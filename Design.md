@@ -8,7 +8,7 @@ It is our desire to achieve a game authoring environment that is integrated seam
 
 The diversity in platformers means that any game authoring environment and engine that we design should be quite powerful in its ability to support a huge variety of demands. It should be able to handle the different goals of either just staying alive or reaching a final point, whose location should be able specifiable. There should be variety of platforms and other obstacles,  and collision properties associated with these different types of platforms. Enemies are very much a large part of many platformers, and we should be able to support different enemies with their own properties and behaviour. These enemies may be able to kill or damage the player, and therefore death and damage conditions must be specified for these enemies. 
 
-## Overview ![image alt text](image_0.jpg)
+## Overview ![alt text](https://github.com/duke-compsci308-fall2015/voogasalad_SquirtleSquad/blob/master/image 0.jpg "Overview Diagram")
 
 Our overall design is rather interesting.  Everything begins in our main which quickly calls graphicHandler.  Graphic handler holds two things: the startScreen and the Overarching controller that contains everything else.  This Overarching controller contains all the other controllers as well as our UI and backend.  The startScreen is used to choose editing or playing as well as the game/level.
 
