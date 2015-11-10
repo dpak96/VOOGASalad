@@ -164,6 +164,13 @@ At this moment, Model and UIBasics possess an observer/observable relationship c
 
 ### Game Data
 
+*What kind of data files will we need?*
+
+-Data Files (specific game data, comprised of rules, objects, environment settings)
+-Resource Files (images, audio files)
+-Error Files
+
+
 ## Team Responsibilities
 
 ### Authoring Environment
