@@ -14,22 +14,21 @@ public interface IAuthoringController {
      * Place an object from the palette onto the screen and reflect it in
      * the model
      */
-    public void placeObject (/* Something */);
+    public void placeObject (double x, double y, Article placedObject);
 
     /*
      * Assign an action to a control
      */
     public void setControl (/* Map<KeyPress, Action> */);
-    
+
     /*
      * Sets the introductory splash screen
      */
-    public void setSplash();
-    
+    public void setSplash ();
+
     /*
      * Loads another level
      */
-    public void loadLevel();
-    
-    
+    public void loadLevel ();
+
 }
