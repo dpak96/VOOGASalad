@@ -14,8 +14,7 @@ public class UseCaseAuthoringController implements IAuthoringController{
 
     @Override
     public void placeObject (double x, double y, Article placedObject) {
-        // TODO Auto-generated method stub
-        
+           
     }
 
     @Override
