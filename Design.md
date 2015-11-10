@@ -84,7 +84,11 @@ This controller establishes the relationship between the Model and the UIBasics.
 
 #### Model
 
+Contains data structures that hold rules, objects, and environment settings. The model is the current representation of everything that is contained in a state of a game. The model is updated every frame by the game engine's decisions and directly manipulated by the model controller. Public methods will include create/delete for both rules and objects, as well as a public method for extracting the contents of the entire model. 
+
 #### Loading and saving
+
+Will be done using xStream / XML
 
 #### Observer Controller
 
