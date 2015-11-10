@@ -119,7 +119,9 @@ Megaman/Metroid/Contra/SANIC: side scroller shooting game, player moves characte
 
 Vertical scroller, character constantly jumps and moves back and forth. Platforms will have different properties, and pickups that have different effects. Camera moves vertically as character rises. Platforms also have different properties based on direction (can pass up through a platform, but when you land on the platform you bounce off of it). There are also enemies that move with basic algorithms. Character can shoot or jump on enemies to get rid of them. Jumping on enemies behaves like a normal platform. There are also power ups like trampolines or rockets that gives user a temporary boost in their jump power. Platforms can be randomly generated
 
-Flappy bird: Player moves right at a constant rate, and falls under the effect of gravity. Player rises a short amount for each user input, and must avoid obstacles.  Points are awarded for every obstacle passed or over time. Obstacles can be randomly generated.
+### Flappy Bird
+
+Player moves right at a constant rate, and falls under the effect of gravity. Player rises a short amount for each user input, and must avoid obstacles.  Points are awarded for every obstacle passed or over time. Obstacles can be randomly generated.
 
 These games are distinct because they have randomly generated objects and no clear win conditions. There is also only one stage that goes on infinitely. 
 
@@ -127,7 +129,7 @@ These games are distinct because they have randomly generated objects and no cle
 
 ### Authoring Environment
 
-*does AE have access to model?*
+*Does AE have access to model?*
 
 One thing that was discussed was whether or not the AE should have access to the model. If the AE didn’t have access to the model than the AE would not be module. Furthermore it would have to get extra information. Thus we decided to give AE access to the model.
 
@@ -137,27 +139,27 @@ The authoring environment is slightly different from the game engine in that it 
 
 ### Game Engine
 
-How to keep track of objects in the GE to apply rules?
+*How to keep track of objects in the GE to apply rules?*
 
 * Pointer to model in the GE
 
 * GE must iterate through all objects to check rules (ex. collision). 
 
-Checking all the objects when updating?
+*Checking all the objects when updating?*
 
-Checking objects in a certain quadrant/section when updating?
+*Checking objects in a certain quadrant/section when updating?*
 
-Putting objects in map keyed to their coordinates, but would have to update keys every time they moved? 
+*Putting objects in map keyed to their coordinates, but would have to update keys every time they moved?*
 
 Model controller:
 
-How will authoring environment distinguish between different types of rules and objects when creating?
+*How will authoring environment distinguish between different types of rules and objects when creating?*
 
-How will authoring environment identify which objects/rules to delete/edit? Will program have to search through every instance of rules/objects? 
+*How will authoring environment identify which objects/rules to delete/edit? Will program have to search through every instance of rules/objects?*
 
 ### Game Player
 
-*In which module will the significance of a button press be defined? *
+*In which module will the significance of a button press be defined?*
 
 Our debate surrounding the location of the translation of a button press to an action that modifies the model is composed of a couple of issues:
 
