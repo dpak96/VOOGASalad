@@ -66,7 +66,20 @@ The purpose of the Model Controller is to give connected classes access to the m
 
 #### GP Module
 
-The Game Player is designed to serve as the front-end component when a user is playing a game. Thus, it will sit atop the UI Basics and overlay menus, controls, the player sprite, score and health information, and anything else relevant to the game during play. Specifically, there will be buttons to save and load game, as well as to pause and exit the current game to switch to another game. 
+The Game Player is designed to serve as the front-end component when a user is playing a game. Thus, it will sit atop the UI Basics and overlay menus, controls, the player sprite, score and health information, and anything else relevant to the game during play. These will be updated via an Observer/Observable relationship between the game player and the engine. Specifically, there will be buttons to play/pause and exit the current game to switch to another game. 
+
+The menus will contain preference options that allow the user to change the control set to another one made in the authoring environment (i.e. southpaw, inverted, etc.) The user will also be able to change any other preferences, such as game rules, character avatars, or difficulty levels specified during creation of the game.
+
+This module will communicate directly with UI Basics inherently, but it will also send and receive information from the Game Engine through the Action Controller. The engine will take in key presses, mouse button clicks, or other inputs from the user and translate them into useful front-end actions, as well as saving current state information to the model.
+
+Using information from the engine, the player will animate game physics and other actions, including but not limited to:
+- Creating objects
+- Destroying/damaging objects
+- Running/jumping characters
+- Firing projectiles
+- Power-up modifications
+- Collisions
+- Camera motion
 
 #### UI Basics
 
