@@ -1,6 +1,6 @@
-Squirtle Squad Vooga Design
+#Squirtle Squad Vooga Design
 
-# Introduction
+## Introduction
 
 We are attempting to create an authoring environment, game engine and game player for 2-D platform games. The unique feature of 2-D platform games is that it is a genre that should be able to support a wide variety of gameplay modes, as very different and diverse games from *Donkey Kong, * to *Metroid*. But what unifies these diverse games is that they all contain at some level the goal of either reaching a final point or staying alive while traversing the pitfalls contained within the level. Our design should be very flexible in being able to create, store, load and play a wide variety of game styles, each with their own rules, physics and environment. 
 
@@ -8,7 +8,7 @@ It is our desire to achieve a game authoring environment that is integrated seam
 
 The diversity in platformers means that any game authoring environment and engine that we design should be quite powerful in its ability to support a huge variety of demands. It should be able to handle the different goals of either just staying alive or reaching a final point, whose location should be able specifiable. There should be variety of platforms and other obstacles,  and collision properties associated with these different types of platforms. Enemies are very much a large part of many platformers, and we should be able to support different enemies with their own properties and behaviour. These enemies may be able to kill or damage the player, and therefore death and damage conditions must be specified for these enemies. 
 
-# Overview ![image alt text](image_0.jpg)
+## Overview ![image alt text](image_0.jpg)
 
 Our overall design is rather interesting.  Everything begins in our main which quickly calls graphicHandler.  Graphic handler holds two things: the startScreen and the Overarching controller that contains everything else.  This Overarching controller contains all the other controllers as well as our UI and backend.  The startScreen is used to choose editing or playing as well as the game/level.
 
@@ -26,15 +26,15 @@ The core to our program is the game engine and the UI Basics.  These allow for m
 
 The way this all fits together isn’t too complicated.  Actions that occur trigger the proper controller which then calls for an action to be taken, which updates the model.  The updated model is then reflected when the interface updates.  In our design the core is the model, the UI Basics, and the Game Engine, without these the program will not function properly.  The game player and the authoring environments are simply an overlay on the core that add functionality.  They can easily be swapped or the program could even survive with neither. One of our other majors goals was to prevent redundancy by minimizing classes that contain instances of each other.  We attempted to accomplish this through injections and pointers.
 
-# User Interface
+## User Interface
 
 Begin with the start screen that shows a list of games (Game 1, Game 2, etc.) along with an option to make a new game. Once you click on an option, there will be a new screen with two choices, edit and play. Once either is clicked, UI Basics is overlaid.  This is the "shared" graphical window between both the AE and GP.  This will display the visual elements of the game such as the players, level design, enemies, ie, anything that is a part of the game.  Additionally, it would also have certain buttons that are shared across AE and GP such as pause/play, load/save, quit, etc.  GP will display score and live data, and anything relevant to the current gameplay session.  It must additionally have a button to go to the AE mode.  The AE will have its host of editing tools, as well as a button to go back to the GP mode.
 
-# Design Details
+## Design Details
 
-## Authoring Environment 
+### Authoring Environment 
 
-### AE Module
+#### AE Module
 
 The authoring model is designed to attach to the model controller in the same way that the game engine attaches to the model controller. We felt like this was a good design because the game engine and the authoring environment should be using the same model controller API to modify the game. For example if the player is shooting a projectile vs. dragging a new object onto the screen, it should be calling the same model API of create new object. In this sense, the authoring environment and the game engine are providing "inputs" to the same source and make changes to the model in the same way. Once you adopt this point of view live editing seems to be easier to accomplish because the game engine can be running at the same time as authoring environment module. Thus the functionality of the authoring environment will be dependent on the functionality provided by the authoring environment. The AE module has also been designed to fulfill the requirements as required.
 
@@ -54,8 +54,6 @@ The authoring model is designed to attach to the model controller in the same wa
 
 -Load previous games: functionality is inside the model which is accessed by the authoring environment
 
-## Game Engine
-
 ### Game Engine
 
 The game engine was designed to be a stateless component that regulates the objects in the game according to the rules. We decided to make it stateless because the role of the engine is to apply the rules, not store them. Additionally, this makes the saving and loading of games simpler, as they only have to save data from the Model instead of saving individual game engines as well. The game engine was connected to the model controller in order to access the rules and objects in the model that it will need to run the game. This preserves the MVC design. The game engine will also have to interact with the action controller in order to process information from the front end during game play. The action controller will pass the game engine an indication of user input through an Action object, and the game engine will perform the appropriate action based on information from the model. The game engine will have to parse through all the rules and apply them to the objects in the game every cycle. This will be done by calling the update function. Ideally, the rules will be part of a hierarchy, so the game engine will be able to handle a variety of different rules with ease. For example, a win/lose condition would be a specific type of rule compared to a point-collecting rule. The game engine should parse these in a similar manner, due to the two rules having the same super class. The game engine will also have to edit objects in the model for character movement or frame movement. In these cases, we will apply the rule and update the model as well through the model controller. We decided for now that the frame of view for our side scroller will have specific coordinates to define where the frame is. Rules will determine how the frame moves according to what happens in the game. We decided also that there will be a buffer zone around all objects that. If the buffer zone and the frame of view intersect, then the object will become active and will be updated. If they are not intersecting with the frame of view, the object will be inactive and not be updated whenever update is called. 
@@ -64,43 +62,43 @@ Model Controller
 
 The purpose of the Model Controller is to give connected classes access to the model. We designed it to enable creating/deleting new rules and objects. It was designed with the purpose of editing the model, so it will contain any methods necessary for the authoring environment, game player, and game engine to get information or change information. It was also made to work with the hierarchy of rules and objects, so it should be flexible in handling a variety of cases. 
 
-## Game Player
+### Game Player
 
-### GP Module
+#### GP Module
 
 The Game Player is designed to serve as the front-end component when a user is playing a game. Thus, it will sit atop the UI Basics and overlay menus, controls, the player sprite, score and health information, and anything else relevant to the game during play. Specifically, there will be buttons to save and load game, as well as to pause and exit the current game to switch to another game. 
 
-### UI Basics
+#### UI Basics
 
 The UI Basics is designed to reflect the shared elements of the "window" that represents our game environment.  Seeing as this “window” shows the same level and elements of the game, whether or not you are playing the game in GP or editing the game in AE, it makes sense to extract these shared elements into this module.  Thus, UI Basics will always have GP or AE overlaid over itself at any one time; by selecting which one is active, GP and AE - along with their associated functionalities - can be easily switched back-and-forth.  Thus, live editing *drops mic.*  It will also have “shared” buttons, as well as actually showing the running game.  Such shared buttons will include save, load, pause/play, etc.
 
-### Action Controller
+#### Action Controller
 
 The Action Controller is simply a controller class that takes in the engine and UI Basics as parameters to its constructors.  In our current design setup, it is supposed to simply relay an "empty" Action object (to adhere to the Open-Closed principle) for any front end action, such as pressing the “Q” key, or pressing the “Save” button.  It only exists to set up the Game Engine as an Observer for the UI Basics; after that, the notifyObservers() of UI Basics will take care of passing the needed List<Actions> to the Engine.  The Engine will interpret the Action object and perform the appropriate response to it.
 
-### Observer Controller
+#### Observer Controller
 
 This controller establishes the relationship between the Model and the UIBasics. The UI Basics will 
 
-## Game Data
+### Game Data
 
-### Model
+#### Model
 
-### Loading and saving
+#### Loading and saving
 
-### Observer Controller
+#### Observer Controller
 
-# Example games
+## Example games
 
-## Super mario
+### Super mario
 
 Side scroller, player moves character in horizontal direction, and can jump. WIll be presented with enemies and platforms to navigate safely without dying, goal is to reach end of level. Camera will move as the character moves horizontally with some delay with camera movement. There will be different types of platforms and power ups in the game as well. There is also a checkpoint in the middle so if the player dies, he does not respawn at the beginning of the level. There are also power ups that change how the user acts (star makes you invincible, flower allows you to shoot fire, etc.). Can also get a 1-up mushroom to get extra lives. Coins are placed throughout the level and can also be found in boxes. Getting 100 coins will give you an extra life. Score is determined by number of enemies killed and number of coins collected. Extra points are added depending on how you clear the final checkpoint. There will also be pipes in the stages that will take you to different levels. Mario will be an example of a game with distinct levels that has a clear win condition. There will also be objects with predetermined placement. The authoring environment will have to design each of these stages before starting the game and defining a rule that establishes a win condition. The win condition will be checked by the Game Engine. 
 
-## Spelunky
+### Spelunky
 
 Megaman/Metroid/Contra/SANIC: side scroller shooting game, player moves character in horizontal direction, and has the ability to jump. Enemies will be presented and the goal of the game is to shoot/avoid the enemies/bullets and reach to the end of the level. There is also the option of including a boss/stronger enemy at the end that must be defeated to finish the level. Bonus items will randomly appear to enhance the shooting ability (example: scattered bullet) of the player. Boss characters will be coded into the hierarchy of objects as a distinct object that has different traits. Will also have certain rules that will prevent player from exiting the boss room. Authoring environment will have to create specific objects and rules for boss rooms. Also, need rules and objects for projectiles. 
 
-## Doodle Jump
+### Doodle Jump
 
 Vertical scroller, character constantly jumps and moves back and forth. Platforms will have different properties, and pickups that have different effects. Camera moves vertically as character rises. Platforms also have different properties based on direction (can pass up through a platform, but when you land on the platform you bounce off of it). There are also enemies that move with basic algorithms. Character can shoot or jump on enemies to get rid of them. Jumping on enemies behaves like a normal platform. There are also power ups like trampolines or rockets that gives user a temporary boost in their jump power. Platforms can be randomly generated
 
@@ -108,9 +106,9 @@ Flappy bird: Player moves right at a constant rate, and falls under the effect o
 
 These games are distinct because they have randomly generated objects and no clear win conditions. There is also only one stage that goes on infinitely. 
 
-# Design Considerations 
+## Design Considerations 
 
-## Authoring Environment
+### Authoring Environment
 
 *does AE have access to model?*
 
@@ -120,7 +118,7 @@ One thing that was discussed was whether or not the AE should have access to the
 
 The authoring environment is slightly different from the game engine in that it also has a front end section. This means that it has	 to be treated slightly different. However we weren’t sure if authoring environment should be combined or to keep the frontend and the backend separate. The thought was that if the sections were separated we might get a better data path that followed MVC better but by keeping them together we would have more modularity. We found a way (the current design) to maximize both of the things we wanted.
 
-## Game Engine
+### Game Engine
 
 How to keep track of objects in the GE to apply rules?
 
@@ -140,7 +138,7 @@ How will authoring environment distinguish between different types of rules and 
 
 How will authoring environment identify which objects/rules to delete/edit? Will program have to search through every instance of rules/objects? 
 
-## Game Player
+### Game Player
 
 *In which module will the significance of a button press be defined? *
 
@@ -160,11 +158,11 @@ Currently UIBasics only sends objects implementing the IUserAction interface to 
 
 At this moment, Model and UIBasics possess an observer/observable relationship created in the ObserverController. We have also been researching the various capabilities of Game Loops and have been trying to determine whether or not the observer/observable relationship is necessary. We could have a more direct relationship and constantly redraw the scene, as opposed to waiting for the signal from an observable to update the graphics. This would increase the ease of dealing with large quantities of objects that are being almost constantly updated. 
 
-## Game Data
+### Game Data
 
-# Team Responsibilities
+## Team Responsibilities
 
-## Authoring Environment
+### Authoring Environment
 
 Rob Martorano 
 
@@ -172,7 +170,7 @@ Kevin Wang
 
 Jasper Hancock
 
-## Game Engine
+### Game Engine
 
 Brandon Ho
 
@@ -182,7 +180,7 @@ Daniel Pak
 
 Calvin Chueh (Secondary: Game Data)
 
-## Game Player
+### Game Player
 
 Alex Rice
 
