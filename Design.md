@@ -1,7 +1,5 @@
 Squirtle Squad Vooga Design
 
-[[TOC]]
-
 # Introduction
 
 We are attempting to create an authoring environment, game engine and game player for 2-D platform games. The unique feature of 2-D platform games is that it is a genre that should be able to support a wide variety of gameplay modes, as very different and diverse games from *Donkey Kong, * to *Metroid*. But what unifies these diverse games is that they all contain at some level the goal of either reaching a final point or staying alive while traversing the pitfalls contained within the level. Our design should be very flexible in being able to create, store, load and play a wide variety of game styles, each with their own rules, physics and environment. 
