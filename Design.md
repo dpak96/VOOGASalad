@@ -28,7 +28,13 @@ The way this all fits together isn’t too complicated.  Actions that occur trig
 
 ## User Interface
 
-Begin with the start screen that shows a list of games (Game 1, Game 2, etc.) along with an option to make a new game. Once you click on an option, there will be a new screen with two choices, edit and play. Once either is clicked, UI Basics is overlaid.  This is the "shared" graphical window between both the AE and GP.  This will display the visual elements of the game such as the players, level design, enemies, ie, anything that is a part of the game.  Additionally, it would also have certain buttons that are shared across AE and GP such as pause/play, load/save, quit, etc.  GP will display score and live data, and anything relevant to the current gameplay session.  It must additionally have a button to go to the AE mode.  The AE will have its host of editing tools, as well as a button to go back to the GP mode.
+Once the Main is launched, a start screen will initialize that contains a list of games (Game 1, Game 2, etc.) along with an option to make a new game in vetical columns. Once an option is selected, a new screen will launch with two choices, *EDIT* and *PLAY*. 
+
+After one of these options is selected, UI Basics is overlaid.  This is the "shared" graphical component between both the AE and GP.  It will display the visual elements of the game including the players, level design, enemies, and anything else that is a part of the game.  Additionally, it will contain certain buttons that are shared across AE and GP such as load/save, quit, etc. 
+
+GP will display score and live data, and anything else relevant to the current gameplay session. Within this mode, the user will be able to implement pre-defined set(s) of controls to move their character and interact with the game environment in order to achieve a goal, such as defeating enemies, traversing a map/level, or reaching a high score.
+
+It will also contain a button to switch to the AE mode.  The AE will have its host of editing tools that can add and modify game elements, as well as a button to go back to the GP mode.
 
 ## Design Details
 
