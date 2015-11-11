@@ -7,5 +7,7 @@ package voogasalad_SquirtleSquad;
  *
  */
 public class Input {
-
+	public void run(){
+		//Runs action
+	}
 }
