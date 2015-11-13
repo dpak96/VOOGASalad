@@ -19,13 +19,13 @@ public class HelpMenuItem extends AbstractMenuItem {
 	}
 	@Override
 	public void handle() {
-	    File html = new File("HelpPage.html");
-	    try {
-	      Desktop.getDesktop().browse(html.toURI());
-	    } catch (IOException e) {
-	      // TODO Auto-generated catch block
-	      e.printStackTrace();
-	    }
+//	    File html = new File("HelpPage.html");
+//	    try {
+//	      Desktop.getDesktop().browse(html.toURI());
+//	    } catch (IOException e) {
+//	      // TODO Auto-generated catch block
+//	      e.printStackTrace();
+//	    }
 	}
 
 }
