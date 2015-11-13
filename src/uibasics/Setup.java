@@ -1,27 +1,33 @@
 package uibasics;
 
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import properties.VoogaProperties;
 
-public class Setup{
+public class Setup extends Observable{
 	private Group myRoot;
 	private Scene myScene;
 	
 	public Setup(Stage stage, ResourceBundle resource){
 		VoogaProperties penisAss = new VoogaProperties();
 		this.myRoot = new Group();
-		this.myScene = new Scene(myRoot, penisAss.getSceneHeight(), penisAss.getSceneWidth());
+		this.myScene = new Scene(myRoot, penisAss.getSceneWidth(), penisAss.getSceneHeight());
 		myRoot.getChildren().add(new Layout(stage, resource));
+		myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
 	
 	public Scene getScene(){
 		return myScene;
+	}
+	
+	private void handleKeyInput(KeyCode key){
+		notifyObservers(key.toString());
+//		System.out.println("penis in Steven's ass");
 	}
 }
 

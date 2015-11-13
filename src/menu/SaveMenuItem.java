@@ -22,20 +22,20 @@ public class SaveMenuItem extends AbstractMenuItem {
 	@Override
 	public void handle() {
 		try {
-	        saveSlogo();
+	        saveGame();
 	      } catch (Exception e1) {
 	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
 	      }
 	}
-	public void saveSlogo() throws IOException{
+	public void saveGame() throws IOException{
 		myFileChooser.setTitle(myResource.getString("SAVE"));
-	    File slogo = myFileChooser.showSaveDialog(myStage);
-	    if (!slogo.exists()) {
-	      slogo.createNewFile();
+	    File game = myFileChooser.showSaveDialog(myStage);
+	    if (!game.exists()) {
+	      game.createNewFile();
 	    }
 	    try {
-	      FileOutputStream f = new FileOutputStream(slogo);
+	      FileOutputStream f = new FileOutputStream(game);
 	      ObjectOutputStream o = new ObjectOutputStream(f);
 //	      o.writeObject(myController.getMyScene().getAllData().get(0));
 	      f.close();

@@ -34,8 +34,8 @@ public class MenuPanel extends MenuBar {
 	}
 
 	private Menu navigateMenu() {
-		Menu menu = new Menu(myResource.getString("FILE"));
-		AbstractMenuItem mainMenu = new OpenMenuItem(myResource, myStage);
+		Menu menu = new Menu(myResource.getString("NAVIGATE"));
+		AbstractMenuItem mainMenu = new MainMenuItem(myResource, myStage);
 		AbstractMenuItem switchAE = new SwitchMenuItem(myResource, myStage);
 		menu.getItems().addAll(mainMenu, switchAE);
 
@@ -43,7 +43,7 @@ public class MenuPanel extends MenuBar {
 	}
 
 	private Menu helpMenu() {
-		Menu menu = new Menu(myResource.getString("FILE"));
+		Menu menu = new Menu(myResource.getString("HELPMENU"));
 		AbstractMenuItem controls = new ControlMenuItem(myResource, myStage);
 		AbstractMenuItem helper = new HelpMenuItem(myResource, myStage);
 		menu.getItems().addAll(controls, helper);
