@@ -1,6 +1,6 @@
 //This entire file is a part of my masterpiece
 //Alex Rice
-package uibasics;
+package menu;
 
 import java.io.File;
 import java.io.FileOutputStream;
