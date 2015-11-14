@@ -8,12 +8,15 @@ import java.util.List;
  *
  */
 public class Article {
+	
 	private double myX;
 	private double myY;
 	private String myImageFile;
 	private boolean active;
 	private double myXBuffer;
 	private double myYBuffer;
-	private double myVelocity;
+	private double myXVelocity;
+	private double myYVelocity;
+	private double myOrientation;
 	
 }
