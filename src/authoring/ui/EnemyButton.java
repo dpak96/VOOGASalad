@@ -1,4 +1,4 @@
-package authoring;
+package authoring.ui;
 
 import javafx.scene.control.Button;
 
