@@ -22,7 +22,7 @@ public class UseCaseGameEngine implements IGameEngine{
 		List<Rule> rules = controller.getRules();
 		List<Article> articles = controller.getArticles();
 		for(Rule r: rules){
-			r.apply(articles);
+			r.update(articles);
 		}
 	}
 
