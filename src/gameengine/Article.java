@@ -8,11 +8,12 @@ import java.util.List;
  *
  */
 public class Article {
-	
-	private List<Rule> rules;	
-	
-	public void addRule(Rule rule){
-		rules.add(rule);
-	}
+	private double myX;
+	private double myY;
+	private String myImageFile;
+	private boolean active;
+	private double myXBuffer;
+	private double myYBuffer;
+	private double myVelocity;
 	
 }
