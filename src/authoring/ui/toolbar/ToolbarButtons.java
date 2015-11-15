@@ -21,7 +21,7 @@ public abstract class ToolbarButtons  extends Button implements IObjectPlacing {
         return buttonEffect;
     }
     public ImageView setImage(String imgName, int width, int height) {
-        Image img = new Image(getClass().getClassLoader().getResourceAsStream("images/"+imgName));
+        Image img = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/"+imgName));
         ImageView buttonIcon = new ImageView(img);
         buttonIcon.setFitWidth(width);
         buttonIcon.setFitHeight(height);
