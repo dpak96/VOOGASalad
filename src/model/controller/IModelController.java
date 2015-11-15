@@ -1,4 +1,4 @@
-package voogasalad_SquirtleSquad;
+package model.controller;
 
 import gameengine.Rule;
 import gameengine.Article;
