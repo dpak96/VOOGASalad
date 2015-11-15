@@ -1,7 +1,7 @@
 package gameengine;
 
 import java.util.List;
-import model.controller.ModelConroller;
+import model.controller.ModelController;
 
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;

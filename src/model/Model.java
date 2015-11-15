@@ -5,8 +5,15 @@ import gameengine.Article;
 
 public class Model {
 	
-	List<Rule> myRules;
-	Map<String, Action> myButtonMap;
-	List<Article> myArticles;
+	private List<Rule> myRules;
+	private Map<String, Action> myButtonMap;
+	private List<Article> myArticles;
+	
+	public List<Rule> getRules(){
+		return myRules;
+	}
+	public List<Article> getArticles(){
+		return myArticles;
+	}
 
 }
