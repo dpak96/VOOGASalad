@@ -2,7 +2,6 @@ package gameengine;
 
 import java.util.List;
 
-import voogasalad_SquirtleSquad.Article;
 
 /**
  * Hierarchy of classes that will define rules for the game
