@@ -38,6 +38,7 @@ public class ToolbarContainer extends Application {
         List<Button> buttonList = new ArrayList<Button>();
         buttonList.add(new PlatformButton());
         buttonList.add(new EnemyButton());
+        
         buttonList.add(new CheckpointButton());
         return buttonList;
     }
