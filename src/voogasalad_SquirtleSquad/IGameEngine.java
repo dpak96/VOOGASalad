@@ -9,5 +9,5 @@ public interface IGameEngine {
 	 * the ModelController based on the rules in ModelController. 
 	 * @param actions
 	 */
-	public void update(List<Input> actions);
+	public void update(List<String> actions);
 }
