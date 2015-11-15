@@ -2,14 +2,12 @@ package gameengine;
 
 import java.util.List;
 
-import voogasalad_SquirtleSquad.Article;
-
 /**
  * Hierarchy of classes that will define rules for the game
  * @author danielpak
  *
  */
-public class Rule {
+public abstract class Rule {
 	
 	private String myName;
 	private List<Article> myArticles;
@@ -22,9 +20,7 @@ public class Rule {
 		myArticles.add(art);
 	}
 	
-	public void apply(Article art){
-		//Applies the rule on a given article
-	}
+	protected abstract void apply(Article art);
 	
 	public void update(){
 		for(Article a: myArticles){
