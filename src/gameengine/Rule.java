@@ -20,6 +20,12 @@ public abstract class Rule {
 		myArticles.add(art);
 	}
 	
+	public void addAllArticle(List<Article> articles){
+		for(Article a: articles){
+			addArticle(a);
+		}
+	}
+	
 	protected abstract void apply(Article art);
 	
 	public void update(){
