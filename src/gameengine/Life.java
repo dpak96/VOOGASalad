@@ -1,6 +1,7 @@
 package gameengine;
 
 public class Life {
+	
 	private double health;
 	private int lives;
 	
@@ -26,6 +27,14 @@ public class Life {
 	
 	public void addHealth(double heal){
 		health += heal;
+	}
+	
+	public void removeLife(int value){
+		lives-=value;
+	}
+	
+	public void addLife(int value){
+		lives+=value;
 	}
 	
 	public void removeLife(){
