@@ -9,6 +9,20 @@ public class LevelChooserModule extends AbstractChooserModule {
 
     public LevelChooserModule(String[] levels){
         super(levels);
+        myContainer.setId("LevelS");
+
+    }
+
+    @Override
+    protected void init(StartScreenController controller){
+        super.init(controller);
+        setButtonID();
+    }
+
+    private void setButtonID(){
+        for(Button b: buttons){
+            b.setId("LButton");
+        }
     }
 
 

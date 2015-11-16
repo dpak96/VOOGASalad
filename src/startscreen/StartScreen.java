@@ -2,9 +2,6 @@ package startscreen;
 
 import javafx.scene.layout.Pane;
 
-/**
- * Created by Rob on 11/14/15.
- */
 public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
@@ -25,6 +22,7 @@ public class StartScreen {
     public void addGameChooser(){
         GameChooserModule games = new GameChooserModule(getGames());
         games.init(myController);
+
         skeleton.addLayer(games.getContainer());
     }
 
@@ -43,7 +41,6 @@ public class StartScreen {
         String[] levelEx = {"Level1","Level2","Level3"};
         return levelEx;
     }
-
 
     public Pane getScreen(){
         return skeleton.getPane();

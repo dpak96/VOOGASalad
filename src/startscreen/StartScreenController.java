@@ -21,7 +21,6 @@ public class StartScreenController {
 
     protected void setModeAndAddGame(String value){
         try{
-            System.out.print(value);
             game.setMode(value);
             start.removeLayer();
             start.addGameChooser();
