@@ -2,10 +2,9 @@ package usecases;
 
 import groovy.mock.interceptor.MockFor;
 import javafx.scene.Node;
-import voogasalad_SquirtleSquad.Article;
 import voogasalad_SquirtleSquad.IAuthoringController;
 
-public class AddPlatform  {
+/*public class AddPlatform  {
 
     UseCaseAuthoringController mockController=new UseCaseAuthoringController();
     
@@ -14,3 +13,4 @@ public class AddPlatform  {
         mockController.placeObject(0,0,newPlatform);
     }
 }
+*/

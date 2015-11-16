@@ -2,12 +2,8 @@ package usecases;
 
 import java.util.List;
 
-import voogasalad_SquirtleSquad.Article;
-import voogasalad_SquirtleSquad.IGameEngine;
-import voogasalad_SquirtleSquad.Input;
-import voogasalad_SquirtleSquad.Rule;
 
-public class UseCaseGameEngine implements IGameEngine{
+/*public class UseCaseGameEngine implements IGameEngine{
 	private UseCaseModelController controller;
 	
 	public UseCaseGameEngine (UseCaseModelController modelController){
@@ -27,3 +23,4 @@ public class UseCaseGameEngine implements IGameEngine{
 	}
 
 }
+*/
