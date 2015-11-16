@@ -55,7 +55,7 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public List<Rule> getButonRules(String button){
+	public List<Rule> getButtonRules(String button){
 		return myModel.getButtonRules(button);
 	}
 
