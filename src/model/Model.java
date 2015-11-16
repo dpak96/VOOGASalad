@@ -6,7 +6,7 @@ import gameengine.Article;
 public class Model {
 	
 	private List<Rule> myRules;
-	private Map<String, Action> myButtonMap;
+	//private Map<String, Action> myButtonMap;
 	private List<Article> myArticles;
 	
 	public List<Rule> getRules(){

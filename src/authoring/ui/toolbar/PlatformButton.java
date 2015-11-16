@@ -1,5 +1,6 @@
-package authoring.ui;
+package authoring.ui.toolbar;
 
+import authoring.ui.propertyeditor.EnemyProperties;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,8 +14,9 @@ public class PlatformButton extends ToolbarButtons{
 
     @Override
     public void placeYourObject () {
-        // TODO Auto-generated method stub
-        
+            
+            EnemyProperties propTest=new EnemyProperties();
+            propTest.showMenu();
     }
 
    
