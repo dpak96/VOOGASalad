@@ -1,6 +1,8 @@
-package gameengine;
+package model;
 
-public class RuleGravity extends Rule{
+import java.util.List;
+
+public class RuleGravity extends SingleDependencyRule{
 
 	private double yAcceleration;
 	
@@ -22,5 +24,5 @@ public class RuleGravity extends Rule{
 	public void setYAcceleration(double gravity){
 		yAcceleration = gravity;
 	}
-
+	
 }

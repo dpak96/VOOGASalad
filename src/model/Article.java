@@ -1,4 +1,4 @@
-package gameengine;
+package model;
 
 import java.util.List;
 

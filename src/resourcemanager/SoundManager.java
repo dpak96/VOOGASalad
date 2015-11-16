@@ -12,7 +12,7 @@ public class SoundManager {
   private final String PROPERTIES_PATH = "resources/sounds/";
   private Map<String, AudioClip> soundMap;
 
-  public void initListSound() {
+  public void initListSounds() {
     soundMap = new HashMap<String, AudioClip>();
     File[] folder = new File("src/" + PROPERTIES_PATH).listFiles();
     for (File f : folder) {
