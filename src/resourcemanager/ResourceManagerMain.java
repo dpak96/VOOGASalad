@@ -16,7 +16,7 @@ public class ResourceManagerMain {
     im.initListImages();
     
     SoundManager sm = new SoundManager();
-    sm.initListSound();
+    sm.initListSounds();
     sm.getSoundMap().get("rayGunWav").play();
     System.out.println("bleh");
 
