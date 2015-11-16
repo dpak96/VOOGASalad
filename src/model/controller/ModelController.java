@@ -4,7 +4,9 @@ import gameengine.*;
 
 import java.util.List;
 
+import model.Article;
 import model.Model;
+import model.Rule;
 
 public class ModelController implements IModelController {
 	private Model myModel;
