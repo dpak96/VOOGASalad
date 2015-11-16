@@ -26,6 +26,6 @@ public abstract class Rule {
 		}
 	}
 	
-	protected abstract void update();
+	public abstract void update();
 
 }
