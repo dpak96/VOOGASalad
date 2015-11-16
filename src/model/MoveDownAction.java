@@ -11,8 +11,7 @@ public class MoveDownAction extends SingleDependencyRule {
 
 	@Override
 	protected void apply(Article a) {
-		a.moveDown(defaultAccel);
-		
+		a.setYVelocity(a.getYVelocity() + defaultAccel*a.accelMultiplier());
 	}
 
 }

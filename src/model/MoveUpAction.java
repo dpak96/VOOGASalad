@@ -11,7 +11,7 @@ public class MoveUpAction extends SingleDependencyRule {
 	
 	@Override
 	protected void apply(Article a) {
-		a.moveUp(defaultAccel);
+		a.setYVelocity(a.getYVelocity() - defaultAccel*a.accelMultiplier());
 	}
 
 }
