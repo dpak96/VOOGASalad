@@ -19,6 +19,7 @@ public class PlayAuthorModule extends AbstractModule{
 
     public PlayAuthorModule(){
         super(new HBox());
+        myContainer.setId("PE");
         buttons = new ArrayList<>();
     }
 
@@ -28,12 +29,16 @@ public class PlayAuthorModule extends AbstractModule{
     }
 
     private void buttonSetup(){
-        playButton = new Button();
-        playButton.setText("Play");
-        buttons.add(playButton);
-        editButton = new Button();
-        editButton.setText("Edit");
-        buttons.add(editButton);
+        buttons.add(buttonCreator("Play"));
+        buttons.add(buttonCreator("Edit"));
+    }
+
+
+    private Button buttonCreator(String name){
+        Button genButton = new Button();
+        genButton.setText(name);
+        genButton.setId("PAButton");
+        return genButton;
     }
 
     private void addButtons(StartScreenController controller){

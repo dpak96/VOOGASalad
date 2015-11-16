@@ -1,13 +1,10 @@
-package authoring.ui.drapanddrop;
+package authoring.ui.draganddrop;
 
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.input.*;
 
-/**
- * Created by Rob on 11/15/15.
- */
 public class basicExample {
     final Text source = new Text(50, 100, "DRAG ME");
     final Text target = new Text(250, 100, "DROP HERE");
