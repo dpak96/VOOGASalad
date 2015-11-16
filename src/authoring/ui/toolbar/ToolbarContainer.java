@@ -1,4 +1,4 @@
-package authoring.ui;
+package authoring.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class ToolbarContainer extends Application {
         FlowPane toolBox = new FlowPane();
         configureToolBox(toolBox);
 
+       // toolBox.getChildren().add(new PlatformSelector());
         toolBox.getChildren().addAll(populateButtonList());
 
         return toolBox;
@@ -39,6 +40,8 @@ public class ToolbarContainer extends Application {
         buttonList.add(new PlatformButton());
         buttonList.add(new EnemyButton());
         buttonList.add(new CheckpointButton());
+        buttonList.add(new BackgroundButton());
+        buttonList.add(new ControlButton());
         return buttonList;
     }
 

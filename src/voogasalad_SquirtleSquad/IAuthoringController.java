@@ -1,5 +1,6 @@
 package voogasalad_SquirtleSquad;
 
+import gameengine.Article;
 import javafx.scene.Node;
 
 
