@@ -1,44 +1,44 @@
 package resourcemanager;
 
 public class ResourceManager {
-  private PropertiesManager pm;
-  private ImageManager im;
-  private SoundManager sm;
+  private PropertiesManager propertiesManager;
+  private ImageManager imageManager;
+  private SoundManager soundManager;
 
   public ResourceManager() {
-    pm = new PropertiesManager();
-    im = new ImageManager();
-    sm = new SoundManager();
+    propertiesManager = new PropertiesManager();
+    imageManager = new ImageManager();
+    soundManager = new SoundManager();
   }
 
   public void initResources() {
-    pm.initListResources();
-    im.initListImages();
-    sm.initListSounds();
+    propertiesManager.initListResources();
+    imageManager.initListImages();
+    soundManager.initListSounds();
   }
 
   public PropertiesManager getPm() {
-    return pm;
+    return propertiesManager;
   }
 
   public void setPm(PropertiesManager pm) {
-    this.pm = pm;
+    this.propertiesManager = pm;
   }
 
   public ImageManager getIm() {
-    return im;
+    return imageManager;
   }
 
   public void setIm(ImageManager im) {
-    this.im = im;
+    this.imageManager = im;
   }
 
   public SoundManager getSm() {
-    return sm;
+    return soundManager;
   }
 
   public void setSm(SoundManager sm) {
-    this.sm = sm;
+    this.soundManager = sm;
   }
 
 }
