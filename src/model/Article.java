@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+
 /**
  * This is the hierarchy of classes of objects, or articles, for the games
  * @author danielpak
@@ -18,12 +19,18 @@ public class Article {
 	protected double myXVelocity;
 	protected double myYVelocity;
 	private double myOrientation;
-	
+	private BitMap myBitMap;
 	
 	public double accelMultiplier(){
 		return 1;
 	}
 	
+	public Article(String file) {
+		myImageFile = file;
+		
+		myBitMap = new BitMap(file);
+		
+	}
 	public double getX(){
 		return myX;
 	}
@@ -83,5 +90,9 @@ public class Article {
 	public void setOrientation(double value){
 		myOrientation = value;
 	}
+	public BitMap getBitMap() {
+		return myBitMap;
+	}
+	
 	
 }
