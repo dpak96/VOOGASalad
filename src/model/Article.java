@@ -15,9 +15,11 @@ public class Article {
 	private boolean active;
 	private double myXBuffer;
 	private double myYBuffer;
-	private double myXVelocity;
-	private double myYVelocity;
+	protected double myXVelocity;
+	protected double myYVelocity;
 	private double myOrientation;
+	
+	
 	
 	public double getX(){
 		return myX;
