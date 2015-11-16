@@ -1,7 +1,7 @@
 package voogasalad_SquirtleSquad;
 
-import gameengine.Rule;
-import gameengine.Article;
+import model.Article;
+import model.Rule;
 
 import java.util.List;
 

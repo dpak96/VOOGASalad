@@ -13,7 +13,4 @@ public class GameEngine implements IGameEngine {
 		// TODO Auto-generated method stub
 	}
 
-
-
-
 }
