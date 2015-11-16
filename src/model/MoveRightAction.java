@@ -11,7 +11,7 @@ public class MoveRightAction extends SingleDependencyRule{
 
 	@Override
 	protected void apply(Article a) {
-		a.moveRight(defaultAccel);
+		a.setXVelocity(a.getXVelocity() + defaultAccel*a.accelMultiplier());
 	}
 	
 
