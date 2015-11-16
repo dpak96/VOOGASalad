@@ -1,4 +1,4 @@
-package gameengine;
+package model;
 
 public class RuleGravity extends Rule{
 
