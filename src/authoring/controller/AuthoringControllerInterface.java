@@ -14,22 +14,22 @@ public interface AuthoringControllerInterface {
 
     public void expandToolBar();
 
-    public void createObj(String name);
+    public void createNewArticle(String name);
 
     public void createObjAndPlace(double x,double y, String name);
 
     public void moveObj(double x, double y);
 
-    public void deleteObj(Node n);
+    public void deleteObj();
 
-    public void editObj(Node n);
+    public void editObj();
 
     public void setSplash(Image img);
 
-
-
-
     public void loadLevel();
+    
+    public void editKeyPress();
+
 
 
 
