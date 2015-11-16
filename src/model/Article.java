@@ -19,23 +19,10 @@ public class Article {
 	protected double myYVelocity;
 	private double myOrientation;
 	
-	public void moveRight(double defaultAccel){
-		myXVelocity += defaultAccel;
+	
+	public double accelMultiplier(){
+		return 1;
 	}
-	
-	public void moveLeft(double defaultAccel){
-		myXVelocity -= defaultAccel;
-	}
-	
-	public void moveUp(double defaultAccel){
-		myYVelocity -= defaultAccel;
-	}
-	
-	public void moveDown(double defaultAccel){
-		myYVelocity += defaultAccel;
-	}
-	
-	
 	
 	public double getX(){
 		return myX;
