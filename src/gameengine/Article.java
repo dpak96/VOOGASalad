@@ -18,6 +18,7 @@ public class Article {
 	private double myXVelocity;
 	private double myYVelocity;
 	private double myOrientation;
+	private BitMap myBitMap;
 	
 	public double getX(){
 		return myX;
@@ -78,5 +79,9 @@ public class Article {
 	public void setOrientation(double value){
 		myOrientation = value;
 	}
+	public BitMap getBitMap() {
+		return myBitMap;
+	}
+	
 	
 }
