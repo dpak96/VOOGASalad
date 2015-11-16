@@ -4,7 +4,9 @@ import gameengine.*;
 
 import java.util.List;
 
+import model.Article;
 import model.Model;
+import model.Rule;
 
 public class ModelController implements IModelController {
 	private Model myModel;
@@ -24,28 +26,37 @@ public class ModelController implements IModelController {
 	}
 
 	@Override
-	public void setRules() {
-		// TODO Auto-generated method stub
-		
+	public void addRule(Rule rule) {
+		myModel.addRule(rule);
 	}
 
 	@Override
-	public void removeRule() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addArticle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeArticle() {
-		// TODO Auto-generated method stub
-		
+	public void removeArticleFromRule(Rule rule, Article article) {
+		myModel.removeArticleFromRule(rule, article);
 	}
 	
+	public void removeRule(Rule rule){
+		myModel.removeRule(rule);
+	}
+
+	@Override
+	public void addArticle(Article article) {
+		myModel.addArticle(article);
+	}
+
+	@Override
+	public void removeArticle(Article article) {
+		myModel.removeArticle(article);
+	}
 	
+	@Override
+	public void remapButton(String button, List<Rule> rules){
+		myModel.remapButton(button, rules);
+	}
+	
+	@Override
+	public List<Rule> getButonRules(String button){
+		return myModel.getButtonRules(button);
+	}
+
 }
