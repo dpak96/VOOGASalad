@@ -1,10 +1,10 @@
 package model;
 
-public class MoveDownRight extends SingleDependencyRule {
+public class MoveDownAction extends SingleDependencyRule {
 
 	private double defaultAccel;
 	
-	public MoveDownRight(String name) {
+	public MoveDownAction(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
