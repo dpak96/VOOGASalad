@@ -16,6 +16,10 @@ public abstract class Rule {
 		myName = name;
 	}
 	
+	public void removeArticle(Article article){
+		myArticles.remove(article);
+	}
+	
 	public void addArticle(Article art){
 		myArticles.add(art);
 	}
