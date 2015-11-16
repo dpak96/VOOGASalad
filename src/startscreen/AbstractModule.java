@@ -5,10 +5,11 @@ import javafx.scene.layout.Pane;
 
 
 public abstract class AbstractModule {
-    private Pane myContainer;
+    protected Pane myContainer;
 
     public AbstractModule(){
         myContainer = new Pane();
+        myContainer.setId("pane");
     }
 
     public AbstractModule(Pane pane){
