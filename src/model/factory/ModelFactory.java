@@ -17,8 +17,8 @@ public class ModelFactory {
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {fileName, x, y, direction};
 			Article test = (Article) cons.newInstance(obj);
-			test.addRules(rules);
-			
+			test.addAllRules(rules);
+			return test;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class ModelFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	
 	public Rule createRule(String name, double value){
@@ -85,7 +85,6 @@ public class ModelFactory {
 	
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
-		ArrayList<Rules>
 		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0, null);
 		Article testArticle = m.createArticle("penis", 1.0, 2.0, false, null);
 		System.out.println(testArticle.getImageFile());
