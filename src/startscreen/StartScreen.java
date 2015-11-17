@@ -1,22 +1,32 @@
 package startscreen;
 
+import java.util.ResourceBundle;
+
+import authoring.ui.smalloverlay.BasicOverlay;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import uibasics.Layout;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
+    private ResourceBundle myResource = ResourceBundle.getBundle("properties/english");
+    private Stage myStage;
 
     public StartScreen(){
         skeleton = new StartScreenSkeleton();
         playEdit = new PlayAuthorModule();
     }
 
-    public void init(StartScreenController controller){
+    public void init(StartScreenController controller, Stage s){
         skeleton.init();
         myController = controller;
         playEdit.init(controller);
         skeleton.addLayer(playEdit.getContainer());
+        myStage = s;
     }
 
     public void addGameChooser(){
@@ -36,7 +46,11 @@ public class StartScreen {
         levels.init(myController);
         skeleton.addLayer(levels.getContainer());
     }
-
+    public void addLevel(){
+    	BasicOverlay basic = new BasicOverlay();
+    	basic.init(new Layout(myStage,myResource));
+    	myController.setScene(new Scene(basic.getModule()));
+    }
     private String[] getLevels(){
         String[] levelEx = {"Level1","Level2","Level3"};
         return levelEx;
