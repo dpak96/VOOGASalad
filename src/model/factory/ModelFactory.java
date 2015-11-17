@@ -10,14 +10,15 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Object createRule(String name, double value){
+	public Object createRule(String name, double value, List<Article> articles){
 		try {
 			Class<?> cls = Class.forName(name);
 			Class[] type = { String.class, Double.class };
 			
 			Constructor cons = cls.getConstructors()[0];
 			Object[] obj = { "test", value };
-			Object test = cons.newInstance(obj);
+			Rule test = (Rule) cons.newInstance(obj);
+			test.addAllArticle(articles);
 			return test;
 		            //for (int i = 0; i < fieldlist.length; i++) {
 		            //   Field fld = fieldlist[i];
