@@ -2,8 +2,10 @@ package menu;
 
 import java.util.ResourceBundle;
 
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import startscreen.StartScreenController;
 
 public class MainMenuItem extends AbstractMenuItem {
 	
@@ -16,6 +18,10 @@ public class MainMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle() {
-		// TODO : wangs	
+		StartScreenController start = new StartScreenController();
+		start.init(myStage);
+		Scene mainMenu = new Scene(start.getStart(),400,400);
+		mainMenu.getStylesheets().add("startscreen/StartScreen.css");
+		myStage.setScene(mainMenu);
 	}
 }

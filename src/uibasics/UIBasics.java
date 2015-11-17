@@ -1,7 +1,6 @@
 package uibasics;
 
 import model.Article;
-import state.turtle.TurtleState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +32,7 @@ public class UIBasics implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		myBackArticles = ((HashMap<String, Article>) arg);
-		myBackArticles.
+		//myBackArticles.
 	}	
 	
 	
