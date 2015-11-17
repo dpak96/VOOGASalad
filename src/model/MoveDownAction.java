@@ -1,6 +1,6 @@
 package model;
 
-public class MoveDownAction extends SingleDependencyRule {
+public class MoveDownAction extends Rule {
 
 	private double defaultAccel;
 	
@@ -10,8 +10,9 @@ public class MoveDownAction extends SingleDependencyRule {
 	}
 
 	@Override
-	protected void apply(Article a) {
+	public void apply(Article a) {
 		a.setYVelocity(a.getYVelocity() + defaultAccel*a.accelMultiplier());
 	}
+
 
 }

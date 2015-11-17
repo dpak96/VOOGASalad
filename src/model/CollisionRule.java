@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public abstract class CollisionRule extends MultiDependencyRule{
+public abstract class CollisionRule extends Rule{
 
 	
 	public CollisionRule(String name) {

@@ -12,7 +12,7 @@ public class RuleMaxHorizontalSpeed extends Rule{
 	}
 
 	@Override
-	public void update(Article art) {
+	public void apply(Article art) {
 		double horizontalVelocity = art.getXVelocity();
 		if(Math.abs(horizontalVelocity) <= myMaxSpeed) return;
 		art.setXVelocity(myMaxSpeed*Math.signum(horizontalVelocity));
