@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * This is the hierarchy of classes of objects, or articles, for the games
@@ -9,36 +9,37 @@ import java.util.List;
  */
 public class Article {
 	
-	private double myX;
-	private double myY;
 	private String myImageFile;
-	private boolean active;
 	private double myXBuffer;
 	private double myYBuffer;
-	protected double myXVelocity;
-	protected double myYVelocity;
-	private double myOrientation;
-	
 	private double myWidth;
 	private double myHeight;
-	
 	private List<Rule> myRules;
+	private Life myLife;
+	private Position myPosition;
 	
-	public double accelMultiplier(){
-		return 1;
+	
+	public Article(String image, double x, double y, boolean direction){
+		myImageFile = image;
+		myPosition = new Position(x, y, direction);
+		myXBuffer = 40; //CHANGE IF NECESSARY
+		myYBuffer = 40; //CHANGE IF NECESSARY
+		myRules = new ArrayList<Rule>();
 	}
+
+
 	
 	public double getX(){
-		return myX;
+		return myPosition.getX();
 	}
 	public double getY(){
-		return myY;
+		return myPosition.getY();
 	}
 	public void setX(double value){
-		myX = value;
+		myPosition.setX(value);
 	}
 	public void setY(double value){
-		myY = value;
+		myPosition.setY(value);
 	}
 	
 	public String getImageFile(){
@@ -47,14 +48,7 @@ public class Article {
 	public void setImageFile(String fileName){
 		myImageFile = fileName;
 	}
-	
-	public boolean getActive(){
-		return active;
-	}
-	
-	public void setActive(boolean value){
-		active = value;
-	}
+
 	public double getXBuffer(){
 		return myXBuffer;
 	}
@@ -69,25 +63,39 @@ public class Article {
 	}
 	
 	public double getXVelocity(){
-		return myXVelocity;
+		return myPosition.getXVelocity();
 	}
 	public void setXVelocity(double value){
-		myXVelocity = value;
+		myPosition.setXVelocity(value);
 	}
 	public double getYVelocity(){
-		return myYVelocity;
+		return myPosition.getYVelocity();
 	}
 	public void setYVelocity(double value){
-		myYVelocity = value;
+		myPosition.setYVelocity(value);
 	}
 	
 	public double getOrientation(){
-		return myOrientation;
+		return myPosition.getOrientation();
 	}
 	public void setOrientation(double value){
-		myOrientation = value;
+		myPosition.setOrientation(value);
 	}
 	
+	public boolean getDirection(){
+		return myPosition.isDirection();
+	}
+	
+	public void addRule(Rule rule){
+		myRules.add(rule);
+	}
+	
+	public void addAllRules(List<Rule> rules){
+		for(Rule r: rules){
+			myRules.add(r);
+		}
+	}
+		
 	public List<Rule> getRules(){
 		return myRules;
 	}
