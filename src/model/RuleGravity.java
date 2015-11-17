@@ -13,7 +13,7 @@ public class RuleGravity extends Rule{
 	}
 
 	@Override
-	public void update(Article art) {
+	public void apply(Article art) {
 		art.setYVelocity(art.getYVelocity() + myGravity);
 	}
 	

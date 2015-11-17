@@ -12,7 +12,7 @@ public class RuleMaxVerticalSpeed extends Rule{
 	}
 
 	@Override
-	public void update(Article art) {
+	public void apply(Article art) {
 		double verticalVelocity = art.getYVelocity();
 		if(Math.abs(verticalVelocity) <= myMaxSpeed) return;
 		art.setYVelocity(myMaxSpeed*Math.signum(verticalVelocity));

@@ -16,6 +16,26 @@ public class Model {
 		return myArticles;
 	}
 	
+	public Article getArticleFromCoordinates(double x, double y){
+		double xAdjusted = x + myViewpoint.getX();
+		double yAdjusted = y + myViewpoint.getY();
+		Article current = null;
+		double smallestArea = Double.MAX_VALUE;
+		for(Article article : myArticles){
+			if(articleContainsPoint(article, xAdjusted, yAdjusted)){
+				if(smallestArea > article.getWidth()*article.getHeight()){
+					current = article;
+					smallestArea = article.getWidth()*article.getHeight();
+				}
+			}
+		}
+		return current;
+	}
+	
+	private boolean articleContainsPoint(Article article, double x, double y) {
+		return x > article.getX() && x < article.getX()+article.getWidth()
+		&& y > article.getY() && y < article.getY()+article.getHeight();
+	}
 	public Article getViewpoint(){
 		return myViewpoint;
 	}
@@ -28,22 +48,18 @@ public class Model {
 		article.getRules().remove(rule);
 	}
 
-	
-	public void removeArticle(Article article) {
-		myArticles.remove(article);
-		for(Rule r : myRules){
-			removeArticleFromRule(r, article);
-		}
-		for(List<Rule> ruleList : myButtonMap.values()){
-			for(Rule r : ruleList)removeArticleFromRule(r, article);
-		}
-	}
 	public void remapButton(String button, List<Rule> rules) {
 		myButtonMap.put(button, rules);
 	}
 	
 	public List<Rule> getButtonRules(String button){
 		return myButtonMap.get(button);
+	}
+	public void addArticle(Article article) {
+		myArticles.add(article);
+	}
+	public void removeArticle(Article article) {
+		myArticles.remove(article);		
 	}
 	
 
