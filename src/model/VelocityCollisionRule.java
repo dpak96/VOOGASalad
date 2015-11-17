@@ -23,4 +23,11 @@ public class VelocityCollisionRule extends CollisionRule{
 		secondArticle.setXVelocity(mySecondXVelocity);
 		secondArticle.setYVelocity(mySecondYVelocity);
 	}
+
+	@Override
+	public void apply(Article art) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

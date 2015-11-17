@@ -26,20 +26,6 @@ public class ModelController implements IModelController {
 	}
 
 	@Override
-	public void addRule(Rule rule) {
-		myModel.addRule(rule);
-	}
-
-	@Override
-	public void removeArticleFromRule(Rule rule, Article article) {
-		myModel.removeArticleFromRule(rule, article);
-	}
-	
-	public void removeRule(Rule rule){
-		myModel.removeRule(rule);
-	}
-
-	@Override
 	public void addArticle(Article article) {
 		myModel.addArticle(article);
 	}
@@ -57,6 +43,24 @@ public class ModelController implements IModelController {
 	@Override
 	public List<Rule> getButonRules(String button){
 		return myModel.getButtonRules(button);
+	}
+
+	public Article getCharacter() {
+		return myModel.getCharacter();
+	}
+	
+	public Article getViewpoint(){
+		return myModel.getViewpoint();
+	}
+	
+	public Article getArticleFromCoordinates(double x, double y){
+		return myModel.getArticleFromCoordinates(x, y);
+	}
+
+	@Override
+	public void removeArticleFromRule(Rule rule, Article article) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
