@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * This is the hierarchy of classes of objects, or articles, for the games
@@ -12,17 +12,26 @@ public class Article {
 	private double myX;
 	private double myY;
 	private String myImageFile;
-	private boolean active;
 	private double myXBuffer;
 	private double myYBuffer;
 	protected double myXVelocity;
 	protected double myYVelocity;
 	private double myOrientation;
-	
+	private boolean myDirection; //True = facing right; False = facing left
 	private double myWidth;
 	private double myHeight;
-	
 	private List<Rule> myRules;
+	
+	public Article(String image, double x, double y, boolean direction){
+		myImageFile = image;
+		myX = x;
+		myY = y;
+		myDirection = direction;
+		myXBuffer = 40; //CHANGE IF NECESSARY
+		myYBuffer = 40; //CHANGE IF NECESSARY
+		myRules = new ArrayList<Rule>();
+	}
+
 	
 	public double accelMultiplier(){
 		return 1;
@@ -47,14 +56,7 @@ public class Article {
 	public void setImageFile(String fileName){
 		myImageFile = fileName;
 	}
-	
-	public boolean getActive(){
-		return active;
-	}
-	
-	public void setActive(boolean value){
-		active = value;
-	}
+
 	public double getXBuffer(){
 		return myXBuffer;
 	}
@@ -88,6 +90,20 @@ public class Article {
 		myOrientation = value;
 	}
 	
+	public boolean getDirection(){
+		return myDirection;
+	}
+	
+	public void addRule(Rule rule){
+		myRules.add(rule);
+	}
+	
+	public void addAllRules(List<Rule> rules){
+		for(Rule r: rules){
+			myRules.add(r);
+		}
+	}
+		
 	public List<Rule> getRules(){
 		return myRules;
 	}

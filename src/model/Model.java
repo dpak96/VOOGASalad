@@ -48,22 +48,18 @@ public class Model {
 		article.getRules().remove(rule);
 	}
 
-	
-	public void removeArticle(Article article) {
-		myArticles.remove(article);
-		for(Rule r : myRules){
-			removeArticleFromRule(r, article);
-		}
-		for(List<Rule> ruleList : myButtonMap.values()){
-			for(Rule r : ruleList)removeArticleFromRule(r, article);
-		}
-	}
 	public void remapButton(String button, List<Rule> rules) {
 		myButtonMap.put(button, rules);
 	}
 	
 	public List<Rule> getButtonRules(String button){
 		return myButtonMap.get(button);
+	}
+	public void addArticle(Article article) {
+		myArticles.add(article);
+	}
+	public void removeArticle(Article article) {
+		myArticles.remove(article);		
 	}
 	
 
