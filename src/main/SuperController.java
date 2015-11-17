@@ -2,11 +2,12 @@ package main;
 
 import gameengine.GameEngine;
 import model.controller.ModelController;
+import observer.controller.ObserverController;
 import uibasics.UIBasics;
 
 
 public class SuperController {
-  private UIBasics UIBasics;
+  private UIBasics uibasics;
   // TODO: Action Controller
   private ObserverController observerController;
   private GameEngine gameEngine;
@@ -29,11 +30,19 @@ public class SuperController {
   }
 
   public UIBasics getUIBasics() {
-    return UIBasics;
+    return uibasics;
   }
 
   public void setUIBasics(UIBasics uIBasics) {
-    UIBasics = uIBasics;
+    uibasics = uIBasics;
+  }
+
+  public ObserverController getObserverController() {
+    return observerController;
+  }
+
+  public void setObserverController(ObserverController observerController) {
+    this.observerController = observerController;
   }
 
 }
