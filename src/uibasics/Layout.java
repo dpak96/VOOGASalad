@@ -11,7 +11,7 @@ public class Layout extends BorderPane{
 	
 	public Layout(Stage stage, ResourceBundle resources){
 		VoogaProperties props = new VoogaProperties();
-		this.setCenter(new UIStackPane());
+		this.setCenter(new UIStackPane().getStack());
 		this.setTop(new MenuPanel(stage, resources));
 		this.setPrefWidth(props.getSceneWidth());
 		this.setPrefHeight(props.getSceneHeight());

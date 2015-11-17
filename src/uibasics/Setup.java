@@ -18,16 +18,17 @@ public class Setup extends Observable{
 		this.myRoot = new Group();
 		this.myScene = new Scene(myRoot, properties.getSceneWidth(), properties.getSceneHeight());
 		myRoot.getChildren().add(new Layout(stage, resource));
-		myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+		
 	}
 	
 	public Scene getScene(){
 		return myScene;
 	}
 	
-	private void handleKeyInput(KeyCode key){
-		notifyObservers(key.toString());
-//		System.out.println("penis in Steven's ass");
+
+	
+	private void handleClickInput(){
+		
 	}
 }
 

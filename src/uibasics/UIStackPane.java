@@ -1,20 +1,39 @@
 package uibasics;
 
+import java.util.Observable;
+
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class UIStackPane extends StackPane {
+public class UIStackPane extends Observable {
+	private StackPane myStackPane;
 	
 	public UIStackPane() {
-		this.getChildren().add(new UIBasics().getPane());
+		myStackPane = new StackPane();
+		myStackPane.getChildren().add(new UIBasics().getPane());
+		myStackPane.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+		myStackPane.setOnMouseClicked(e -> handleClick());
+	}
+	
+	public StackPane getStack(){
+		return myStackPane;
 	}
 	
 	public void addPane(Pane pane) {
-		this.getChildren().add(pane);
+		myStackPane.getChildren().add(pane);
 	}
 	
 	public void removePane() {
-		this.getChildren().remove(this.getChildren().size()-1);
+		myStackPane.getChildren().remove(myStackPane.getChildren().size()-1);
+	}
+	
+	private void handleKeyInput(KeyCode key){
+		notifyObservers(key.toString());
+	}
+	
+	private void handleClick(){
+		notifyObservers("click");
 	}
 
 }
