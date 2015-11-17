@@ -39,10 +39,19 @@ public class GameEngine implements IGameEngine {
 	private List<Article> getActiveArticles(){
 		List<Article> activeArticles = new ArrayList<Article>();
 		for(Article article : myModelController.getArticles()){
-			if(isInViewpoint(article.getX(),article.getY()) || 
-			   isInViewpoint(article.getX()+article.getWidth(),article.getY()) || 
-			   isInViewpoint(article.getX(),article.getY()+article.getHeight()) ||
-			   isInViewpoint(article.getX()+article.getWidth(),article.getY())){
+			double x = article.getX();
+			double y = article.getY();
+			double width = article.getWidth();
+			double height = article.getHeight();
+			double viewpointX = myViewpoint.getX();
+			double viewpointY = myViewpoint.getY();
+			double viewpointWidth = myViewpoint.getWidth();
+			double viewpointHeight = myViewpoint.getHeight();
+			double xBuffer = article.getXBuffer();
+			double yBuffer = article.getYBuffer();
+			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+					x, x + width, y, y + height)){
 				myArticles.add(article);
 			}
 					
@@ -50,9 +59,16 @@ public class GameEngine implements IGameEngine {
 		return activeArticles;
 	}
 	
-	private boolean isInViewpoint(double x, double y){
-		return x > myViewpoint.getX() && x < myViewpoint.getX()+myViewpoint.getWidth()
-			&& y > myViewpoint.getY() && y < myViewpoint.getY()+myViewpoint.getHeight();
+	private boolean rectanglesOverlap(double minX1, double maxX1, double minY1, double maxY1,
+			double minX2, double maxX2, double minY2, double maxY2){
+		return rectangleContainsPoint(minX1, maxX1, minY1, maxY1, minX2, minY2) ||
+			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, minX2, maxY2) ||
+			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, minY2) ||
+			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, maxY2);
+	}
+	
+	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
+		return x > minX && x < maxX && y > minY && y < maxY;
 	}
 
 }
