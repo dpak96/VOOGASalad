@@ -18,14 +18,10 @@ public class Article {
 	protected double myYVelocity;
 	private double myOrientation;
 	private boolean myDirection; //True = facing right; False = facing left
-	private List<Rule> myRules;
-	
-<<<<<<< HEAD
 	private double myWidth;
 	private double myHeight;
-	
 	private List<Rule> myRules;
-=======
+	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
 		myX = x;
@@ -35,7 +31,7 @@ public class Article {
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myRules = new ArrayList<Rule>();
 	}
->>>>>>> GE_Daniel
+
 	
 	public double accelMultiplier(){
 		return 1;
@@ -94,7 +90,10 @@ public class Article {
 		myOrientation = value;
 	}
 	
-<<<<<<< HEAD
+	public boolean getDirection(){
+		return myDirection;
+	}
+		
 	public List<Rule> getRules(){
 		return myRules;
 	}
@@ -105,10 +104,6 @@ public class Article {
 	
 	public double getHeight(){
 		return myHeight;
-=======
-	public boolean getDirection(){
-		return myDirection;
->>>>>>> GE_Daniel
 	}
 	
 }
