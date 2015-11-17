@@ -33,6 +33,9 @@ public class DraggableElement extends Button {
                 content.putImage(imgView.getImage());
                 db.setContent(content);
                 event.consume();
+                System.out.println(event.getScreenX());
+                System.out.println(event.getSceneX());
+                System.out.println(event.getX());
             }
         });
     }
@@ -58,6 +61,13 @@ public class DraggableElement extends Button {
                 //if (event.getTransferMode() == TransferMode.MOVE) {
                     //de.dragEnd();
                     System.out.println("done");
+                    System.out.println(event.getScreenX());
+                    System.out.println(event.getSceneX());
+                    System.out.println(event.getX());
+
+                    //System.out.println(event.getScreenY());
+
+
                 //}
                 event.consume();
             }
