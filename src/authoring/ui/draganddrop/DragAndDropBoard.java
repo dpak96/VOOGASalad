@@ -11,6 +11,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 
 public class DragAndDropBoard extends Node{
+
     public DragAndDropBoard(){
 
     }

@@ -19,6 +19,10 @@ public class Article {
 	protected double myYVelocity;
 	private double myOrientation;
 	
+	private double myWidth;
+	private double myHeight;
+	
+	private List<Rule> myRules;
 	
 	public double accelMultiplier(){
 		return 1;
@@ -82,6 +86,18 @@ public class Article {
 	}
 	public void setOrientation(double value){
 		myOrientation = value;
+	}
+	
+	public List<Rule> getRules(){
+		return myRules;
+	}
+	
+	public double getWidth(){
+		return myWidth;
+	}
+	
+	public double getHeight(){
+		return myHeight;
 	}
 	
 }
