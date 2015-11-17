@@ -36,12 +36,10 @@ public class Model {
 		return myButtonMap.get(button);
 	}
 	public void addArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		myArticles.add(article);
 	}
 	public void removeArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		myArticles.remove(article);		
 	}
 	
 
