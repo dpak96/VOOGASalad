@@ -14,9 +14,9 @@ public class Setup extends Observable{
 	private Scene myScene;
 	
 	public Setup(Stage stage, ResourceBundle resource){
-		VoogaProperties penisAss = new VoogaProperties();
+		VoogaProperties properties = new VoogaProperties();
 		this.myRoot = new Group();
-		this.myScene = new Scene(myRoot, penisAss.getSceneWidth(), penisAss.getSceneHeight());
+		this.myScene = new Scene(myRoot, properties.getSceneWidth(), properties.getSceneHeight());
 		myRoot.getChildren().add(new Layout(stage, resource));
 		myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
