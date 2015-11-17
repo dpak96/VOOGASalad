@@ -2,6 +2,7 @@ package main;
 
 import gameengine.GameEngine;
 import model.controller.ModelController;
+import observer.controller.ObserverController;
 import uibasics.UIBasics;
 
 
