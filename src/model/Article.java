@@ -1,4 +1,4 @@
-package gameengine;
+package model;
 
 import java.util.List;
 
@@ -15,9 +15,14 @@ public class Article {
 	private boolean active;
 	private double myXBuffer;
 	private double myYBuffer;
-	private double myXVelocity;
-	private double myYVelocity;
+	protected double myXVelocity;
+	protected double myYVelocity;
 	private double myOrientation;
+	
+	
+	public double accelMultiplier(){
+		return 1;
+	}
 	
 	public double getX(){
 		return myX;

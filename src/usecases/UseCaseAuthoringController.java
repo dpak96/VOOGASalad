@@ -1,10 +1,9 @@
 package usecases;
 
 import javafx.scene.Node;
-import voogasalad_SquirtleSquad.Article;
 import voogasalad_SquirtleSquad.IAuthoringController;
 
-public class UseCaseAuthoringController implements IAuthoringController{
+/*public class UseCaseAuthoringController implements IAuthoringController{
 
     @Override
     public void setProperty (Node obj) {
@@ -35,4 +34,4 @@ public class UseCaseAuthoringController implements IAuthoringController{
         
     }
 
-}
+}*/
