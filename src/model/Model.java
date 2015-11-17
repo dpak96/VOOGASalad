@@ -61,6 +61,4 @@ public class Model {
 	public void removeArticle(Article article) {
 		myArticles.remove(article);		
 	}
-	
-
 }
