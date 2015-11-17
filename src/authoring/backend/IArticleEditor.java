@@ -1,5 +1,6 @@
 package authoring.backend;
 
+import java.util.List;
 import javafx.scene.image.Image;
 import model.Rule;
 

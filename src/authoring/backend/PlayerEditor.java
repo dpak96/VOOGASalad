@@ -16,4 +16,10 @@ public class PlayerEditor implements IPlayerEditor {
   public void setPlayer(Player player) {
     this.player = player;
   }
+
+  @Override
+  public void addPlayer() {
+    // TODO Auto-generated method stub
+    
+  }
 }
