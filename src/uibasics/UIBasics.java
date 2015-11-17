@@ -20,6 +20,7 @@ public class UIBasics implements Observer {
 	private HashMap<String, Article> myBackArticles;
 	private List<ImageView> myFrontArticles;
 	private List<AbstractCommand> myCommands;
+	private AuthoringController authoringController;
 	
 	public UIBasics() {
 		load("commands");
