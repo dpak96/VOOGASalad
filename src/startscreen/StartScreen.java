@@ -47,9 +47,7 @@ public class StartScreen {
         skeleton.addLayer(levels.getContainer());
     }
     public void addLevel(){
-    	BasicOverlay basic = new BasicOverlay();
-    	basic.init(new Layout(myStage,myResource));
-    	myController.setScene(new Scene(basic.getModule()));
+    	myController.setScene(new Scene(new Layout(myStage,myResource)));
     }
     private String[] getLevels(){
         String[] levelEx = {"Level1","Level2","Level3"};
