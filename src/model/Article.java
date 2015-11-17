@@ -9,45 +9,37 @@ import java.util.*;
  */
 public class Article {
 	
-	private double myX;
-	private double myY;
 	private String myImageFile;
 	private double myXBuffer;
 	private double myYBuffer;
-	protected double myXVelocity;
-	protected double myYVelocity;
-	private double myOrientation;
-	private boolean myDirection; //True = facing right; False = facing left
 	private double myWidth;
 	private double myHeight;
 	private List<Rule> myRules;
+	private Life myLife;
+	private Position myPosition;
+	
 	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
-		myX = x;
-		myY = y;
-		myDirection = direction;
+		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myRules = new ArrayList<Rule>();
 	}
 
-	
-	public double accelMultiplier(){
-		return 1;
-	}
+
 	
 	public double getX(){
-		return myX;
+		return myPosition.getX();
 	}
 	public double getY(){
-		return myY;
+		return myPosition.getY();
 	}
 	public void setX(double value){
-		myX = value;
+		myPosition.setX(value);
 	}
 	public void setY(double value){
-		myY = value;
+		myPosition.setY(value);
 	}
 	
 	public String getImageFile(){
@@ -71,27 +63,27 @@ public class Article {
 	}
 	
 	public double getXVelocity(){
-		return myXVelocity;
+		return myPosition.getXVelocity();
 	}
 	public void setXVelocity(double value){
-		myXVelocity = value;
+		myPosition.setXVelocity(value);
 	}
 	public double getYVelocity(){
-		return myYVelocity;
+		return myPosition.getYVelocity();
 	}
 	public void setYVelocity(double value){
-		myYVelocity = value;
+		myPosition.setYVelocity(value);
 	}
 	
 	public double getOrientation(){
-		return myOrientation;
+		return myPosition.getOrientation();
 	}
 	public void setOrientation(double value){
-		myOrientation = value;
+		myPosition.setOrientation(value);
 	}
 	
 	public boolean getDirection(){
-		return myDirection;
+		return myPosition.isDirection();
 	}
 	
 	public void addRule(Rule rule){

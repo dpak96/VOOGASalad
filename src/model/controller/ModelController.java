@@ -52,6 +52,10 @@ public class ModelController implements IModelController {
 	public Article getViewpoint(){
 		return myModel.getViewpoint();
 	}
+	
+	public Article getArticleFromCoordinates(double x, double y){
+		return myModel.getArticleFromCoordinates(x, y);
+	}
 
 	@Override
 	public void removeArticleFromRule(Rule rule, Article article) {
