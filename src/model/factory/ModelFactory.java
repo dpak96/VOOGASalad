@@ -6,12 +6,6 @@ import model.*;
 
 public class ModelFactory {
 	
-	public Object createArticle(String name){
-		return null;
-	}
-	
-	
-	
 	public Article createArticle(String fileName, double x, double y, boolean direction){
 		try {
 			Class<?> cls = Class.forName("model.Article");
@@ -93,8 +87,10 @@ public class ModelFactory {
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
 		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
-		Article testArticle = m.createArticle("test", 1.0, 2.0, false);
-		System.out.println(testArticle.getImageFile());
+		ArrayList<Rule> ruleList = new ArrayList<Rule>();
+		ruleList.add(test);
+		Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
+		System.out.println(testArticle.getRules().get(0).toString());
 	}
 }
  
