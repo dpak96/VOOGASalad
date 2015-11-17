@@ -48,6 +48,7 @@ public class StartScreen {
     }
     public void addLevel(){
     	myController.setScene(new Scene(new Layout(myStage,myResource)));
+    	//add actionController/observercontroller to super controller?
     }
     private String[] getLevels(){
         String[] levelEx = {"Level1","Level2","Level3"};

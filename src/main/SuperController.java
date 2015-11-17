@@ -1,13 +1,15 @@
 package main;
 
+import action.controller.ActionController;
 import gameengine.GameEngine;
 import model.controller.ModelController;
+import observer.controller.ObserverController;
 import uibasics.UIBasics;
 
 
 public class SuperController {
-  private UIBasics UIBasics;
-  // TODO: Action Controller
+  private UIBasics uibasics;
+  private ActionController actionController;
   private ObserverController observerController;
   private GameEngine gameEngine;
   private ModelController modelController;
@@ -29,11 +31,27 @@ public class SuperController {
   }
 
   public UIBasics getUIBasics() {
-    return UIBasics;
+    return uibasics;
   }
 
   public void setUIBasics(UIBasics uIBasics) {
-    UIBasics = uIBasics;
+    uibasics = uIBasics;
+  }
+
+  public ObserverController getObserverController() {
+    return observerController;
+  }
+
+  public void setObserverController(ObserverController observerController) {
+    this.observerController = observerController;
+  }
+
+  public ActionController getActionController() {
+    return actionController;
+  }
+
+  public void setActionController(ActionController actionController) {
+    this.actionController = actionController;
   }
 
 }
