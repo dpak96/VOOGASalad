@@ -63,7 +63,7 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public List<Rule> getButonRules(String button){
+	public List<Rule> getButtonRules(String button){
 		return myModel.getButtonRules(button);
 	}
 
@@ -78,11 +78,14 @@ public class ModelController implements IModelController {
 	public Article getArticleFromCoordinates(double x, double y){
 		return myModel.getArticleFromCoordinates(x, y);
 	}
+	
+	public void notifyObservers(){
+		myModel.notifyObservers();
+	}
 
 	@Override
 	public void removeArticleFromRule(Rule rule, Article article) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

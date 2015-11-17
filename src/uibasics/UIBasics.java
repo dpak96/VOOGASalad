@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import authoring.controller.AuthoringController;
 import config.Config;
 import front.commands.AbstractCommand;
 
@@ -20,6 +21,7 @@ public class UIBasics implements Observer {
 	private HashMap<String, Article> myBackArticles;
 	private List<ImageView> myFrontArticles;
 	private List<AbstractCommand> myCommands;
+	private AuthoringController authoringController;
 	
 	public UIBasics() {
 		load("commands");
@@ -63,5 +65,13 @@ public class UIBasics implements Observer {
 		for (AbstractCommand c: myCommands)
 			c.update(article, img);
 	}
+
+  public AuthoringController getAuthoringController() {
+    return authoringController;
+  }
+
+  public void setAuthoringController(AuthoringController authoringController) {
+    this.authoringController = authoringController;
+  }
 	
 }
