@@ -1,5 +1,6 @@
 package authoring.ui.toolbar;
 
+import authoring.ui.draganddrop.DraggableElement;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -7,12 +8,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import resourcemanager.ResourceManager;
 
-public abstract class ToolbarButtons  extends Button implements IObjectPlacing {
+public abstract class ToolbarButtons  extends DraggableElement implements IObjectPlacing {
     ResourceManager resources=new ResourceManager();
+    
     public ToolbarButtons(){
         this.setPrefHeight(50);
         this.setPrefWidth(50);
-        this.setOnAction(e-> placeYourObject());
+        super.dragDetected();
+        super.dragEnd();
+       // this.setOnAction(e-> placeYourObject());
         this.setEffect(configureShadowEffect());
     }
     

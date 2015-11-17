@@ -27,7 +27,7 @@ public class EnemyProperties extends PropertyMenu {
 
         menuGrid.add(velocityLabel, 1, rowIndex);
         menuGrid.add(velocityField, 2, rowIndex++);
-
+       
         Label imageLabel = new Label("Image: ");
         ComboBox imageBox = new ComboBox();
 

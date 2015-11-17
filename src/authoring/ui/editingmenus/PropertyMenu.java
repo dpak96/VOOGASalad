@@ -6,7 +6,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 
 
-public abstract class PropertyMenu {
+public abstract class PropertyMenu  {
 
     public void showMenu (String title /* Enemy */) {
 
