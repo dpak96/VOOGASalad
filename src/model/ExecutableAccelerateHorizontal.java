@@ -6,8 +6,8 @@ public class ExecutableAccelerateHorizontal extends Executable{
 
 	private double myAcceleration;
 	
-	public ExecutableAccelerateHorizontal(Article actor, double acceleration) {
-		super(actor);
+	public ExecutableAccelerateHorizontal(String name, Article actor, double acceleration) {
+		super(name, actor);
 		myAcceleration = acceleration;
 		// TODO Auto-generated constructor stub
 	}

@@ -4,8 +4,8 @@ public class ExecutableAccelerateVertical extends Executable{
 	
 	private double myAcceleration;
 	
-	public ExecutableAccelerateVertical(Article actor, double acceleration) {
-		super(actor);
+	public ExecutableAccelerateVertical(String name, Article actor, double acceleration) {
+		super(name, actor);
 		myAcceleration = acceleration;
 		// TODO Auto-generated constructor stub
 	}
