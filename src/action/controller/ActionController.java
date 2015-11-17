@@ -8,8 +8,8 @@ import gameengine.GameEngine;
 public class ActionController implements Observer {
 	private GameEngine myGE;
 	
-	public ActionController(GameEngine ge){
-		myGE = ge;
+	public ActionController(GameEngine engine){
+		myGE = engine;
 	}
 
 	@Override
