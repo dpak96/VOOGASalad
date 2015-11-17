@@ -22,4 +22,22 @@ public class PlayerEditor implements IPlayerEditor {
     // TODO Auto-generated method stub
     
   }
+
+  @Override
+  public void editPlayerImage() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void editPlayerImageOrientation() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void editPlayerLocation(double x, double y) {
+    // TODO Auto-generated method stub
+    
+  }
 }

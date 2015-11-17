@@ -65,5 +65,13 @@ public class UIBasics implements Observer {
 		for (AbstractCommand c: myCommands)
 			c.update(article, img);
 	}
+
+  public AuthoringController getAuthoringController() {
+    return authoringController;
+  }
+
+  public void setAuthoringController(AuthoringController authoringController) {
+    this.authoringController = authoringController;
+  }
 	
 }
