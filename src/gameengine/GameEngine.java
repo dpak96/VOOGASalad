@@ -31,7 +31,7 @@ public class GameEngine implements IGameEngine {
 		for(Article article : myArticles){
 			List<Rule> articleRules = article.getRules();
 			for(Rule rule : articleRules){
-				rule.update(article);
+				rule.apply(article);
 			}
 		}
 		

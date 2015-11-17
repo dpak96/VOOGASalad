@@ -85,6 +85,16 @@ public class Article {
 	public boolean getDirection(){
 		return myPosition.isDirection();
 	}
+	
+	public void addRule(Rule rule){
+		myRules.add(rule);
+	}
+	
+	public void addAllRules(List<Rule> rules){
+		for(Rule r: rules){
+			myRules.add(r);
+		}
+	}
 		
 	public List<Rule> getRules(){
 		return myRules;
