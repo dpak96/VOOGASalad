@@ -15,7 +15,7 @@ public class BasicOverlay extends OverlayController {
     }
 
     public void init(Layout basics) {
-        addOverlay(basics);
+        addPane(basics);
     }
 
 }
