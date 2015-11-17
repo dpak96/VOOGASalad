@@ -7,12 +7,15 @@ import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
-public class DraggableElement extends Node {
+public class DraggableElement extends Button {
+    
 
-    public DraggableElement(){
+/*    public DraggableElement(){
 
     }
 
@@ -35,23 +38,27 @@ public class DraggableElement extends Node {
     public Object impl_processMXNode(MXNodeAlgorithm alg, MXNodeAlgorithmContext ctx) {
         return null;
     }
+*/
 
 
 
-
-    protected void dragDetected(Dragging d){
+    public void dragDetected(){
+        
         this.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 /* drag was detected, start drag-and-drop gesture*/
                 System.out.println("OMG WE DRAGGIN");
                 /* allow MOVE transfer mode */
-                d.dragging();
-                //Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
+              //  d.dragging();
+                
+                Dragboard db = startDragAndDrop(TransferMode.MOVE);
                 /* put a string on dragboard */
                 ClipboardContent content = new ClipboardContent();
-                //content.putString(source.getText());
-                //db.setContent(content);
+                
+                ImageView imgView=(ImageView) getGraphic();
+                content.putImage(imgView.getImage());
+                db.setContent(content);
                 event.consume();
             }
         });
@@ -68,7 +75,7 @@ public class DraggableElement extends Node {
         });
     }
 
-    protected void dragEnd(DragEnd de){
+    public void dragEnd(){
         this.setOnDragDone(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
@@ -76,7 +83,8 @@ public class DraggableElement extends Node {
                 //System.out.println("onDragDone");
                 /* if the data was successfully moved, clear it */
                 if (event.getTransferMode() == TransferMode.MOVE) {
-                    de.dragEnd();
+                    //de.dragEnd();
+                    System.out.println("done");
                 }
                 event.consume();
             }
