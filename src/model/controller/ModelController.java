@@ -4,15 +4,37 @@ import gameengine.*;
 
 import java.util.List;
 
-import model.Article;
-import model.Model;
-import model.Rule;
+import model.*;
+import model.factory.*;
+
 
 public class ModelController implements IModelController {
 	private Model myModel;
+	private ModelFactory myModelFactory;
 	
 	public ModelController(Model model){
 		myModel = model;
+		myModelFactory = new ModelFactory();
+	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, rules);
+		addArticle(newArticle);
+	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+		addArticle(newArticle);
+	}
+	
+	public void createRule(String name, double value, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value);
+		ruleOwner.addRule(newRule);
+	}
+	
+	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value, dependencies);
+		ruleOwner.addRule(newRule);
 	}
 
 	@Override

@@ -6,18 +6,13 @@ import model.*;
 
 public class ModelFactory {
 	
-	public Object createArticle(String name){
-		return null;
-	}
-	
-	public Article createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+	public Article createArticle(String fileName, double x, double y, boolean direction){
 		try {
 			Class<?> cls = Class.forName("model.Article");
 			Class [] type = {String.class, Double.class, Double.class, Boolean.class};
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {fileName, x, y, direction};
 			Article test = (Article) cons.newInstance(obj);
-			test.addAllRules(rules);
 			return test;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -36,6 +31,12 @@ public class ModelFactory {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Article createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+		Article temp = createArticle(fileName, x, y, direction);
+		temp.addAllRules(rules);
+		return temp;
 	}
 	
 	public Rule createRule(String name, double value){
@@ -85,9 +86,11 @@ public class ModelFactory {
 	
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
-		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0, null);
-		Article testArticle = m.createArticle("penis", 1.0, 2.0, false, null);
-		System.out.println(testArticle.getImageFile());
+		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
+		ArrayList<Rule> ruleList = new ArrayList<Rule>();
+		ruleList.add(test);
+		Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
+		System.out.println(testArticle.getRules().get(0).toString());
 	}
 }
  
