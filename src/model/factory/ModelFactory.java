@@ -10,7 +10,11 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Object createRule(String name, double value, List<Article> articles){
+	public Article createArticle(String fileName, double x, double y, boolean direction){
+		return null;
+	}
+	
+	public Rule createRule(String name, double value, List<Article> articles){
 		try {
 			Class<?> cls = Class.forName(name);
 			Class[] type = { String.class, Double.class };
@@ -53,7 +57,7 @@ public class ModelFactory {
 	
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
-		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
+		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0, null);
 		System.out.println(test.getYAcceleration());
 	}
 }
