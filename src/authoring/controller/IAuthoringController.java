@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 /**
  * Created by Rob on 11/15/15.
  */
-public interface AuthoringControllerInterface {
+public interface IAuthoringController {
 
     public void setToolBar(String toolBar);
 
