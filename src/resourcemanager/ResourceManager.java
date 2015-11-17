@@ -9,6 +9,7 @@ public class ResourceManager {
     propertiesManager = new PropertiesManager();
     imageManager = new ImageManager();
     soundManager = new SoundManager();
+    initResources();
   }
 
   public void initResources() {

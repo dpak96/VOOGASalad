@@ -2,6 +2,7 @@ package authoring.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import authoring.ui.draganddrop.DraggableElement;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-public class ToolbarContainer extends Application {
+public class ToolbarContainer extends DraggableElement {
 
     public FlowPane initializeToolbar () {
         FlowPane toolBox = new FlowPane();
@@ -42,24 +43,9 @@ public class ToolbarContainer extends Application {
         buttonList.add(new CheckpointButton());
         buttonList.add(new BackgroundButton());
         buttonList.add(new ControlButton());
+        buttonList.add(new RuleButton());
         return buttonList;
     }
 
-    public static void main (String args[]) {
-        launch(args);
-
-    }
-
-    @Override
-    public void start (Stage arg0) throws Exception {
-        ToolbarContainer tester = new ToolbarContainer();
-        BorderPane testLayout=new BorderPane();
-        testLayout.setRight(tester.initializeToolbar());
-        testLayout.setLeft(new HBox());
-        Scene testScene = new Scene(testLayout);
-        
-        arg0.setScene(testScene);
-        arg0.show();
-
-    }
+   
 }
