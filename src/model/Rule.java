@@ -12,6 +12,11 @@ public abstract class Rule {
 	private String myName;
 	protected List<Article> myDependencies;
 	
+	public Rule (String name){
+		myName = name;
+		myDependencies = null;
+	}
+	
 	public Rule (String name, List<Article> dependencies){
 		myName = name;
 		myDependencies = dependencies;
@@ -25,5 +30,11 @@ public abstract class Rule {
 		myDependencies.add(art);
 	}
 	
-	public abstract void update(Article art);
+	public void addAllDependencies(List<Article> articles){
+		for(Article a: articles){
+			myDependencies.add(a);
+		}
+	}
+	
+	public abstract void apply(Article art);
 }

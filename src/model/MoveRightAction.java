@@ -1,6 +1,6 @@
 package model;
 
-public class MoveRightAction extends SingleDependencyRule{
+public class MoveRightAction extends Rule{
 	
 	private double defaultAccel;
 
@@ -8,12 +8,11 @@ public class MoveRightAction extends SingleDependencyRule{
 	public MoveRightAction(String name) {
 		super(name);
 	}
-
+	
 	@Override
-	protected void apply(Article a) {
+	public void apply(Article a) {
 		a.setXVelocity(a.getXVelocity() + defaultAccel*a.accelMultiplier());
 	}
-	
 
 	
 }

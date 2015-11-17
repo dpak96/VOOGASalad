@@ -1,6 +1,6 @@
 package model;
 
-public class MoveResetHorizontal extends SingleDependencyRule{
+public class MoveResetHorizontal extends Rule{
 
 	private double defaultDeccel;
 	
@@ -8,9 +8,9 @@ public class MoveResetHorizontal extends SingleDependencyRule{
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
-	protected void apply(Article a) {
+	public void apply(Article a) {
 		double xVelocity = a.getXVelocity();
 		if(Math.abs(xVelocity) <= defaultDeccel) a.setXVelocity(0);
 		else{
