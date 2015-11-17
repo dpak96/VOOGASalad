@@ -14,6 +14,9 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javafx.scene.paint.Color;
 
 public class Matrix {
 	protected double[][] myMatrix;
@@ -34,7 +37,6 @@ public class Matrix {
 	}
 	
 	public void writeXML(){
-		System.out.println("where is my XML");
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -45,7 +47,7 @@ public class Matrix {
 			doc.appendChild(matrixXML);
 			
 			for (int i = 0; i < myMatrix.length; i++){
-				Element row = doc.createElement("Row" + Integer.toString(i));
+				Element row = doc.createElement("Row");
 				matrixXML.appendChild(row);
 				String tempString = "";
 				for (int j = 0; j < myMatrix.length-1; j++){
@@ -75,6 +77,29 @@ public class Matrix {
 	
 	
 	public void addRowAndColumn(){
-		
+		try {
+    		File fXmlFile = new File(".\\src\\ColorLibrary\\model\\DamageCollisionLibrary.xml");
+    		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    		Document doc = dBuilder.parse(fXmlFile);
+
+    		doc.getDocumentElement().normalize();
+    		NodeList collisionList = doc.getElementsByTagName("Row");
+    		for (int i = 0; i < collisionList.getLength(); i++)
+    		{
+    			Element colorNode = (Element) collisionList.item(i);
+    			if (Double.parseDouble(colorNode.getAttribute("index")) == index)
+    			{
+    				double r = getColor(colorNode,"r");
+    				double g = getColor(colorNode,"g");
+    				double b = getColor(colorNode,"b");
+    				c = Color.rgb((int)r, (int)g, (int)b);
+    			}
+    		}
+    	} catch (Exception e) {
+
+    		e.printStackTrace();
+    	}
+		return c;
 	}
 }
