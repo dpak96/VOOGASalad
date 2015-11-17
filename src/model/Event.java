@@ -15,7 +15,7 @@ public class Event {
 	
 	public void fire(){
 		for(Condition c : myConditions){
-			if(!c.check()) return;
+			if(!c.isMet()) return;
 		}
 		for(Executable e : myExecutables){
 			e.execute();
