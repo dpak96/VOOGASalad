@@ -1,5 +1,6 @@
 package main;
 
+import action.controller.ActionController;
 import gameengine.GameEngine;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
@@ -8,7 +9,7 @@ import uibasics.UIBasics;
 
 public class SuperController {
   private UIBasics uibasics;
-  // TODO: Action Controller
+  private ActionController actionController;
   private ObserverController observerController;
   private GameEngine gameEngine;
   private ModelController modelController;
@@ -43,6 +44,14 @@ public class SuperController {
 
   public void setObserverController(ObserverController observerController) {
     this.observerController = observerController;
+  }
+
+  public ActionController getActionController() {
+    return actionController;
+  }
+
+  public void setActionController(ActionController actionController) {
+    this.actionController = actionController;
   }
 
 }
