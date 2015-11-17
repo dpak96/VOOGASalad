@@ -89,9 +89,19 @@ public class Article {
 	public void setOrientation(double value){
 		myOrientation = value;
 	}
-
+	
 	public boolean getDirection(){
 		return myDirection;
+	}
+	
+	public void addRule(Rule rule){
+		myRules.add(rule);
+	}
+	
+	public void addAllRules(List<Rule> rules){
+		for(Rule r: rules){
+			myRules.add(r);
+		}
 	}
 		
 	public List<Rule> getRules(){
