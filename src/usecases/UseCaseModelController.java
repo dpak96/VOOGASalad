@@ -2,11 +2,8 @@ package usecases;
 
 import java.util.List;
 
-import voogasalad_SquirtleSquad.Article;
-import voogasalad_SquirtleSquad.IModelController;
-import voogasalad_SquirtleSquad.Rule;
 
-public class UseCaseModelController implements IModelController {
+/*public class UseCaseModelController implements IModelController {
 
 	@Override
 	public List<Rule> getRules() {
@@ -44,4 +41,4 @@ public class UseCaseModelController implements IModelController {
 		
 	}
 
-}
+}*/

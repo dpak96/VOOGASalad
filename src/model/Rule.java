@@ -1,4 +1,4 @@
-package gameengine;
+package model;
 
 import java.util.List;
 
@@ -10,10 +10,14 @@ import java.util.List;
 public abstract class Rule {
 	
 	private String myName;
-	private List<Article> myArticles;
+	protected List<Article> myArticles;
 	
 	public Rule (String name){
 		myName = name;
+	}
+	
+	public void removeArticle(Article article){
+		myArticles.remove(article);
 	}
 	
 	public void addArticle(Article art){
@@ -26,11 +30,6 @@ public abstract class Rule {
 		}
 	}
 	
-	protected abstract void apply(Article art);
-	
-	public void update(){
-		for(Article a: myArticles){
-			apply(a);
-		}
-	}
+	public abstract void update();
+
 }

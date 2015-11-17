@@ -1,4 +1,4 @@
-package authoring.ui;
+package authoring.ui.toolbar;
 
 public interface IObjectPlacing {
 
