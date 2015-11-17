@@ -3,6 +3,7 @@ package model;
 public class Life {
 	
 	private double health;
+	private double maxHealth;
 	private int lives;
 	
 	public double getHealth(){
@@ -23,10 +24,16 @@ public class Life {
 	
 	public void removeHealth(double damage){
 		health -= damage;
+		if(health < 0){
+			health = 0;
+		}
 	}
 	
 	public void addHealth(double heal){
 		health += heal;
+		if(health > maxHealth){
+			health = maxHealth;
+		}
 	}
 	
 	public void removeLife(int value){
