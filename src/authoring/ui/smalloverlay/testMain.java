@@ -16,8 +16,8 @@ public class testMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        OverlayControllerEx oc = new OverlayControllerEx();
-        oc.init();
+        BasicOverlay oc = new BasicOverlay();
+        //oc.init();
         Scene baseScene = new Scene(oc.getModule(), 400,400);
         baseScene.getStylesheets().add("authoring/ui/smalloverlay/Overlay.css");
         primaryStage.setTitle("Test");
