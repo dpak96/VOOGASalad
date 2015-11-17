@@ -42,6 +42,7 @@ public class ToolbarContainer extends Application {
         buttonList.add(new CheckpointButton());
         buttonList.add(new BackgroundButton());
         buttonList.add(new ControlButton());
+        buttonList.add(new RuleButton());
         return buttonList;
     }
 

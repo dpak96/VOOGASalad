@@ -6,7 +6,7 @@ public class EnemyButton extends ToolbarButtons{
 
     public EnemyButton () {
         super();
-        this.setGraphic(super.setImage("Goomba.png", 50, 50));
+        this.setGraphic(super.setImage("Goomba", 50, 50));
     }
 
     @Override

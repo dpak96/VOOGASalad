@@ -1,4 +1,4 @@
-package authoring.ui.propertyeditor;
+package authoring.ui.editingmenus;
 
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -12,26 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
 
 
-public class EnemyProperties {
+public class EnemyProperties extends PropertyMenu {
 
-    public void showMenu (/* Enemy */) {
-
-        Dialog propertyMenu = new Dialog();
-        propertyMenu.setTitle("Enemy Property Editor");
-
-        GridPane menuGrid = new GridPane();
-
-        populateMenu(menuGrid);
-        propertyMenu.getDialogPane().setContent(menuGrid);
-
-        ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
-
-        propertyMenu.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
-        propertyMenu.showAndWait();
-    }
-
-    private void populateMenu (GridPane menuGrid) {
+    protected void populateMenu (GridPane menuGrid) {
 
         int rowIndex = 1;
         Label enemyLabel = new Label("Name: ");
@@ -44,7 +27,7 @@ public class EnemyProperties {
 
         menuGrid.add(velocityLabel, 1, rowIndex);
         menuGrid.add(velocityField, 2, rowIndex++);
-        
+
         Label imageLabel = new Label("Image: ");
         ComboBox imageBox = new ComboBox();
 
@@ -56,7 +39,7 @@ public class EnemyProperties {
 
         menuGrid.add(collisionLabel, 1, rowIndex);
         menuGrid.add(collisionBox, 2, rowIndex++);
-        
+
         Label defaultOption = new Label("Save as default?");
         CheckBox defaultSave = new CheckBox();
 

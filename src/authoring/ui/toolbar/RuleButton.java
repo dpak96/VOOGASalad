@@ -1,10 +1,10 @@
 package authoring.ui.toolbar;
 
-public class BackgroundButton extends ToolbarButtons {
+public class RuleButton extends ToolbarButtons {
 
-    public  BackgroundButton() {
+    public RuleButton(){
         super();
-        this.setGraphic(super.setImage("background", 50, 50));
+        this.setGraphic(super.setImage("gavel", 50, 50));
     }
     @Override
     public void placeYourObject () {
@@ -12,4 +12,5 @@ public class BackgroundButton extends ToolbarButtons {
         
     }
 
+    
 }
