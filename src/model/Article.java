@@ -31,6 +31,7 @@ public class Article {
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myRules = new ArrayList<Rule>();
 	}
+
 	
 	public double accelMultiplier(){
 		return 1;
