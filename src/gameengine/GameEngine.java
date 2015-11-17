@@ -28,12 +28,12 @@ public class GameEngine implements IGameEngine {
 		
 		myArticles = getActiveArticles();
 		
-		for(Article article : myArticles){
+		/*for(Article article : myArticles){
 			List<Rule> articleRules = article.getRules();
 			for(Rule rule : articleRules){
 				rule.apply(article);
 			}
-		}
+		}*/ //FIX FOR EVENTS
 		
 	}
 	

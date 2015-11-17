@@ -35,7 +35,7 @@ public class ModelFactory {
 	
 	public Article createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
 		Article temp = createArticle(fileName, x, y, direction);
-		temp.addAllRules(rules);
+		//temp.addAllRules(rules);
 		return temp;
 	}
 	
@@ -90,7 +90,7 @@ public class ModelFactory {
 		ArrayList<Rule> ruleList = new ArrayList<Rule>();
 		ruleList.add(test);
 		Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
-		System.out.println(testArticle.getRules().get(0).toString());
+		//System.out.println(testArticle.getRules().get(0).toString());
 	}
 }
  

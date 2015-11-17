@@ -14,7 +14,7 @@ public class Article {
 	private double myYBuffer;
 	private double myWidth;
 	private double myHeight;
-	private List<Rule> myRules;
+	private List<Event> myEvents;
 	private Life myLife;
 	private Position myPosition;
 	
@@ -24,7 +24,7 @@ public class Article {
 		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
-		myRules = new ArrayList<Rule>();
+		myEvents = new ArrayList<Event>();
 	}
 
 
@@ -86,18 +86,18 @@ public class Article {
 		return myPosition.isDirection();
 	}
 	
-	public void addRule(Rule rule){
-		myRules.add(rule);
+	public void addEvent(Event event){
+		myEvents.add(event);
 	}
 	
-	public void addAllRules(List<Rule> rules){
-		for(Rule r: rules){
-			myRules.add(r);
+	public void addAllEvents(List<Event> events){
+		for(Event ev: events){
+			myEvents.add(ev);
 		}
 	}
 		
-	public List<Rule> getRules(){
-		return myRules;
+	public List<Event> getEvents(){
+		return myEvents;
 	}
 	
 	public double getWidth(){
