@@ -3,7 +3,7 @@ package authoring.controller;
 import model.Game;
 
 
-public class GameEditor {
+public class GameEditor implements IGameEditor{
   private Game game;
   
   public GameEditor(){

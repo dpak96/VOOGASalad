@@ -8,13 +8,13 @@ import model.Game;
 import model.Player;
 
 
-public class AuthoringController {
+public class AuthoringController implements IAuthoringController  {
   private GameEditor gameEditor;
   private ArticleEditor articleEditor;
   private PlayerEditor playerEditor;
-  private Point2D cursor;
-  
-  public AuthoringController(){
+  private UserInterfaceEditor userInterfaceEditor;
+
+  public AuthoringController() {
     setGameEditor(new GameEditor());
     setArticleEditor(new ArticleEditor());
     setPlayerEditor(new PlayerEditor());
@@ -44,13 +44,12 @@ public class AuthoringController {
     this.gameEditor = gameEditor;
   }
 
-  public Point2D getCursor() {
-    return cursor;
+  public UserInterfaceEditor getUserInterfaceEditor() {
+    return userInterfaceEditor;
   }
 
-  public void setCursor(Point2D cursor) {
-    this.cursor = cursor;
+  public void setUserInterfaceEditor(UserInterfaceEditor userInterfaceEditor) {
+    this.userInterfaceEditor = userInterfaceEditor;
   }
-  
 
 }

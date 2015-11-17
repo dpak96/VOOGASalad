@@ -2,7 +2,7 @@ package authoring.controller;
 
 import model.Player;
 
-public class PlayerEditor {
+public class PlayerEditor implements IPlayerEditor {
   private Player player;
   
   public PlayerEditor(){

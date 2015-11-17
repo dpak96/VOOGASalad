@@ -2,7 +2,7 @@ package authoring.controller;
 
 import model.Article;
 
-public class ArticleEditor {
+public class ArticleEditor implements IArticleEditor{
   private Article article;
   
   public ArticleEditor(){
