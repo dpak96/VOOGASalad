@@ -1,0 +1,24 @@
+.text {
+    -fx-font-size: 50;
+}
+
+.OverlayP {
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+    -fx-min-width: 300;
+    -fx-min-height: 300;
+    -fx-effect: dropshadow( GAUSSIAN , #333333 , 5 , 5.0 , 0 , 0 );
+}
+
+
+.Overlayed{
+    -fx-background-color: rgba(64, 64, 64, 0.85);
+}
+
+.BaseP {
+
+    -fx-padding: 200;
+    -fx-alignment: center;
+    -fx-min-width: 400;
+    -fx-min-height: 300;
+}
