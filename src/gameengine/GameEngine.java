@@ -20,7 +20,7 @@ public class GameEngine implements IGameEngine {
 	}
 	
 	@Override
-	public void update(){
+	public void update(List<String> inputs){
 		myArticles = myModelController.getArticles();
 		myViewpoint = myModelController.getViewpoint();
 		myCharacter = myModelController.getCharacter();
@@ -34,6 +34,7 @@ public class GameEngine implements IGameEngine {
 				rule.update(article);
 			}
 		}
+		
 	}
 	
 	private List<Article> getActiveArticles(){
