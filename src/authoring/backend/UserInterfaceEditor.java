@@ -1,4 +1,4 @@
-package authoring.controller;
+package authoring.backend;
 
 public class UserInterfaceEditor implements IUserInterfaceEditor {
 

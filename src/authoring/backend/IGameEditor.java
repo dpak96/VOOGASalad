@@ -1,4 +1,4 @@
-package authoring.controller;
+package authoring.backend;
 
 import javafx.scene.image.Image;
 

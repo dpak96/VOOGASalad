@@ -1,4 +1,4 @@
-package authoring.controller;
+package authoring.backend;
 
 import model.Article;
 

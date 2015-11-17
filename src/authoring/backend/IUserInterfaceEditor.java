@@ -1,4 +1,4 @@
-package authoring.controller;
+package authoring.backend;
 
 public interface IUserInterfaceEditor {
   public void setToolBar(String toolBar);
