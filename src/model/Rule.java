@@ -10,26 +10,20 @@ import java.util.List;
 public abstract class Rule {
 	
 	private String myName;
-	protected List<Article> myArticles;
+	protected List<Article> myDependencies;
 	
-	public Rule (String name){
+	public Rule (String name, List<Article> dependencies){
 		myName = name;
+		myDependencies = dependencies;
 	}
 	
-	public void removeArticle(Article article){
-		myArticles.remove(article);
+	public void removeDependency(Article article){
+		myDependencies.remove(article);
 	}
 	
-	public void addArticle(Article art){
-		myArticles.add(art);
+	public void addDependency(Article art){
+		myDependencies.add(art);
 	}
 	
-	public void addAllArticle(List<Article> articles){
-		for(Article a: articles){
-			addArticle(a);
-		}
-	}
-	
-	public abstract void update();
-
+	public abstract void update(Article art);
 }

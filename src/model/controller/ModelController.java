@@ -59,4 +59,12 @@ public class ModelController implements IModelController {
 		return myModel.getButtonRules(button);
 	}
 
+	public Article getCharacter() {
+		return myModel.getCharacter();
+	}
+	
+	public Article getViewpoint(){
+		return myModel.getViewpoint();
+	}
+
 }

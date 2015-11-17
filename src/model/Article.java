@@ -18,6 +18,8 @@ public class Article {
 	protected double myYVelocity;
 	private double myOrientation;
 	private boolean myDirection; //True = facing right; False = facing left
+	private double myWidth;
+	private double myHeight;
 	private List<Rule> myRules;
 	
 	public Article(String image, double x, double y, boolean direction){
@@ -86,9 +88,21 @@ public class Article {
 	public void setOrientation(double value){
 		myOrientation = value;
 	}
-	
+
 	public boolean getDirection(){
 		return myDirection;
+	}
+		
+	public List<Rule> getRules(){
+		return myRules;
+	}
+	
+	public double getWidth(){
+		return myWidth;
+	}
+	
+	public double getHeight(){
+		return myHeight;
 	}
 	
 }
