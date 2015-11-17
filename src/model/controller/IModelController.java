@@ -18,15 +18,6 @@ public interface IModelController {
 	 */
 	public List<Article> getArticles();
 	
-	/**
-	 * Adds a new rule to the model
-	 */
-	public void addRule(Rule rule);
-	
-	/**
-	 * Removes a given rule from the model
-	 */
-	public void removeRule(Rule rule);
 	
 	/**
 	 * Adds a new game object to the model
@@ -40,7 +31,7 @@ public interface IModelController {
 
 	public void removeArticleFromRule(Rule rule, Article article);
 
-	public List<Rule> getButonRules(String button);
+	public List<Rule> getButtonRules(String button);
 
 	public void remapButton(String button, List<Rule> rules);
 

@@ -4,15 +4,37 @@ import gameengine.*;
 
 import java.util.List;
 
-import model.Article;
-import model.Model;
-import model.Rule;
+import model.*;
+import model.factory.*;
+
 
 public class ModelController implements IModelController {
 	private Model myModel;
+	private ModelFactory myModelFactory;
 	
 	public ModelController(Model model){
 		myModel = model;
+		myModelFactory = new ModelFactory();
+	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, rules);
+		addArticle(newArticle);
+	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+		addArticle(newArticle);
+	}
+	
+	public void createRule(String name, double value, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value);
+		ruleOwner.addRule(newRule);
+	}
+	
+	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value, dependencies);
+		ruleOwner.addRule(newRule);
 	}
 
 	@Override
@@ -23,20 +45,6 @@ public class ModelController implements IModelController {
 	@Override
 	public List<Article> getArticles() {
 		return myModel.getArticles();
-	}
-
-	@Override
-	public void addRule(Rule rule) {
-		myModel.addRule(rule);
-	}
-
-	@Override
-	public void removeArticleFromRule(Rule rule, Article article) {
-		myModel.removeArticleFromRule(rule, article);
-	}
-	
-	public void removeRule(Rule rule){
-		myModel.removeRule(rule);
 	}
 
 	@Override
@@ -55,8 +63,29 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public List<Rule> getButonRules(String button){
+	public List<Rule> getButtonRules(String button){
 		return myModel.getButtonRules(button);
+	}
+
+	public Article getCharacter() {
+		return myModel.getCharacter();
+	}
+	
+	public Article getViewpoint(){
+		return myModel.getViewpoint();
+	}
+	
+	public Article getArticleFromCoordinates(double x, double y){
+		return myModel.getArticleFromCoordinates(x, y);
+	}
+	
+	public void notifyObservers(){
+		myModel.notifyObservers();
+	}
+
+	@Override
+	public void removeArticleFromRule(Rule rule, Article article) {
+		// TODO Auto-generated method stub
 	}
 
 }

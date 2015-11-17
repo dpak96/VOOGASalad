@@ -4,7 +4,7 @@ public class BackgroundButton extends ToolbarButtons {
 
     public  BackgroundButton() {
         super();
-        this.setGraphic(super.setImage("background.png", 50, 50));
+        this.setGraphic(super.setImage("background", 50, 50));
     }
     @Override
     public void placeYourObject () {
