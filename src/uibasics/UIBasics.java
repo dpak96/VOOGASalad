@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd8b0d953ccbbf180cb81efc07db2508dc406650
 import authoring.controller.AuthoringController;
 import config.Config;
 import front.commands.AbstractCommand;

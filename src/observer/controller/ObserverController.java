@@ -1,9 +1,10 @@
 package observer.controller;
 
+import model.Model;
 import uibasics.UIBasics;
 
 public class ObserverController {
-	public ObserverController(Something modelMap, UIBasics uiBasics) {
+	public ObserverController(Model modelMap, UIBasics uiBasics) {
 		modelMap.addObserver(uiBasics);
 	}
 }

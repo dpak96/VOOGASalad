@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-public class Model {
+public class Model extends Observable{
 	
 	private List<Rule> myRules;
 	private Map<String, List<Rule>> myButtonMap;
