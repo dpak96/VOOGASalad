@@ -13,32 +13,6 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
 public class DraggableElement extends Button {
-    
-
-/*    public DraggableElement(){
-
-    }
-
-    @Override
-    protected NGNode impl_createPeer() {
-        return null;
-    }
-
-    @Override
-    public BaseBounds impl_computeGeomBounds(BaseBounds bounds, BaseTransform tx) {
-        return null;
-    }
-
-    @Override
-    protected boolean impl_computeContains(double localX, double localY) {
-        return false;
-    }
-
-    @Override
-    public Object impl_processMXNode(MXNodeAlgorithm alg, MXNodeAlgorithmContext ctx) {
-        return null;
-    }
-*/
 
 
 
@@ -55,7 +29,6 @@ public class DraggableElement extends Button {
                 Dragboard db = startDragAndDrop(TransferMode.MOVE);
                 /* put a string on dragboard */
                 ClipboardContent content = new ClipboardContent();
-                
                 ImageView imgView=(ImageView) getGraphic();
                 content.putImage(imgView.getImage());
                 db.setContent(content);
@@ -82,10 +55,10 @@ public class DraggableElement extends Button {
                 /* the drag-and-drop gesture ended */
                 //System.out.println("onDragDone");
                 /* if the data was successfully moved, clear it */
-                if (event.getTransferMode() == TransferMode.MOVE) {
+                //if (event.getTransferMode() == TransferMode.MOVE) {
                     //de.dragEnd();
                     System.out.println("done");
-                }
+                //}
                 event.consume();
             }
         });
