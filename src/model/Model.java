@@ -35,6 +35,14 @@ public class Model {
 	public List<Rule> getButtonRules(String button){
 		return myButtonMap.get(button);
 	}
+	public void addArticle(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void removeArticle(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
