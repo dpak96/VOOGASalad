@@ -31,7 +31,7 @@ public interface IModelController {
 
 	public void removeArticleFromRule(Rule rule, Article article);
 
-	public List<Rule> getButonRules(String button);
+	public List<Rule> getButtonRules(String button);
 
 	public void remapButton(String button, List<Rule> rules);
 
