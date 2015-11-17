@@ -7,6 +7,8 @@ public class Model {
 	private Map<String, List<Rule>> myButtonMap;
 	private List<Article> myArticles;
 	
+	private HashMap<String, Article> myArticleMap;
+	
 	public List<Rule> getRules(){
 		return myRules;
 	}

@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class RuleGravity extends SingleDependencyRule{
+public class RuleGravity extends Rule{
 
 	private double yAcceleration;
 	
@@ -13,7 +13,7 @@ public class RuleGravity extends SingleDependencyRule{
 	}
 
 	@Override
-	protected void apply(Article art) {
+	protected void update(Article art) {
 		art.setYVelocity(art.getYVelocity() + yAcceleration);
 	}
 	

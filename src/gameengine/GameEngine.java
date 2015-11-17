@@ -10,16 +10,20 @@ import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
 
 public class GameEngine implements IGameEngine {
-	private List<Rule> myRules;
-	public GameEngine(ModelController myModelController){
-		myRules = myModelController.getRules();
+	private List<Article> myArticles;
+	private ModelController myModelController;
+	public GameEngine(ModelController modelController){
+		myModelController = modelController;
 	}
 	
 	@Override
 	public void update(){
-		// TODO Auto-generated method stub
-		for(Rule r : myRules){
-			r.update();
+		myArticles = myModelController.getArticles();
+		for(Article article : myArticles){
+			List<Rule> articleRules = article.getRules();
+			for(Rule rule : articleRules){
+				rule.update(article);
+			}
 		}
 	}
 
