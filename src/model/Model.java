@@ -6,6 +6,8 @@ public class Model {
 	private List<Rule> myRules;
 	private Map<String, List<Rule>> myButtonMap;
 	private List<Article> myArticles;
+	private Article myViewpoint;
+	private Article myCharacter;
 	
 	public List<Rule> getRules(){
 		return myRules;
@@ -13,19 +15,20 @@ public class Model {
 	public List<Article> getArticles(){
 		return myArticles;
 	}
-	public void addRule(Rule rule) {
-		myRules.add(rule);
+	
+	public Article getViewpoint(){
+		return myViewpoint;
 	}
-	public void removeRule(Rule rule) {
-		myRules.remove(rule);
+	
+	public Article getCharacter(){
+		return myCharacter;
 	}
-	public void removeArticleFromRule(Rule rule, Article article) {
-		rule.removeArticle(article);
+
+	public void removeRuleFromArticle(Article article, Rule rule){
+		article.getRules().remove(rule);
 	}
-	public void addArticle(Article article) {
-		myArticles.add(article);
-		
-	}
+
+	
 	public void removeArticle(Article article) {
 		myArticles.remove(article);
 		for(Rule r : myRules){

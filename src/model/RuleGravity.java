@@ -2,27 +2,23 @@ package model;
 
 import java.util.List;
 
-public class RuleGravity extends SingleDependencyRule{
+public class RuleGravity extends Rule{
 
-	private double yAcceleration;
+	private double myGravity;
 	
 	public RuleGravity(String name, double gravity) {
-		super(name);
-		yAcceleration = gravity;
+		super(name, null);
+		myGravity = gravity;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected void apply(Article art) {
-		art.setYVelocity(art.getYVelocity() + yAcceleration);
-	}
-	
-	public double getYAcceleration(){
-		return yAcceleration;
+	public void update(Article art) {
+		art.setYVelocity(art.getYVelocity() + myGravity);
 	}
 	
 	public void setYAcceleration(double gravity){
-		yAcceleration = gravity;
+		myGravity = gravity;
 	}
 	
 }
