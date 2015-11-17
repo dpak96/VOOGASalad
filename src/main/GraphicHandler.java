@@ -19,7 +19,7 @@ public class GraphicHandler {
         baseScene.getStylesheets().add("startscreen/StartScreen.css");
         s.setTitle("Test");
         s.setScene(baseScene);
-        start.init();
+        start.init(s);
         s.show();
     }
 
