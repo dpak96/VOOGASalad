@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 public class UIBasics extends Observable{
 	private StackPane myPane;
+	
 	public UIBasics(){
 		myPane = new StackPane();
 		myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
