@@ -3,12 +3,15 @@ import java.util.*;
 
 public class Event {
 
+	String myName;
+	
 	List<Article> myActors;
 	
 	List<Condition> myConditions;
 	List<Executable> myExecutables;
 	
-	public Event(List<Condition> conditions, List<Executable> executables){
+	public Event(String name, List<Condition> conditions, List<Executable> executables){
+		myName = name;
 		myConditions = conditions;
 		myExecutables = executables;
 	}
