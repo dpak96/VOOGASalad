@@ -2,7 +2,6 @@ package authoring.backend;
 
 import java.util.List;
 import javafx.scene.image.Image;
-import model.Rule;
 
 
 public interface IArticleEditor {
@@ -35,11 +34,7 @@ public interface IArticleEditor {
   
   public void editArticleOrientation(double value);
   
-  public void addRuleToArticle(Rule rule);
-  
-  public void addRulesToArticle(List<Rule> rules);
-  
-  public void deleteRule(Rule rule);
+
 
   
   

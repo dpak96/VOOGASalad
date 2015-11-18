@@ -1,16 +1,11 @@
 package voogasalad_SquirtleSquad;
 
 import model.Article;
-import model.Rule;
 
 import java.util.List;
 
 public interface IModelController {
-	/**
-	 * Gets the rules from the model and returns them 
-	 * @return
-	 */
-	public List<Rule> getRules();
+
 	
 	/**
 	 * Gets the different objects from the model and returns them

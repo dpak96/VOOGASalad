@@ -2,7 +2,6 @@ package authoring.backend;
 
 import javafx.scene.image.Image;
 import model.Game;
-import model.Rule;
 
 
 public class GameEditor implements IGameEditor{
@@ -26,17 +25,7 @@ public class GameEditor implements IGameEditor{
     
   }
 
-  @Override
-  public void editKeyPress(Rule rule) {
-    // TODO Auto-generated method stub
-    
-  }
 
-  @Override
-  public void addKeyPress(String key, Rule rule) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void addNewLevel() {
