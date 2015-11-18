@@ -12,6 +12,7 @@ public class Position {
 	private boolean myDirection = true; //True = facing right; False = facing left
 
 	private boolean isValid;
+	
 	public Position() {
 		isValid = false;
 	}
@@ -23,6 +24,7 @@ public class Position {
 	public Position(double x, double y, boolean direction){
 		myX = x;
 		myY = y;
+		myDirection = direction;
 		isValid = true;
 	}
 
