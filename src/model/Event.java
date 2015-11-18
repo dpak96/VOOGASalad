@@ -5,8 +5,6 @@ public class Event {
 
 	String myName;
 	
-	List<Article> myActors;
-	
 	List<Condition> myConditions;
 	List<Executable> myExecutables;
 	
