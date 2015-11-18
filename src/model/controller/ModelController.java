@@ -39,11 +39,6 @@ public class ModelController implements IModelController {
 	}*/
 
 	@Override
-	public List<Rule> getRules() {
-		return myModel.getRules();
-	}
-
-	@Override
 	public List<Article> getArticles() {
 		return myModel.getArticles();
 	}
@@ -59,13 +54,13 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public void remapButton(String button, List<Rule> rules){
-		myModel.remapButton(button, rules);
+	public void remapButton(String button, List<Event> events){
+		myModel.remapButton(button, events);
 	}
 	
 	@Override
-	public List<Rule> getButtonRules(String button){
-		return myModel.getButtonRules(button);
+	public List<Event> getButtonEvents(String button){
+		return myModel.getButtonEvents(button);
 	}
 
 	public Article getCharacter() {
@@ -84,9 +79,5 @@ public class ModelController implements IModelController {
 		myModel.notifyObservers();
 	}
 
-	@Override
-	public void removeArticleFromRule(Rule rule, Article article) {
-		// TODO Auto-generated method stub
-	}
 
 }

@@ -1,16 +1,11 @@
 package model.controller;
 
 import model.Article;
-import model.Rule;
+import model.Event;
 
 import java.util.List;
 
 public interface IModelController {
-	/**
-	 * Gets the rules from the model and returns them 
-	 * @return
-	 */
-	public List<Rule> getRules();
 	
 	/**
 	 * Gets the different objects from the model and returns them
@@ -29,11 +24,9 @@ public interface IModelController {
 	 */
 	public void removeArticle(Article article);
 
-	public void removeArticleFromRule(Rule rule, Article article);
+	public List<Event> getButtonEvents(String button);
 
-	public List<Rule> getButtonRules(String button);
-
-	public void remapButton(String button, List<Rule> rules);
+	public void remapButton(String button, List<Event> events);
 
 
 	
