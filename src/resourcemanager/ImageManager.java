@@ -12,7 +12,7 @@ public class ImageManager {
   
   public void initListImages() {
     imageMap = new HashMap<String, Image>();
-    File[] folder = new File("src/" + PROPERTIES_PATH).listFiles();
+    File[] folder = new File(PROPERTIES_PATH).listFiles();
     for (File f : folder) {
       Image temp = new Image(getClass().getClassLoader().getResourceAsStream(PROPERTIES_PATH + f.getName()));
       imageMap.put(f.getName().split("\\.")[0], temp);

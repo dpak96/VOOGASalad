@@ -2,7 +2,6 @@ package authoring.ui.smalloverlay;
 
 import authoring.ui.draganddrop.DragAndDropBoard;
 import authoring.ui.toolbar.ToolbarContainer;
-import com.sun.tools.javac.comp.Flow;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
