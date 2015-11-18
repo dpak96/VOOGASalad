@@ -39,6 +39,9 @@ public class ModelController implements IModelController {
 	}*/
 
 	@Override
+	public List<Event> getEvents() {
+		return myModel.getEvents();
+	}
 	public List<Article> getArticles() {
 		return myModel.getArticles();
 	}
@@ -78,6 +81,5 @@ public class ModelController implements IModelController {
 	public void notifyObservers(){
 		myModel.notifyObservers();
 	}
-
 
 }

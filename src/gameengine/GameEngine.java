@@ -1,13 +1,16 @@
 package gameengine;
 
+import java.util.Arrays;
+import java.util.List;
+
 import java.util.*;
 
 import model.Article;
-import model.Rule;
 import model.controller.ModelController;
 
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
+import model.Article;
 
 public class GameEngine implements IGameEngine {
 	private List<Article> myArticles;
@@ -71,5 +74,16 @@ public class GameEngine implements IGameEngine {
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
 		return x > minX && x < maxX && y > minY && y < maxY;
 	}
+	
+	public static void main(String args[]) {
+		Article one = new Article("GoombaRefinedAgain.png");
+//		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
+		for(int[] a: one.getBitMap().getByteArray()) {
+			System.out.println(Arrays.toString(a));
+		}
+		//CollisionManager temp = new CollisionManager();
+		//System.out.println(temp.didCollide(one, two));
+	}
+	
 
 }

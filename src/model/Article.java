@@ -2,6 +2,7 @@ package model;
 
 import java.util.*;
 
+
 /**
  * This is the hierarchy of classes of objects, or articles, for the games
  * @author danielpak
@@ -12,6 +13,10 @@ public class Article {
 	private String myImageFile;
 	private double myXBuffer;
 	private double myYBuffer;
+	private double myXVelocity;
+	private double myYVelocity;
+	private double myOrientation;
+	private BitMap myBitMap;
 	private double myWidth;
 	private double myHeight;
 	private List<Event> myEvents;
@@ -29,6 +34,12 @@ public class Article {
 
 
 	
+	public Article(String file) {
+		myImageFile = file;
+		
+		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		
+	}
 	public double getX(){
 		return myPosition.getX();
 	}
@@ -123,5 +134,9 @@ public class Article {
 	public void gainLife(){
 		myLife.addLife();
 	}
+	public BitMap getBitMap() {
+		return myBitMap;
+	}
+	
 	
 }

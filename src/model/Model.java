@@ -3,10 +3,15 @@ import java.util.*;
 
 public class Model extends Observable{
 	
+	private List<Event> myEvents;
 	private Map<String, List<Event>> myButtonMap;
 	private List<Article> myArticles;
 	private Article myViewpoint;
 	private Article myCharacter;
+	
+	public List<Event> getEvents(){
+		return myEvents;
+	}
 	
 	public List<Article> getArticles(){
 		return myArticles;
