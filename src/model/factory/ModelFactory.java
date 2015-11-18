@@ -3,6 +3,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import model.*;
+import model.Executable;
 
 public class ModelFactory {
 	
@@ -33,19 +34,24 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Article createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
 		Article temp = createArticle(fileName, x, y, direction);
-		//temp.addAllRules(rules);
+		temp.addAllEvents(events);
 		return temp;
 	}
 	
-	public Rule createRule(String name, double value){
+	public Condition createCondition(String cond){
+		//Will return the condition of a given type you want.
+		return null;
+	}
+	
+	public Executable createExecutable(String name, double value, Article actor){
 		try {
 			Class<?> cls = Class.forName(name);
-			Class[] type = { String.class, Double.class };
+			Class[] type = { String.class, Double.class, Article.class };
 			Constructor<?> cons = cls.getConstructors()[0];
-			Object[] obj = { "test", value };
-			Rule test = (Rule) cons.newInstance(obj);
+			Object[] obj = { "test", value, actor };
+			Executable test = (Executable) cons.newInstance(obj);
 			return test;
 		            //for (int i = 0; i < fieldlist.length; i++) {
 		            //   Field fld = fieldlist[i];
@@ -78,18 +84,12 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Rule createRule(String name, double value, List<Article> articles){
-		Rule temp = createRule(name,value);
-		temp.addAllDependencies(articles);
-		return temp;
-	}
-	
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
-		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
+		//RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
 		ArrayList<Rule> ruleList = new ArrayList<Rule>();
-		ruleList.add(test);
-		Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
+		//ruleList.add(test);
+		//Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
 		//System.out.println(testArticle.getRules().get(0).toString());
 	}
 }
