@@ -12,10 +12,14 @@ public class FactoryData {
   private String executableName;
   private Article executableArticle;
   private double executableDouble;
+  private Object[] executableArray = {executableName, executableArticle, executableDouble};
 
   private String eventName;
   private List<Condition> eventCondition;
   private List<Executable> eventExecutable;
+  private Object[] eventArray = {eventName, eventCondition, eventExecutable};
+  
+
 
   public String getCondition() {
     return condition;
@@ -71,6 +75,22 @@ public class FactoryData {
 
   public void setEventExecutable(List<Executable> eventExecutable) {
     this.eventExecutable = eventExecutable;
+  }
+
+  public Object[] getExecutableArray() {
+    return executableArray;
+  }
+
+  public void setExecutableArray(Object[] executableArray) {
+    this.executableArray = executableArray;
+  }
+
+  public Object[] getEventArray() {
+    return eventArray;
+  }
+
+  public void setEventArray(Object[] eventArray) {
+    this.eventArray = eventArray;
   }
 
 }
