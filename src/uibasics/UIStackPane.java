@@ -11,7 +11,6 @@ public class UIStackPane extends Observable {
 	
 	public UIStackPane() {
 		myStackPane = new StackPane();
-		myStackPane.getChildren().add(new UIBasics().getPane());
 		myStackPane.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		myStackPane.setOnMouseClicked(e -> handleClick());
 	}

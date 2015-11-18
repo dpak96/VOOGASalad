@@ -2,10 +2,16 @@ package main;
 
 import action.controller.ActionController;
 import gameengine.GameEngine;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
+import startscreen.GameCreation;
+import uibasics.Setup;
 import uibasics.UIBasics;
+
+import java.util.ResourceBundle;
 
 
 public class SuperController {
@@ -15,13 +21,22 @@ public class SuperController {
   private GameEngine gameEngine;
   private ModelController modelController;
   private Model model;
+  private GraphicHandler myGraphicHandler;
   
-  public SuperController(){
+  public SuperController(GraphicHandler graphicHandler){
+    myGraphicHandler = graphicHandler;
     uibasics = new UIBasics();
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
     observerController = new ObserverController(model, uibasics);
+  }
+
+  public Scene init(GameCreation gameCreation){
+      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
+      Scene mainScene = new Setup(myGraphicHandler, resource).getScene();
+      return mainScene;
+
   }
 
   public ModelController getModelController() {
