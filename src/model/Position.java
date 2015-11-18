@@ -27,6 +27,13 @@ public class Position {
 		myDirection = direction;
 		isValid = true;
 	}
+	
+	public void update(){
+		myX += myXVelocity;
+		myY += myYVelocity;
+		if(myXVelocity > 0) myDirection = true;
+		if(myXVelocity < 0) myDirection = false;
+	}
 
 	public boolean isValidPosition() {
 		return isValid;
