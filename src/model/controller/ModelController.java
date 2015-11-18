@@ -17,8 +17,8 @@ public class ModelController implements IModelController {
 		myModelFactory = new ModelFactory();
 	}
 	
-	public void createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
-		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, rules);
+	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, events);
 		addArticle(newArticle);
 	}
 	
@@ -27,7 +27,8 @@ public class ModelController implements IModelController {
 		addArticle(newArticle);
 	}
 	
-	public void createRule(String name, double value, Article ruleOwner){
+	
+	/*public void createRule(String name, double value, Article ruleOwner){
 		Rule newRule = myModelFactory.createRule(name, value);
 		//ruleOwner.addRule(newRule); FIX TO EVENTS
 	}
@@ -35,7 +36,7 @@ public class ModelController implements IModelController {
 	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
 		Rule newRule = myModelFactory.createRule(name, value, dependencies);
 		//ruleOwner.addRule(newRule); FIX TO EVENTS
-	}
+	}*/
 
 	@Override
 	public List<Rule> getRules() {
