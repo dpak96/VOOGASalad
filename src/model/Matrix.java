@@ -77,29 +77,29 @@ public class Matrix {
 	
 	
 	public void addRowAndColumn(){
-		try {
-    		File fXmlFile = new File(".\\src\\ColorLibrary\\model\\DamageCollisionLibrary.xml");
-    		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-    		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-    		Document doc = dBuilder.parse(fXmlFile);
-
-    		doc.getDocumentElement().normalize();
-    		NodeList collisionList = doc.getElementsByTagName("Row");
-    		for (int i = 0; i < collisionList.getLength(); i++)
-    		{
-    			Element colorNode = (Element) collisionList.item(i);
-    			if (Double.parseDouble(colorNode.getAttribute("index")) == index)
-    			{
-    				double r = getColor(colorNode,"r");
-    				double g = getColor(colorNode,"g");
-    				double b = getColor(colorNode,"b");
-    				c = Color.rgb((int)r, (int)g, (int)b);
-    			}
-    		}
-    	} catch (Exception e) {
-
-    		e.printStackTrace();
-    	}
-		return c;
+//		try {
+//    		File fXmlFile = new File(".\\src\\ColorLibrary\\model\\DamageCollisionLibrary.xml");
+//    		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//    		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//    		Document doc = dBuilder.parse(fXmlFile);
+//
+//    		doc.getDocumentElement().normalize();
+//    		NodeList collisionList = doc.getElementsByTagName("Row");
+//    		for (int i = 0; i < collisionList.getLength(); i++)
+//    		{
+//    			Element colorNode = (Element) collisionList.item(i);
+//    			if (Double.parseDouble(colorNode.getAttribute("index")) == index)
+//    			{
+//    				double r = getColor(colorNode,"r");
+//    				double g = getColor(colorNode,"g");
+//    				double b = getColor(colorNode,"b");
+//    				c = Color.rgb((int)r, (int)g, (int)b);
+//    			}
+//    		}
+//    	} catch (Exception e) {
+//
+//    		e.printStackTrace();
+//    	}
+//		return c;
 	}
 }
