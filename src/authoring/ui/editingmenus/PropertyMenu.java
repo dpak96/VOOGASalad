@@ -6,9 +6,9 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 
 
-public abstract class PropertyMenu  {
+public abstract class PropertyMenu implements IMenuAction {
 
-    public void showMenu (String title /* Enemy */) {
+    public void showMenu (String title /* Article being acted on */) {
 
         Dialog propertyMenu = new Dialog();
         propertyMenu.setTitle("Enemy Property Editor");
@@ -22,7 +22,8 @@ public abstract class PropertyMenu  {
 
         propertyMenu.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
-        propertyMenu.showAndWait();
+        propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
+                .ifPresent(action -> this.executeYourMenuFunction() );;
     }
 
     protected abstract void populateMenu (GridPane menuPane);
