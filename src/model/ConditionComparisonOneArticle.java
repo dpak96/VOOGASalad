@@ -1,21 +1,20 @@
  package model;
 import java.lang.reflect.*;
-public class ConditionComparison extends Condition{
+
+public class ConditionComparisonOneArticle extends Condition{
 	
 	private Article myFirst;
 	private String myFirstVariable;
-	private Article mySecond;
-	private String mySecondVariable;
+	private double myCompareValue;
 	private String myComparison;
 	
 	
-	public ConditionComparison(String name, Article first, String firstVariable,
-			Article second, String secondVariable, String comparison) {
+	public ConditionComparisonOneArticle(String name, Article first, String firstVariable,
+			double compareValue, String comparison) {
 		super(name);
 		myFirst = first;
 		myFirstVariable = firstVariable;
-		mySecond = second;
-		mySecondVariable = secondVariable;
+		myCompareValue = compareValue;
 		myComparison = comparison;
 	}
 
@@ -23,16 +22,13 @@ public class ConditionComparison extends Condition{
 	public boolean isMet() {
 		try{
 			Method method1 = myFirst.getClass().getMethod("get"+myFirstVariable);
-			Method method2 = mySecond.getClass().getMethod("get"+mySecondVariable);
 			double firstValue = (double) method1.invoke(myFirst);
-			double secondValue = (double) method2.invoke(mySecond);
 			
 			Maths m = new Maths();
 			Method compare = m.getClass().getMethod(myComparison, double.class, double.class);
-			return (boolean) compare.invoke(m, firstValue, secondValue);
+			return (boolean) compare.invoke(m, firstValue, myCompareValue);
 		}
 		catch(Exception e){
-			System.out.println("error lol");
 			return false;
 		}
 	}
