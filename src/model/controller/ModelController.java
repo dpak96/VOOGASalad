@@ -42,8 +42,6 @@ public class ModelController implements IModelController {
 	public List<Event> getEvents() {
 		return myModel.getEvents();
 	}
-
-	@Override
 	public List<Article> getArticles() {
 		return myModel.getArticles();
 	}
@@ -65,7 +63,7 @@ public class ModelController implements IModelController {
 	
 	@Override
 	public List<Event> getButtonEvents(String button){
-		return myModel.getButtonRules(button);
+		return myModel.getButtonEvents(button);
 	}
 
 	public Article getCharacter() {
@@ -82,12 +80,6 @@ public class ModelController implements IModelController {
 	
 	public void notifyObservers(){
 		myModel.notifyObservers();
-	}
-
-	@Override
-	public void removeArticleFromEvent(Event event, Article article) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

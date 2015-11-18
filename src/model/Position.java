@@ -11,13 +11,33 @@ public class Position {
 	private double myOrientation = 0;
 	private boolean myDirection = true; //True = facing right; False = facing left
 
-
+	private boolean isValid;
+	
+	public Position() {
+		isValid = false;
+	}
+	public Position(double x, double y){
+		myX = x;
+		myY = y;
+		isValid = true;
+	}
 	public Position(double x, double y, boolean direction){
 		myX = x;
 		myY = y;
-		
+		myDirection = direction;
+		isValid = true;
+	}
+	
+	public void update(){
+		myX += myXVelocity;
+		myY += myYVelocity;
+		if(myXVelocity > 0) myDirection = true;
+		if(myXVelocity < 0) myDirection = false;
 	}
 
+	public boolean isValidPosition() {
+		return isValid;
+	}
 	public double getXVelocity() {
 		return myXVelocity;
 	}

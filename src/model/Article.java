@@ -2,6 +2,9 @@ package model;
 
 import java.util.*;
 
+import gameengine.CollisionInformation;
+
+
 /**
  * This is the hierarchy of classes of objects, or articles, for the games
  * @author danielpak
@@ -12,11 +15,13 @@ public class Article {
 	private String myImageFile;
 	private double myXBuffer;
 	private double myYBuffer;
+	private BitMap myBitMap;
 	private double myWidth;
 	private double myHeight;
 	private List<Event> myEvents;
 	private Life myLife;
 	private Position myPosition;
+	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
 	
 	
 	public Article(String image, double x, double y, boolean direction){
@@ -28,6 +33,18 @@ public class Article {
 	}
 
 
+	
+	public Article(String file) {
+		myImageFile = file;
+		
+		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		
+	}
+	
+	public void update(){
+		myPosition.update();
+	}
+	
 	
 	public double getX(){
 		return myPosition.getX();
@@ -123,5 +140,25 @@ public class Article {
 	public void gainLife(){
 		myLife.addLife();
 	}
+	public BitMap getBitMap() {
+		return myBitMap;
+	}
+	
+	public void clearCollisions(){
+		myCollisions.clear();
+	}
+	
+	public void addCollision(Article article, CollisionInformation collision){
+		myCollisions.put(article, collision);
+	}
+	
+	public Set<Article> getCollisionArticles(){
+		return myCollisions.keySet();
+	}
+	
+	public CollisionInformation getCollisionInformation(Article article){
+		return myCollisions.get(article);
+	}
+	
 	
 }

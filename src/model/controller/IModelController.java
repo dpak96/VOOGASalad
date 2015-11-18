@@ -28,13 +28,9 @@ public interface IModelController {
 	 */
 	public void removeArticle(Article article);
 
-	public void removeArticleFromEvent(Event event, Article article);
-
 	public List<Event> getButtonEvents(String button);
 
 	public void remapButton(String button, List<Event> events);
-
-
 
 	
 }

@@ -12,6 +12,7 @@ public class Model extends Observable{
 	public List<Event> getEvents(){
 		return myEvents;
 	}
+	
 	public List<Article> getArticles(){
 		return myArticles;
 	}
@@ -52,7 +53,7 @@ public class Model extends Observable{
 		myButtonMap.put(button, events);
 	}
 	
-	public List<Event> getButtonRules(String button){
+	public List<Event> getButtonEvents(String button){
 		return myButtonMap.get(button);
 	}
 	public void addArticle(Article article) {
