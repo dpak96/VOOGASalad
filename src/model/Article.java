@@ -107,5 +107,21 @@ public class Article {
 	public double getHeight(){
 		return myHeight;
 	}
+
+	public void removeHealth(double myDamage) {
+		myLife.removeHealth(myDamage);
+	}
+	
+	public void removeLife(){
+		myLife.removeLife();
+	}
+	
+	public void gainHealth(double myHealthGain){
+		myLife.addHealth(myHealthGain);
+	}
+	
+	public void gainLife(){
+		myLife.addLife();
+	}
 	
 }
