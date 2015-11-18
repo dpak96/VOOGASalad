@@ -11,21 +11,15 @@ import javafx.stage.Stage;
 
 public class HelpMenuItem extends AbstractMenuItem {
 	
-	public HelpMenuItem(ResourceBundle resource, Stage stage){
-		super(resource, stage);
+	public HelpMenuItem(ResourceBundle resource, MenuController menuController){
+		super(resource);
 		this.setText(myResource.getString("HELP"));
 	    this.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
 
 	}
 	@Override
-	public void handle() {
-//	    File html = new File("HelpPage.html");
-//	    try {
-//	      Desktop.getDesktop().browse(html.toURI());
-//	    } catch (IOException e) {
-//	      // TODO Auto-generated catch block
-//	      e.printStackTrace();
-//	    }
-	}
+	public void handle(MenuController menuController) {
+    }
+
 
 }

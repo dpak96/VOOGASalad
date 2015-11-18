@@ -46,10 +46,7 @@ public class StartScreen {
         levels.init(myController);
         skeleton.addLayer(levels.getContainer());
     }
-    public void addLevel(){
-    	myController.setScene(new Scene(new Layout(myStage,myResource)));
-    	//add actionController/observercontroller to super controller?
-    }
+
     private String[] getLevels(){
         String[] levelEx = {"Level1","Level2","Level3"};
         return levelEx;
