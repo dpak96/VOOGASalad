@@ -12,6 +12,8 @@ public class ModelController implements IModelController {
 	private Model myModel;
 	private ModelFactory myModelFactory;
 	
+	//WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
+	 
 	public ModelController(Model model){
 		myModel = model;
 		myModelFactory = new ModelFactory();
