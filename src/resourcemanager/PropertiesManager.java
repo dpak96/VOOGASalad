@@ -20,6 +20,7 @@ public class PropertiesManager {
     for (File f : folder) {
       ResourceBundle temp =
           ResourceBundle.getBundle(PROPERTIES_PATH + f.getName().split("\\.")[0]);
+
       resourceMap.put(f.getName().split("\\.")[0], temp);
     }
   }

@@ -27,7 +27,7 @@ public class AuthoringController implements IAuthoringController {
 
   public Point2D getMouseCoordinates(){
     
-    this.getUi().getDragAndDrop()
+    this.getUi().getDragAndDrop();
     return null;
     
   }
