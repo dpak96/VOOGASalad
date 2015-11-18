@@ -17,7 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class BitMap {
-	private int[][] myBitMap;
+	private Position[][] myBitMap;
+	
 	
 
 	public BitMap(String myImage, Double x, Double y) {
@@ -29,11 +30,11 @@ public class BitMap {
 		myBitMap = makeBitMap(convertedImg, x, y);
 	}
 
-	public int[][] getByteArray() {
+	public Position[][] getByteArray() {
 		return myBitMap;
 	}
 
-	private static int[][] makeBitMap(BufferedImage image, Double x, Double y) {
+	private static Position[][] makeBitMap(BufferedImage image, Double x, Double y) {
 		System.out.println("making");
 		 final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 	      final int width = image.getWidth();
@@ -41,15 +42,15 @@ public class BitMap {
 	      System.out.println(width + " " + height);
 	      final boolean hasAlphaChannel = image.getAlphaRaster() != null;
 	      System.out.println(hasAlphaChannel);
-	      int[][] result = new int[height][width];
+	      Position[][] result = new Position[height][width];
 	      
 	      for (int i = 0; i < height; i++) {
 	          for (int j = 0; j < width; j++) {
 	        	  int alpha = image.getRGB(j,i);
 		             if( (alpha>>24) == 0x00 ) {
-		                 result[i][j] = 1;
+		                 result[i][j] = new Position();
 		             } else {
-		            	 result[i][j] = 0;
+		            	 result[i][j] = new Position(x+j, y+i) ;
 		             }
 	          }
 	        }

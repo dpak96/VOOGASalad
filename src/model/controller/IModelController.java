@@ -18,24 +18,23 @@ public interface IModelController {
 	 */
 	public List<Article> getArticles();
 	
-	/**
-	 * Adds a new rule to the model
-	 */
-	public void setRules(/**[AE FILL IN WHAT YOU INPUT]**/);
-	
-	/**
-	 * Removes a given rule from the model
-	 */
-	public void removeRule(/**AE**/);
 	
 	/**
 	 * Adds a new game object to the model
 	 */
-	public void addArticle(/**[AE FILL IN WHAT YOU INPUT]**/);
+	public void addArticle(Article article);
 	
 	/**
 	 * Removes a game object to the model
 	 */
-	public void removeArticle(/**[AE]**/);
+	public void removeArticle(Article article);
+
+	public void removeArticleFromRule(Rule rule, Article article);
+
+	public List<Rule> getButtonRules(String button);
+
+	public void remapButton(String button, List<Rule> rules);
+
+
 	
 }

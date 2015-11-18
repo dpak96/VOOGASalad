@@ -6,7 +6,7 @@ public class CheckpointButton extends ToolbarButtons {
 
     public CheckpointButton () {
         super();
-        this.setGraphic(super.setImage("Checkpoint.png", 50, 50));
+        this.setGraphic(super.setImage("Checkpoint", 50, 50));
         
     }
 

@@ -15,10 +15,11 @@ public class GraphicHandler {
     }
 
     public void init(Stage s){
-        baseScene = new Scene(start.getStart());
+        baseScene = new Scene(start.getStart(), 400,400);
+        baseScene.getStylesheets().add("startscreen/StartScreen.css");
         s.setTitle("Test");
         s.setScene(baseScene);
-        start.init();
+        start.init(s);
         s.show();
     }
 

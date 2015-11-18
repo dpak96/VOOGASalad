@@ -21,11 +21,12 @@ public class StartScreenSkeleton {
 
     public void init(){
         border.setTop(backButton());
-        border.setBottom(layers);
+        border.setCenter(layers);
     }
 
     private Button backButton(){
         back = new Button("Back");
+        back.setId("backB");
         back.setOnAction(e->this.backLayer());
         return back;
     }
@@ -45,9 +46,9 @@ public class StartScreenSkeleton {
         if(layers.getChildren().size()>0){
             removeLayer();
         }
-        if(!layerStack.isEmpty()){
+        if(layerStack.size()>=2){
             layerStack.pop();
-            layers.getChildren().add(layerStack.pop());
+            addLayer(layerStack.pop());
         }
     }
 
