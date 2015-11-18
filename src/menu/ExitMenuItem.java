@@ -9,15 +9,15 @@ import javafx.stage.Stage;
 
 public class ExitMenuItem extends AbstractMenuItem {
 	
-	public ExitMenuItem(ResourceBundle resource, Stage stage) {
-		super(resource, stage);
+	public ExitMenuItem(ResourceBundle resource, MenuController menuController) {
+		super(resource);
 		this.setText(myResource.getString("EXIT"));
 		this.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
 
 	}
 	
 	@Override
-	public void handle(){
+	public void handle(MenuController menuController){
 		System.exit(0);
 	}
 }

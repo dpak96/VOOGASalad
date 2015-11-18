@@ -10,18 +10,19 @@ import startscreen.StartScreenController;
 public class MainMenuItem extends AbstractMenuItem {
 	
 	
-	public MainMenuItem(ResourceBundle resource, Stage stage){
-		super(resource, stage);
+	public MainMenuItem(ResourceBundle resource, MenuController menuController){
+		super(resource);
 		this.setText(myResource.getString("MAINMENU"));
 //		this.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
+		handle(menuController);
 	}
 
+
 	@Override
-	public void handle() {
-		StartScreenController start = new StartScreenController();
-		start.init(myStage);
-		Scene mainMenu = new Scene(start.getStart(),400,400);
-		mainMenu.getStylesheets().add("startscreen/StartScreen.css");
-		myStage.setScene(mainMenu);
+	public void handle(MenuController menuController) {
+		this.setOnAction(e ->menuController.newStart());
 	}
+
+
+
 }
