@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.*;
 
 import model.Article;
+import model.Event;
 import model.controller.ModelController;
 
 import voogasalad_SquirtleSquad.IGameEngine;
@@ -13,31 +14,81 @@ import voogasalad_SquirtleSquad.Input;
 import model.Article;
 
 public class GameEngine implements IGameEngine {
-	private List<Article> myArticles;
+	private List<Article> myActiveArticles;
 	private ModelController myModelController;
 	private Article myViewpoint;
 	private Article myCharacter;
+	private CollisionManager myCollisionManager;
 	
 	public GameEngine(ModelController modelController){
 		myModelController = modelController;
+		myCollisionManager = new CollisionManager();
 	}
 	
 	@Override
 	public void update(String input){
-		myArticles = myModelController.getArticles();
 		myViewpoint = myModelController.getViewpoint();
 		myCharacter = myModelController.getCharacter();
 		
+		myActiveArticles = getActiveArticles();
 		
-		myArticles = getActiveArticles();
+		checkAndAddCollisions();
+		runButtonPress(input);
+		runArticleCollisions();
+		runArticleEvents();
+		runArticleUpdates();
 		
-		/*for(Article article : myArticles){
-			List<Rule> articleRules = article.getRules();
-			for(Rule rule : articleRules){
-				rule.apply(article);
+		myModelController.notifyObservers();
+		
+	}
+	
+	private void checkAndAddCollisions(){
+		for(Article article : myActiveArticles){
+			article.clearCollisions();
+		}
+		
+		for(int i = 0; i < myActiveArticles.size(); i++){
+			Article first = myActiveArticles.get(i);
+			for(int j = i + 1; j < myActiveArticles.size(); j++){
+				Article second = myActiveArticles.get(j);
+				if(myCollisionManager.didCollide(first, second)){
+					first.addCollision(second, new CollisionInformation());
+					second.addCollision(first, new CollisionInformation());
+				}
 			}
-		}*/ //FIX FOR EVENTS
+		}
+	}
+	
+	private void runButtonPress(String input){
+		List<Event> buttonEvents = myModelController.getButtonEvents(input);
+		for(Event e : buttonEvents){
+			e.fire();
+		}
+	}
+	
+	private void runArticleCollisions(){
+		for(Article article : myActiveArticles){
+			for(Article collided : article.getCollisionArticles()){
+				//NEEDS COLLISION INFORMATION HERE
+				article.getCollisionInformation(collided);
+			}
+		}
 		
+	}
+	
+	private void runArticleEvents(){
+		for(Article article : myActiveArticles){
+			List<Event> articleEvents = article.getEvents();
+			for(Event e : articleEvents){
+				e.fire();
+			}
+		}
+	}
+	
+	private void runArticleUpdates(){
+		for(Article article : myActiveArticles){
+			article.update();
+		}
 	}
 	
 	private List<Article> getActiveArticles(){
@@ -56,7 +107,7 @@ public class GameEngine implements IGameEngine {
 			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
 					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
 					x, x + width, y, y + height)){
-				myArticles.add(article);
+				myActiveArticles.add(article);
 			}
 					
 		}
@@ -75,15 +126,17 @@ public class GameEngine implements IGameEngine {
 		return x > minX && x < maxX && y > minY && y < maxY;
 	}
 	
+	/*
 	public static void main(String args[]) {
 		Article one = new Article("GoombaRefinedAgain.png");
-//		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
+		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
 		for(int[] a: one.getBitMap().getByteArray()) {
 			System.out.println(Arrays.toString(a));
 		}
-		//CollisionManager temp = new CollisionManager();
-		//System.out.println(temp.didCollide(one, two));
+		CollisionManager temp = new CollisionManager();
+		System.out.println(temp.didCollide(one, two));
 	}
+	*/
 	
 
 }
