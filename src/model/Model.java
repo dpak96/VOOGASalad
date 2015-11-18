@@ -44,8 +44,8 @@ public class Model extends Observable{
 		return myCharacter;
 	}
 
-	public void removeRuleFromArticle(Article article, Rule rule){
-		article.getRules().remove(rule);
+	public void removeEventFromArticle(Article article, Event event){
+		article.getEvents().remove(event);
 	}
 
 	public void remapButton(String button, List<Rule> rules) {

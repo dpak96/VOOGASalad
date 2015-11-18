@@ -29,12 +29,12 @@ public class ModelController implements IModelController {
 	
 	public void createRule(String name, double value, Article ruleOwner){
 		Rule newRule = myModelFactory.createRule(name, value);
-		ruleOwner.addRule(newRule);
+		//ruleOwner.addRule(newRule); FIX TO EVENTS
 	}
 	
 	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
 		Rule newRule = myModelFactory.createRule(name, value, dependencies);
-		ruleOwner.addRule(newRule);
+		//ruleOwner.addRule(newRule); FIX TO EVENTS
 	}
 
 	@Override
