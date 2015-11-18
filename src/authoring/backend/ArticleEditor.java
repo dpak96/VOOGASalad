@@ -2,7 +2,7 @@ package authoring.backend;
 
 import java.util.List;
 import model.Article;
-import model.Rule;
+
 
 
 public class ArticleEditor implements IArticleEditor {
@@ -96,21 +96,5 @@ public class ArticleEditor implements IArticleEditor {
 
   }
 
-  @Override
-  public void addRuleToArticle(Rule rule) {
-    // TODO Auto-generated method stub
 
-  }
-
-  @Override
-  public void addRulesToArticle(List<Rule> rules) {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void deleteRule(Rule rule) {
-    // TODO Auto-generated method stub
-
-  }
 }
