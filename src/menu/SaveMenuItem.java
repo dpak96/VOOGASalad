@@ -12,35 +12,17 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 public class SaveMenuItem extends AbstractMenuItem {
-	
-	public SaveMenuItem(ResourceBundle resource, Stage stage){
-		super(resource, stage);
+
+	public SaveMenuItem(ResourceBundle resource, MenuController menuController) {
+		super(resource);
 		this.setText(myResource.getString("SAVE"));
-	    this.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+		this.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+		this.handle(menuController);
 
 	}
+
 	@Override
-	public void handle() {
-		try {
-	        saveGame();
-	      } catch (Exception e1) {
-	        // TODO Auto-generated catch block
-	        e1.printStackTrace();
-	      }
-	}
-	public void saveGame() throws IOException{
-		myFileChooser.setTitle(myResource.getString("SAVE"));
-	    File game = myFileChooser.showSaveDialog(myStage);
-	    if (!game.exists()) {
-	      game.createNewFile();
-	    }
-	    try {
-	      FileOutputStream f = new FileOutputStream(game);
-	      ObjectOutputStream o = new ObjectOutputStream(f);
-//	      o.writeObject(myController.getMyScene().getAllData().get(0));
-	      f.close();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    }
+	public void handle(MenuController menuController) {
+		this.setOnAction(e -> menuController.trySave(myFileChooser,myResource.getString("SAVE")));
 	}
 }

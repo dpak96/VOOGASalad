@@ -15,9 +15,8 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-		
-		Setup setup = new Setup(primaryStage, resource);
-		primaryStage.setScene(setup.getScene());
+		//Setup setup = new Setup(primaryStage, resource);
+		//primaryStage.setScene(setup.getScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
