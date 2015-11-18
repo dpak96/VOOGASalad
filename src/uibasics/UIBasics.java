@@ -1,12 +1,9 @@
 package uibasics;
 
+import main.GraphicHandler;
 import model.Article;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import authoring.controller.AuthoringController;
 import config.Config;
@@ -22,15 +19,24 @@ public class UIBasics implements Observer {
 	private List<ImageView> myFrontArticles;
 	private List<AbstractCommand> myCommands;
 	private AuthoringController authoringController;
+	private UIStackPane myStackPane;
 	
 	public UIBasics() {
-		load("commands");
+		//load("commands"); temporarily off
 		myPane = new Pane();
 		myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
 		myBackArticles = new HashMap<String, Article>();
 		myFrontArticles = new ArrayList<ImageView>();
+		authoringController = new AuthoringController();
+		myStackPane = new UIStackPane();
+		myStackPane.addPane(myPane);
+		Authoring();
 	}
-	
+
+	private void Authoring(){
+		myStackPane.addPane(authoringController.getUi().tester());
+	}
+
 	private void load(String identifier) {
 		myCommands = new ArrayList<AbstractCommand>();
 		String[] myVals = Config.getStringArray(String.format("%s.%s", this.getClass().getName(), identifier));
@@ -38,9 +44,10 @@ public class UIBasics implements Observer {
 			myCommands.add(Config.getObject(s));
 		}	
 	}
-	
+
+
 	public Pane getPane() {
-		return myPane;
+		return myStackPane.getStack();
 	}
 
 	@SuppressWarnings("unchecked")
