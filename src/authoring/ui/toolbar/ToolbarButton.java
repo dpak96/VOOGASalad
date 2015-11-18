@@ -1,5 +1,6 @@
 package authoring.ui.toolbar;
 
+import java.util.ResourceBundle;
 import authoring.ui.draganddrop.DraggableElement;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -8,10 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import resourcemanager.ResourceManager;
 
-public abstract class ToolbarButtons  extends DraggableElement implements IObjectPlacing {
+public abstract class ToolbarButton  extends DraggableElement implements IObjectPlacing {
     ResourceManager resources=new ResourceManager();
+    ResourceBundle toolbarProperties=ResourceBundle.getBundle("properties.toolbar");
     
-    public ToolbarButtons(){
+    public ToolbarButton(){
         this.setPrefHeight(50);
         this.setPrefWidth(50);
         super.dragDetected();
@@ -26,11 +28,11 @@ public abstract class ToolbarButtons  extends DraggableElement implements IObjec
         return buttonEffect;
     }
     
-    public ImageView setImage(String imgName, int width, int height) {
+    protected ImageView setImage(String imgName) {
         resources.getIm().getImageMap().get(imgName);
         ImageView buttonIcon = new ImageView(resources.getIm().getImageMap().get(imgName));
-        buttonIcon.setFitWidth(width);
-        buttonIcon.setFitHeight(height);
+        buttonIcon.setFitWidth(this.getPrefWidth());
+        buttonIcon.setFitHeight(this.getPrefHeight());
         return buttonIcon;
 }
     
