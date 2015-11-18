@@ -16,12 +16,11 @@ public class PropertiesManager {
 
   public void initListResources() {
     resourceMap = new HashMap<String, ResourceBundle>();
-    File[] folder = new File(PROPERTIES_PATH).listFiles();
+    File[] folder = new File("src/" + PROPERTIES_PATH).listFiles();
     for (File f : folder) {
-      System.out.println(PROPERTIES_PATH + f.getName().split("\\.")[0]);
       ResourceBundle temp =
           ResourceBundle.getBundle(PROPERTIES_PATH + f.getName().split("\\.")[0]);
-              
+
       resourceMap.put(f.getName().split("\\.")[0], temp);
     }
   }
