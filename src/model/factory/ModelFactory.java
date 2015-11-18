@@ -87,7 +87,7 @@ public class ModelFactory {
 	public static void main(String args[]){
 		ModelFactory m = new ModelFactory();
 		//RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0);
-		ArrayList<Rule> ruleList = new ArrayList<Rule>();
+		//ArrayList<Rule> ruleList = new ArrayList<Rule>();
 		//ruleList.add(test);
 		//Article testArticle = m.createArticle("test", 1.0, 2.0, false, ruleList);
 		//System.out.println(testArticle.getRules().get(0).toString());

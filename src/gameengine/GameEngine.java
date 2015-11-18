@@ -3,7 +3,6 @@ package gameengine;
 import java.util.*;
 
 import model.Article;
-import model.Rule;
 import model.controller.ModelController;
 
 import voogasalad_SquirtleSquad.IGameEngine;
