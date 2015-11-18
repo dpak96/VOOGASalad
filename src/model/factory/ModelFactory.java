@@ -1,7 +1,7 @@
 package model.factory;
 import java.lang.reflect.*;
 import java.util.*;
-
+import authoring.backend.*;
 import model.*;
 import model.Executable;
 
@@ -73,7 +73,7 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Condition createCondition(String name, String cond /*Some data object*/){
+	public Condition createCondition(String name, String cond, FactoryData data){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> cons = cls.getConstructors()[0];
@@ -104,13 +104,13 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Executable createExecutable(String name, double value, Article actor /*Some data object*/){
+	public Executable createExecutable(String name, double value, Article actor, FactoryData data){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> cons = cls.getConstructors()[0];
 			//Object[] obj = new Object[Replace with getSize from dataObject];
 			/*for each piece of data in the object, add it to the obj array*/
-			Object[] obj = { "test", value, actor };
+			Object[] obj = data.getExecutableArray();
 			Executable test = (Executable) cons.newInstance(obj);
 			return test;
 		} catch (ClassNotFoundException e) {
