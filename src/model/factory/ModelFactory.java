@@ -3,21 +3,17 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import model.*;
+import model.Executable;
 
 public class ModelFactory {
 	
-	public Object createArticle(String name){
-		return null;
-	}
-	
-	public Article createArticle(String fileName, double x, double y, boolean direction, List<Rule> rules){
+	public Article createArticle(String fileName, double x, double y, boolean direction){
 		try {
 			Class<?> cls = Class.forName("model.Article");
 			Class [] type = {String.class, Double.class, Double.class, Boolean.class};
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {fileName, x, y, direction};
 			Article test = (Article) cons.newInstance(obj);
-			test.addAllRules(rules);
 			return test;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -38,23 +34,23 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Rule createRule(String name, double value){
+	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
+		Article temp = createArticle(fileName, x, y, direction);
+		temp.addAllEvents(events);
+		return temp;
+	}
+	
+	public Event creatEvent(String name, List<Condition> conditions, List<Executable> executables){
 		try {
 			Class<?> cls = Class.forName(name);
-			Class[] type = { String.class, Double.class };
 			Constructor<?> cons = cls.getConstructors()[0];
-			Object[] obj = { "test", value };
-			Rule test = (Rule) cons.newInstance(obj);
+			//Object[] obj = new Object[Replace with getSize from dataObject];
+			/*for each piece of data in the object, add it to the obj array*/
+			Object[] obj = {/* Fill with data from object*/};
+			Event test = (Event) cons.newInstance(obj);
+			test.addAllConditions(conditions);
+			test.addAllExecutables(executables);
 			return test;
-		            //for (int i = 0; i < fieldlist.length; i++) {
-		            //   Field fld = fieldlist[i];
-		            //   System.out.println("name = " + fld.getName());
-		            //   System.out.println("decl class = " +  fld.getDeclaringClass());
-		            //   System.out.println("type  = " + fld.getType());
-		            //   int mod = fld.getModifiers();
-		            //   System.out.println("modifiers = " +  Modifier.toString(mod));
-		            //   System.out.println("-----");
-		            // }
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,17 +73,66 @@ public class ModelFactory {
 		return null;
 	}
 	
-	public Rule createRule(String name, double value, List<Article> articles){
-		Rule temp = createRule(name,value);
-		temp.addAllDependencies(articles);
-		return temp;
+	public Condition createCondition(String name, String cond /*Some data object*/){
+		try {
+			Class<?> cls = Class.forName(name);
+			Constructor<?> cons = cls.getConstructors()[0];
+			//Object[] obj = new Object[Replace with getSize from dataObject];
+			/*for each piece of data in the object, add it to the obj array*/
+			Object[] obj = {/* Fill with data from object*/};
+			Condition test = (Condition) cons.newInstance(obj);
+			return test;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	public static void main(String args[]){
-		ModelFactory m = new ModelFactory();
-		RuleGravity test = (RuleGravity) m.createRule("model.RuleGravity", 240.0, null);
-		Article testArticle = m.createArticle("penis", 1.0, 2.0, false, null);
-		System.out.println(testArticle.getImageFile());
+	public Executable createExecutable(String name, double value, Article actor /*Some data object*/){
+		try {
+			Class<?> cls = Class.forName(name);
+			Constructor<?> cons = cls.getConstructors()[0];
+			//Object[] obj = new Object[Replace with getSize from dataObject];
+			/*for each piece of data in the object, add it to the obj array*/
+			Object[] obj = { "test", value, actor };
+			Executable test = (Executable) cons.newInstance(obj);
+			return test;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
  

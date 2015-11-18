@@ -1,7 +1,7 @@
 package authoring.ui.smalloverlay;
 
+import authoring.ui.draganddrop.DragAndDropBoard;
 import authoring.ui.toolbar.ToolbarContainer;
-import com.sun.tools.javac.comp.Flow;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -25,7 +25,7 @@ public class OverlayControllerEx extends OverlayController {
         FlowPane flowTBC = tbc.initializeToolbar();
         ov2.setRight(flowTBC);
         ov2.setMargin(flowTBC, new Insets(0,20,20,20));
-        Pane rando = new Pane();
+        Pane rando = new DragAndDropBoard();
         rando.getStyleClass().add("OverlayP");
         ov2.setLeft(rando);
         //addPane(ov);

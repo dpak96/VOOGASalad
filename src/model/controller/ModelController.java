@@ -4,23 +4,44 @@ import gameengine.*;
 
 import java.util.List;
 
-import model.Article;
-import model.Model;
-import model.Rule;
+import model.*;
+import model.factory.*;
+
 
 public class ModelController implements IModelController {
 	private Model myModel;
+	private ModelFactory myModelFactory;
 	
 	public ModelController(Model model){
 		myModel = model;
+		myModelFactory = new ModelFactory();
 	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, events);
+		addArticle(newArticle);
+	}
+	
+	public void createArticle(String fileName, double x, double y, boolean direction){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+		addArticle(newArticle);
+	}
+	
+	
+	/*public void createRule(String name, double value, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value);
+		//ruleOwner.addRule(newRule); FIX TO EVENTS
+	}
+	
+	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
+		Rule newRule = myModelFactory.createRule(name, value, dependencies);
+		//ruleOwner.addRule(newRule); FIX TO EVENTS
+	}*/
 
 	@Override
-	public List<Rule> getRules() {
-		return myModel.getRules();
+	public List<Event> getEvents() {
+		return myModel.getEvents();
 	}
-
-	@Override
 	public List<Article> getArticles() {
 		return myModel.getArticles();
 	}
@@ -36,13 +57,13 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public void remapButton(String button, List<Rule> rules){
-		myModel.remapButton(button, rules);
+	public void remapButton(String button, List<Event> events){
+		myModel.remapButton(button, events);
 	}
 	
 	@Override
-	public List<Rule> getButonRules(String button){
-		return myModel.getButtonRules(button);
+	public List<Event> getButtonEvents(String button){
+		return myModel.getButtonEvents(button);
 	}
 
 	public Article getCharacter() {
@@ -56,11 +77,9 @@ public class ModelController implements IModelController {
 	public Article getArticleFromCoordinates(double x, double y){
 		return myModel.getArticleFromCoordinates(x, y);
 	}
-
-	@Override
-	public void removeArticleFromRule(Rule rule, Article article) {
-		// TODO Auto-generated method stub
-		
+	
+	public void notifyObservers(){
+		myModel.notifyObservers();
 	}
 
 }

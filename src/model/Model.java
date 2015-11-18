@@ -1,17 +1,18 @@
 package model;
 import java.util.*;
 
-public class Model {
+public class Model extends Observable{
 	
-	private List<Rule> myRules;
-	private Map<String, List<Rule>> myButtonMap;
+	private List<Event> myEvents;
+	private Map<String, List<Event>> myButtonMap;
 	private List<Article> myArticles;
 	private Article myViewpoint;
 	private Article myCharacter;
 	
-	public List<Rule> getRules(){
-		return myRules;
+	public List<Event> getEvents(){
+		return myEvents;
 	}
+	
 	public List<Article> getArticles(){
 		return myArticles;
 	}
@@ -44,15 +45,15 @@ public class Model {
 		return myCharacter;
 	}
 
-	public void removeRuleFromArticle(Article article, Rule rule){
-		article.getRules().remove(rule);
+	public void removeEventFromArticle(Article article, Event event){
+		article.getEvents().remove(event);
 	}
 
-	public void remapButton(String button, List<Rule> rules) {
-		myButtonMap.put(button, rules);
+	public void remapButton(String button, List<Event> events) {
+		myButtonMap.put(button, events);
 	}
 	
-	public List<Rule> getButtonRules(String button){
+	public List<Event> getButtonEvents(String button){
 		return myButtonMap.get(button);
 	}
 	public void addArticle(Article article) {
@@ -61,6 +62,4 @@ public class Model {
 	public void removeArticle(Article article) {
 		myArticles.remove(article);		
 	}
-	
-
 }

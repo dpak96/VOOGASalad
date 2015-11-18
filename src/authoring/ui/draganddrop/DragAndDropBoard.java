@@ -9,64 +9,72 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
-public class DragAndDropBoard extends Node{
+public class DragAndDropBoard extends StackPane {
 
-    public DragAndDropBoard(){
-
+    public DragAndDropBoard() {
+        dragEntered();
+        dragDropped();
+        dragOver();
     }
 
-    @Override
-    protected NGNode impl_createPeer() {
-        return null;
-    }
-
-    @Override
-    public BaseBounds impl_computeGeomBounds(BaseBounds bounds, BaseTransform tx) {
-        return null;
-    }
-
-    @Override
-    protected boolean impl_computeContains(double localX, double localY) {
-        return false;
-    }
-
-    @Override
-    public Object impl_processMXNode(MXNodeAlgorithm alg, MXNodeAlgorithmContext ctx) {
-        return null;
-    }
-
-    protected void dragOver(InDropArea ida){
+    protected void dragEntered(){
         this.setOnDragEntered(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent event) {
                 /* the drag-and-drop gesture entered the target */
                 System.out.println("Dragging");
                 /* show to the user that it is an actual gesture target */
-                if (event.getGestureSource() != this && event.getDragboard().hasString()) {
-                    ida.inArea();
+                if (event.getGestureSource() != this && event.getDragboard().hasImage()) {
+                    //ida.inArea();
                 }
                 event.consume();
             }
         });
     }
 
-    protected void dragDropped(Dropped d){
+    protected void dragDropped(){
         this.setOnDragDropped(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
                 /* data dropped */
                 System.out.println("onDragDropped");
+                System.out.println(event.getX());
+                System.out.println(event.getSceneY());
                 /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
                 boolean success = false;
-                if (db.hasString()) {
-                    d.dropped();
+                if (db.hasImage()) {
+                    //d.dropped();
                     success = true;
                 }
                 /* let the source know whether the string was successfully
                  * transferred and used */
                 event.setDropCompleted(success);
+                event.consume();
+            }
+        });
+    }
+
+
+    protected void dragOver(){
+        this.setOnDragOver(new EventHandler <DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                /* data is dragged over the target */
+                //System.out.println("onDragOver");
+
+                /* accept it only if it is  not dragged from the same node
+                 * and if it has a string data */
+                if (event.getGestureSource() != this &&
+                        event.getDragboard().hasImage()) {
+                    /* allow for moving */
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+
                 event.consume();
             }
         });

@@ -1,32 +1,34 @@
 package authoring.controller;
 
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import model.Article;
-import model.Game;
-import model.Player;
+import authoring.backend.Editor;
+import authoring.ui.AuthoringUI;
+import javafx.geometry.Point2D;
 
 
-public class AuthoringController {
-  private GameEditor gameEditor;
-  private ArticleEditor articleEditor;
-  private PlayerEditor playerEditor;
-  
-  public AuthoringController(){
-    gameEditor = new GameEditor();
-    articleEditor = new ArticleEditor();
-    playerEditor = new PlayerEditor();
+public class AuthoringController implements IAuthoringController {
+  private Editor editor;
+  private AuthoringUI ui;
+
+  public Editor getEditor() {
+    return editor;
   }
-  
-  public void setGame(Game game){
-    gameEditor.setGame(game);
+
+  public void setEditor(Editor editor) {
+    this.editor = editor;
   }
-  
-  public void setArticle(Article article){
-    articleEditor.setArticle(article);
+
+  public AuthoringUI getUi() {
+    return ui;
   }
-  
-  public void setPlayer(Player player){
-    playerEditor.setPlayer(player);
+
+  public void setUi(AuthoringUI ui) {
+    this.ui = ui;
+  }
+
+  public Point2D getMouseCoordinates(){
+    
+    this.getUi().getDragAndDrop();
+    return null;
+    
   }
 }
