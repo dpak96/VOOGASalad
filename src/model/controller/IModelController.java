@@ -1,7 +1,7 @@
 package model.controller;
 
 import model.Article;
-import model.Rule;
+import model.Event;
 
 import java.util.List;
 
@@ -10,15 +10,14 @@ public interface IModelController {
 	 * Gets the rules from the model and returns them 
 	 * @return
 	 */
-	public List<Rule> getRules();
+	public List<Event> getEvents();
 	
 	/**
 	 * Gets the different objects from the model and returns them
 	 * @return
 	 */
 	public List<Article> getArticles();
-	
-	
+		
 	/**
 	 * Adds a new game object to the model
 	 */
@@ -29,11 +28,12 @@ public interface IModelController {
 	 */
 	public void removeArticle(Article article);
 
-	public void removeArticleFromRule(Rule rule, Article article);
+	public void removeArticleFromEvent(Event event, Article article);
 
-	public List<Rule> getButtonRules(String button);
+	public List<Event> getButtonEvents(String button);
 
-	public void remapButton(String button, List<Rule> rules);
+	public void remapButton(String button, List<Event> events);
+
 
 
 	

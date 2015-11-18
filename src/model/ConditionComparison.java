@@ -1,4 +1,4 @@
-package model;
+ package model;
 import java.lang.reflect.*;
 public class ConditionComparison extends Condition{
 	
