@@ -2,6 +2,7 @@ package authoring.controller;
 
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
@@ -32,10 +33,12 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public void getMouseCoordinates(double x, double y, Object event){
+  public void getMouseCoordinates(double x, double y, ToolbarButton event){
     System.out.print(x);
     System.out.print(y);
     System.out.print(event);
+    event.getGraphic();
+
     
   }
 }
