@@ -23,8 +23,6 @@ public class ToolbarContainer extends DraggableElement {
     public FlowPane initializeToolbar () {
         FlowPane toolBox = new FlowPane();
         configureToolBox(toolBox);
-
-       // toolBox.getChildren().add(new PlatformSelector());
         toolBox.getChildren().addAll(populateButtonList());
         return toolBox;
     }

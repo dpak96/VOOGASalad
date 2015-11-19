@@ -13,15 +13,16 @@ public class EnemyButton extends ToolbarButton{
 
     public EnemyButton () {
         super();
+
         this.setGraphic(super.setImage(super.toolbarProperties.getString(NAME)));
         this.setName(NAME);
         this.setImageName(super.toolbarProperties.getString(NAME));
 
-       // this.setOnAction(e -> placeYourObject());
     }
 
     @Override
     public void placeYourObject () {
+
         ButtonOverlay bo = new ButtonOverlay();
         OverlayController oc = (OverlayController) this.getParent().getParent();
         oc.addOverlay(bo.init());
