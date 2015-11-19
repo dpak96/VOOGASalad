@@ -20,6 +20,8 @@ public class GameEngine implements IGameEngine {
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
 	
+	private List<Article> allArticles;
+	
 	public GameEngine(ModelController modelController){
 		myModelController = modelController;
 		myCollisionManager = new CollisionManager();
@@ -28,8 +30,8 @@ public class GameEngine implements IGameEngine {
 	@Override
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
+		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
-		
 		myActiveArticles = getActiveArticles();
 		
 		checkAndAddCollisions();
@@ -78,7 +80,8 @@ public class GameEngine implements IGameEngine {
 	}
 	
 	private void runArticleEvents(){
-		for(Article article : myActiveArticles){
+		for(Article article : allArticles){
+		  System.out.println("C");
 			List<Event> articleEvents = article.getEvents();
 			for(Event e : articleEvents){
 				e.fire();
