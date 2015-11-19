@@ -9,6 +9,7 @@ public class Model extends Observable{
 	private Article myViewpoint;
 	private Article myCharacter;
 	
+	
 	public List<Event> getEvents(){
 		return myEvents;
 	}
@@ -33,6 +34,14 @@ public class Model extends Observable{
 		return current;
 	}
 	
+	public void initialize() {
+		myEvents = new ArrayList<Event>();
+		myButtonMap = new HashMap<String, List<Event>>();
+		myButtonMap.put("default", new ArrayList<Event>());
+		myArticles = new ArrayList<Article>();
+		myViewpoint = new Article("GoombaRefinedAGain.png", 100, 100);
+		myCharacter = new Article("GoombaRefinedAGain.png", 100, 100);
+	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()
 		&& y > article.getY() && y < article.getY()+article.getHeight();
@@ -54,7 +63,7 @@ public class Model extends Observable{
 	}
 	
 	public List<Event> getButtonEvents(String button){
-		return myButtonMap.get(button);
+		return myButtonMap.getOrDefault(button,myButtonMap.get("default"));
 	}
 	public void addArticle(Article article) {
 		myArticles.add(article);

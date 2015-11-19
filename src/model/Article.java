@@ -34,10 +34,10 @@ public class Article {
 
 
 	
-	public Article(String file) {
+	public Article(String file, double x, double y) {
 		myImageFile = file;
-		
-		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		myPosition = new Position(x, y);
+		//myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
 		
 	}
 	

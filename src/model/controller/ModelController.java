@@ -17,6 +17,7 @@ public class ModelController implements IModelController {
 	 
 	public ModelController(Model model){
 		myModel = model;
+		myModel.initialize();
 		myModelFactory = new ModelFactory();
 	}
 	

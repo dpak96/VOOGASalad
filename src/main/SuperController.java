@@ -26,10 +26,10 @@ public class SuperController {
   public SuperController(GraphicHandler graphicHandler) {
     model = new Model();
     myGraphicHandler = graphicHandler;
-    actionController = new ActionController(gameEngine);
     modelController = new ModelController(model);
-    uiCore = new UICore(myGraphicHandler, actionController, modelController);
     gameEngine = new GameEngine(modelController);
+    actionController = new ActionController(gameEngine);
+    uiCore = new UICore(myGraphicHandler, actionController, modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
 
   }

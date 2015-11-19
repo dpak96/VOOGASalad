@@ -9,36 +9,67 @@ import model.Position;
 public class CollisionManager {
 
 	
-	public Boolean didCollide(Article articleOne, Article articleTwo) {
+	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 		
 		if (checkSimpleCollision(articleOne, articleTwo)) {
-			return checkBitMapCollision(articleOne, articleTwo);
+			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
+			return temp;
 		} else {
-			return false;
+			return new CollisionInformation("", false);
 		}
 	}
 	
-	private Boolean checkBitMapCollision(Article a, Article b) {
+	//TODO: we don't know which article comes first, we'll assume a1 is colliding with a2
+	
+	
+	//We want the incidence direction for the article that's colliding.
+	private String getIncidenceDirection(Article articleOne, Position p) {
+		double centerX = articleOne.getX() + articleOne.getWidth()/2;
+		double centerY = articleOne.getY() + articleOne.getHeight()/2;
+		double residualX = p.getX() - centerX;
+		double residualY = p.getY() - centerY;
+		if (residualX >= 0 || residualY >= 0) {
+			if (residualX > residualY) {
+				return "Right";
+			} else if (residualX < residualY) {
+				return "Bottom";
+			} else {
+				return "Bottom"; //Edge case (exactly on diag) returns bottom
+			}
+		} else {
+			if (residualX > residualY) {
+				return "Top";
+			} else if (residualX < residualY) {
+				return "Left";
+			} else {
+				return "Top"; //Edge case (exactly on diag) returns top
+			}
+		}
+		
+	}
+
+	private CollisionInformation checkBitMapCollision(Article a, Article b) {
 		for(Position[] p: a.getBitMap().getByteArray()) {
 			for(Position q: p) {
-				if(checkPixelCollision(q, b.getBitMap().getByteArray())) {
-					return true;
+				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
+				if(temp.isValidPosition()) {
+					return new CollisionInformation(getIncidenceDirection(a,temp), true);
 				}
 				
 			}
 		}
-		return false;
+		return new CollisionInformation("", false);
 	}
 	
-	private Boolean checkPixelCollision(Position a, Position[][] b) {
+	private Position checkPixelCollision(Position a, Position[][] b) {
 		for(Position[] p: b) {
 			for(Position q: p) {
 				if(a.getX() == q.getX() && a.getY() == q.getY()) {
-					return true;
+					return new Position(a.getX(), a.getY());
 				} 
 			}
 		}
-		return false;
+		return new Position();
 		
 	}
 	

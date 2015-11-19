@@ -1,8 +1,19 @@
 package gameengine;
 
 public class CollisionInformation {
-	public String getCollideDirection() {
-		// TODO Auto-generated method stub
-		return null;
+	private Boolean didCollide;
+	private String incidenceDirection;
+	
+	public CollisionInformation(String direction, Boolean real) {
+		incidenceDirection = direction;
+		didCollide = real;
 	}
+	public String getCollideDirection() {
+		return incidenceDirection;
+	}
+	
+	public Boolean isRealCollision(){
+		return didCollide;
+	}
+	
 }

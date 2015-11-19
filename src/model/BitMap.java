@@ -5,6 +5,7 @@ package model;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import resourcemanager.ResourceManager;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -23,7 +24,8 @@ public class BitMap {
 
 	public BitMap(String myImage, Double x, Double y) {
 		System.out.println(myImage);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImage));
+		
+		Image image = ResourceManager.getResourceManager().getIm().getImageMap().get(myImage);
 		BufferedImage bfImage = SwingFXUtils.fromFXImage(image, null);
 		BufferedImage convertedImg = new BufferedImage(bfImage.getWidth(), bfImage.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 	    convertedImg.getGraphics().drawImage(bfImage, 0, 0, null);
