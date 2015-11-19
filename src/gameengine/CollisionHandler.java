@@ -29,7 +29,7 @@ public class CollisionHandler {
 		leftCollideCondition.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));
 		
 		List<Executable> leftCollideExecutable = new ArrayList<Executable>();
-		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity);
+//		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity);
 		
 		List<Condition> rightCollideCondition = new ArrayList<Condition>();
 		rightCollideCondition.add(new ConditionCollisionFromRight("rightCollide",myCollisionInformation));
