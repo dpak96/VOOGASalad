@@ -16,15 +16,14 @@ import model.controller.ModelController;
 
 public class RuleMenu extends AuthoringMenu {
 
-    AuthoringController myController;
+    HashMap<String,Control> ruleParameters;
     public RuleMenu (String title, AuthoringController controller) {
-        super(title);
+        super(title,controller);
 
-        myController=controller;
-
+        
     }
 
-    HashMap<String,Control> ruleParameters = new HashMap<String,Control>();
+    
 
     @Override
     protected void populateMenu (GridPane menuPane) {
@@ -34,18 +33,26 @@ public class RuleMenu extends AuthoringMenu {
         ComboBox ruleTypeBox = new ComboBox();
         menuPane.add(ruleTypeBox, 2, 1);
         ruleTypeBox.getItems().add("Gravity");
+        ruleTypeBox.getItems().add("MoveRight");
         ruleTypeBox.setOnAction(e -> addParameterFields(ruleTypeBox, menuPane));
 
     }
 
     public void addParameterFields (ComboBox ruleBox, GridPane paramGrid) {
-        ModelController model = new ModelController(null);
+        ruleParameters = new HashMap<String,Control>();
+
+        System.out.println(resourcemanager.ResourceManager.getResourceManager()
+                           .getPm().getResourceMap().get("rules")
+                           .getString(ruleBox.getValue().toString()));
+       
         Map<String, Class<?>> ruleParams =
-                model.getParameters("model." + resourcemanager.ResourceManager.getResourceManager()
+                super.myController.getFactoryParameters(("model." + resourcemanager.ResourceManager.getResourceManager()
                         .getPm().getResourceMap().get("rules")
-                        .getString(ruleBox.getValue().toString()));
+                        .getString(ruleBox.getValue().toString())));
+     
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {
+           System.out.println(key);
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
             if (ruleParams.get(key).getName() == "model.Article")
                 ruleParameters.put(key,(super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++)));

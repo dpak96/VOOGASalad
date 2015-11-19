@@ -53,7 +53,7 @@ public class AuthoringController implements IAuthoringController {
   public PlatformButton getArticleFromCoordinates(double x, double y) {
   try {
     editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-    PlatformButton pb = new PlatformButton();
+   PlatformButton pb = new PlatformButton(this);
     return pb;
   }
   catch (Exception e){

@@ -2,6 +2,7 @@ package authoring.ui.editingmenus;
 
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import authoring.controller.AuthoringController;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import model.Article;
@@ -9,8 +10,9 @@ import model.Article;
 
 public abstract class AuthoringMenu implements IMenuAction {
     protected MenuBuilder componentAdder = new MenuBuilder();
-
-    public AuthoringMenu (String title) {
+    protected AuthoringController myController;
+    public AuthoringMenu (String title, AuthoringController controller) {
+        myController=controller;
         showMenu(title);
     }
 
@@ -28,7 +30,7 @@ public abstract class AuthoringMenu implements IMenuAction {
 
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
-        ;
+        
     }
 
     protected abstract void populateMenu (GridPane menuPane);

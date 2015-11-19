@@ -10,9 +10,10 @@ public class RuleButton extends ToolbarButton {
         this.setGraphic(super.setImage(super.toolbarProperties.getString("RULE")));
     }
     @Override
-    public void placeYourObject (AuthoringController myController) {
-        RuleMenu ruleDialog=new RuleMenu("Rule Menu",myController);
-        
+    public void placeYourObject () {
+        if(super.myController==null)
+            System.out.println("null");
+        RuleMenu ruleDialog=new RuleMenu("Rule Menu",super.myController);
     }
 
     
