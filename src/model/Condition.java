@@ -1,14 +1,12 @@
 package model;
+import java.util.*;
 
-public abstract class Condition{
+public abstract class Condition extends Process{
 
-	protected String myName = "";
+	protected String myName;
 	
-	public Condition(){
-	}
-	
-	public Condition(String name){
-		myName = name;
+	public Condition(Map<String, Object> parameters){
+		super(parameters);
 	}
 	
 	public abstract boolean isMet();

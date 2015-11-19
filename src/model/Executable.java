@@ -1,14 +1,12 @@
 package model;
+import java.util.*;
 
-public abstract class Executable{
+public abstract class Executable extends Process{
 
-	protected Article myActor = new Article();
-	protected String myName = "";
+	protected Article myActor;
 	
-	public Executable(String name, Article actor){
-		myName = name;
-		myActor = actor;
+	public Executable(Map<String, Object> parameters){
+		super(parameters);
 	}
-	
 	public abstract void execute();
 }
