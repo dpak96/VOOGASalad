@@ -10,8 +10,8 @@
 }
 
 .Thingy {
-    -fx-min-width: 623;
-    -fx-min-height: 522;
+    -fx-min-width: 675;
+    -fx-min-height: 580;
 }
 
 
@@ -35,4 +35,11 @@
     -fx-alignment: center;
     -fx-min-width: 400;
     -fx-min-height: 300;
+}
+
+.Butt {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: blue;
+    -fx-border-style: solid;
+    -fx-border-width: 10;
 }

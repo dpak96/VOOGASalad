@@ -2,6 +2,7 @@ package authoring.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import authoring.controller.AuthoringController;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.smalloverlay.OverlayController;
 import javafx.application.Application;
@@ -17,9 +18,11 @@ public class ButtonOverlay extends DraggableElement {
     private OverlayController myOverlayController;
     private FlowPane myToolBox;
     private Button back;
-    public ButtonOverlay(){
+    private AuthoringController myAuthoringController;
+    public ButtonOverlay(AuthoringController authoringController){
         myToolBox = new FlowPane();
         myOverlayController = new OverlayController();
+        myAuthoringController=authoringController;
     }
 
     public Pane init() {
@@ -42,8 +45,8 @@ public class ButtonOverlay extends DraggableElement {
 
     private List<Button> populateButtonList () {
         List<Button> buttonList = new ArrayList<Button>();
-        buttonList.add(new RuleButton());
-        buttonList.add(new EnemyButton());
+        buttonList.add(new RuleButton(myAuthoringController));
+        buttonList.add(new EnemyButton(myAuthoringController));
         return buttonList;
     }
 

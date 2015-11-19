@@ -9,6 +9,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import model.Article;
 
 public class DragAndDropBoard extends StackPane {
 
@@ -37,9 +38,7 @@ public class DragAndDropBoard extends StackPane {
             @Override
             public void handle(DragEvent event) {
                 /* data dropped */
-                System.out.println("onDragDropped");
-
-                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (ToolbarButton) event.getGestureSource());
+                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (DraggableElement) event.getGestureSource());
 
                 /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
@@ -54,8 +53,23 @@ public class DragAndDropBoard extends StackPane {
                 event.consume();
             }
         });
+        this.setOnMouseClicked(e->
+                addTemp(authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
     }
-
+    protected void addTemp(Article n, AuthoringController authoringController){
+        try {
+            authoringController.removeArticle(n);
+            HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
+            highlightedArticle.setTranslateX(n.getX() - 307);
+            highlightedArticle.setTranslateY(n.getY() - 268);
+            authoringController.removeArticle(n);
+            authoringController.setHighlighted(true);
+            getChildren().add(highlightedArticle);
+        }
+        catch (Exception e){
+            System.out.println("hi");
+        }
+    }
 
     protected void dragOver(){
         this.setOnDragOver(new EventHandler <DragEvent>() {

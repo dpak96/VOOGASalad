@@ -1,7 +1,7 @@
 package uibasics;
 
 import model.Article;
-import resourcemanager.ResourceManager;
+import model.controller.ModelController;
 import java.util.*;
 import config.Config;
 import front.commands.AbstractCommand;
@@ -13,10 +13,12 @@ public class UIBasics{
   private List<Article> myBackArticles;
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
+  private ModelController myModelController;
 
-  public UIBasics() {
+  public UIBasics(ModelController modelController) {
     load("commands");
     myPane = new Pane();
+    myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
   }
@@ -39,30 +41,30 @@ public class UIBasics{
     return myPane;
   }
 
-  public void update(List<Article> list) {
+  public void update(List<Article> list, Article character) {
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
-      ImageView img = new ImageView();
-      articleUpdate(value, img);
-      myFrontArticles.add(img);
+      articleUpdate(value);
     }
+    articleUpdate(character);
     myPane.getChildren().addAll(myFrontArticles);
   }
+  
+  public void articleUpdate(Article article) {
+	  ImageView img = new ImageView();
+      commands(article, img);
+      myFrontArticles.add(img);
+  }
 
+  private void commands(Article article, ImageView img) {
+	  for (AbstractCommand c : myCommands)
+		  c.update(article, myModelController, img);
+  }
+  
   private void clearAll() {
     myPane.getChildren().removeAll(myFrontArticles);
     myFrontArticles.clear();
-  }
-
-  public void articleUpdate(Article article, ImageView img) {
-    for (AbstractCommand c : myCommands)
-      c.update(article, img);
-//    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
-//    System.out.print("hi");
-//    img.setX(article.getX());
-//    img.setY(article.getY());
-//    img.setRotate(article.getOrientation());
   }
 
 }

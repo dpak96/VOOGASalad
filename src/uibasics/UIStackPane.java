@@ -18,16 +18,17 @@ public class UIStackPane extends StackPane implements Observer {
 	private GamePlayerOverlay myGamePlayer;
 	private boolean edit;
 	private Pane myAuthoringControllerPane;
+	private ModelController myModelController;
 	
 	public UIStackPane(ModelController modelController) {
-
+		myModelController = modelController;
 		myAuthoringController = new AuthoringController(modelController);
 		initializePanes();
 	}
 
 	public void initializePanes() {
 		edit = true;
-		myUIBasics = new UIBasics();
+		myUIBasics = new UIBasics(myModelController);
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
 	}
@@ -73,7 +74,7 @@ public class UIStackPane extends StackPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Model model = (Model) o;
-		myUIBasics.update(model.getArticles());
+		myUIBasics.update(model.getArticles(), model.getCharacter());
 		myGamePlayer.update(model.getArticles(), model.getCharacter());
 	}
 
