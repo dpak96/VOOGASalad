@@ -30,8 +30,8 @@ public class Article {
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
 		Image img = ResourceManager.getResourceManager().getImage(myImageFile);
-		myHeight = img.getHeight();
-		myWidth = img.getWidth();
+		//myHeight = img.getHeight();
+		//myWidth = img.getWidth();
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY

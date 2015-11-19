@@ -114,7 +114,7 @@ public class xmlUtility {
 		Article test = new Article("Goomba.png", 100, 100, true);
 		model.addArticle(test);
 		xmlUtility xml = new xmlUtility(model);
-		Model newModel = xml.loadModel("test.xml");
+		Model newModel = xml.loadModel("testing.xml");
 		System.out.println("loaded");
 		for(Article a: newModel.getArticles()) {
 			System.out.println(a.getX());
