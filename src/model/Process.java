@@ -19,6 +19,10 @@ public abstract class Process {
 			cls = cls.getSuperclass();
 		}
 	}
+	
+	public Process(String name){
+		myName = name;
+	}
 
 	public String getName(){
 		return myName;
