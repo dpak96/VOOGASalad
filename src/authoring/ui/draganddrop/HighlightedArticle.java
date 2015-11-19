@@ -18,7 +18,7 @@ public class HighlightedArticle extends DraggableElement {
 
     public HighlightedArticle(String img) {
         super();
-        name = "Rando";
+        name = "YOOO";
         imageName = img;
         ImageView i = new ImageView();
         i.setImage(ResourceManager.getResourceManager().getImage(img));

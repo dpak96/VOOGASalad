@@ -27,16 +27,13 @@ public class AuthoringController implements IAuthoringController {
   private Executable currentExecutable;
   private Condition currentCondition;
   private Event currentEvent;
-
-  public boolean isHighlighted() {
-    return highlighted;
-  }
+  private boolean highlighted = false;
 
   public void setHighlighted(boolean highlighted) {
     this.highlighted = highlighted;
   }
 
-  private boolean highlighted = false;
+
 
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
@@ -70,12 +67,27 @@ public class AuthoringController implements IAuthoringController {
               true);
     }
     else {
+      highlighted = false;
       editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
               true);
-
       Pane p = (Pane)event.getParent();
       p.getChildren().remove(event);
-      highlighted = false;
+    }
+
+    if(event.getImageName().equals("Goomba")){
+      Map<String, Object> tempMap= new HashMap<String, Object>();
+      tempMap.put("myName", "penis");
+      tempMap.put("myActor", editor.getArticleEditor().getArticle());
+      tempMap.put("myDisplacement", .5);
+      this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+      List<Executable> listExecutable = new ArrayList<Executable>();
+      listExecutable.add(currentExecutable);
+      List<Condition> listCondition = new ArrayList<Condition>();
+      this.makeEvent("event", listCondition, listExecutable);
+      List<Event> listEvent = new ArrayList<Event>();
+      listEvent.add(currentEvent);
+      editor.getArticleEditor().getArticle().addEvent(currentEvent);
+      this.mapKey("A", listEvent);
     }
 
 
@@ -94,22 +106,6 @@ public class AuthoringController implements IAuthoringController {
     editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
                                                        true);
     //System.out.println("this might've happened");
-    //System.out.println(event.getName());
-    if(event.getName().equals("ENEMY")){
-      Map<String, Object> tempMap= new HashMap<String, Object>();
-      tempMap.put("myName", "penis");
-      tempMap.put("myActor", editor.getArticleEditor().getArticle());
-      tempMap.put("myDisplacement", .5);
-      this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
-      List<Executable> listExecutable = new ArrayList<Executable>();
-      listExecutable.add(currentExecutable);
-      List<Condition> listCondition = new ArrayList<Condition>();
-      this.makeEvent("event", listCondition, listExecutable);
-      List<Event> listEvent = new ArrayList<Event>();
-      listEvent.add(currentEvent);
-      editor.getArticleEditor().getArticle().addEvent(currentEvent);
-      this.mapKey("A", listEvent);
-    }
 
   }
 

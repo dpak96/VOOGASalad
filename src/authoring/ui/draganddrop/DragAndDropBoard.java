@@ -58,11 +58,12 @@ public class DragAndDropBoard extends StackPane {
     }
     protected void addTemp(Article n, AuthoringController authoringController){
         try {
-            authoringController.setHighlighted(true);
+            authoringController.removeArticle(n);
             HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
             highlightedArticle.setTranslateX(n.getX() - 307);
             highlightedArticle.setTranslateY(n.getY() - 268);
             authoringController.removeArticle(n);
+            authoringController.setHighlighted(true);
             getChildren().add(highlightedArticle);
         }
         catch (Exception e){
