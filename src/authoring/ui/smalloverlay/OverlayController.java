@@ -29,7 +29,9 @@ public class OverlayController {
     public void addOverlay(Pane ov){
 
         if(overlays.size()>0){
-            overlays.get(overlays.size()-1).getStyleClass().add("Overlayed");
+            for(int x= 0; x<overlays.size(); x++){
+                overlays.get(x).getStyleClass().add("Overlayed");
+            }
         }
         overlays.add(ov);
         base.getChildren().add(ov);
@@ -53,8 +55,9 @@ public class OverlayController {
     public void removeTopAndtoggleOverlay(){
         removeTop();
         if(overlays.size()>0) {
-            int last = overlays.size() - 1;
-            overlays.get(last).getStyleClass().remove("Overlayed");
+            for(int x= 0; x<overlays.size(); x++){
+                overlays.get(x).getStyleClass().remove("Overlayed");
+            }
         }
 
     }
