@@ -17,8 +17,6 @@ public class GamePlayerOverlay extends BorderPane {
 		setPrefSize(500, 500);
 		VoogaProperties props = new VoogaProperties();
 		double width = props.getSceneWidth() - OFFSET;
-		
-		this.getChildren().add(new Rectangle(50,50,50,50));
 		scoreText = new Text("Score: ");
 		healthText = new Text("Health :");
 		lifeText = new Text("Life :");

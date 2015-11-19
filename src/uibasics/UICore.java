@@ -22,7 +22,7 @@ public class UICore {
     uiStackPane = new UIStackPane(modelController);
     VoogaProperties props = new VoogaProperties();
     myRoot = new BorderPane();
-    menuController = new MenuController(graphicHandler,modelController);
+    menuController = new MenuController(graphicHandler, modelController);
     myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
     borderInit(props);
     myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
