@@ -19,6 +19,7 @@ public class xmlUtility {
 	public void saveModel(String gameName) {
 		FileOutputStream fos = null;
 		myStream.omitField(Article.class, "myBitMap");
+		myStream.omitField(Article.class, "this$0");
 	    try{            
 	        String xml = myStream.toXML(myModel);
 	        
