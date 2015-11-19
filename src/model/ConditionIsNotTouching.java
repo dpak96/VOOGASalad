@@ -1,14 +1,14 @@
 package model;
 
+import java.util.Map;
+
 public class ConditionIsNotTouching extends Condition{
 
 	Article myFirst;
 	Article mySecond;
 	
-	public ConditionIsNotTouching(String name, Article first, Article second) {
-		super(name);
-		myFirst = first;
-		mySecond = second;
+	public ConditionIsNotTouching(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

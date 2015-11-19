@@ -1,13 +1,13 @@
 package model;
 
+import java.util.Map;
+
 public class ExecutableAccelerateVertical extends Executable{
 	
 	private double myAcceleration;
 	
-	public ExecutableAccelerateVertical(String name, Article actor, double acceleration) {
-		super(name, actor);
-		myAcceleration = acceleration;
-		// TODO Auto-generated constructor stub
+	public ExecutableAccelerateVertical(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

@@ -5,19 +5,12 @@ import java.util.*;
 
 public class ConditionAbovePositionOnScreen extends Condition{
 	
-	private Article myViewpoint = new Article();
-	private Article myCheckArticle = new Article();
-	private double myFraction = 0;
+	private Article myViewpoint;
+	private Article myCheckArticle;
+	private double myFraction;
 	
-	public ConditionAbovePositionOnScreen(){
-		super();
-	}
-	
-	public ConditionAbovePositionOnScreen(String name, Article viewpoint, Article check, double fraction) {
-		super(name);
-		myViewpoint = viewpoint;
-		myCheckArticle = check;
-		myFraction = fraction;
+	public ConditionAbovePositionOnScreen(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

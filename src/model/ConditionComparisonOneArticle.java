@@ -1,5 +1,6 @@
  package model;
 import java.lang.reflect.*;
+import java.util.Map;
 
 public class ConditionComparisonOneArticle extends Condition{
 	
@@ -9,13 +10,8 @@ public class ConditionComparisonOneArticle extends Condition{
 	private String myComparison;
 	
 	
-	public ConditionComparisonOneArticle(String name, Article first, String firstVariable,
-			double compareValue, String comparison) {
-		super(name);
-		myFirst = first;
-		myFirstVariable = firstVariable;
-		myCompareValue = compareValue;
-		myComparison = comparison;
+	public ConditionComparisonOneArticle(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

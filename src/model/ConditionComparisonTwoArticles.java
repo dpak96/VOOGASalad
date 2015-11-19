@@ -1,5 +1,6 @@
  package model;
 import java.lang.reflect.*;
+import java.util.Map;
 public class ConditionComparisonTwoArticles extends Condition{
 	
 	private Article myFirst;
@@ -10,14 +11,8 @@ public class ConditionComparisonTwoArticles extends Condition{
 	
 	
 	
-	public ConditionComparisonTwoArticles(String name, Article first, String firstVariable,
-			Article second, String secondVariable, String comparison) {
-		super(name);
-		myFirst = first;
-		myFirstVariable = firstVariable;
-		mySecond = second;
-		mySecondVariable = secondVariable;
-		myComparison = comparison;
+	public ConditionComparisonTwoArticles(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override
