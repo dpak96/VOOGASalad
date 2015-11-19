@@ -2,11 +2,11 @@ package authoring.ui.toolbar;
 
 import javafx.scene.control.Button;
 
-public class CheckpointButton extends ToolbarButtons {
+public class CheckpointButton extends ToolbarButton {
 
     public CheckpointButton () {
         super();
-        this.setGraphic(super.setImage("Checkpoint", 50, 50));
+        this.setGraphic(super.setImage(super.toolbarProperties.getString("CHECKPOINT")));
         
     }
 

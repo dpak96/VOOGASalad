@@ -9,6 +9,11 @@ public class AuthoringController implements IAuthoringController {
   private Editor editor;
   private AuthoringUI ui;
 
+  public AuthoringController(){
+    ui = new AuthoringUI();
+    editor = new Editor();
+  }
+
   public Editor getEditor() {
     return editor;
   }
