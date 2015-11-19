@@ -47,13 +47,11 @@ public class ModelFactory {
 		return parameterMap;
 	}
 
-	public Event creatEvent(String name, List<Condition> conditions, List<Executable> executables){
+	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> cons = cls.getConstructors()[0];
-			//Object[] obj = new Object[Replace with getSize from dataObject];
-			/*for each piece of data in the object, add it to the obj array*/
-			Object[] obj = {/* Fill with data from object*/};
+			Object[] obj = {name, conditions, executables};
 			Event test = (Event) cons.newInstance(obj);
 			test.addAllConditions(conditions);
 			test.addAllExecutables(executables);
@@ -65,15 +63,12 @@ public class ModelFactory {
 		return null;
 	}
 
-	public Condition createCondition(String name, String cond, FactoryData data){
+	public Condition createCondition(String name, Map<String, Object> data){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> trialCons = cls.getConstructor(Map.class);
-			Constructor<?> cons = cls.getConstructors()[0];
-			//Object[] obj = new Object[Replace with getSize from dataObject];
-			/*for each piece of data in the object, add it to the obj array*/
-			Object[] obj = {/* Fill with data from object*/};
-			Condition test = (Condition) trialCons.newInstance(/*data.getMap()*/);
+			Constructor<?> cons = cls.getConstructor(Map.class);
+			Condition test = (Condition) trialCons.newInstance(data);
 			return test;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -81,16 +76,11 @@ public class ModelFactory {
 		}
 		return null;
 	}
-	public Executable createExecutable(String name, double value, Article actor, FactoryData data){
+	public Executable createExecutable(String name, Map<String, Object> data){
 		try {
-			HashMap<String, Class> asdf = new HashMap<String, Class>();
-			asdf.put("poop", String.class);
 			Class<?> cls = Class.forName(name);
-			Constructor<?> cons = cls.getConstructors()[0];
-			//Object[] obj = new Object[Replace with getSize from dataObject];
-			/*for each piece of data in the object, add it to the obj array*/
-			Object[] obj = data.getExecutableArray();
-			Executable test = (Executable) cons.newInstance(obj);
+			Constructor<?> cons = cls.getConstructor(Map.class);
+			Executable test = (Executable) cons.newInstance(data);
 			return test;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

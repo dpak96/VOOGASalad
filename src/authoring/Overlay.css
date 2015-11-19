@@ -10,9 +10,8 @@
 }
 
 .Thingy {
-    -fx-background-color: purple;
-    -fx-min-width: 500;
-    -fx-min-height: 500;
+    -fx-min-width: 675;
+    -fx-min-height: 580;
 }
 
 

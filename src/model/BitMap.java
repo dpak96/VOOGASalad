@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import resourcemanager.ResourceManager;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 
 public class BitMap {
 	private Position[][] myBitMap;
@@ -28,9 +27,9 @@ public class BitMap {
 	public Position[][] getByteArray() {
 		return myBitMap;
 	}
+	
 
 	private static Position[][] makeBitMap(BufferedImage image, Double x, Double y) {
-		 final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 	      final int width = image.getWidth();
 	      final int height = image.getHeight();
 	      System.out.println(width + " " + height);

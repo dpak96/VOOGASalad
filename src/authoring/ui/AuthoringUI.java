@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import properties.VoogaProperties;
 
 public class AuthoringUI {
   private DragAndDropBoard dragAndDrop;
@@ -36,10 +37,14 @@ public class AuthoringUI {
     ov2.setRight(test);
     // ov2.setMargin(toolbar, new Insets(0,0,0,5));
     ov2.setLeft(dragAndDrop);
+    VoogaProperties props = new VoogaProperties();
+    //dragAndDrop.setPrefSize(props.getSceneWidth(),props.getSceneHeight());
     dragAndDrop.getStyleClass().add("Thingy");
     myOverlayController.addPane(ov2);
     return myOverlayController;
   }
+
+
 
 
   public DragAndDropBoard getDragAndDrop() {
