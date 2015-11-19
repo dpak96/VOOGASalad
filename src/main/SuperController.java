@@ -32,6 +32,7 @@ public class SuperController {
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
+
   }
 
   public Scene init(GameCreation gameCreation) {
