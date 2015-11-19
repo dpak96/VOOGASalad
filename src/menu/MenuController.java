@@ -15,9 +15,9 @@ public class MenuController {
     private MenuPanel myMenuPanel;
 
 
-    public MenuController(GraphicHandler graphicHandler, ResourceManager resourceManager){
+    public MenuController(GraphicHandler graphicHandler){
         myGraphicHandler = graphicHandler;
-        myMenuPanel = new MenuPanel(resourceManager, this);
+        myMenuPanel = new MenuPanel(this);
     }
 
     public void newStart(){

@@ -19,12 +19,10 @@ public class GameEngine implements IGameEngine {
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
-	private ResourceManager resourceManager;
 	
-	public GameEngine(ModelController modelController, ResourceManager rm){
+	public GameEngine(ModelController modelController){
 		myModelController = modelController;
 		myCollisionManager = new CollisionManager();
-		resourceManager = rm;
 	}
 	
 	@Override
@@ -128,14 +126,6 @@ public class GameEngine implements IGameEngine {
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
 		return x > minX && x < maxX && y > minY && y < maxY;
 	}
-
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
-  }
 
   public Article getMyCharacter() {
     return myCharacter;

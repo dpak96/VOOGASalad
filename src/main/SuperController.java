@@ -24,22 +24,19 @@ public class SuperController {
   private ModelController modelController;
   private Model model;
   private GraphicHandler myGraphicHandler;
-  private ResourceManager resourceManager;
 
   private UICore uiCore;
   
   public SuperController(GraphicHandler graphicHandler){
     myGraphicHandler = graphicHandler;
-    resourceManager = new ResourceManager();
-    uiCore = new UICore(myGraphicHandler, resourceManager);
-    modelController = new ModelController(model, resourceManager);
-    gameEngine = new GameEngine(modelController, resourceManager);
-    actionController = new ActionController(gameEngine, resourceManager);
-    observerController = new ObserverController(model, uiCore.getUIBasics(), resourceManager);
+    uiCore = new UICore(myGraphicHandler);
+    modelController = new ModelController(model);
+    gameEngine = new GameEngine(modelController);
+    actionController = new ActionController(gameEngine);
+    observerController = new ObserverController(model, uiCore.getUIBasics());
   }
 
   public Scene init(GameCreation gameCreation){
-      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
       Scene mainScene = uiCore.getScene();
       return mainScene;
   }
@@ -92,12 +89,5 @@ public class SuperController {
     this.model = model;
   }
 
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
-  }
 
 }

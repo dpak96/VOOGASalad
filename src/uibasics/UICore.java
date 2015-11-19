@@ -17,10 +17,10 @@ public class UICore {
 	private MenuController menuController;
 	private Scene myScene;
 	
-	public UICore (GraphicHandler graphicHandler, ResourceManager resourceManager){
+	public UICore (GraphicHandler graphicHandler){
 		VoogaProperties props = new VoogaProperties();
 		myRoot = new BorderPane();
-		menuController = new MenuController(graphicHandler, resourceManager);
+		menuController = new MenuController(graphicHandler);
 		uiStackPane = new UIStackPane();
 		myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
 		borderInit(props);

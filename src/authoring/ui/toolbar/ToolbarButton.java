@@ -10,8 +10,7 @@ import javafx.scene.paint.Color;
 import resourcemanager.ResourceManager;
 
 public abstract class ToolbarButton  extends DraggableElement implements IObjectPlacing {
-   private ResourceManager resources=new ResourceManager();
-   protected ResourceBundle toolbarProperties=ResourceBundle.getBundle("properties.toolbar");
+   protected ResourceBundle toolbarProperties=ResourceManager.getResourceManager().getPm().getResourceMap().get("toolbar");
    private String imageName;
    private String name;
    
@@ -33,8 +32,7 @@ public abstract class ToolbarButton  extends DraggableElement implements IObject
     }
     
     protected ImageView setImage(String imgName) {
-        resources.getIm().getImageMap().get(imgName);
-        ImageView buttonIcon = new ImageView(resources.getIm().getImageMap().get(imgName));
+        ImageView buttonIcon = new ImageView(ResourceManager.getResourceManager().getIm().getImageMap().get(imgName));
         buttonIcon.setFitWidth(this.getPrefWidth());
         buttonIcon.setFitHeight(this.getPrefHeight());
         return buttonIcon;
