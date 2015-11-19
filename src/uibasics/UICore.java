@@ -31,6 +31,7 @@ public class UICore {
     myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
     myScene.setOnMouseClicked(e -> actionController.update(e.toString()));
   }
+  
 
   public void borderInit(VoogaProperties props) {
     myRoot.setCenter(uiStackPane);

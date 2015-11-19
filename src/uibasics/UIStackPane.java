@@ -28,7 +28,6 @@ public class UIStackPane extends StackPane implements Observer {
 	public void initializePanes() {
 		edit = true;
 		myUIBasics = new UIBasics();
-
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
 		this.getChildren().add(myUIBasics.getPane());
@@ -67,7 +66,6 @@ public class UIStackPane extends StackPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		@SuppressWarnings("unchecked")
 //		ArrayList<Article> articles = (ArrayList<Article>) arg;
 		Model model = (Model) o;
 		ArrayList<Article> articles = (ArrayList<Article>) model.getArticles();
