@@ -142,17 +142,16 @@ public class ModelController implements IModelController {
 	}
 	
 	public void loadFromFile(Model toLoad) {
-		myModel.destroyModel();
-		myModel.addAllArticles(toLoad.getArticles());
-		myModel.addAllEvents(toLoad.getEvents());
-		myModel.addAllButtonMap(toLoad.getButtonMap());
-		myModel.addAllConditions(toLoad.getConditions());
-		myModel.addAllExecutables(toLoad.getExecutables());
-		myModel.setCharacter(toLoad.getCharacter());
+		myModel = toLoad;
+		//toLoad.initialize();
 	}
 
 	public void save(Window wind){
 		myXMLUtility.saveModel(wind);
+	}
+
+	public void load(Window wind){
+		loadFromFile(myXMLUtility.loadModel(wind));
 	}
 
 }
