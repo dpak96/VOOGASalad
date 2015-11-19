@@ -12,22 +12,23 @@ import resourcemanager.ResourceManager;
 public class ModelController implements IModelController {
 	private Model myModel;
 	private ModelFactory myModelFactory;
-	private ResourceManager resourceManager;
 	
 	//WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
 	 
-	public ModelController(Model model, ResourceManager rm){
+	public ModelController(Model model){
 		myModel = model;
 		myModelFactory = new ModelFactory();
-		setResourceManager(rm);
 	}
 	
-	public Map<String, Class> getParameters(String className){
+	public Map<String, Class<?>> getParameters(String className){
 		return myModelFactory.getParameters(className);
 	}
 	
 	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
-		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, events);
+		Article myViewpoint = myModel.getViewpoint();
+		double xAdjusted = x + myViewpoint.getX();
+		double yAdjusted = y + myViewpoint.getY();
+		Article newArticle = myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
 		addArticle(newArticle);
 	}
 	
@@ -90,13 +91,5 @@ public class ModelController implements IModelController {
 	public void notifyObservers(){
 		myModel.notifyObservers();
 	}
-
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
-  }
 
 }

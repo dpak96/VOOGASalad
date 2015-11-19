@@ -9,11 +9,7 @@ import observer.controller.ObserverController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIBasics;
-
 import uibasics.UICore;
-import uibasics.UIStackPane;
-
-
 import java.util.ResourceBundle;
 
 
@@ -24,24 +20,23 @@ public class SuperController {
   private ModelController modelController;
   private Model model;
   private GraphicHandler myGraphicHandler;
-  private ResourceManager resourceManager;
 
   private UICore uiCore;
-  
-  public SuperController(GraphicHandler graphicHandler){
+
+  public SuperController(GraphicHandler graphicHandler) {
+    model = new Model();
     myGraphicHandler = graphicHandler;
-    resourceManager = new ResourceManager();
-    uiCore = new UICore(myGraphicHandler, resourceManager);
-    modelController = new ModelController(model, resourceManager);
-    gameEngine = new GameEngine(modelController, resourceManager);
-    actionController = new ActionController(gameEngine, resourceManager);
-    observerController = new ObserverController(model, uiCore.getUIBasics(), resourceManager);
+    actionController = new ActionController(gameEngine);
+
+    uiCore = new UICore(myGraphicHandler, actionController);
+    modelController = new ModelController(model);
+    gameEngine = new GameEngine(modelController);
+    observerController = new ObserverController(model, uiCore.getUIStackPane());
   }
 
-  public Scene init(GameCreation gameCreation){
-      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-      Scene mainScene = uiCore.getScene();
-      return mainScene;
+  public Scene init(GameCreation gameCreation) {
+    Scene mainScene = uiCore.getScene();
+    return mainScene;
   }
 
   public ModelController getModelController() {
@@ -90,14 +85,6 @@ public class SuperController {
 
   public void setModel(Model model) {
     this.model = model;
-  }
-
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
   }
 
 }

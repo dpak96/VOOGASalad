@@ -25,7 +25,7 @@ public class ArticleEditor implements IArticleEditor {
                                        Double x,
                                        Double y,
                                        Boolean direction) {
-
+    
   }
 
   @Override

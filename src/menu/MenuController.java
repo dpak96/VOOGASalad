@@ -1,11 +1,14 @@
 package menu;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.GraphicHandler;
 import resourcemanager.ResourceManager;
+import startscreen.GameCreation;
 import startscreen.StartScreenController;
+import uibasics.UIStackPane;
 
 import java.io.*;
 import java.util.ResourceBundle;
@@ -15,10 +18,17 @@ public class MenuController {
     private MenuPanel myMenuPanel;
 
 
-    public MenuController(GraphicHandler graphicHandler, ResourceManager resourceManager){
+    public MenuController(GraphicHandler graphicHandler){
         myGraphicHandler = graphicHandler;
-        myMenuPanel = new MenuPanel(resourceManager, this);
+        myMenuPanel = new MenuPanel(this);
     }
+    
+    public void switchOverlay() {
+    	BorderPane core = (BorderPane) myMenuPanel.getParent();
+    	UIStackPane stack = (UIStackPane) core.getCenter();
+    	stack.toggle();
+    }
+    	
 
     public void newStart(){
         myGraphicHandler.startScreen();
