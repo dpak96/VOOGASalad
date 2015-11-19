@@ -145,6 +145,9 @@ public class Article {
 		return myBitMap;
 	}
 	
+	public void destroyBitMap() {
+		myBitMap = null;
+	}
 	public void clearCollisions(){
 		myCollisions.clear();
 	}
