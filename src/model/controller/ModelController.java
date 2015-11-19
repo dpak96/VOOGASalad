@@ -2,7 +2,7 @@ package model.controller;
 
 import gameengine.*;
 
-import java.util.List;
+import java.util.*;
 
 import model.*;
 import model.factory.*;
@@ -20,6 +20,10 @@ public class ModelController implements IModelController {
 		myModel = model;
 		myModelFactory = new ModelFactory();
 		setResourceManager(rm);
+	}
+	
+	public Map<String, Class> getParameters(String className){
+		return myModelFactory.getParameters(className);
 	}
 	
 	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
