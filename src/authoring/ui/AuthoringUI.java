@@ -34,7 +34,7 @@ public class AuthoringUI {
     test.getStyleClass().add("Test");
     test.getChildren().add(toolbar);
     ov2.setRight(test);
-   // ov2.setMargin(toolbar, new Insets(0,0,0,5));
+    // ov2.setMargin(toolbar, new Insets(0,0,0,5));
     ov2.setLeft(dragAndDrop);
     dragAndDrop.getStyleClass().add("Thingy");
     myOverlayController.addPane(ov2);
