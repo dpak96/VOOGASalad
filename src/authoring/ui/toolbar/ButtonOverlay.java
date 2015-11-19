@@ -14,33 +14,40 @@ import javafx.scene.layout.Pane;
 
 
 public class ButtonOverlay extends DraggableElement {
-        private OverlayController myOverlayController;
-        private FlowPane myToolBox;
-
-        public ButtonOverlay(){
-            myToolBox = new FlowPane();
-            myOverlayController = new OverlayController();
-        }
-
-        public Pane init() {
-            myToolBox = new FlowPane();
-            configureToolBox(myToolBox);
-            // toolBox.getChildren().add(new PlatformSelector());
-            myToolBox.getChildren().addAll(populateButtonList());
-            //myToolBox.setPrefSize(600,200);
-            return myToolBox;
-        }
-        private void configureToolBox (FlowPane toolBox) {
-        }
-
-        private List<Button> populateButtonList () {
-            List<Button> buttonList = new ArrayList<Button>();
-            buttonList.add(new RuleButton());
-            buttonList.add(new EnemyButton());
-            return buttonList;
-        }
-
-
-
-
+    private OverlayController myOverlayController;
+    private FlowPane myToolBox;
+    private Button back;
+    public ButtonOverlay(){
+        myToolBox = new FlowPane();
+        myOverlayController = new OverlayController();
     }
+
+    public Pane init() {
+        myToolBox = new FlowPane();
+        configureToolBox(myToolBox);
+        // toolBox.getChildren().add(new PlatformSelector());
+        myToolBox.getChildren().addAll(populateButtonList());
+        back = new Button("BACK");
+        myToolBox.getChildren().add(back);
+        //myToolBox.setPrefSize(600,200);
+        return myToolBox;
+    }
+    public void init2(){
+        OverlayController oc = (OverlayController) myToolBox.getParent();
+        back.setOnAction(e-> oc.removeTop());
+    }
+
+    private void configureToolBox (FlowPane toolBox) {
+    }
+
+    private List<Button> populateButtonList () {
+        List<Button> buttonList = new ArrayList<Button>();
+        buttonList.add(new RuleButton());
+        buttonList.add(new EnemyButton());
+        return buttonList;
+    }
+
+
+
+
+}

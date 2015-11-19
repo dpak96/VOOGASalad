@@ -9,6 +9,7 @@ import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Article;
+import model.controller.ModelController;
 
 public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
@@ -17,14 +18,16 @@ public class UIStackPane extends StackPane implements Observer {
 	private boolean edit;
 	private Pane myAuthoringControllerPane;
 	
-	public UIStackPane() {
+	public UIStackPane(ModelController modelController) {
+
+		myAuthoringController = new AuthoringController(modelController);
 		initializePanes();
 	}
-	
+
 	public void initializePanes() {
 		edit = true;
 		myUIBasics = new UIBasics();
-		myAuthoringController = new AuthoringController();
+
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
 		this.getChildren().add(myUIBasics.getPane());
