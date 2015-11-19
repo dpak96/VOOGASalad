@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import main.GraphicHandler;
 import menu.MenuController;
 import properties.VoogaProperties;
+import resourcemanager.ResourceManager;
 
 public class UICore {
 	
@@ -16,10 +17,10 @@ public class UICore {
 	private MenuController menuController;
 	private Scene myScene;
 	
-	public UICore (GraphicHandler graphicHandler, ResourceBundle resources){
+	public UICore (GraphicHandler graphicHandler, ResourceManager resourceManager){
 		VoogaProperties props = new VoogaProperties();
 		myRoot = new BorderPane();
-		menuController = new MenuController(graphicHandler, resources);
+		menuController = new MenuController(graphicHandler, resourceManager);
 		uiStackPane = new UIStackPane();
 		myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
 		borderInit(props);
