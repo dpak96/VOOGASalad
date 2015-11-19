@@ -6,11 +6,8 @@ import javafx.scene.Scene;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
-import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
-import uibasics.UIBasics;
 import uibasics.UICore;
-import java.util.ResourceBundle;
 
 
 public class SuperController {
@@ -36,6 +33,7 @@ public class SuperController {
 
   public Scene init(GameCreation gameCreation) {
     Scene mainScene = uiCore.getScene();
+    uiCore.initPanels(gameCreation);
     return mainScene;
   }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,31 +16,28 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class WriteMatrixToXML {
-	public WriteMatrixToXML(double[][] matrix, String fileName) {
+public class WriteCollisionTypeToXML {
+	private final String FILENAME = "CollisionTypeLibrary";
+	public WriteCollisionTypeToXML(List<String> typeList) {
 		// TODO Auto-generated constructor stub
-		write(matrix, fileName);
+		write(typeList);
 	}
 	
-	public void write(double[][] matrix, String fileName){
+	private void write(List<String> typeList) {
+		// TODO Auto-generated method stub
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 			Document doc = docBuilder.newDocument();
-			Element matrixXML = doc.createElement("Matrix");
+			Element matrixXML = doc.createElement("Collision");
 			doc.appendChild(matrixXML);
 			
-			for (int i = 0; i < matrix.length; i++){
-				Element row = doc.createElement("Row");
+			for (int i = 0; i < typeList.size(); i++){
+				Element row = doc.createElement("Type");
 				matrixXML.appendChild(row);
-				String tempString = "";
-				for (int j = 0; j < matrix.length-1; j++){
-					tempString = tempString + Double.toString(matrix[i][j]) + ",";
-				}
-				tempString = tempString + Double.toString(matrix[i][matrix.length-1]);
-				row.setAttribute("RowString", tempString);
+				row.setAttribute("TypeString", typeList.get(i));
 			}
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -49,7 +47,7 @@ public class WriteMatrixToXML {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			
-			StreamResult result = new StreamResult(new File(".\\src\\model\\"+fileName+"CollisionLibrary.xml"));
+			StreamResult result = new StreamResult(new File(".\\src\\model\\"+FILENAME+".xml"));
 
 			transformer.transform(source, result);
 
@@ -59,6 +57,4 @@ public class WriteMatrixToXML {
 			tfe.printStackTrace();
 		  }
 	}
-	
-
 }

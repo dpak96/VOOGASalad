@@ -2,6 +2,7 @@ package model;
 
 import java.util.*;
 
+
 import gameengine.CollisionInformation;
 
 
@@ -37,7 +38,7 @@ public class Article {
 	public Article(String file, double x, double y) {
 		myImageFile = file;
 		myPosition = new Position(x, y);
-		//myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
 		
 	}
 	

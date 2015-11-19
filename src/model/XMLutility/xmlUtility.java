@@ -18,8 +18,10 @@ public class xmlUtility {
 	
 	public void saveModel(String gameName) {
 		FileOutputStream fos = null;
+		myStream.omitField(Article.class, "myBitMap");
 	    try{            
 	        String xml = myStream.toXML(myModel);
+	        
 	        fos = new FileOutputStream(gameName + ".xml");
 	        fos.write("<?xml version=\"1.0\"?>".getBytes("UTF-8"));
 	        byte[] bytes = xml.getBytes("UTF-8");
@@ -45,7 +47,8 @@ public class xmlUtility {
 		Article test = new Article("Goomba.png", 100, 100, true);
 		model.addArticle(test);
 		xmlUtility xml = new xmlUtility(model);
-		xml.saveModel("FUCK");
+		xml.saveModel("test");
+		System.out.println("saved");
 	}
 
 }
