@@ -11,9 +11,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
-public class loadMatrixFromXML {
+public class LoadMatrixFromXML {
 private double[][] myMatrix;
-	public loadMatrixFromXML(String fileName) {
+	public LoadMatrixFromXML(String fileName) {
 		// TODO Auto-generated constructor stub
 		load(fileName);
 	}

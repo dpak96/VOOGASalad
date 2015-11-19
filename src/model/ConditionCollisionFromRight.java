@@ -12,6 +12,11 @@ public class ConditionCollisionFromRight extends Condition{
 		super(parameters);
 	}
 	
+	public ConditionCollisionFromRight(String name, CollisionInformation wu){
+		super(name);
+		myCollisionInformation = wu;
+	}
+	
 	@Override
 	public boolean isMet() {		
 		return myCollisionInformation.getCollideDirection().equals(RIGHT);		
