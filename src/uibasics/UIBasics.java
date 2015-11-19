@@ -1,5 +1,6 @@
 package uibasics;
 
+import javafx.scene.image.Image;
 import model.Article;
 import resourcemanager.ResourceManager;
 import java.util.*;
@@ -60,8 +61,13 @@ public class UIBasics{
   }
 
   public void articleUpdate(Article article, ImageView img) {
-    for (AbstractCommand c : myCommands)
-      c.update(article, img);
+//    for (AbstractCommand c : myCommands)
+//      c.update(article, img);
+    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
+    System.out.print("hi");
+    img.setX(article.getX());
+    img.setY(article.getY());
+    img.setRotate(article.getOrientation());
   }
 
 }

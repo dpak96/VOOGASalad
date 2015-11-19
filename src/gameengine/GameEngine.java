@@ -37,7 +37,6 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runArticleEvents();
 		runArticleUpdates();
-		
 		myModelController.notifyObservers();
 		
 	}
@@ -61,9 +60,8 @@ public class GameEngine implements IGameEngine {
 	}
 	
 	private void runButtonPress(String input){
-		System.out.println(input);
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
-		System.out.println(buttonEvents == null);
+
 		for(Event e : buttonEvents){
 			e.fire();
 		}

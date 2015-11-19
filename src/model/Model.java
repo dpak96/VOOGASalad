@@ -9,6 +9,7 @@ public class Model extends Observable{
 	private Article myViewpoint;
 	private Article myCharacter;
 
+
 	
 	public List<Event> getEvents(){
 		return myEvents;
@@ -67,6 +68,7 @@ public class Model extends Observable{
 	}
 	public void addArticle(Article article) {
 		myArticles.add(article);
+		setChanged();
 	}
 	public void removeArticle(Article article) {
 		myArticles.remove(article);		

@@ -66,6 +66,7 @@ public class UIStackPane extends StackPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Hi");
 //		ArrayList<Article> articles = (ArrayList<Article>) arg;
 		Model model = (Model) o;
 		ArrayList<Article> articles = (ArrayList<Article>) model.getArticles();
