@@ -1,5 +1,6 @@
  package model;
 import java.lang.reflect.*;
+import java.util.Map;
 
 public class ConditionComparisonOneArticle extends Condition{
 	
@@ -9,13 +10,8 @@ public class ConditionComparisonOneArticle extends Condition{
 	private String myComparison;
 	
 	
-	public ConditionComparisonOneArticle(String name, Article first, String firstVariable,
-			double compareValue, String comparison) {
-		super(name);
-		myFirst = first;
-		myFirstVariable = firstVariable;
-		myCompareValue = compareValue;
-		myComparison = comparison;
+	public ConditionComparisonOneArticle(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override
@@ -33,17 +29,6 @@ public class ConditionComparisonOneArticle extends Condition{
 		}
 	}
 	
-	private class Maths{
-		public boolean Equals(double a, double b){
-			return a == b;
-		}
-		public boolean LessThan(double a, double b){
-			return a < b;
-		}
-		public boolean GreaterThan(double a, double b){
-			return a > b;
-		}
-	}
 	/*
 	public static void main(String[] args){
 		Article a = new Article("a", 0, 0, false);

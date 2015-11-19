@@ -1,11 +1,13 @@
 package model;
 
+import java.util.Map;
+
 public class ExecutableLoseLife extends Executable{
 
-	public ExecutableLoseLife(String name, Article actor) {
-		super(name, actor);
+	public ExecutableLoseLife(Map<String, Object> parameters){
+		super(parameters);
 	}
-
+	
 	@Override
 	public void execute() {
 		myActor.removeLife();

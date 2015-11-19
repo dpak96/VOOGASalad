@@ -1,12 +1,13 @@
 package model;
 
+import java.util.Map;
+
 public class ExecutableLoseHealth extends Executable {
 	
 	private double myDamage;
 
-	public ExecutableLoseHealth(String name, Article actor, double damage) {
-		super(name, actor);
-		myDamage = damage;
+	public ExecutableLoseHealth(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override
