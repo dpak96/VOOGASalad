@@ -9,7 +9,6 @@ public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
-    private ResourceBundle myResource = ResourceBundle.getBundle("properties/english");
     private Stage myStage;
 
     public StartScreen(){

@@ -8,9 +8,8 @@ import resourcemanager.ResourceManager;
 
 public class ActionController{
 	private GameEngine myGE;
-	private ResourceManager resourceManager;
 	
-	public ActionController(GameEngine engine, ResourceManager resourceManager){
+	public ActionController(GameEngine engine){
 		myGE = engine;
 		
 	}
@@ -18,13 +17,5 @@ public class ActionController{
 	public void update(String arg1) {
 		myGE.update(arg1);
 	}
-
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
-  }
 
 }
