@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.sun.naming.internal.ResourceManager;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -19,13 +20,7 @@ public class RuleMenu extends AuthoringMenu {
 
     }
 
-    ArrayList<String> ruleParameters = new ArrayList<String>();
-
-    @Override
-    public void executeYourMenuFunction () {
-        // TODO Auto-generated method stub
-
-    }
+    HashMap<String,Control> ruleParameters = new HashMap<String,Control>();
 
     @Override
     protected void populateMenu (GridPane menuPane) {
@@ -49,11 +44,25 @@ public class RuleMenu extends AuthoringMenu {
         for (String key : ruleParams.keySet()) {
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
             if (ruleParams.get(key).getName() == "model.Article")
-                super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
+                ruleParameters.put(key,(super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++)));
             else
-                super.componentAdder.makeField(paramGrid, 2, rowIndex++);
-            System.out.println(ruleParams.get(key).getName());
+                ruleParameters.put(key,(super.componentAdder.makeField(paramGrid, 2, rowIndex++)));
         }
+
+    }
+
+    @Override
+    public void executeYourMenuFunction () {
+        HashMap<String, Object> parametersToReturn=new HashMap<String,Object>();
+        for(String key: ruleParameters.keySet()){
+            if(ruleParameters.get(key) instanceof TextField)
+            {
+             TextField parameterField=(TextField) ruleParameters.get(key);
+             parametersToReturn.put(key, Double.parseDouble(parameterField.getText()));
+            }
+
+        }
+        // TODO Auto-generated method stub
 
     }
 

@@ -65,7 +65,7 @@ public class EnemyProperties extends ArticleEditorMenu {
 
     @Override
     public void executeYourMenuFunction () {
-        // objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getp);
+        objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
 

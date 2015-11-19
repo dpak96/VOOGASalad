@@ -20,7 +20,7 @@ public abstract class AuthoringMenu implements IMenuAction {
         propertyMenu.setTitle("Enemy Property Editor");
 
         GridPane menuGrid = new GridPane();
-
+        menuGrid.setPrefSize(300, 300);
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
 

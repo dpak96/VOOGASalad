@@ -25,7 +25,7 @@ public class AuthoringUI {
   public AuthoringUI(AuthoringController authoringController){
     dragAndDrop = new DragAndDropBoard(authoringController);
     myOverlayController = new OverlayController();
-    myToolbarContainer = new ToolbarContainer();
+    myToolbarContainer = new ToolbarContainer(authoringController);
   }
 
   public Pane tester(){
