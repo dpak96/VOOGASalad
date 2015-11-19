@@ -70,10 +70,11 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public PlatformButton getArticleFromCoordinates(double x, double y) {
+
     try {
       editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-      PlatformButton pb = new PlatformButton();
-      return pb;
+      //PlatformButton pb = new PlatformButton();
+      return null;
     } catch (Exception e) {
       System.out.print("Oops");
       return null;
