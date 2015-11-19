@@ -26,10 +26,11 @@ public class SuperController {
   public SuperController(GraphicHandler graphicHandler){
     myGraphicHandler = graphicHandler;
     ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-    uiCore = new UICore(myGraphicHandler, resource);
+    
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
+    uiCore = new UICore(myGraphicHandler, resource, actionController);
     observerController = new ObserverController(model, uiCore.getUIBasics());
   }
 

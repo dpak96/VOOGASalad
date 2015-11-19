@@ -16,8 +16,6 @@ public class UIStackPane extends Observable {
 	public UIStackPane() {
 		myStackPane = new StackPane();
 		initializePanes();
-		myStackPane.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-		myStackPane.setOnMouseClicked(e -> handleClick());
 	}
 	
 	public void initializePanes() {
@@ -54,12 +52,6 @@ public class UIStackPane extends Observable {
 		return myUIBasics;
 	}
 	
-	private void handleKeyInput(KeyCode key){
-		notifyObservers(key.toString());
-	}
-	
-	private void handleClick(){
-		notifyObservers("click");
-	}
+
 
 }

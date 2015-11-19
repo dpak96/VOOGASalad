@@ -2,8 +2,10 @@ package uibasics;
 
 import java.util.ResourceBundle;
 
+import action.controller.ActionController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,13 +21,15 @@ public class UICore {
 	private MenuController menuController;
 	private Scene myScene;
 	
-	public UICore (GraphicHandler graphicHandler, ResourceBundle resources){
+	public UICore (GraphicHandler graphicHandler, ResourceBundle resources, ActionController actionController){
 		VoogaProperties props = new VoogaProperties();
 		myRoot = new BorderPane();
 		menuController = new MenuController(graphicHandler, resources);
 		uiStackPane = new UIStackPane();
 		myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
 		borderInit(props);
+		myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
+		myScene.setOnMouseClicked(e -> actionController.update(e.toString()));
 	}
 	
 	public void borderInit(VoogaProperties props) {
@@ -51,5 +55,13 @@ public class UICore {
 	public MenuController getMenu() {
 		return menuController;
 	}
+	
+//	private void handleKeyInput(KeyCode key){
+////		(key.toString());
+//	}
+//	
+//	private void handleClick(){
+////		notifyObservers("click");
+//	}
 }
 
