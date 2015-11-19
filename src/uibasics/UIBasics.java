@@ -2,7 +2,6 @@ package uibasics;
 
 import model.Article;
 import model.controller.ModelController;
-import resourcemanager.ResourceManager;
 import java.util.*;
 import config.Config;
 import front.commands.AbstractCommand;
@@ -19,6 +18,7 @@ public class UIBasics{
   public UIBasics(ModelController modelController) {
     load("commands");
     myPane = new Pane();
+    myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
   }
@@ -45,26 +45,26 @@ public class UIBasics{
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
-      ImageView img = new ImageView();
-      articleUpdate(value, img, character);
-      myFrontArticles.add(img);
+      articleUpdate(value);
     }
+    articleUpdate(character);
     myPane.getChildren().addAll(myFrontArticles);
   }
+  
+  public void articleUpdate(Article article) {
+	  ImageView img = new ImageView();
+      commands(article, img);
+      myFrontArticles.add(img);
+  }
 
+  private void commands(Article article, ImageView img) {
+	  for (AbstractCommand c : myCommands)
+		  c.update(article, myModelController, img);
+  }
+  
   private void clearAll() {
     myPane.getChildren().removeAll(myFrontArticles);
     myFrontArticles.clear();
-  }
-
-  public void articleUpdate(Article article, ImageView img, Article character) {
-    for (AbstractCommand c : myCommands)
-      c.update(article, myModelController, img);
-//    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
-//    System.out.print("hi");
-//    img.setX(article.getX());
-//    img.setY(article.getY());
-//    img.setRotate(article.getOrientation());
   }
 
 }
