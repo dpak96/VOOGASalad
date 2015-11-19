@@ -38,7 +38,8 @@ public class AuthoringUI {
     // ov2.setMargin(toolbar, new Insets(0,0,0,5));
     ov2.setLeft(dragAndDrop);
     VoogaProperties props = new VoogaProperties();
-    //dragAndDrop.setPrefSize(props.getSceneWidth(),props.getSceneHeight());
+    dragAndDrop.setPrefSize(props.getSceneWidth()-100,props.getSceneHeight());
+    dragAndDrop.setTranslateX(150);
     dragAndDrop.getStyleClass().add("Thingy");
     myOverlayController.addPane(ov2);
     return myOverlayController;
