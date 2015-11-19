@@ -2,13 +2,14 @@ package authoring.backend;
 
 import java.util.List;
 import model.Article;
+import model.controller.ModelController;
 
 
 public class ArticleEditor implements IArticleEditor {
   private Article article;
+  private ModelController myModelController;
 
   public ArticleEditor() {
-
   }
 
   public Article getArticle() {
