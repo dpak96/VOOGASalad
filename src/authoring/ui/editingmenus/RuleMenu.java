@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.Article;
+import model.controller.ModelController;
 
 public class RuleMenu extends AuthoringMenu{
 
@@ -35,6 +36,7 @@ public class RuleMenu extends AuthoringMenu{
     }
     
     public void addParameterFields(GridPane menuPane){
+      
         menuPane.add(new Label("Gravity Value"), 1, 2);
         menuPane.add(new TextField(), 2, 2);
         
