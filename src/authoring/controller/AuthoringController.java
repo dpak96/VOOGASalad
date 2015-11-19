@@ -2,6 +2,7 @@ package authoring.controller;
 
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.Event;
 import javafx.geometry.Point2D;
@@ -42,8 +43,16 @@ public class AuthoringController implements IAuthoringController {
 
   }
 
-  public void getArticleFromCoordinates(double x, double y) {
+  public PlatformButton getArticleFromCoordinates(double x, double y) {
+  try {
     editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
+    PlatformButton pb = new PlatformButton();
+    return pb;
+  }
+  catch (Exception e){
+    System.out.print("Oops");
+    return null;
+  }
   }
   
 }
