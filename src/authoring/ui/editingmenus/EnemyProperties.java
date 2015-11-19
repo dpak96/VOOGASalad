@@ -1,5 +1,7 @@
 package authoring.ui.editingmenus;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -13,26 +15,25 @@ import javafx.stage.Popup;
 import model.Article;
 
 
-public class EnemyProperties extends AuthoringMenu {
+public class EnemyProperties extends ArticleEditorMenu {
+    private HashMap<String, TextField> enemyPropertyMap;
 
-    public EnemyProperties(String title){
-        super(title);
-       // super.objectToEdit=selectedObject;
+    public EnemyProperties (String title,Article enemy) {
+        super(title,enemy);
     }
     
     protected void populateMenu (GridPane menuGrid) {
+        enemyPropertyMap=new HashMap<String,TextField>();
+        int rowIndex = 1;       
         
-        int rowIndex = 1;
-        super.componentAdder.makeLabel(menuGrid, rowIndex, 1, "Name: ");
-        TextField enemyField = new TextField();
-        menuGrid.add(enemyField, 2, rowIndex++);
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
+        enemyPropertyMap.put("NAME",(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+      
 
-        Label velocityLabel = new Label("Velocity: ");
-        TextField velocityField = new TextField();
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Velocity: ");
+        enemyPropertyMap.put("VELOCITY",(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-        menuGrid.add(velocityLabel, 1, rowIndex);
-        menuGrid.add(velocityField, 2, rowIndex++);
-       
+
         Label imageLabel = new Label("Image: ");
         ComboBox imageBox = new ComboBox();
 
@@ -55,8 +56,7 @@ public class EnemyProperties extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
-
-        //Pass on the edits to the thing being edited
+        // Pass on the edits to the thing being edited
     }
 
 }

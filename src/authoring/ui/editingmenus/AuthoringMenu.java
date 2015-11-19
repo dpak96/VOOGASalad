@@ -8,7 +8,6 @@ import model.Article;
 
 
 public abstract class AuthoringMenu implements IMenuAction {
-    protected Object objectToEdit;
     protected MenuBuilder componentAdder=new MenuBuilder();
     
     public AuthoringMenu(String title){
@@ -24,9 +23,8 @@ public abstract class AuthoringMenu implements IMenuAction {
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
 
-        ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
 
-        propertyMenu.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
 
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction() );;
