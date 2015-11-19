@@ -55,8 +55,7 @@ public class EnemyProperties extends ArticleEditorMenu {
     }
 
     public void addImages (ComboBox imageBox) {
-        for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet())
-        {
+        for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet()) {
             imageBox.getItems().add(new ImageView(ResourceManager.getResourceManager().getIm()
                     .getImageMap().get(imgName)));
         }
