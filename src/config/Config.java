@@ -1,6 +1,7 @@
 package config;
 
 import java.util.ResourceBundle;
+import resourcemanager.ResourceManager;
 
 public class Config {
 	private static final String CONFIG_FILE = "properties/config";
@@ -8,7 +9,7 @@ public class Config {
 	private ResourceBundle stateGroupsBundle;
 	
 	private Config() {
-		stateGroupsBundle = ResourceBundle.getBundle(CONFIG_FILE);
+		stateGroupsBundle = ResourceManager.getResourceManager().getPm().getResourceMap().get(config);
 	}
 
 	public static Integer getInt(String s) {
