@@ -3,19 +3,21 @@ package main;
 import action.controller.ActionController;
 import gameengine.GameEngine;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
-import uibasics.Setup;
 import uibasics.UIBasics;
+
+import uibasics.UICore;
+import uibasics.UIStackPane;
+
+
 import java.util.ResourceBundle;
 
 
 public class SuperController {
-  private UIBasics uibasics;
   private ActionController actionController;
   private ObserverController observerController;
   private GameEngine gameEngine;
@@ -24,22 +26,22 @@ public class SuperController {
   private GraphicHandler myGraphicHandler;
   private ResourceManager resourceManager;
 
-  public SuperController(GraphicHandler graphicHandler) {
+  private UICore uiCore;
+  
+  public SuperController(GraphicHandler graphicHandler){
     myGraphicHandler = graphicHandler;
     resourceManager = new ResourceManager();
-
-    uibasics = new UIBasics();
+    uiCore = new UICore(myGraphicHandler, resourceManager);
     modelController = new ModelController(model, resourceManager);
     gameEngine = new GameEngine(modelController, resourceManager);
     actionController = new ActionController(gameEngine, resourceManager);
-    observerController = new ObserverController(model, uibasics, resourceManager);
+    observerController = new ObserverController(model, uiCore.getUIBasics(), resourceManager);
   }
 
-  public Scene init(GameCreation gameCreation) {
-    ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-    Scene mainScene = new Setup(myGraphicHandler, resource).getScene();
-    return mainScene;
-
+  public Scene init(GameCreation gameCreation){
+      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
+      Scene mainScene = uiCore.getScene();
+      return mainScene;
   }
 
   public ModelController getModelController() {
@@ -58,12 +60,12 @@ public class SuperController {
     this.gameEngine = gameEngine;
   }
 
-  public UIBasics getUIBasics() {
-    return uibasics;
+  public UICore getUICore() {
+    return uiCore;
   }
 
-  public void setUIBasics(UIBasics uIBasics) {
-    uibasics = uIBasics;
+  public void setUICore(UICore uICore) {
+    uiCore = uICore;
   }
 
   public ObserverController getObserverController() {

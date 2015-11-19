@@ -6,10 +6,9 @@ import uibasics.UIBasics;
 
 public class ObserverController {
   private ResourceManager resourceManager;
-  
 	public ObserverController(Model modelMap, UIBasics uiBasics, ResourceManager rm) {
-		//modelMap.addObserver(uiBasics); temporarily off
-	  setResourceManager(rm);
+		modelMap.addObserver(uiBasics);
+		resourceManager = rm;
 	}
 
   public ResourceManager getResourceManager() {

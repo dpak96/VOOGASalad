@@ -1,6 +1,5 @@
 package uibasics;
 
-import main.GraphicHandler;
 import model.Article;
 import resourcemanager.ResourceManager;
 import java.util.*;
@@ -9,7 +8,6 @@ import config.Config;
 import front.commands.AbstractCommand;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 
 
 public class UIBasics implements Observer {
