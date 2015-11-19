@@ -9,6 +9,11 @@ public class ExecutableSetHorizontalVelocity extends Executable{
 	public ExecutableSetHorizontalVelocity(Map<String, Object> parameters){
 		super(parameters);
 	}
+	
+	public ExecutableSetHorizontalVelocity(String name, double xVelocity){
+		super(name);
+		myXVelocity = xVelocity;
+	}
 
 	@Override
 	public void execute() {

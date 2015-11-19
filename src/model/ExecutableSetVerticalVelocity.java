@@ -10,6 +10,11 @@ public class ExecutableSetVerticalVelocity extends Executable{
 		super(parameters);
 	}
 
+	public ExecutableSetVerticalVelocity(String name, double yVelocity){
+		super(name);
+		myYVelocity = yVelocity;
+	}
+	
 	@Override
 	public void execute() {
 		myActor.setYVelocity(myYVelocity);
