@@ -36,17 +36,7 @@ public class ConditionComparisonTwoArticles extends Condition{
 		}
 	}
 	
-	private class Maths{
-		public boolean Equals(double a, double b){
-			return a == b;
-		}
-		public boolean LessThan(double a, double b){
-			return a < b;
-		}
-		public boolean GreaterThan(double a, double b){
-			return a > b;
-		}
-	}
+	
 	/*
 	public static void main(String[] args){
 		Article a = new Article("a", 0, 0, false);
