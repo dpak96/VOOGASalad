@@ -2,6 +2,8 @@ package authoring.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -15,6 +17,8 @@ import javafx.stage.Stage;
 
 
 public class ToolbarContainer extends DraggableElement {
+    public ToolbarContainer(){
+    }
 
     public FlowPane initializeToolbar () {
         FlowPane toolBox = new FlowPane();
@@ -22,9 +26,7 @@ public class ToolbarContainer extends DraggableElement {
 
        // toolBox.getChildren().add(new PlatformSelector());
         toolBox.getChildren().addAll(populateButtonList());
-
         return toolBox;
-
     }
 
     private void configureToolBox (FlowPane toolBox) {
