@@ -1,6 +1,7 @@
 package uibasics;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -66,11 +67,10 @@ public class UIStackPane extends StackPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-//		ArrayList<Article> articles = (ArrayList<Article>) arg;
+		@SuppressWarnings("unchecked")
 		Model model = (Model) o;
-		ArrayList<Article> articles = (ArrayList<Article>) model.getArticles();
-		myUIBasics.update(articles);
-		myGamePlayer.update(articles);
+		myUIBasics.update(model.getArticles());
+		myGamePlayer.update(model.getArticles(), model.getCharacter());
 	}
 
 }
