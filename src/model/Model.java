@@ -18,6 +18,7 @@ public class Model extends Observable{
 	}
 	
 	public List<Article> getArticles(){
+	  setChanged();
 		return myArticles;
 	}
 	

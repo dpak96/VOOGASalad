@@ -1,5 +1,6 @@
 package authoring.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class AuthoringController implements IAuthoringController {
   private ModelController modelController;
   private Executable currentExecutable;
   private Condition currentCondition;
+  private Event currentEvent;
 
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
@@ -47,19 +49,36 @@ public class AuthoringController implements IAuthoringController {
   public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
     editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
                                                        true);
+    System.out.println("this might've happened");
+    System.out.println(event.getName());
+    if(event.getName().equals("ENEMY")){
+      Map<String, Object> tempMap= new HashMap<String, Object>();
+      tempMap.put("myName", "penis");
+      tempMap.put("myActor", editor.getArticleEditor().getArticle());
+      tempMap.put("myDisplacement", .5);
+      this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+      List<Executable> listExecutable = new ArrayList<Executable>();
+      listExecutable.add(currentExecutable);
+      List<Condition> listCondition = new ArrayList<Condition>();
+      this.makeEvent("event", listCondition, listExecutable);
+      List<Event> listEvent = new ArrayList<Event>();
+      listEvent.add(currentEvent);
+      editor.getArticleEditor().getArticle().addEvent(currentEvent);
+      this.mapKey("A", listEvent);
+    }
 
   }
 
   public PlatformButton getArticleFromCoordinates(double x, double y) {
-  try {
-    editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-   PlatformButton pb = new PlatformButton(this);
-    return pb;
-  }
-  catch (Exception e){
-    System.out.print("Oops");
-    return null;
-  }
+
+    try {
+      editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
+      //PlatformButton pb = new PlatformButton();
+      return null;
+    } catch (Exception e) {
+      System.out.print("Oops");
+      return null;
+    }
   }
 
   public Map<String, Class<?>> getFactoryParameters(String s) {
@@ -75,10 +94,10 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void makeEvent(String s, List<Condition> lc, List<Executable> le) {
-    modelController.createEvent(s, lc, le);
+    currentEvent = modelController.createEvent(s, lc, le);
   }
-  
-  public void mapKey(String button, List<Event> events){
+
+  public void mapKey(String button, List<Event> events) {
     modelController.remapButton(button, events);
   }
 
