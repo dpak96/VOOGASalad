@@ -2,7 +2,7 @@ package uibasics;
 
 import main.GraphicHandler;
 import model.Article;
-
+import resourcemanager.ResourceManager;
 import java.util.*;
 
 import authoring.controller.AuthoringController;
@@ -20,8 +20,9 @@ public class UIBasics implements Observer {
 	private List<AbstractCommand> myCommands;
 	private AuthoringController authoringController;
 	private UIStackPane myStackPane;
+	private ResourceManager resourceManager;
 	
-	public UIBasics() {
+	public UIBasics(ResourceManager rm) {
 		//load("commands"); temporarily off
 		myPane = new Pane();
 		myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
@@ -31,6 +32,7 @@ public class UIBasics implements Observer {
 		myStackPane = new UIStackPane();
 		myStackPane.addPane(myPane);
 		Authoring();
+		resourceManager = rm;
 	}
 
 	private void Authoring(){
@@ -79,6 +81,14 @@ public class UIBasics implements Observer {
 
   public void setAuthoringController(AuthoringController authoringController) {
     this.authoringController = authoringController;
+  }
+
+  public ResourceManager getResourceManager() {
+    return resourceManager;
+  }
+
+  public void setResourceManager(ResourceManager resourceManager) {
+    this.resourceManager = resourceManager;
   }
 	
 }
