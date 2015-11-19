@@ -142,8 +142,14 @@ public class ModelController implements IModelController {
 	}
 	
 	public void loadFromFile(Model toLoad) {
-		myModel = toLoad;
-		//toLoad.initialize();
+		myModel.destroyModel();
+		myModel.initialize();
+		myModel.addAllArticles(toLoad.getArticles());
+		myModel.addAllEvents(toLoad.getEvents());
+		myModel.addAllButtonMap(toLoad.getButtonMap());
+		myModel.addAllConditions(toLoad.getConditions());
+		myModel.addAllExecutables(toLoad.getExecutables());
+		myModel.setCharacter(toLoad.getCharacter());
 	}
 
 	public void save(Window wind){
