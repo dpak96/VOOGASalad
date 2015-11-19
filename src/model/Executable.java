@@ -9,8 +9,9 @@ public abstract class Executable extends Process{
 		super(parameters);
 	}
 	
-	public Executable(String name){
+	public Executable(String name, Article actor){
 		super(name);
+		myActor = actor;
 	}
 	public abstract void execute();
 }

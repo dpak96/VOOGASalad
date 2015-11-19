@@ -10,8 +10,8 @@ public class ExecutableSetHorizontalVelocity extends Executable{
 		super(parameters);
 	}
 	
-	public ExecutableSetHorizontalVelocity(String name, double xVelocity){
-		super(name);
+	public ExecutableSetHorizontalVelocity(String name, Article actor, double xVelocity){
+		super(name, actor);
 		myXVelocity = xVelocity;
 	}
 

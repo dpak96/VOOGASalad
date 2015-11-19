@@ -33,7 +33,8 @@ public class CollisionHandler {
 		List<Condition> leftCollideCondition = new ArrayList<Condition>();
 		leftCollideCondition.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));		
 		List<Executable> leftCollideExecutable = new ArrayList<Executable>();
-		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", leftValue));
+		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myArticle, -leftValue*myArticle.getXVelocity()));
+		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myCollided, -leftValue*myCollided.getXVelocity()));
 		Event leftCollisionEvent = new Event("leftCollision", leftCollideCondition, leftCollideExecutable);
 		leftCollisionEvent.fire();
 		
@@ -41,7 +42,8 @@ public class CollisionHandler {
 		List<Condition> rightCollideCondition = new ArrayList<Condition>();
 		rightCollideCondition.add(new ConditionCollisionFromRight("rightCollide",myCollisionInformation));		
 		List<Executable> rightCollideExecutable = new ArrayList<Executable>();
-		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", rightValue));
+		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myArticle, -rightValue*myArticle.getXVelocity()));
+		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myCollided, -rightValue*myCollided.getXVelocity()));
 		Event rightCollisionEvent = new Event("rightCollision", rightCollideCondition, rightCollideExecutable);
 		rightCollisionEvent.fire();
 		
@@ -49,7 +51,8 @@ public class CollisionHandler {
 		List<Condition> aboveCollideCondition = new ArrayList<Condition>();
 		aboveCollideCondition.add(new ConditionCollisionFromAbove("aboveCollide",myCollisionInformation));		
 		List<Executable> aboveCollideExecutable = new ArrayList<Executable>();
-		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", aboveValue));
+		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myArticle, -aboveValue*myArticle.getYVelocity()));
+		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myCollided, -aboveValue*myCollided.getYVelocity()));		
 		Event aboveCollisionEvent = new Event("aboveCollision", aboveCollideCondition, aboveCollideExecutable);
 		aboveCollisionEvent.fire();
 		
@@ -57,14 +60,15 @@ public class CollisionHandler {
 		List<Condition> bottomCollideCondition = new ArrayList<Condition>();
 		bottomCollideCondition.add(new ConditionCollisionFromBottom("bottomCollide",myCollisionInformation));		
 		List<Executable> bottomCollideExecutable = new ArrayList<Executable>();
-		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", bottomValue));
+		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myArticle, -bottomValue*myArticle.getYVelocity()));
+		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myCollided, -bottomValue*myCollided.getYVelocity()));
 		Event bottomCollisionEvent = new Event("bottomCollision", bottomCollideCondition, bottomCollideExecutable);
 		bottomCollisionEvent.fire();
 		
 		double damageValue = getValueFromMatrix("Damage");
 		List<Condition> damageCollideCondition = new ArrayList<Condition>();	
 		List<Executable> damageCollideExecutable = new ArrayList<Executable>();
-		damageCollideExecutable.add(new ExecutableSetHorizontalVelocity("damageCollideExe", damageValue));
+		damageCollideExecutable.add(new ExecutableSetHorizontalVelocity("damageCollideExe", myArticle, damageValue));
 		Event damageCollisionEvent = new Event("damageCollision", damageCollideCondition, damageCollideExecutable);
 		damageCollisionEvent.fire();
 	}

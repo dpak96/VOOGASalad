@@ -10,8 +10,8 @@ public class ExecutableSetVerticalVelocity extends Executable{
 		super(parameters);
 	}
 
-	public ExecutableSetVerticalVelocity(String name, double yVelocity){
-		super(name);
+	public ExecutableSetVerticalVelocity(String name, Article actor, double yVelocity){
+		super(name,actor);
 		myYVelocity = yVelocity;
 	}
 	
