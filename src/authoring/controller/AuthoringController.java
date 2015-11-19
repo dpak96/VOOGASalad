@@ -93,14 +93,17 @@ public class AuthoringController implements IAuthoringController {
 
   }
 
+
   public Article getArticleFromCoordinates(double x, double y) {
     try {
       editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
       return editor.getArticleEditor().getArticle();
     } catch (Exception e) {
+      System.out.println("oops");
       return null;
     }
   }
+
 
   public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
     editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,

@@ -2,6 +2,8 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import action.controller.ActionController;
+import authoring.controller.AuthoringController;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -22,8 +24,8 @@ public class EnemyProperties extends ArticleEditorMenu {
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
 
-    public EnemyProperties (String title, Article enemy) {
-        super(title, enemy);
+    public EnemyProperties (String title, Article enemy, AuthoringController myController) {
+        super(title, enemy, myController);
     }
 
     protected void populateMenu (GridPane menuGrid) {
@@ -65,7 +67,7 @@ public class EnemyProperties extends ArticleEditorMenu {
 
     @Override
     public void executeYourMenuFunction () {
-        // objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getp);
+        objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
 

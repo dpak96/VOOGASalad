@@ -1,6 +1,7 @@
 package authoring.ui.toolbar;
 
 import java.util.ResourceBundle;
+import authoring.controller.AuthoringController;
 import authoring.ui.draganddrop.DraggableElement;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -14,8 +15,10 @@ public abstract class ToolbarButton  extends DraggableElement implements IObject
    protected ResourceBundle toolbarProperties=ResourceManager.getResourceManager().getPm().getResourceMap().get("toolbar");
    
    private final int BUTTON_DIMENSION=50;
+   public AuthoringController myController;
    
-    public ToolbarButton(){
+    public ToolbarButton(AuthoringController authoringController){
+        myController=authoringController;
         this.setPrefSize(BUTTON_DIMENSION, BUTTON_DIMENSION);
         super.dragDetected();
         super.dragEnd();
