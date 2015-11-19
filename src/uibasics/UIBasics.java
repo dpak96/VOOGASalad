@@ -1,6 +1,7 @@
 package uibasics;
 
 import model.Article;
+import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import java.util.*;
 import config.Config;
@@ -13,8 +14,9 @@ public class UIBasics{
   private List<Article> myBackArticles;
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
+  private ModelController myModelController;
 
-  public UIBasics() {
+  public UIBasics(ModelController modelController) {
     load("commands");
     myPane = new Pane();
     myBackArticles = new ArrayList<Article>();
@@ -39,12 +41,12 @@ public class UIBasics{
     return myPane;
   }
 
-  public void update(List<Article> list) {
+  public void update(List<Article> list, Article character) {
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
       ImageView img = new ImageView();
-      articleUpdate(value, img);
+      articleUpdate(value, img, character);
       myFrontArticles.add(img);
     }
     myPane.getChildren().addAll(myFrontArticles);
@@ -55,9 +57,9 @@ public class UIBasics{
     myFrontArticles.clear();
   }
 
-  public void articleUpdate(Article article, ImageView img) {
+  public void articleUpdate(Article article, ImageView img, Article character) {
     for (AbstractCommand c : myCommands)
-      c.update(article, img);
+      c.update(article, myModelController, img);
 //    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
 //    System.out.print("hi");
 //    img.setX(article.getX());

@@ -75,8 +75,8 @@ public class MenuController {
             }*/
     }
 
-    public void saveGame() throws IOException {
-        /*fileChooser.setTitle(saveName);
+    public void saveGame(FileChooser fileChooser, String saveName) throws IOException {
+        fileChooser.setTitle(saveName);
         File game = fileChooser.showSaveDialog(myMenuPanel.getScene().getWindow());
         if (!game.exists()) {
             game.createNewFile();
@@ -88,7 +88,7 @@ public class MenuController {
             f.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         myModelController.save();
     }
 
