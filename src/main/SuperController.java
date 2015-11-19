@@ -7,9 +7,7 @@ import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
 import startscreen.GameCreation;
-import uibasics.UIBasics;
 import uibasics.UICore;
-import uibasics.UIStackPane;
 
 import java.util.ResourceBundle;
 
@@ -26,16 +24,15 @@ public class SuperController {
   public SuperController(GraphicHandler graphicHandler){
     myGraphicHandler = graphicHandler;
     ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-    
+    model = new Model();
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
     uiCore = new UICore(myGraphicHandler, resource, actionController);
-    observerController = new ObserverController(model, uiCore.getUIBasics());
+    observerController = new ObserverController(model, uiCore.getUIStackPane());
   }
 
   public Scene init(GameCreation gameCreation){
-      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
       Scene mainScene = uiCore.getScene();
       return mainScene;
   }

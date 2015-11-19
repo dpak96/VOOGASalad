@@ -3,10 +3,8 @@ package uibasics;
 import java.util.ResourceBundle;
 
 import action.controller.ActionController;
-import javafx.scene.Group;
 
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.GraphicHandler;
@@ -47,6 +45,10 @@ public class UICore {
 		return uiStackPane.getStack();
 	}
 	
+	public UIStackPane getUIStackPane() {
+		return uiStackPane;
+	}
+	
 	public UIBasics getUIBasics() {
 		return uiStackPane.getUIBasics();
 	}
@@ -55,12 +57,5 @@ public class UICore {
 		return menuController;
 	}
 	
-//	private void handleKeyInput(KeyCode key){
-////		(key.toString());
-//	}
-//	
-//	private void handleClick(){
-////		notifyObservers("click");
-//	}
 }
 

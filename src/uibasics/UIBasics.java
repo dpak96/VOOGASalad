@@ -10,9 +10,9 @@ import front.commands.AbstractCommand;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class UIBasics implements Observer {
+public class UIBasics {
 	private Pane myPane;
-	private HashMap<String, Article> myBackArticles;
+	private List<Article> myBackArticles;
 	private List<ImageView> myFrontArticles;
 	private List<AbstractCommand> myCommands;
 	
@@ -20,7 +20,7 @@ public class UIBasics implements Observer {
 		load("commands"); //temporarily off
 		myPane = new Pane();
 		//myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
-		myBackArticles = new HashMap<String, Article>();
+		myBackArticles = new ArrayList<Article>();
 		myFrontArticles = new ArrayList<ImageView>();
 	}
 
@@ -39,12 +39,10 @@ public class UIBasics implements Observer {
 		return myPane;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void update(Observable o, Object arg) {
+	public void update(ArrayList<Article> arg) {
 		clearAll();
-		myBackArticles = ((HashMap<String, Article>) arg);
-		for (Article value: myBackArticles.values()) {
+		myBackArticles = ((ArrayList<Article>) arg);
+		for (Article value: myBackArticles) {
 			ImageView img = new ImageView();
 			articleUpdate(value, img);
 			myFrontArticles.add(img);

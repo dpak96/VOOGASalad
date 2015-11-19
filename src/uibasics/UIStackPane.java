@@ -1,16 +1,20 @@
 package uibasics;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import authoring.controller.AuthoringController;
-import javafx.scene.input.KeyCode;
+import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import model.Article;
 
-public class UIStackPane extends Observable {
+public class UIStackPane implements Observer {
 	private StackPane myStackPane;
 	private UIBasics myUIBasics;
 	private AuthoringController authoringController;
+	private GamePlayerOverlay myGamePlayer;
 	private Pane myActive;
 	
 	public UIStackPane() {
@@ -21,6 +25,7 @@ public class UIStackPane extends Observable {
 	public void initializePanes() {
 		myUIBasics = new UIBasics();
 		authoringController = new AuthoringController();
+		myGamePlayer = new GamePlayerOverlay();
 //		if (edit) //currently inactive
 			myActive = authoringController.getUi().tester();
 //		else
@@ -50,6 +55,14 @@ public class UIStackPane extends Observable {
 	
 	public UIBasics getUIBasics(){
 		return myUIBasics;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		@SuppressWarnings("unchecked")
+		ArrayList<Article> articles = (ArrayList<Article>) arg;
+		myUIBasics.update(articles);
+		myGamePlayer.update(articles);
 	}
 	
 
