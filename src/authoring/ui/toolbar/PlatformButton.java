@@ -1,5 +1,6 @@
 package authoring.ui.toolbar;
 
+import authoring.ui.AuthoringUI;
 import authoring.ui.editingmenus.EnemyProperties;
 import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;
@@ -10,14 +11,15 @@ public class PlatformButton extends ToolbarButton{
 
     public PlatformButton () {
         super();
-        this.setGraphic(super.setImage(toolbarProperties.getString("PLATFORM")));
+        this.setGraphic(super.setImage(super.toolbarProperties.getString("PLATFORM")));
     }
+
 
     @Override
     public void placeYourObject () {
-            
-            EnemyProperties propTest=new EnemyProperties(null,null);
-   
+            ButtonOverlay bo = new ButtonOverlay();
+            OverlayController oc = (OverlayController) this.getParent().getParent();
+            oc.addOverlay(bo.init());
     }
 
    
