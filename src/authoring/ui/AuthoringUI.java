@@ -25,7 +25,7 @@ public class AuthoringUI {
   public AuthoringUI(AuthoringController authoringController){
     dragAndDrop = new DragAndDropBoard(authoringController);
     myOverlayController = new OverlayController();
-    myToolbarContainer = new ToolbarContainer();
+    myToolbarContainer = new ToolbarContainer(authoringController);
   }
 
   public Pane tester(){
@@ -43,6 +43,8 @@ public class AuthoringUI {
     myOverlayController.addPane(ov2);
     return myOverlayController;
   }
+
+
 
 
   public DragAndDropBoard getDragAndDrop() {

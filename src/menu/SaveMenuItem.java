@@ -23,6 +23,6 @@ public class SaveMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle(MenuController menuController) {
-		this.setOnAction(e -> menuController.trySave(myFileChooser,myResource.getString("SAVE")));
+		this.setOnAction(e -> menuController.saveGame());
 	}
 }

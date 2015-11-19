@@ -18,7 +18,7 @@ public abstract class AbstractMenuItem extends MenuItem {
 		myResource = resource;
 		myFileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extensionFilter =
-		        new FileChooser.ExtensionFilter("Java files (*.ser)", "*.ser");
+		        new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);
 
 	}

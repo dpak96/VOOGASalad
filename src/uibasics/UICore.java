@@ -1,6 +1,5 @@
 package uibasics;
 
-import java.util.ResourceBundle;
 import action.controller.ActionController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,7 +8,6 @@ import main.GraphicHandler;
 import menu.MenuController;
 import model.controller.ModelController;
 import properties.VoogaProperties;
-import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
 
@@ -22,10 +20,9 @@ public class UICore {
 
   public UICore(GraphicHandler graphicHandler, ActionController actionController, ModelController modelController) {
     uiStackPane = new UIStackPane(modelController);
-
     VoogaProperties props = new VoogaProperties();
     myRoot = new BorderPane();
-    menuController = new MenuController(graphicHandler);
+    menuController = new MenuController(graphicHandler, modelController);
     myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
     borderInit(props);
     myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
