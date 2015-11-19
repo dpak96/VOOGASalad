@@ -20,7 +20,7 @@ public class OverlayControllerEx extends OverlayController {
         myAuthoringController = authoringController;
     }
 
-    public void init() {
+    /*public void init() {
         //Button button = new Button("Switch");
         Pane ov = new StackPane();
         BorderPane ov2 = new BorderPane();
@@ -35,6 +35,6 @@ public class OverlayControllerEx extends OverlayController {
         ov2.getStyleClass().add("OverlayP");
         addPane(ov2);
 
-    }
+    }*/
 
 }
