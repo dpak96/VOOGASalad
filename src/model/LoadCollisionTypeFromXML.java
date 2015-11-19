@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 public class LoadCollisionTypeFromXML {
 	private final String FILENAME = "CollisionTypeLibrary";
-	private List<String> collisionTypeList= new ArrayList<String>();
+	private ArrayList<String> collisionTypeList= new ArrayList<String>();
 	public LoadCollisionTypeFromXML() {
 		// TODO Auto-generated constructor stub
 		load();
@@ -39,7 +39,7 @@ public class LoadCollisionTypeFromXML {
 		}
 	}
 	
-	public List<String> getCollisionTypeList(){
+	public ArrayList<String> getCollisionTypeList(){
 		return collisionTypeList;
 	}
 }
