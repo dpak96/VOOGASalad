@@ -11,6 +11,6 @@ public class GamePlayerOverlay extends BorderPane {
 	}
 	
 	public void update(ArrayList<Article> arg) {
-		
+		System.out.println("Matt Battles loves to shove penis in his butthole");
 	}
 }
