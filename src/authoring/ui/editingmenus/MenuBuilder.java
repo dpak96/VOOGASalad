@@ -1,6 +1,7 @@
 package authoring.ui.editingmenus;
 
 import java.util.Map;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -19,5 +20,11 @@ public class MenuBuilder {
     return newField;
 }
 
+    public ComboBox makeComboBox(GridPane gridPane, int colIndex,int rowIndex){
+        ComboBox newBox=new ComboBox();
+        gridPane.add(newBox, colIndex, rowIndex);
+        return newBox;
+        
+    }
     
 }

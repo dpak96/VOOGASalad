@@ -11,23 +11,21 @@ public class EnemyButton extends ToolbarButton{
     public EnemyButton () {
         super();
         this.setGraphic(super.setImage(super.toolbarProperties.getString("ENEMY")));
-        
-
-       // this.setOnAction(e -> placeYourObject());
-    }
+            }
 
     @Override
     public void placeYourObject () {
-        DraggableElement elementToDrag=new DraggableElement();
+        
+        
+         DraggableElement elementToDrag=new DraggableElement();
        ImageView icon= (ImageView) this.getGraphic();
         elementToDrag.setGraphic(icon);
         
-        Pane parentPane=(Pane) this.getParent();
+        Pane parentPane=(Pane) this.getParent().getParent();
+       
         
         parentPane.getChildren().add(elementToDrag);
-        System.out.println("drag");
         elementToDrag.dragDetected();
-        System.out.println("stop");
         elementToDrag.dragEnd();
         
     }
