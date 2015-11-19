@@ -25,7 +25,7 @@ public class ArticleEditor implements IArticleEditor {
   public void createNewArticleAndPlace(String name, String imageFileName, Double x, Double y, Boolean direction) {
     double xAdjusted = x + myModelController.getViewpoint().getX();
     double yAdjusted = y + myModelController.getViewpoint().getY();
-    myModelController.createArticle(imageFileName,xAdjusted,yAdjusted,direction);
+    this.setArticle(myModelController.createArticle(imageFileName,xAdjusted,yAdjusted,direction));
   }
 
 

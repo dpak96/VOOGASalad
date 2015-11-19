@@ -27,17 +27,19 @@ public class ModelController implements IModelController {
 		return myModelFactory.getParameters(className);
 	}
 	
-	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
+	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
 		Article myViewpoint = myModel.getViewpoint();
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
 		Article newArticle = myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
 		addArticle(newArticle);
+		return newArticle;
 	}
 	
-	public void createArticle(String fileName, double x, double y, boolean direction){
+	public Article createArticle(String fileName, double x, double y, boolean direction){
 		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
 		addArticle(newArticle);
+		return newArticle;
 	}
 	
 	public Executable createExecutable(String executableName, Map<String, Object> data){
