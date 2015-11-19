@@ -2,12 +2,20 @@ package authoring.controller;
 
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.toolbar.ToolbarButton;
+import javafx.event.Event;
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 
 
 public class AuthoringController implements IAuthoringController {
   private Editor editor;
   private AuthoringUI ui;
+
+  public AuthoringController() {
+    ui = new AuthoringUI(this);
+    editor = new Editor();
+  }
 
   public Editor getEditor() {
     return editor;
@@ -25,10 +33,9 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public Point2D getMouseCoordinates(){
-    
-    this.getUi().getDragAndDrop();
-    return null;
-    
+  public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
+    editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+                                                       true);
+
   }
 }

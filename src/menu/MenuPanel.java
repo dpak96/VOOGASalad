@@ -5,16 +5,19 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.Stage;
+import resourcemanager.ResourceManager;
 
 public class MenuPanel extends MenuBar {
 
-	private Stage myStage;
 	private ResourceBundle myResource;
+	private ResourceManager resourceManager;
+	private MenuController myMenuController;
 
-	public MenuPanel(Stage stage, ResourceBundle resource) {
+	public MenuPanel(ResourceManager rm, MenuController menuController) {
 		super();
-		myResource = resource;
-		myStage = stage;
+		resourceManager = rm;
+		myResource = resourceManager.getPm().getResourceMap().get("english");
+		myMenuController = menuController;
 		getMenus().addAll(fileMenu(), navigateMenu(), helpMenu());
 	}
 
@@ -25,9 +28,9 @@ public class MenuPanel extends MenuBar {
 	 */
 	private Menu fileMenu() {
 		Menu menu = new Menu(myResource.getString("FILE"));
-		AbstractMenuItem opener = new OpenMenuItem(myResource, myStage);
-		AbstractMenuItem saver = new SaveMenuItem(myResource, myStage);
-		AbstractMenuItem exiter = new ExitMenuItem(myResource, myStage);
+		AbstractMenuItem opener = new OpenMenuItem(myResource, myMenuController);
+		AbstractMenuItem saver = new SaveMenuItem(myResource, myMenuController);
+		AbstractMenuItem exiter = new ExitMenuItem(myResource, myMenuController);
 		menu.getItems().addAll(opener, saver, exiter);
 
 		return menu;
@@ -35,8 +38,8 @@ public class MenuPanel extends MenuBar {
 
 	private Menu navigateMenu() {
 		Menu menu = new Menu(myResource.getString("NAVIGATE"));
-		AbstractMenuItem mainMenu = new MainMenuItem(myResource, myStage);
-		AbstractMenuItem switchAE = new SwitchMenuItem(myResource, myStage);
+		AbstractMenuItem mainMenu = new MainMenuItem(myResource, myMenuController);
+		AbstractMenuItem switchAE = new SwitchMenuItem(myResource, myMenuController);
 		menu.getItems().addAll(mainMenu, switchAE);
 
 		return menu;
@@ -44,10 +47,9 @@ public class MenuPanel extends MenuBar {
 
 	private Menu helpMenu() {
 		Menu menu = new Menu(myResource.getString("HELPMENU"));
-		AbstractMenuItem controls = new ControlMenuItem(myResource, myStage);
-		AbstractMenuItem helper = new HelpMenuItem(myResource, myStage);
+		AbstractMenuItem controls = new ControlMenuItem(myResource,myMenuController);
+		AbstractMenuItem helper = new HelpMenuItem(myResource, myMenuController);
 		menu.getItems().addAll(controls, helper);
-
 		return menu;
 	}
 }

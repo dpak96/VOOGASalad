@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
-public class OverlayController {
+public class OverlayController extends StackPane {
 
     protected StackPane base;
     protected ArrayList<Pane> overlays;
@@ -16,23 +16,22 @@ public class OverlayController {
 
     public OverlayController(StackPane b){
         overlays = new ArrayList<>();
-        base = b;
-        base.getStyleClass().add("BaseP");
+        getStyleClass().add("BaseP");
         overlays.add(base);
     }
 
     public void addPane(Pane n){
         overlays.add(n);
-        base.getChildren().add(n);
+        getChildren().add(n);
     }
 
     public void addOverlay(Pane ov){
-
-        if(overlays.size()>0){
-            overlays.get(overlays.size()-1).getStyleClass().add("Overlayed");
-        }
+        Pane cover = new StackPane();
+        cover.getStyleClass().addAll("Overlayed");
+        getChildren().add(cover);
+        overlays.add(cover);
         overlays.add(ov);
-        base.getChildren().add(ov);
+        getChildren().add(ov);
     }
 
     public Pane getModule(){
@@ -42,19 +41,20 @@ public class OverlayController {
     public void removeTop(){
         if(overlays.size()>0) {
             Pane last = overlays.get(overlays.size() - 1);
-            base.getChildren().remove(last);
+            getChildren().remove(last);
         }
     }
 
     public void removePane(Pane n){
-        base.getChildren().remove(n);
+        getChildren().remove(n);
     }
 
     public void removeTopAndtoggleOverlay(){
         removeTop();
         if(overlays.size()>0) {
-            int last = overlays.size() - 1;
-            overlays.get(last).getStyleClass().remove("Overlayed");
+            for(int x= 0; x<overlays.size(); x++){
+                overlays.get(x).getStyleClass().remove("Overlayed");
+            }
         }
 
     }

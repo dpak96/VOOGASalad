@@ -2,12 +2,8 @@ package startscreen;
 
 import java.util.ResourceBundle;
 
-import authoring.ui.smalloverlay.BasicOverlay;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import uibasics.Layout;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
@@ -46,10 +42,7 @@ public class StartScreen {
         levels.init(myController);
         skeleton.addLayer(levels.getContainer());
     }
-    public void addLevel(){
-    	myController.setScene(new Scene(new Layout(myStage,myResource)));
-    	//add actionController/observercontroller to super controller?
-    }
+
     private String[] getLevels(){
         String[] levelEx = {"Level1","Level2","Level3"};
         return levelEx;

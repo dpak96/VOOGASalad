@@ -2,26 +2,46 @@ package main;
 
 import action.controller.ActionController;
 import gameengine.GameEngine;
+import javafx.scene.Scene;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
+import resourcemanager.ResourceManager;
+import startscreen.GameCreation;
 import uibasics.UIBasics;
+
+import uibasics.UICore;
+import uibasics.UIStackPane;
+
+
+import java.util.ResourceBundle;
 
 
 public class SuperController {
-  private UIBasics uibasics;
   private ActionController actionController;
   private ObserverController observerController;
   private GameEngine gameEngine;
   private ModelController modelController;
   private Model model;
+  private GraphicHandler myGraphicHandler;
+  private ResourceManager resourceManager;
+
+  private UICore uiCore;
   
-  public SuperController(){
-    uibasics = new UIBasics();
-    modelController = new ModelController(model);
-    gameEngine = new GameEngine(modelController);
-    actionController = new ActionController(gameEngine);
-    observerController = new ObserverController(model, uibasics);
+  public SuperController(GraphicHandler graphicHandler){
+    myGraphicHandler = graphicHandler;
+    resourceManager = new ResourceManager();
+    uiCore = new UICore(myGraphicHandler, resourceManager);
+    modelController = new ModelController(model, resourceManager);
+    gameEngine = new GameEngine(modelController, resourceManager);
+    actionController = new ActionController(gameEngine, resourceManager);
+    observerController = new ObserverController(model, uiCore.getUIBasics(), resourceManager);
+  }
+
+  public Scene init(GameCreation gameCreation){
+      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
+      Scene mainScene = uiCore.getScene();
+      return mainScene;
   }
 
   public ModelController getModelController() {
@@ -40,12 +60,12 @@ public class SuperController {
     this.gameEngine = gameEngine;
   }
 
-  public UIBasics getUIBasics() {
-    return uibasics;
+  public UICore getUICore() {
+    return uiCore;
   }
 
-  public void setUIBasics(UIBasics uIBasics) {
-    uibasics = uIBasics;
+  public void setUICore(UICore uICore) {
+    uiCore = uICore;
   }
 
   public ObserverController getObserverController() {
@@ -70,6 +90,14 @@ public class SuperController {
 
   public void setModel(Model model) {
     this.model = model;
+  }
+
+  public ResourceManager getResourceManager() {
+    return resourceManager;
+  }
+
+  public void setResourceManager(ResourceManager resourceManager) {
+    this.resourceManager = resourceManager;
   }
 
 }
