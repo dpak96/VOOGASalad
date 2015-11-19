@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import model.Article;
 import model.Condition;
 import model.Event;
 import model.Executable;
@@ -23,10 +26,24 @@ public class AuthoringController implements IAuthoringController {
   private Executable currentExecutable;
   private Condition currentCondition;
 
+  public boolean isHighlighted() {
+    return highlighted;
+  }
+
+  public void setHighlighted(boolean highlighted) {
+    this.highlighted = highlighted;
+  }
+
+  private boolean highlighted = false;
+
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
     modelController = mc;
     editor = new Editor(mc);
+  }
+
+  public void removeArticle(Article n){
+    modelController.removeArticle(n);
   }
 
   public Editor getEditor() {
@@ -45,20 +62,30 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
-    editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
-                                                       true);
+  public void createAndPlaceArticle(double x, double y, DraggableElement event) {
+    if(!highlighted){
+      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+              true);
+    }
+    else {
+
+      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+              true);
+
+      Pane p = (Pane)event.getParent();
+      p.getChildren().remove(event);
+      highlighted = false;
+    }
+
 
   }
 
-  public HighlightedArticle getArticleFromCoordinates(double x, double y) {
+  public Article getArticleFromCoordinates(double x, double y) {
   try {
     editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-    HighlightedArticle highlightedArticle = new HighlightedArticle();
-    return highlightedArticle;
+    return editor.getArticleEditor().getArticle();
   }
   catch (Exception e){
-    System.out.print("Oops");
     return null;
   }
   }

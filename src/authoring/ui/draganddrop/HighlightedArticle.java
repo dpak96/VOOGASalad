@@ -8,25 +8,26 @@ import authoring.ui.toolbar.ToolbarButton;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import model.Article;
+import resourcemanager.ResourceManager;
 
 
-public class HighlightedArticle extends ToolbarButton {
-    private final String NAME = "NOTHING";
+public class HighlightedArticle extends DraggableElement {
 
-    public HighlightedArticle() {
+
+    public HighlightedArticle(String img) {
         super();
-        this.setGraphic(super.setImage(toolbarProperties.getString(NAME)));
+        name = "Rando";
+        imageName = img;
+        ImageView i = new ImageView();
+        i.setImage(ResourceManager.getResourceManager().getImage(img));
+        this.setGraphic(i);
         this.getStyleClass().add("Butt");
-        this.setName(NAME);
-        this.setImageName("TEST");
+        super.dragDetected();
+        super.dragEnd();
     }
 
-    @Override
-    public void placeYourObject () {
-        //EnemyProperties propTest=new EnemyProperties();
-        //propTest.showMenu("Enemy Property Editor");
-        //OverlayController oc = (OverlayController) this.getParent().getParent();
-        //oc.addOverlay(bo.init());
-    }
+
 }
 
