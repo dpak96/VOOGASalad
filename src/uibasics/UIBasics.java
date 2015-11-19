@@ -19,6 +19,7 @@ public class UIBasics{
   public UIBasics(ModelController modelController) {
     load("commands");
     myPane = new Pane();
+    myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
   }
