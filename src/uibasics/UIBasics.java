@@ -24,7 +24,7 @@ public class UIBasics implements Observer {
 	public UIBasics() {
 		//load("commands"); temporarily off
 		myPane = new Pane();
-		myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
+		//myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
 		myBackArticles = new HashMap<String, Article>();
 		myFrontArticles = new ArrayList<ImageView>();
 		authoringController = new AuthoringController();
