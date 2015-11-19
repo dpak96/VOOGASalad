@@ -1,0 +1,45 @@
+
+.OverlayP {
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+    -fx-min-width: 300;
+    -fx-min-height: 500;
+    -fx-max-width: 300;
+    -fx-max-height: 500;
+    -fx-effect: dropshadow( GAUSSIAN , #333333 , 5 , 5.0 , 0 , 0 );
+}
+
+.Thingy {
+    -fx-min-width: 675;
+    -fx-min-height: 580;
+}
+
+
+.Test {
+    -fx-pref-height: 500;
+    -fx-pref-width: 200;
+}
+
+
+.Overlayed{
+    -fx-pref-height: 500;
+    -fx-pref-width: 200;
+    -fx-min-height: 500;
+    -fx-min-width: 200;
+    -fx-background-color: rgba(64, 64, 64, 0.85);
+}
+
+.BaseP {
+
+    -fx-padding: 200;
+    -fx-alignment: center;
+    -fx-min-width: 400;
+    -fx-min-height: 300;
+}
+
+.Butt {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: blue;
+    -fx-border-style: solid;
+    -fx-border-width: 10;
+}

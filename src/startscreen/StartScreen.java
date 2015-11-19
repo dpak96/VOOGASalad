@@ -1,22 +1,27 @@
 package startscreen;
 
+import java.util.ResourceBundle;
+
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
+    private Stage myStage;
 
     public StartScreen(){
         skeleton = new StartScreenSkeleton();
         playEdit = new PlayAuthorModule();
     }
 
-    public void init(StartScreenController controller){
+    public void init(StartScreenController controller, Stage s){
         skeleton.init();
         myController = controller;
         playEdit.init(controller);
         skeleton.addLayer(playEdit.getContainer());
+        myStage = s;
     }
 
     public void addGameChooser(){

@@ -2,41 +2,95 @@ package model.controller;
 
 import gameengine.*;
 
-import java.util.List;
+import java.util.*;
 
-import model.Article;
-import model.Model;
-import model.Rule;
+import javafx.stage.Window;
+import model.*;
+import model.XMLutility.xmlUtility;
+import model.factory.*;
+import resourcemanager.ResourceManager;
+
 
 public class ModelController implements IModelController {
 	private Model myModel;
-	
+	private ModelFactory myModelFactory;
+	private xmlUtility myXMLUtility;
+	//WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
+	 
 	public ModelController(Model model){
 		myModel = model;
+		myModel.initialize();
+		myModelFactory = new ModelFactory();
+		myXMLUtility = new xmlUtility(myModel);
+	}
+	
+	public Map<String, Class<?>> getParameters(String className){
+		return myModelFactory.getParameters(className);
+	}
+	
+	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
+		Article myViewpoint = myModel.getViewpoint();
+		double xAdjusted = x + myViewpoint.getX();
+		double yAdjusted = y + myViewpoint.getY();
+		Article newArticle = myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
+		addArticle(newArticle);
+		return newArticle;
+	}
+	
+	public Article createArticle(String fileName, double x, double y, boolean direction){
+		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+		addArticle(newArticle);
+		return newArticle;
+	}
+	
+	public Executable createExecutable(String executableName, Map<String, Object> data){
+		Executable newExecutable = myModelFactory.createExecutable(executableName, data);
+		addExecutable(newExecutable);
+		return newExecutable;
+	}
+	
+	public Condition createCondition(String conditionName, Map<String, Object> data){
+		Condition newCondition = myModelFactory.createCondition(conditionName, data);
+		addCondition(newCondition);
+		return newCondition;
+	}
+	
+	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables){
+		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
+		addEvent(newEvent);
+		return newEvent;
+	}
+
+	public void addEvent(Event newEvent) {
+		myModel.addEvent(newEvent);
+	}
+	
+	public void removeEvent(Event event){
+		myModel.removeEvent(event);
 	}
 
 	@Override
-	public List<Rule> getRules() {
-		return myModel.getRules();
+	public List<Event> getEvents() {
+		return myModel.getEvents();
 	}
-
-	@Override
 	public List<Article> getArticles() {
 		return myModel.getArticles();
 	}
-
-	@Override
-	public void addRule(Rule rule) {
-		myModel.addRule(rule);
-	}
-
-	@Override
-	public void removeArticleFromRule(Rule rule, Article article) {
-		myModel.removeArticleFromRule(rule, article);
+	
+	public void addExecutable(Executable executable){
+		myModel.addExecutable(executable);
 	}
 	
-	public void removeRule(Rule rule){
-		myModel.removeRule(rule);
+	public void removeExecutable(Executable executable){
+		myModel.removeExecutable(executable);
+	}
+	
+	public void addCondition(Condition condition){
+		myModel.addCondition(condition);
+	}
+	
+	public void removeCondition(Condition condition){
+		myModel.removeCondition(condition);
 	}
 
 	@Override
@@ -50,13 +104,60 @@ public class ModelController implements IModelController {
 	}
 	
 	@Override
-	public void remapButton(String button, List<Rule> rules){
-		myModel.remapButton(button, rules);
+	public void remapButton(String button, List<Event> events){
+		myModel.remapButton(button, events);
 	}
 	
 	@Override
-	public List<Rule> getButonRules(String button){
-		return myModel.getButtonRules(button);
+	public List<Event> getButtonEvents(String button){
+		return myModel.getButtonEvents(button);
+	}
+
+
+	public Article getCharacter() {
+		return myModel.getCharacter();
+	}
+	
+	public void setCharacter(Article character) {
+		myModel.setCharacter(character);
+	}
+	
+	public Article getViewpoint(){
+		return myModel.getViewpoint();
+	}
+	
+	public void setViewpoint(Article viewpoint) {
+		myModel.setViewpoint(viewpoint);
+	}
+	
+	public void addButtonMap(Map<String, List<Event>> buttonMap) {
+		myModel.addAllButtonMap(buttonMap);
+	}
+	public Article getArticleFromCoordinates(double x, double y){
+		return myModel.getArticleFromCoordinates(x, y);
+	}
+	
+	public void notifyObservers(){
+		myModel.notifyObservers();
+	}
+	
+	public void loadFromFile(Model toLoad) {
+		myModel.destroyModel();
+		myModel.initialize();
+		myModel.addAllArticles(toLoad.getArticles());
+		myModel.addAllEvents(toLoad.getEvents());
+		myModel.addAllButtonMap(toLoad.getButtonMap());
+		myModel.addAllConditions(toLoad.getConditions());
+		myModel.addAllExecutables(toLoad.getExecutables());
+		myModel.setCharacter(toLoad.getCharacter());
+	}
+
+	public void save(Window wind){
+		myXMLUtility.saveModel(wind);
+	}
+
+	public void load(Window wind){
+		loadFromFile(myXMLUtility.loadModel(wind));
 	}
 
 }

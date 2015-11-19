@@ -1,16 +1,24 @@
 package authoring.ui.toolbar;
 
-public class ControlButton extends ToolbarButtons {
+import authoring.controller.AuthoringController;
+import authoring.ui.editingmenus.EnemyProperties;
 
-    public ControlButton(){
-        super();
-        this.setGraphic(this.setImage("ArrowKeys.jpg", 50, 50));
-    }
-    
-    @Override
-    public void placeYourObject () {
-        // TODO Auto-generated method stub
+public class ControlButton extends ToolbarButton {
+  private final String NAME = "KEYS";
 
-    }
+  public ControlButton(AuthoringController myController) {
+    super( myController);
+    this.setGraphic(this.setImage(super.toolbarProperties.getString(NAME)));
+    this.setName(NAME);
+    this.setImageName(super.toolbarProperties.getString(NAME));
+  }
+
+  @Override
+  public void placeYourObject() {
+
+          EnemyProperties testProp=new EnemyProperties("Editor", null,super.myController
+                                                       );
+      
+  }
 
 }
