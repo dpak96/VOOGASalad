@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Map;
+
 public class ExecutableGainLife extends Executable{
 
-	public ExecutableGainLife(String name, Article actor) {
-		super(name, actor);
+	public ExecutableGainLife(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

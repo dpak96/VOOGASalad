@@ -6,7 +6,7 @@ import java.util.Observer;
 import gameengine.GameEngine;
 import resourcemanager.ResourceManager;
 
-public class ActionController implements Observer {
+public class ActionController{
 	private GameEngine myGE;
 	private ResourceManager resourceManager;
 	
@@ -15,9 +15,8 @@ public class ActionController implements Observer {
 		
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		myGE.update((String) arg1);	
+	public void update(String arg1) {
+		myGE.update(arg1);
 	}
 
   public ResourceManager getResourceManager() {

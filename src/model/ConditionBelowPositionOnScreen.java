@@ -1,17 +1,15 @@
 package model;
 
+import java.util.Map;
+
 public class ConditionBelowPositionOnScreen extends Condition{
 	
 	private Article myViewpoint;
 	private Article myCheckArticle;
 	private double myFraction;
 	
-	public ConditionBelowPositionOnScreen(String name, Article viewpoint, Article check, double fraction) {
-		super(name);
-		myViewpoint = viewpoint;
-		myCheckArticle = check;
-		myFraction = fraction;
-		// TODO Auto-generated constructor stub
+	public ConditionBelowPositionOnScreen(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

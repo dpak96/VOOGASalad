@@ -22,12 +22,15 @@ public class ModelController implements IModelController {
 		setResourceManager(rm);
 	}
 	
-	public Map<String, Class> getParameters(String className){
+	public Map<String, Class<?>> getParameters(String className){
 		return myModelFactory.getParameters(className);
 	}
 	
 	public void createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
-		Article newArticle = myModelFactory.createArticle(fileName, x, y, direction, events);
+		Article myViewpoint = myModel.getViewpoint();
+		double xAdjusted = x + myViewpoint.getX();
+		double yAdjusted = y + myViewpoint.getY();
+		Article newArticle = myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
 		addArticle(newArticle);
 	}
 	

@@ -22,7 +22,7 @@ public class Article {
 	private Life myLife;
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
-	
+
 	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
