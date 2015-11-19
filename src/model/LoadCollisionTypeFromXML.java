@@ -27,11 +27,11 @@ public class LoadCollisionTypeFromXML {
 			Document doc = dBuilder.parse(fXmlFile);
 
 			doc.getDocumentElement().normalize();
-			NodeList rowList = doc.getElementsByTagName("Row");
+			NodeList rowList = doc.getElementsByTagName("Type");
 			for (int i = 0; i < rowList.getLength(); i++)
 			{
 				Element rowElement = (Element) rowList.item(i);			
-				String tempStr = rowElement.getAttribute("RowString");
+				String tempStr = rowElement.getAttribute("TypeString");
 				collisionTypeList.add(tempStr);
 			}
 		} catch (Exception e) {
