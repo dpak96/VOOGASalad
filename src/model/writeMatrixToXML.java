@@ -15,8 +15,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class writeMatrixToXML {
-	public writeMatrixToXML(double[][] matrix, String fileName) {
+public class WriteMatrixToXML {
+	public WriteMatrixToXML(double[][] matrix, String fileName) {
 		// TODO Auto-generated constructor stub
 		write(matrix, fileName);
 	}

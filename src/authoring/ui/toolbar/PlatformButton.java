@@ -19,14 +19,12 @@ public class PlatformButton extends ToolbarButton {
   }
 
   @Override
-  public void placeYourObject() {
-    EnemyProperties propTest = new EnemyProperties();
-    propTest.showMenu("Enemy Property Editor");
-    // EnemyProperties propTest=new EnemyProperties();
-    propTest.showMenu("Enemy Property Editor");
+  public void placeYourObject () {
+    //EnemyProperties propTest=new EnemyProperties();
+    //propTest.showMenu("Enemy Property Editor");
     ButtonOverlay bo = new ButtonOverlay();
     OverlayController oc = (OverlayController) this.getParent().getParent();
     oc.addOverlay(bo.init());
-
+    bo.init2();
   }
 }

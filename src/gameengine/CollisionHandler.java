@@ -23,7 +23,7 @@ public class CollisionHandler {
 
 
 	public void collide(){
-		List<Condition> leftCollide = new ArrayList<Condition>();
+		/*List<Condition> leftCollide = new ArrayList<Condition>();
 		leftCollide.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));
 		List<Condition> rightCollide = new ArrayList<Condition>();
 		rightCollide.add(new ConditionCollisionFromRight("rightCollide",myCollisionInformation));
@@ -31,7 +31,7 @@ public class CollisionHandler {
 		aboveCollide.add(new ConditionCollisionFromAbove("aboveCollide",myCollisionInformation));
 		List<Condition> bottomCollide = new ArrayList<Condition>();
 		bottomCollide.add(new ConditionCollisionFromLeft("bottomCollide",myCollisionInformation));
-		// NEED TO WORK ON EXECUTABLES
+		// NEED TO WORK ON EXECUTABLES*/
 	}
 	
 }

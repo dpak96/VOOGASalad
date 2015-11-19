@@ -12,6 +12,11 @@ public class ConditionCollisionFromAbove extends Condition{
 		super(parameters);
 	}
 	
+	public ConditionCollisionFromAbove(String name, CollisionInformation wu){
+		super(name);
+		myCollisionInformation = wu;
+	}
+	
 	@Override
 	public boolean isMet() {		
 		return myCollisionInformation.getCollideDirection().equals(ABOVE);		
