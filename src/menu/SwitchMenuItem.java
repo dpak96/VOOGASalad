@@ -8,7 +8,7 @@ public class SwitchMenuItem extends AbstractMenuItem {
 
 	public SwitchMenuItem(ResourceBundle resource, MenuController menuController) {
 		super(resource);
-		this.setText(myResource.getString("SWITCH"));
+		this.setText(myResource.getString("SWITCHAE"));
 		handle(menuController);
 //		this.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
 	}

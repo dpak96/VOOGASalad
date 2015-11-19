@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.GraphicHandler;
+import startscreen.GameCreation;
 import startscreen.StartScreenController;
 import uibasics.UIStackPane;
 

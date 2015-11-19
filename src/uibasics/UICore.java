@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import main.GraphicHandler;
 import menu.MenuController;
 import properties.VoogaProperties;
+import startscreen.GameCreation;
 
 public class UICore {
 	
