@@ -46,6 +46,7 @@ public class xmlUtility {
 		model.addArticle(test);
 		xmlUtility xml = new xmlUtility(model);
 		xml.saveModel("FUCK");
+		System.out.println("saved");
 	}
 
 }
