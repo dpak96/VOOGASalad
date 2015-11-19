@@ -76,9 +76,15 @@ public class MenuController {
             }*/
     }
 
-    public void saveGame(FileChooser fileChooser, String saveName) throws IOException {
+    public void saveGame(){
             myModelController.save(myMenuPanel.getScene().getWindow());
     }
+
+    public void loadGame(){
+        myModelController.load(myMenuPanel.getScene().getWindow());
+    }
+
+
 
     public MenuPanel getMenu(){
         return myMenuPanel;
