@@ -37,7 +37,7 @@ public class WriteCollisionTypeToXML {
 			for (int i = 0; i < typeList.size(); i++){
 				Element row = doc.createElement("Type");
 				matrixXML.appendChild(row);
-				row.appendChild(doc.createTextNode(typeList.get(i)));
+				row.setAttribute("TypeString", typeList.get(i));
 			}
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

@@ -39,7 +39,7 @@ public class WriteMatrixToXML {
 					tempString = tempString + Double.toString(matrix[i][j]) + ",";
 				}
 				tempString = tempString + Double.toString(matrix[i][matrix.length-1]);
-				row.appendChild(doc.createTextNode(tempString));
+				row.setAttribute("RowString", tempString);
 			}
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
