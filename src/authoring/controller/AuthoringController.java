@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
@@ -49,8 +50,16 @@ public class AuthoringController implements IAuthoringController {
 
   }
 
-  public void getArticleFromCoordinates(double x, double y) {
+  public PlatformButton getArticleFromCoordinates(double x, double y) {
+  try {
     editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
+    PlatformButton pb = new PlatformButton();
+    return pb;
+  }
+  catch (Exception e){
+    System.out.print("Oops");
+    return null;
+  }
   }
 
   public Map<String, Class<?>> getFactoryParameters(String s) {

@@ -24,6 +24,7 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
+		System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
@@ -44,7 +45,7 @@ public class Model extends Observable{
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint = new Article("Goomba", 0, 0);
 		myCharacter = new Article("Goomba", 100, 100);
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
