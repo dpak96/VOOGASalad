@@ -1,6 +1,7 @@
 package authoring.ui.toolbar;
 
 import authoring.ui.draganddrop.DraggableElement;
+import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,18 +22,11 @@ public class EnemyButton extends ToolbarButton{
 
     @Override
     public void placeYourObject () {
-        
-        
-         DraggableElement elementToDrag=new DraggableElement();
-       ImageView icon= (ImageView) this.getGraphic();
-        elementToDrag.setGraphic(icon);
-        
-        Pane parentPane=(Pane) this.getParent().getParent();
-       
-        
-        parentPane.getChildren().add(elementToDrag);
-        elementToDrag.dragDetected();
-        elementToDrag.dragEnd();
+
+        ButtonOverlay bo = new ButtonOverlay();
+        OverlayController oc = (OverlayController) this.getParent().getParent();
+        oc.addOverlay(bo.init());
+        bo.init2();
         
     }
 
