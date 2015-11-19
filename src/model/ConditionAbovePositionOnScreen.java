@@ -18,7 +18,6 @@ public class ConditionAbovePositionOnScreen extends Condition{
 		myViewpoint = viewpoint;
 		myCheckArticle = check;
 		myFraction = fraction;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -27,23 +26,6 @@ public class ConditionAbovePositionOnScreen extends Condition{
 	
 		return yMid < myViewpoint.getY() + myViewpoint.getHeight()*myFraction;
 		
-	}
-	
-	public static void main(String[] args){
-		Condition c = new ConditionAbovePositionOnScreen();
-		Class<?> d = c.getClass();
-		Map<String, Class<?>> newMap = new HashMap<String, Class<?>>();
-		for(Field field : d.getDeclaredFields()) {
-		    newMap.put(field.getName(), field.getType());
-		}
-		for(Field field : d.getSuperclass().getDeclaredFields()){
-			System.out.println("C");
-			newMap.put(field.getName(), field.getType());
-		}
-		for(Field field : d.getSuperclass().getSuperclass().getDeclaredFields()){
-			System.out.println("C");
-			newMap.put(field.getName(), field.getType());
-		}
 	}
 
 }

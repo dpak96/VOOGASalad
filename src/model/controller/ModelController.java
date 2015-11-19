@@ -19,7 +19,7 @@ public class ModelController implements IModelController {
 		myModelFactory = new ModelFactory();
 	}
 	
-	public Map<String, Class> getParameters(String className){
+	public Map<String, Class<?>> getParameters(String className){
 		return myModelFactory.getParameters(className);
 	}
 	
