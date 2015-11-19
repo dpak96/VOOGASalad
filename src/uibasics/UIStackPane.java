@@ -19,8 +19,9 @@ public class UIStackPane extends StackPane implements Observer {
 	private Pane myAuthoringControllerPane;
 	
 	public UIStackPane(ModelController modelController) {
-		initializePanes();
+
 		myAuthoringController = new AuthoringController(modelController);
+		initializePanes();
 	}
 
 	public void initializePanes() {

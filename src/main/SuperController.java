@@ -27,9 +27,8 @@ public class SuperController {
     model = new Model();
     myGraphicHandler = graphicHandler;
     actionController = new ActionController(gameEngine);
-
-    uiCore = new UICore(myGraphicHandler, actionController);
     modelController = new ModelController(model);
+    uiCore = new UICore(myGraphicHandler, actionController, modelController);
     gameEngine = new GameEngine(modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
 
