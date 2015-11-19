@@ -10,13 +10,11 @@ import resourcemanager.ResourceManager;
 public class MenuPanel extends MenuBar {
 
 	private ResourceBundle myResource;
-	private ResourceManager resourceManager;
 	private MenuController myMenuController;
 
-	public MenuPanel(ResourceManager rm, MenuController menuController) {
+	public MenuPanel(MenuController menuController) {
 		super();
-		resourceManager = rm;
-		myResource = resourceManager.getPm().getResourceMap().get("english");
+		myResource = ResourceManager.getResourceManager().getPm().getResourceMap().get("english");
 		myMenuController = menuController;
 		getMenus().addAll(fileMenu(), navigateMenu(), helpMenu());
 	}

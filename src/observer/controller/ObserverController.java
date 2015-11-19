@@ -3,20 +3,12 @@ package observer.controller;
 import model.Model;
 import resourcemanager.ResourceManager;
 import uibasics.UIBasics;
+import uibasics.UIStackPane;
+
 
 public class ObserverController {
-  private ResourceManager resourceManager;
-	public ObserverController(Model modelMap, UIBasics uiBasics, ResourceManager rm) {
-		modelMap.addObserver(uiBasics);
-		resourceManager = rm;
-	}
-
-  public ResourceManager getResourceManager() {
-    return resourceManager;
-  }
-
-  public void setResourceManager(ResourceManager resourceManager) {
-    this.resourceManager = resourceManager;
+  public ObserverController(Model modelMap, UIStackPane uiStack) {
+    modelMap.addObserver(uiStack);
   }
 
 }
