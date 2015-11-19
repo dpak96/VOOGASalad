@@ -18,8 +18,12 @@ public class xmlUtility {
 	
 	public void saveModel(String gameName) {
 		FileOutputStream fos = null;
-		myStream.omitField(Article.class, "myBitMap");
-		myStream.omitField(Article.class, "this$0");
+		for(Article a: myModel.getArticles()) {
+			a.destroyBitMap();
+			System.out.println("destroyed");
+		}
+		myModel.getViewpoint().destroyBitMap();
+		myModel.getCharacter().destroyBitMap();
 	    try{            
 	        String xml = myStream.toXML(myModel);
 	        

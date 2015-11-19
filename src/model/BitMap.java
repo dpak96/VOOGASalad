@@ -27,6 +27,7 @@ public class BitMap {
 	public Position[][] getByteArray() {
 		return myBitMap;
 	}
+	
 
 	private static Position[][] makeBitMap(BufferedImage image, Double x, Double y) {
 	      final int width = image.getWidth();
