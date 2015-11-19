@@ -61,7 +61,6 @@ public class GameEngine implements IGameEngine {
 	
 	private void runButtonPress(String input){
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
-
 		for(Event e : buttonEvents){
 			e.fire();
 		}
