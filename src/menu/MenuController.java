@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.GraphicHandler;
+import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import startscreen.StartScreenController;
@@ -16,11 +17,13 @@ import java.util.ResourceBundle;
 public class MenuController {
     private GraphicHandler myGraphicHandler;
     private MenuPanel myMenuPanel;
+    private ModelController myModelController;
 
 
-    public MenuController(GraphicHandler graphicHandler){
+    public MenuController(GraphicHandler graphicHandler, ModelController modelController){
         myGraphicHandler = graphicHandler;
         myMenuPanel = new MenuPanel(this);
+        myModelController = modelController;
     }
     
     public void switchOverlay() {
@@ -64,16 +67,16 @@ public class MenuController {
 
 
     public void trySave(FileChooser fileChooser, String saveName) {
-            try {
+           /* try {
                 saveGame(fileChooser, saveName);
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
-            }
+            }*/
     }
 
-    public void saveGame(FileChooser fileChooser, String saveName) throws IOException {
-        fileChooser.setTitle(saveName);
+    public void saveGame() throws IOException {
+        /*fileChooser.setTitle(saveName);
         File game = fileChooser.showSaveDialog(myMenuPanel.getScene().getWindow());
         if (!game.exists()) {
             game.createNewFile();
@@ -85,7 +88,8 @@ public class MenuController {
             f.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+        myModelController.save();
     }
 
     public MenuPanel getMenu(){
