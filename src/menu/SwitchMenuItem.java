@@ -15,6 +15,7 @@ public class SwitchMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle(MenuController menuController) {
-		// TODO Auto-generated method stub
+		this.setOnAction(e -> menuController.switchOverlay());
+		System.out.println("It hits the handle button");
 	}
 }

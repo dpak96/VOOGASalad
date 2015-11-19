@@ -30,7 +30,7 @@ public class UICore {
 	}
 	
 	public void borderInit(VoogaProperties props) {
-		myRoot.setCenter(uiStackPane.getStack());
+		myRoot.setCenter(uiStackPane);
 		myRoot.setTop(menuController.getMenu());
 		myRoot.setPrefWidth(props.getSceneWidth());
 		myRoot.setPrefHeight(props.getSceneHeight());
