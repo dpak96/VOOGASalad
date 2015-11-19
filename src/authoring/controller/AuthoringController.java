@@ -2,7 +2,9 @@ package authoring.controller;
 
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import javafx.event.Event;
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 
 
 public class AuthoringController implements IAuthoringController {
@@ -10,7 +12,7 @@ public class AuthoringController implements IAuthoringController {
   private AuthoringUI ui;
 
   public AuthoringController(){
-    ui = new AuthoringUI();
+    ui = new AuthoringUI(this);
     editor = new Editor();
   }
 
@@ -30,10 +32,10 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public Point2D getMouseCoordinates(){
-    
-    this.getUi().getDragAndDrop();
-    return null;
+  public void getMouseCoordinates(double x, double y, Object event){
+    System.out.print(x);
+    System.out.print(y);
+    System.out.print(event);
     
   }
 }

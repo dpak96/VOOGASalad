@@ -3,7 +3,6 @@ package main;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import startscreen.GameCreation;
-import startscreen.StartScreen;
 import startscreen.StartScreenController;
 
 public class GraphicHandler {
@@ -26,8 +25,8 @@ public class GraphicHandler {
     public void startScreen(){
         start = new StartScreenController();
         baseScene = new Scene(start.getStart(), 400,400);
-        baseScene.getStylesheets().add("startscreen/StartScreen.css");
-        currentStage.setTitle("Test");
+        baseScene.getStylesheets().addAll("startscreen/StartScreen.css");
+        currentStage.setTitle("Hi");
         currentStage.setScene(baseScene);
         start.init(currentStage, this);
         currentStage.show();
