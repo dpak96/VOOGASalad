@@ -40,16 +40,31 @@ public class ModelController implements IModelController {
 		addArticle(newArticle);
 	}
 	
-	
-	/*public void createRule(String name, double value, Article ruleOwner){
-		Rule newRule = myModelFactory.createRule(name, value);
-		//ruleOwner.addRule(newRule); FIX TO EVENTS
+	public Executable createExecutable(String executableName, Map<String, Object> data){
+		Executable newExecutable = myModelFactory.createExecutable(executableName, data);
+		addExecutable(newExecutable);
+		return newExecutable;
 	}
 	
-	public void createRule(String name, double value, List<Article> dependencies, Article ruleOwner){
-		Rule newRule = myModelFactory.createRule(name, value, dependencies);
-		//ruleOwner.addRule(newRule); FIX TO EVENTS
-	}*/
+	public Condition createCondition(String conditionName, Map<String, Object> data){
+		Condition newCondition = myModelFactory.createCondition(conditionName, data);
+		addCondition(newCondition);
+		return newCondition;
+	}
+	
+	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables){
+		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
+		addEvent(newEvent);
+		return newEvent;
+	}
+
+	public void addEvent(Event newEvent) {
+		myModel.addEvent(newEvent);
+	}
+	
+	public void removeEvent(Event event){
+		myModel.removeEvent(event);
+	}
 
 	@Override
 	public List<Event> getEvents() {
@@ -57,6 +72,22 @@ public class ModelController implements IModelController {
 	}
 	public List<Article> getArticles() {
 		return myModel.getArticles();
+	}
+	
+	public void addExecutable(Executable executable){
+		myModel.addExecutable(executable);
+	}
+	
+	public void removeExecutable(Executable executable){
+		myModel.removeExecutable(executable);
+	}
+	
+	public void addCondition(Condition condition){
+		myModel.addCondition(condition);
+	}
+	
+	public void removeCondition(Condition condition){
+		myModel.removeCondition(condition);
 	}
 
 	@Override
