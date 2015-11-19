@@ -9,11 +9,7 @@ import observer.controller.ObserverController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIBasics;
-
 import uibasics.UICore;
-import uibasics.UIStackPane;
-
-
 import java.util.ResourceBundle;
 
 
@@ -26,19 +22,21 @@ public class SuperController {
   private GraphicHandler myGraphicHandler;
 
   private UICore uiCore;
-  
-  public SuperController(GraphicHandler graphicHandler){
+
+  public SuperController(GraphicHandler graphicHandler) {
+    model = new Model();
     myGraphicHandler = graphicHandler;
-    uiCore = new UICore(myGraphicHandler);
+    actionController = new ActionController(gameEngine);
+
+    uiCore = new UICore(myGraphicHandler, actionController);
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
-    actionController = new ActionController(gameEngine);
-    observerController = new ObserverController(model, uiCore.getUIBasics());
+    observerController = new ObserverController(model, uiCore.getUIStackPane());
   }
 
-  public Scene init(GameCreation gameCreation){
-      Scene mainScene = uiCore.getScene();
-      return mainScene;
+  public Scene init(GameCreation gameCreation) {
+    Scene mainScene = uiCore.getScene();
+    return mainScene;
   }
 
   public ModelController getModelController() {
@@ -88,6 +86,5 @@ public class SuperController {
   public void setModel(Model model) {
     this.model = model;
   }
-
 
 }

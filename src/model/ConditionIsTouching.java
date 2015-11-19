@@ -1,14 +1,13 @@
 package model;
+import java.util.*;
 
 public class ConditionIsTouching extends Condition{
 
 	Article myFirst;
 	Article mySecond;
 	
-	public ConditionIsTouching(String name, Article first, Article second) {
-		super(name);
-		myFirst = first;
-		mySecond = second;
+	public ConditionIsTouching(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override
