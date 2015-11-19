@@ -15,7 +15,7 @@ public class PlatformButton extends ToolbarButton{
     @Override
     public void placeYourObject () {
             
-            EnemyProperties propTest=new EnemyProperties();
+            EnemyProperties propTest=new EnemyProperties(null);
             propTest.showMenu("Enemy Property Editor");
     }
 

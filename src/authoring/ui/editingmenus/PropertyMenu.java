@@ -4,11 +4,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
+import model.Article;
 
 
 public abstract class PropertyMenu implements IMenuAction {
-
-    public void showMenu (String title /* Article being acted on */) {
+    protected Object objectToEdit;
+    protected MenuBuilder componentAdder=new MenuBuilder();
+    
+    public void showMenu (String title) {
 
         Dialog propertyMenu = new Dialog();
         propertyMenu.setTitle("Enemy Property Editor");

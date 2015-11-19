@@ -10,16 +10,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
+import model.Article;
 
 
 public class EnemyProperties extends PropertyMenu {
 
+    public EnemyProperties(Article selectedObject){
+        super.objectToEdit=selectedObject;
+    }
+    
     protected void populateMenu (GridPane menuGrid) {
-
+        
         int rowIndex = 1;
-        Label enemyLabel = new Label("Name: ");
+        super.componentAdder.makeLabel(menuGrid, rowIndex, 1, "Name: ");
         TextField enemyField = new TextField();
-        menuGrid.add(enemyLabel, 1, rowIndex);
         menuGrid.add(enemyField, 2, rowIndex++);
 
         Label velocityLabel = new Label("Velocity: ");
@@ -46,6 +50,12 @@ public class EnemyProperties extends PropertyMenu {
         menuGrid.add(defaultOption, 1, rowIndex);
         menuGrid.add(defaultSave, 2, rowIndex++);
 
+    }
+
+    @Override
+    public void executeYourMenuFunction () {
+
+        //Pass on the edits to the thing being edited
     }
 
 }
