@@ -12,10 +12,12 @@ import model.controller.ModelController;
 public class AuthoringController implements IAuthoringController {
   private Editor editor;
   private AuthoringUI ui;
+  private ModelController modelController;
 
-  public AuthoringController(ModelController modelController) {
+  public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
-    editor = new Editor(modelController);
+    modelController = mc;
+    editor = new Editor(mc);
   }
 
   public Editor getEditor() {
@@ -39,4 +41,9 @@ public class AuthoringController implements IAuthoringController {
                                                        true);
 
   }
+
+  public void getArticleFromCoordinates(double x, double y) {
+    editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
+  }
+  
 }
