@@ -1,6 +1,5 @@
 package front.commands;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Article;
 import resourcemanager.ResourceManager;
