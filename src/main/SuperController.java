@@ -26,12 +26,12 @@ public class SuperController {
   public SuperController(GraphicHandler graphicHandler) {
     model = new Model();
     myGraphicHandler = graphicHandler;
-    actionController = new ActionController(gameEngine);
-
-    uiCore = new UICore(myGraphicHandler, actionController);
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
+    actionController = new ActionController(gameEngine);
+    uiCore = new UICore(myGraphicHandler, actionController, modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
+
   }
 
   public Scene init(GameCreation gameCreation) {

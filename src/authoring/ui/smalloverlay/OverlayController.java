@@ -40,8 +40,9 @@ public class OverlayController extends StackPane {
 
     public void removeTop(){
         if(overlays.size()>0) {
-            Pane last = overlays.get(overlays.size() - 1);
+            int last = getChildren().size()-1;
             getChildren().remove(last);
+            getChildren().remove(last-1);
         }
     }
 

@@ -9,6 +9,7 @@ import model.ConditionCollisionFromAbove;
 import model.ConditionCollisionFromLeft;
 import model.ConditionCollisionFromRight;
 import model.Executable;
+import model.ExecutableSetHorizontalVelocity;
 
 public class CollisionHandler {
 	Article myArticle;
@@ -38,7 +39,7 @@ public class CollisionHandler {
 		bottomCollideCondition.add(new ConditionCollisionFromLeft("bottomCollide",myCollisionInformation));
 		List<Condition> damageCollideCondition = new ArrayList<Condition>();
 		// NEED TO WORK ON EXECUTABLES
-		
+
 	}
 	
 }

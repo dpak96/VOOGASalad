@@ -14,7 +14,6 @@ public class UIBasics{
   private List<Article> myBackArticles;
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
-  private AuthoringController authoringController;
   private UIStackPane myStackPane;
 
   public UIBasics() {
@@ -24,7 +23,6 @@ public class UIBasics{
     // myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-    authoringController = new AuthoringController();
     //myStackPane.addPane(myPane);
     //Authoring();
 
@@ -66,11 +64,4 @@ public class UIBasics{
       c.update(article, img);
   }
 
-  public AuthoringController getAuthoringController() {
-    return authoringController;
-  }
-
-  public void setAuthoringController(AuthoringController authoringController) {
-    this.authoringController = authoringController;
-  }
 }

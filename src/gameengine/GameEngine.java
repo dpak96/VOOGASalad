@@ -51,16 +51,19 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				if(myCollisionManager.didCollide(first, second)){
-					first.addCollision(second, new CollisionInformation());
-					second.addCollision(first, new CollisionInformation());
+				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				if(temp.isRealCollision()){
+					first.addCollision(second, temp);
+					second.addCollision(first, temp);
 				}
 			}
 		}
 	}
 	
 	private void runButtonPress(String input){
+		System.out.println(input);
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
+		System.out.println(buttonEvents == null);
 		for(Event e : buttonEvents){
 			e.fire();
 		}

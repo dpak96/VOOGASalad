@@ -1,6 +1,7 @@
 package uibasics;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,6 +10,8 @@ import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Article;
+import model.Model;
+import model.controller.ModelController;
 
 public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
@@ -17,14 +20,15 @@ public class UIStackPane extends StackPane implements Observer {
 	private boolean edit;
 	private Pane myAuthoringControllerPane;
 	
-	public UIStackPane() {
+	public UIStackPane(ModelController modelController) {
+
+		myAuthoringController = new AuthoringController(modelController);
 		initializePanes();
 	}
-	
+
 	public void initializePanes() {
 		edit = true;
 		myUIBasics = new UIBasics();
-		myAuthoringController = new AuthoringController();
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
 		this.getChildren().add(myUIBasics.getPane());
@@ -64,9 +68,9 @@ public class UIStackPane extends StackPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		@SuppressWarnings("unchecked")
-		ArrayList<Article> articles = (ArrayList<Article>) arg;
-		myUIBasics.update(articles);
-		myGamePlayer.update(articles);
+		Model model = (Model) o;
+		myUIBasics.update(model.getArticles());
+		myGamePlayer.update(model.getArticles(), model.getCharacter());
 	}
 
 }
