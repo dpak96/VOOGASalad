@@ -9,5 +9,9 @@ public abstract class Condition extends Process{
 		super(parameters);
 	}
 	
+	public Condition(String name){
+		super(name);
+	}
+	
 	public abstract boolean isMet();
 }
