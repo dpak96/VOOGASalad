@@ -28,7 +28,7 @@ public class SuperController {
     myGraphicHandler = graphicHandler;
     resourceManager = new ResourceManager();
 
-    uibasics = new UIBasics(resourceManager);
+    uibasics = new UIBasics();
     modelController = new ModelController(model, resourceManager);
     gameEngine = new GameEngine(modelController, resourceManager);
     actionController = new ActionController(gameEngine, resourceManager);
