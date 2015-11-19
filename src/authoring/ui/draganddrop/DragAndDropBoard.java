@@ -55,10 +55,13 @@ public class DragAndDropBoard extends StackPane {
             }
         });
         this.setOnMouseClicked(e->
-                getChildren().add(authoringController.getArticleFromCoordinates(e.getX(),e.getY())));
-
+                addTemp(authoringController.getArticleFromCoordinates(e.getX(),e.getY()),e.getX(),e.getY() ));
     }
-
+    protected void addTemp(HighlightedArticle n, Double x, Double y){
+        n.setLayoutX(x);
+        n.setLayoutY(y);
+        getChildren().add(n);
+    }
 
     protected void dragOver(){
         this.setOnDragOver(new EventHandler <DragEvent>() {

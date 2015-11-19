@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.draganddrop.HighlightedArticle;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
@@ -50,11 +51,11 @@ public class AuthoringController implements IAuthoringController {
 
   }
 
-  public PlatformButton getArticleFromCoordinates(double x, double y) {
+  public HighlightedArticle getArticleFromCoordinates(double x, double y) {
   try {
     editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-    PlatformButton pb = new PlatformButton();
-    return pb;
+    HighlightedArticle highlightedArticle = new HighlightedArticle();
+    return highlightedArticle;
   }
   catch (Exception e){
     System.out.print("Oops");
