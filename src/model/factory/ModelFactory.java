@@ -47,7 +47,7 @@ public class ModelFactory {
 		return parameterMap;
 	}
 
-	public Event creatEvent(String name, List<Condition> conditions, List<Executable> executables){
+	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> cons = cls.getConstructors()[0];
@@ -63,7 +63,7 @@ public class ModelFactory {
 		return null;
 	}
 
-	public Condition createCondition(String name, String cond, Map<String, Object> data){
+	public Condition createCondition(String name, Map<String, Object> data){
 		try {
 			Class<?> cls = Class.forName(name);
 			Constructor<?> trialCons = cls.getConstructor(Map.class);
@@ -76,10 +76,8 @@ public class ModelFactory {
 		}
 		return null;
 	}
-	public Executable createExecutable(String name, double value, Article actor, Map<String, Object> data){
+	public Executable createExecutable(String name, Map<String, Object> data){
 		try {
-			HashMap<String, Class> asdf = new HashMap<String, Class>();
-			asdf.put("poop", String.class);
 			Class<?> cls = Class.forName(name);
 			Constructor<?> cons = cls.getConstructor(Map.class);
 			Executable test = (Executable) cons.newInstance(data);
