@@ -7,13 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class PlatformButton extends ToolbarButton{
 
-    public PlatformButton () {
-        super();
-        this.setGraphic(super.setImage(super.toolbarProperties.getString("PLATFORM")));
-    }
+public class PlatformButton extends ToolbarButton {
+  private final String NAME = "PLATFORM";
 
+  public PlatformButton() {
+    super();
+    this.setGraphic(super.setImage(toolbarProperties.getString(NAME)));
+    this.setName(NAME);
+    this.setImageName(super.toolbarProperties.getString(NAME));
+  }
 
     @Override
     public void placeYourObject () {
@@ -22,7 +25,5 @@ public class PlatformButton extends ToolbarButton{
             oc.addOverlay(bo.init());
     }
 
-   
-    
-    
-}
+  }
+

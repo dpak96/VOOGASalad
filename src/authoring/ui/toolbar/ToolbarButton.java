@@ -13,6 +13,8 @@ public abstract class ToolbarButton extends DraggableElement implements IObjectP
     
    private ResourceManager resources=new ResourceManager();
    protected ResourceBundle toolbarProperties=ResourceBundle.getBundle("properties.toolbar");
+   private String imageName;
+   private String name;
    
    private final int BUTTON_DIMENSION=50;
    
@@ -37,5 +39,21 @@ public abstract class ToolbarButton extends DraggableElement implements IObjectP
         buttonIcon.setFitHeight(this.getPrefHeight());
         return buttonIcon;
 }
+
+    public String getImageName() {
+      return imageName;
+    }
+
+    public void setImageName(String imageName) {
+      this.imageName = imageName;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
     
 }
