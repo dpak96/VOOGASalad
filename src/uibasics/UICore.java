@@ -4,14 +4,13 @@ import java.util.ResourceBundle;
 
 import action.controller.ActionController;
 import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import main.GraphicHandler;
 import menu.MenuController;
-import menu.MenuPanel;
 import properties.VoogaProperties;
 
 public class UICore {
