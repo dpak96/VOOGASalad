@@ -11,6 +11,10 @@ public class GameCreation {
 
     public GameCreation(){
     }
+    
+    public Mode getMode() {
+    	return myMode;
+    }
 
     public void setMode(String mode){
         if(mode == "Play"){
