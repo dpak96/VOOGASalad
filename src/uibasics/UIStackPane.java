@@ -9,6 +9,7 @@ import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Article;
+import model.Model;
 import model.controller.ModelController;
 
 public class UIStackPane extends StackPane implements Observer {
@@ -67,7 +68,9 @@ public class UIStackPane extends StackPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		@SuppressWarnings("unchecked")
-		ArrayList<Article> articles = (ArrayList<Article>) arg;
+//		ArrayList<Article> articles = (ArrayList<Article>) arg;
+		Model model = (Model) o;
+		ArrayList<Article> articles = (ArrayList<Article>) model.getArticles();
 		myUIBasics.update(articles);
 		myGamePlayer.update(articles);
 	}
