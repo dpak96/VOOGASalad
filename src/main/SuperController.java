@@ -7,36 +7,36 @@ import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
 import startscreen.GameCreation;
-import uibasics.Setup;
 import uibasics.UIBasics;
+import uibasics.UICore;
 import uibasics.UIStackPane;
 
 import java.util.ResourceBundle;
 
 
 public class SuperController {
-  private UIBasics uibasics;
   private ActionController actionController;
   private ObserverController observerController;
   private GameEngine gameEngine;
   private ModelController modelController;
   private Model model;
   private GraphicHandler myGraphicHandler;
+  private UICore uiCore;
   
   public SuperController(GraphicHandler graphicHandler){
     myGraphicHandler = graphicHandler;
-    uibasics = new UIBasics();
+    ResourceBundle resource = ResourceBundle.getBundle("properties/english");
+    uiCore = new UICore(myGraphicHandler, resource);
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
-    observerController = new ObserverController(model, uibasics);
+    observerController = new ObserverController(model, uiCore.getUIBasics());
   }
 
   public Scene init(GameCreation gameCreation){
       ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-      Scene mainScene = new Setup(myGraphicHandler, uibasics, resource).getScene();
+      Scene mainScene = uiCore.getScene();
       return mainScene;
-
   }
 
   public ModelController getModelController() {
@@ -55,12 +55,12 @@ public class SuperController {
     this.gameEngine = gameEngine;
   }
 
-  public UIBasics getUIBasics() {
-    return uibasics;
+  public UICore getUICore() {
+    return uiCore;
   }
 
-  public void setUIBasics(UIBasics uIBasics) {
-    uibasics = uIBasics;
+  public void setUICore(UICore uICore) {
+    uiCore = uICore;
   }
 
   public ObserverController getObserverController() {
