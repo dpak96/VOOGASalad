@@ -2,7 +2,6 @@ package startscreen;
 
 import java.util.ResourceBundle;
 
-import authoring.ui.smalloverlay.BasicOverlay;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
