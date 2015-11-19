@@ -11,9 +11,9 @@ import properties.VoogaProperties;
 
 public class Layout extends BorderPane{
 	
-	public Layout(GraphicHandler graphicHandler, ResourceBundle resources){
+	public Layout(GraphicHandler graphicHandler, UIBasics uibasics, ResourceBundle resources){
 		VoogaProperties props = new VoogaProperties();
-		this.setCenter(new UIStackPane().getStack());
+		this.setCenter(new UIStackPane(uibasics).getStack());
 		this.setTop(new MenuController(graphicHandler, resources).getMenu());
 		this.setPrefWidth(props.getSceneWidth());
 		this.setPrefHeight(props.getSceneHeight());

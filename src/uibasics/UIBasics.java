@@ -1,11 +1,9 @@
 package uibasics;
 
-import main.GraphicHandler;
 import model.Article;
 
 import java.util.*;
 
-import authoring.controller.AuthoringController;
 import config.Config;
 import front.commands.AbstractCommand;
 

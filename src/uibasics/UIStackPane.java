@@ -13,15 +13,15 @@ public class UIStackPane extends Observable {
 	private AuthoringController authoringController;
 	private Pane myActive;
 	
-	public UIStackPane() {
+	public UIStackPane(UIBasics uiBasics) {
 		myStackPane = new StackPane();
-		initializePanes();
+		initializePanes(uiBasics);
 		myStackPane.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		myStackPane.setOnMouseClicked(e -> handleClick());
 	}
 	
-	public void initializePanes() {
-		myUIBasics = new UIBasics();
+	public void initializePanes(UIBasics uiBasics) {
+		myUIBasics = uiBasics;
 		authoringController = new AuthoringController();
 //		if (edit) //currently inactive
 			myActive = authoringController.getUi().tester();

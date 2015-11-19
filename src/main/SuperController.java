@@ -3,13 +3,13 @@ package main;
 import action.controller.ActionController;
 import gameengine.GameEngine;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
 import startscreen.GameCreation;
 import uibasics.Setup;
 import uibasics.UIBasics;
+import uibasics.UIStackPane;
 
 import java.util.ResourceBundle;
 
@@ -34,7 +34,7 @@ public class SuperController {
 
   public Scene init(GameCreation gameCreation){
       ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-      Scene mainScene = new Setup(myGraphicHandler, resource).getScene();
+      Scene mainScene = new Setup(myGraphicHandler, uibasics, resource).getScene();
       return mainScene;
 
   }

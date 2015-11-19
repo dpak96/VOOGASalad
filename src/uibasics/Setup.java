@@ -14,11 +14,11 @@ public class Setup extends Observable{
 	private Group myRoot;
 	private Scene myScene;
 	
-	public Setup(GraphicHandler graphicHandler, ResourceBundle resource){
+	public Setup(GraphicHandler graphicHandler, UIBasics uibasics, ResourceBundle resource){
 		VoogaProperties properties = new VoogaProperties();
 		this.myRoot = new Group();
 		this.myScene = new Scene(myRoot, properties.getSceneWidth(), properties.getSceneHeight());
-		myRoot.getChildren().add(new Layout(graphicHandler, resource));
+		myRoot.getChildren().add(new Layout(graphicHandler, uibasics, resource));
 		
 	}
 	
