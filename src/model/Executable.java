@@ -1,9 +1,9 @@
 package model;
 
-public abstract class Executable {
+public abstract class Executable{
 
-	protected Article myActor;
-	protected String myName;
+	protected Article myActor = new Article();
+	protected String myName = "";
 	
 	public Executable(String name, Article actor){
 		myName = name;

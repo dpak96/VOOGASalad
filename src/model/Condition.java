@@ -1,8 +1,11 @@
 package model;
 
-public abstract class Condition {
+public abstract class Condition{
+
+	protected String myName = "";
 	
-	private String myName;
+	public Condition(){
+	}
 	
 	public Condition(String name){
 		myName = name;

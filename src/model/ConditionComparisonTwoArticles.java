@@ -9,6 +9,7 @@ public class ConditionComparisonTwoArticles extends Condition{
 	private String myComparison;
 	
 	
+	
 	public ConditionComparisonTwoArticles(String name, Article first, String firstVariable,
 			Article second, String secondVariable, String comparison) {
 		super(name);
