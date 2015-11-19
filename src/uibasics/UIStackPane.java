@@ -67,7 +67,6 @@ public class UIStackPane extends StackPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		@SuppressWarnings("unchecked")
 		Model model = (Model) o;
 		myUIBasics.update(model.getArticles());
 		myGamePlayer.update(model.getArticles(), model.getCharacter());
