@@ -22,7 +22,7 @@ public class UIBasics implements Observer {
 	private UIStackPane myStackPane;
 	
 	public UIBasics() {
-		//load("commands"); temporarily off
+		load("commands"); //temporarily off
 		myPane = new Pane();
 		myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
 		myBackArticles = new HashMap<String, Article>();
