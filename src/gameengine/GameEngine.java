@@ -37,7 +37,6 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runArticleEvents();
 		runArticleUpdates();
-		
 		myModelController.notifyObservers();
 		
 	}
