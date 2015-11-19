@@ -33,6 +33,7 @@ public class UICore {
 	}
 	
 	public Scene getScene(){
+		myScene.getStylesheets().addAll("authoring/Overlay.css");
 		return myScene;
 	}
 	
