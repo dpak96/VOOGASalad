@@ -13,7 +13,7 @@ public class ExitMenuItem extends AbstractMenuItem {
 		super(resource);
 		this.setText(myResource.getString("EXIT"));
 		this.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
-
+		this.setOnAction(e -> handle(menuController));
 	}
 	
 	@Override
