@@ -25,7 +25,6 @@ public class UIBasics{
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
     authoringController = new AuthoringController();
-    myStackPane = new UIStackPane();
     //myStackPane.addPane(myPane);
     //Authoring();
 
