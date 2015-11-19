@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import resourcemanager.ResourceManager;
 
+
 public abstract class ToolbarButton  extends DraggableElement implements IObjectPlacing {
    protected ResourceBundle toolbarProperties=ResourceManager.getResourceManager().getPm().getResourceMap().get("toolbar");
    private String imageName;
@@ -17,8 +18,7 @@ public abstract class ToolbarButton  extends DraggableElement implements IObject
    private final int BUTTON_DIMENSION=50;
    
     public ToolbarButton(){
-        this.setPrefHeight(BUTTON_DIMENSION);
-        this.setPrefWidth(BUTTON_DIMENSION);
+        this.setPrefSize(BUTTON_DIMENSION, BUTTON_DIMENSION);
         super.dragDetected();
         super.dragEnd();
         this.setOnAction(e-> placeYourObject());

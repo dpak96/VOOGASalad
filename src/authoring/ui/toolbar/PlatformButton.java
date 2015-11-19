@@ -18,6 +18,7 @@ public class PlatformButton extends ToolbarButton {
     this.setImageName(super.toolbarProperties.getString(NAME));
   }
 
+
   @Override
   public void placeYourObject () {
     //EnemyProperties propTest=new EnemyProperties();
@@ -28,3 +29,4 @@ public class PlatformButton extends ToolbarButton {
     bo.init2();
   }
 }
+
