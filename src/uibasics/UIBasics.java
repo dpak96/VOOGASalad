@@ -1,10 +1,8 @@
 package uibasics;
 
-import javafx.scene.image.Image;
 import model.Article;
 import resourcemanager.ResourceManager;
 import java.util.*;
-import authoring.controller.AuthoringController;
 import config.Config;
 import front.commands.AbstractCommand;
 import javafx.scene.image.ImageView;
@@ -15,19 +13,12 @@ public class UIBasics{
   private List<Article> myBackArticles;
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
-  private UIStackPane myStackPane;
 
   public UIBasics() {
-    // load("commands"); temporarily off
-
+    load("commands");
     myPane = new Pane();
-    // myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-    //myStackPane.addPane(myPane);
-    //Authoring();
-
-
   }
 
   private void load(String identifier) {
@@ -37,13 +28,17 @@ public class UIBasics{
     for (String s : myVals) {
       myCommands.add(Config.getObject(s));
     }
+    for (AbstractCommand c: myCommands) {
+    	System.out.println(c);
+    	System.out.println("bark");
+
+    }
   }
 
   public Pane getPane() {
     return myPane;
   }
 
-  @SuppressWarnings("unchecked")
   public void update(List<Article> list) {
     clearAll();
     myBackArticles = list;
@@ -61,13 +56,13 @@ public class UIBasics{
   }
 
   public void articleUpdate(Article article, ImageView img) {
-//    for (AbstractCommand c : myCommands)
-//      c.update(article, img);
-    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
-    System.out.print("hi");
-    img.setX(article.getX());
-    img.setY(article.getY());
-    img.setRotate(article.getOrientation());
+    for (AbstractCommand c : myCommands)
+      c.update(article, img);
+//    img.setImage(ResourceManager.getResourceManager().getIm().getImageMap().get(article.getImageFile()));
+//    System.out.print("hi");
+//    img.setX(article.getX());
+//    img.setY(article.getY());
+//    img.setRotate(article.getOrientation());
   }
 
 }

@@ -63,11 +63,9 @@ public class ActionController{
 	}
 
 	public void change_rate(double dub){
-
 		animation.pause();
 		animation.setRate(dub);
 		animation.playFromStart();
-
 	}
 
 }

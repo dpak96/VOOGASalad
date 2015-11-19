@@ -1,7 +1,5 @@
 package uibasics;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,7 +7,6 @@ import authoring.controller.AuthoringController;
 import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import model.Article;
 import model.Model;
 import model.controller.ModelController;
 import startscreen.GameCreation;
