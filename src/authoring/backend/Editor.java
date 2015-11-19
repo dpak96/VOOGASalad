@@ -18,7 +18,7 @@ public class Editor implements IEditor  {
 
   public Editor(ModelController modelController) {
     setGameEditor(new GameEditor());
-    setArticleEditor(new ArticleEditor());
+    setArticleEditor(new ArticleEditor(modelController));
     setPlayerEditor(new PlayerEditor());
     myModelController = modelController;
   }
