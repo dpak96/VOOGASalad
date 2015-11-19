@@ -34,11 +34,14 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(ruleTypeBox, 2, 1);
         ruleTypeBox.getItems().add("Gravity");
         ruleTypeBox.getItems().add("MoveRight");
-        ruleTypeBox.setOnAction(e -> addParameterFields(ruleTypeBox, menuPane));
+        GridPane paramGrid=new GridPane();
+        ruleTypeBox.setOnAction(e -> addParameterFields(ruleTypeBox, paramGrid));
+        menuPane.add(paramGrid, 1, 2, 2, 1);;
 
     }
 
     public void addParameterFields (ComboBox ruleBox, GridPane paramGrid) {
+        paramGrid.getChildren().clear();
         ruleParameters = new HashMap<String,Control>();
 
         System.out.println(resourcemanager.ResourceManager.getResourceManager()
@@ -52,7 +55,6 @@ public class RuleMenu extends AuthoringMenu {
      
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {
-           System.out.println(key);
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
             if (ruleParams.get(key).getName() == "model.Article")
                 ruleParameters.put(key,(super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++)));
