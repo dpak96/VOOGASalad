@@ -40,11 +40,11 @@ public class ToolbarContainer extends DraggableElement {
 
     private List<Button> populateButtonList () {
         List<Button> buttonList = new ArrayList<Button>();
-        buttonList.add(new PlatformButton(myController));
-        buttonList.add(new EnemyButton(myController));
-        buttonList.add(new CheckpointButton(myController));
-        buttonList.add(new BackgroundButton(myController));
-        buttonList.add(new ControlButton(myController));
+        buttonList.add(new PlatformButton());
+        buttonList.add(new EnemyButton());
+        buttonList.add(new CheckpointButton());
+        buttonList.add(new BackgroundButton());
+        buttonList.add(new ControlButton());
         buttonList.add(new RuleButton(myController));
         return buttonList;
     }

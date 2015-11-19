@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.sun.naming.internal.ResourceManager;
+import authoring.controller.AuthoringController;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -15,8 +16,11 @@ import model.controller.ModelController;
 
 public class RuleMenu extends AuthoringMenu {
 
-    public RuleMenu (String title) {
+    AuthoringController myController;
+    public RuleMenu (String title, AuthoringController controller) {
         super(title);
+
+        myController=controller;
 
     }
 
