@@ -1,9 +1,11 @@
 package model;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AddCollisionType {
@@ -15,29 +17,56 @@ public class AddCollisionType {
 	
 	public void add(String type){
 		// add new type name to the XML list
-		LoadCollisionTypeFromXML loadCollisionType = new LoadCollisionTypeFromXML();
-		ArrayList<String> loadType = loadCollisionType.getCollisionTypeList();
-		loadType.add(type);
-		WriteCollisionTypeToXML writeCollisionType = new WriteCollisionTypeToXML(loadType);
+		File typeFile = new File(".\\src\\model\\CollisionTypeLibrary.xml");
+		boolean typeFileExists = typeFile.exists();
+		if (typeFileExists){
+			LoadCollisionTypeFromXML loadCollisionType = new LoadCollisionTypeFromXML();
+			ArrayList<String> loadType = loadCollisionType.getCollisionTypeList();
+			loadType.add(type);
+			WriteCollisionTypeToXML writeCollisionType = new WriteCollisionTypeToXML(loadType);
+		}
+		else{
+			List<String> newString = new ArrayList<String>();
+			newString.add(type);
+			WriteCollisionTypeToXML newCollisionType = new WriteCollisionTypeToXML(newString);
+		}
 		
-		for (String str: nameList){
-			LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(str);
-			double[][] tempMatrix = loadMatrix.getMatrix();
-			double[][] newMatrix = new double[tempMatrix.length+1][tempMatrix.length+1];
-			for (int i = 0; i < newMatrix.length; i++){
-				for (int j = 0; j < newMatrix.length; j++){
-					if (i < newMatrix.length-1){
-						newMatrix[i][j] = tempMatrix[i][j];
-					}
-					else{
-						if (str.equals("Damage")){
-							newMatrix[i][j] = 0;
+		File matrixFile = new File(".\\src\\model\\CollisionTypeLibrary.xml");
+		boolean matrixFileExists = typeFile.exists();
+		double[][] outputMatrix;
+		if (matrixFileExists){
+			for (String str: nameList){
+				LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(str);
+				double[][] tempMatrix = loadMatrix.getMatrix();
+				outputMatrix = new double[tempMatrix.length+1][tempMatrix.length+1];
+				for (int i = 0; i < outputMatrix.length; i++){
+					for (int j = 0; j < outputMatrix.length; j++){
+						if (i < outputMatrix.length-1){
+							outputMatrix[i][j] = tempMatrix[i][j];
 						}
 						else{
-							newMatrix[i][j] = 1;
+							if (str.equals("Damage")){
+								outputMatrix[i][j] = 0;
+							}
+							else{
+								outputMatrix[i][j] = 1;
+							}
 						}
 					}
 				}
+				WriteMatrixToXML writer = new WriteMatrixToXML(outputMatrix, str);
+			}
+		}
+		else{
+			for (String str: nameList){
+				double[][] singleCell = new double[1][1];
+				if (str.equals("Damage")){
+					singleCell[0][0] = 0;
+				}
+				else{
+					singleCell[0][0] = 1;
+				}
+				WriteMatrixToXML cellWriter = new WriteMatrixToXML(singleCell, str);
 			}
 		}
 	}
