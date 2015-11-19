@@ -1,6 +1,5 @@
 package uibasics;
 
-import java.util.ResourceBundle;
 import action.controller.ActionController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,7 +8,6 @@ import main.GraphicHandler;
 import menu.MenuController;
 import model.controller.ModelController;
 import properties.VoogaProperties;
-import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
 
