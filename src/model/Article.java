@@ -160,5 +160,13 @@ public class Article {
 		return myCollisions.get(article);
 	}
 	
+	public int getLife(){
+		return myLife.getLife();
+	}
+	
+	public double getHealth(){
+		return myLife.getHealth();
+	}
+	
 	
 }

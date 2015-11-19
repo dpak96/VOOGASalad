@@ -9,9 +9,7 @@ import observer.controller.ObserverController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIBasics;
-
 import uibasics.UICore;
-import uibasics.UIStackPane;
 
 
 import java.util.ResourceBundle;
@@ -39,7 +37,6 @@ public class SuperController {
   }
 
   public Scene init(GameCreation gameCreation){
-      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
       Scene mainScene = uiCore.getScene();
       return mainScene;
   }
