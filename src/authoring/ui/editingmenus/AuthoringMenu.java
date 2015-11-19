@@ -8,11 +8,12 @@ import model.Article;
 
 
 public abstract class AuthoringMenu implements IMenuAction {
-    protected MenuBuilder componentAdder=new MenuBuilder();
-    
-    public AuthoringMenu(String title){
+    protected MenuBuilder componentAdder = new MenuBuilder();
+
+    public AuthoringMenu (String title) {
         showMenu(title);
     }
+
     public void showMenu (String title) {
 
         Dialog propertyMenu = new Dialog();
@@ -23,11 +24,11 @@ public abstract class AuthoringMenu implements IMenuAction {
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
 
-
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
 
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
-                .ifPresent(action -> this.executeYourMenuFunction() );;
+                .ifPresent(action -> this.executeYourMenuFunction());
+        ;
     }
 
     protected abstract void populateMenu (GridPane menuPane);

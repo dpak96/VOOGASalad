@@ -1,6 +1,7 @@
 package uibasics;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import model.Article;
 import model.Model;
 import model.controller.ModelController;
+import startscreen.GameCreation;
+import startscreen.GameCreation.Mode;
 
 public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
@@ -28,15 +31,20 @@ public class UIStackPane extends StackPane implements Observer {
 	public void initializePanes() {
 		edit = true;
 		myUIBasics = new UIBasics();
-
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
+	}
+	
+	public void initPanes(GameCreation game) {
+		this.getChildren().clear();
 		this.getChildren().add(myUIBasics.getPane());
-//		if (edit) //currently inactive
-//			this.getChildren().add(myAuthoringControllerPane);
-//		else
-//			this.getChildren().add(myGamePlayer);
-		this.getChildren().add(myAuthoringControllerPane);
+		if (game.getMode() == Mode.play) {
+			edit=false;
+			this.getChildren().add(myGamePlayer);
+		} else {
+			edit=true;
+			this.getChildren().add(myAuthoringControllerPane);
+		}
 	}
 	
 	public void toggle() {
@@ -67,12 +75,9 @@ public class UIStackPane extends StackPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		@SuppressWarnings("unchecked")
-//		ArrayList<Article> articles = (ArrayList<Article>) arg;
 		Model model = (Model) o;
-		ArrayList<Article> articles = (ArrayList<Article>) model.getArticles();
-		myUIBasics.update(articles);
-		myGamePlayer.update(articles);
+		myUIBasics.update(model.getArticles());
+		myGamePlayer.update(model.getArticles(), model.getCharacter());
 	}
 
 }

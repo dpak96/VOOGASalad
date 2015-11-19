@@ -37,7 +37,6 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runArticleEvents();
 		runArticleUpdates();
-		
 		myModelController.notifyObservers();
 		
 	}
@@ -51,9 +50,10 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				if(myCollisionManager.didCollide(first, second)){
-					first.addCollision(second, new CollisionInformation());
-					second.addCollision(first, new CollisionInformation());
+				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				if(temp.isRealCollision()){
+					first.addCollision(second, temp);
+					second.addCollision(first, temp);
 				}
 			}
 		}

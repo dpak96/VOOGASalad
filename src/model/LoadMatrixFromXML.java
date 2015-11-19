@@ -29,9 +29,8 @@ private double[][] myMatrix;
 		NodeList rowList = doc.getElementsByTagName("Row");
 		for (int i = 0; i < rowList.getLength(); i++)
 		{
-			Node rowNode = rowList.item(i);
-			Element rowElement = (Element) rowNode;
-			String tempStr = rowElement.getElementsByTagName("Row").item(0).getTextContent();
+			Element rowElement = (Element) rowList.item(i);			
+			String tempStr = rowElement.getAttribute("RowString");
 			String[] numStr = tempStr.split(",");
 			for (int j = 0; j < rowList.getLength(); j++){
 				myMatrix[i][j] = Double.parseDouble(numStr[j]);
