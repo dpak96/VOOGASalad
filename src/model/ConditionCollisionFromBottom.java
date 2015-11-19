@@ -12,6 +12,10 @@ public class ConditionCollisionFromBottom extends Condition{
 		super(parameters);
 	}
 	
+	public ConditionCollisionFromBottom(String name, CollisionInformation wu){
+		super(name);
+		myCollisionInformation = wu;
+	}
 	@Override
 	public boolean isMet() {		
 		return myCollisionInformation.getCollideDirection().equals(BOTTOM);		
