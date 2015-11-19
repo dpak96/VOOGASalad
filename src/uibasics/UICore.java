@@ -39,6 +39,10 @@ public class UICore {
     myRoot.setPrefWidth(props.getSceneWidth());
     myRoot.setPrefHeight(props.getSceneHeight());
   }
+  
+  public void initPanels(GameCreation game) {
+	uiStackPane.initPanes(game);
+  }
 
   public Scene getScene() {
     myScene.getStylesheets().addAll("authoring/Overlay.css");
