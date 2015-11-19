@@ -5,6 +5,7 @@ import gameengine.*;
 import java.util.*;
 
 import model.*;
+import model.XMLutility.xmlUtility;
 import model.factory.*;
 import resourcemanager.ResourceManager;
 
@@ -12,13 +13,14 @@ import resourcemanager.ResourceManager;
 public class ModelController implements IModelController {
 	private Model myModel;
 	private ModelFactory myModelFactory;
-	
+	private xmlUtility myXMLUtility;
 	//WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
 	 
 	public ModelController(Model model){
 		myModel = model;
 		myModel.initialize();
 		myModelFactory = new ModelFactory();
+		myXMLUtility = new xmlUtility(myModel);
 	}
 	
 	public Map<String, Class<?>> getParameters(String className){
@@ -91,6 +93,10 @@ public class ModelController implements IModelController {
 	
 	public void notifyObservers(){
 		myModel.notifyObservers();
+	}
+
+	public void save(){
+		myXMLUtility.saveModel("Tester");
 	}
 
 }
