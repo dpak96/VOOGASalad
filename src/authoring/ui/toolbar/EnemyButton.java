@@ -6,11 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class EnemyButton extends ToolbarButtons{
+public class EnemyButton extends ToolbarButton{
 
     public EnemyButton () {
         super();
-        this.setGraphic(super.setImage("Goomba", 50, 50));
+        this.setGraphic(super.setImage(super.toolbarProperties.getString("ENEMY")));
         
 
        // this.setOnAction(e -> placeYourObject());
