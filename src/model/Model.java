@@ -39,8 +39,8 @@ public class Model extends Observable{
 		myButtonMap = new HashMap<String, List<Event>>();
 		myButtonMap.put("default", new ArrayList<Event>());
 		myArticles = new ArrayList<Article>();
-		myViewpoint = new Article("GoombaRefinedAGain.png", 100, 100);
-		myCharacter = new Article("GoombaRefinedAGain.png", 100, 100);
+		myViewpoint = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Goomba", 100, 100);
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()
