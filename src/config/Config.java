@@ -4,12 +4,12 @@ import java.util.ResourceBundle;
 import resourcemanager.ResourceManager;
 
 public class Config {
-	private static final String CONFIG_FILE = "properties/config";
+	private static final String CONFIG_FILE = "resources.properties/config";
 	private static final Config config = new Config();
 	private ResourceBundle stateGroupsBundle;
 	
 	private Config() {
-		stateGroupsBundle = ResourceManager.getResourceManager().getPm().getResourceMap().get(config);
+		stateGroupsBundle = ResourceManager.getResourceManager().getPm().getResourceMap().get("config");
 	}
 
 	public static Integer getInt(String s) {
@@ -31,6 +31,8 @@ public class Config {
 	}
 	
 	public static String[] getStringArray(String s) {
+		System.out.println(s);
+		System.out.println(config.stateGroupsBundle);
 		String temp = config.stateGroupsBundle.getString(s);
 		String[] ret = temp.split(",");
 		return ret;

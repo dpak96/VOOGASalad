@@ -1,5 +1,5 @@
 <?xml version="1.0"?><model.Model>
-  <changed>false</changed>
+  <changed>true</changed>
   <obs/>
   <myEvents/>
   <myButtonMap>
@@ -28,6 +28,8 @@
       <myCollisions/>
     </model.Article>
   </myArticles>
+  <myExecutables/>
+  <myConditions/>
   <myViewpoint>
     <myImageFile>Goomba</myImageFile>
     <myXBuffer>0.0</myXBuffer>

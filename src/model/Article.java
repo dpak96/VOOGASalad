@@ -4,6 +4,8 @@ import java.util.*;
 
 
 import gameengine.CollisionInformation;
+import javafx.scene.image.Image;
+import resourcemanager.ResourceManager;
 
 
 /**
@@ -20,7 +22,7 @@ public class Article {
 	private double myWidth;
 	private double myHeight;
 	private List<Event> myEvents;
-	private Life myLife;
+	private Life myLife = new Life();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
 	private String myCollisionType;
@@ -28,7 +30,10 @@ public class Article {
 	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
-		myPosition = new Position(x, y, direction);
+		Image img = ResourceManager.getResourceManager().getImage(myImageFile);
+		myHeight = img.getHeight();
+		myWidth = img.getWidth();
+		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myEvents = new ArrayList<Event>();
@@ -146,6 +151,9 @@ public class Article {
 		return myBitMap;
 	}
 	
+	public void destroyBitMap() {
+		myBitMap = null;
+	}
 	public void clearCollisions(){
 		myCollisions.clear();
 	}
