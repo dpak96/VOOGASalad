@@ -1,5 +1,7 @@
 package authoring.ui.toolbar;
 
+import authoring.ui.editingmenus.RuleMenu;
+
 public class RuleButton extends ToolbarButton {
 
     public RuleButton(){
@@ -8,7 +10,7 @@ public class RuleButton extends ToolbarButton {
     }
     @Override
     public void placeYourObject () {
-        // TODO Auto-generated method stub
+        RuleMenu ruleDialog=new RuleMenu("Rule Menu");
         
     }
 

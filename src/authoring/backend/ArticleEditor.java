@@ -2,14 +2,15 @@ package authoring.backend;
 
 import java.util.List;
 import model.Article;
-
+import model.controller.ModelController;
 
 
 public class ArticleEditor implements IArticleEditor {
   private Article article;
+  private ModelController myModelController;
 
-  public ArticleEditor() {
-
+  public ArticleEditor(ModelController modelController) {
+    myModelController = modelController;
   }
 
   public Article getArticle() {
@@ -21,14 +22,12 @@ public class ArticleEditor implements IArticleEditor {
   }
 
   @Override
-  public void createNewArticleAndPlace(String name,
-                                       String imageFileName,
-                                       Double x,
-                                       Double y,
-                                       Boolean direction) {
-    // TODO Auto-generated method stub
-
+  public void createNewArticleAndPlace(String name, String imageFileName, Double x, Double y, Boolean direction) {
+    myModelController.createArticle(imageFileName,x,y,direction);
   }
+
+
+
 
   @Override
   public void createNewArticle(String name, String imageFileName, Boolean direction) {
@@ -95,6 +94,5 @@ public class ArticleEditor implements IArticleEditor {
     // TODO Auto-generated method stub
 
   }
-
 
 }

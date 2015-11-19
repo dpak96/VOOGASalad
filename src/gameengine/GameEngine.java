@@ -8,7 +8,7 @@ import java.util.*;
 import model.Article;
 import model.Event;
 import model.controller.ModelController;
-
+import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
 import model.Article;
@@ -28,7 +28,7 @@ public class GameEngine implements IGameEngine {
 	@Override
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
-		myCharacter = myModelController.getCharacter();
+		setMyCharacter(myModelController.getCharacter());
 		
 		myActiveArticles = getActiveArticles();
 		
@@ -51,16 +51,19 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				if(myCollisionManager.didCollide(first, second)){
-					first.addCollision(second, new CollisionInformation());
-					second.addCollision(first, new CollisionInformation());
+				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				if(temp.isRealCollision()){
+					first.addCollision(second, temp);
+					second.addCollision(first, temp);
 				}
 			}
 		}
 	}
 	
 	private void runButtonPress(String input){
+		System.out.println(input);
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
+		System.out.println(buttonEvents == null);
 		for(Event e : buttonEvents){
 			e.fire();
 		}
@@ -126,6 +129,14 @@ public class GameEngine implements IGameEngine {
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
 		return x > minX && x < maxX && y > minY && y < maxY;
 	}
+
+  public Article getMyCharacter() {
+    return myCharacter;
+  }
+
+  public void setMyCharacter(Article myCharacter) {
+    this.myCharacter = myCharacter;
+  }
 	
 	/*
 	public static void main(String args[]) {

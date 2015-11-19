@@ -5,16 +5,10 @@ package model;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import resourcemanager.ResourceManager;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class BitMap {
 	private Position[][] myBitMap;
@@ -23,7 +17,8 @@ public class BitMap {
 
 	public BitMap(String myImage, Double x, Double y) {
 		System.out.println(myImage);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImage));
+		
+		Image image = ResourceManager.getResourceManager().getIm().getImageMap().get("Goomba");
 		BufferedImage bfImage = SwingFXUtils.fromFXImage(image, null);
 		BufferedImage convertedImg = new BufferedImage(bfImage.getWidth(), bfImage.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 	    convertedImg.getGraphics().drawImage(bfImage, 0, 0, null);
@@ -35,7 +30,6 @@ public class BitMap {
 	}
 
 	private static Position[][] makeBitMap(BufferedImage image, Double x, Double y) {
-		System.out.println("making");
 		 final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 	      final int width = image.getWidth();
 	      final int height = image.getHeight();

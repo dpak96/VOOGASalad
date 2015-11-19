@@ -29,18 +29,22 @@ public class ModelFactory {
 		return temp;
 	}
 
-	public Map<String, Class> getParameters(String className){
-		Class<?> cls;
+	public Map<String, Class<?>> getParameters(String className){
+		Class<?> cls = String.class;
 		try {
 			cls = Class.forName(className);
-			Constructor<?> cons = cls.getConstructor();
-			Process temp = (Process) cons.newInstance();
-			//return temp.getParameters();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		Map<String, Class<?>> parameterMap = new HashMap<String, Class<?>>();
+		while(!cls.toString().equals("class java.lang.Object")){
+			for(Field field : cls.getDeclaredFields()) {
+			    parameterMap.put(field.getName(), field.getType());
+			}
+			cls = cls.getSuperclass();
+		}
+		return parameterMap;
 	}
 
 	public Event creatEvent(String name, List<Condition> conditions, List<Executable> executables){

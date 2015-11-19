@@ -1,13 +1,13 @@
 package model;
 
+import java.util.Map;
+
 public class ExecutableMoveHorizontal extends Executable{
 
 	private double myDisplacement;
 	
-	public ExecutableMoveHorizontal(String name, Article actor, double displacement) {
-		super(name, actor);
-		myDisplacement = displacement;
-		// TODO Auto-generated constructor stub
+	public ExecutableMoveHorizontal(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override

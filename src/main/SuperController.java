@@ -6,11 +6,10 @@ import javafx.scene.Scene;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
+import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIBasics;
 import uibasics.UICore;
-import uibasics.UIStackPane;
-
 import java.util.ResourceBundle;
 
 
@@ -21,22 +20,23 @@ public class SuperController {
   private ModelController modelController;
   private Model model;
   private GraphicHandler myGraphicHandler;
+
   private UICore uiCore;
-  
-  public SuperController(GraphicHandler graphicHandler){
+
+  public SuperController(GraphicHandler graphicHandler) {
+    model = new Model();
     myGraphicHandler = graphicHandler;
-    ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-    uiCore = new UICore(myGraphicHandler, resource);
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
-    observerController = new ObserverController(model, uiCore.getUIBasics());
+    uiCore = new UICore(myGraphicHandler, actionController, modelController);
+    observerController = new ObserverController(model, uiCore.getUIStackPane());
+
   }
 
-  public Scene init(GameCreation gameCreation){
-      ResourceBundle resource = ResourceBundle.getBundle("properties/english");
-      Scene mainScene = uiCore.getScene();
-      return mainScene;
+  public Scene init(GameCreation gameCreation) {
+    Scene mainScene = uiCore.getScene();
+    return mainScene;
   }
 
   public ModelController getModelController() {

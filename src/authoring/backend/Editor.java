@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import model.Article;
 import model.Game;
 import model.Player;
+import model.controller.ModelController;
 
 
 public class Editor implements IEditor  {
@@ -13,11 +14,13 @@ public class Editor implements IEditor  {
   private ArticleEditor articleEditor;
   private PlayerEditor playerEditor;
   private UserInterfaceEditor userInterfaceEditor;
+  private ModelController myModelController;
 
-  public Editor() {
+  public Editor(ModelController modelController) {
     setGameEditor(new GameEditor());
-    setArticleEditor(new ArticleEditor());
+    setArticleEditor(new ArticleEditor(modelController));
     setPlayerEditor(new PlayerEditor());
+    myModelController = modelController;
   }
 
   public ArticleEditor getArticleEditor() {

@@ -1,14 +1,20 @@
 package model;
 
+import java.util.Map;
+
 import gameengine.CollisionInformation;
 
 public class ConditionCollisionFromLeft extends Condition{
 	private CollisionInformation myCollisionInformation;
 	private final String LEFT = "left";
-	public ConditionCollisionFromLeft(String name, CollisionInformation collisionInformation) {
-		// TODO Auto-generated constructor stub
+	
+	public ConditionCollisionFromLeft(Map<String, Object> parameters){
+		super(parameters);
+	}
+	
+	public ConditionCollisionFromLeft(String name, CollisionInformation wu){
 		super(name);
-		myCollisionInformation = collisionInformation;
+		myCollisionInformation = wu;
 	}
 	
 	@Override

@@ -5,15 +5,16 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.Stage;
+import resourcemanager.ResourceManager;
 
 public class MenuPanel extends MenuBar {
 
 	private ResourceBundle myResource;
 	private MenuController myMenuController;
 
-	public MenuPanel(ResourceBundle resource, MenuController menuController) {
+	public MenuPanel(MenuController menuController) {
 		super();
-		myResource = resource;
+		myResource = ResourceManager.getResourceManager().getPm().getResourceMap().get("english");
 		myMenuController = menuController;
 		getMenus().addAll(fileMenu(), navigateMenu(), helpMenu());
 	}

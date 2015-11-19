@@ -38,7 +38,9 @@ public class DragAndDropBoard extends StackPane {
             public void handle(DragEvent event) {
                 /* data dropped */
                 System.out.println("onDragDropped");
-                authoringController.getMouseCoordinates(event.getX(),event.getY(), (ToolbarButton) event.getGestureSource());
+
+                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (ToolbarButton) event.getGestureSource());
+
                 /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
                 boolean success = false;
