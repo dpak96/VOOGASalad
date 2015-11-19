@@ -6,6 +6,8 @@ public class Model extends Observable{
 	private List<Event> myEvents;
 	private Map<String, List<Event>> myButtonMap;
 	private List<Article> myArticles;
+	private List<Executable> myExecutables;
+	private List<Condition> myConditions;
 	private Article myViewpoint;
 	private Article myCharacter;
 
@@ -40,6 +42,8 @@ public class Model extends Observable{
 		myButtonMap = new HashMap<String, List<Event>>();
 		myButtonMap.put("default", new ArrayList<Event>());
 		myArticles = new ArrayList<Article>();
+		myExecutables = new ArrayList<Executable>();
+		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Goomba", 100, 100);
 	}
@@ -73,4 +77,29 @@ public class Model extends Observable{
 	public void removeArticle(Article article) {
 		myArticles.remove(article);		
 	}
+
+	public void addExecutable(Executable executable) {
+		myExecutables.add(executable);
+	}
+	
+	public void removeExecutable(Executable executable){
+		myExecutables.remove(executable);
+	}
+	
+	public void addCondition(Condition condition){
+		myConditions.add(condition);
+	}
+	
+	public void removeCondition(Condition condition){
+		myConditions.remove(condition);
+	}
+
+	public void addEvent(Event newEvent) {
+		myEvents.add(newEvent);
+	}
+	
+	public void removeEvent(Event event){
+		myEvents.remove(event);
+	}
+	
 }
