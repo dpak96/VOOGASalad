@@ -37,10 +37,5 @@ public class GraphicHandler {
     public void startUp(GameCreation gameCreation){
         currentStage.setScene(superController.init(gameCreation));
     }
-
-
-
-
-
-
+    
 }

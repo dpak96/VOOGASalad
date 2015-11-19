@@ -73,11 +73,10 @@ public class ModelFactory {
 			return test;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
-
-
 	public Executable createExecutable(String name, double value, Article actor, FactoryData data){
 		try {
 			HashMap<String, Class> asdf = new HashMap<String, Class>();
@@ -92,7 +91,7 @@ public class ModelFactory {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
 }
