@@ -9,7 +9,7 @@ public abstract class Process {
 	public Process(Map<String, Object> parameters){
 		Class<?> cls = this.getClass();
 		while(!cls.toString().equals("class java.lang.Object")){
-			for(Field field : this.getClass().getDeclaredFields()){
+			for(Field field : cls.getDeclaredFields()){
 				try {
 					field.set(this, parameters.get(field.getName()));
 				} catch (Exception e){

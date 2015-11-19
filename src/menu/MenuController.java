@@ -18,6 +18,7 @@ public class MenuController {
     private GraphicHandler myGraphicHandler;
     private MenuPanel myMenuPanel;
     private ModelController myModelController;
+    private GameCreation game;
 
 
     public MenuController(GraphicHandler graphicHandler, ModelController modelController){
