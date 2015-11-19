@@ -4,6 +4,7 @@ import gameengine.*;
 
 import java.util.*;
 
+import javafx.stage.Window;
 import model.*;
 import model.XMLutility.xmlUtility;
 import model.factory.*;
@@ -128,8 +129,8 @@ public class ModelController implements IModelController {
 		myModel.notifyObservers();
 	}
 
-	public void save(){
-		myXMLUtility.saveModel("Tester");
+	public void save(Window wind){
+		myXMLUtility.saveModel(wind);
 	}
 
 }
