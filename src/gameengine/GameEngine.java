@@ -8,7 +8,7 @@ import java.util.*;
 import model.Article;
 import model.Event;
 import model.controller.ModelController;
-
+import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
 import model.Article;
@@ -19,16 +19,18 @@ public class GameEngine implements IGameEngine {
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
+	private ResourceManager resourceManager;
 	
-	public GameEngine(ModelController modelController){
+	public GameEngine(ModelController modelController, ResourceManager rm){
 		myModelController = modelController;
 		myCollisionManager = new CollisionManager();
+		resourceManager = rm;
 	}
 	
 	@Override
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
-		myCharacter = myModelController.getCharacter();
+		setMyCharacter(myModelController.getCharacter());
 		
 		myActiveArticles = getActiveArticles();
 		
@@ -126,6 +128,22 @@ public class GameEngine implements IGameEngine {
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
 		return x > minX && x < maxX && y > minY && y < maxY;
 	}
+
+  public ResourceManager getResourceManager() {
+    return resourceManager;
+  }
+
+  public void setResourceManager(ResourceManager resourceManager) {
+    this.resourceManager = resourceManager;
+  }
+
+  public Article getMyCharacter() {
+    return myCharacter;
+  }
+
+  public void setMyCharacter(Article myCharacter) {
+    this.myCharacter = myCharacter;
+  }
 	
 	/*
 	public static void main(String args[]) {

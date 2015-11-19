@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.GraphicHandler;
+import resourcemanager.ResourceManager;
 import startscreen.StartScreenController;
 
 import java.io.*;
@@ -14,9 +15,9 @@ public class MenuController {
     private MenuPanel myMenuPanel;
 
 
-    public MenuController(GraphicHandler graphicHandler, ResourceBundle resource){
+    public MenuController(GraphicHandler graphicHandler, ResourceManager resourceManager){
         myGraphicHandler = graphicHandler;
-        myMenuPanel = new MenuPanel(resource, this);
+        myMenuPanel = new MenuPanel(resourceManager, this);
     }
 
     public void newStart(){

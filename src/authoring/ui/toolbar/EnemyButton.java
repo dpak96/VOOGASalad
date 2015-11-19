@@ -7,11 +7,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnemyButton extends ToolbarButton{
+  private final String NAME = "ENEMY";
+
 
     public EnemyButton () {
         super();
-        this.setGraphic(super.setImage(super.toolbarProperties.getString("ENEMY")));
-        
+        this.setGraphic(super.setImage(super.toolbarProperties.getString(NAME)));
+        this.setName(NAME);
+        this.setImageName(super.toolbarProperties.getString(NAME));
 
        // this.setOnAction(e -> placeYourObject());
     }
