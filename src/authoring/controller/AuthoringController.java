@@ -32,10 +32,11 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public void getMouseCoordinates(double x, double y, Object event){
+  public void createArticleFromDragAndDrop(double x, double y, Object event){
     System.out.print(x);
     System.out.print(y);
     System.out.print(event);
+    editor.getArticleEditor().createNewArticleAndPlace("placeholder", imageFileName, x, y, true);
     
   }
 }
