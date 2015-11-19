@@ -8,7 +8,7 @@ public class Model extends Observable{
 	private List<Article> myArticles;
 	private Article myViewpoint;
 	private Article myCharacter;
-	
+
 	
 	public List<Event> getEvents(){
 		return myEvents;
