@@ -12,15 +12,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class LoadCollisionTypeFromXML {
-private List<String> collisionTypeList= new ArrayList<String>();
-	public LoadCollisionTypeFromXML(String fileName) {
+	private final String FILENAME = "CollisionTypeLibrary";
+	private List<String> collisionTypeList= new ArrayList<String>();
+	public LoadCollisionTypeFromXML() {
 		// TODO Auto-generated constructor stub
-		load(fileName);
+		load();
 	}
 	
-	public void load(String fileName){
+	public void load(){
 		try {
-			File fXmlFile = new File(".\\src\\model\\"+fileName+".xml");
+			File fXmlFile = new File(".\\src\\model\\"+FILENAME+".xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
