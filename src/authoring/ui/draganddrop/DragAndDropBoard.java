@@ -60,8 +60,8 @@ public class DragAndDropBoard extends StackPane {
         try {
             authoringController.removeArticle(n);
             HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
-            highlightedArticle.setTranslateX(n.getX() -460);
-            highlightedArticle.setTranslateY(n.getY() - 268);
+            highlightedArticle.setTranslateX(n.getX() -408);
+            highlightedArticle.setTranslateY(n.getY() - 270);
             authoringController.removeArticle(n);
             authoringController.setHighlighted(true);
             getChildren().add(highlightedArticle);
