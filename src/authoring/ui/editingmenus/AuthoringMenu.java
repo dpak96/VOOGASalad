@@ -7,10 +7,13 @@ import javafx.scene.layout.GridPane;
 import model.Article;
 
 
-public abstract class PropertyMenu implements IMenuAction {
+public abstract class AuthoringMenu implements IMenuAction {
     protected Object objectToEdit;
     protected MenuBuilder componentAdder=new MenuBuilder();
     
+    public AuthoringMenu(String title){
+        showMenu(title);
+    }
     public void showMenu (String title) {
 
         Dialog propertyMenu = new Dialog();

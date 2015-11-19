@@ -13,10 +13,11 @@ import javafx.stage.Popup;
 import model.Article;
 
 
-public class EnemyProperties extends PropertyMenu {
+public class EnemyProperties extends AuthoringMenu {
 
-    public EnemyProperties(Article selectedObject){
-        super.objectToEdit=selectedObject;
+    public EnemyProperties(String title){
+        super(title);
+       // super.objectToEdit=selectedObject;
     }
     
     protected void populateMenu (GridPane menuGrid) {

@@ -10,8 +10,8 @@ public class RuleButton extends ToolbarButton {
     }
     @Override
     public void placeYourObject () {
-        RuleMenu ruleDialog=new RuleMenu();
-        ruleDialog.showMenu("Rule Creator" );
+        RuleMenu ruleDialog=new RuleMenu("Rule Menu");
+        
     }
 
     

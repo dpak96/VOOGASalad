@@ -7,7 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.Article;
 
-public class RuleMenu extends PropertyMenu{
+public class RuleMenu extends AuthoringMenu{
+
+    public RuleMenu (String title) {
+        super(title);
+
+    }
 
     ArrayList<String> ruleParameters=new ArrayList<String>();
     
