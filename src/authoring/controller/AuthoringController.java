@@ -6,15 +6,16 @@ import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import model.controller.ModelController;
 
 
 public class AuthoringController implements IAuthoringController {
   private Editor editor;
   private AuthoringUI ui;
 
-  public AuthoringController() {
+  public AuthoringController(ModelController modelController) {
     ui = new AuthoringUI(this);
-    editor = new Editor();
+    editor = new Editor(modelController);
   }
 
   public Editor getEditor() {
