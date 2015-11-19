@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import uibasics.Layout;
+import uibasics.UICore;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;

@@ -50,6 +50,10 @@ public class UIStackPane extends Observable {
 		return myStackPane;
 	}
 	
+	public UIBasics getUIBasics(){
+		return myUIBasics;
+	}
+	
 	private void handleKeyInput(KeyCode key){
 		notifyObservers(key.toString());
 	}
