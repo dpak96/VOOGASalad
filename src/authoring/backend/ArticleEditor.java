@@ -4,7 +4,6 @@ import java.util.List;
 import model.Article;
 
 
-
 public class ArticleEditor implements IArticleEditor {
   private Article article;
 
@@ -26,7 +25,6 @@ public class ArticleEditor implements IArticleEditor {
                                        Double x,
                                        Double y,
                                        Boolean direction) {
-    // TODO Auto-generated method stub
 
   }
 
@@ -95,6 +93,5 @@ public class ArticleEditor implements IArticleEditor {
     // TODO Auto-generated method stub
 
   }
-
 
 }

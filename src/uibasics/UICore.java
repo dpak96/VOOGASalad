@@ -2,15 +2,16 @@ package uibasics;
 
 import java.util.ResourceBundle;
 
-import javafx.scene.Group;
+import action.controller.ActionController;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import main.GraphicHandler;
 import menu.MenuController;
-import menu.MenuPanel;
 import properties.VoogaProperties;
+import resourcemanager.ResourceManager;
+import startscreen.GameCreation;
 
 public class UICore {
 	
@@ -19,17 +20,19 @@ public class UICore {
 	private MenuController menuController;
 	private Scene myScene;
 	
-	public UICore (GraphicHandler graphicHandler, ResourceBundle resources){
+	public UICore (GraphicHandler graphicHandler, ResourceManager resourceManager, ActionController actionController){
 		VoogaProperties props = new VoogaProperties();
 		myRoot = new BorderPane();
-		menuController = new MenuController(graphicHandler, resources);
+		menuController = new MenuController(graphicHandler, resourceManager);
 		uiStackPane = new UIStackPane();
 		myScene = new Scene(myRoot, props.getSceneWidth(), props.getSceneHeight());
 		borderInit(props);
+		myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
+		myScene.setOnMouseClicked(e -> actionController.update(e.toString()));
 	}
 	
 	public void borderInit(VoogaProperties props) {
-		myRoot.setCenter(uiStackPane.getStack());
+		myRoot.setCenter(uiStackPane);
 		myRoot.setTop(menuController.getMenu());
 		myRoot.setPrefWidth(props.getSceneWidth());
 		myRoot.setPrefHeight(props.getSceneHeight());
@@ -44,6 +47,10 @@ public class UICore {
 		return uiStackPane.getStack();
 	}
 	
+	public UIStackPane getUIStackPane() {
+		return uiStackPane;
+	}
+	
 	public UIBasics getUIBasics() {
 		return uiStackPane.getUIBasics();
 	}
@@ -51,5 +58,6 @@ public class UICore {
 	public MenuController getMenu() {
 		return menuController;
 	}
+	
 }
 

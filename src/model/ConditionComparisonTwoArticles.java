@@ -1,6 +1,7 @@
  package model;
 import java.lang.reflect.*;
-public class ConditionComparison extends Condition{
+import java.util.Map;
+public class ConditionComparisonTwoArticles extends Condition{
 	
 	private Article myFirst;
 	private String myFirstVariable;
@@ -9,14 +10,9 @@ public class ConditionComparison extends Condition{
 	private String myComparison;
 	
 	
-	public ConditionComparison(String name, Article first, String firstVariable,
-			Article second, String secondVariable, String comparison) {
-		super(name);
-		myFirst = first;
-		myFirstVariable = firstVariable;
-		mySecond = second;
-		mySecondVariable = secondVariable;
-		myComparison = comparison;
+	
+	public ConditionComparisonTwoArticles(Map<String, Object> parameters){
+		super(parameters);
 	}
 
 	@Override
@@ -32,22 +28,11 @@ public class ConditionComparison extends Condition{
 			return (boolean) compare.invoke(m, firstValue, secondValue);
 		}
 		catch(Exception e){
-			System.out.println("error lol");
 			return false;
 		}
 	}
 	
-	private class Maths{
-		public boolean Equals(double a, double b){
-			return a == b;
-		}
-		public boolean LessThan(double a, double b){
-			return a < b;
-		}
-		public boolean GreaterThan(double a, double b){
-			return a > b;
-		}
-	}
+	
 	/*
 	public static void main(String[] args){
 		Article a = new Article("a", 0, 0, false);

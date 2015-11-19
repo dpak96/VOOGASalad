@@ -16,8 +16,17 @@
 }
 
 
+.Test {
+    -fx-pref-height: 500;
+    -fx-pref-width: 200;
+}
+
 
 .Overlayed{
+    -fx-pref-height: 500;
+    -fx-pref-width: 200;
+    -fx-min-height: 500;
+    -fx-min-width: 200;
     -fx-background-color: rgba(64, 64, 64, 0.85);
 }
 

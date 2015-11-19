@@ -1,65 +1,72 @@
 package uibasics;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import authoring.controller.AuthoringController;
-import javafx.scene.input.KeyCode;
+import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import model.Article;
 
-public class UIStackPane extends Observable {
-	private StackPane myStackPane;
+public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
-	private AuthoringController authoringController;
-	private Pane myActive;
+	private AuthoringController myAuthoringController;
+	private GamePlayerOverlay myGamePlayer;
+	private boolean edit;
+	private Pane myAuthoringControllerPane;
 	
 	public UIStackPane() {
-		myStackPane = new StackPane();
 		initializePanes();
-		myStackPane.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-		myStackPane.setOnMouseClicked(e -> handleClick());
 	}
 	
 	public void initializePanes() {
+		edit = true;
 		myUIBasics = new UIBasics();
-		authoringController = new AuthoringController();
+		myAuthoringController = new AuthoringController();
+		myGamePlayer = new GamePlayerOverlay();
+		myAuthoringControllerPane = myAuthoringController.getUi().tester();
+		this.getChildren().add(myUIBasics.getPane());
 //		if (edit) //currently inactive
-			myActive = authoringController.getUi().tester();
+//			this.getChildren().add(myAuthoringControllerPane);
 //		else
-//			myActive = gamePlayerController.getPane();
-		myStackPane.getChildren().add(myUIBasics.getPane());
-		myStackPane.getChildren().add(myActive);
+//			this.getChildren().add(myGamePlayer);
+		this.getChildren().add(myAuthoringControllerPane);
 	}
 	
 	public void toggle() {
-//		if (edit) 
-//			myActive = gamePlayerController.getPane();
-//		else
-//			myActive = authoringController.getUi().tester();
+		this.getChildren().remove(this.getChildren().size()-1);
+		if (edit) {
+			this.getChildren().add(myGamePlayer);
+		} else {
+			this.getChildren().add(myAuthoringControllerPane);
+		}
+		edit=!edit;
 	}
 	
 	 public AuthoringController getAuthoringController() {
-		 return authoringController;
+		 return myAuthoringController;
 	 }
 
 	 public void setAuthoringController(AuthoringController authoringController) {
-		 this.authoringController = authoringController;
+		 this.myAuthoringController = authoringController;
 	 }
 	
 	public StackPane getStack(){
-		return myStackPane;
+		return this;
 	}
 	
 	public UIBasics getUIBasics(){
 		return myUIBasics;
 	}
-	
-	private void handleKeyInput(KeyCode key){
-		notifyObservers(key.toString());
-	}
-	
-	private void handleClick(){
-		notifyObservers("click");
+
+	@Override
+	public void update(Observable o, Object arg) {
+		@SuppressWarnings("unchecked")
+		ArrayList<Article> articles = (ArrayList<Article>) arg;
+		myUIBasics.update(articles);
+		myGamePlayer.update(articles);
 	}
 
 }
