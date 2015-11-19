@@ -8,6 +8,7 @@ import resourcemanager.ResourceManager;
 
 public class ActionController{
 	private GameEngine myGE;
+	private String input;
 	
 	public ActionController(GameEngine engine){
 		myGE = engine;
@@ -15,6 +16,7 @@ public class ActionController{
 	}
 
 	public void update(String arg1) {
+		input=arg1;
 		myGE.update(arg1);
 	}
 
