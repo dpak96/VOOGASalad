@@ -21,8 +21,8 @@ public class Setup extends Observable{
 		myRoot.getChildren().add(new Layout(graphicHandler, resource));
 		
 	}
-	
 	public Scene getScene(){
+		myScene.getStylesheets().add("authoring/Overlay.css");
 		return myScene;
 	}
 	
