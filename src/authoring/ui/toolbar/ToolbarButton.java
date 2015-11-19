@@ -13,8 +13,6 @@ import resourcemanager.ResourceManager;
 
 public abstract class ToolbarButton  extends DraggableElement implements IObjectPlacing {
    protected ResourceBundle toolbarProperties=ResourceManager.getResourceManager().getPm().getResourceMap().get("toolbar");
-   private String imageName;
-   private String name;
    
    private final int BUTTON_DIMENSION=50;
    public AuthoringController myController;

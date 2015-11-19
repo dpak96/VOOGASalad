@@ -47,7 +47,7 @@ public class Model extends Observable{
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 0, 0);
-		myCharacter = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Goomba", -100, -100);
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()

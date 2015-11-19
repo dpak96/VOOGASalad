@@ -81,7 +81,6 @@ public class GameEngine implements IGameEngine {
 	
 	private void runArticleEvents(){
 		for(Article article : allArticles){
-		  System.out.println("C");
 			List<Event> articleEvents = article.getEvents();
 			for(Event e : articleEvents){
 				e.fire();

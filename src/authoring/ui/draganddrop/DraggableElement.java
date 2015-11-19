@@ -13,7 +13,8 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
 public class DraggableElement extends Button {
-
+    protected String name;
+    protected String imageName;
 
 
     public void dragDetected(){
@@ -66,6 +67,14 @@ public class DraggableElement extends Button {
                 event.consume();
             }
         });
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getImageName(){
+        return imageName;
     }
 
 }
