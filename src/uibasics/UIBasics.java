@@ -18,24 +18,16 @@ public class UIBasics implements Observer {
 	private HashMap<String, Article> myBackArticles;
 	private List<ImageView> myFrontArticles;
 	private List<AbstractCommand> myCommands;
-	private AuthoringController authoringController;
-	private UIStackPane myStackPane;
 	
 	public UIBasics() {
-		//load("commands"); temporarily off
+		load("commands"); //temporarily off
 		myPane = new Pane();
 		//myPane.getChildren().add(new Rectangle(50, 50, 50, 50));
 		myBackArticles = new HashMap<String, Article>();
 		myFrontArticles = new ArrayList<ImageView>();
-		authoringController = new AuthoringController();
-		myStackPane = new UIStackPane();
-		myStackPane.addPane(myPane);
-		Authoring();
 	}
 
-	private void Authoring(){
-		myStackPane.addPane(authoringController.getUi().tester());
-	}
+
 
 	private void load(String identifier) {
 		myCommands = new ArrayList<AbstractCommand>();
@@ -47,7 +39,7 @@ public class UIBasics implements Observer {
 
 
 	public Pane getPane() {
-		return myStackPane.getStack();
+		return myPane;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -72,13 +64,4 @@ public class UIBasics implements Observer {
 		for (AbstractCommand c: myCommands)
 			c.update(article, img);
 	}
-
-  public AuthoringController getAuthoringController() {
-    return authoringController;
-  }
-
-  public void setAuthoringController(AuthoringController authoringController) {
-    this.authoringController = authoringController;
-  }
-	
 }

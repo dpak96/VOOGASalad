@@ -1,10 +1,10 @@
 package authoring.ui.toolbar;
 
-public class BackgroundButton extends ToolbarButtons {
+public class BackgroundButton extends ToolbarButton {
 
     public  BackgroundButton() {
         super();
-        this.setGraphic(super.setImage("background", 50, 50));
+        this.setGraphic(super.setImage(super.toolbarProperties.getString("BACKGROUND")));
     }
     @Override
     public void placeYourObject () {

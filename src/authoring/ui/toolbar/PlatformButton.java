@@ -5,11 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class PlatformButton extends ToolbarButtons{
+public class PlatformButton extends ToolbarButton{
 
     public PlatformButton () {
         super();
-        this.setGraphic(super.setImage("Platform", 50, 50));
+        this.setGraphic(super.setImage(toolbarProperties.getString("PLATFORM")));
     }
 
     @Override

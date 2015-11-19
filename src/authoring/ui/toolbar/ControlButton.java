@@ -1,10 +1,10 @@
 package authoring.ui.toolbar;
 
-public class ControlButton extends ToolbarButtons {
+public class ControlButton extends ToolbarButton {
 
     public ControlButton(){
         super();
-        this.setGraphic(this.setImage("ArrowKeys", 50, 50));
+        this.setGraphic(this.setImage(super.toolbarProperties.getString("KEYS")));
     }
     
     @Override
