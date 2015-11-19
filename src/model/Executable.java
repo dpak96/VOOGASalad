@@ -8,5 +8,9 @@ public abstract class Executable extends Process{
 	public Executable(Map<String, Object> parameters){
 		super(parameters);
 	}
+	
+	public Executable(String name){
+		super(name);
+	}
 	public abstract void execute();
 }
