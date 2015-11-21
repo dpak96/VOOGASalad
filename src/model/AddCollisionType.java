@@ -31,17 +31,19 @@ public class AddCollisionType {
 			WriteCollisionTypeToXML newCollisionType = new WriteCollisionTypeToXML(newString);
 		}
 		
-		File matrixFile = new File(".\\src\\model\\CollisionTypeLibrary.xml");
-		boolean matrixFileExists = typeFile.exists();
+		
 		double[][] outputMatrix;
-		if (matrixFileExists){
 			for (String str: nameList){
+				File matrixFile = new File(".\\src\\model\\"+str+"CollisionTypeLibrary.xml");
+				boolean matrixFileExists = matrixFile.exists();
+				if (matrixFileExists){
 				LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(str);
 				double[][] tempMatrix = loadMatrix.getMatrix();
 				outputMatrix = new double[tempMatrix.length+1][tempMatrix.length+1];
+				System.out.println("length: "+outputMatrix.length);
 				for (int i = 0; i < outputMatrix.length; i++){
 					for (int j = 0; j < outputMatrix.length; j++){
-						if (i < outputMatrix.length-1){
+						if (i < outputMatrix.length-1 && j < outputMatrix.length-1){
 							outputMatrix[i][j] = tempMatrix[i][j];
 						}
 						else{
@@ -56,19 +58,19 @@ public class AddCollisionType {
 				}
 				WriteMatrixToXML writer = new WriteMatrixToXML(outputMatrix, str);
 			}
-		}
-		else{
-			for (String str: nameList){
-				double[][] singleCell = new double[1][1];
-				if (str.equals("Damage")){
-					singleCell[0][0] = 0;
-				}
-				else{
-					singleCell[0][0] = 1;
-				}
-				WriteMatrixToXML cellWriter = new WriteMatrixToXML(singleCell, str);
+			else{
+					double[][] singleCell = new double[1][1];
+					if (str.equals("Damage")){
+						singleCell[0][0] = 0;
+					}
+					else{
+						singleCell[0][0] = 1;
+					}
+					WriteMatrixToXML cellWriter = new WriteMatrixToXML(singleCell, str);
 			}
+				
 		}
+		
 	}
 
 }

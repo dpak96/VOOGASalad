@@ -3,4 +3,6 @@
   <Type TypeString="damage"/>
   <Type TypeString="abc"/>
   <Type TypeString="speed"/>
+  <Type TypeString="newCollision"/>
+  <Type TypeString="newCollision"/>
 </Collision>
