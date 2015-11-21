@@ -27,6 +27,7 @@ private double[][] myMatrix;
 
 		doc.getDocumentElement().normalize();
 		NodeList rowList = doc.getElementsByTagName("Row");
+		myMatrix = new double[rowList.getLength()][rowList.getLength()];
 		for (int i = 0; i < rowList.getLength(); i++)
 		{
 			Element rowElement = (Element) rowList.item(i);			
