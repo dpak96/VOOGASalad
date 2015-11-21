@@ -39,10 +39,11 @@ public class ActionController{
 		animation.play();*/
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step(SECOND_DELAY));
-		Timeline animation = new Timeline();
+		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		rate = animation.getRate();
 	}
 
 
@@ -65,6 +66,12 @@ public class ActionController{
 	public void change_rate(double dub){
 		animation.pause();
 		animation.setRate(dub);
+		animation.playFromStart();
+	}
+	
+	public void resume(){
+		animation.pause();
+		animation.setRate(rate);
 		animation.playFromStart();
 	}
 

@@ -36,3 +36,10 @@
     -fx-min-width: 400;
     -fx-min-height: 300;
 }
+
+.Butt {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: blue;
+    -fx-border-style: solid;
+    -fx-border-width: 10;
+}

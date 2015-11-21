@@ -1,12 +1,13 @@
 package authoring.ui.editingmenus;
 
+import authoring.controller.AuthoringController;
 import javafx.scene.layout.GridPane;
 
 
 public class CommandMenu extends AuthoringMenu {
 
-    public CommandMenu (String title) {
-        super(title);
+    public CommandMenu (String title, AuthoringController myController) {
+        super(title, myController);
         // TODO Auto-generated constructor stub
     }
 

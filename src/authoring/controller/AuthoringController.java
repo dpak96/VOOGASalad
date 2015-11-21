@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Map;
 import authoring.backend.Editor;
 import authoring.ui.AuthoringUI;
+import authoring.ui.draganddrop.DraggableElement;
+import authoring.ui.draganddrop.HighlightedArticle;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import model.Article;
 import model.Condition;
 import model.Event;
 import model.Executable;
@@ -23,11 +27,22 @@ public class AuthoringController implements IAuthoringController {
   private Executable currentExecutable;
   private Condition currentCondition;
   private Event currentEvent;
+  private boolean highlighted = false;
+
+  public void setHighlighted(boolean highlighted) {
+    this.highlighted = highlighted;
+  }
+
+
 
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
     modelController = mc;
     editor = new Editor(mc);
+  }
+
+  public void removeArticle(Article n){
+    modelController.removeArticle(n);
   }
 
   public Editor getEditor() {
@@ -46,12 +61,20 @@ public class AuthoringController implements IAuthoringController {
     this.ui = ui;
   }
 
-  public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
-    editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
-                                                       true);
-    System.out.println("this might've happened");
-    System.out.println(event.getName());
-    if(event.getName().equals("ENEMY")){
+  public void createAndPlaceArticle(double x, double y, DraggableElement event) {
+    if(!highlighted){
+      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+              true);
+    }
+    else {
+      highlighted = false;
+      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+              true);
+      Pane p = (Pane)event.getParent();
+      p.getChildren().remove(event);
+    }
+
+    if(event.getImageName().equals("Goomba")){
       Map<String, Object> tempMap= new HashMap<String, Object>();
       tempMap.put("myName", "penis");
       tempMap.put("myActor", editor.getArticleEditor().getArticle());
@@ -67,18 +90,28 @@ public class AuthoringController implements IAuthoringController {
       this.mapKey("A", listEvent);
     }
 
+
   }
 
-  public PlatformButton getArticleFromCoordinates(double x, double y) {
+
+  public Article getArticleFromCoordinates(double x, double y) {
     try {
       editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-      PlatformButton pb = new PlatformButton();
-      return pb;
+      return editor.getArticleEditor().getArticle();
     } catch (Exception e) {
-      System.out.print("Oops");
+      System.out.println("oops");
       return null;
     }
   }
+
+
+  public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
+    editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
+                                                       true);
+    //System.out.println("this might've happened");
+
+  }
+
 
   public Map<String, Class<?>> getFactoryParameters(String s) {
     return modelController.getParameters(s);
