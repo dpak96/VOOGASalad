@@ -12,6 +12,7 @@ public class CollisionManager {
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 
 		if (checkSimpleCollision(articleOne, articleTwo)) {
+			System.out.println("simple collision true");
 			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			return temp;
 		} else {
@@ -49,6 +50,7 @@ public class CollisionManager {
 	}
 
 	private CollisionInformation checkBitMapCollision(Article a, Article b) {
+		
 		for (Position[] p : a.getBitMap().getByteArray()) {
 			for (Position q : p) {
 				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
@@ -76,11 +78,14 @@ public class CollisionManager {
 	}
 
 	private Boolean checkSimpleCollision(Article a, Article b) {
-		if (a.getX() + a.getWidth() >= b.getX() && a.getY() + a.getHeight() >= b.getY()) {
-			return true;
-		} else if (a.getX() <= b.getX() + b.getWidth() && a.getY() <= b.getY() + b.getHeight()) {
-			return true;
-		} else {
+		if ((a.getX() <= b.getX() && a.getX()+a.getWidth() <= b.getX() || b.getX() <= a.getX() && b.getX()+b.getWidth() <= a.getX())) {
+			if (a.getY() <= b.getY() && a.getY()+a.getHeight() <= b.getY() || b.getY() <= a.getY() && b.getY() + b.getHeight() <= a.getY()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		else {
 			return false;
 		}
 	}

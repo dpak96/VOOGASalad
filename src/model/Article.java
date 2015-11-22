@@ -35,7 +35,8 @@ public class Article {
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myEvents = new ArrayList<Event>();
-	}
+		myBitMap = new BitMap(image, x, y);	}
+
 	
 	public Article(String file, double x, double y) {
 		myImageFile = file;

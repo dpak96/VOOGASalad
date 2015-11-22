@@ -31,8 +31,11 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
+		//System.out.println(allArticles.size());
 		setMyCharacter(myModelController.getCharacter());
+		//myActiveArticles = getActiveArticles();
 		myActiveArticles = getActiveArticles();
+		myActiveArticles.addAll(allArticles);
 		
 		checkAndAddCollisions();
 		runButtonPress(input);
@@ -47,18 +50,20 @@ public class GameEngine implements IGameEngine {
 		for(Article article : myActiveArticles){
 			article.clearCollisions();
 		}
-		
-		for(int i = 0; i < myActiveArticles.size(); i++){
-			Article first = myActiveArticles.get(i);
-			for(int j = i + 1; j < myActiveArticles.size(); j++){
-				Article second = myActiveArticles.get(j);
-				CollisionInformation temp = myCollisionManager.didCollide(first,second);
-				if(temp.isRealCollision()){
-					first.addCollision(second, temp);
-					second.addCollision(first, temp);
+		if (myActiveArticles.size() >= 2){
+			for(int i = 0; i < myActiveArticles.size(); i++){
+				Article first = myActiveArticles.get(i);
+				for(int j = i + 1; j < myActiveArticles.size(); j++){
+					Article second = myActiveArticles.get(j);
+					CollisionInformation temp = myCollisionManager.didCollide(first,second);
+					if(temp.isRealCollision()){
+						first.addCollision(second, temp);
+						second.addCollision(first, temp);
+					}
 				}
 			}
 		}
+			
 	}
 	
 	private void runButtonPress(String input){
@@ -105,6 +110,7 @@ public class GameEngine implements IGameEngine {
 			double viewpointY = myViewpoint.getY();
 			double viewpointWidth = myViewpoint.getWidth();
 			double viewpointHeight = myViewpoint.getHeight();
+			System.out.println(viewpointHeight + " " + viewpointWidth);
 			double xBuffer = article.getXBuffer();
 			double yBuffer = article.getYBuffer();
 			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
