@@ -25,6 +25,7 @@ public class Article {
 	private Life myLife = new Life();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
+	private String myCollisionType;
 
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
@@ -175,5 +176,11 @@ public class Article {
 		return myLife.getHealth();
 	}
 	
+	public String getCollisionType(){
+		return myCollisionType;
+	}
 	
+	public void setCollisionType(String collisionType){
+		myCollisionType = collisionType;
+	}
 }
