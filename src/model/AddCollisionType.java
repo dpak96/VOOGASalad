@@ -10,24 +10,25 @@ import java.util.Set;
 
 public class AddCollisionType {
 	private Set<String> nameList = new HashSet<String>(Arrays.asList("Left", "Right","Above","Bottom","Damage"));
+	private String myTypeName;
 	public AddCollisionType(String typeName) {
-		// TODO Auto-generated constructor stub		
-		add(typeName);
+		// TODO Auto-generated constructor stub	
+		myTypeName = typeName;
 	}
 	
-	public void add(String type){
+	public void add(){
 		// add new type name to the XML list
 		File typeFile = new File(".\\src\\model\\CollisionTypeLibrary.xml");
 		boolean typeFileExists = typeFile.exists();
 		if (typeFileExists){
 			LoadCollisionTypeFromXML loadCollisionType = new LoadCollisionTypeFromXML();
 			ArrayList<String> loadType = loadCollisionType.getCollisionTypeList();
-			loadType.add(type);
+			loadType.add(myTypeName);
 			WriteCollisionTypeToXML writeCollisionType = new WriteCollisionTypeToXML(loadType);
 		}
 		else{
 			List<String> newString = new ArrayList<String>();
-			newString.add(type);
+			newString.add(myTypeName);
 			WriteCollisionTypeToXML newCollisionType = new WriteCollisionTypeToXML(newString);
 		}
 		
@@ -67,10 +68,9 @@ public class AddCollisionType {
 						singleCell[0][0] = 1;
 					}
 					WriteMatrixToXML cellWriter = new WriteMatrixToXML(singleCell, str);
-			}
-				
-		}
-		
+			}		
+		}		
 	}
 
+	
 }
