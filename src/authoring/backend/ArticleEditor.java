@@ -98,5 +98,7 @@ public class ArticleEditor implements IArticleEditor {
     this.getArticle().setOrientation(value);
 
   }
+  
+  //TODO: collisions
 
 }

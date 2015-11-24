@@ -72,5 +72,10 @@ public class AddCollisionType {
 		}		
 	}
 
+  public void define(String one, String two, Double type) {
+    // TODO Auto-generated method stub
+    
+  }
+
 	
 }
