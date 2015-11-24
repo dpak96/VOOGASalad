@@ -73,6 +73,10 @@ public class AuthoringController implements IAuthoringController {
       p.getChildren().remove(event);
     }
 
+    if (event.getImageName().equals("Goomba")) {
+      this.goombaMovementDemo();
+    }
+
   }
 
   public Article getArticleFromCoordinates(double x, double y) {
@@ -125,7 +129,6 @@ public class AuthoringController implements IAuthoringController {
     listEvent.add(currentEvent);
     editor.getArticleEditor().getArticle().addEvent(currentEvent);
     this.mapKey("A", listEvent);
-
   }
 
 }
