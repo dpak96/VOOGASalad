@@ -1,6 +1,5 @@
 package authoring.backend;
 
-import java.util.List;
 import model.Article;
 import model.controller.ModelController;
 
@@ -22,14 +21,16 @@ public class ArticleEditor implements IArticleEditor {
   }
 
   @Override
-  public void createNewArticleAndPlace(String name, String imageFileName, Double x, Double y, Boolean direction) {
+  public void createNewArticleAndPlace(String name,
+                                       String imageFileName,
+                                       Double x,
+                                       Double y,
+                                       Boolean direction) {
     double xAdjusted = x + myModelController.getViewpoint().getX();
     double yAdjusted = y + myModelController.getViewpoint().getY();
-    this.setArticle(myModelController.createArticle(imageFileName,xAdjusted,yAdjusted,direction));
+    this.setArticle(myModelController.createArticle(imageFileName, xAdjusted, yAdjusted,
+                                                    direction));
   }
-
-
-
 
   @Override
   public void createNewArticle(String name, String imageFileName, Boolean direction) {
@@ -39,61 +40,62 @@ public class ArticleEditor implements IArticleEditor {
 
   @Override
   public void editArticleLocation(double x, double y) {
-    // TODO Auto-generated method stub
+    this.getArticle().setX(x);
+    this.getArticle().setY(y);
 
   }
 
   @Override
   public void deleteObj() {
-    // TODO Auto-generated method stub
+    myModelController.removeArticle(this.getArticle());
+    this.setArticle(null);
 
   }
 
   @Override
   public void editArticleImage(String imageFileName) {
-    // TODO Auto-generated method stub
+    this.getArticle().setImageFile(imageFileName);
 
   }
 
   @Override
   public void editArticleName(String name) {
-    // TODO Auto-generated method stub
+    this.getArticle().setName(name);
 
   }
 
   @Override
   public void editArticleImageDirection(boolean direction) {
-    // TODO Auto-generated method stub
+    this.getArticle().setDirection(direction);
 
   }
 
   @Override
   public void editArticleImageBufferX(double x) {
-    // TODO Auto-generated method stub
+    this.getArticle().setXBuffer(x);
 
   }
 
   @Override
   public void editArticleImageBufferY(double y) {
-    // TODO Auto-generated method stub
+    this.getArticle().setYBuffer(y);
 
   }
 
   @Override
   public void editArticleXVelocity(double x) {
-    // TODO Auto-generated method stub
+    this.getArticle().setXVelocity(x);
 
   }
 
   @Override
   public void editArticleYVelocity(double y) {
-    // TODO Auto-generated method stub
-
+    this.getArticle().setYVelocity(y);
   }
 
   @Override
   public void editArticleOrientation(double value) {
-    // TODO Auto-generated method stub
+    this.getArticle().setOrientation(value);
 
   }
 
