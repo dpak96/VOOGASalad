@@ -34,7 +34,7 @@ public class AddCollisionType {
 		
 		double[][] outputMatrix;
 			for (String str: nameList){
-				File matrixFile = new File(".\\src\\model\\"+str+"CollisionTypeLibrary.xml");
+				File matrixFile = new File(".\\src\\model\\"+str+"CollisionLibrary.xml");
 				boolean matrixFileExists = matrixFile.exists();
 				if (matrixFileExists){
 				LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(str);
