@@ -5,4 +5,7 @@
   <Type TypeString="speed"/>
   <Type TypeString="newCollision"/>
   <Type TypeString="newCollision"/>
+  <Type TypeString="newType"/>
+  <Type TypeString="newType"/>
+  <Type TypeString="lmao"/>
 </Collision>
