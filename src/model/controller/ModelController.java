@@ -170,10 +170,10 @@ public class ModelController implements IModelController {
     addCollision.add();
   }
   
-  public void addCollisionType(String name, String one, String two, Double type) {
+  public void addCollisionType(String name, String one, String two, String collision, Double type) {
     addCollision = new AddCollisionType(name);
     addCollision.add();
-    addCollision.define(one, two, type);
+    addCollision.define(one, two, collision, type);
   }
   
 
