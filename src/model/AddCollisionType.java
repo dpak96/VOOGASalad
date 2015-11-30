@@ -72,9 +72,24 @@ public class AddCollisionType {
 		}		
 	}
 
-  public void define(String one, String two, Double type) {
+  public void define(String typeOne, String typeTwo, String collision, Double value) {
     // TODO Auto-generated method stub
-    
+	  	File typeFile = new File(".\\src\\model\\CollisionTypeLibrary.xml");
+		boolean typeFileExists = typeFile.exists();
+		if (typeFileExists){
+			LoadCollisionTypeFromXML loadCollisionType = new LoadCollisionTypeFromXML();
+			ArrayList<String> loadType = loadCollisionType.getCollisionTypeList();
+			int indexOne = loadType.indexOf(typeOne);
+			int indexTwo = loadType.indexOf(typeTwo);
+			LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(collision);
+			double[][] tempMatrix = loadMatrix.getMatrix();
+			tempMatrix[indexOne][indexTwo] = value;
+			tempMatrix[indexTwo][indexOne] = value;
+			WriteMatrixToXML cellWriter = new WriteMatrixToXML(tempMatrix, collision);
+		}
+		else{
+			System.out.println("CollisionTypeLibrary.xml doesn't exist");
+		}
   }
 
 	
