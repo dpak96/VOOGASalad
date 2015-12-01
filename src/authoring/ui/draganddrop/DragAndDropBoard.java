@@ -61,9 +61,9 @@ public class DragAndDropBoard extends StackPane {
     protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
        if(e.isPopupTrigger())
        {
-           if(n==null)
-               System.out.println("its null");
+          if(n!=null){
            EnemyProperties popupEditingMenu=new EnemyProperties("Object Editor",n, authoringController);   
+          }
        }
        else{
         try {

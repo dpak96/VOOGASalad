@@ -13,7 +13,6 @@ public abstract class AuthoringMenu implements IMenuAction {
     protected AuthoringController myController;
     public AuthoringMenu (String title, AuthoringController controller) {
         myController=controller;
-       showMenu(title);
     }
 
     public void showMenu (String title) {

@@ -27,6 +27,7 @@ public class EnemyProperties extends ArticleEditorMenu {
     public EnemyProperties (String title,Article enemy, AuthoringController myController) {
         super(title, myController);
         super.objectToEdit=enemy;
+        super.showMenu(title);
           }
 
     protected void populateMenu (GridPane menuGrid) {
