@@ -2,11 +2,13 @@ package authoring.ui.draganddrop;
 
 
 import authoring.controller.AuthoringController;
+import authoring.ui.editingmenus.EnemyProperties;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import model.Article;
@@ -54,9 +56,16 @@ public class DragAndDropBoard extends StackPane {
             }
         });
         this.setOnMouseClicked(e->
-                addTemp(authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
+                addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
     }
-    protected void addTemp(Article n, AuthoringController authoringController){
+    protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
+       if(e.isPopupTrigger())
+       {
+           if(n==null)
+               System.out.println("its null");
+           EnemyProperties popupEditingMenu=new EnemyProperties("Object Editor",n, authoringController);   
+       }
+       else{
         try {
             authoringController.removeArticle(n);
             HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
@@ -66,9 +75,10 @@ public class DragAndDropBoard extends StackPane {
             authoringController.setHighlighted(true);
             getChildren().add(highlightedArticle);
         }
-        catch (Exception e){
+        catch (Exception execption){
             System.out.println("hi");
         }
+       }
     }
 
     protected void dragOver(){

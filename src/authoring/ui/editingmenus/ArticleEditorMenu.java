@@ -6,11 +6,10 @@ import model.Article;
 
 
 public abstract class ArticleEditorMenu extends AuthoringMenu {
-    protected Article objectToEdit;
+    public Article objectToEdit;
 
-    public ArticleEditorMenu (String title, Article selectedArticle,AuthoringController myController) {
+    public ArticleEditorMenu (String title,AuthoringController myController) {
         super(title,myController);
-        objectToEdit = selectedArticle;
     }
 
 }
