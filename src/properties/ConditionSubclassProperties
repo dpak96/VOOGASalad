@@ -1,0 +1,12 @@
+AbovePositionOnScreen = Object is in the top percentage of the screen
+BelowPositionOnScreen = Object is in the bottom percentage of the screen
+CollisionFromAbove = Object is colliding with a different object from above 
+CollisionFromBelow = Object is colliding with a different object from below
+CollisionFromLeft = Object is colliding with a different object from the left
+CollisionFromRight = Object is colliding with a different object from the right
+ComparisonOneArticle = Compare an attribute of an object to a given value
+ComparisonTwoArticle = Compare an attribute of an object to different attribute of a different object
+IsNotTouching = Check if two objects are not touching
+IsTouching = Check if two objects are touching
+LeftOfPositionOnScreen = Check if an object is in the left percentage of the screen
+RightOfPositionOnScreen = Check if an object is in the right percentage of the screen
