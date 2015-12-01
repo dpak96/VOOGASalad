@@ -2,16 +2,19 @@ package authoring.ui.draganddrop;
 
 
 import authoring.controller.AuthoringController;
+import authoring.ui.editingmenus.EnemyProperties;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Article;
 
-public class DragAndDropBoard extends StackPane {
+public class DragAndDropBoard extends Pane {
 
     public DragAndDropBoard(AuthoringController authoringController) {
         dragEntered();
@@ -54,21 +57,30 @@ public class DragAndDropBoard extends StackPane {
             }
         });
         this.setOnMouseClicked(e->
-                addTemp(authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
+                addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
     }
-    protected void addTemp(Article n, AuthoringController authoringController){
+    protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
+       if(e.isPopupTrigger())
+       {
+          if(n!=null){
+           EnemyProperties popupEditingMenu=new EnemyProperties("Object Editor",n, authoringController);   
+          }
+       }
+       else{
         try {
+            double tX = n.getX();
+            double tY = n.getY();
             authoringController.removeArticle(n);
             HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
-            highlightedArticle.setTranslateX(n.getX() -408);
-            highlightedArticle.setTranslateY(n.getY() - 270);
-            authoringController.removeArticle(n);
+            //highlightedArticle.relocate(tX,tY);
             authoringController.setHighlighted(true);
             getChildren().add(highlightedArticle);
+            highlightedArticle.relocate(tX,tY);
         }
-        catch (Exception e){
+        catch (Exception execption){
             System.out.println("hi");
         }
+       }
     }
 
     protected void dragOver(){

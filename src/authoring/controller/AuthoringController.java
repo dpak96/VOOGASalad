@@ -39,6 +39,8 @@ public class AuthoringController implements IAuthoringController {
     editor = new Editor(mc);
   }
 
+  //    TODO Method for editing an article
+  
   public void removeArticle(Article n) {
     modelController.removeArticle(n);
   }
@@ -117,7 +119,6 @@ public class AuthoringController implements IAuthoringController {
 
   public void goombaMovementDemo() {
     Map<String, Object> tempMap = new HashMap<String, Object>();
-    tempMap.put("myName", "penis");
     tempMap.put("myActor", editor.getArticleEditor().getArticle());
     tempMap.put("myDisplacement", .5);
     this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
