@@ -24,9 +24,11 @@ public class EnemyProperties extends ArticleEditorMenu {
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
 
-    public EnemyProperties (String title, Article enemy, AuthoringController myController) {
-        super(title, enemy, myController);
-    }
+    public EnemyProperties (String title,Article enemy, AuthoringController myController) {
+        super(title, myController);
+        super.objectToEdit=enemy;
+        super.showMenu(title);
+          }
 
     protected void populateMenu (GridPane menuGrid) {
         textFieldPropertyMap = new HashMap<String, TextField>();
@@ -58,17 +60,24 @@ public class EnemyProperties extends ArticleEditorMenu {
 
     public void addImages (ComboBox imageBox) {
         for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet()) {
-            imageBox.getItems().add(new ImageView(ResourceManager.getResourceManager().getIm()
-                    .getImageMap().get(imgName)));
+        
+            imageBox.getItems().add(imgName);
         }
-        ComboBoxImageRendering renderer = new ComboBoxImageRendering();
+       
+      ComboBoxImageRendering renderer = new ComboBoxImageRendering();
         renderer.renderComboBox(imageBox);
     }
 
     @Override
     public void executeYourMenuFunction () {
-        objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
+        super.objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
+
         // Pass on the edits to the thing being edited
+    }
+    
+    
+    public void obtainSelectedImageName(ImageView img){
+        
     }
 
 }
