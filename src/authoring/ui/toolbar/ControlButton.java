@@ -16,8 +16,6 @@ public class ControlButton extends ToolbarButton {
   @Override
   public void placeYourObject() {
 
-          EnemyProperties testProp=new EnemyProperties("Editor", null,super.myController
-                                                       );
       
   }
 

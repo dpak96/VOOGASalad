@@ -183,4 +183,19 @@ public class Article {
 	public void setCollisionType(String collisionType){
 		myCollisionType = collisionType;
 	}
+
+
+
+  public void setDirection(boolean direction) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+
+  public void setName(String name) {
+    // TODO Auto-generated method stub
+    
+  }
+  
 }
