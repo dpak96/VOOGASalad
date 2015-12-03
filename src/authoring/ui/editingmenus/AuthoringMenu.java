@@ -14,43 +14,43 @@ import resourcemanager.ResourceManager;
 public abstract class AuthoringMenu implements IMenuAction {
     protected MenuBuilder componentAdder = new MenuBuilder();
     protected AuthoringController myController;
-
+    private String myTitle;
     public AuthoringMenu (String title, AuthoringController controller) {
-        myController = controller;
+        myController=controller;
+        myTitle=title;
     }
 
-    public void showMenu (String title) {
+
+    public void showMenu (int menuWidth, int menuHeight) {
 
         Dialog propertyMenu = new Dialog();
-
-        propertyMenu.setTitle(title);
-
+       
+        propertyMenu.setTitle(myTitle);
+        
         GridPane menuGrid = new GridPane();
-        menuGrid.setPrefSize(300, 300);
+        menuGrid.setPrefSize(menuWidth, menuHeight);
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
 
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
-
+        
     }
 
-    protected Double parseDouble (String input) {
-        try {
+    protected Double parseDouble(String input){
+        try{
 
-            Double parsedNum = Double.parseDouble(input);
+            Double parsedNum= Double.parseDouble(input);
             return parsedNum;
         }
-        catch (Exception e) {
-            Alert invalidInput = new Alert(AlertType.INFORMATION);
+        catch(Exception e){
+            Alert invalidInput=new Alert(AlertType.INFORMATION);
             invalidInput.setTitle("Invalid input");
-            invalidInput.setContentText(ResourceManager.getResourceManager().getPm()
-                    .getResourceMap().get("error").getString("numberInput"));
+            invalidInput.setContentText(ResourceManager.getResourceManager().getPm().getResourceMap().get("error").getString("numberInput"));
             invalidInput.show();
         }
         return 0.0;
     }
-
     protected abstract void populateMenu (GridPane menuPane);
 }

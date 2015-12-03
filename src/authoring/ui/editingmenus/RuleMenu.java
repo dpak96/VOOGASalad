@@ -19,7 +19,7 @@ public class RuleMenu extends AuthoringMenu {
     HashMap<String,Control> ruleParameters;
     public RuleMenu (String title, AuthoringController controller) {
         super(title,controller);
-
+        super.showMenu(300, 300);
         
     }
 
@@ -27,8 +27,6 @@ public class RuleMenu extends AuthoringMenu {
 
     @Override
     protected void populateMenu (GridPane menuPane) {
-        menuPane.setPrefWidth(300);
-        menuPane.setPrefHeight(300);
         super.componentAdder.makeLabel(menuPane, 1, 1, "Rule Type: ");
         ComboBox ruleTypeBox = new ComboBox();
         menuPane.add(ruleTypeBox, 2, 1);
