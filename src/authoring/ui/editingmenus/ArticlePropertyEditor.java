@@ -31,7 +31,6 @@ public class ArticlePropertyEditor extends AuthoringMenu {
                                   AuthoringController myController) {
         super(title, myController);
         myArticleToEdit = selectedArticle;
-        super.showMenu(title);
     }
 
     protected void populateMenu (GridPane menuGrid) {
