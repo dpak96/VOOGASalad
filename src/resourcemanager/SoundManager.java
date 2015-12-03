@@ -8,25 +8,22 @@ import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 
-public class SoundManager {
-  private final String PROPERTIES_PATH = "resources/sounds/";
-  private Map<String, AudioClip> soundMap;
+public class SoundManager extends Manager {
+
+  public SoundManager(String path) {
+    filePath = path;
+
+    this.initListSounds();
+  }
 
   public void initListSounds() {
-    soundMap = new HashMap<String, AudioClip>();
-    File[] folder = new File("src/" + PROPERTIES_PATH).listFiles();
+    objectMap = new HashMap<String, Object>();
+    File[] folder = new File("src/" + filePath).listFiles();
     for (File f : folder) {
-      File tempFile = new File("src/" + PROPERTIES_PATH + f.getName());
+      File tempFile = new File("src/" + filePath + f.getName());
       AudioClip temp = new AudioClip(tempFile.toURI().toString());
-      soundMap.put(f.getName().split("\\.")[0], temp);
+      objectMap.put(f.getName().split("\\.")[0], temp);
     }
   }
 
-  public Map<String, AudioClip> getSoundMap() {
-    return soundMap;
-  }
-
-  public void setSoundMap(Map<String, AudioClip> soundMap) {
-    this.soundMap = soundMap;
-  }
 }
