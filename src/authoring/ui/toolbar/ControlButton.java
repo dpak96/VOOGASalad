@@ -1,7 +1,7 @@
 package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
-import authoring.ui.editingmenus.EnemyProperties;
+import authoring.ui.editingmenus.ArticlePropertyEditor;
 
 public class ControlButton extends ToolbarButton {
   private final String NAME = "KEYS";
