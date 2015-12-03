@@ -23,6 +23,6 @@ public class OpenMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle(MenuController menuController) {
-		this.setOnAction(e-> menuController.something(myResource,myFileChooser));
+		this.setOnAction(e-> menuController.loadGame());
 	}
 }

@@ -49,7 +49,7 @@ public class ModelFactory {
 
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables){
 		try {
-			Class<?> cls = Class.forName(name);
+			Class<?> cls = Class.forName("model.Event");
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {name, conditions, executables};
 			Event test = (Event) cons.newInstance(obj);

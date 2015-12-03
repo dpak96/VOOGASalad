@@ -18,6 +18,7 @@ public class MenuController {
     private GraphicHandler myGraphicHandler;
     private MenuPanel myMenuPanel;
     private ModelController myModelController;
+    private GameCreation game;
 
 
     public MenuController(GraphicHandler graphicHandler, ModelController modelController){
@@ -75,22 +76,15 @@ public class MenuController {
             }*/
     }
 
-    public void saveGame(FileChooser fileChooser, String saveName) throws IOException {
-        fileChooser.setTitle(saveName);
-        File game = fileChooser.showSaveDialog(myMenuPanel.getScene().getWindow());
-        if (!game.exists()) {
-            game.createNewFile();
-        }
-        try {
-            FileOutputStream f = new FileOutputStream(game);
-            ObjectOutputStream o = new ObjectOutputStream(f);
-//	      o.writeObject(myController.getMyScene().getAllData().get(0));
-            f.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        myModelController.save();
+    public void saveGame(){
+            myModelController.save(myMenuPanel.getScene().getWindow());
     }
+
+    public void loadGame(){
+        myModelController.load(myMenuPanel.getScene().getWindow());
+    }
+
+
 
     public MenuPanel getMenu(){
         return myMenuPanel;

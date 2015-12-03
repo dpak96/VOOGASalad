@@ -2,15 +2,19 @@ package authoring.ui.draganddrop;
 
 
 import authoring.controller.AuthoringController;
+import authoring.ui.editingmenus.ArticlePropertyEditor;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import model.Article;
 
-public class DragAndDropBoard extends StackPane {
+public class DragAndDropBoard extends Pane {
 
     public DragAndDropBoard(AuthoringController authoringController) {
         dragEntered();
@@ -37,9 +41,7 @@ public class DragAndDropBoard extends StackPane {
             @Override
             public void handle(DragEvent event) {
                 /* data dropped */
-                System.out.println("onDragDropped");
-                System.out.println(event.getX()+","+event.getY());
-                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (ToolbarButton) event.getGestureSource());
+                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (DraggableElement) event.getGestureSource());
 
                 /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
@@ -55,10 +57,31 @@ public class DragAndDropBoard extends StackPane {
             }
         });
         this.setOnMouseClicked(e->
-                getChildren().add(authoringController.getArticleFromCoordinates(e.getX(),e.getY())));
-
+                addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
     }
-
+    protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
+       if(e.isPopupTrigger())
+       {
+          if(n!=null){
+           ArticlePropertyEditor popupEditingMenu=new ArticlePropertyEditor("Object Editor",n, authoringController);   
+          }
+       }
+       else{
+        try {
+            double tX = n.getX();
+            double tY = n.getY();
+            authoringController.removeArticle(n);
+            HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
+            //highlightedArticle.relocate(tX,tY);
+            authoringController.setHighlighted(true);
+            getChildren().add(highlightedArticle);
+            highlightedArticle.relocate(tX,tY);
+        }
+        catch (Exception execption){
+            System.out.println("hi");
+        }
+       }
+    }
 
     protected void dragOver(){
         this.setOnDragOver(new EventHandler <DragEvent>() {

@@ -2,6 +2,8 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import action.controller.ActionController;
+import authoring.controller.AuthoringController;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -18,13 +20,15 @@ import model.Article;
 import resourcemanager.ResourceManager;
 
 
-public class EnemyProperties extends ArticleEditorMenu {
+public class ArticlePropertyEditor extends AuthoringMenu {
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
-
-    public EnemyProperties (String title, Article enemy) {
-        super(title, enemy);
-    }
+    private Article myArticleToEdit;
+    public ArticlePropertyEditor (String title,Article selectedArticle, AuthoringController myController) {
+        super(title, myController);
+        myArticleToEdit=selectedArticle;
+        super.showMenu(title);
+          }
 
     protected void populateMenu (GridPane menuGrid) {
         textFieldPropertyMap = new HashMap<String, TextField>();
@@ -56,17 +60,20 @@ public class EnemyProperties extends ArticleEditorMenu {
 
     public void addImages (ComboBox imageBox) {
         for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet()) {
-            imageBox.getItems().add(new ImageView(ResourceManager.getResourceManager().getIm()
-                    .getImageMap().get(imgName)));
+        
+            imageBox.getItems().add(imgName);
         }
-        ComboBoxImageRendering renderer = new ComboBoxImageRendering();
+       
+      ComboBoxImageRendering renderer = new ComboBoxImageRendering();
         renderer.renderComboBox(imageBox);
     }
 
     @Override
     public void executeYourMenuFunction () {
-        // objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getp);
+        
+        myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
-
+    
+    
 }
