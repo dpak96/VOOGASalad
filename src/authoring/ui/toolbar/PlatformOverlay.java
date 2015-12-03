@@ -20,7 +20,7 @@ public class PlatformOverlay extends ButtonOverlay{
         buttonList.add(new PlatformButton(myAuthoringController, "BrickTile"));
         buttonList.add(new PlatformButton(myAuthoringController, "BoneTile"));
 
-        buttonList.add(new EnemyButton(myAuthoringController));
+        buttonList.add(new EnemyButton(myAuthoringController, "ENEMY"));
         return buttonList;
     }
 
