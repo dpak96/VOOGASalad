@@ -71,7 +71,9 @@ public class ArticlePropertyEditor extends AuthoringMenu {
 
         ComboBoxImageRendering renderer = new ComboBoxImageRendering();
         renderer.renderComboBox(imageBox);
+        imageBox.setValue(imageBox.getItems().get(0));
     }
+    
 
     @Override
     public void executeYourMenuFunction () {
