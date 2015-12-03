@@ -2,6 +2,7 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import action.controller.ActionController;
 import authoring.controller.AuthoringController;
 import javafx.scene.Node;
@@ -70,8 +71,12 @@ public class ArticlePropertyEditor extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
+    
+        super.myController.getEditor().getArticleEditor().editArticleXVelocity(Double.parseDouble(textFieldPropertyMap.get("VELOCITY").getText()), myArticleToEdit);
         
-        myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
+        super.myController.getEditor().getArticleEditor().editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(), myArticleToEdit);
+        
+        // myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
     
