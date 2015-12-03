@@ -20,13 +20,13 @@ import model.Article;
 import resourcemanager.ResourceManager;
 
 
-public class EnemyProperties extends ArticleEditorMenu {
+public class ArticlePropertyEditor extends AuthoringMenu {
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
-
-    public EnemyProperties (String title,Article enemy, AuthoringController myController) {
+    private Article myArticleToEdit;
+    public ArticlePropertyEditor (String title,Article selectedArticle, AuthoringController myController) {
         super(title, myController);
-        super.objectToEdit=enemy;
+        myArticleToEdit=selectedArticle;
         super.showMenu(title);
           }
 
@@ -70,14 +70,10 @@ public class EnemyProperties extends ArticleEditorMenu {
 
     @Override
     public void executeYourMenuFunction () {
-        super.objectToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
-
+        
+        myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
     
     
-    public void obtainSelectedImageName(ImageView img){
-        
-    }
-
 }
