@@ -18,13 +18,13 @@ public abstract class AuthoringMenu implements IMenuAction {
     public void showMenu (String title) {
 
         Dialog propertyMenu = new Dialog();
+       
         propertyMenu.setTitle(title);
-
+        
         GridPane menuGrid = new GridPane();
         menuGrid.setPrefSize(300, 300);
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
-
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
 
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
