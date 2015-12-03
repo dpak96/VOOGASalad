@@ -3,9 +3,18 @@ package uibasics;
 import model.Article;
 import model.controller.ModelController;
 import java.util.*;
+
+import javax.annotation.Resource;
+
+import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
+
 import config.Config;
 import front.commands.AbstractCommand;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
 public class UIBasics{
@@ -21,6 +30,7 @@ public class UIBasics{
     myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
+    this.setBackImage("Goomba");
   }
 
   private void load(String identifier) {
@@ -65,6 +75,13 @@ public class UIBasics{
   private void clearAll() {
     myPane.getChildren().removeAll(myFrontArticles);
     myFrontArticles.clear();
+  }
+  
+  public void setBackImage(String img) {
+	  BackgroundSize size = new BackgroundSize(100,100,true,true,true,true);
+	  BackgroundImage back = new BackgroundImage(resourcemanager.ResourceManager.getResourceManager().getIm().getImageMap().get(img),
+			  BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, null, size);
+	  myPane.setBackground(new Background(back));
   }
 
 }
