@@ -22,6 +22,7 @@ import resourcemanager.ResourceManager;
 
 
 public class ArticlePropertyEditor extends AuthoringMenu {
+
   private HashMap<String, TextField> textFieldPropertyMap;
   private HashMap<String, ComboBox> comboBoxPropertyMap;
   private Article myArticleToEdit;
@@ -63,21 +64,32 @@ public class ArticlePropertyEditor extends AuthoringMenu {
   }
 
   public void addImages(ComboBox imageBox) {
-    Map<String, Object> tempMap =
-        ResourceManager.getResourceManager().getResourceMap("ImageManager");
-    for (String imgName : tempMap.keySet()) {
+    for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
 
       imageBox.getItems().add(imgName);
     }
 
     ComboBoxImageRendering renderer = new ComboBoxImageRendering();
     renderer.renderComboBox(imageBox);
+    imageBox.setValue(imageBox.getItems().get(0));
   }
 
   @Override
   public void executeYourMenuFunction() {
+    System.out.println(myArticleToEdit == null);
 
-    myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
+    super.myController.getEditor().getArticleEditor()
+        .editArticleXVelocity(super.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+            .getText()),
+                              myArticleToEdit);
+    super.myController.getEditor().getArticleEditor()
+        .editArticleYVelocity(super.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+            .getText()),
+                              myArticleToEdit);
+    super.myController.getEditor().getArticleEditor()
+        .editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(),
+                          myArticleToEdit);
+
     // Pass on the edits to the thing being edited
   }
 
