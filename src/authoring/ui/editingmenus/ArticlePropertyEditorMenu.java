@@ -21,13 +21,13 @@ import model.Article;
 import resourcemanager.ResourceManager;
 
 
-public class ArticlePropertyEditor extends AuthoringMenu {
+public class ArticlePropertyEditorMenu extends AuthoringMenu {
 
   private HashMap<String, TextField> textFieldPropertyMap;
   private HashMap<String, ComboBox> comboBoxPropertyMap;
   private Article myArticleToEdit;
 
-  public ArticlePropertyEditor(String title,
+  public ArticlePropertyEditorMenu(String title,
                                Article selectedArticle,
                                AuthoringController myController) {
     super(title, myController);

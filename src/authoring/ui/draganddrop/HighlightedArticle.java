@@ -1,7 +1,7 @@
 package authoring.ui.draganddrop;
 
 import authoring.ui.AuthoringUI;
-import authoring.ui.editingmenus.ArticlePropertyEditor;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.smalloverlay.OverlayController;
 import authoring.ui.toolbar.ButtonOverlay;
 import authoring.ui.toolbar.ToolbarButton;
