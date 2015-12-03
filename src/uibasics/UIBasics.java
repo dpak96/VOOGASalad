@@ -13,6 +13,7 @@ import front.commands.AbstractCommand;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
@@ -78,9 +79,10 @@ public class UIBasics{
   }
   
   public void setBackImage(String img) {
-	  BackgroundSize size = new BackgroundSize(100,100,true,true,true,true);
+	  BackgroundSize size = new BackgroundSize(100,100,true,true,true,false);
+	  BackgroundPosition pos = new BackgroundPosition(null, 250, false, null, 0, false);
 	  BackgroundImage back = new BackgroundImage(resourcemanager.ResourceManager.getResourceManager().getIm().getImageMap().get(img),
-			  BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, null, size);
+			  BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
 	  myPane.setBackground(new Background(back));
   }
 
