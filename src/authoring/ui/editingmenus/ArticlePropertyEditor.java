@@ -25,22 +25,27 @@ public class ArticlePropertyEditor extends AuthoringMenu {
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
     private Article myArticleToEdit;
-    public ArticlePropertyEditor (String title,Article selectedArticle, AuthoringController myController) {
+
+    public ArticlePropertyEditor (String title,
+                                  Article selectedArticle,
+                                  AuthoringController myController) {
         super(title, myController);
-        myArticleToEdit=selectedArticle;
+        myArticleToEdit = selectedArticle;
         super.showMenu(title);
-          }
+    }
 
     protected void populateMenu (GridPane menuGrid) {
         textFieldPropertyMap = new HashMap<String, TextField>();
         comboBoxPropertyMap = new HashMap<String, ComboBox>();
         int rowIndex = 1;
 
-        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
-        textFieldPropertyMap.put("NAME", (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+       
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
+        textFieldPropertyMap.put("XVELOCITY",
+                                 (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Velocity: ");
-        textFieldPropertyMap.put("VELOCITY",
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
+        textFieldPropertyMap.put("YVELOCITY",
                                  (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
@@ -61,24 +66,31 @@ public class ArticlePropertyEditor extends AuthoringMenu {
 
     public void addImages (ComboBox imageBox) {
         for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet()) {
-        
+
             imageBox.getItems().add(imgName);
         }
-       
-      ComboBoxImageRendering renderer = new ComboBoxImageRendering();
+
+        ComboBoxImageRendering renderer = new ComboBoxImageRendering();
         renderer.renderComboBox(imageBox);
     }
 
     @Override
     public void executeYourMenuFunction () {
-    
-        super.myController.getEditor().getArticleEditor().editArticleXVelocity(Double.parseDouble(textFieldPropertyMap.get("VELOCITY").getText()), myArticleToEdit);
-        
-        super.myController.getEditor().getArticleEditor().editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(), myArticleToEdit);
-        
+
+        super.myController.getEditor().getArticleEditor()
+                .editArticleXVelocity(Double
+                        .parseDouble(textFieldPropertyMap.get("XVELOCITY").getText()),
+                                      myArticleToEdit);
+        super.myController.getEditor().getArticleEditor()
+                .editArticleYVelocity(Double
+                        .parseDouble(textFieldPropertyMap.get("YVELOCITY").getText()),
+                                      myArticleToEdit);
+        super.myController.getEditor().getArticleEditor()
+                .editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(),
+                                  myArticleToEdit);
+
         // myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
-    
-    
+
 }
