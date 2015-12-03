@@ -31,6 +31,7 @@ public class ArticlePropertyEditor extends AuthoringMenu {
                                   AuthoringController myController) {
         super(title, myController);
         myArticleToEdit = selectedArticle;
+        super.showMenu(title);
     }
 
     protected void populateMenu (GridPane menuGrid) {
@@ -38,7 +39,6 @@ public class ArticlePropertyEditor extends AuthoringMenu {
         comboBoxPropertyMap = new HashMap<String, ComboBox>();
         int rowIndex = 1;
 
-       
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
         textFieldPropertyMap.put("XVELOCITY",
                                  (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
@@ -75,20 +75,20 @@ public class ArticlePropertyEditor extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
+        System.out.println(myArticleToEdit == null);
 
         super.myController.getEditor().getArticleEditor()
-                .editArticleXVelocity(Double
-                        .parseDouble(textFieldPropertyMap.get("XVELOCITY").getText()),
+                .editArticleXVelocity(super.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+                        .getText()),
                                       myArticleToEdit);
         super.myController.getEditor().getArticleEditor()
-                .editArticleYVelocity(Double
-                        .parseDouble(textFieldPropertyMap.get("YVELOCITY").getText()),
+                .editArticleYVelocity(super.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+                        .getText()),
                                       myArticleToEdit);
         super.myController.getEditor().getArticleEditor()
                 .editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(),
                                   myArticleToEdit);
 
-        // myArticleToEdit.setImageFile(comboBoxPropertyMap.get("IMAGE").getValue().toString());
         // Pass on the edits to the thing being edited
     }
 
