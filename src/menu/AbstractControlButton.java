@@ -11,7 +11,7 @@ import resourcemanager.ResourceManager;
 public abstract class AbstractControlButton extends Button {
 	
 	protected Map<String, Object> myImages = ResourceManager.getResourceManager().getResourceMap("ImageManager");
-	protected ResourceBundle myStrings = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesMananger", "english");
+	protected ResourceBundle myStrings = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "english");
 	
 	public AbstractControlButton(){
 		super();

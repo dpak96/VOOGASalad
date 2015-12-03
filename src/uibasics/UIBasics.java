@@ -80,7 +80,7 @@ public class UIBasics{
   
   public void setBackImage(String img) {
 	  BackgroundSize size = new BackgroundSize(100,100,true,true,true,true);
-	  BackgroundImage back = new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager().getResource("ImangeManger", img),
+	  BackgroundImage back = new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager().getResource("ImageManager", img),
 			  BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, null, size);
 	  myPane.setBackground(new Background(back));
   }
