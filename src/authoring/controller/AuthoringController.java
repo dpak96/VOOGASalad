@@ -39,8 +39,8 @@ public class AuthoringController implements IAuthoringController {
     editor = new Editor(mc);
   }
 
-  //    TODO Method for editing an article
-  
+  // TODO Method for editing an article
+
   public void removeArticle(Article n) {
     modelController.removeArticle(n);
   }
@@ -62,13 +62,14 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void createAndPlaceArticle(double x, double y, DraggableElement event) {
+    Article article = null;
     if (!highlighted) {
-      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
+      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
                                                          y,
                                                          true);
     } else {
       highlighted = false;
-      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
+      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
                                                          y,
                                                          true);
       Pane p = (Pane) event.getParent();
@@ -76,15 +77,14 @@ public class AuthoringController implements IAuthoringController {
     }
 
     if (event.getImageName().equals("Goomba")) {
-      this.goombaMovementDemo();
+      this.goombaMovementDemo(article);
     }
 
   }
 
   public Article getArticleFromCoordinates(double x, double y) {
     try {
-      editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-      return editor.getArticleEditor().getArticle();
+      return modelController.getArticleFromCoordinates(x, y);
     } catch (Exception e) {
       System.out.println("oops");
       return null;
@@ -117,9 +117,9 @@ public class AuthoringController implements IAuthoringController {
     modelController.remapButton(button, events);
   }
 
-  public void goombaMovementDemo() {
+  public void goombaMovementDemo(Article article) {
     Map<String, Object> tempMap = new HashMap<String, Object>();
-    tempMap.put("myActor", editor.getArticleEditor().getArticle());
+    tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
     this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
     List<Executable> listExecutable = new ArrayList<Executable>();
@@ -128,7 +128,7 @@ public class AuthoringController implements IAuthoringController {
     this.makeEvent("event", listCondition, listExecutable);
     List<Event> listEvent = new ArrayList<Event>();
     listEvent.add(currentEvent);
-    editor.getArticleEditor().getArticle().addEvent(currentEvent);
+    article.addEvent(currentEvent);
     this.mapKey("A", listEvent);
   }
 
