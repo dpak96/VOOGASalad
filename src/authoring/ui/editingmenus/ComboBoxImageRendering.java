@@ -6,6 +6,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import resourcemanager.ResourceManager;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -32,7 +33,7 @@ public class ComboBoxImageRendering {
                             setGraphic(null);
                         }
                         else {
-                            view.setImage(ResourceManager.getResourceManager().getImage(item));
+                            view.setImage((Image) ResourceManager.getResourceManager().getResource("ImageManager", item));
                             setGraphic(view);
                         }
                     }

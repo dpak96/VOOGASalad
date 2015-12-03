@@ -6,11 +6,11 @@ import javafx.scene.text.Text;
 import resourcemanager.ResourceManager;
 
 public abstract class AbstractTextField extends Text{
-	private ResourceManager myResourceManager;
 	private String mainText;
 	
 	public AbstractTextField(String text){
-		mainText = myResourceManager.getPm().getResourceMap().get("english").getString(text);
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "english");
+		mainText = rb.getString(text);
 		this.setText(mainText);
 	}
 	

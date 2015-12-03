@@ -10,7 +10,7 @@ public class VoogaProperties {
 	private double multiplier;
 	
 	public VoogaProperties(){
-	  myConfigRes = ResourceManager.getResourceManager().getPm().getResourceMap().get("config");
+	  myConfigRes = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "config");
 		multiplier = Double.parseDouble(myConfigRes.getString("MULTIPLIER"));
 	}
 

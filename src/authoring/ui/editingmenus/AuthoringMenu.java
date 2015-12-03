@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Alert.AlertType;
+import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
@@ -45,8 +46,8 @@ public abstract class AuthoringMenu implements IMenuAction {
         catch (Exception e) {
             Alert invalidInput = new Alert(AlertType.INFORMATION);
             invalidInput.setTitle("Invalid input");
-            invalidInput.setContentText(ResourceManager.getResourceManager().getPm()
-                    .getResourceMap().get("error").getString("numberInput"));
+            ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "error");
+            invalidInput.setContentText(rb.getString("numberInput"));
             invalidInput.show();
         }
         return 0.0;
