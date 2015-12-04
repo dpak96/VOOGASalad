@@ -2,37 +2,36 @@ package authoring.backend;
 
 import java.util.List;
 import javafx.scene.image.Image;
+import model.Article;
 
 
 public interface IArticleEditor {
 
-  public void createNewArticleAndPlace(String name,
+  public Article createNewArticleAndPlace(String name,
                                        String imageFileName,
                                        Double x,
                                        Double y,
                                        Boolean direction);
 
-  public void createNewArticle(String name, String imageFileName, Boolean direction);
+  public void editArticleLocation(double x, double y, Article article);
 
-  public void editArticleLocation(double x, double y);
+  public void deleteObj(Article article);
 
-  public void deleteObj();
+  public void editArticleImage(String imageFileName, Article article);
 
-  public void editArticleImage(String imageFileName);
+  public void editArticleName(String name, Article article);
 
-  public void editArticleName(String name);
+  public void editArticleImageDirection(boolean direction, Article article);
 
-  public void editArticleImageDirection(boolean direction);
-
-  public void editArticleImageBufferX(double x);
+  public void editArticleImageBufferX(double x, Article article);
   
-  public void editArticleImageBufferY(double y);
+  public void editArticleImageBufferY(double y, Article article);
   
-  public void editArticleXVelocity(double x);
+  public void editArticleXVelocity(double x, Article article);
   
-  public void editArticleYVelocity(double y);
+  public void editArticleYVelocity(double y, Article article);
   
-  public void editArticleOrientation(double value);
+  public void editArticleOrientation(double value, Article article);
   
 
 

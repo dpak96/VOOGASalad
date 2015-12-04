@@ -1,7 +1,7 @@
 package authoring.ui.draganddrop;
 
 import authoring.ui.AuthoringUI;
-import authoring.ui.editingmenus.EnemyProperties;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.smalloverlay.OverlayController;
 import authoring.ui.toolbar.ButtonOverlay;
 import authoring.ui.toolbar.ToolbarButton;
@@ -21,7 +21,7 @@ public class HighlightedArticle extends DraggableElement {
         name = "YOOO";
         imageName = img;
         ImageView i = new ImageView();
-        i.setImage(ResourceManager.getResourceManager().getImage(img));
+        i.setImage((Image) ResourceManager.getResourceManager().getResource("ImageManager", img));
         this.setGraphic(i);
         this.getStyleClass().add("Butt");
         super.dragDetected();

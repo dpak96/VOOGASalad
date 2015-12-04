@@ -2,7 +2,7 @@ package authoring.ui.draganddrop;
 
 
 import authoring.controller.AuthoringController;
-import authoring.ui.editingmenus.EnemyProperties;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -63,7 +63,7 @@ public class DragAndDropBoard extends Pane {
        if(e.isPopupTrigger())
        {
           if(n!=null){
-           EnemyProperties popupEditingMenu=new EnemyProperties("Object Editor",n, authoringController);   
+           ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);   
           }
        }
        else{
