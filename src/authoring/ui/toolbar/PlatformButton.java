@@ -2,7 +2,6 @@ package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
 import authoring.ui.AuthoringUI;
-import authoring.ui.editingmenus.ArticlePropertyEditor;
 import authoring.ui.editingmenus.PlatformMenu;
 import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;
@@ -24,7 +23,6 @@ public class PlatformButton extends ToolbarButton {
 
   @Override
   public void placeYourObject () {
-   // PlatformMenu platformPallette=new PlatformMenu("Platform Palletee", myController);
     ButtonOverlay bo = new PlatformOverlay(myController);
     OverlayController oc = (OverlayController) this.getParent().getParent();
     oc.addOverlay(bo.init());
