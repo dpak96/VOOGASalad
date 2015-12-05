@@ -2,7 +2,6 @@ package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
 import authoring.ui.AuthoringUI;
-import authoring.ui.editingmenus.ArticlePropertyEditor;
 import authoring.ui.editingmenus.PlatformMenu;
 import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;

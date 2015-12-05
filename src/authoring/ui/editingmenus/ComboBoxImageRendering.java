@@ -34,6 +34,8 @@ public class ComboBoxImageRendering {
                         }
                         else {
                             view.setImage((Image) ResourceManager.getResourceManager().getResource("ImageManager", item));
+                            view.setFitWidth(50);
+                            view.setFitHeight(50);
                             setGraphic(view);
                         }
                     }

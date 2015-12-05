@@ -43,10 +43,14 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
     textFieldPropertyMap.put("NAME", (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Velocity: ");
-    textFieldPropertyMap.put("VELOCITY",
+    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
+    textFieldPropertyMap.put("XVELOCITY",
                              (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
+    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
+    textFieldPropertyMap.put("YVELOCITY",
+                             (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+    
     super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
     comboBoxPropertyMap.put("IMAGE",
                             super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
@@ -60,12 +64,12 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     menuGrid.add(defaultSave, 2, rowIndex++);
 
     addImages(comboBoxPropertyMap.get("IMAGE"));
+    initializeFieldValues();
 
   }
 
   public void addImages(ComboBox imageBox) {
     for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
-
       imageBox.getItems().add(imgName);
     }
 
@@ -74,6 +78,12 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     imageBox.setValue(imageBox.getItems().get(0));
   }
 
+  public void initializeFieldValues(){
+      this.textFieldPropertyMap.get("XVELOCITY").setText(Double.toString(myArticleToEdit.getXVelocity()));
+      this.textFieldPropertyMap.get("YVELOCITY").setText(Double.toString(myArticleToEdit.getYVelocity()));
+      this.comboBoxPropertyMap.get("IMAGE").setValue(myArticleToEdit.getImageFile());
+      
+   }
   @Override
   public void executeYourMenuFunction() {
     System.out.println(myArticleToEdit == null);
