@@ -7,6 +7,7 @@ import java.util.*;
 
 import model.Article;
 import model.Event;
+import model.Position;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
@@ -35,7 +36,7 @@ public class GameEngine implements IGameEngine {
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
 		myActiveArticles = getActiveArticles();
-		//myActiveArticles = allArticles;
+		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
@@ -109,7 +110,7 @@ public class GameEngine implements IGameEngine {
 			double viewpointY = myViewpoint.getY();
 			double viewpointWidth = myViewpoint.getWidth();
 			double viewpointHeight = myViewpoint.getHeight();
-			System.out.println(viewpointHeight + " " + viewpointWidth);
+			//System.out.println(viewpointHeight + " " + viewpointWidth);
 			double xBuffer = article.getXBuffer();
 			double yBuffer = article.getYBuffer();
 			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
@@ -142,17 +143,18 @@ public class GameEngine implements IGameEngine {
     this.myCharacter = myCharacter;
   }
 	
-	/*
+	
 	public static void main(String args[]) {
-		Article one = new Article("GoombaRefinedAgain.png");
+		Article one = new Article("GoombaRefinedAgain.png", 100, 100);
 		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
-		for(int[] a: one.getBitMap().getByteArray()) {
-			System.out.println(Arrays.toString(a));
+		for(Position[] a: one.getBitMap().getByteArray()) {
+			for(Position p: a) {
+				System.out.print(p.getX() + " " + p.getY());
+			}
+			System.out.println(" ");
 		}
-		CollisionManager temp = new CollisionManager();
-		System.out.println(temp.didCollide(one, two));
 	}
-	*/
+	
 	
 
 }

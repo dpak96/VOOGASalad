@@ -41,8 +41,10 @@ public class BitMap {
 	          for (int j = 0; j < width; j++) {
 	        	  int alpha = image.getRGB(j,i);
 		             if( (alpha>>24) == 0x00 ) {
-		                 result[i][j] = new Position();
+		            	 System.out.println("absent");
+		                 result[i][j] = new Position(-1,-1);
 		             } else {
+		            	 System.out.print("here");
 		            	 result[i][j] = new Position(x+j, y+i) ;
 		             }
 	          }

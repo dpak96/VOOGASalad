@@ -14,6 +14,7 @@ public class CollisionManager {
 		if (checkSimpleCollision(articleOne, articleTwo)) {
 			System.out.println("simple collision true");
 			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
+			//System.out.println(temp.isRealCollision());
 			return temp;
 		} else {
 			return new CollisionInformation("", false);
@@ -55,6 +56,7 @@ public class CollisionManager {
 			for (Position q : p) {
 				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
 				if (temp.isValidPosition()) {
+					System.out.println("found an intersection");
 					return new CollisionInformation(getIncidenceDirection(a, temp), true);
 				}
 
@@ -66,8 +68,13 @@ public class CollisionManager {
 	private Position checkPixelCollision(Position a, Position[][] b) {
 		for (Position[] p : b) {
 			for (Position q : p) {
-				if (q.isValidPosition()) {
+				if (q.isValidPosition() && a.isValidPosition() && a.getX() != -1 && q.getX() != -1) {
+					//System.out.println("is valid position");
+					System.out.println("Comparing:" + a.getX() + " " + a.getY() + " with " + q.getX() + " " + q.getY());
+					//a.getX() == q.getX() && a.getY() == q.getY()
+				
 					if (a.getX() == q.getX() && a.getY() == q.getY()) {
+						System.out.println("found");
 						return new Position(a.getX(), a.getY());
 					}
 				}
@@ -76,17 +83,20 @@ public class CollisionManager {
 		return new Position();
 
 	}
-
+	
+	//Assume A is being collided with
 	private Boolean checkSimpleCollision(Article a, Article b) {
-		if ((a.getX() <= b.getX() && a.getX()+a.getWidth() <= b.getX() || b.getX() <= a.getX() && b.getX()+b.getWidth() <= a.getX())) {
-			if (a.getY() <= b.getY() && a.getY()+a.getHeight() <= b.getY() || b.getY() <= a.getY() && b.getY() + b.getHeight() <= a.getY()) {
+		
+		//A or B intersect on the X plane
+		if((a.getX() >= b.getX() && a.getX() <= b.getX()+b.getWidth()) || (a.getX()+a.getWidth() >= b.getX() && a.getX()+a.getWidth() <= b.getX()+b.getWidth())) {
+			if ((a.getY() >= b.getY() && a.getY()<= b.getY()+b.getHeight()) || (a.getY()+a.getHeight() >= b.getY() && a.getY()+a.getHeight() <= b.getY()+b.getHeight())) {
 				return true;
 			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
+
 }

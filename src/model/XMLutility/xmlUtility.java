@@ -25,6 +25,8 @@ public class xmlUtility {
 		myModel = model;
 	}
 	
+	
+	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extensionFilter =
