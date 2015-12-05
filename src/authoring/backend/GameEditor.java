@@ -11,37 +11,20 @@ public class GameEditor extends Editor{
     // TODO Auto-generated constructor stub
   }
 
-  private Game game;
-  
 
-  public Game getGame() {
-    return game;
-  }
-
-  public void setGame(Game game) {
-    this.game = game;
-  }
-
-  public void setSplash(Image img) {
+  public void setSplash(Image img, Game game) {
     // TODO Auto-generated method stub
     
   }
 
-
-
-  public void addNewLevel() {
+  public void addNewLevel(Game game) {
     // TODO Auto-generated method stub
     
   }
 
-  public void loadLevel() {
+  public void loadLevel(Game game) {
     // TODO Auto-generated method stub
     
   }
-  
-  public void setBackgroundImage(String name){
-    myModelController.setBackgroundImage(name);
-  }
-  
-  
+    
 }
