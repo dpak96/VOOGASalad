@@ -6,6 +6,8 @@ import java.util.Map;
 import action.controller.ActionController;
 import authoring.controller.AuthoringController;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -31,7 +33,7 @@ public class ArticlePropertyEditor extends AuthoringMenu {
                                   AuthoringController myController) {
         super(title, myController);
         myArticleToEdit = selectedArticle;
-        super.showMenu(300, 300);
+        super.showMenu(500, 500);
     }
 
     protected void populateMenu (GridPane menuGrid) {
@@ -42,15 +44,15 @@ public class ArticlePropertyEditor extends AuthoringMenu {
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
         textFieldPropertyMap.put("XVELOCITY",
                                  (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
-
+        
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
         textFieldPropertyMap.put("YVELOCITY",
                                  (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
-
+        
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
         comboBoxPropertyMap.put("IMAGE",
                                 super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
-
+        
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Action on Collision: ");
         comboBoxPropertyMap.put("COLLISION",
                                 super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
@@ -60,7 +62,7 @@ public class ArticlePropertyEditor extends AuthoringMenu {
         menuGrid.add(defaultSave, 2, rowIndex++);
 
         addImages(comboBoxPropertyMap.get("IMAGE"));
-
+        initializeFieldValues();
     }
 
     public void addImages (ComboBox imageBox) {
@@ -74,19 +76,30 @@ public class ArticlePropertyEditor extends AuthoringMenu {
         imageBox.setValue(imageBox.getItems().get(0));
     }
     
-
+    public void initializeFieldValues(){
+       this.textFieldPropertyMap.get("XVELOCITY").setText(Double.toString(myArticleToEdit.getXVelocity()));
+       this.textFieldPropertyMap.get("YVELOCITY").setText(Double.toString(myArticleToEdit.getYVelocity()));
+       this.comboBoxPropertyMap.get("IMAGE").setValue(myArticleToEdit.getImageFile());
+       
+    }
     @Override
     public void executeYourMenuFunction () {
         System.out.println(myArticleToEdit == null);
 
+        try{
         super.myController.getEditor().getArticleEditor()
-                .editArticleXVelocity(super.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+                .editArticleXVelocity(Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
                         .getText()),
                                       myArticleToEdit);
         super.myController.getEditor().getArticleEditor()
-                .editArticleYVelocity(super.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+                .editArticleYVelocity(Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
                         .getText()),
                                       myArticleToEdit);
+        }
+        catch(NumberFormatException e)
+        {
+          super.displayErrorMessage();
+        }
         super.myController.getEditor().getArticleEditor()
                 .editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(),
                                   myArticleToEdit);

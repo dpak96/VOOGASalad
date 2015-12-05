@@ -38,19 +38,12 @@ public abstract class AuthoringMenu implements IMenuAction {
         
     }
 
-    protected Double parseDouble(String input){
-        try{
-
-            Double parsedNum= Double.parseDouble(input);
-            return parsedNum;
-        }
-        catch(Exception e){
-            Alert invalidInput=new Alert(AlertType.INFORMATION);
-            invalidInput.setTitle("Invalid input");
-            invalidInput.setContentText(ResourceManager.getResourceManager().getPm().getResourceMap().get("error").getString("numberInput"));
-            invalidInput.show();
-        }
-        return 0.0;
+    protected void displayErrorMessage(){
+        
+        Alert invalidInput=new Alert(AlertType.INFORMATION);
+        invalidInput.setTitle("Invalid input");
+        invalidInput.setContentText(ResourceManager.getResourceManager().getPm().getResourceMap().get("error").getString("numberInput"));
+        invalidInput.show();
     }
     protected abstract void populateMenu (GridPane menuPane);
 }
