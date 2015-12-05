@@ -17,8 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import model.Article;
 import model.Event;
+import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 

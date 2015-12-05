@@ -1,7 +1,7 @@
 package model.controller;
 
-import model.Article;
 import model.Event;
+import model.article.Article;
 
 import java.util.List;
 
