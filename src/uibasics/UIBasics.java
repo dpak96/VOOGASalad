@@ -3,8 +3,7 @@ package uibasics;
 import model.article.Article;
 import model.controller.ModelController;
 import java.util.*;
-import javax.annotation.Resource;
-import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
+
 import config.Config;
 import front.commands.AbstractCommand;
 import javafx.scene.image.Image;
