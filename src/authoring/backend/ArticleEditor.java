@@ -6,7 +6,8 @@ import model.controller.ModelController;
 
 public class ArticleEditor {
   private ModelController myModelController;
-
+  
+  
   public ArticleEditor(ModelController modelController) {
     myModelController = modelController;
   }
@@ -22,14 +23,21 @@ public class ArticleEditor {
                                            direction);
   }
 
-  public void editArticleLocation(double x, double y, Article article) {
+  public void removeArticle(Article article) {
+    myModelController.removeArticle(article);
+
+  }
+  
+  public void edit(String thing, Object edit, Article article){
+  }
+
+  public void editArticleXLocation(double x, Article article) {
     article.setX(x);
-    article.setY(y);
 
   }
 
-  public void deleteObj(Article article) {
-    myModelController.removeArticle(article);
+  public void editArticleYLocation(double y, Article article) {
+    article.setY(y);
 
   }
 
