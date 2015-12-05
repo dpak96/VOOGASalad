@@ -47,7 +47,6 @@ public class StartScreen {
     private String[] getLevels(){
         ArrayList<String> levels = new ArrayList<String>();
         levels.add("Add New Level");
-        
         return levels.toArray(new String[levels.size()]);
     }
 

@@ -3,6 +3,7 @@ package startscreen;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import level.manager.LevelManager;
 import main.GraphicHandler;
 import model.controller.ModelController;
 
@@ -14,11 +15,12 @@ public class StartScreenController {
     private StartScreen start;
     private Stage myStage;
     private GraphicHandler myGraphicHandler;
+    private LevelManager myLevelManager;
 
-    public StartScreenController(){
+    public StartScreenController(LevelManager levelManager){
+    	myLevelManager = levelManager;
         game = new GameCreation();
         start = new StartScreen();
-
     }
 
     public void init(Stage s, GraphicHandler graphicHandler){
