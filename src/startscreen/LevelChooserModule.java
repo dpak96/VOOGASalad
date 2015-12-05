@@ -28,7 +28,7 @@ public class LevelChooserModule extends AbstractChooserModule {
 
     protected void setController(StartScreenController controller, Button b){
         b.setOnAction(e -> controller.setLevel(b.getText()));
-
+        System.out.println("hi everyone");
     }
 
 

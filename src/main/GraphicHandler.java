@@ -38,4 +38,8 @@ public class GraphicHandler {
         currentStage.setScene(superController.init(gameCreation));
     }
     
+    public void setScene(Scene scene) {
+    	currentStage.setScene(scene);
+    }
+    
 }

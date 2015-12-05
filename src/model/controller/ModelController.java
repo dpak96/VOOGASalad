@@ -180,5 +180,8 @@ public class ModelController implements IModelController {
     myModel.setBackgroundImage(name);
   }
   
-
+  public void setModel(Model model) {
+	  this.myModel = model;
+  }
+  
 }
