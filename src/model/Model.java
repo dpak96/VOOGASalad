@@ -2,8 +2,8 @@ package model;
 import java.util.*;
 
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 public class Model extends Observable{
 	
