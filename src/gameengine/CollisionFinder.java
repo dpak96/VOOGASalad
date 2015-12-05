@@ -1,4 +1,5 @@
 package gameengine;
+
 /*
  *  Array2DIntgIterator implements Iterator interface and provides the functionality 
  *  to iterate through the elements of a 2 dimensional int array in an   
@@ -20,17 +21,23 @@ import java.util.NoSuchElementException;
 
 import model.Position;
 
-public class CollisionFinder implements Iterator<Integer> {
+/**
+ * @version 1.0
+ * @author Sol
+ * @since December, 2013
+ */
 
+public class CollisionFinder implements Iterator<Position> {
+	
     private Position[][] array2D;
     private int pos = 0;
-    private List<Integer> collection;
+    private List<Position> collection;
     
 //    public static void main(String[] args) {
-//    	int[][] arr = {{1,2,3}, {7,4,5}, {12, 13, 45}};
-//    	Array2DIntgIterator test = new Array2DIntgIterator(arr);
-//    	while(test.hasNext()) {
-//    		System.out.println(test.next());
+    	//Position[][] arr = {{1,2,3}, {7,4,5}, {12, 7, 45}};
+    	//CollisionFinder test = new CollisionFinder(arr);
+    	//while(test.hasNext()) {
+    	//	System.out.println(test.next());
 //    	}
 //    }
     
@@ -49,7 +56,7 @@ public class CollisionFinder implements Iterator<Integer> {
     }
 
     @Override
-    public Integer next() throws NoSuchElementException {
+    public Position next() throws NoSuchElementException {
         if (hasNext()) {
             return collection.get(pos++);
         } else {
@@ -66,7 +73,7 @@ public class CollisionFinder implements Iterator<Integer> {
         return collection.size();
     }
     
-    public int getElementAt (int index) {
+    public Position getElementAt (int index) {
         return collection.get(index);
     }
 
@@ -122,7 +129,7 @@ public class CollisionFinder implements Iterator<Integer> {
 
             for (int row = 0; row < rowHeight; row++) {
 
-                collection.add(Integer.valueOf(arr2D[row][0]));
+                collection.add(arr2D[row][0]);
             }
 
             return;
@@ -146,12 +153,12 @@ public class CollisionFinder implements Iterator<Integer> {
                 for (int col = rowPos; col < columnHeight; col++) {
                     //System.out.println("row [" + rowPos + "] and col [" + col + "] =>" + arr2D[rowPos][col]);
 
-                    if (collection.contains(Integer.valueOf(arr2D[rowPos][col]))) {
+                    if (collection.contains(arr2D[rowPos][col])) {
                         //System.out.println("Done row/column processing :");
                         //return; 
                         continue;
                     } else {
-                        collection.add(Integer.valueOf(arr2D[rowPos][col]));
+                        collection.add(arr2D[rowPos][col]);
                         colPos = col;
                     }
                 }
@@ -166,11 +173,12 @@ public class CollisionFinder implements Iterator<Integer> {
 
                 for (int row = rowPos; row < rowHeight; row++) {
 
-                    if (collection.contains(Integer.valueOf(arr2D[row][colPos]))) {
+                    if (collection.contains(arr2D[row][colPos])) {
                         //return; 
+                    	collection.add(arr2D[row][colPos]);
                         continue;
                     } else {
-                        collection.add(Integer.valueOf(arr2D[row][colPos]));
+                        collection.add(arr2D[row][colPos]);
                         rowPos = row;
                     }
 
@@ -191,11 +199,12 @@ public class CollisionFinder implements Iterator<Integer> {
 
                 for (int col = colPos; col >= 0; col--) {
 
-                    if (collection.contains(Integer.valueOf(arr2D[rowPos][col]))) {
+                    if (collection.contains(arr2D[rowPos][col])) {
+                    	collection.add(arr2D[rowPos][col]);
                         //return;
                         continue;
                     } else {
-                        collection.add(Integer.valueOf(arr2D[rowPos][col]));
+                        collection.add(arr2D[rowPos][col]);
                         colPos = col;
                     }
 
@@ -211,11 +220,12 @@ public class CollisionFinder implements Iterator<Integer> {
 
                 for (int row = rowPos; row > 0; row--) {
 
-                    if (collection.contains(Integer.valueOf(arr2D[row][colPos]))) {
+                    if (collection.contains(arr2D[row][colPos])) {
                         //return;
+                    	collection.add(arr2D[row][colPos]);
                         continue;
                     } else {
-                        collection.add(Integer.valueOf(arr2D[row][colPos]));
+                        collection.add(arr2D[row][colPos]);
                         rowPos = row;
                     }
 
