@@ -19,6 +19,7 @@ import model.Event;
 import model.processes.Condition;
 import model.processes.ConditionIsTouching;
 import model.processes.Executable;
+import model.processes.ExecutableGainLife;
 import resourcemanager.ResourceManager;
 
 
@@ -57,15 +58,12 @@ public class RuleMenu extends AuthoringMenu {
      super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
      menuPane.add(executableTable, 3, 2);
 
+     this.addColumns(eventTable, conditionTable, executableTable);
+     
      GridPane paramGrid=new GridPane();
      menuPane.add(paramGrid, 1, 4, 3, 1);
      
-     TableColumn eventNameCol = new TableColumn("Event Name");
-     eventNameCol.setMinWidth(100);
-     eventNameCol.setCellValueFactory(
-             new PropertyValueFactory<Event, String>("myName"));
      
-     eventNameCol.setPrefWidth(eventTable.getPrefWidth()-2);
      
      List<Event> eventList=new ArrayList<Event>();
      eventList.add(new Event("MoveHorizontal",new ArrayList<Condition>(),new ArrayList<Executable>()));
@@ -75,12 +73,13 @@ public class RuleMenu extends AuthoringMenu {
      testMap.put("mySecond", null);
      eventList.get(0).getConditions().add(new ConditionIsTouching(testMap));
      
+     eventList.get(0).getExecutables().add(new ExecutableGainLife(testMap));
+     
 
      ObservableList<Event> eventData =
              FXCollections.observableArrayList(eventList);
      
      eventTable.setItems(eventData);
-     eventTable.getColumns().add(eventNameCol);
      
 
      
@@ -95,13 +94,7 @@ public class RuleMenu extends AuthoringMenu {
      
      
 
-     TableColumn condNameCol = new TableColumn("Condition Name");
-     condNameCol.setMinWidth(100);
-     condNameCol.setCellValueFactory(
-             new PropertyValueFactory<Condition, String>("myName"));
 
-     conditionTable.getColumns().add(condNameCol);
-     
      
      
    /*  conditionTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -115,6 +108,30 @@ public class RuleMenu extends AuthoringMenu {
   
 
   }
+  public void addColumns(TableView eventTable,TableView conditionTable, TableView executableTable){
+      
+      
+      TableColumn condNameCol = new TableColumn("Condition Name");
+      condNameCol.setMinWidth(100);
+      condNameCol.setCellValueFactory(
+              new PropertyValueFactory<Condition, String>("myName"));
+
+      conditionTable.getColumns().add(condNameCol);
+      
+
+      TableColumn eventNameCol = new TableColumn("Event Name");
+      eventNameCol.setMinWidth(100);
+      eventNameCol.setCellValueFactory(
+              new PropertyValueFactory<Event, String>("myName"));
+      eventTable.getColumns().add(eventNameCol);
+
+
+      TableColumn execNameCol = new TableColumn("Executable Name");
+      execNameCol.setMinWidth(100);
+      execNameCol.setCellValueFactory(
+              new PropertyValueFactory<Executable, String>("myName"));
+      executableTable.getColumns().add(execNameCol);
+  }
 
   public void updateConditionsAndExecutables(Event selectedEvent){
       
@@ -122,9 +139,9 @@ public class RuleMenu extends AuthoringMenu {
               FXCollections.observableArrayList(selectedEvent.getConditions());
       conditionTable.setItems(conditionData);
       
-     /* ObservableList<Executable> executableData =
+      ObservableList<Executable> executableData =
               FXCollections.observableArrayList(selectedEvent.getExecutables());
-      eventTable.setItems(executableData);*/
+      executableTable.setItems(executableData);
       
       
   }
