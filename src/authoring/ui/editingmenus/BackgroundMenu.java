@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 public class BackgroundMenu extends AuthoringMenu {
 
-    private ComboBox imageBox=new ComboBox();
+    private ComboBox<String> imageBox=new ComboBox<String>();
     private ComboBoxImageRendering imageHandler=new ComboBoxImageRendering();
     
     public BackgroundMenu (String title, AuthoringController controller) {
@@ -15,8 +15,8 @@ public class BackgroundMenu extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
-        // TODO Auto-generated method stub
-        
+
+            super.myController.getEditor().getGameEditor().setBackgroundImage(imageBox.getValue());
     }
 
     @Override
