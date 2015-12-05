@@ -41,8 +41,18 @@ public class DragAndDropBoard extends Pane {
             @Override
             public void handle(DragEvent event) {
                 /* data dropped */
-                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (DraggableElement) event.getGestureSource());
-
+                if(event.getGestureSource() instanceof HighlightedArticle){
+                    HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
+                   double tempX = highlightedArticle.getLayoutX()+0.1;
+                    double tempY = highlightedArticle.getLayoutY()+0.1;
+                    Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
+                    //System.out.println(n == null);
+                    n.setX(event.getX());
+                    n.setY(event.getY());
+                }
+                else {
+                    authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+                }
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasImage()) {
@@ -51,9 +61,10 @@ public class DragAndDropBoard extends Pane {
                 event.setDropCompleted(success);
                 event.consume();
             }
+
         });
         this.setOnMouseClicked(e->
-                authoringController.addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
+                authoringController.addTemp(e));
     }
 
 
