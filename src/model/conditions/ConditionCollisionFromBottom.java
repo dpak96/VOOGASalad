@@ -1,4 +1,4 @@
-package model;
+package model.conditions;
 
 import java.util.Map;
 

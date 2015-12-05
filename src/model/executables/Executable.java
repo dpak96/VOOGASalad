@@ -1,5 +1,8 @@
-package model;
+package model.executables;
 import java.util.*;
+
+import model.Process;
+import model.article.Article;
 
 public abstract class Executable extends Process{
 
@@ -14,4 +17,8 @@ public abstract class Executable extends Process{
 		myActor = actor;
 	}
 	public abstract void execute();
+	
+	public void setMyActor(Article article){
+		myActor = article;
+	}
 }

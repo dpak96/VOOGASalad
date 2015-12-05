@@ -5,6 +5,7 @@ package model;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import model.article.Position;
 import resourcemanager.ResourceManager;
 
 import java.awt.image.BufferedImage;

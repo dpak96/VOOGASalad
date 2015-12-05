@@ -1,9 +1,10 @@
 package authoring.backend;
 
 import java.util.List;
-import model.Article;
-import model.Condition;
-import model.Executable;
+
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
 
 
 public class FactoryData {

@@ -1,6 +1,10 @@
 package model;
 import java.util.*;
 
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
+
 public class Model extends Observable{
 	
 	private List<Event> myEvents;
@@ -9,7 +13,7 @@ public class Model extends Observable{
 	private List<Executable> myExecutables;
 	private List<Condition> myConditions;
 	private List<Event> allEvents;
-	private List<Event> activeEvents;
+	private List<Event> myActiveEvents;
 	private Article myViewpoint;
 	private Article myCharacter;
 	private String myBackgroundImage;
@@ -106,10 +110,6 @@ public class Model extends Observable{
 		myCharacter = character;
 	}
 
-	public void removeEventFromArticle(Article article, Event event){
-		article.getEvents().remove(event);
-	}
-
 	public void remapButton(String button, List<Event> events) {
 		myButtonMap.put(button, events);
 	}
@@ -178,6 +178,18 @@ public class Model extends Observable{
 	
 	public String getBackgroundImage(){
 		return myBackgroundImage;
+	}
+
+	public List<Event> getActiveEvents() {
+		return myActiveEvents;
+	}
+
+	public void setActiveEvents(List<Event> activeEvents) {
+		myActiveEvents = activeEvents;
+	}
+	
+	public void addActiveEvent(Event event){
+		myActiveEvents.add(event);
 	}
 	
 }
