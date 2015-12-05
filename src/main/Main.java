@@ -11,7 +11,6 @@ public class Main extends Application {
     private SuperController squirtle;
   
     public static void main(String[] args) {
-    	
         launch(args);
     }
 
