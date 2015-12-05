@@ -6,10 +6,11 @@ import model.controller.ModelController;
 
 public class ArticleEditor {
   private ModelController myModelController;
-  
+  //private PropertyEditor pe;
   
   public ArticleEditor(ModelController modelController) {
     myModelController = modelController;
+    //pe = new PropertyEditor();
   }
 
   public Article createNewArticleAndPlace(String name,
@@ -29,6 +30,7 @@ public class ArticleEditor {
   }
   
   public void edit(String thing, Object edit, Article article){
+    //pe.editProperty(thing,edit,article);
   }
 
   public void editArticleXLocation(double x, Article article) {

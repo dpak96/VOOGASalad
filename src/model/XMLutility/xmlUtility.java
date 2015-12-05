@@ -13,6 +13,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+
+import level.manager.XMLOrderer;
 import model.Model;
 import model.article.Article;
 import model.article.Position;
@@ -20,6 +22,11 @@ import model.article.Position;
 public class xmlUtility {
 	XStream myStream;
 	Model myModel;
+	
+	public xmlUtility() {
+		myStream = new XStream(new DomDriver());
+	}
+	
 	public xmlUtility(Model model) {
 		myStream = new XStream(new DomDriver());
 		myModel = model;
@@ -27,6 +34,7 @@ public class xmlUtility {
 	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
+		System.out.println("File Chooser 1");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);
@@ -40,7 +48,7 @@ public class xmlUtility {
 		}
 
 	}
-	private Model load(File file){
+	public Model load(File file){
 		try {
 			myStream = new XStream(new DomDriver());
 			myStream.processAnnotations(Model.class);
@@ -56,15 +64,18 @@ public class xmlUtility {
 
 	}
 	
-	public void saveModel(Window window) {
+	public void saveModel(Window window, String path) {
 		FileChooser myFileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);
 		myFileChooser.setTitle("Howdy");
+		myFileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator")+path));
 		File game = myFileChooser.showSaveDialog(window);
 		try {
 			save(game);
+			XMLOrderer levelOrder = new XMLOrderer(path,game.getName());
+			levelOrder.makeXML(path);
 //	      o.writeObject(myController.getMyScene().getAllData().get(0));
 		} catch (Exception e) {
 			e.printStackTrace();

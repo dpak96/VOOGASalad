@@ -14,7 +14,7 @@ import resourcemanager.ResourceManager;
  * @author danielpak
  *
  */
-public class Article {
+public class Article{
 	
 	private String myImageFile;
 	private double myXBuffer;
