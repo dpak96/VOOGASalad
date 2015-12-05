@@ -18,7 +18,7 @@ public class GraphicHandler {
     public GraphicHandler(){
         superController = new SuperController(this);
         myLevelManager = new LevelManager(superController.getModelController());
-        start = new StartScreenController();
+//        start = new StartScreenController(myLevelManager);
     }
 
     public void init(Stage s){
@@ -28,7 +28,7 @@ public class GraphicHandler {
 
 
     public void startScreen(){
-        start = new StartScreenController();
+        start = new StartScreenController(myLevelManager);
         baseScene = new Scene(start.getStart(), 400,400);
         baseScene.getStylesheets().add("startscreen/StartScreen.css");
         currentStage.setTitle("Test");

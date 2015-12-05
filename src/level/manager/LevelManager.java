@@ -17,14 +17,12 @@ public class LevelManager {
 //	private GraphicHandler myGraphic;
 //	private UICore myUI;
 	private ModelController myModelCtr;
-	private StartScreenController myStart;
 	
 	public LevelManager(ModelController modelCtr) {
 		levels = new ArrayList<String>();
 		xmlUtil = new xmlUtility();
 //		myGraphic = graphic;
 //		myUI = uiCore;
-		myStart = start;
 		myModelCtr = modelCtr;
 		updateLevels();
 	}
