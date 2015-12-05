@@ -8,11 +8,32 @@ public class Model extends Observable{
 	private List<Article> myArticles;
 	private List<Executable> myExecutables;
 	private List<Condition> myConditions;
+	private List<Event> allEvents;
+	private List<Event> activeEvents;
 	private Article myViewpoint;
 	private Article myCharacter;
 	private String myBackgroundImage;
 
 
+	public void removeExecutableFromEvent(String eventName, String executableName){
+		
+		for(Event ev: allEvents){
+			if(ev.getName().equals(eventName)){
+				ev.removeExecutable(executableName);
+				break;
+			}
+		}
+	}
+	
+	public void removeConditionFromEvent(String eventName, String conditionName){
+		
+		for(Event ev: allEvents){
+			if(ev.getName().equals(eventName)){
+				ev.removeCondition(conditionName);
+				break;
+			}
+		}
+	}
 	
 	public List<Event> getEvents(){
 		return myEvents;

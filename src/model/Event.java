@@ -30,6 +30,10 @@ public class Event {
 		myExecutables.addAll(execs);
 	}
 	
+	public String getName(){
+		return myName;
+	}
+	
 	public void fire(){
 		for(Condition c : myConditions){
 			if(!c.isMet()) return;
@@ -37,6 +41,27 @@ public class Event {
 		for(Executable e : myExecutables){
 			e.execute();
 		}
+	}
+
+	
+	public Executable removeExecutable(String execName){
+		for(Executable ex: myExecutables){
+			if(ex.getName().equals(execName)){
+				myExecutables.remove(ex);
+				return ex;
+			}
+		}
+		return null;
+	}
+	
+	public Condition removeCondition (String condName){
+		for(Condition c: myConditions){
+			if(c.getName().equals(condName)){
+				myConditions.remove(c);
+				return c;
+			}
+		}
+		return null;
 	}
 	
 }
