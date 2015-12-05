@@ -30,7 +30,6 @@ public class UIBasics {
     myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-    this.setBackImage("Goomba");
   }
 
   private void load(String identifier) {
@@ -79,14 +78,19 @@ public class UIBasics {
   }
 
   public void setBackImage(String img) {
-    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
-    BackgroundPosition pos = new BackgroundPosition(null, 250, false, null, 0, false);
-    BackgroundImage back =
-        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
-            .getResource("ImageManager", img),
-                            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
+	try {
+	    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+	    BackgroundPosition pos = new BackgroundPosition(null, 250, false, null, 0, false);
+	    BackgroundImage back =
+	        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
+	            .getResource("ImageManager", img),
+	                            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
 
-    myPane.setBackground(new Background(back));
+	    myPane.setBackground(new Background(back));
+	} catch (NullPointerException e) {
+		//No set background image
+	}
+
   }
 
 }
