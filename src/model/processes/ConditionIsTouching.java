@@ -1,4 +1,4 @@
-package model.conditions;
+package model.processes;
 import java.util.*;
 
 import model.article.Article;

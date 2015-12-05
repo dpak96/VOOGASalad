@@ -2,8 +2,8 @@ package model;
 import java.util.*;
 
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 public class Event {
 
@@ -18,6 +18,14 @@ public class Event {
 		myExecutables = executables;
 	}
 	
+	public List<Condition> getConditions(){
+		return myConditions;
+	}
+	
+	public List<Executable> getExecutables(){
+		return myExecutables;
+	}
+	
 	public void addCondition(Condition cond){
 		myConditions.add(cond);
 	}
@@ -26,7 +34,7 @@ public class Event {
 		myConditions.addAll(conds);
 	}
 	
-	public void addExecutaale(Executable exec){
+	public void addExecutable(Executable exec){
 		myExecutables.add(exec);
 	}
 	
@@ -48,24 +56,12 @@ public class Event {
 	}
 
 	
-	public Executable removeExecutable(String execName){
-		for(Executable ex: myExecutables){
-			if(ex.getName().equals(execName)){
-				myExecutables.remove(ex);
-				return ex;
-			}
-		}
-		return null;
+	public void removeExecutable(Executable exec){
+		myExecutables.remove(exec);
 	}
 	
-	public Condition removeCondition (String condName){
-		for(Condition c: myConditions){
-			if(c.getName().equals(condName)){
-				myConditions.remove(c);
-				return c;
-			}
-		}
-		return null;
+	public void removeCondition (Condition cond){
+		myConditions.remove(cond);
 	}
 	
 	public void setExecutableArticle(Article article){
