@@ -18,6 +18,10 @@ public class Event {
 		myExecutables = executables;
 	}
 	
+	public String getMyName(){
+	    return myName;
+	}
+	
 	public List<Condition> getConditions(){
 		return myConditions;
 	}
