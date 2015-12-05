@@ -203,6 +203,10 @@ public class ModelController implements IModelController {
     myModel.setBackgroundImage(name);
   }
   
+  public void setModel(Model model) {
+	  this.myModel = model;
+  }
+  
   public List<Event> getActiveEvents(){
 	  return myModel.getActiveEvents();
   }
@@ -221,10 +225,6 @@ public class ModelController implements IModelController {
   
   public List<Event> getAllEvents(){
 	  return myModel.getAllEvents();
-  }
-
-  public void setModel(Model model) {
-	  this.myModel = model;
   }
   
 }
