@@ -3,6 +3,7 @@ package level.manager;
 import model.Model;
 import model.XMLutility.*;
 import model.controller.ModelController;
+import startscreen.GameCreation;
 import startscreen.StartScreenController;
 
 import java.io.File;
@@ -37,6 +38,20 @@ public class LevelManager {
 	
 	public String[] getLevelsArr() {
 		return (String[]) levels.toArray();
+	}
+	
+	public void setLevel(GameCreation game) {
+		if (game.getLevel().equals("Add New Level")) {
+			currentLevel = levels.size();
+			addLevel("Level " + currentLevel);
+			System.out.println("Level " + currentLevel);
+		} else
+			currentLevel = Integer.valueOf(game.getLevel());
+		System.out.println(currentLevel);
+		System.out.println(levels.size());
+
+		Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
+		myModelCtr.setModel(model);
 	}
 	
 	public void addLevel(String levelName) {
