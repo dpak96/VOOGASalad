@@ -69,6 +69,10 @@ public class MenuController {
     }
 
     public void loadGame(){
+    	System.out.println("myMainMenu.getScene()");
+    	System.out.println(myMainMenu.getScene() == null);
+    	System.out.println("myMainMenu.getScene().getWindow()");
+    	System.out.println(myMainMenu.getScene().getWindow() == null);
         myModelController.load(myMainMenu.getScene().getWindow());
     }
     

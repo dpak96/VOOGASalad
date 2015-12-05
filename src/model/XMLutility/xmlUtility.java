@@ -34,6 +34,7 @@ public class xmlUtility {
 	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
+		System.out.println("File Chooser 1");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);

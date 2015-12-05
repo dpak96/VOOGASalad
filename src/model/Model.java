@@ -16,6 +16,19 @@ public class Model extends Observable{
 	private Article myViewpoint;
 	private Article myCharacter;
 	private String myBackgroundImage;
+	
+	public Model(){
+		allEvents = new ArrayList<Event>();
+		myActiveEvents = new ArrayList<Event>();
+		myButtonMap = new HashMap<String, List<Event>>();
+		myButtonMap.put("default", new ArrayList<Event>());
+		myArticles = new ArrayList<Article>();
+		myExecutables = new ArrayList<Executable>();
+		myConditions = new ArrayList<Condition>();
+		myViewpoint = new Article("Goomba", 0, 0);
+		myCharacter = new Article("Goomba", -100, -100);
+		
+	}
 
 	public List<Event> getAllEvents(){
 		return allEvents;

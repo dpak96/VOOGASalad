@@ -17,6 +17,12 @@ public class StartScreenController {
     private GraphicHandler myGraphicHandler;
     private LevelManager myLevelManager;
 
+    
+    public StartScreenController(){
+        game = new GameCreation();
+        start = new StartScreen();
+    }
+    
     public StartScreenController(LevelManager levelManager){
     	myLevelManager = levelManager;
         game = new GameCreation();

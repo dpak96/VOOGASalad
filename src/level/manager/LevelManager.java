@@ -15,8 +15,6 @@ public class LevelManager {
 	private List<String> levels;
 	private int currentLevel;
 	private xmlUtility xmlUtil;
-//	private GraphicHandler myGraphic;
-//	private UICore myUI;
 	private ModelController myModelCtr;
 	
 	public LevelManager(ModelController modelCtr) {
@@ -45,13 +43,16 @@ public class LevelManager {
 			currentLevel = levels.size();
 			addLevel("Level " + currentLevel);
 			System.out.println("Level " + currentLevel);
-		} else
+		} else {
 			currentLevel = Integer.valueOf(game.getLevel());
+			Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
+			System.out.println("reading model");
+			System.out.println("floopymcfloopyasspeniswanker");
+			System.out.println(model == null);
+			myModelCtr.setModel(model);
+		}
 		System.out.println(currentLevel);
 		System.out.println(levels.size());
-
-		Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
-		myModelCtr.setModel(model);
 	}
 	
 	public void addLevel(String levelName) {
