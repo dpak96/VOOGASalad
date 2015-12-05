@@ -71,10 +71,14 @@ public class StartScreen {
     public String[] allGames(){
     	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
+    	try{
     	String[] ret = new String[all.length];
     	for(int i = 0; i<all.length; i++){
     		ret[i]=(all[i].getName());
     	}
     	return ret;
+    	}catch(Exception e){
+    		return new String[0];
+    	}
     }
 }
