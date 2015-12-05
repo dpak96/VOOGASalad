@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
-import model.Article;
+import model.article.Article;
 import resourcemanager.ResourceManager;
 
 

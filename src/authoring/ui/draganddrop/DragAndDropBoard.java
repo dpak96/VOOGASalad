@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import model.Article;
+import model.article.Article;
 
 public class DragAndDropBoard extends Pane {
 

@@ -10,7 +10,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import model.Article;
+import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 

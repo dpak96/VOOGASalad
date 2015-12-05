@@ -1,6 +1,6 @@
 package authoring.backend;
 
-import model.Article;
+import model.article.Article;
 import model.controller.ModelController;
 
 

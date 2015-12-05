@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import model.Article;
+import model.article.Article;
 import resourcemanager.ResourceManager;
 
 

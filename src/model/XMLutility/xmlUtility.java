@@ -13,9 +13,9 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import model.Article;
 import model.Model;
-import model.Position;
+import model.article.Article;
+import model.article.Position;
 
 public class xmlUtility {
 	XStream myStream;
