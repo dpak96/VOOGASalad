@@ -8,10 +8,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
-import model.Article;
-import model.Condition;
 import model.Event;
-import model.Executable;
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
  
 
 @XStreamAlias("Model")

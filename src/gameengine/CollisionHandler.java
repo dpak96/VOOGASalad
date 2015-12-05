@@ -3,17 +3,17 @@ package gameengine;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Article;
-import model.Condition;
-import model.ConditionCollisionFromAbove;
-import model.ConditionCollisionFromBottom;
-import model.ConditionCollisionFromLeft;
-import model.ConditionCollisionFromRight;
 import model.Event;
-import model.Executable;
-import model.ExecutableSetHorizontalVelocity;
 import model.LoadCollisionTypeFromXML;
 import model.LoadMatrixFromXML;
+import model.article.Article;
+import model.conditions.Condition;
+import model.conditions.ConditionCollisionFromAbove;
+import model.conditions.ConditionCollisionFromBottom;
+import model.conditions.ConditionCollisionFromLeft;
+import model.conditions.ConditionCollisionFromRight;
+import model.executables.Executable;
+import model.executables.ExecutableSetHorizontalVelocity;
 
 public class CollisionHandler {
 	private Article myArticle;

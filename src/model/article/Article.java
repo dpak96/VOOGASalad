@@ -1,10 +1,11 @@
-package model;
+package model.article;
 
 import java.util.*;
 
 
 import gameengine.CollisionInformation;
 import javafx.scene.image.Image;
+import model.BitMap;
 import resourcemanager.ResourceManager;
 
 
@@ -21,7 +22,6 @@ public class Article {
 	private BitMap myBitMap;
 	private double myWidth;
 	private double myHeight;
-	private List<Event> myEvents;
 	private Life myLife = new Life();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
@@ -36,7 +36,6 @@ public class Article {
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
-		myEvents = new ArrayList<Event>();
 	}
 
 
@@ -108,20 +107,6 @@ public class Article {
 	
 	public boolean getDirection(){
 		return myPosition.isDirection();
-	}
-	
-	public void addEvent(Event event){
-		myEvents.add(event);
-	}
-	
-	public void addAllEvents(List<Event> events){
-		for(Event ev: events){
-			myEvents.add(ev);
-		}
-	}
-		
-	public List<Event> getEvents(){
-		return myEvents;
 	}
 	
 	public double getWidth(){
