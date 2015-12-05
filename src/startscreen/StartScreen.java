@@ -27,9 +27,9 @@ public class StartScreen {
         myStage = s;
     }
 
-    public void addGameChooser(){
+    public void addGameChooser(String value){
         GameChooserModule games = new GameChooserModule(getGames());
-        games.init(myController);
+        games.init(myController, value);
 
         skeleton.addLayer(games.getContainer());
     }
@@ -39,9 +39,9 @@ public class StartScreen {
         return gameEx;
     }
 
-    public void addLevelChooser(){
+    public void addLevelChooser(String value){
         LevelChooserModule levels = new LevelChooserModule(getLevels());
-        levels.init(myController);
+        levels.init(myController, value);
         skeleton.addLayer(levels.getContainer());
     }
 

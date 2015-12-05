@@ -1,5 +1,7 @@
 package menu;
 
+import javafx.beans.property.Property;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -38,42 +40,21 @@ public class MenuController {
         myGraphicHandler.startScreen();
     }
 
-    public void something(ResourceBundle resourceBundle, FileChooser myFileChooser){ //what does this do?
-        myFileChooser.setTitle(resourceBundle.getString("OPEN"));
-        File file = myFileChooser.showOpenDialog(myMainMenu.getScene().getWindow());
+    public void saveGameCreation(GameCreation gameCreation){
+    	File gamesDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames");
+    	if(!gamesDir.exists()){
+    		gamesDir.mkdir();
+    	}
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Game Folder");
+        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
         try {
-            if (file != null) {
-                FileInputStream f = new FileInputStream(file);
-                ObjectInputStream o = new ObjectInputStream(f);
-//				Data newDat = (Data) o.readObject();
-                o.close();
-//				newDat.recreate();
-//				myController.getGuiManager().getTurtScene();
-//				myController.getGuiManager().getMyHistory().clear();
-//				myController.getMyScene().setData(0, newDat);
-//				for (String i : newDat.getUserHistory()) {
-//					myController.getGuiManager().getMyHistory().addCommand(i);
-//				}
-//				for (String j : newDat.getUserCommandMap().keySet()) {
-//					myController.getGuiManager().getMyUserCommands().addCommand(j);
-//				}
-//				for (String k : newDat.getVariableMap().keySet()) {
-//					myController.getGuiManager().getMyUserCommands().addCommand(k);
-//				}
-            }
+        	dir.mkdir();
+        	gameCreation.setFolderPath(dir.getPath());
+        	
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    public void trySave(FileChooser fileChooser, String saveName) {
-           /* try {
-                saveGame(fileChooser, saveName);
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }*/
     }
 
     public void saveGame(){

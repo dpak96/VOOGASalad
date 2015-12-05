@@ -31,7 +31,7 @@ public class StartScreenController {
         try{
             game.setMode(value);
             start.removeLayer();
-            start.addGameChooser();
+            start.addGameChooser(value);
         }
         catch(Exception e){
             throw e;
@@ -42,7 +42,18 @@ public class StartScreenController {
         try{
             game.setGame(value);
             start.removeLayer();
-            start.addLevelChooser();
+            start.addLevelChooser(value);
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
+    
+    protected void newGame(String value){
+        try{
+            start.removeLayer();
+            game.setLevel(value);
+            myGraphicHandler.startUpNew(game);
         }
         catch(Exception e){
             throw e;
