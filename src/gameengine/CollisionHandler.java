@@ -7,13 +7,13 @@ import model.Event;
 import model.LoadCollisionTypeFromXML;
 import model.LoadMatrixFromXML;
 import model.article.Article;
-import model.conditions.Condition;
-import model.conditions.ConditionCollisionFromAbove;
-import model.conditions.ConditionCollisionFromBottom;
-import model.conditions.ConditionCollisionFromLeft;
-import model.conditions.ConditionCollisionFromRight;
-import model.executables.Executable;
-import model.executables.ExecutableSetHorizontalVelocity;
+import model.processes.Condition;
+import model.processes.ConditionCollisionFromAbove;
+import model.processes.ConditionCollisionFromBottom;
+import model.processes.ConditionCollisionFromLeft;
+import model.processes.ConditionCollisionFromRight;
+import model.processes.Executable;
+import model.processes.ExecutableSetHorizontalVelocity;
 
 public class CollisionHandler {
 	private Article myArticle;

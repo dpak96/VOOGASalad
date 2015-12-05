@@ -1,4 +1,4 @@
-package model;
+package model.processes;
 import java.util.*;
 import java.lang.reflect.Field;
 

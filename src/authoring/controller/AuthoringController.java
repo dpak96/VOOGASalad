@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import authoring.backend.Editor;
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
@@ -18,9 +19,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.Event;
 import model.article.Article;
-import model.conditions.Condition;
 import model.controller.ModelController;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 
 public class AuthoringController implements IAuthoringController {
@@ -124,7 +125,7 @@ public class AuthoringController implements IAuthoringController {
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
-    this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+    this.makeExecutable("ExecutableMoveHorizontal", tempMap);
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(currentExecutable);
     List<Condition> listCondition = new ArrayList<Condition>();
@@ -163,6 +164,9 @@ public class AuthoringController implements IAuthoringController {
     }
   }
 
+  public List<Event> getEventList(){
+      return this.modelController.getAllEvents();
+  }
 
   public void tester(MouseEvent e){
     double x = e.getX();

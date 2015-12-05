@@ -5,14 +5,14 @@ import java.util.*;
 import authoring.backend.*;
 import model.*;
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 public class ModelFactory {
 
 	public Article createArticle(String fileName, double x, double y, boolean direction){
 		try {
-			Class<?> cls = Class.forName("model.Article");
+			Class<?> cls = Class.forName("model.article.Article");
 			Class [] type = {String.class, Double.class, Double.class, Boolean.class};
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {fileName, x, y, direction};
@@ -69,7 +69,7 @@ public class ModelFactory {
 
 	public Condition createCondition(String name, Map<String, Object> data){
 		try {
-			Class<?> cls = Class.forName(name);
+			Class<?> cls = Class.forName("model.processes." + name);
 			Constructor<?> trialCons = cls.getConstructor(Map.class);
 			Constructor<?> cons = cls.getConstructor(Map.class);
 			Condition test = (Condition) trialCons.newInstance(data);
@@ -82,7 +82,7 @@ public class ModelFactory {
 	}
 	public Executable createExecutable(String name, Map<String, Object> data){
 		try {
-			Class<?> cls = Class.forName(name);
+			Class<?> cls = Class.forName("model.processes."+ name);
 			Constructor<?> cons = cls.getConstructor(Map.class);
 			Executable test = (Executable) cons.newInstance(data);
 			return test;

@@ -1,16 +1,16 @@
-package model.conditions;
+package model.processes;
 
 import java.util.Map;
 
 import model.article.Article;
 
-public class ConditionRightOfPositionOnScreen extends Condition{
+public class ConditionLeftOfPositionOnScreen extends Condition{
 	
 	private Article myViewpoint;
 	private Article myCheckArticle;
 	private double myFraction;
 	
-	public ConditionRightOfPositionOnScreen(Map<String, Object> parameters){
+	public ConditionLeftOfPositionOnScreen(Map<String, Object> parameters){
 		super(parameters);
 	}
 
@@ -18,7 +18,7 @@ public class ConditionRightOfPositionOnScreen extends Condition{
 	public boolean isMet() {
 		double xMid = myCheckArticle.getX() + myCheckArticle.getWidth()/2;
 		
-		return xMid > myViewpoint.getX() + myViewpoint.getWidth()*myFraction;
+		return xMid < myViewpoint.getX() + myViewpoint.getWidth()*myFraction;
 		
 	}
 

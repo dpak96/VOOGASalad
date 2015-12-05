@@ -16,6 +16,7 @@ public class BackgroundButton extends ToolbarButton {
   @Override
   public void placeYourObject() {
       BackgroundMenu backgroundPopup=new BackgroundMenu(NAME, myController);
+      backgroundPopup.showMenu(300 , 150);
 
       
   }

@@ -2,8 +2,8 @@ package model;
 import java.util.*;
 
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 public class Event {
 
@@ -16,6 +16,10 @@ public class Event {
 		myName = name;
 		myConditions = conditions;
 		myExecutables = executables;
+	}
+	
+	public String getMyName(){
+	    return myName;
 	}
 	
 	public List<Condition> getConditions(){

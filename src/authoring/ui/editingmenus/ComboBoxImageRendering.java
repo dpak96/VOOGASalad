@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 
 public class ComboBoxImageRendering {
 
+    
     @SuppressWarnings("unchecked")
     public void renderComboBox (ComboBox box) {
         box.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -34,6 +35,8 @@ public class ComboBoxImageRendering {
                         }
                         else {
                             view.setImage((Image) ResourceManager.getResourceManager().getResource("ImageManager", item));
+                            view.setFitWidth(50);
+                            view.setFitHeight(50);
                             setGraphic(view);
                         }
                     }
@@ -42,4 +45,13 @@ public class ComboBoxImageRendering {
             }
         });
     }
+    
+    public void addImages(ComboBox imageBox) {
+        for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
+          imageBox.getItems().add(imgName);
+        }
+        renderComboBox(imageBox);
+        imageBox.setValue(imageBox.getItems().get(0));
+      }
+
 }
