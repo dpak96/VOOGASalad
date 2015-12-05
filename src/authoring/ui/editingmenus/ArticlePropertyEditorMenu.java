@@ -32,7 +32,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
                                AuthoringController myController) {
     super(title, myController);
     myArticleToEdit = selectedArticle;
-    super.showMenu(title);
+    super.showMenu(300,300);
   }
 
   protected void populateMenu(GridPane menuGrid) {
@@ -79,11 +79,11 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     System.out.println(myArticleToEdit == null);
 
     super.myController.getEditor().getArticleEditor()
-        .editArticleXVelocity(super.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+        .editArticleXVelocity(Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()
-        .editArticleYVelocity(super.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+        .editArticleYVelocity(Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()
