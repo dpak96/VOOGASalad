@@ -91,8 +91,8 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()
-        .editArticleImage(comboBoxPropertyMap.get("IMAGE").getValue().toString(),
-                          myArticleToEdit);
+    .edit("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
+            myArticleToEdit);
 
     // Pass on the edits to the thing being edited
   }
