@@ -73,7 +73,7 @@ public class GameEngine implements IGameEngine {
 			for(Article collided : article.getCollisionArticles()){
 				//NEEDS COLLISION INFORMATION HERE
 				CollisionHandler handler = new CollisionHandler(article, collided, article.getCollisionInformation(collided));
-				handler.collide();
+				handler.collide(myModelController);
 			}
 		}
 		

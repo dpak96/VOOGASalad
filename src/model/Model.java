@@ -155,4 +155,15 @@ public class Model extends Observable{
 		myEvents.remove(event);
 	}
 	
+	public void addNewCollisionType(String type){
+		myCollisionTypeEditor.addCollisionType(type);
+	}
+	
+	public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
+		myCollisionTypeEditor.define(direction, nameOne, nameTwo, event);
+	}
+	
+	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+		return myCollisionTypeEditor.getEvents(direction, nameOne, nameTwo);
+	}
 }

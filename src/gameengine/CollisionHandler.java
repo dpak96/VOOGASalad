@@ -14,6 +14,7 @@ import model.Executable;
 import model.ExecutableSetHorizontalVelocity;
 import model.LoadCollisionTypeFromXML;
 import model.LoadMatrixFromXML;
+import model.controller.ModelController;
 
 public class CollisionHandler {
 	private Article myArticle;
@@ -28,8 +29,11 @@ public class CollisionHandler {
 	
 
 
-	public void collide(){
-		List<Event> myEvents = getEventsFromMatrix();
+	public void collide(ModelController modelController){
+		List<Event> events = modelController.getCollisionEvents(myCollisionInformation.getCollideDirection(), myArticle.getCollisionType(), myCollided.getCollisionType());
+		for (Event e:events){
+			e.fire();
+		}
 //		double leftValue = getValueFromMatrix("Left");
 //		List<Condition> leftCollideCondition = new ArrayList<Condition>();
 //		leftCollideCondition.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));		
@@ -74,16 +78,16 @@ public class CollisionHandler {
 //		damageCollisionEvent.fire();
 	}
 	
-	public List<Event> getEventsFromMatrix(String fileName){
-		LoadCollisionTypeFromXML loadType = new LoadCollisionTypeFromXML();
-		List<String> typeList = loadType.getCollisionTypeList();
-		String myType = myArticle.getCollisionType();
-		String collidedType = myCollided.getCollisionType();
-		int rowIndex = typeList.indexOf(myType);
-		int colIndex = typeList.indexOf(collidedType);
-		LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(fileName);
-		double[][] matrix = loadMatrix.getMatrix();
-		
-		return matrix[rowIndex][colIndex];
-	}
+//	public List<Event> getEventsFromMatrix(String fileName){
+//		LoadCollisionTypeFromXML loadType = new LoadCollisionTypeFromXML();
+//		List<String> typeList = loadType.getCollisionTypeList();
+//		String myType = myArticle.getCollisionType();
+//		String collidedType = myCollided.getCollisionType();
+//		int rowIndex = typeList.indexOf(myType);
+//		int colIndex = typeList.indexOf(collidedType);
+//		LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(fileName);
+//		double[][] matrix = loadMatrix.getMatrix();
+//		
+//		return matrix[rowIndex][colIndex];
+//	}
 }
