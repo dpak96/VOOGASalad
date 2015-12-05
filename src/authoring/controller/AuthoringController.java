@@ -39,9 +39,7 @@ public class AuthoringController implements IAuthoringController {
     editor = new EditorManager(mc);
   }
 
-
   public EditorManager getEditor() {
-
     return editor;
   }
 
@@ -60,14 +58,18 @@ public class AuthoringController implements IAuthoringController {
   public void createAndPlaceArticle(double x, double y, DraggableElement event) {
     Article article = null;
     if (!highlighted) {
-      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
-                                                         y,
-                                                         true);
+      article =
+          editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+                                                             x,
+                                                             y,
+                                                             true);
     } else {
       highlighted = false;
-      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
-                                                         y,
-                                                         true);
+      article =
+          editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+                                                             x,
+                                                             y,
+                                                             true);
       Pane p = (Pane) event.getParent();
       p.getChildren().remove(event);
     }
@@ -122,26 +124,23 @@ public class AuthoringController implements IAuthoringController {
     this.mapKey("A", listEvent);
   }
 
-
-  public void addTemp(MouseEvent e, Article n, AuthoringController authoringController){
-    if(e.isPopupTrigger())
-    {
-      if(n!=null){
-        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);
+  public void addTemp(MouseEvent e, Article n, AuthoringController authoringController) {
+    if (e.isPopupTrigger()) {
+      if (n != null) {
+        ArticlePropertyEditorMenu popupEditingMenu =
+            new ArticlePropertyEditorMenu("Object Editor", n, authoringController);
       }
-    }
-    else{
+    } else {
       try {
         double tX = n.getX();
         double tY = n.getY();
         authoringController.getEditor().getArticleEditor().removeArticle(n);
         HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
-        //highlightedArticle.relocate(tX,tY);
+        // highlightedArticle.relocate(tX,tY);
         authoringController.setHighlighted(true);
         ui.getDragAndDrop().getChildren().add(highlightedArticle);
-        highlightedArticle.relocate(tX,tY);
-      }
-      catch (Exception execption){
+        highlightedArticle.relocate(tX, tY);
+      } catch (Exception execption) {
         System.out.println("hi");
       }
     }
