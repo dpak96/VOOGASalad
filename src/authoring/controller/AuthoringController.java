@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import authoring.backend.Editor;
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.Article;
 import model.Condition;
@@ -131,5 +134,30 @@ public class AuthoringController implements IAuthoringController {
     article.addEvent(currentEvent);
     this.mapKey("A", listEvent);
   }
-  
+
+
+  public void addTemp(MouseEvent e, Article n, AuthoringController authoringController){
+    if(e.isPopupTrigger())
+    {
+      if(n!=null){
+        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);
+      }
+    }
+    else{
+      try {
+        double tX = n.getX();
+        double tY = n.getY();
+        authoringController.removeArticle(n);
+        HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
+        //highlightedArticle.relocate(tX,tY);
+        authoringController.setHighlighted(true);
+        ui.getDragAndDrop().getChildren().add(highlightedArticle);
+        highlightedArticle.relocate(tX,tY);
+      }
+      catch (Exception execption){
+        System.out.println("hi");
+      }
+    }
+  }
+
 }

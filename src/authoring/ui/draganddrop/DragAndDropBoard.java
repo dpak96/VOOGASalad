@@ -43,45 +43,19 @@ public class DragAndDropBoard extends Pane {
                 /* data dropped */
                 authoringController.createAndPlaceArticle(event.getX(),event.getY(), (DraggableElement) event.getGestureSource());
 
-                /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasImage()) {
-
                     success = true;
                 }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
                 event.setDropCompleted(success);
                 event.consume();
             }
         });
         this.setOnMouseClicked(e->
-                addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
+                authoringController.addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
     }
-    protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
-       if(e.isPopupTrigger())
-       {
-          if(n!=null){
-           ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);   
-          }
-       }
-       else{
-        try {
-            double tX = n.getX();
-            double tY = n.getY();
-            authoringController.removeArticle(n);
-            HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
-            //highlightedArticle.relocate(tX,tY);
-            authoringController.setHighlighted(true);
-            getChildren().add(highlightedArticle);
-            highlightedArticle.relocate(tX,tY);
-        }
-        catch (Exception execption){
-            System.out.println("hi");
-        }
-       }
-    }
+
 
     protected void dragOver(){
         this.setOnDragOver(new EventHandler <DragEvent>() {
