@@ -18,8 +18,7 @@ public class SuperController {
   private ModelController modelController;
   private Model model;
   private GraphicHandler myGraphicHandler;
-  private LevelManager myLevelManager;
-
+  
   private UICore uiCore;
 
   public SuperController(GraphicHandler graphicHandler) {
@@ -30,7 +29,6 @@ public class SuperController {
     actionController = new ActionController(gameEngine);
     uiCore = new UICore(myGraphicHandler, actionController, modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
-    myLevelManager = new LevelManager(graphicHandler, uiCore, modelController);
   }
 
   public Scene init(GameCreation gameCreation) {

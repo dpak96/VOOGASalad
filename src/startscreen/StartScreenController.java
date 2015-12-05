@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.GraphicHandler;
+import model.controller.ModelController;
 
 /**
  * Created by Rob on 11/14/15.
