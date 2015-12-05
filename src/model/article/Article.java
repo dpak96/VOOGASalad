@@ -14,7 +14,7 @@ import resourcemanager.ResourceManager;
  * @author danielpak
  *
  */
-public class Article implements Cloneable{
+public class Article{
 	
 	private String myImageFile;
 	private double myXBuffer;
@@ -184,13 +184,5 @@ public class Article implements Cloneable{
     // TODO Auto-generated method stub
     
   }
-
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-
-	public Object cl() throws CloneNotSupportedException {
-		return super.clone();
-	}
   
 }
