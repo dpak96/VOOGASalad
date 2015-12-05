@@ -78,7 +78,7 @@ public class UIStackPane extends StackPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Model model = (Model) o;
-		myUIBasics.update(model.getArticles(), model.getCharacter());
+		myUIBasics.update(model.getArticles(), model.getCharacter(), model.getBackgroundImage());
 		myGamePlayer.update(model.getArticles(), model.getCharacter());
 	}
 

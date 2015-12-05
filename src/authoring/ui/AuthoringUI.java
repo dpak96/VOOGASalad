@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import properties.VoogaProperties;
+import main.VoogaProperties;
 
 public class AuthoringUI {
   private DragAndDropBoard dragAndDrop;
