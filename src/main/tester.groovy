@@ -4,13 +4,14 @@ package main
  * Created by Rob on 12/5/15.
  */
 class tester {
-    static int method(String arg) {
+    public static int method(String arg) {
+        println("hi");
         return 1;
     }
-    static int method(Object arg) {
+    public int method(Object arg) {
         return 2;
     }
-    static void main(String... args) {
+    void teste() {
         Object o = "Object";
         int result = method(o);
         println result;
