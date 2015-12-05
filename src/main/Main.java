@@ -19,5 +19,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         GraphicHandler graphics = new GraphicHandler();
         graphics.init(primaryStage);
+        tester test = new tester();
+        test.teste();
+        yo hey = new yo();
+        hey.hi();
     }
 }
