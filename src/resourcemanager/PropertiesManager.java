@@ -6,31 +6,23 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 
-public class PropertiesManager {
-  private final String PROPERTIES_PATH = "resources/properties/";
-  private Map<String, ResourceBundle> resourceMap;
+public class PropertiesManager extends Manager {
 
-  public PropertiesManager() {
-
+  public PropertiesManager(String path) {
+    filePath = path;
+    this.initListResources();
   }
 
   public void initListResources() {
-    resourceMap = new HashMap<String, ResourceBundle>();
-    File[] folder = new File("src/" + PROPERTIES_PATH).listFiles();
+    objectMap = new HashMap<String, Object>();
+    File[] folder = new File("src/" + filePath).listFiles();
     for (File f : folder) {
       ResourceBundle temp =
-          ResourceBundle.getBundle(PROPERTIES_PATH + f.getName().split("\\.")[0]);
+          ResourceBundle.getBundle(filePath + f.getName().split("\\.")[0]);
 
-      resourceMap.put(f.getName().split("\\.")[0], temp);
+      objectMap.put(f.getName().split("\\.")[0], temp);
     }
   }
 
-  public Map<String, ResourceBundle> getResourceMap() {
-    return resourceMap;
-  }
-
-  public void setResourceMap(Map<String, ResourceBundle> resourceMap) {
-    this.resourceMap = resourceMap;
-  }
 
 }

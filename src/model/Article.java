@@ -25,11 +25,12 @@ public class Article {
 	private Life myLife = new Life();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
+	private String myCollisionType;
 
 	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
-		Image img = ResourceManager.getResourceManager().getImage(myImageFile);
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
 		myHeight = img.getHeight();
 		myWidth = img.getWidth();
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
@@ -177,5 +178,26 @@ public class Article {
 		return myLife.getHealth();
 	}
 	
+	public String getCollisionType(){
+		return myCollisionType;
+	}
 	
+	public void setCollisionType(String collisionType){
+		myCollisionType = collisionType;
+	}
+
+
+
+  public void setDirection(boolean direction) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+
+  public void setName(String name) {
+    // TODO Auto-generated method stub
+    
+  }
+  
 }

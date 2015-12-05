@@ -70,6 +70,10 @@ public class UIStackPane extends StackPane implements Observer {
 	public UIBasics getUIBasics(){
 		return myUIBasics;
 	}
+	
+	public GamePlayerOverlay getGamePlayer(){
+		return myGamePlayer;
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {

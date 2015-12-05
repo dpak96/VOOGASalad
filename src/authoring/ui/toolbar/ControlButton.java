@@ -1,7 +1,7 @@
 package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
-import authoring.ui.editingmenus.EnemyProperties;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 
 public class ControlButton extends ToolbarButton {
   private final String NAME = "KEYS";
@@ -16,8 +16,6 @@ public class ControlButton extends ToolbarButton {
   @Override
   public void placeYourObject() {
 
-          EnemyProperties testProp=new EnemyProperties("Editor", null,super.myController
-                                                       );
       
   }
 

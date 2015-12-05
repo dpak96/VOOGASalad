@@ -1,9 +1,12 @@
 package uibasics;
 
+import java.util.Optional;
+
 import action.controller.ActionController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import main.GraphicHandler;
 import menu.MenuController;
 import model.controller.ModelController;
@@ -27,6 +30,7 @@ public class UICore {
     borderInit(props);
     myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
     myScene.setOnMouseClicked(e -> actionController.update(e.toString()));
+    pauseInit(actionController);
   }
   
 
@@ -61,5 +65,33 @@ public class UICore {
   public MenuController getMenu() {
     return menuController;
   }
+  
+  private void pauseInit(ActionController actionController){
+	  menuController.getMenu().getPlayer().setOnAction(e->actionController.resume());
+	  menuController.getMenu().getPauser().setOnAction(e->actionController.change_rate(0));
+	  menuController.getMenu().getStepper().setOnAction(e->actionController.stepper());
+  }
+  
+  /*HELPFUL CODE FOR FUTURE DIALOGS (EXIT, STOP, etc.)
+   * private void pauser(ActionController actionController){
+	  PauseDialog pause = new PauseDialog();
+	  actionController.change_rate(0);
+	  Optional<String> ret = pause.showAndWait();
+	  if(ret.isPresent()){
+		  switch (ret.get()){
+		  	case "Resume":
+		  		actionController.resume();
+		  		break;
+		  	case "Authoring Environment":
+		  		menuController.switchOverlay();
+		  		break;
+		  	case "Return to Main":
+		  		menuController.newStart();
+		  		break;
+		  	default:
+		  		
+		  }
+	  }
+  }*/
 
 }

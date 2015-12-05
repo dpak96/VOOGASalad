@@ -39,10 +39,11 @@ public class ActionController{
 		animation.play();*/
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step(SECOND_DELAY));
-		Timeline animation = new Timeline();
+		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		rate = animation.getRate();
 	}
 
 
@@ -59,12 +60,26 @@ public class ActionController{
 			ui.get_chart_panel().chart_handler(ui.get_panel().getSum1(), ui.get_panel().getSum2());
 
 		}*/
-
 	}
 
 	public void change_rate(double dub){
 		animation.pause();
 		animation.setRate(dub);
+		animation.playFromStart();
+	}
+	
+	public void stepper(){
+		animation.pause();
+		animation.setCycleCount(5);
+		animation.setRate(rate);
+		animation.playFromStart();
+		System.out.println("Hey Bitch");
+	}
+	
+	public void resume(){
+		animation.pause();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.setRate(rate);
 		animation.playFromStart();
 	}
 

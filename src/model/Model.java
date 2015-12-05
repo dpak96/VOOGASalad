@@ -10,6 +10,7 @@ public class Model extends Observable{
 	private List<Condition> myConditions;
 	private Article myViewpoint;
 	private Article myCharacter;
+	private String myBackgroundImage;
 
 
 	
@@ -148,6 +149,14 @@ public class Model extends Observable{
 	
 	public void removeEvent(Event event){
 		myEvents.remove(event);
+	}
+	
+	public void setBackgroundImage(String backgroundImage){
+		myBackgroundImage = backgroundImage;
+	}
+	
+	public String getBackgroundImage(){
+		return myBackgroundImage;
 	}
 	
 }

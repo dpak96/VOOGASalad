@@ -3,7 +3,9 @@ package game.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.Article;
@@ -30,7 +32,6 @@ public class GamePlayerOverlay extends BorderPane {
 		this.getChildren().add(scoreText);
 		this.getChildren().add(healthText);
 		this.getChildren().add(lifeText);
-		
 	}
 	
 	public void update(List<Article> arg, Article character) {

@@ -33,15 +33,15 @@ public class AuthoringController implements IAuthoringController {
     this.highlighted = highlighted;
   }
 
-
-
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
     modelController = mc;
     editor = new Editor(mc);
   }
 
-  public void removeArticle(Article n){
+  // TODO Method for editing an article
+
+  public void removeArticle(Article n) {
     modelController.removeArticle(n);
   }
 
@@ -62,56 +62,40 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void createAndPlaceArticle(double x, double y, DraggableElement event) {
-    if(!highlighted){
-      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
-              true);
-    }
-    else {
+    Article article = null;
+    if (!highlighted) {
+      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
+                                                         y,
+                                                         true);
+    } else {
       highlighted = false;
-      editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
-              true);
-      Pane p = (Pane)event.getParent();
+      article = editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x,
+                                                         y,
+                                                         true);
+      Pane p = (Pane) event.getParent();
       p.getChildren().remove(event);
     }
 
-    if(event.getImageName().equals("Goomba")){
-      Map<String, Object> tempMap= new HashMap<String, Object>();
-      tempMap.put("myName", "penis");
-      tempMap.put("myActor", editor.getArticleEditor().getArticle());
-      tempMap.put("myDisplacement", .5);
-      this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
-      List<Executable> listExecutable = new ArrayList<Executable>();
-      listExecutable.add(currentExecutable);
-      List<Condition> listCondition = new ArrayList<Condition>();
-      this.makeEvent("event", listCondition, listExecutable);
-      List<Event> listEvent = new ArrayList<Event>();
-      listEvent.add(currentEvent);
-      editor.getArticleEditor().getArticle().addEvent(currentEvent);
-      this.mapKey("A", listEvent);
+    if (event.getImageName().equals("Goomba")) {
+      this.goombaMovementDemo(article);
     }
-
 
   }
 
-
   public Article getArticleFromCoordinates(double x, double y) {
     try {
-      editor.getArticleEditor().setArticle(modelController.getArticleFromCoordinates(x, y));
-      return editor.getArticleEditor().getArticle();
+      return modelController.getArticleFromCoordinates(x, y);
     } catch (Exception e) {
       System.out.println("oops");
       return null;
     }
   }
 
-
   public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
     editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
                                                        true);
-    //System.out.println("this might've happened");
 
   }
-
 
   public Map<String, Class<?>> getFactoryParameters(String s) {
     return modelController.getParameters(s);
@@ -131,6 +115,21 @@ public class AuthoringController implements IAuthoringController {
 
   public void mapKey(String button, List<Event> events) {
     modelController.remapButton(button, events);
+  }
+
+  public void goombaMovementDemo(Article article) {
+    Map<String, Object> tempMap = new HashMap<String, Object>();
+    tempMap.put("myActor", article);
+    tempMap.put("myDisplacement", .5);
+    this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+    List<Executable> listExecutable = new ArrayList<Executable>();
+    listExecutable.add(currentExecutable);
+    List<Condition> listCondition = new ArrayList<Condition>();
+    this.makeEvent("event", listCondition, listExecutable);
+    List<Event> listEvent = new ArrayList<Event>();
+    listEvent.add(currentEvent);
+    article.addEvent(currentEvent);
+    this.mapKey("A", listEvent);
   }
 
 }
