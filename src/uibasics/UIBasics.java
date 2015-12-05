@@ -51,7 +51,7 @@ public class UIBasics {
     return myPane;
   }
 
-  public void update(List<Article> list, Article character) {
+  public void update(List<Article> list, Article character, String backImage) {
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
@@ -59,6 +59,7 @@ public class UIBasics {
     }
     articleUpdate(character);
     myPane.getChildren().addAll(myFrontArticles);
+    setBackImage(backImage);
   }
 
   public void articleUpdate(Article article) {
