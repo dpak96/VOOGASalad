@@ -1,20 +1,24 @@
 package authoring.backend;
 
-public class UserInterfaceEditor implements IUserInterfaceEditor {
+import model.controller.ModelController;
 
-  @Override
+public class UserInterfaceEditor extends Editor{
+
+  public UserInterfaceEditor(ModelController mc) {
+    super(mc);
+    // TODO Auto-generated constructor stub
+  }
+
   public void setToolBar(String toolBar) {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
   public void selectFromToolBar() {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
   public void expandToolBar() {
     // TODO Auto-generated method stub
     

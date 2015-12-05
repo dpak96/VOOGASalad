@@ -1,13 +1,17 @@
 package authoring.backend;
 
 import model.Player;
+import model.controller.ModelController;
 
-public class PlayerEditor implements IPlayerEditor {
+public class PlayerEditor extends Editor{
+  public PlayerEditor(ModelController mc) {
+    super(mc);
+    // TODO Auto-generated constructor stub
+  }
+
   private Player player;
   
-  public PlayerEditor(){
-    
-  }
+
 
   public Player getPlayer() {
     return player;
@@ -17,25 +21,21 @@ public class PlayerEditor implements IPlayerEditor {
     this.player = player;
   }
 
-  @Override
   public void addPlayer() {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
   public void editPlayerImage() {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
   public void editPlayerImageOrientation() {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
   public void editPlayerLocation(double x, double y) {
     // TODO Auto-generated method stub
     
