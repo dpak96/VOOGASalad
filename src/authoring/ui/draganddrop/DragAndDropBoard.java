@@ -69,7 +69,7 @@ public class DragAndDropBoard extends Pane {
         try {
             double tX = n.getX();
             double tY = n.getY();
-            authoringController.removeArticle(n);
+            authoringController.getEditor().getArticleEditor().removeArticle(n);
             HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
             //highlightedArticle.relocate(tX,tY);
             authoringController.setHighlighted(true);

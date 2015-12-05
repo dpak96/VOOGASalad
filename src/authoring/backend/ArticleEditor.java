@@ -71,6 +71,10 @@ public class ArticleEditor {
     article.setOrientation(value);
 
   }
+  
+  public void removeArticle(Article n) {
+    myModelController.removeArticle(n);
+  }
 
   // TODO: collisions
 

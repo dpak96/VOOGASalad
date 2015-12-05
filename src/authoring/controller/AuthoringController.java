@@ -24,9 +24,6 @@ public class AuthoringController implements IAuthoringController {
   private EditorManager editor;
   private AuthoringUI ui;
   private ModelController modelController;
-  private Executable currentExecutable;
-  private Condition currentCondition;
-  private Event currentEvent;
   private boolean highlighted = false;
 
   public void setHighlighted(boolean highlighted) {
@@ -37,12 +34,6 @@ public class AuthoringController implements IAuthoringController {
     ui = new AuthoringUI(this);
     modelController = mc;
     editor = new EditorManager(mc);
-  }
-
-  // TODO Method for editing an article
-
-  public void removeArticle(Article n) {
-    modelController.removeArticle(n);
   }
 
   public EditorManager getEditor() {
@@ -91,26 +82,20 @@ public class AuthoringController implements IAuthoringController {
     }
   }
 
-  public void createAndPlaceArticle(double x, double y, ToolbarButton event) {
-    editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(), x, y,
-                                                       true);
-
-  }
-
   public Map<String, Class<?>> getFactoryParameters(String s) {
     return modelController.getParameters(s);
   }
 
-  public void makeExecutable(String s, Map<String, Object> map) {
-    currentExecutable = modelController.createExecutable(s, map);
+  public Executable makeExecutable(String s, Map<String, Object> map) {
+    return modelController.createExecutable(s, map);
   }
 
-  public void makeCondition(String s, Map<String, Object> map) {
-    currentCondition = modelController.createCondition(s, map);
+  public Condition makeCondition(String s, Map<String, Object> map) {
+    return modelController.createCondition(s, map);
   }
 
-  public void makeEvent(String s, List<Condition> lc, List<Executable> le) {
-    currentEvent = modelController.createEvent(s, lc, le);
+  public Event makeEvent(String s, List<Condition> lc, List<Executable> le) {
+    return modelController.createEvent(s, lc, le);
   }
 
   public void mapKey(String button, List<Event> events) {
@@ -121,14 +106,14 @@ public class AuthoringController implements IAuthoringController {
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
-    this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+    Executable ex = this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
     List<Executable> listExecutable = new ArrayList<Executable>();
-    listExecutable.add(currentExecutable);
+    listExecutable.add(ex);
     List<Condition> listCondition = new ArrayList<Condition>();
-    this.makeEvent("event", listCondition, listExecutable);
+    Event ev = this.makeEvent("event", listCondition, listExecutable);
     List<Event> listEvent = new ArrayList<Event>();
-    listEvent.add(currentEvent);
-    article.addEvent(currentEvent);
+    listEvent.add(ev);
+    article.addEvent(ev);
     this.mapKey("A", listEvent);
   }
   
