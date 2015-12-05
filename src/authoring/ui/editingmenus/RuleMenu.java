@@ -2,6 +2,7 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
@@ -63,12 +64,14 @@ public class RuleMenu extends AuthoringMenu {
      firstNameCol.setCellValueFactory(
              new PropertyValueFactory<Event, String>("myName"));
      eventTable.getColumns().add(firstNameCol);
-     firstNameCol.setPrefWidth(eventTable.getPrefWidth()-2);
+     //firstNameCol.setPrefWidth(eventTable.getPrefWidth()-2);
      
-     ArrayList<String> eventList=new ArrayList<String>();
-     eventList.add("MoveHorizontal");
-     ObservableList<String> data =
+     List<Event> eventList=this.myController.getEventList();
+     eventList.add(new Event("MoveHorizontal",null,null));
+     
+     ObservableList<Event> data =
              FXCollections.observableArrayList(eventList);
+     System.out.println(data.size());
      eventTable.setItems(data);
      
      

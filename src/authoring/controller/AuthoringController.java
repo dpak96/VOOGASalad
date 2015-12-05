@@ -160,4 +160,7 @@ public class AuthoringController implements IAuthoringController {
     }
   }
 
+  public List<Event> getEventList(){
+      return this.modelController.getAllEvents();
+  }
 }
