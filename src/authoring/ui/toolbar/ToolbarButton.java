@@ -12,7 +12,7 @@ import resourcemanager.ResourceManager;
 
 
 public abstract class ToolbarButton  extends DraggableElement implements IObjectPlacing {
-   protected ResourceBundle toolbarProperties=ResourceManager.getResourceManager().getPm().getResourceMap().get("toolbar");
+   protected ResourceBundle toolbarProperties=(ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "toolbar");
    
    private final int BUTTON_DIMENSION=50;
    public AuthoringController myController;
@@ -33,7 +33,7 @@ public abstract class ToolbarButton  extends DraggableElement implements IObject
     }
     
     protected ImageView setImage(String imgName) {
-        ImageView buttonIcon = new ImageView(ResourceManager.getResourceManager().getIm().getImageMap().get(imgName));
+        ImageView buttonIcon = new ImageView((Image) ResourceManager.getResourceManager().getResource("ImageManager", imgName));
         buttonIcon.setFitWidth(this.getPrefWidth());
         buttonIcon.setFitHeight(this.getPrefHeight());
         return buttonIcon;
