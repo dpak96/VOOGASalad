@@ -12,7 +12,7 @@ public class CollisionManager {
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 
 		if (checkSimpleCollision(articleOne, articleTwo)) {
-			System.out.println("simple collision true");
+			//System.out.println("simple collision true");
 			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			//System.out.println(temp.isRealCollision());
 			return temp;
@@ -52,17 +52,42 @@ public class CollisionManager {
 
 	private CollisionInformation checkBitMapCollision(Article a, Article b) {
 		
-		for (Position[] p : a.getBitMap().getByteArray()) {
-			for (Position q : p) {
-				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
-				if (temp.isValidPosition()) {
-					System.out.println("found an intersection");
-					return new CollisionInformation(getIncidenceDirection(a, temp), true);
+		CollisionFinder finder = new CollisionFinder(a.getBitMap().getByteArray());
+		while (finder.hasNext()) {
+			Position p = finder.next();
+			if (!p.isValidPosition()) {
+				continue;
+			} else {
+				for (Position[] q: b.getBitMap().getByteArray()) {
+					for (Position r: q) {
+						if (!r.isValidPosition()) {
+							continue;
+						} else {
+							System.out.println("both valid");
+							if (Math.floor(p.getX()) == Math.floor( r.getX()) && Math.floor(p.getY()) == Math.floor(r.getY())) {
+								System.out.println("bitmap working");
+								return new CollisionInformation(getIncidenceDirection(a, r), true);
+							} else {
+								return new CollisionInformation("", false);
+							}
+						}
+					}
 				}
-
 			}
 		}
+		
 		return new CollisionInformation("", false);
+//		for (Position[] p : a.getBitMap().getByteArray()) {
+//			for (Position q : p) {
+//				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
+//				if (temp.isValidPosition()) {
+//					System.out.println("found an intersection");
+//					return new CollisionInformation(getIncidenceDirection(a, temp), true);
+//				}
+//
+//			}
+//		}
+//		return new CollisionInformation("", false);
 	}
 
 	private Position checkPixelCollision(Position a, Position[][] b) {

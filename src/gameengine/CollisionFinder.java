@@ -137,18 +137,18 @@ public class CollisionFinder implements Iterator<Position> {
 
         // TODO - find a better approach to break the recursive loop
         if (countDown < 1) {
-            System.out.println("All array elements processed :" + countDown);
+            //System.out.println("All array elements processed :" + countDown);
             return;
         }
 
         if (plusIter) {
 
             // TO DO - use logger debug
-            System.out.println("===== Processing increment loop =====");
+            //System.out.println("===== Processing increment loop =====");
 
             if (colIter) {
 
-                System.out.println("===== process Column index increment =====");
+                //System.out.println("===== process Column index increment =====");
 
                 for (int col = rowPos; col < columnHeight; col++) {
                     //System.out.println("row [" + rowPos + "] and col [" + col + "] =>" + arr2D[rowPos][col]);
@@ -169,7 +169,7 @@ public class CollisionFinder implements Iterator<Position> {
 
             } else {
 
-                System.out.println("===== process Row index increment =====");
+                //System.out.println("===== process Row index increment =====");
 
                 for (int row = rowPos; row < rowHeight; row++) {
 
@@ -191,11 +191,11 @@ public class CollisionFinder implements Iterator<Position> {
         } else {
 
             // TO DO - use logger debug
-            System.out.println("===== Processing decrement loop =====");
+            //System.out.println("===== Processing decrement loop =====");
 
             if (colIter) {
 
-                System.out.println("===== process Column index decrement =====");
+                //System.out.println("===== process Column index decrement =====");
 
                 for (int col = colPos; col >= 0; col--) {
 
@@ -216,7 +216,7 @@ public class CollisionFinder implements Iterator<Position> {
 
             } else {
 
-                System.out.println("===== process Row index decrement =====");
+                //System.out.println("===== process Row index decrement =====");
 
                 for (int row = rowPos; row > 0; row--) {
 
