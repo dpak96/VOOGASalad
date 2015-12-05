@@ -171,16 +171,16 @@ public class ModelController implements IModelController {
     loadFromFile(myXMLUtility.loadModel(wind));
   }
 
-  public void addCollisionType(String name) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
-  }
+//  public void addCollisionType(String name) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//  }
   
-  public void addCollisionType(String name, String one, String two, String collision, Double type) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
-    addCollision.define(one, two, collision, type);
-  }
+//  public void addCollisionType(String name, String one, String two, String collision, Double type) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//    addCollision.define(one, two, collision, type);
+//  }
   
   public void addNewCollisionType(String type){
 		myModel.addNewCollisionType(type);
