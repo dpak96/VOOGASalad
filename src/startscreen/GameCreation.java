@@ -1,8 +1,13 @@
 package startscreen;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
+import org.xml.sax.SAXException;
 
 import level.manager.LevelManager;
+import level.manager.OrdererParser;
 
 
 public class GameCreation {
@@ -13,6 +18,7 @@ public class GameCreation {
     private Mode myMode;
     private String myLevel;
     private String myFolderPath;
+    private Map<Integer,String> myLevelMap;
 
     public GameCreation(){
     }
@@ -44,6 +50,16 @@ public class GameCreation {
 
     public void setGame(String game){
         myGameName = game;
+        try {
+			OrdererParser order = new OrdererParser(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator")+game +System.getProperty("file.separator") + game +".xml"));
+			myLevelMap = order.getLevelMap();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
     }
 
     public void setLevel(String level){
@@ -60,5 +76,9 @@ public class GameCreation {
     
     public String getName(){
     	return myGameName;
+    }
+    
+    public Map<Integer,String> getLevelMap(){
+    	return myLevelMap;
     }
 }

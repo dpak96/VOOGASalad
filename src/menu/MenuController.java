@@ -49,6 +49,7 @@ public class MenuController {
     	}
     	FileChooser myFileChooser = new FileChooser();
     	myFileChooser.setTitle("New Game Folder");
+    	myFileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" ));
         File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
         try {
         	dir.mkdir();
@@ -62,12 +63,17 @@ public class MenuController {
     }
 
     public void saveGame(){
-            myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
+        game = myGraphicHandler.getGameCreation();
+        myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
             
     }
 
     public void loadGame(){
         myModelController.load(myMainMenu.getScene().getWindow());
+    }
+    
+    public void loadGame(GameCreation gameCreation, String file){
+    	myModelController.load(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator") + gameCreation.getGameName() + System.getProperty("file.separator") + file));
     }
 
 

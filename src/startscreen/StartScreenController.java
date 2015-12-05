@@ -45,7 +45,7 @@ public class StartScreenController {
         try{
             game.setGame(value);
             start.removeLayer();
-            start.addLevelChooser(value);
+            start.addLevelChooser(value,game.getLevelMap());
         }
         catch(Exception e){
             throw e;
@@ -67,8 +67,7 @@ public class StartScreenController {
         try{
             start.removeLayer();
             game.setLevel(value);
-            myGraphicHandler.startUp(game);
-            System.out.println("setLevel in start screen");
+            myGraphicHandler.startUp(game,value);
         }
         catch(Exception e){
             throw e;
@@ -81,6 +80,10 @@ public class StartScreenController {
     
     public void setScene(Scene scene){
     	myStage.setScene(scene);
+    }
+    
+    public GameCreation getGameCreation(){
+    	return game;
     }
 
 }

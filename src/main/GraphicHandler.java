@@ -38,9 +38,9 @@ public class GraphicHandler {
     }
 
 
-    public void startUp(GameCreation gameCreation){
-    	myLevelManager.setLevel(gameCreation);
-        currentStage.setScene(superController.init(gameCreation));
+    public void startUp(GameCreation gameCreation, String levelFile){
+    	//myLevelManager.setLevel(gameCreation);
+        currentStage.setScene(superController.init(gameCreation, levelFile));
     }
     
     public void setScene(Scene scene) {
@@ -50,4 +50,7 @@ public class GraphicHandler {
     	currentStage.setScene(superController.initNew(gameCreation));
     }
     
+    public GameCreation getGameCreation(){
+    	return start.getGameCreation();
+    }
 }
