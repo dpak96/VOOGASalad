@@ -55,7 +55,7 @@ public class StartScreenController {
     protected void newGame(String value){
         try{
             start.removeLayer();
-            game.setLevel(value);
+            game.setGame(value);
             myGraphicHandler.startUpNew(game);
         }
         catch(Exception e){
@@ -68,6 +68,7 @@ public class StartScreenController {
             start.removeLayer();
             game.setLevel(value);
             myGraphicHandler.startUp(game);
+            System.out.println("setLevel in start screen");
         }
         catch(Exception e){
             throw e;

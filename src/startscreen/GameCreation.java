@@ -11,13 +11,20 @@ public class GameCreation {
     private Mode myMode;
     private String myLevel;
     private String myFolderPath;
-    private LevelManager myLevelManager;
 
     public GameCreation(){
     }
     
     public Mode getMode() {
     	return myMode;
+    }
+    
+    public String getGameName() {
+    	return myGameName;
+    }
+    
+    public String getLevel() {
+    	return myLevel;
     }
 
     public void setMode(String mode){
@@ -38,7 +45,7 @@ public class GameCreation {
     }
 
     public void setLevel(String level){
-        myLevel = level;
+    		myLevel = level;
     }
     
     public void setFolderPath(String path){
