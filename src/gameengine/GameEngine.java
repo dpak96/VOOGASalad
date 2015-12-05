@@ -5,13 +5,12 @@ import java.util.List;
 
 import java.util.*;
 
-import model.Article;
 import model.Event;
+import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
-import model.Article;
 
 public class GameEngine implements IGameEngine {
 	private List<Article> myActiveArticles;
@@ -33,11 +32,11 @@ public class GameEngine implements IGameEngine {
 		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
 		myActiveArticles = getActiveArticles();
-		myActiveArticles = allArticles;
+		//myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
-		runArticleEvents();
+		runActiveEvents();
 		runArticleUpdates();
 		myModelController.notifyObservers();
 		
@@ -79,12 +78,9 @@ public class GameEngine implements IGameEngine {
 		
 	}
 	
-	private void runArticleEvents(){
-		for(Article article : allArticles){
-			List<Event> articleEvents = article.getEvents();
-			for(Event e : articleEvents){
-				e.fire();
-			}
+	private void runActiveEvents(){
+		for(Event e : myModelController.getActiveEvents()){
+			e.fire();
 		}
 	}
 	

@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
-import model.Article;
+import model.article.Article;
 import resourcemanager.ResourceManager;
 
 
@@ -33,10 +33,8 @@ public abstract class AuthoringMenu implements IMenuAction {
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
-
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
-
     }
 
     protected void displayErrorMessage () {

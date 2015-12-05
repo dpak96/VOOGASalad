@@ -3,29 +3,27 @@ package level.manager;
 import model.Model;
 import model.XMLutility.*;
 import model.controller.ModelController;
-import uibasics.UICore;
+import startscreen.GameCreation;
+import startscreen.StartScreenController;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import main.GraphicHandler;
-
 
 public class LevelManager {
 	private String myGame;
 	private List<String> levels;
 	private int currentLevel;
 	private xmlUtility xmlUtil;
-	private GraphicHandler myGraphic;
-	private UICore myUI;
+//	private GraphicHandler myGraphic;
+//	private UICore myUI;
 	private ModelController myModelCtr;
 	
-	public LevelManager(GraphicHandler graphic, UICore uiCore, ModelController modelCtr) {
+	public LevelManager(ModelController modelCtr) {
 		levels = new ArrayList<String>();
 		xmlUtil = new xmlUtility();
-		myGraphic = graphic;
-		myUI = uiCore;
+//		myGraphic = graphic;
+//		myUI = uiCore;
 		myModelCtr = modelCtr;
 		updateLevels();
 	}
@@ -40,6 +38,20 @@ public class LevelManager {
 	
 	public String[] getLevelsArr() {
 		return (String[]) levels.toArray();
+	}
+	
+	public void setLevel(GameCreation game) {
+		if (game.getLevel().equals("Add New Level")) {
+			currentLevel = levels.size();
+			addLevel("Level " + currentLevel);
+			System.out.println("Level " + currentLevel);
+		} else
+			currentLevel = Integer.valueOf(game.getLevel());
+		System.out.println(currentLevel);
+		System.out.println(levels.size());
+
+		Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
+		myModelCtr.setModel(model);
 	}
 	
 	public void addLevel(String levelName) {
