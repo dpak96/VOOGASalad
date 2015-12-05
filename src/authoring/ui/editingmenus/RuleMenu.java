@@ -17,13 +17,15 @@ import resourcemanager.ResourceManager;
 
 public class RuleMenu extends AuthoringMenu {
 
-  HashMap<String, Control> ruleParameters;
+    HashMap<String,Control> ruleParameters;
+    public RuleMenu (String title, AuthoringController controller) {
+        super(title,controller);
+        super.showMenu(300, 300);
+        
+    }
+    
 
-  public RuleMenu(String title, AuthoringController controller) {
-    super(title, controller);
-
-  }
-
+ 
   @Override
   protected void populateMenu(GridPane menuPane) {
     menuPane.setPrefWidth(300);
