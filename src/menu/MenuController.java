@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import level.manager.XMLOrderer;
 import main.GraphicHandler;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
@@ -41,6 +42,7 @@ public class MenuController {
     }
 
     public void saveGameCreation(GameCreation gameCreation){
+    	game = gameCreation;
     	File gamesDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames");
     	if(!gamesDir.exists()){
     		gamesDir.mkdir();
@@ -50,15 +52,18 @@ public class MenuController {
         File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
         try {
         	dir.mkdir();
-        	gameCreation.setFolderPath(dir.getPath());
-        	
+        	game.setFolderPath(dir.getPath());
+        	XMLOrderer levelOrder = new XMLOrderer();
+        	levelOrder.makeXML(dir.getName());
+        	game.setGame(dir.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void saveGame(){
-            myModelController.save(myMainMenu.getScene().getWindow());
+            myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
+            
     }
 
     public void loadGame(){

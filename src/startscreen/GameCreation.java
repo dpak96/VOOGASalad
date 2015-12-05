@@ -1,7 +1,9 @@
 package startscreen;
 
+import java.io.File;
+
 import level.manager.LevelManager;
-import model.controller.ModelController;
+
 
 public class GameCreation {
     public enum Mode{
@@ -50,5 +52,13 @@ public class GameCreation {
     
     public void setFolderPath(String path){
     	myFolderPath = path;
+    }
+    
+    public String getFolderPath(){
+    	return myFolderPath;
+    }
+    
+    public String getName(){
+    	return myGameName;
     }
 }
