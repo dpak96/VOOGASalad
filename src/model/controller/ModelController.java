@@ -184,5 +184,8 @@ public class ModelController implements IModelController {
 	  return myModel.getActiveEvents();
   }
   
+  public void addActiveEvent(Event event){
+	  myModel.addActiveEvent(event);
+  }
 
 }

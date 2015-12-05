@@ -25,7 +25,9 @@ public class ModelFactory {
 
 	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
 		Article temp = createArticle(fileName, x, y, direction);
-		temp.addAllEvents(events);
+		for(Event event : events){
+			event.setExecutableArticle(temp);
+		}
 		return temp;
 	}
 

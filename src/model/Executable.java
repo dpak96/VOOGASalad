@@ -14,4 +14,8 @@ public abstract class Executable extends Process{
 		myActor = actor;
 	}
 	public abstract void execute();
+	
+	public void setMyActor(Article article){
+		myActor = article;
+	}
 }

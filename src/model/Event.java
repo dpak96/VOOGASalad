@@ -64,4 +64,10 @@ public class Event {
 		return null;
 	}
 	
+	public void setExecutableArticle(Article article){
+		for(Executable e : myExecutables){
+			e.setMyActor(article);
+		}
+	}
+	
 }
