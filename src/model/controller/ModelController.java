@@ -78,7 +78,7 @@ public class ModelController implements IModelController {
 
   @Override
   public List<Event> getEvents() {
-    return myModel.getEvents();
+    return myModel.getAllEvents();
   }
 
   public List<Article> getArticles() {
@@ -153,7 +153,7 @@ public class ModelController implements IModelController {
     myModel.destroyModel();
     myModel.initialize();
     myModel.addAllArticles(toLoad.getArticles());
-    myModel.addAllEvents(toLoad.getEvents());
+    myModel.addAllEvents(toLoad.getAllEvents());
     myModel.addAllButtonMap(toLoad.getButtonMap());
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
@@ -189,6 +189,18 @@ public class ModelController implements IModelController {
   
   public void addActiveEvent(Event event){
 	  myModel.addActiveEvent(event);
+  }
+  
+  public void removeExecutableFromEvent(Event event, Executable exec){
+	  myModel.removeExecutableFromEvent(event, exec);
+  }
+  
+  public void removeConditionFromEvent(Event event, Condition cond){
+	  myModel.removeConditionFromEvent(event, cond);
+  }
+  
+  public List<Event> getAllEvents(){
+	  return myModel.getAllEvents();
   }
 
 }
