@@ -1,10 +1,5 @@
 package startscreen;
 
-import java.io.File;
-
-import level.manager.LevelManager;
-
-
 public class GameCreation {
     public enum Mode{
         play,edit
