@@ -40,6 +40,7 @@ public class ModelController implements IModelController {
     double yAdjusted = y + myViewpoint.getY();
     Article newArticle =
         myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
+    System.out.println("A"+ newArticle.getX());
     addArticle(newArticle);
     return newArticle;
   }

@@ -124,7 +124,7 @@ public class AuthoringController implements IAuthoringController {
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
-    this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+    this.makeExecutable("model.executables.ExecutableMoveHorizontal", tempMap);
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(currentExecutable);
     List<Condition> listCondition = new ArrayList<Condition>();
