@@ -3,29 +3,28 @@ package level.manager;
 import model.Model;
 import model.XMLutility.*;
 import model.controller.ModelController;
-import uibasics.UICore;
+import startscreen.StartScreenController;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import main.GraphicHandler;
-
 
 public class LevelManager {
 	private String myGame;
 	private List<String> levels;
 	private int currentLevel;
 	private xmlUtility xmlUtil;
-	private GraphicHandler myGraphic;
-	private UICore myUI;
+//	private GraphicHandler myGraphic;
+//	private UICore myUI;
 	private ModelController myModelCtr;
+	private StartScreenController myStart;
 	
-	public LevelManager(GraphicHandler graphic, UICore uiCore, ModelController modelCtr) {
+	public LevelManager(ModelController modelCtr) {
 		levels = new ArrayList<String>();
 		xmlUtil = new xmlUtility();
-		myGraphic = graphic;
-		myUI = uiCore;
+//		myGraphic = graphic;
+//		myUI = uiCore;
+		myStart = start;
 		myModelCtr = modelCtr;
 		updateLevels();
 	}

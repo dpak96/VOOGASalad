@@ -1,5 +1,8 @@
 package startscreen;
 
+import level.manager.LevelManager;
+import model.controller.ModelController;
+
 public class GameCreation {
     public enum Mode{
         play,edit
@@ -8,7 +11,7 @@ public class GameCreation {
     private Mode myMode;
     private String myLevel;
     private String myFolderPath;
-
+    private LevelManager myLevelManager;
 
     public GameCreation(){
     }

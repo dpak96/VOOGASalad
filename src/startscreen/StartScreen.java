@@ -12,7 +12,6 @@ public class StartScreen {
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
     private Stage myStage;
-    private LevelManager levelMng;
 
     public StartScreen(){
         skeleton = new StartScreenSkeleton();
@@ -47,8 +46,8 @@ public class StartScreen {
 
     private String[] getLevels(){
         ArrayList<String> levels = new ArrayList<String>();
-        levels.add("Add New LeveL");
-        levels.addAll(levelMng.getLevels());
+        levels.add("Add New Level");
+        
         return levels.toArray(new String[levels.size()]);
     }
 
