@@ -9,7 +9,6 @@ import authoring.controller.AuthoringController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,14 +18,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import model.Event;
-import model.article.Article;
-import model.controller.ModelController;
+import model.processes.Condition;
+import model.processes.Executable;
 import resourcemanager.ResourceManager;
 
 
 public class RuleMenu extends AuthoringMenu {
 
-    HashMap<String,Control> ruleParameters;
+   private HashMap<String,Control> ruleParameters;
+   private TableView eventTable=new TableView();
+   private TableView conditionTable=new TableView();
+   private TableView executableTable=new TableView();
+
+
+
     
     public RuleMenu (String title, AuthoringController controller) {
         super(title,controller);
@@ -44,16 +49,13 @@ public class RuleMenu extends AuthoringMenu {
       menuPane.setHgap(10);
    
      super.componentAdder.makeLabel(menuPane, 1, 1 , "Events");
-     TableView eventTable=new TableView();
      menuPane.add(eventTable, 1, 2);
          
      
      super.componentAdder.makeLabel(menuPane, 2, 1 , "Conditions");
-     TableView conditionTable=new TableView();
      menuPane.add(conditionTable, 2, 2);
      
      super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
-     TableView executableTable=new TableView();
      menuPane.add(executableTable, 3, 2);
 
      GridPane paramGrid=new GridPane();
@@ -71,8 +73,16 @@ public class RuleMenu extends AuthoringMenu {
      
      ObservableList<Event> data =
              FXCollections.observableArrayList(eventList);
-     System.out.println(data.size());
      eventTable.setItems(data);
+     
+     eventTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+         //Check whether item is selected and set value of selected item to Label
+         if (eventTable.getSelectionModel().getSelectedItem() != null) {
+             Event selectedEvent=(Event) newValue;
+             this.updateConditionsAndExecutables(selectedEvent);
+         }
+     });
+     
      
      
      /*
@@ -88,6 +98,17 @@ public class RuleMenu extends AuthoringMenu {
 
   }
 
+  public void updateConditionsAndExecutables(Event selectedEvent){
+
+      ObservableList<Condition> conditionData =
+              FXCollections.observableArrayList(selectedEvent.getConditions());
+      eventTable.setItems(conditionData);      
+      ObservableList<Executable> executableData =
+              FXCollections.observableArrayList(selectedEvent.getExecutables());
+      eventTable.setItems(executableData);
+      
+      
+  }
   public void addParameterFields(String selectedObject, GridPane paramGrid) {
     paramGrid.getChildren().clear();
     ruleParameters = new HashMap<String, Control>();
