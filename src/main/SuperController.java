@@ -31,9 +31,10 @@ public class SuperController {
     observerController = new ObserverController(model, uiCore.getUIStackPane());
   }
 
-  public Scene init(GameCreation gameCreation) {
+  public Scene init(GameCreation gameCreation, String levelFile) {
     Scene mainScene = uiCore.getScene();
     uiCore.initPanels(gameCreation);
+    uiCore.getMenu().loadGame(gameCreation, levelFile);
     return mainScene;
   }
   

@@ -2,6 +2,7 @@ package model.controller;
 
 import gameengine.*;
 
+import java.io.File;
 import java.util.*;
 
 import javafx.stage.Window;
@@ -169,6 +170,10 @@ public class ModelController implements IModelController {
 
   public void load(Window wind) {
     loadFromFile(myXMLUtility.loadModel(wind));
+  }
+  
+  public void load(File file){
+	  loadFromFile(myXMLUtility.load(file));
   }
 
   public void addCollisionType(String name) {
