@@ -83,11 +83,11 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     System.out.println(myArticleToEdit == null);
 
     super.myController.getEditor().getArticleEditor()
-        .editArticleXVelocity(Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+        .edit("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()
-        .editArticleYVelocity(Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+        .edit("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()

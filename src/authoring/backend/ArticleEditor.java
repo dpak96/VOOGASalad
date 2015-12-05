@@ -33,54 +33,7 @@ public class ArticleEditor {
     pe.editProperty(thing,edit,article);
   }
 
-  public void editArticleXLocation(double x, Article article) {
-    article.setX(x);
-
-  }
-
-  public void editArticleYLocation(double y, Article article) {
-    article.setY(y);
-
-  }
-
-  public void editArticleImage(String imageFileName, Article article) {
-    article.setImageFile(imageFileName);
-
-  }
-
-  public void editArticleName(String name, Article article) {
-    article.setName(name);
-
-  }
-
-  public void editArticleImageDirection(boolean direction, Article article) {
-    article.setDirection(direction);
-
-  }
-
-  public void editArticleImageBufferX(double x, Article article) {
-    article.setXBuffer(x);
-
-  }
-
-  public void editArticleImageBufferY(double y, Article article) {
-    article.setYBuffer(y);
-
-  }
-
-  public void editArticleXVelocity(double x, Article article) {
-    article.setXVelocity(x);
-
-  }
-
-  public void editArticleYVelocity(double y, Article article) {
-    article.setYVelocity(y);
-  }
-
-  public void editArticleOrientation(double value, Article article) {
-    article.setOrientation(value);
-
-  }
+ 
 
   // TODO: collisions
 
