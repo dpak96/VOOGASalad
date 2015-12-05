@@ -176,5 +176,9 @@ public class ModelController implements IModelController {
     addCollision.define(one, two, collision, type);
   }
   
+  public void setBackgroundImage(String name){
+    myModel.setBackgroundImage(name);
+  }
+  
 
 }

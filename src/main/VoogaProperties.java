@@ -1,4 +1,4 @@
-package properties;
+package main;
 
 import java.util.ResourceBundle;
 
