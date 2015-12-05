@@ -157,8 +157,8 @@ public class ModelController implements IModelController {
     myModel.setCharacter(toLoad.getCharacter());
   }
 
-  public void save(Window wind) {
-    myXMLUtility.saveModel(wind);
+  public void save(Window wind, String path) {
+    myXMLUtility.saveModel(wind, path);
   }
 
   public void load(Window wind) {

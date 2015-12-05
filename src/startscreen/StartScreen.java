@@ -1,5 +1,6 @@
 package startscreen;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,7 +36,7 @@ public class StartScreen {
     }
 
     private String[] getGames(){
-        String[] gameEx = {"Game1","Game2","Game3"};
+        String[] gameEx = allGames();
         return gameEx;
     }
 
@@ -58,5 +59,15 @@ public class StartScreen {
 
     public void removeLayer(){
         skeleton.removeLayer();
+    }
+    
+    public String[] allGames(){
+    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
+    	File[] all = allGames.listFiles();
+    	String[] ret = new String[all.length];
+    	for(int i = 0; i<all.length; i++){
+    		ret[i]=(all[i].getName());
+    	}
+    	return ret;
     }
 }

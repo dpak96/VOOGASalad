@@ -1,5 +1,9 @@
 package startscreen;
 
+import java.io.File;
+
+import level.manager.LevelManager;
+
 public class GameCreation {
     public enum Mode{
         play,edit
@@ -8,7 +12,7 @@ public class GameCreation {
     private Mode myMode;
     private String myLevel;
     private String myFolderPath;
-
+    private LevelManager myLevelManager;
 
     public GameCreation(){
     }
@@ -40,5 +44,13 @@ public class GameCreation {
     
     public void setFolderPath(String path){
     	myFolderPath = path;
+    }
+    
+    public String getFolderPath(){
+    	return myFolderPath;
+    }
+    
+    public String getName(){
+    	return myGameName;
     }
 }
