@@ -182,6 +182,18 @@ public class ModelController implements IModelController {
     addCollision.define(one, two, collision, type);
   }
   
+  public void addNewCollisionType(String type){
+		myModel.addNewCollisionType(type);
+  }
+	
+  public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
+		myModel.defineCollision(direction, nameOne, nameTwo, event);
+  }
+	
+  public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+		return myModel.getCollisionEvents(direction, nameOne, nameTwo);
+  }
+  
   public void setBackgroundImage(String name){
     myModel.setBackgroundImage(name);
   }
