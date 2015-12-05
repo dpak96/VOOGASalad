@@ -1,10 +1,11 @@
-package model;
+package model.article;
 
 import java.util.*;
 
 
 import gameengine.CollisionInformation;
 import javafx.scene.image.Image;
+import model.BitMap;
 import resourcemanager.ResourceManager;
 
 

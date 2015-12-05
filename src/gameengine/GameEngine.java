@@ -5,13 +5,12 @@ import java.util.List;
 
 import java.util.*;
 
-import model.Article;
 import model.Event;
+import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
-import model.Article;
 
 public class GameEngine implements IGameEngine {
 	private List<Article> myActiveArticles;

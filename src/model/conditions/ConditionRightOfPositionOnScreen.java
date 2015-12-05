@@ -1,6 +1,8 @@
-package model;
+package model.conditions;
 
 import java.util.Map;
+
+import model.article.Article;
 
 public class ConditionRightOfPositionOnScreen extends Condition{
 	

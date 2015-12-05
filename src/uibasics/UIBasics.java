@@ -1,6 +1,6 @@
 package uibasics;
 
-import model.Article;
+import model.article.Article;
 import model.controller.ModelController;
 import java.util.*;
 import javax.annotation.Resource;

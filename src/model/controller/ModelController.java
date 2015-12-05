@@ -5,6 +5,9 @@ import java.util.*;
 import javafx.stage.Window;
 import model.*;
 import model.XMLutility.xmlUtility;
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
 import model.factory.*;
 import resourcemanager.ResourceManager;
 

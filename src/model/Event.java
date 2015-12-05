@@ -1,6 +1,10 @@
 package model;
 import java.util.*;
 
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
+
 public class Event {
 
 	private String myName;

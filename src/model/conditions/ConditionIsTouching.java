@@ -1,5 +1,7 @@
-package model;
+package model.conditions;
 import java.util.*;
+
+import model.article.Article;
 
 public class ConditionIsTouching extends Condition{
 

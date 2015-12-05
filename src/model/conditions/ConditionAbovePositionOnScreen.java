@@ -1,7 +1,9 @@
-package model;
+package model.conditions;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.util.*;
+
+import model.article.Article;
 
 public class ConditionAbovePositionOnScreen extends Condition{
 	

@@ -1,6 +1,6 @@
 package front.commands;
 import javafx.scene.image.ImageView;
-import model.Article;
+import model.article.Article;
 import model.controller.ModelController;
 
 public abstract class AbstractCommand {

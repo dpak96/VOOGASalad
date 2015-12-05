@@ -4,7 +4,9 @@ import java.util.*;
 
 import authoring.backend.*;
 import model.*;
-import model.Executable;
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
 
 public class ModelFactory {
 
