@@ -8,12 +8,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import model.Article;
-import properties.VoogaProperties;
+import main.VoogaProperties;
+import model.article.Article;
 
 public class GamePlayerOverlay extends BorderPane {
 	private Text scoreText, healthText, lifeText;
-	private Rectangle myPauser = new Rectangle(50,20,Color.BLUE);
 	private final int OFFSET = 100;
 
 	public GamePlayerOverlay() {
@@ -29,19 +28,10 @@ public class GamePlayerOverlay extends BorderPane {
 		healthText.setY(70);
 		lifeText.setX(width);
 		lifeText.setY(90);
-		myPauser.setX(width);
-		myPauser.setY(110);
-		Text pause = new Text("Pause");
-		pause.setX(width+5);
-		pause.setY(125);
 		
-		
-		this.getChildren().add(myPauser);
 		this.getChildren().add(scoreText);
 		this.getChildren().add(healthText);
 		this.getChildren().add(lifeText);
-		this.getChildren().add(pause);
-		
 	}
 	
 	public void update(List<Article> arg, Article character) {
@@ -67,9 +57,5 @@ public class GamePlayerOverlay extends BorderPane {
 	
 	private void updateLife(int life) {
 		lifeText.setText("Life: " + life);
-	}
-	
-	public Rectangle getPause(){
-		return myPauser;
 	}
 }

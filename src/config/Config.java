@@ -9,7 +9,7 @@ public class Config {
 	private ResourceBundle stateGroupsBundle;
 	
 	private Config() {
-		stateGroupsBundle = ResourceManager.getResourceManager().getPm().getResourceMap().get("config");
+		stateGroupsBundle = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "config");
 	}
 
 	public static Integer getInt(String s) {

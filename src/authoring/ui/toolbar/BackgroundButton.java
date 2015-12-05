@@ -1,6 +1,7 @@
 package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
+import authoring.ui.editingmenus.BackgroundMenu;
 
 public class BackgroundButton extends ToolbarButton {
   private final String NAME = "BACKGROUND";
@@ -14,8 +15,10 @@ public class BackgroundButton extends ToolbarButton {
 
   @Override
   public void placeYourObject() {
-    // TODO Auto-generated method stub
+      BackgroundMenu backgroundPopup=new BackgroundMenu(NAME, myController);
+      backgroundPopup.showMenu(300 , 150);
 
+      
   }
 
 }

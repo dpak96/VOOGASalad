@@ -1,8 +1,8 @@
 package voogasalad_SquirtleSquad;
 
-import model.Article;
-
 import java.util.List;
+
+import model.article.Article;
 
 public interface IModelController {
 

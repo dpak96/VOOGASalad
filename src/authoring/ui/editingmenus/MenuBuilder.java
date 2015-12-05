@@ -20,6 +20,7 @@ public class MenuBuilder {
         return newField;
     }
 
+    
     public ComboBox makeComboBox (GridPane gridPane, int colIndex, int rowIndex) {
         ComboBox newBox = new ComboBox();
         gridPane.add(newBox, colIndex, rowIndex);
@@ -27,4 +28,10 @@ public class MenuBuilder {
 
     }
 
+    public ComboBox makeLabelAndBox(GridPane gridPane,int colIndex, int rowIndex,String label){
+            makeLabel(gridPane,colIndex,rowIndex,label);
+            return makeComboBox(gridPane,colIndex+1,rowIndex);
+            
+        
+    }
 }

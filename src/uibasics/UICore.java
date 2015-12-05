@@ -8,9 +8,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import main.GraphicHandler;
+import main.VoogaProperties;
 import menu.MenuController;
 import model.controller.ModelController;
-import properties.VoogaProperties;
 import startscreen.GameCreation;
 
 
@@ -30,7 +30,7 @@ public class UICore {
     borderInit(props);
     myScene.setOnKeyPressed(e -> actionController.update(e.getCode().toString()));
     myScene.setOnMouseClicked(e -> actionController.update(e.toString()));
-    pauseInit(actionController, menuController);
+    pauseInit(actionController);
   }
   
 
@@ -66,14 +66,14 @@ public class UICore {
     return menuController;
   }
   
-  private void pauseInit(ActionController actionController, MenuController menuController){
-	  Rectangle pause = uiStackPane.getGamePlayer().getPause();
-	  pause.setOnMouseEntered(e->pause.setOpacity(.5));
-	  pause.setOnMouseExited(e->pause.setOpacity(1));
-	  pause.setOnMouseClicked(e->pauser(actionController, menuController));
+  private void pauseInit(ActionController actionController){
+	  menuController.getMenu().getPlayer().setOnAction(e->actionController.resume());
+	  menuController.getMenu().getPauser().setOnAction(e->actionController.change_rate(0));
+	  menuController.getMenu().getStepper().setOnAction(e->actionController.stepper());
   }
   
-  private void pauser(ActionController actionController, MenuController menuController){
+  /*HELPFUL CODE FOR FUTURE DIALOGS (EXIT, STOP, etc.)
+   * private void pauser(ActionController actionController){
 	  PauseDialog pause = new PauseDialog();
 	  actionController.change_rate(0);
 	  Optional<String> ret = pause.showAndWait();
@@ -92,6 +92,6 @@ public class UICore {
 		  		
 		  }
 	  }
-  }
+  }*/
 
 }

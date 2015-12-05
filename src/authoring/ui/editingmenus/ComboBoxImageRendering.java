@@ -5,17 +5,20 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+import resourcemanager.ResourceManager;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
 public class ComboBoxImageRendering {
 
+    
     @SuppressWarnings("unchecked")
     public void renderComboBox (ComboBox box) {
-        box.setCellFactory(new Callback<ListView<ImageView>, ListCell<ImageView>>() {
+        box.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
-            public ListCell<ImageView> call (ListView<ImageView> p) {
-                return new ListCell<ImageView>() {
+            public ListCell<String> call (ListView<String> p) {
+                return new ListCell<String>() {
                     private final ImageView view;
 
                     {
@@ -24,14 +27,16 @@ public class ComboBoxImageRendering {
                     }
 
                     @Override
-                    protected void updateItem (ImageView item, boolean empty) {
+                    protected void updateItem (String item, boolean empty) {
                         super.updateItem(item, empty);
 
                         if (item == null || empty) {
                             setGraphic(null);
                         }
                         else {
-                            view.setImage(item.getImage());
+                            view.setImage((Image) ResourceManager.getResourceManager().getResource("ImageManager", item));
+                            view.setFitWidth(50);
+                            view.setFitHeight(50);
                             setGraphic(view);
                         }
                     }
@@ -40,4 +45,13 @@ public class ComboBoxImageRendering {
             }
         });
     }
+    
+    public void addImages(ComboBox imageBox) {
+        for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
+          imageBox.getItems().add(imgName);
+        }
+        renderComboBox(imageBox);
+        imageBox.setValue(imageBox.getItems().get(0));
+      }
+
 }
