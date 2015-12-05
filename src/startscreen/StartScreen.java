@@ -1,15 +1,18 @@
 package startscreen;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import level.manager.LevelManager;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
     private Stage myStage;
+    private LevelManager levelMng;
 
     public StartScreen(){
         skeleton = new StartScreenSkeleton();
@@ -43,8 +46,10 @@ public class StartScreen {
     }
 
     private String[] getLevels(){
-        String[] levelEx = {"Level1","Level2","Level3"};
-        return levelEx;
+        ArrayList<String> levels = new ArrayList<String>();
+        levels.add("Add New LeveL");
+        levels.addAll(levelMng.getLevels());
+        return levels.toArray(new String[levels.size()]);
     }
 
     public Pane getScreen(){

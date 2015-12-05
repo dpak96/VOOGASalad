@@ -45,7 +45,7 @@ public class xmlUtility {
 		}
 
 	}
-	private Model load(File file){
+	public Model load(File file){
 		try {
 			myStream = new XStream(new DomDriver());
 			myStream.processAnnotations(Model.class);

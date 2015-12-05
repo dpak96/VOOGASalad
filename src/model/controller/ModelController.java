@@ -218,4 +218,8 @@ public class ModelController implements IModelController {
 	  return myModel.getAllEvents();
   }
 
+  public void setModel(Model model) {
+	  this.myModel = model;
+  }
+  
 }
