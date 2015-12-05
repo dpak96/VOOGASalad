@@ -53,5 +53,13 @@ public class ComboBoxImageRendering {
         renderComboBox(imageBox);
         imageBox.setValue(imageBox.getItems().get(0));
       }
-
+    
+    public void addBackgroundImages(ComboBox imageBox){  for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
+       if(imgName.contains("background"))
+        imageBox.getItems().add(imgName);
+      }
+      renderComboBox(imageBox);
+      imageBox.setValue(imageBox.getItems().get(0));
+        
+    }
 }
