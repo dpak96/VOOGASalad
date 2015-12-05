@@ -1,6 +1,5 @@
 package authoring.ui.draganddrop;
 
-
 import authoring.controller.AuthoringController;
 import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.ToolbarButton;
@@ -14,91 +13,72 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Article;
 
+
 public class DragAndDropBoard extends Pane {
 
-    public DragAndDropBoard(AuthoringController authoringController) {
-        dragEntered();
-        dragDropped(authoringController);
-        dragOver();
-    }
+  public DragAndDropBoard(AuthoringController authoringController) {
+    dragEntered();
+    dragDropped(authoringController);
+    dragOver();
+  }
 
-    protected void dragEntered(){
-        this.setOnDragEntered(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                /* the drag-and-drop gesture entered the target */
-                /* show to the user that it is an actual gesture target */
-                if (event.getGestureSource() != this && event.getDragboard().hasImage()) {
-                    //ida.inArea();
-                }
-                event.consume();
-            }
-        });
-    }
-
-    protected void dragDropped(AuthoringController authoringController){
-        this.setOnDragDropped(new EventHandler <DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                /* data dropped */
-                authoringController.createAndPlaceArticle(event.getX(),event.getY(), (DraggableElement) event.getGestureSource());
-
-                /* if there is a string data on dragboard, read it and use it */
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasImage()) {
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-                event.consume();
-            }
-        });
-        this.setOnMouseClicked(e->
-                addTemp(e,authoringController.getArticleFromCoordinates(e.getX(),e.getY()), authoringController));
-    }
-    protected void addTemp(MouseEvent e,Article n, AuthoringController authoringController){
-       if(e.isPopupTrigger())
-       {
-          if(n!=null){
-           ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);   
-          }
-       }
-       else{
-        try {
-            double tX = n.getX();
-            double tY = n.getY();
-            authoringController.getEditor().getArticleEditor().removeArticle(n);
-            HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
-            //highlightedArticle.relocate(tX,tY);
-            authoringController.setHighlighted(true);
-            getChildren().add(highlightedArticle);
-            highlightedArticle.relocate(tX,tY);
+  protected void dragEntered() {
+    this.setOnDragEntered(new EventHandler<DragEvent>() {
+      @Override
+      public void handle(DragEvent event) {
+        /* the drag-and-drop gesture entered the target */
+        /* show to the user that it is an actual gesture target */
+        if (event.getGestureSource() != this && event.getDragboard().hasImage()) {
+          // ida.inArea();
         }
-        catch (Exception execption){
-            System.out.println("hi");
+        event.consume();
+      }
+    });
+  }
+
+  protected void dragDropped(AuthoringController authoringController) {
+    this.setOnDragDropped(new EventHandler<DragEvent>() {
+      @Override
+      public void handle(DragEvent event) {
+        /* data dropped */
+        authoringController.createAndPlaceArticle(event.getX(), event.getY(),
+                                                  (DraggableElement) event.getGestureSource());
+
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasImage()) {
+          success = true;
         }
-       }
-    }
+        event.setDropCompleted(success);
+        event.consume();
+      }
+    });
+    this.setOnMouseClicked(e ->
 
-    protected void dragOver(){
-        this.setOnDragOver(new EventHandler <DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                /* data is dragged over the target */
-                //System.out.println("onDragOver");
+    authoringController.addTemp(e,
+                                authoringController.getArticleFromCoordinates(e.getX(), e.getY()),
+                                authoringController));
+  }
 
-                /* accept it only if it is  not dragged from the same node
-                 * and if it has a string data */
-                if (event.getGestureSource() != this &&
-                        event.getDragboard().hasImage()) {
-                    /* allow for moving */
-                    event.acceptTransferModes(TransferMode.MOVE);
-                }
+  protected void dragOver() {
+    this.setOnDragOver(new EventHandler<DragEvent>() {
+      @Override
+      public void handle(DragEvent event) {
+        /* data is dragged over the target */
+        // System.out.println("onDragOver");
 
-                event.consume();
-            }
-        });
-    }
+        /*
+         * accept it only if it is not dragged from the same node
+         * and if it has a string data
+         */
+        if (event.getGestureSource() != this &&
+            event.getDragboard().hasImage()) {
+          /* allow for moving */
+          event.acceptTransferModes(TransferMode.MOVE);
+        }
+
+        event.consume();
+      }
+    });
+  }
 }
