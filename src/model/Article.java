@@ -30,7 +30,7 @@ public class Article {
 	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
-		Image img = ResourceManager.getResourceManager().getImage(myImageFile);
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
 		myHeight = img.getHeight();
 		myWidth = img.getWidth();
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);

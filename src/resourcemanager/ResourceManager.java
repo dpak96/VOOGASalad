@@ -1,51 +1,29 @@
 package resourcemanager;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 
-public class ResourceManager {
+public class ResourceManager extends Manager {
   private static ResourceManager resourceManager;
-  private PropertiesManager propertiesManager;
-  private ImageManager imageManager;
-  private SoundManager soundManager;
+  private Map<String, Manager> managerMap;
+  private ResourceBundle paths;
 
   private ResourceManager() {
-    propertiesManager = new PropertiesManager();
-    imageManager = new ImageManager();
-    soundManager = new SoundManager();
+    filePath = "resources/path";
+    paths = ResourceBundle.getBundle(filePath);
+    managerMap = new HashMap<String, Manager>();
     initResources();
   }
 
   public void initResources() {
-    propertiesManager.initListResources();
-    imageManager.initListImages();
-    soundManager.initListSounds();
-  }
-
-  public PropertiesManager getPm() {
-    return propertiesManager;
-  }
-
-  public void setPm(PropertiesManager pm) {
-    this.propertiesManager = pm;
-  }
-
-  public ImageManager getIm() {
-    return imageManager;
-  }
-
-  public void setIm(ImageManager im) {
-    this.imageManager = im;
-  }
-
-  public SoundManager getSm() {
-    return soundManager;
-  }
-
-  public void setSm(SoundManager sm) {
-    this.soundManager = sm;
+    managerMap.put("PropertiesManager",
+                   new PropertiesManager(paths.getString("PropertiesManager")));
+    managerMap.put("ImageManager", new ImageManager(paths.getString("ImageManager")));
+    managerMap.put("SoundManager", new SoundManager(paths.getString("SoundManager")));
   }
 
   public static ResourceManager getResourceManager() {
@@ -59,17 +37,12 @@ public class ResourceManager {
     ResourceManager.resourceManager = resourceManager;
   }
 
-  public Image getImage(String s) {
-    return ResourceManager.getResourceManager().getIm().getImageMap().get(s);
+  public Object getResource(String manager, String name) {
+    return ResourceManager.getResourceManager().managerMap.get(manager).getObjectMap().get(name);
   }
 
-  public ResourceBundle getBundle(String s) {
-    return ResourceManager.getResourceManager().getPm().getResourceMap().get(s);
-  }
-
-  public AudioClip getAudio(String s) {
-    return ResourceManager.getResourceManager().getSm().getSoundMap().get(s);
-
+  public Map<String, Object> getResourceMap(String manager) {
+    return ResourceManager.getResourceManager().managerMap.get(manager).getObjectMap();
   }
 
 }

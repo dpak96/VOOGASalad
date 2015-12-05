@@ -16,19 +16,19 @@ import java.util.ResourceBundle;
 
 public class MenuController {
     private GraphicHandler myGraphicHandler;
-    private MenuPanel myMenuPanel;
+    private MainMenu myMainMenu;
     private ModelController myModelController;
     private GameCreation game;
 
 
     public MenuController(GraphicHandler graphicHandler, ModelController modelController){
         myGraphicHandler = graphicHandler;
-        myMenuPanel = new MenuPanel(this);
+        myMainMenu = new MainMenu(this);
         myModelController = modelController;
     }
     
     public void switchOverlay() {
-    	BorderPane core = (BorderPane) myMenuPanel.getParent();
+    	BorderPane core = (BorderPane) myMainMenu.getParent();
     	UIStackPane stack = (UIStackPane) core.getCenter();
     	stack.toggle();
     }
@@ -40,7 +40,7 @@ public class MenuController {
 
     public void something(ResourceBundle resourceBundle, FileChooser myFileChooser){ //what does this do?
         myFileChooser.setTitle(resourceBundle.getString("OPEN"));
-        File file = myFileChooser.showOpenDialog(myMenuPanel.getScene().getWindow());
+        File file = myFileChooser.showOpenDialog(myMainMenu.getScene().getWindow());
         try {
             if (file != null) {
                 FileInputStream f = new FileInputStream(file);
@@ -77,17 +77,17 @@ public class MenuController {
     }
 
     public void saveGame(){
-            myModelController.save(myMenuPanel.getScene().getWindow());
+            myModelController.save(myMainMenu.getScene().getWindow());
     }
 
     public void loadGame(){
-        myModelController.load(myMenuPanel.getScene().getWindow());
+        myModelController.load(myMainMenu.getScene().getWindow());
     }
 
 
 
-    public MenuPanel getMenu(){
-        return myMenuPanel;
+    public MainMenu getMenu(){
+        return myMainMenu;
     }
 
 

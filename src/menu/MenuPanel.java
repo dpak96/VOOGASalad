@@ -14,7 +14,7 @@ public class MenuPanel extends MenuBar {
 
 	public MenuPanel(MenuController menuController) {
 		super();
-		myResource = ResourceManager.getResourceManager().getPm().getResourceMap().get("english");
+		myResource = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "english");
 		myMenuController = menuController;
 		getMenus().addAll(fileMenu(), navigateMenu(), helpMenu());
 	}

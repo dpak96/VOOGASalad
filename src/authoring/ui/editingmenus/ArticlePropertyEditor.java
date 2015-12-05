@@ -66,7 +66,7 @@ public class ArticlePropertyEditor extends AuthoringMenu {
     }
 
     public void addImages (ComboBox imageBox) {
-        for (String imgName : ResourceManager.getResourceManager().getIm().getImageMap().keySet()) {
+        for (String imgName : ResourceManager.getResourceManager().getResourceMap("Image").keySet()) {
 
             imageBox.getItems().add(imgName);
         }
