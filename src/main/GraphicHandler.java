@@ -16,9 +16,9 @@ public class GraphicHandler {
     
     
     public GraphicHandler(){
+        start = new StartScreenController(myLevelManager);
         superController = new SuperController(this);
         myLevelManager = new LevelManager(superController.getModelController());
-//        start = new StartScreenController(myLevelManager);
     }
 
     public void init(Stage s){
