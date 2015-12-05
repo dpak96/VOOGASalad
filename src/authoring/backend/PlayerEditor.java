@@ -1,6 +1,6 @@
 package authoring.backend;
 
-import model.Player;
+import model.article.Player;
 import model.controller.ModelController;
 
 public class PlayerEditor extends Editor{

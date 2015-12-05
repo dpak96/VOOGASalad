@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import authoring.backend.Editor;
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import model.Article;
-import model.Condition;
 import model.Event;
-import model.Executable;
+import model.article.Article;
 import model.controller.ModelController;
+import model.processes.Condition;
+import model.processes.Executable;
 
 
 public class AuthoringController implements IAuthoringController {
@@ -121,15 +125,59 @@ public class AuthoringController implements IAuthoringController {
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
-    this.makeExecutable("model.ExecutableMoveHorizontal", tempMap);
+    this.makeExecutable("ExecutableMoveHorizontal", tempMap);
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(currentExecutable);
     List<Condition> listCondition = new ArrayList<Condition>();
     this.makeEvent("event", listCondition, listExecutable);
     List<Event> listEvent = new ArrayList<Event>();
     listEvent.add(currentEvent);
-    article.addEvent(currentEvent);
+    modelController.addActiveEvent(currentEvent);
     this.mapKey("A", listEvent);
   }
-  
+
+
+  public void addTemp(MouseEvent e){
+    System.out.println(e.getX());
+    System.out.println(e.getY());
+    Article n = getArticleFromCoordinates(e.getX(),e.getY());
+    if(e.isPopupTrigger()||e.isControlDown())
+    {
+      if(n!=null){
+        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
+      }
+    }
+    else{
+      try {
+        double tX = n.getX();
+        double tY = n.getY();
+        //authoringController.removeArticle(n);
+        HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
+        //highlightedArticle.relocate(tX,tY);
+        this.setHighlighted(true);
+        ui.getDragAndDrop().getChildren().add(highlightedArticle);
+        highlightedArticle.relocate(tX,tY);
+      }
+      catch (Exception execption){
+        System.out.println("hi");
+      }
+    }
+  }
+
+  public List<Event> getEventList(){
+      return this.modelController.getAllEvents();
+  }
+
+  public void tester(MouseEvent e){
+    double x = e.getX();
+    double y = e.getY();
+    Article n = getArticleFromCoordinates(x,y);
+    if(e.isPopupTrigger()||e.isControlDown())
+    {
+      if(n!=null){
+        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
+      }
+    }
+  }
+
 }

@@ -1,11 +1,16 @@
 package model.controller;
 
 import gameengine.*;
+
 import java.util.*;
+
 import javafx.stage.Window;
 import model.*;
 import model.XMLutility.xmlUtility;
+import model.article.Article;
 import model.factory.*;
+import model.processes.Condition;
+import model.processes.Executable;
 import resourcemanager.ResourceManager;
 
 
@@ -37,6 +42,7 @@ public class ModelController implements IModelController {
     double yAdjusted = y + myViewpoint.getY();
     Article newArticle =
         myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
+    System.out.println("A"+ newArticle.getX());
     addArticle(newArticle);
     return newArticle;
   }
@@ -75,7 +81,7 @@ public class ModelController implements IModelController {
 
   @Override
   public List<Event> getEvents() {
-    return myModel.getEvents();
+    return myModel.getAllEvents();
   }
 
   public List<Article> getArticles() {
@@ -150,7 +156,7 @@ public class ModelController implements IModelController {
     myModel.destroyModel();
     myModel.initialize();
     myModel.addAllArticles(toLoad.getArticles());
-    myModel.addAllEvents(toLoad.getEvents());
+    myModel.addAllEvents(toLoad.getAllEvents());
     myModel.addAllButtonMap(toLoad.getButtonMap());
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
@@ -182,6 +188,26 @@ public class ModelController implements IModelController {
   
   public void setModel(Model model) {
 	  this.myModel = model;
+  }
+  
+  public List<Event> getActiveEvents(){
+	  return myModel.getActiveEvents();
+  }
+  
+  public void addActiveEvent(Event event){
+	  myModel.addActiveEvent(event);
+  }
+  
+  public void removeExecutableFromEvent(Event event, Executable exec){
+	  myModel.removeExecutableFromEvent(event, exec);
+  }
+  
+  public void removeConditionFromEvent(Event event, Condition cond){
+	  myModel.removeConditionFromEvent(event, cond);
+  }
+  
+  public List<Event> getAllEvents(){
+	  return myModel.getAllEvents();
   }
   
 }
