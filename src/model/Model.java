@@ -37,7 +37,7 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
-		System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
+		//System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
