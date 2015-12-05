@@ -14,8 +14,8 @@ public class LevelChooserModule extends AbstractChooserModule {
     }
 
     @Override
-    protected void init(StartScreenController controller){
-        super.init(controller);
+    protected void init(StartScreenController controller, String mode){
+        super.init(controller, mode);
         setButtonID();
     }
 

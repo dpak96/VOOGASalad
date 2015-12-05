@@ -7,6 +7,7 @@ public class GameCreation {
     private String myGameName;
     private Mode myMode;
     private String myLevel;
+    private String myFolderPath;
 
 
     public GameCreation(){
@@ -35,5 +36,9 @@ public class GameCreation {
 
     public void setLevel(String level){
         myLevel = level;
+    }
+    
+    public void setFolderPath(String path){
+    	myFolderPath = path;
     }
 }
