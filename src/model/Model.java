@@ -2,12 +2,11 @@ package model;
 import java.util.*;
 
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 public class Model extends Observable{
 	
-	private List<Event> myEvents;
 	private Map<String, List<Event>> myButtonMap;
 	private List<Article> myArticles;
 	private List<Executable> myExecutables;
@@ -18,29 +17,16 @@ public class Model extends Observable{
 	private Article myCharacter;
 	private String myBackgroundImage;
 
-
-	public void removeExecutableFromEvent(String eventName, String executableName){
-		
-		for(Event ev: allEvents){
-			if(ev.getName().equals(eventName)){
-				ev.removeExecutable(executableName);
-				break;
-			}
-		}
+	public List<Event> getAllEvents(){
+		return allEvents;
 	}
 	
-	public void removeConditionFromEvent(String eventName, String conditionName){
-		
-		for(Event ev: allEvents){
-			if(ev.getName().equals(eventName)){
-				ev.removeCondition(conditionName);
-				break;
-			}
-		}
+	public void removeExecutableFromEvent(Event ev, Executable exec){
+		ev.removeExecutable(exec);
 	}
 	
-	public List<Event> getEvents(){
-		return myEvents;
+	public void removeConditionFromEvent(Event ev, Condition cond){
+		ev.removeCondition(cond);
 	}
 	
 	public List<Article> getArticles(){
@@ -51,7 +37,7 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
-		System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
+		//System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
@@ -66,7 +52,8 @@ public class Model extends Observable{
 	}
 	
 	public void destroyModel() {
-		myEvents = null;
+		allEvents = null;
+		myActiveEvents = null;
 		myButtonMap = null;
 		myArticles = null;
 		myExecutables = null;
@@ -75,7 +62,8 @@ public class Model extends Observable{
 		myCharacter = null;
 	}
 	public void initialize() {
-		myEvents = new ArrayList<Event>();
+		allEvents = new ArrayList<Event>();
+		myActiveEvents = new ArrayList<Event>();
 		myButtonMap = new HashMap<String, List<Event>>();
 		myButtonMap.put("default", new ArrayList<Event>());
 		myArticles = new ArrayList<Article>();
@@ -161,15 +149,26 @@ public class Model extends Observable{
 	}
 
 	public void addEvent(Event newEvent) {
-		myEvents.add(newEvent);
+		allEvents.add(newEvent);
 	}
 	
 	public void addAllEvents(List<Event> events) {
-		myEvents.addAll(events);
+		allEvents.addAll(events);
 	}
 	
 	public void removeEvent(Event event){
-		myEvents.remove(event);
+		if(allEvents.contains(event)){
+			allEvents.remove(event);
+		}
+		if(myActiveEvents.contains(event)){
+			myActiveEvents.remove(event);
+		}
+		for(String k: myButtonMap.keySet()){
+			if(myButtonMap.get(k).contains(event)){
+				myButtonMap.get(k).remove(event);
+			}
+		}
+		//ADD REMOVE FROM COLLISION EVENTS!!!!
 	}
 	
 	public void setBackgroundImage(String backgroundImage){
