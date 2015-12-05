@@ -11,7 +11,6 @@ public class Main extends Application {
     private SuperController squirtle;
   
     public static void main(String[] args) {
-    	
         launch(args);
     }
 
@@ -19,5 +18,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         GraphicHandler graphics = new GraphicHandler();
         graphics.init(primaryStage);
+        tester test = new tester();
+        test.teste();
+        yo hey = new yo();
+        hey.hi();
     }
 }

@@ -33,10 +33,8 @@ public abstract class AuthoringMenu implements IMenuAction {
         populateMenu(menuGrid);
         propertyMenu.getDialogPane().setContent(menuGrid);
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
-
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
-
     }
 
     protected void displayErrorMessage () {
