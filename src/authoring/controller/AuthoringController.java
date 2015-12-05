@@ -15,6 +15,7 @@ import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
@@ -51,7 +52,7 @@ public class AuthoringController implements IAuthoringController {
     if (event.getCode() == KeyCode.B && event.isControlDown()) {
 
       if(nXRight ==0){
-        nXRight = high.getX()+high.getWidth();
+        nXRight = high.getX()+(high.getWidth()/2);
       }
       try {
         createAndPlaceArticle(nXRight,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
@@ -65,7 +66,7 @@ public class AuthoringController implements IAuthoringController {
     if (event.getCode() == KeyCode.V && event.isControlDown()) {
 
       if(nXLeft ==0 ){
-        nXLeft = high.getX()-high.getWidth();
+        nXLeft = high.getX()-(high.getWidth()/2);
       }
       try {
         createAndPlaceArticle(nXLeft,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
@@ -217,6 +218,11 @@ public class AuthoringController implements IAuthoringController {
       if(n!=null){
         ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
       }
+    }
+    else{
+      Button b = (Button) e.getSource();
+      Pane p = (Pane)b.getParent();
+      p.getChildren().remove(b);
     }
   }
 

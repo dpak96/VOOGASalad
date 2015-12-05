@@ -51,11 +51,11 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				/*CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
-				}
+				}*/
 			}
 		}
 	}
