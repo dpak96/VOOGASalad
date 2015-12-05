@@ -43,7 +43,7 @@ public class Event {
 		myExecutables.addAll(execs);
 	}
 	
-	public String getName(){
+	public String getMyName(){
 		return myName;
 	}
 	
