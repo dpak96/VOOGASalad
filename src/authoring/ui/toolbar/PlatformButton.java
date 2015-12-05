@@ -23,7 +23,6 @@ public class PlatformButton extends ToolbarButton {
 
   @Override
   public void placeYourObject () {
-   // PlatformMenu platformPallette=new PlatformMenu("Platform Palletee", myController);
     ButtonOverlay bo = new PlatformOverlay(myController);
     OverlayController oc = (OverlayController) this.getParent().getParent();
     oc.addOverlay(bo.init());

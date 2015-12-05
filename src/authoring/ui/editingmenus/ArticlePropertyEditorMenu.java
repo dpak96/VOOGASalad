@@ -26,6 +26,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
   private HashMap<String, TextField> textFieldPropertyMap;
   private HashMap<String, ComboBox> comboBoxPropertyMap;
   private Article myArticleToEdit;
+  private ComboBoxImageRendering imageBoxHandler=new ComboBoxImageRendering();
 
   public ArticlePropertyEditorMenu(String title,
                                Article selectedArticle,
@@ -63,21 +64,14 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     CheckBox defaultSave = new CheckBox();
     menuGrid.add(defaultSave, 2, rowIndex++);
 
-    addImages(comboBoxPropertyMap.get("IMAGE"));
+    
+    
+    imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
     initializeFieldValues();
 
   }
 
-  public void addImages(ComboBox imageBox) {
-    for (String imgName : ResourceManager.getResourceManager().getResourceMap("ImageManager").keySet()) {
-      imageBox.getItems().add(imgName);
-    }
-
-    ComboBoxImageRendering renderer = new ComboBoxImageRendering();
-    renderer.renderComboBox(imageBox);
-    imageBox.setValue(imageBox.getItems().get(0));
-  }
-
+ 
   public void initializeFieldValues(){
       this.textFieldPropertyMap.get("XVELOCITY").setText(Double.toString(myArticleToEdit.getXVelocity()));
       this.textFieldPropertyMap.get("YVELOCITY").setText(Double.toString(myArticleToEdit.getYVelocity()));
