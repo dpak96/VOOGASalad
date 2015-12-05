@@ -48,7 +48,7 @@ public class AuthoringController implements IAuthoringController {
     modelController.removeArticle(n);
   }
 
-  public Editor getEditor() {
+  public EditorManager getEditor() {
     return editor;
   }
 
