@@ -3,8 +3,8 @@ package authoring.backend;
 import java.util.List;
 
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
+import model.processes.Condition;
+import model.processes.Executable;
 
 
 public class FactoryData {

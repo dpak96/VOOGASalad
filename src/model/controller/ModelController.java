@@ -1,14 +1,16 @@
 package model.controller;
 
 import gameengine.*;
+
 import java.util.*;
+
 import javafx.stage.Window;
 import model.*;
 import model.XMLutility.xmlUtility;
 import model.article.Article;
-import model.conditions.Condition;
-import model.executables.Executable;
 import model.factory.*;
+import model.processes.Condition;
+import model.processes.Executable;
 import resourcemanager.ResourceManager;
 
 

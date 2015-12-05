@@ -1,4 +1,4 @@
-package model.executables;
+package model.processes;
 
 import java.util.Map;
 

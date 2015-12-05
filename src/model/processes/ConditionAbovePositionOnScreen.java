@@ -1,4 +1,4 @@
-package model.conditions;
+package model.processes;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.util.*;
