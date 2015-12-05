@@ -32,7 +32,7 @@ public class GameEngine implements IGameEngine {
 		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
 		myActiveArticles = getActiveArticles();
-		//myActiveArticles = allArticles;
+		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
@@ -71,8 +71,13 @@ public class GameEngine implements IGameEngine {
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
 				//NEEDS COLLISION INFORMATION HERE
-				CollisionHandler handler = new CollisionHandler(article, collided, article.getCollisionInformation(collided));
-				handler.collide(myModelController);
+				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
+						article.getCollisionType(), collided.getCollisionType());
+				for (Event e:events){
+					System.out.println(article.getImageFile() + collided.getImageFile());
+					e.setExecutableArticle(article);
+					e.fire();
+				}
 			}
 		}
 		

@@ -197,11 +197,11 @@ public class Model extends Observable{
 	}
 	
 	public void addNewCollisionType(String type){
-		myCollisionTypeEditor.addCollisionType(type);
+		myCollisionTypeEditor.add(type);
 	}
 	
-	public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
-		myCollisionTypeEditor.define(direction, nameOne, nameTwo, event);
+	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
 	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){

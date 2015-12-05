@@ -78,6 +78,9 @@ public class AuthoringController implements IAuthoringController {
     if (event.getImageName().equals("Goomba")) {
       this.goombaMovementDemo(article);
     }
+    if(event.getImageName().equals("Platform")){
+    	this.platformMovementDemo(article);
+    }
 
   }
 
@@ -111,6 +114,7 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void goombaMovementDemo(Article article) {
+	  /*
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
     tempMap.put("myDisplacement", .5);
@@ -125,6 +129,40 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
+    */
+	article.setXVelocity(2);
+	article.setCollisionType("A");
+	modelController.addNewCollisionType("A");
+	modelController.addNewCollisionType("B");
+  }
+  
+  public void platformMovementDemo(Article article){
+	  article.setXVelocity(-2);
+	  article.setCollisionType("B");
+		
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myDisplacement", 30);
+	    Executable ex = this.makeExecutable("ExecutableMoveHorizontal", tempMap);
+
+	    List<Executable> listExecutable = new ArrayList<Executable>();
+	    listExecutable.add(ex);
+	    List<Condition> listCondition = new ArrayList<Condition>();
+	    Event ev = this.makeEvent("event", listCondition, listExecutable);
+		
+		Map<String, Object> tempMap2 = new HashMap<String, Object>();
+		tempMap2.put("myActor", article);
+		tempMap2.put("myDisplacement", -30);
+	    Executable ex2 = this.makeExecutable("ExecutableMoveHorizontal", tempMap2);
+
+	    List<Executable> listExecutable2 = new ArrayList<Executable>();
+	    listExecutable2.add(ex2);
+	    List<Condition> listCondition2 = new ArrayList<Condition>();
+	    Event ev2 = this.makeEvent("event", listCondition2, listExecutable2);
+	    modelController.addCollision("Left", "A", "B", ev2);
+
+	    modelController.addCollision("Left", "B", "A", ev);
+	  
   }
 
 
