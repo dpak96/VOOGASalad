@@ -32,7 +32,7 @@ public class GameEngine implements IGameEngine {
 		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
 		myActiveArticles = getActiveArticles();
-		//myActiveArticles = allArticles;
+		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
