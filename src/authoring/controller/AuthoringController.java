@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import authoring.backend.Editor;
+import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
@@ -21,7 +21,7 @@ import model.controller.ModelController;
 
 
 public class AuthoringController implements IAuthoringController {
-  private Editor editor;
+  private EditorManager editor;
   private AuthoringUI ui;
   private ModelController modelController;
   private Executable currentExecutable;
@@ -36,7 +36,7 @@ public class AuthoringController implements IAuthoringController {
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
     modelController = mc;
-    editor = new Editor(mc);
+    editor = new EditorManager(mc);
   }
 
   // TODO Method for editing an article
@@ -45,11 +45,11 @@ public class AuthoringController implements IAuthoringController {
     modelController.removeArticle(n);
   }
 
-  public Editor getEditor() {
+  public EditorManager getEditor() {
     return editor;
   }
 
-  public void setEditor(Editor editor) {
+  public void setEditor(EditorManager editor) {
     this.editor = editor;
   }
 
@@ -131,5 +131,5 @@ public class AuthoringController implements IAuthoringController {
     article.addEvent(currentEvent);
     this.mapKey("A", listEvent);
   }
-
+  
 }

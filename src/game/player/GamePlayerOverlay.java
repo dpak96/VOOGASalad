@@ -8,8 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import main.VoogaProperties;
 import model.Article;
-import properties.VoogaProperties;
 
 public class GamePlayerOverlay extends BorderPane {
 	private Text scoreText, healthText, lifeText;

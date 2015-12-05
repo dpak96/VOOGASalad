@@ -20,6 +20,11 @@ import model.Position;
 public class xmlUtility {
 	XStream myStream;
 	Model myModel;
+	
+	public xmlUtility() {
+		myStream = new XStream(new DomDriver());
+	}
+	
 	public xmlUtility(Model model) {
 		myStream = new XStream(new DomDriver());
 		myModel = model;

@@ -47,7 +47,6 @@ public class DragAndDropBoard extends Pane {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasImage()) {
-
                     success = true;
                 }
                 /* let the source know whether the string was successfully
