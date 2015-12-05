@@ -16,13 +16,17 @@ public abstract class AbstractChooserModule extends AbstractModule {
         buttons = new ArrayList<>();
     }
 
-    protected void init(StartScreenController controller){
-        for(String gameName: myObjects){
+    protected void init(StartScreenController controller, String mode){
+       try{
+    	for(String gameName: myObjects){
             Button option = new Button(gameName);
             buttons.add(option);
             addToContainer(option);
             setController(controller, option);
         }
+       }catch(Exception e){
+    	   
+       }
     }
 
     protected abstract void setController(StartScreenController controller, Button b);

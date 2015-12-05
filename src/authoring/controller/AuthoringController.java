@@ -172,6 +172,8 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
+    
+    
   }
 
 
