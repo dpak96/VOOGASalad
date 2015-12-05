@@ -14,8 +14,8 @@ public class LevelChooserModule extends AbstractChooserModule {
     }
 
     @Override
-    protected void init(StartScreenController controller){
-        super.init(controller);
+    protected void init(StartScreenController controller, String mode){
+        super.init(controller, mode);
         setButtonID();
     }
 
@@ -27,8 +27,7 @@ public class LevelChooserModule extends AbstractChooserModule {
 
 
     protected void setController(StartScreenController controller, Button b){
-        b.setOnAction(e -> controller.setLevel(b.getText()));
-
+        b.setOnAction(e -> controller.setLevel(b.getText() + ".xml"));
     }
 
 
