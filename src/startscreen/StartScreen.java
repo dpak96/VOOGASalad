@@ -2,6 +2,8 @@ package startscreen;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.scene.layout.Pane;
@@ -38,14 +40,23 @@ public class StartScreen {
         return allGames();
     }
 
-    public void addLevelChooser(String value){
-        LevelChooserModule levels = new LevelChooserModule(getLevels());
+    public void addLevelChooser(String value, Map<Integer,String> levelMap){
+        LevelChooserModule levels = new LevelChooserModule(getLevels(levelMap));
         levels.init(myController, value);
         skeleton.addLayer(levels.getContainer());
     }
 
-    private String[] getLevels(){
-        return allLevels();
+    private String[] getLevels(Map<Integer,String> levelMap){
+        ArrayList<String> levels = new ArrayList<String>();
+        ArrayList<Integer> levelNums = new ArrayList<Integer>();
+        for(int i: levelMap.keySet()){
+        	levelNums.add(i);
+        }
+        Collections.sort(levelNums);
+        for(int j: levelNums){
+        	levels.add(levelMap.get(j).trim().replace(".xml", ""));
+        }
+        return levels.toArray(new String[levels.size()]);
     }
 
     public Pane getScreen(){
@@ -69,10 +80,14 @@ public class StartScreen {
     private String[] allLevels() {
     	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
+    	try{
     	String[] ret = new String[all.length];
     	for(int i = 0; i<all.length; i++){
     		ret[i]=(all[i].getName());
     	}
     	return ret;
+    	}catch(Exception e){
+    		return new String[0];
+    	}
     }
 }

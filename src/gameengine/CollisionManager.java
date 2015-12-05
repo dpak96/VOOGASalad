@@ -76,10 +76,14 @@ public class CollisionManager {
 	}
 
 	private Boolean checkSimpleCollision(Article a, Article b) {
-		if (a.getX() + a.getWidth() >= b.getX() && a.getY() + a.getHeight() >= b.getY()) {
-			return true;
-		} else if (a.getX() <= b.getX() + b.getWidth() && a.getY() <= b.getY() + b.getHeight()) {
-			return true;
+
+		//A or B intersect on the X plane
+		if((a.getX() >= b.getX() && a.getX() <= b.getX()+b.getWidth()) || (a.getX()+a.getWidth() >= b.getX() && a.getX()+a.getWidth() <= b.getX()+b.getWidth())) {
+			if ((a.getY() >= b.getY() && a.getY()<= b.getY()+b.getHeight()) || (a.getY()+a.getHeight() >= b.getY() && a.getY()+a.getHeight() <= b.getY()+b.getHeight())) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}

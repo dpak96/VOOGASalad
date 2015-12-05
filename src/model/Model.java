@@ -1,6 +1,8 @@
 package model;
 import java.util.*;
 
+
+import gameengine.CollisionTypeEditor;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
@@ -15,6 +17,7 @@ public class Model extends Observable{
 	private List<Event> myActiveEvents;
 	private Article myViewpoint;
 	private Article myCharacter;
+	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
 	
 	public Model(){
@@ -73,6 +76,7 @@ public class Model extends Observable{
 		myConditions = null;
 		myViewpoint = null;
 		myCharacter = null;
+		myCollisionTypeEditor = null;
 	}
 	public void initialize() {
 		allEvents = new ArrayList<Event>();
@@ -84,6 +88,7 @@ public class Model extends Observable{
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 0, 0);
 		myCharacter = new Article("Goomba", -100, -100);
+		myCollisionTypeEditor = new CollisionTypeEditor();
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()
@@ -204,4 +209,15 @@ public class Model extends Observable{
 		myActiveEvents.add(event);
 	}
 	
+	public void addNewCollisionType(String type){
+		myCollisionTypeEditor.addCollisionType(type);
+	}
+	
+	public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
+		myCollisionTypeEditor.define(direction, nameOne, nameTwo, event);
+	}
+	
+	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+		return myCollisionTypeEditor.getEvents(direction, nameOne, nameTwo);
+	}
 }

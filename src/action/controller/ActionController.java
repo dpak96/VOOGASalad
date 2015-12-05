@@ -68,7 +68,6 @@ public class ActionController{
 		animation.setCycleCount(5);
 		animation.setRate(rate);
 		animation.playFromStart();
-		System.out.println("Hey Bitch");
 	}
 	
 	public void resume(){

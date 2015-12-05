@@ -38,16 +38,20 @@ public class GraphicHandler {
     }
 
 
-    public void startUp(GameCreation gameCreation){
-    	myLevelManager.setLevel(gameCreation);
-        currentStage.setScene(superController.init(gameCreation));
+    public void startUp(GameCreation gameCreation, String levelFile){
+    	//myLevelManager.setLevel(gameCreation);
+        currentStage.setScene(superController.init(gameCreation, levelFile));
     }
     
-    public void setScene(Scene scene) {
-    	currentStage.setScene(scene);
-    }
     public void startUpNew(GameCreation gameCreation){
     	currentStage.setScene(superController.initNew(gameCreation));
     }
+    public void setScene(Scene scene) {
+    	currentStage.setScene(scene);
+
+    }
     
+    public GameCreation getGameCreation(){
+    	return start.getGameCreation();
+    }
 }
