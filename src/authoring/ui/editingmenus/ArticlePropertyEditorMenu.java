@@ -94,6 +94,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     .edit("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
             myArticleToEdit);
 
+    System.out.println("asdas");
     // Pass on the edits to the thing being edited
   }
 
