@@ -9,21 +9,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnemyButton extends ToolbarButton{
-  private final String NAME = "ENEMY";
+  private final String NAME;
 
 
-    public EnemyButton (AuthoringController myController) {
+    public EnemyButton (AuthoringController myController, String imageName) {
         super(myController);
-        this.setGraphic(super.setImage(super.toolbarProperties.getString(NAME)));
+        NAME=imageName;
+        this.setGraphic(super.setImage(NAME));
         this.setName(NAME);
-        this.setImageName(super.toolbarProperties.getString(NAME));
+        this.setImageName(NAME);
 
     }
 
     @Override
     public void placeYourObject () {
 
-        ButtonOverlay bo = new ButtonOverlay(myController);
+        ButtonOverlay bo = new EnemyOverlay(myController);
         OverlayController oc = (OverlayController) this.getParent().getParent();
         oc.addOverlay(bo.init());
         bo.init2();

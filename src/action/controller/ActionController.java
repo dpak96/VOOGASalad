@@ -60,7 +60,6 @@ public class ActionController{
 			ui.get_chart_panel().chart_handler(ui.get_panel().getSum1(), ui.get_panel().getSum2());
 
 		}*/
-
 	}
 
 	public void change_rate(double dub){
@@ -69,8 +68,17 @@ public class ActionController{
 		animation.playFromStart();
 	}
 	
+	public void stepper(){
+		animation.pause();
+		animation.setCycleCount(5);
+		animation.setRate(rate);
+		animation.playFromStart();
+		System.out.println("Hey Bitch");
+	}
+	
 	public void resume(){
 		animation.pause();
+		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.setRate(rate);
 		animation.playFromStart();
 	}

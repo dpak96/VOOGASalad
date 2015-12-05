@@ -2,7 +2,8 @@ package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
 import authoring.ui.AuthoringUI;
-import authoring.ui.editingmenus.EnemyProperties;
+import authoring.ui.editingmenus.ArticlePropertyEditor;
+import authoring.ui.editingmenus.PlatformMenu;
 import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -10,21 +11,21 @@ import javafx.scene.image.ImageView;
 
 
 public class PlatformButton extends ToolbarButton {
-  private final String NAME = "PLATFORM";
+  private final String NAME;
 
-  public PlatformButton(AuthoringController myController) {
+  public PlatformButton(AuthoringController myController, String imageName) {
     super(myController);
-    this.setGraphic(super.setImage(toolbarProperties.getString(NAME)));
-    this.setName(NAME);
-    this.setImageName(super.toolbarProperties.getString(NAME));
+    NAME=imageName;
+    super.setGraphic(super.setImage(NAME));
+    super.setName(NAME);
+    super.setImageName(NAME);
   }
 
 
   @Override
   public void placeYourObject () {
-    //EnemyProperties propTest=new EnemyProperties();
-    //propTest.showMenu("Enemy Property Editor");
-    ButtonOverlay bo = new ButtonOverlay(myController);
+   // PlatformMenu platformPallette=new PlatformMenu("Platform Palletee", myController);
+    ButtonOverlay bo = new PlatformOverlay(myController);
     OverlayController oc = (OverlayController) this.getParent().getParent();
     oc.addOverlay(bo.init());
     bo.init2();
