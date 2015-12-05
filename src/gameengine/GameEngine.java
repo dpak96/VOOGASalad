@@ -121,12 +121,15 @@ public class GameEngine implements IGameEngine {
 				double viewpointHeight = myViewpoint.getHeight();
 				double xBuffer = article.getXBuffer();
 				double yBuffer = article.getYBuffer();
+				
+				//FIX THE VIEWPOINT CHECKER THINGY
+				/*
 				if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
 						viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
 						x, x + width, y, y + height)){
 					article.setActive();
 				}
-				else article.setInactive();
+				else article.setInactive();*/
 			}	
 		}
 	}
