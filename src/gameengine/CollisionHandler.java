@@ -6,6 +6,7 @@ import java.util.List;
 import model.Event;
 import model.LoadCollisionTypeFromXML;
 import model.LoadMatrixFromXML;
+import model.controller.ModelController;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.ConditionCollisionFromAbove;
@@ -28,61 +29,65 @@ public class CollisionHandler {
 	
 
 
-	public void collide(){
-		double leftValue = getValueFromMatrix("Left");
-		List<Condition> leftCollideCondition = new ArrayList<Condition>();
-		leftCollideCondition.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));		
-		List<Executable> leftCollideExecutable = new ArrayList<Executable>();
-		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myArticle, -leftValue*myArticle.getXVelocity()));
-		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myCollided, -leftValue*myCollided.getXVelocity()));
-		Event leftCollisionEvent = new Event("leftCollision", leftCollideCondition, leftCollideExecutable);
-		leftCollisionEvent.fire();
-		
-		double rightValue = getValueFromMatrix("Right");
-		List<Condition> rightCollideCondition = new ArrayList<Condition>();
-		rightCollideCondition.add(new ConditionCollisionFromRight("rightCollide",myCollisionInformation));		
-		List<Executable> rightCollideExecutable = new ArrayList<Executable>();
-		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myArticle, -rightValue*myArticle.getXVelocity()));
-		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myCollided, -rightValue*myCollided.getXVelocity()));
-		Event rightCollisionEvent = new Event("rightCollision", rightCollideCondition, rightCollideExecutable);
-		rightCollisionEvent.fire();
-		
-		double aboveValue = getValueFromMatrix("Above");
-		List<Condition> aboveCollideCondition = new ArrayList<Condition>();
-		aboveCollideCondition.add(new ConditionCollisionFromAbove("aboveCollide",myCollisionInformation));		
-		List<Executable> aboveCollideExecutable = new ArrayList<Executable>();
-		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myArticle, -aboveValue*myArticle.getYVelocity()));
-		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myCollided, -aboveValue*myCollided.getYVelocity()));		
-		Event aboveCollisionEvent = new Event("aboveCollision", aboveCollideCondition, aboveCollideExecutable);
-		aboveCollisionEvent.fire();
-		
-		double bottomValue = getValueFromMatrix("Bottom");
-		List<Condition> bottomCollideCondition = new ArrayList<Condition>();
-		bottomCollideCondition.add(new ConditionCollisionFromBottom("bottomCollide",myCollisionInformation));		
-		List<Executable> bottomCollideExecutable = new ArrayList<Executable>();
-		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myArticle, -bottomValue*myArticle.getYVelocity()));
-		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myCollided, -bottomValue*myCollided.getYVelocity()));
-		Event bottomCollisionEvent = new Event("bottomCollision", bottomCollideCondition, bottomCollideExecutable);
-		bottomCollisionEvent.fire();
-		
-		double damageValue = getValueFromMatrix("Damage");
-		List<Condition> damageCollideCondition = new ArrayList<Condition>();	
-		List<Executable> damageCollideExecutable = new ArrayList<Executable>();
-		damageCollideExecutable.add(new ExecutableSetHorizontalVelocity("damageCollideExe", myArticle, damageValue));
-		Event damageCollisionEvent = new Event("damageCollision", damageCollideCondition, damageCollideExecutable);
-		damageCollisionEvent.fire();
+	public void collide(ModelController modelController){
+		List<Event> events = modelController.getCollisionEvents(myCollisionInformation.getCollideDirection(), myArticle.getCollisionType(), myCollided.getCollisionType());
+		for (Event e:events){
+			e.fire();
+		}
+//		double leftValue = getValueFromMatrix("Left");
+//		List<Condition> leftCollideCondition = new ArrayList<Condition>();
+//		leftCollideCondition.add(new ConditionCollisionFromLeft("leftCollide",myCollisionInformation));		
+//		List<Executable> leftCollideExecutable = new ArrayList<Executable>();
+//		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myArticle, -leftValue*myArticle.getXVelocity()));
+//		leftCollideExecutable.add(new ExecutableSetHorizontalVelocity("leftCollideExe", myCollided, -leftValue*myCollided.getXVelocity()));
+//		Event leftCollisionEvent = new Event("leftCollision", leftCollideCondition, leftCollideExecutable);
+//		leftCollisionEvent.fire();
+//		
+//		double rightValue = getValueFromMatrix("Right");
+//		List<Condition> rightCollideCondition = new ArrayList<Condition>();
+//		rightCollideCondition.add(new ConditionCollisionFromRight("rightCollide",myCollisionInformation));		
+//		List<Executable> rightCollideExecutable = new ArrayList<Executable>();
+//		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myArticle, -rightValue*myArticle.getXVelocity()));
+//		rightCollideExecutable.add(new ExecutableSetHorizontalVelocity("rightCollideExe", myCollided, -rightValue*myCollided.getXVelocity()));
+//		Event rightCollisionEvent = new Event("rightCollision", rightCollideCondition, rightCollideExecutable);
+//		rightCollisionEvent.fire();
+//		
+//		double aboveValue = getValueFromMatrix("Above");
+//		List<Condition> aboveCollideCondition = new ArrayList<Condition>();
+//		aboveCollideCondition.add(new ConditionCollisionFromAbove("aboveCollide",myCollisionInformation));		
+//		List<Executable> aboveCollideExecutable = new ArrayList<Executable>();
+//		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myArticle, -aboveValue*myArticle.getYVelocity()));
+//		aboveCollideExecutable.add(new ExecutableSetHorizontalVelocity("aboveCollideExe", myCollided, -aboveValue*myCollided.getYVelocity()));		
+//		Event aboveCollisionEvent = new Event("aboveCollision", aboveCollideCondition, aboveCollideExecutable);
+//		aboveCollisionEvent.fire();
+//		
+//		double bottomValue = getValueFromMatrix("Bottom");
+//		List<Condition> bottomCollideCondition = new ArrayList<Condition>();
+//		bottomCollideCondition.add(new ConditionCollisionFromBottom("bottomCollide",myCollisionInformation));		
+//		List<Executable> bottomCollideExecutable = new ArrayList<Executable>();
+//		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myArticle, -bottomValue*myArticle.getYVelocity()));
+//		bottomCollideExecutable.add(new ExecutableSetHorizontalVelocity("bottomCollideExe", myCollided, -bottomValue*myCollided.getYVelocity()));
+//		Event bottomCollisionEvent = new Event("bottomCollision", bottomCollideCondition, bottomCollideExecutable);
+//		bottomCollisionEvent.fire();
+//		
+//		double damageValue = getValueFromMatrix("Damage");
+//		List<Condition> damageCollideCondition = new ArrayList<Condition>();	
+//		List<Executable> damageCollideExecutable = new ArrayList<Executable>();
+//		damageCollideExecutable.add(new ExecutableSetHorizontalVelocity("damageCollideExe", myArticle, damageValue));
+//		Event damageCollisionEvent = new Event("damageCollision", damageCollideCondition, damageCollideExecutable);
+//		damageCollisionEvent.fire();
 	}
 	
-	public double getValueFromMatrix(String fileName){
-		LoadCollisionTypeFromXML loadType = new LoadCollisionTypeFromXML();
-		List<String> typeList = loadType.getCollisionTypeList();
-		String myType = myArticle.getCollisionType();
-		String collidedType = myCollided.getCollisionType();
-		int rowIndex = typeList.indexOf(myType);
-		int colIndex = typeList.indexOf(collidedType);
-		LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(fileName);
-		double[][] matrix = loadMatrix.getMatrix();
-		
-		return matrix[rowIndex][colIndex];
-	}
+//	public List<Event> getEventsFromMatrix(String fileName){
+//		LoadCollisionTypeFromXML loadType = new LoadCollisionTypeFromXML();
+//		List<String> typeList = loadType.getCollisionTypeList();
+//		String myType = myArticle.getCollisionType();
+//		String collidedType = myCollided.getCollisionType();
+//		int rowIndex = typeList.indexOf(myType);
+//		int colIndex = typeList.indexOf(collidedType);
+//		LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(fileName);
+//		double[][] matrix = loadMatrix.getMatrix();
+//		
+//		return matrix[rowIndex][colIndex];
+//	}
 }
