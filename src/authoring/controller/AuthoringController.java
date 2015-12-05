@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import authoring.backend.Editor;
+import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.Article;
 import model.Condition;
@@ -21,7 +24,7 @@ import model.controller.ModelController;
 
 
 public class AuthoringController implements IAuthoringController {
-  private Editor editor;
+  private EditorManager editor;
   private AuthoringUI ui;
   private ModelController modelController;
   private Executable currentExecutable;
@@ -36,7 +39,7 @@ public class AuthoringController implements IAuthoringController {
   public AuthoringController(ModelController mc) {
     ui = new AuthoringUI(this);
     modelController = mc;
-    editor = new Editor(mc);
+    editor = new EditorManager(mc);
   }
 
   // TODO Method for editing an article
@@ -45,11 +48,11 @@ public class AuthoringController implements IAuthoringController {
     modelController.removeArticle(n);
   }
 
-  public Editor getEditor() {
+  public EditorManager getEditor() {
     return editor;
   }
 
-  public void setEditor(Editor editor) {
+  public void setEditor(EditorManager editor) {
     this.editor = editor;
   }
 
@@ -130,6 +133,31 @@ public class AuthoringController implements IAuthoringController {
     listEvent.add(currentEvent);
     article.addEvent(currentEvent);
     this.mapKey("A", listEvent);
+  }
+
+
+  public void addTemp(MouseEvent e, Article n, AuthoringController authoringController){
+    if(e.isPopupTrigger())
+    {
+      if(n!=null){
+        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, authoringController);
+      }
+    }
+    else{
+      try {
+        double tX = n.getX();
+        double tY = n.getY();
+        authoringController.removeArticle(n);
+        HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile());
+        //highlightedArticle.relocate(tX,tY);
+        authoringController.setHighlighted(true);
+        ui.getDragAndDrop().getChildren().add(highlightedArticle);
+        highlightedArticle.relocate(tX,tY);
+      }
+      catch (Exception execption){
+        System.out.println("hi");
+      }
+    }
   }
 
 }
