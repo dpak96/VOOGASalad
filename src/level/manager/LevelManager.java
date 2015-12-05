@@ -4,7 +4,6 @@ import model.Model;
 import model.XMLutility.*;
 import model.controller.ModelController;
 import startscreen.GameCreation;
-import startscreen.StartScreenController;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class LevelManager {
 			System.out.println("Level " + currentLevel);
 		} else {
 			currentLevel = Integer.valueOf(game.getLevel());
-			Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
+			Model model = xmlUtil.load(new File(game.getFolderPath()+levels.get(currentLevel)+".xml"));
 			System.out.println("reading model");
 			System.out.println("floopymcfloopyasspeniswanker");
 			System.out.println(model == null);

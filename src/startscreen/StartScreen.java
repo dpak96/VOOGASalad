@@ -37,8 +37,7 @@ public class StartScreen {
     }
 
     private String[] getGames(){
-        String[] gameEx = allGames();
-        return gameEx;
+        return allGames();
     }
 
     public void addLevelChooser(String value, Map<Integer,String> levelMap){
@@ -68,7 +67,17 @@ public class StartScreen {
         skeleton.removeLayer();
     }
     
-    public String[] allGames(){
+    private String[] allGames(){
+    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
+    	File[] all = allGames.listFiles();
+    	String[] ret = new String[all.length];
+    	for(int i = 0; i<all.length; i++){
+    		ret[i]=(all[i].getName());
+    	}
+    	return ret;
+    }
+    
+    private String[] allLevels() {
     	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
     	try{
