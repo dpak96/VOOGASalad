@@ -180,5 +180,9 @@ public class ModelController implements IModelController {
     myModel.setBackgroundImage(name);
   }
   
+  public List<Event> getActiveEvents(){
+	  return myModel.getActiveEvents();
+  }
+  
 
 }

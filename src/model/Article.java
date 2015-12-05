@@ -21,7 +21,6 @@ public class Article {
 	private BitMap myBitMap;
 	private double myWidth;
 	private double myHeight;
-	private List<Event> myEvents;
 	private Life myLife = new Life();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
@@ -108,20 +107,6 @@ public class Article {
 	
 	public boolean getDirection(){
 		return myPosition.isDirection();
-	}
-	
-	public void addEvent(Event event){
-		myEvents.add(event);
-	}
-	
-	public void addAllEvents(List<Event> events){
-		for(Event ev: events){
-			myEvents.add(ev);
-		}
-	}
-		
-	public List<Event> getEvents(){
-		return myEvents;
 	}
 	
 	public double getWidth(){

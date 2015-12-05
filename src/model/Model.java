@@ -179,5 +179,13 @@ public class Model extends Observable{
 	public String getBackgroundImage(){
 		return myBackgroundImage;
 	}
+
+	public List<Event> getActiveEvents() {
+		return activeEvents;
+	}
+
+	public void setActiveEvents(List<Event> activeEvents) {
+		this.activeEvents = activeEvents;
+	}
 	
 }
