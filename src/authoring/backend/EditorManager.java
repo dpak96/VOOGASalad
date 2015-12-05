@@ -3,9 +3,9 @@ package authoring.backend;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import model.Article;
 import model.Game;
-import model.Player;
+import model.article.Article;
+import model.article.Player;
 import model.controller.ModelController;
 
 

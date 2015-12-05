@@ -1,5 +1,7 @@
-package model;
+package model.conditions;
 import java.util.*;
+
+import model.Process;
 
 public abstract class Condition extends Process{
 

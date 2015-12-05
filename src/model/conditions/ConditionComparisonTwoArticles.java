@@ -1,16 +1,20 @@
- package model;
+ package model.conditions;
 import java.lang.reflect.*;
 import java.util.Map;
 
-public class ConditionComparisonOneArticle extends Condition{
+import model.Maths;
+import model.article.Article;
+public class ConditionComparisonTwoArticles extends Condition{
 	
 	private Article myFirst;
 	private String myFirstVariable;
-	private double myCompareValue;
+	private Article mySecond;
+	private String mySecondVariable;
 	private String myComparison;
 	
 	
-	public ConditionComparisonOneArticle(Map<String, Object> parameters){
+	
+	public ConditionComparisonTwoArticles(Map<String, Object> parameters){
 		super(parameters);
 	}
 
@@ -18,16 +22,19 @@ public class ConditionComparisonOneArticle extends Condition{
 	public boolean isMet() {
 		try{
 			Method method1 = myFirst.getClass().getMethod("get"+myFirstVariable);
+			Method method2 = mySecond.getClass().getMethod("get"+mySecondVariable);
 			double firstValue = (double) method1.invoke(myFirst);
+			double secondValue = (double) method2.invoke(mySecond);
 			
 			Maths m = new Maths();
 			Method compare = m.getClass().getMethod(myComparison, double.class, double.class);
-			return (boolean) compare.invoke(m, firstValue, myCompareValue);
+			return (boolean) compare.invoke(m, firstValue, secondValue);
 		}
 		catch(Exception e){
 			return false;
 		}
 	}
+	
 	
 	/*
 	public static void main(String[] args){

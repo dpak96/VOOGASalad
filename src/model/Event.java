@@ -1,6 +1,10 @@
 package model;
 import java.util.*;
 
+import model.article.Article;
+import model.conditions.Condition;
+import model.executables.Executable;
+
 public class Event {
 
 	private String myName;
@@ -62,6 +66,12 @@ public class Event {
 			}
 		}
 		return null;
+	}
+	
+	public void setExecutableArticle(Article article){
+		for(Executable e : myExecutables){
+			e.setMyActor(article);
+		}
 	}
 	
 }

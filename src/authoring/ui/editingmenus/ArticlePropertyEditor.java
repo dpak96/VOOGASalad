@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
-import model.Article;
+import model.article.Article;
 import resourcemanager.ResourceManager;
 
 

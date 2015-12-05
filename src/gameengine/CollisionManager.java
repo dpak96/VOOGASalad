@@ -4,8 +4,8 @@
 
 package gameengine;
 
-import model.Article;
-import model.Position;
+import model.article.Article;
+import model.article.Position;
 
 public class CollisionManager {
 

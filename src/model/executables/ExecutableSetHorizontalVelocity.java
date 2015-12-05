@@ -1,6 +1,8 @@
-package model;
+package model.executables;
 
 import java.util.Map;
+
+import model.article.Article;
 
 public class ExecutableSetHorizontalVelocity extends Executable{
 

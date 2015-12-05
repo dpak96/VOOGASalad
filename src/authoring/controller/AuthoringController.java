@@ -16,11 +16,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import model.Article;
-import model.Condition;
 import model.Event;
-import model.Executable;
+import model.article.Article;
+import model.conditions.Condition;
 import model.controller.ModelController;
+import model.executables.Executable;
 
 
 public class AuthoringController implements IAuthoringController {
@@ -120,7 +120,8 @@ public class AuthoringController implements IAuthoringController {
     Event ev = this.makeEvent("event", listCondition, listExecutable);
     List<Event> listEvent = new ArrayList<Event>();
     listEvent.add(ev);
-    article.addEvent(ev);
+    modelController.addActiveEvent(ev);
+
     this.mapKey("A", listEvent);
   }
 
