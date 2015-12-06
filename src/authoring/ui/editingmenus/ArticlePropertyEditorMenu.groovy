@@ -83,16 +83,16 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
     System.out.println(myArticleToEdit == null);
 
     super.myController.getEditor().getArticleEditor()
-        .edit("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+        .editProperty("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
             .getText()),
                               myArticleToEdit);
     super.myController.getEditor().getArticleEditor()
-        .edit("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+        .editProperty("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
             .getText()),
-                              myArticleToEdit);
-    super.myController.getEditor().getArticleEditor()
-    .edit("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
-            myArticleToEdit);
+    myArticleToEdit);
+    super.myController.getEditor().getSubEditor("ArticleEditor")
+            .editProperty("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
+                    myArticleToEdit);
 
     System.out.println("asdas");
     // Pass on the edits to the thing being edited

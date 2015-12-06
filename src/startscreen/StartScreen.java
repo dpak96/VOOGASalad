@@ -4,11 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
-import java.util.ResourceBundle;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import level.manager.LevelManager;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
@@ -32,13 +30,13 @@ public class StartScreen {
     public void addGameChooser(String value){
         GameChooserModule games = new GameChooserModule(getGames());
         games.init(myController, value);
+        System.out.println("Game chooser value" + value);
 
         skeleton.addLayer(games.getContainer());
     }
 
     private String[] getGames(){
-        String[] gameEx = allGames();
-        return gameEx;
+        return allGames();
     }
 
     public void addLevelChooser(String value, Map<Integer,String> levelMap){
@@ -60,7 +58,7 @@ public class StartScreen {
         return levels.toArray(new String[levels.size()]);
     }
 
-    public Pane getScreen(){
+    public ScrollPane getScreen(){
         return skeleton.getPane();
     }
 
@@ -68,8 +66,10 @@ public class StartScreen {
         skeleton.removeLayer();
     }
     
-    public String[] allGames(){
-    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
+    private String[] allGames(){
+    	File allGames = new File(System.getProperty("user.home") + 
+    			System.getProperty("file.separator") + "SquirtleSquadGames" + 
+    			System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
     	try{
     	String[] ret = new String[all.length];
@@ -81,4 +81,5 @@ public class StartScreen {
     		return new String[0];
     	}
     }
+
 }
