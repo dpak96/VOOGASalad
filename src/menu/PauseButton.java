@@ -13,8 +13,8 @@ public class PauseButton extends AbstractControlButton{
 	
 	public void resize(MenuPanel menuPanel){
 		ImageView image = new ImageView((Image) myImages.get("pauseButton"));
-		image.fitWidthProperty().bind(menuPanel.heightProperty());
-		image.fitHeightProperty().bind(menuPanel.heightProperty());
+		image.fitWidthProperty().bind(menuPanel.heightProperty().multiply(.65));
+		image.fitHeightProperty().bind(menuPanel.heightProperty().multiply(.65));
 		this.setGraphic(image);
 	}
 
