@@ -128,7 +128,6 @@ public class AddProcessMenu extends AuthoringMenu {
             }
             else{
                 dataMap.put(key, null);
-                System.out.println(key);
             }
 
         }
