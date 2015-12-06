@@ -1,6 +1,7 @@
 package startscreen;
 
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import level.manager.LevelManager;
@@ -80,7 +81,7 @@ public class StartScreenController {
         }
     }
 
-    public Pane getStart(){
+    public ScrollPane getStart(){
         return start.getScreen();
     }
     
