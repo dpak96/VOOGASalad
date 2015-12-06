@@ -37,9 +37,11 @@ class ArticleExtenderController {
             }
         }
         if (event.getCode() == KeyCode.V && event.isControlDown()) {
-            if (nXLeft == 0) {
+            if(nXLeft == 0){
                 nXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
+            
             }
+
             try {
                 nXLeft -= initWith;
                 current.setWidth(current.getWidth()+initWith);
