@@ -45,6 +45,8 @@ public class LevelManager {
 			myCurrentLevel+=1;
 			myCurrentLevelName = myLevels.get(myCurrentLevel);
 			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			myModelCtr.setModel(model);
 		}
 	}
