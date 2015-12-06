@@ -170,8 +170,8 @@ public class AuthoringController {
 			}
 		} else {
 			try {
-				double tX = n.getX() - modelController.getViewpoint().getX()-24;
-				double tY = n.getY()- modelController.getViewpoint().getY()-17;
+				double tX = n.getX() - modelController.getViewpoint().getX()-19;
+				double tY = n.getY()- modelController.getViewpoint().getY()-15;
 				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
 				this.setHighlighted(true);
 				ui.getDragAndDrop().getChildren().add(highlightedArticle);
@@ -187,7 +187,7 @@ public class AuthoringController {
 	}
 
 	public void TempButtonClick(MouseEvent e) {
-		Article n = getArticleFromCoordinates(e.getX()+24.1, e.getY()+17.1);
+		Article n = getArticleFromCoordinates(e.getX(), e.getY());
 		if (controlCheck(e)) {
 			if (n != null) {
 				ArticlePropertyEditorMenu popupEditingMenu =
@@ -220,12 +220,12 @@ public class AuthoringController {
 	public void dropElement(DragEvent event){
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+24.1;
-			double tempY = highlightedArticle.getLayoutY()+17.1;
+			double tempX = highlightedArticle.getLayoutX()+18.6;
+			double tempY = highlightedArticle.getLayoutY()+15.1;
 			Article n = getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
-			n.setX((double)event.getX() + modelController.getViewpoint().getX());
-			n.setY((double)event.getY() + modelController.getViewpoint().getY());
+			n.setX((double)event.getX() + modelController.getViewpoint().getX()-15);
+			n.setY((double)event.getY() + modelController.getViewpoint().getY()-15);
 			Pane p = (Pane)highlightedArticle.getParent();
 			p.getChildren().remove(highlightedArticle);
 			highlighted = false;
