@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ExecutableMoveVertical extends Executable{
 	
-	double myDisplacement;
+	protected double myDisplacement;
 
 	public ExecutableMoveVertical(Map<String, Object> parameters){
 		super(parameters);
