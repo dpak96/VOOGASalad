@@ -58,11 +58,12 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				/*CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
+					System.out.println("GameEngineCheckAndAddCollisions");
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
-				}*/
+				}
 
 			}
 		}
@@ -79,7 +80,6 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				System.out.println(article.getImageFile() + collided.getImageFile());
 				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
 						article.getCollisionType(), collided.getCollisionType());
 				for (Event e:events){
