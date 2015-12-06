@@ -246,7 +246,7 @@ public class AuthoringController {
 		return modelController.getArticles()
 	}
     
-        public addEventToModel(Event eventToAdd,boolean activeEvent){
+        public addEventToModel(Event eventToAdd,String eventType, Map<String,String> params){
             this.modelController.getAllEvents().add(eventToAdd);
             if(activeEvent)
             this.modelController.getActiveEvents().add(eventToAdd);
