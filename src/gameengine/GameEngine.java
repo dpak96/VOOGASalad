@@ -145,11 +145,15 @@ public class GameEngine implements IGameEngine {
 	
 	
 	public static void main(String args[]) {
-		Article one = new Article("GoombaRefinedAgain.png", 100, 100);
-		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
+		Article one = new Article("Platform", 100, 100, true);
+		//System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
 		for(Position[] a: one.getBitMap().getByteArray()) {
 			for(Position p: a) {
-				System.out.print(p.getX() + " " + p.getY());
+				if(p.isValidPosition()) {
+					System.out.print("1");
+				} else {
+					System.out.print("0");
+				}
 			}
 			System.out.println(" ");
 		}

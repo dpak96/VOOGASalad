@@ -56,11 +56,13 @@ public class CollisionManager {
 		while (finder.hasNext()) {
 			Position p = finder.next();
 			if (!p.isValidPosition()) {
+				System.out.println("first invalid");
 				continue;
 			} else {
 				for (Position[] q: b.getBitMap().getByteArray()) {
 					for (Position r: q) {
 						if (!r.isValidPosition()) {
+							System.out.println("second invalid");
 							continue;
 						} else {
 							System.out.println("both valid");

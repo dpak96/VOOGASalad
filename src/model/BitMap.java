@@ -17,7 +17,7 @@ public class BitMap {
 	public BitMap(String myImage, Double x, Double y) {
 		System.out.println(myImage);
 		
-		Image image = (Image) ResourceManager.getResourceManager().getResource("ImageManager", "Goomba");
+		Image image = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImage);
 		BufferedImage bfImage = SwingFXUtils.fromFXImage(image, null);
 		BufferedImage convertedImg = new BufferedImage(bfImage.getWidth(), bfImage.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 	    convertedImg.getGraphics().drawImage(bfImage, 0, 0, null);
