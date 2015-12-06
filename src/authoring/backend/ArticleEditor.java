@@ -4,12 +4,11 @@ import model.article.Article;
 import model.controller.ModelController;
 
 
-public class ArticleEditor {
-  private ModelController myModelController;
+public class ArticleEditor extends Editor{
   //private PropertyEditor pe;
   
   public ArticleEditor(ModelController modelController) {
-    myModelController = modelController;
+    super(modelController);
     //pe = new PropertyEditor();
   }
 
