@@ -188,7 +188,7 @@ public class AuthoringController {
 
 	public void TempButtonClick(MouseEvent e) {
 		Article n = getArticleFromCoordinates(e.getX()+24.1, e.getY()+17.1);
-		if (controlCheck) {
+		if (controlCheck(e)) {
 			if (n != null) {
 				ArticlePropertyEditorMenu popupEditingMenu =
 						new ArticlePropertyEditorMenu("Object Editor", n, this);
@@ -201,7 +201,7 @@ public class AuthoringController {
 		}
 	}
 
-	public boolean controlCheck(){
+	public boolean controlCheck(MouseEvent e){
 		return (e.isPopupTrigger() || e.isControlDown());
 	}
 
