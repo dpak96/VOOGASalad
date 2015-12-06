@@ -2,6 +2,7 @@ package authoring.ui.editingmenus;
 
 import authoring.controller.AuthoringController;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 
 public class UploadImageMenu extends AuthoringMenu{
 
@@ -13,14 +14,12 @@ public class UploadImageMenu extends AuthoringMenu{
 
 	@Override
 	public void executeYourMenuFunction() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	protected void populateMenu(GridPane menuPane) {
 		// TODO Auto-generated method stub
-		
+		FileChooser f = new FileChooser();
 	}
 
 }
