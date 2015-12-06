@@ -70,7 +70,7 @@ public class LevelManager {
 		if (myCurrentLevel != 0) {
 			System.out.println("fuck");
 			myCurrentLevel += 1;
-			myCurrentLevelName = myLevels.get(myCurrentLevel - 1);
+			myCurrentLevelName = myLevels.get(1);
 
 			System.out.println("asdfasdf");
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
@@ -82,7 +82,7 @@ public class LevelManager {
 			// model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			System.out.println(model.getArticles().size());
 
-			myModelCtr.loadFromFile(model);
+			myModelCtr.setModel(model);
 
 			System.out.println("asdfasjf;aij fajef;lksjef ;laje flj f);");
 		} else {

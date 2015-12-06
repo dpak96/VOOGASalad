@@ -1,23 +1,11 @@
 package authoring.controller
 
-import imageextender.ImageExtender;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import authoring.backend.Editor;
+import imageextender.ImageExtender
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
 import authoring.ui.draganddrop.HighlightedArticle;
-import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
-import authoring.ui.toolbar.PlatformButton;
-import authoring.ui.toolbar.ToolbarButton;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+import authoring.ui.editingmenus.ArticlePropertyEditorMenu
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import model.Event;
@@ -35,7 +23,8 @@ public class AuthoringController {
 	private boolean highlighted = false;
 	private Article high;
 	private double nXRight, nXLeft;
-	private PresetArticleFactory presetArticleFactory
+	private PresetArticleFactory presetArticleFactory;
+	private DragAndDropController dragAndDropController;
 
 	public void setHighlighted(boolean highlighted) {
 		this.highlighted = highlighted;
@@ -46,6 +35,7 @@ public class AuthoringController {
 		modelController = mc;
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
+		dragAndDropController = new DragAndDropController();
 	}
 
 	public void init() {
@@ -159,87 +149,18 @@ public class AuthoringController {
 	}
 
 
-	public void addTemp(MouseEvent e) {
-		Article n = getArticleFromCoordinates(e.getX(), e.getY());
-		high = n;
-		ImageExtender dog = new ImageExtender();
 
-		if (e.isPopupTrigger() || e.isControlDown()) {
-			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, this);
-			}
-		} else {
-			try {
-				double tX = n.getX() - modelController.getViewpoint().getX()-19;
-				double tY = n.getY()- modelController.getViewpoint().getY()-15;
-				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
-				this.setHighlighted(true);
-				ui.getDragAndDrop().getChildren().add(highlightedArticle);
-				highlightedArticle.relocate(tX, tY);
-			} catch (Exception exception) {
-				System.out.println("hi");
-			}
-		}
-	}
 
 	public List<Event> getEventList() {
 		return this.modelController.getAllEvents();
 	}
 
-	public void TempButtonClick(MouseEvent e) {
-		Article n = getArticleFromCoordinates(e.getX(), e.getY());
-		if (controlCheck(e)) {
-			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu =
-						new ArticlePropertyEditorMenu("Object Editor", n, this);
-			}
-		} else {
-			Button b = (Button) e.getSource();
-			Pane p = (Pane) b.getParent();
-			p.getChildren().remove(b);
-			highlighted = false;
-		}
+	public ModelController getModelController(){
+		return modelController;
 	}
 
-	public boolean controlCheck(MouseEvent e){
-		return (e.isPopupTrigger() || e.isControlDown());
-	}
-
-
-	public void dragOn(DragEvent event){
-		if (event.getGestureSource() != this &&
-				event.getDragboard().hasImage()) {
-			/* allow for moving */
-			event.acceptTransferModes(TransferMode.MOVE);
-		}
-
-		event.consume();
-	}
-
-
-	public void dropElement(DragEvent event){
-		if(event.getGestureSource() instanceof HighlightedArticle){
-			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+19.1;
-			double tempY = highlightedArticle.getLayoutY()+15.1;
-			Article n = getArticleFromCoordinates(tempX,tempY);
-			//System.out.println(n == null);
-			n.setX((double)event.getX() + modelController.getViewpoint().getX()-27.5);
-			n.setY((double)event.getY() + modelController.getViewpoint().getY()-27.5);
-			Pane p = (Pane)highlightedArticle.getParent();
-			p.getChildren().remove(highlightedArticle);
-			highlighted = false;
-		}
-		else {
-			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
-		}
-		Dragboard db = event.getDragboard();
-		boolean success = false;
-		if (db.hasImage()) {
-			success = true;
-		}
-		event.setDropCompleted(success);
-		event.consume();
+	public void dragEvent(String method,e){
+		dragAndDropController."$method"(e, this);
 	}
   
     
