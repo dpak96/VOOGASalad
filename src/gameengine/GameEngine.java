@@ -12,13 +12,13 @@ import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
 
+
 public class GameEngine implements IGameEngine {
 	private List<Article> myActiveArticles;
 	private ModelController myModelController;
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
-	
 	private List<Article> allArticles;
 	
 	public GameEngine(ModelController modelController){
@@ -31,6 +31,7 @@ public class GameEngine implements IGameEngine {
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
+		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
 		//myActiveArticles = allArticles;
 		checkAndAddCollisions();
@@ -51,11 +52,11 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				/*CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
-				}
+				}*/
 			}
 		}
 	}
@@ -90,27 +91,47 @@ public class GameEngine implements IGameEngine {
 		}
 	}
 	
+	/*
+	 * Makes list of Active articles
+	 */
 	private List<Article> getActiveArticles(){
 		List<Article> activeArticles = new ArrayList<Article>();
+		
 		for(Article article : myModelController.getArticles()){
-			double x = article.getX();
-			double y = article.getY();
-			double width = article.getWidth();
-			double height = article.getHeight();
-			double viewpointX = myViewpoint.getX();
-			double viewpointY = myViewpoint.getY();
-			double viewpointWidth = myViewpoint.getWidth();
-			double viewpointHeight = myViewpoint.getHeight();
-			double xBuffer = article.getXBuffer();
-			double yBuffer = article.getYBuffer();
-			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
-					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
-					x, x + width, y, y + height)){
+			if(article.getStatus().equals(Article.Status.ACTIVE)){
 				myActiveArticles.add(article);
 			}
-					
 		}
 		return activeArticles;
+	}
+	
+	/*
+	 * Updates articles within the viewpoint to active except for HardInactives
+	 */
+	private void updateActiveArticles(){
+		for(Article article : myModelController.getArticles()){
+			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
+				double x = article.getX();
+				double y = article.getY();
+				double width = article.getWidth();
+				double height = article.getHeight();
+				double viewpointX = myViewpoint.getX();
+				double viewpointY = myViewpoint.getY();
+				double viewpointWidth = myViewpoint.getWidth();
+				double viewpointHeight = myViewpoint.getHeight();
+				double xBuffer = article.getXBuffer();
+				double yBuffer = article.getYBuffer();
+				
+				//FIX THE VIEWPOINT CHECKER THINGY
+				/*
+				if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+						viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+						x, x + width, y, y + height)){
+					article.setActive();
+				}
+				else article.setInactive();*/
+			}	
+		}
 	}
 	
 	private boolean rectanglesOverlap(double minX1, double maxX1, double minY1, double maxY1,
