@@ -65,10 +65,14 @@ public class MenuController {
     
     public void saveLevelCreation(GameCreation gameCreation){
     	game = gameCreation;
-    	File levelDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-    	+ "SquirtleSquadGames" + gameCreation.getGameName());
+    	System.out.println("Alex is a homosexual " + gameCreation.getGameName());
+    	System.out.println("Alex likes penis deep inside his asshole: " + gameCreation.getGameName() + " " + gameCreation.getFolderPath());
+    	File levelDir = new File(gameCreation.getFolderPath());
     	FileChooser myFileChooser = new FileChooser();
     	myFileChooser.setTitle("New Level File");
+		FileChooser.ExtensionFilter extensionFilter =
+				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
+		myFileChooser.getExtensionFilters().add(extensionFilter);
     	myFileChooser.setInitialDirectory(levelDir);
         File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
         try {

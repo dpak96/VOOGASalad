@@ -20,7 +20,6 @@ public class LevelChooserModule extends AbstractChooserModule {
         	Button newLevel = new Button("New Level");
         	buttons.add(newLevel);
         	addToContainer(newLevel);
-        	int size = buttons.size();
         	newLevel.setOnAction(e->controller.setNewLevel());
         }
         setButtonID();
