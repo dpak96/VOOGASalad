@@ -246,8 +246,8 @@ public class AuthoringController {
 			double tempY = highlightedArticle.getLayoutY()+0.1;
 			Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
-			n.setX((double)event.getX() - modelController.getViewpoint().getX());
-			n.setY((double)event.getY() - modelController.getViewpoint().getY());
+			n.setX((double)event.getX() + modelController.getViewpoint().getX());
+			n.setY((double)event.getY() + modelController.getViewpoint().getY());
 			Pane p = (Pane)highlightedArticle.getParent();
 			p.getChildren().remove(highlightedArticle);
 		}
