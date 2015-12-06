@@ -1,4 +1,6 @@
-package authoring.controller;
+package authoring.controller
+
+import imageextender.ImageExtender;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,27 +160,23 @@ public class AuthoringController {
 
 
 	public void addTemp(MouseEvent e) {
-		System.out.println(e.getX());
-		System.out.println(e.getY());
 		Article n = getArticleFromCoordinates(e.getX(), e.getY());
 		high = n;
+		ImageExtender dog = new ImageExtender();
+
 		if (e.isPopupTrigger() || e.isControlDown()) {
 			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu =
-						new ArticlePropertyEditorMenu("Object Editor", n, this);
+				ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, this);
 			}
 		} else {
 			try {
 				double tX = n.getX() - modelController.getViewpoint().getX()-24;
 				double tY = n.getY()- modelController.getViewpoint().getY()-17;
-
-				// authoringController.removeArticle(n);
-				HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
-				// highlightedArticle.relocate(tX,tY);
+				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
 				this.setHighlighted(true);
 				ui.getDragAndDrop().getChildren().add(highlightedArticle);
 				highlightedArticle.relocate(tX, tY);
-			} catch (Exception execption) {
+			} catch (Exception exception) {
 				System.out.println("hi");
 			}
 		}
@@ -188,11 +186,9 @@ public class AuthoringController {
 		return this.modelController.getAllEvents();
 	}
 
-	public void tester(MouseEvent e) {
-		double x = e.getX();
-		double y = e.getY();
-		Article n = getArticleFromCoordinates(x, y);
-		if (e.isPopupTrigger() || e.isControlDown()) {
+	public void TempButtonClick(MouseEvent e) {
+		Article n = getArticleFromCoordinates(e.getX()+24.1, e.getY()+17.1);
+		if (controlCheck) {
 			if (n != null) {
 				ArticlePropertyEditorMenu popupEditingMenu =
 						new ArticlePropertyEditorMenu("Object Editor", n, this);
@@ -205,9 +201,12 @@ public class AuthoringController {
 		}
 	}
 
+	public boolean controlCheck(){
+		return (e.isPopupTrigger() || e.isControlDown());
+	}
 
-	public void thingy(DragEvent event){
-		/* data dropped */
+
+	public void dropElement(DragEvent event){
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
 			double tempX = highlightedArticle.getLayoutX()+24.1;
