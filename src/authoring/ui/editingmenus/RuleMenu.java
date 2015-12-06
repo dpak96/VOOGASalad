@@ -51,11 +51,15 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(conditionTable, 2, 2);
         Button addCondition=new Button("Add new condition");
         menuPane.add(addCondition, 2, 3);
-        addCondition.setOnAction(e -> new AddConditionMenu("Add Condition", this.myController));
+        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition"));
         
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
         menuPane.add(executableTable, 3, 2);
+        Button addExecutable=new Button("Add new condition");
+        menuPane.add(addExecutable, 3, 3);
+        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable"));
+        
 
         this.addColumns(eventTable, conditionTable, executableTable);
 
