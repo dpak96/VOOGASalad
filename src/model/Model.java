@@ -3,9 +3,11 @@ import java.util.*;
 
 
 import gameengine.CollisionTypeEditor;
+import main.VoogaProperties;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
+
 
 public class Model extends Observable{
 	
@@ -19,6 +21,7 @@ public class Model extends Observable{
 	private Article myCharacter;
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
+	private VoogaProperties vp;
 	
 	public Model(){
 		allEvents = new ArrayList<Event>();
@@ -30,6 +33,7 @@ public class Model extends Observable{
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
+		vp = new VoogaProperties();
 		
 	}
 
@@ -86,7 +90,9 @@ public class Model extends Observable{
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint = new Article("Goomba", 0, 0);
+		myViewpoint.setWidth(vp.getSceneWidth());
+		myViewpoint.setHeight(vp.getSceneHeight());
 		myCharacter = new Article("Platform", 500, 500, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
 	}

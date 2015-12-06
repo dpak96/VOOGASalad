@@ -25,7 +25,6 @@ public class ModelController implements IModelController {
     myModel.initialize();
     myModelFactory = new ModelFactory();
     myXMLUtility = new xmlUtility(myModel);
-    
   }
 
   public Map<String, Class<?>> getParameters(String className) {
@@ -34,6 +33,7 @@ public class ModelController implements IModelController {
 
   public void makeLevelManager(GameCreation game) {
 	  myLevelManager = new LevelManager(game);
+	  System.out.println("MADE: " + myLevelManager);
   }
  
   public Article createArticle(String fileName, double x, double y, boolean direction) {

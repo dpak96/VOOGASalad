@@ -6,18 +6,17 @@ import level.manager.LevelManager;
 
 public class ExecutableSpecificLevel extends Executable {
 	
+	protected LevelManager myLevelManager;
+	protected int levelIndex;
+	
 	public ExecutableSpecificLevel(Map<String, Object> parameters) {
 		super(parameters);
 		// TODO Auto-generated constructor stub
 	}
 
-	protected LevelManager myLevelManager;
-	protected int levelIndex;
-
 	@Override
 	public void execute() {
-		//Switch levels based on index
-		// myLevelManager.switchLevel(levlIndex);
+		myLevelManager.changeLevelTo(levelIndex);
 	}
 
 }

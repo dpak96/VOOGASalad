@@ -16,7 +16,10 @@ public class ExecutableDeath extends Executable {
 	@Override
 	public void execute() {
 		myActor.removeLife();
-		//myLevelManager.resetLevel();
+		if(myActor.getLife() <= 0){
+			myLevelManager.gameOver();
+		}
+		else myLevelManager.resetLevel();
 	}
 
 }

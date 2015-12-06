@@ -14,6 +14,7 @@ public class ExecutableNextLevel extends Executable {
 
 	@Override
 	public void execute() {
+		System.out.println(myLevelManager);
 		myLevelManager.nextLevel();
 	}
 
