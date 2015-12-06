@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import level.manager.LevelManager;
@@ -60,7 +61,7 @@ public class StartScreen {
         return levels.toArray(new String[levels.size()]);
     }
 
-    public Pane getScreen(){
+    public ScrollPane getScreen(){
         return skeleton.getPane();
     }
 
@@ -73,11 +74,15 @@ public class StartScreen {
     			System.getProperty("file.separator") + "SquirtleSquadGames" + 
     			System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
+    	try{
     	String[] ret = new String[all.length];
     	for(int i = 0; i<all.length; i++){
     		ret[i]=(all[i].getName());
     	}
     	return ret;
+    	}catch(Exception e){
+    		return new String[0];
+    	}
     }
 
 }
