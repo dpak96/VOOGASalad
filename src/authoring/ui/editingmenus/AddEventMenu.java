@@ -10,6 +10,7 @@ import authoring.controller.AuthoringController;
 import javafx.collections.FXCollections;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -26,6 +27,7 @@ public class AddEventMenu extends AuthoringMenu {
     private TableView myEventTable;
     private List<Event> myEventList;
     private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+    
     private  Map<String,String> eventParams=new HashMap<String,String>();
 
     public AddEventMenu (String title, AuthoringController controller, TableView eventTable,  List<Event> tableList) {
@@ -73,10 +75,27 @@ public class AddEventMenu extends AuthoringMenu {
     }
     
     private void populateEventParameters(GridPane paramGrid,String eventSelection,Map<String,String> eventParams){
+        Map<String,Control> fieldMap=new HashMap<String,Control>();
+        
         CollisionEventParameters  collisionFiller=new CollisionEventParameters();
+        
        if( eventType.getValue().equals("Collision"))
-           collisionFiller.populateCollisionEventParameters(paramGrid);
-         
+           fieldMap=collisionFiller.populateCollisionEventParameters(paramGrid);
+       
+       
+       
+       for(String key: fieldMap.keySet())
+       {
+           if(fieldMap.get(key) instanceof TextField)
+           {   TextField field=(TextField) fieldMap.get(key);
+               eventParams.put(key,field.getText());
+           }
+           if(fieldMap.get(key) instanceof ComboBox)
+           {
+               ComboBox box=(ComboBox) fieldMap.get(key);
+               eventParams.put(key,box.getValue().toString());
+           }
+       }
         
     }
 
