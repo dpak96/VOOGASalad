@@ -1,14 +1,9 @@
 package action.controller;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import gameengine.GameEngine;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import resourcemanager.ResourceManager;
 
 public class ActionController{
 	public static final int SIZE = 400;

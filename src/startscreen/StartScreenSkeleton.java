@@ -2,18 +2,22 @@ package startscreen;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.*;
 
 import java.util.Stack;
 
 public class StartScreenSkeleton {
-    private BorderPane border;
+    private ScrollPane myScrollPane;
+	private BorderPane border;
     private StackPane layers;
     private Stack<Pane> layerStack;
     private Button back;
 
     public StartScreenSkeleton(){
-        border = new BorderPane();
+    	myScrollPane = new ScrollPane();
+    	border = new BorderPane();
         layers = new StackPane();
         layerStack = new Stack();
     }
@@ -22,6 +26,8 @@ public class StartScreenSkeleton {
     public void init(){
         border.setTop(backButton());
         border.setCenter(layers);
+        myScrollPane.setContent(border);
+        myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
     }
 
     private Button backButton(){
@@ -54,8 +60,8 @@ public class StartScreenSkeleton {
 
 
 
-    public Pane getPane(){
-        return border;
+    public ScrollPane getPane(){
+        return myScrollPane;
     }
 
 }
