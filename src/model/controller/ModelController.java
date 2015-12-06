@@ -70,16 +70,6 @@ public class ModelController implements IModelController {
 		return newExecutable;
 	}
 
-	public static void main(String[] args) {
-		Model m1 = new Model();
-		ModelController m = new ModelController(m1);
-		String nam = "ExecutableDelete";
-		Map<String, Object> data1 = new HashMap<String, Object>();
-		data1.put("myModel", null);
-		m.createExecutable(nam, data1);
-
-	}
-
 	public Condition createCondition(String conditionName, Map<String, Object> data) {
 		Condition newCondition = myModelFactory.createCondition(conditionName, data);
 		addCondition(newCondition);
