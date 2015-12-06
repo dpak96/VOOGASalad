@@ -19,7 +19,7 @@ public class AuthoringController {
 	private ModelController modelController;
 	private boolean highlighted = false;
 	private Article currentArticle;
-	private double nXRight, nXLeft;
+
 	private PresetArticleFactory presetArticleFactory;
 	private DragAndDropController dragAndDropController;
 	private ArticleExtenderController articleExtenderController;
@@ -175,12 +175,12 @@ public class AuthoringController {
             return modelController.getAllCollisionTypes();
         }
 
-	public Article getCurrentArticle() {
-		return currentArticle
+	public getCurrentArticle() {
+		return currentArticle;
 	}
 
-	public void setCurrentArticle(Article currentArticle) {
-		currentArticle = currentArticle
+	public void setCurrentArticle(Article currArticle) {
+		currentArticle = currArticle;
 	}
 
 	public void setHighlighted(boolean highlighted) {

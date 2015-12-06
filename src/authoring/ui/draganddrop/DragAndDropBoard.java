@@ -14,5 +14,5 @@ public class DragAndDropBoard extends Pane {
         this.setOnDragDropped(event -> authoringController.dragEvent("dropElement",event));
         this.setOnDragOver(event -> authoringController.dragEvent("dragOn",event));
         this.setOnMouseClicked(event -> authoringController.dragEvent("addTemp",event));
-         }
+    }
 }
