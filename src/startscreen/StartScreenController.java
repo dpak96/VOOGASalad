@@ -52,6 +52,7 @@ public class StartScreenController {
             game.setGame(value);
             start.removeLayer();
             start.addLevelChooser(value,game.getLevelMap());
+            myGraphicHandler.updateLevels(game);
         }
         catch(Exception e){
             throw e;

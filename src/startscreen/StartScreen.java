@@ -68,7 +68,9 @@ public class StartScreen {
     }
     
     private String[] allGames(){
-    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
+    	File allGames = new File(System.getProperty("user.home") + 
+    			System.getProperty("file.separator") + "SquirtleSquadGames" + 
+    			System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
     	String[] ret = new String[all.length];
     	for(int i = 0; i<all.length; i++){
@@ -76,18 +78,5 @@ public class StartScreen {
     	}
     	return ret;
     }
-    
-    private String[] allLevels() {
-    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
-    	File[] all = allGames.listFiles();
-    	try{
-    	String[] ret = new String[all.length];
-    	for(int i = 0; i<all.length; i++){
-    		ret[i]=(all[i].getName());
-    	}
-    	return ret;
-    	}catch(Exception e){
-    		return new String[0];
-    	}
-    }
+
 }
