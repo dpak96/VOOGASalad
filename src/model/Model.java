@@ -2,8 +2,8 @@ package model;
 import java.util.*;
 
 import gameengine.CollisionTypeEditor;
-import generationutility.*;
 import model.article.Article;
+import model.generationutility.*;
 import model.processes.Condition;
 import model.processes.Executable;
 
