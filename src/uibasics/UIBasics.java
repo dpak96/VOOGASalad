@@ -2,6 +2,8 @@ package uibasics;
 
 import model.article.Article;
 import model.controller.ModelController;
+import resourcemanager.ResourceManager;
+
 import java.util.*;
 
 import config.Config;
@@ -53,24 +55,32 @@ public class UIBasics {
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
-      articleUpdate(value);
+    	//For the Authoring Environment Offset
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", value.getImageFile());
+		double width = img.getWidth();
+		int iSizeX = (int) (value.getWidth()/width);
+		for (int i = 0; i < iSizeX; i++) {
+			articleUpdate(value, i, width);
+		}
     }
-    articleUpdateCharacter(character);
+    articleUpdate(character, 0, 0);
     myPane.getChildren().addAll(myFrontArticles);
     setBackImage(backImage);
   }
 
-  public void articleUpdate(Article article) {
+  public void articleUpdate(Article article, int offset, double width) {
     ImageView img = new ImageView();
     commands(article, img);
+    //For the Authoring Environment Offset
+    img.setX(img.getX()+(offset*width));
     myFrontArticles.add(img);
   }
   
-  public void articleUpdateCharacter(Article article) {
-	    chara = new ImageView();
-	    commands(article, chara);
-	    myFrontArticles.add(chara);
-	  }
+//  public void articleUpdateCharacter(Article article) {
+//	    chara = new ImageView();
+//	    commands(article, chara);
+//	    myFrontArticles.add(chara);
+//	  }
 
   private void commands(Article article, ImageView img) {
     for (AbstractCommand c : myCommands)
