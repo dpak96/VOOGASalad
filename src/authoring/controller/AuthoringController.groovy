@@ -265,4 +265,13 @@ public class AuthoringController {
     public List<Article> getArticles(){
         return modelController.getArticles()
     }
+    
+    public Condition createCondition(String condName, Map<String,Object> params){
+        this.modelController.createCondition(condName,params);
+        
+    }
+    
+    public Executable createExecutable(String execName,Map<String,Object> params){
+        this.modelController.createExecutable(execName,params);
+    }
 }

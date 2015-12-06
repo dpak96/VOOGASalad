@@ -35,6 +35,7 @@ public class RuleMenu extends AuthoringMenu {
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
         super.showMenu(500, 300);
+        
 
     }
 
@@ -71,6 +72,8 @@ public class RuleMenu extends AuthoringMenu {
         List<Event> eventList = new ArrayList<Event>();
         eventList.add(new Event("MoveHorizontal", new ArrayList<Condition>(),
                                 new ArrayList<Executable>()));
+        eventList.add(new Event("asddsda", new ArrayList<Condition>(),new ArrayList<Executable>()));
+        
         HashMap<String, Object> testMap = new HashMap<String, Object>();
         testMap.put("myName", "2");
         testMap.put("myFirst", null);

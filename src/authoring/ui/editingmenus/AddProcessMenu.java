@@ -15,7 +15,7 @@ import resourcemanager.ResourceManager;
 
 
 public class AddProcessMenu extends AuthoringMenu {
-    private ComboBox<String> conditionBox = new ComboBox<String>();
+    private ComboBox<String> processBox = new ComboBox<String>();
     private Map<String, Control> parameters = new HashMap<String, Control>();
     private String myProcessType;
     Map<String, Class<?>> ruleParams;
@@ -33,30 +33,33 @@ public class AddProcessMenu extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
-
+        if(myProcessType.equals("Condition"))
+        this.myEventToAddTo.addCondition(this.myController.createCondition("Condition"+processBox.getValue(),  this.parseUserInput()));
+        else
+            this.myEventToAddTo.addExecutable(this.myController.createCondition("Executable"+processBox.getValue(), this.parseUserInput()));
     }
 
     @Override
     protected void populateMenu (GridPane menuPane) {
 
         super.componentAdder.makeLabel(menuPane, 1, 1, myProcessType + ":");
-        menuPane.add(conditionBox, 2, 1);
+        menuPane.add(processBox, 2, 1);
         GridPane paramGrid = new GridPane();
         menuPane.add(paramGrid, 1, 2, 2, 2);
-        this.addCondition(conditionBox, paramGrid);
+        this.addProcesses(processBox, paramGrid);
 
     }
 
-    private void addCondition (ComboBox<String> conditionBox, GridPane paramGrid) {
+    private void addProcesses (ComboBox<String> processBox, GridPane paramGrid) {
         ResourceBundle conditionBundle =
                 (ResourceBundle) ResourceManager.getResourceManager()
                         .getResource("PropertiesManager", myProcessType + "Subclass");
         Enumeration bundleKeys = conditionBundle.getKeys();
         while (bundleKeys.hasMoreElements()) {
             String className = (String) bundleKeys.nextElement();
-            conditionBox.getItems().add(className);
+            processBox.getItems().add(className);
         }
-        conditionBox.setOnAction(e -> this.addParameterFields(conditionBox.getValue(), paramGrid));
+        processBox.setOnAction(e -> this.addParameterFields(processBox.getValue(), paramGrid));
     }
 
     private void addParameterFields (String selectedObject, GridPane paramGrid) {
@@ -74,8 +77,12 @@ public class AddProcessMenu extends AuthoringMenu {
             else {
                 ComboBox articleBox = super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
                 for (Article activeArticle : super.myController.getArticles())
+                {
                     articleBox.getItems().add(activeArticle);
 
+                }       
+                
+                super.renderer.renderArticleComboBox(articleBox);
                 parameters.put(key, articleBox);
 
             }
@@ -87,16 +94,20 @@ public class AddProcessMenu extends AuthoringMenu {
     private Map<String, Object> parseUserInput () {
         Map<String, Object> dataMap = new HashMap<String, Object>();
         for (String key : parameters.keySet()) {
-            if (ruleParams.get(key) == String.class) {
+            if (parameters.get(key) instanceof TextField) {
                 TextField field = (TextField) parameters.get(key);
                 if (ruleParams.get(key) == double.class) {
                     dataMap.put(key, Double.parseDouble(field.getText()));
                 }
                 else
                     dataMap.put(key, field.getText());
-
             }
-
+            if(parameters.get(key) instanceof ComboBox){
+               ComboBox articleBox=(ComboBox) parameters.get(key);
+               Article selectedArticle= (Article) articleBox.getValue();
+               dataMap.put(key, selectedArticle);
+            }
+            
         }
 
         return dataMap;

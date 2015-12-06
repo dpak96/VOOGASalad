@@ -15,6 +15,7 @@ import resourcemanager.ResourceManager;
 public abstract class AuthoringMenu implements IMenuAction {
     protected MenuBuilder componentAdder = new MenuBuilder();
     protected AuthoringController myController;
+    protected ComboBoxImageRendering renderer=new ComboBoxImageRendering();
     private String myTitle;
 
     public AuthoringMenu (String title, AuthoringController controller) {
