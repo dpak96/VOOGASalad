@@ -35,14 +35,26 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 		
 		int xGenerations = Integer.MAX_VALUE;
 		int yGenerations = Integer.MAX_VALUE;
-		if(myXDistance != 0) xGenerations = (int) Math.abs(accumulatedXChange)/myXDistance;
-		if(myYDistance != 0) yGenerations = (int) Math.abs(accumulatedYChange)/myYDistance;
+		if(myXDistance != 0) xGenerations = (int) (Math.abs(accumulatedXChange)/myXDistance);
+		if(myYDistance != 0) yGenerations = (int) (Math.abs(accumulatedYChange)/myYDistance);
 		int generations = Math.min(xGenerations, yGenerations);
 		for(int i = 0; i < generations; i++){
-			int index = (int) Math.floor(myGenerationOptions.size()*Math.random());
+			int randomIndex = (int) Math.floor(myGenerationOptions.size()*Math.random());
+
+			List<Article> myCreation = myGenerationOptions.get(randomIndex);
+			Article firstArticle = myCreation.get(0);
+			double viewpointSpotX = myViewpoint.getX() - accumulatedXChange + i*generations;
+			double viewpointSpotY = myViewpoint.getY() - accumulatedYChange + i*generations;
+			Article newOne = new Article(firstArticle.getImageFile(), viewpointSpotX, viewpointSpotY);
+			myArticles.add(newOne);
+			for(int j = 1; j < myCreation.size(); j++){
+				double xDif = myCreation.get(j).getX()-firstArticle.getX();
+				double yDif = myCreation.get(j).getY()-firstArticle.getY();
+				Article newRelative = new Article(myCreation.get(j).getImageFile(), 
+						viewpointSpotX + xDif, viewpointSpotY + yDif);
+				myArticles.add(newRelative);
+			}
 		}
-		
-	
 	}
 
 }
