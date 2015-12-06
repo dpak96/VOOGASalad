@@ -25,6 +25,7 @@ public class Article{
 	private double myWidth;
 	private double myHeight;
 	private Life myLife = new Life();
+	private Score myScore = new Score();
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
 	private String myCollisionType;
@@ -134,17 +135,31 @@ public class Article{
 		myLife.removeHealth(myDamage);
 	}
 
-	public void removeLife(){
-		myLife.removeLife();
-	}
-
-	public void gainHealth(double myHealthGain){
-		myLife.addHealth(myHealthGain);
-	}
-
 	public void gainLife(){
 		myLife.addLife();
 	}
+	
+	public void removeLife(){
+		myLife.removeLife();
+	}
+	
+	public void setLife(int value) {
+		myLife.setLife(value);
+	}
+	
+	public void gainHealth(double myHealthGain){
+		myLife.addHealth(myHealthGain);
+	}
+	
+	public void setScore(double score) {
+		myScore.setScore(myScore.getScore()+score);
+	}
+	
+	public double getScore() {
+		return myScore.getScore();
+	}
+	
+	
 	public BitMap getBitMap() {
 		return myBitMap;
 	}
