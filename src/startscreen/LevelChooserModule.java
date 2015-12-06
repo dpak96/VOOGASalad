@@ -21,6 +21,10 @@ public class LevelChooserModule extends AbstractChooserModule {
         	buttons.add(newLevel);
         	addToContainer(newLevel);
         	newLevel.setOnAction(e->controller.setLevel(mode));
+        	Button levelOrder = new Button("Edit Level Order");
+        	buttons.add(levelOrder);
+        	addToContainer(levelOrder);
+        	levelOrder.setOnAction(e->controller.setLevelOrder());
         }
         setButtonID();
     }
