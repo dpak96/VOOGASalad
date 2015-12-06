@@ -21,6 +21,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import startscreen.GameCreation;
+
 public class XMLOrderer {
 
 	protected Document myXML;
@@ -48,6 +50,28 @@ public class XMLOrderer {
 			}
 		} catch (Exception e) {
 			
+		}
+	}
+	
+	public XMLOrderer(GameCreation gameCreation){
+		try {
+			DocumentBuilderFactory xmlFac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder xmlBuild;
+			xmlBuild = xmlFac.newDocumentBuilder();
+			myXML = xmlBuild.newDocument();
+			myFile = myXML.createElement("file");
+			myXML.appendChild(myFile);
+			for(int i:gameCreation.getLevelMap().keySet()){
+				Element ordering = myXML.createElement("order");
+				ordering.setTextContent(Integer.toString(i));
+				myFile.appendChild(ordering);
+				Element name = myXML.createElement("level");
+				name.setTextContent(gameCreation.getLevelMap().get(i));
+				myFile.appendChild(name);
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

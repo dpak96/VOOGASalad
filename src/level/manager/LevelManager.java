@@ -4,11 +4,12 @@ import model.Model;
 import model.XMLutility.*;
 import model.controller.ModelController;
 import startscreen.GameCreation;
-import startscreen.StartScreenController;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LevelManager {
 	private String myGame;
@@ -16,14 +17,13 @@ public class LevelManager {
 	private int currentLevel;
 	private xmlUtility xmlUtil;
 	private ModelController myModelCtr;
+    private Map<Integer,String> myLevelMap;
 	
 	public LevelManager(ModelController modelCtr) {
 		levels = new ArrayList<String>();
 		xmlUtil = new xmlUtility();
-//		myGraphic = graphic;
-//		myUI = uiCore;
 		myModelCtr = modelCtr;
-		updateLevels();
+		myLevelMap = new HashMap<Integer,String>();
 	}
 	
 	public List<String> getLevels() {
@@ -38,21 +38,8 @@ public class LevelManager {
 		return (String[]) levels.toArray();
 	}
 	
-	public void setLevel(GameCreation game) {
-		if (game.getLevel().equals("Add New Level")) {
-			currentLevel = levels.size();
-			addLevel("Level " + currentLevel);
-			System.out.println("Level " + currentLevel);
-		} else {
-			currentLevel = Integer.valueOf(game.getLevel());
-			Model model = xmlUtil.load(new File(game.getGameName()+levels.get(currentLevel)+".xml"));
-			System.out.println("reading model");
-			System.out.println("floopymcfloopyasspeniswanker");
-			System.out.println(model == null);
-			myModelCtr.setModel(model);
-		}
-		System.out.println(currentLevel);
-		System.out.println(levels.size());
+	public void setLevel(int level) {
+		currentLevel = level;
 	}
 	
 	public void addLevel(String levelName) {
@@ -65,20 +52,44 @@ public class LevelManager {
 	
 	public void nextLevel() {
 		if (currentLevel != 0) {
-			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel+1)+".xml"));
+			setLevel(currentLevel+1);
+			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel)+".xml"));
 			myModelCtr.setModel(model);
 		}
 	}
 	
 	public void previousLevel() {
 		if (currentLevel != (levels.size()-1)) {
+			setLevel(currentLevel-1);
 			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel-1)+".xml"));
 			myModelCtr.setModel(model);
 		}
 	}
 	
-	public void updateLevels() {
-		File[] files = new File("/"+myGame).listFiles();
+	public void updateLevels(GameCreation game) {
+		System.out.println("game is null at LevelManager: " + game == null);
+		myGame = game.getFolderPath();
+		System.out.println("game folder path is null at LevelManager: " + myGame == null);
+		System.out.println("dafdafdsafdsafdsafdsafdsafdsa");
+		System.out.println(myGame);
+		System.out.println("fadfdsafdsa");
+		myLevelMap = game.getLevelMap();
+//		if (game.getLevel().equals("Add New Level")) {
+////			setLevel(levels.size());
+////			addLevel("Level " + currentLevel);
+//			System.out.println("Level " + currentLevel);
+//		} else {
+//			System.out.println("Ass boners " + game.getLevel());
+////			setLevel(Integer.valueOf(game.getLevel()));
+//			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel)+".xml"));
+//			System.out.println("reading model");
+//			System.out.println("floopymcfloopyasspeniswanker");
+//			System.out.println(model == null);
+//			myModelCtr.setModel(model);
+//		}
+		System.out.println("LevelManager updateLevels: myGame bartk " + myGame);
+		System.out.println("LevelManager updateLevels: myGame wefe " + new File(myGame).listFiles());
+		File[] files = new File(myGame).listFiles();
 		//If this pathname does not denote a directory, then listFiles() returns null. 
 		try {
 			for (File file : files) {

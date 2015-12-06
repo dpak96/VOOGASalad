@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import model.Event;
 import model.article.Article;
@@ -97,12 +100,15 @@ public class GameEngine implements IGameEngine {
 	/*
 	 * Makes list of Active articles
 	 */
-	private List<Article> getActiveArticles(){
+	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		
-		for(Article article : myModelController.getArticles()){
-			if(article.getStatus().equals(Article.Status.ACTIVE)){
-				myActiveArticles.add(article);
+		List<Article> art = myModelController.getArticles();
+		int size = art.size();
+		for(int i = 0; i < size; i++){
+			try {
+				activeArticles.add(art.get(i));
+			} catch(Exception e){
+
 			}
 		}
 		return activeArticles;
@@ -123,16 +129,13 @@ public class GameEngine implements IGameEngine {
 				double viewpointWidth = myViewpoint.getWidth();
 				double viewpointHeight = myViewpoint.getHeight();
 				double xBuffer = article.getXBuffer();
-				double yBuffer = article.getYBuffer();
-				
-				//FIX THE VIEWPOINT CHECKER THINGY
-				/*
+				double yBuffer = article.getYBuffer();				
 				if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
 						viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
 						x, x + width, y, y + height)){
 					article.setActive();
 				}
-				else article.setInactive();*/
+				else article.setInactive();
 			}	
 		}
 	}
@@ -143,6 +146,11 @@ public class GameEngine implements IGameEngine {
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, minX2, maxY2) ||
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, minY2) ||
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, maxY2);
+	}
+	
+	private void checker(double minX1, double maxX1, double minY1, double maxY1,
+			double minX2, double maxX2, double minY2, double maxY2){
+		System.out.println(rectanglesOverlap(minX1, maxX1, minY1, maxY1, minX2, maxX2, minY2, maxY2));
 	}
 	
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){

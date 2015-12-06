@@ -52,6 +52,7 @@ public class xmlUtility {
 		try {
 			myStream = new XStream(new DomDriver());
 			myStream.processAnnotations(Model.class);
+			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			System.out.println("Read" + readObject);
 			return (Model) readObject;
