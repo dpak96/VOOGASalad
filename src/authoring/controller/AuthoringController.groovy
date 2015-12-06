@@ -162,6 +162,16 @@ public class AuthoringController {
 	public void dragEvent(String method,e){
 		dragAndDropController."$method"(e, this);
 	}
+  
+    
+    public Condition createCondition(String condName, Map<String,Object> params){
+        this.modelController.createCondition(condName,params);
+        
+    }
+    
+    public Executable createExecutable(String execName,Map<String,Object> params){
+        this.modelController.createExecutable(execName,params);
+    }
 
 	public presetArticle(String function, Article article) {
 		presetArticleFactory."$function"(article);
@@ -170,4 +180,24 @@ public class AuthoringController {
 	public List<Article> getArticles(){
 		return modelController.getArticles()
 	}
+    
+        public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
+            this.modelController.getAllEvents().add(eventToAdd);
+            if(eventType.equals("Ordinary"))
+                this.modelController.getActiveEvents().add(eventToAdd);
+                
+            if(eventType.equals("Collision"))
+            this.modelController.getCollisionEvents(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"));
+            
+            if(eventType.equals("Button"))
+                this.modelController.getButtonEvents(eventParamters.get("button"));
+            
+                            
+         
+        }
+        public List<String> getCollisionTypes(){
+            
+            return modelController.getAllCollisionTypes();
+        }
+        
 }

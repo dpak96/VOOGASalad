@@ -3,8 +3,8 @@ import java.util.*;
 
 import gameengine.CollisionTypeEditor;
 import main.VoogaProperties;
-import generationutility.*;
 import model.article.Article;
+import model.generationutility.*;
 import model.processes.Condition;
 import model.processes.Executable;
 
@@ -34,6 +34,8 @@ public class Model extends Observable{
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint.setWidth(1000.5);
+		myViewpoint.setHeight(1000.5);
 		myCharacter = new Article("Platform", 400, 400, true);
 		//vp = new VoogaProperties();
 		randomGenerator = new NullGenerationUtility();
@@ -147,7 +149,17 @@ public class Model extends Observable{
 		myArticles.addAll(articles);
 	}
 	public void removeArticle(Article article) {
-		myArticles.remove(article);		
+		// This is a clever way to create the iterator and call iterator.hasNext() like
+		// you would do in a while-loop. It would be the same as doing:
+//		     Iterator<String> iterator = list.iterator();
+//		     while (iterator.hasNext()) {
+		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
+		    Article a = iterator.next();
+		    if (article.equals(a)) {
+		        iterator.remove();
+		        return;
+		    }
+		}
 	}
 
 	public void addExecutable(Executable executable) {
