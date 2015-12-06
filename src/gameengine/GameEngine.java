@@ -134,7 +134,6 @@ public class GameEngine implements IGameEngine {
 
 			}
 		}
-
 		return activeArticles;
 	}
 	
