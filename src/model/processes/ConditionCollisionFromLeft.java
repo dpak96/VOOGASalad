@@ -5,7 +5,7 @@ import java.util.Map;
 import gameengine.CollisionInformation;
 
 public class ConditionCollisionFromLeft extends Condition{
-	private CollisionInformation myCollisionInformation;
+	protected CollisionInformation myCollisionInformation;
 	private final String LEFT = "left";
 	
 	public ConditionCollisionFromLeft(Map<String, Object> parameters){

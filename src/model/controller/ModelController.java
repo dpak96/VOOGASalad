@@ -33,21 +33,7 @@ public class ModelController implements IModelController {
     return myModelFactory.getParameters(className);
   }
 
-  public Article createArticle(String fileName,
-                               double x,
-                               double y,
-                               boolean direction,
-                               List<Event> events) {
-    Article myViewpoint = myModel.getViewpoint();
-    double xAdjusted = x + myViewpoint.getX();
-    double yAdjusted = y + myViewpoint.getY();
-    Article newArticle =
-        myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
-    System.out.println("A"+ newArticle.getX());
-    addArticle(newArticle);
-    return newArticle;
-  }
-
+ 
   public Article createArticle(String fileName, double x, double y, boolean direction) {
     Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
     addArticle(newArticle);
@@ -171,28 +157,27 @@ public class ModelController implements IModelController {
   public void load(Window wind) {
     loadFromFile(myXMLUtility.loadModel(wind));
   }
-  
   public void load(File file){
 	  loadFromFile(myXMLUtility.load(file));
   }
 
-  public void addCollisionType(String name) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
-  }
+//  public void addCollisionType(String name) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//  }
   
-  public void addCollisionType(String name, String one, String two, String collision, Double type) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
-    addCollision.define(one, two, collision, type);
-  }
+//  public void addCollisionType(String name, String one, String two, String collision, Double type) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//    addCollision.define(one, two, collision, type);
+//  }
   
   public void addNewCollisionType(String type){
 		myModel.addNewCollisionType(type);
   }
 	
-  public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
-		myModel.defineCollision(direction, nameOne, nameTwo, event);
+  public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+		myModel.addCollision(direction, nameOne, nameTwo, event);
   }
 	
   public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){

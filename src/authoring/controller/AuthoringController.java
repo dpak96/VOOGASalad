@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import authoring.backend.Editor;
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
@@ -26,13 +25,13 @@ import model.processes.Condition;
 import model.processes.Executable;
 
 
-public class AuthoringController implements IAuthoringController {
+public class AuthoringController {
   private EditorManager editor;
   private AuthoringUI ui;
   private ModelController modelController;
   private boolean highlighted = false;
   private Article high;
-  private double nXRight,nXLeft;
+  private double nXRight, nXLeft;
 
   public void setHighlighted(boolean highlighted) {
     this.highlighted = highlighted;
@@ -44,40 +43,35 @@ public class AuthoringController implements IAuthoringController {
     editor = new EditorManager(mc);
   }
 
-  public void init(){
+  public void init() {
     ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
   }
 
-  public void addTile(KeyEvent event){
+  public void addTile(KeyEvent event) {
     if (event.getCode() == KeyCode.B && event.isControlDown()) {
 
-      if(nXRight ==0){
-        nXRight = high.getX()+(high.getWidth()/2);
+      if (nXRight == 0) {
+        nXRight = high.getX() + (high.getWidth() / 2);
       }
       try {
-        createAndPlaceArticle(nXRight,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
-        nXRight+=high.getWidth();
-
+        createAndPlaceArticle(nXRight, high.getY() + (high.getHeight() / 2), high.getImageFile(),
+            high.getImageFile());
+        nXRight += high.getWidth();
+      } catch (Exception e) {
       }
-      catch (Exception e){
-      }
-
     }
     if (event.getCode() == KeyCode.V && event.isControlDown()) {
 
-      if(nXLeft ==0 ){
-        nXLeft = high.getX()-(high.getWidth()/2);
+      if (nXLeft == 0) {
+        nXLeft = high.getX() - (high.getWidth() / 2);
       }
       try {
-        createAndPlaceArticle(nXLeft,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
-        nXLeft-=high.getWidth();
-
+        createAndPlaceArticle(nXLeft, high.getY() + (high.getHeight() / 2), high.getImageFile(),
+            high.getImageFile());
+        nXLeft -= high.getWidth();
+      } catch (Exception e) {
       }
-      catch (Exception e){
-      }
-
     }
-
   }
 
   public EditorManager getEditor() {
@@ -101,33 +95,35 @@ public class AuthoringController implements IAuthoringController {
     if (!highlighted) {
       article =
           editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
-                                                             x,
-                                                             y,
-                                                             true);
+          x,
+          y,
+          true);
     } else {
       highlighted = false;
       article =
           editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
-                                                             x,
-                                                             y,
-                                                             true);
+          x,
+          y,
+          true);
       Pane p = (Pane) event.getParent();
       p.getChildren().remove(event);
     }
     if (event.getImageName().equals("Goomba")) {
       this.goombaMovementDemo(article);
     }
-
-  }
-
-  public void createAndPlaceArticle(double x, double y,String im, String name) {
-    editor.getArticleEditor().createNewArticleAndPlace(name,im,
-            x,
-            y,
-            true);
+    if(event.getImageName().equals("Platform")){
+    	this.platformMovementDemo(article);
     }
 
 
+  }
+
+  public void createAndPlaceArticle(double x, double y, String im, String name) {
+    editor.getArticleEditor().createNewArticleAndPlace(name, im,
+        x,
+        y,
+        true);
+  }
 
   public Article getArticleFromCoordinates(double x, double y) {
     try {
@@ -159,10 +155,11 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void goombaMovementDemo(Article article) {
+	
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
-    tempMap.put("myDisplacement", .5);
-    Executable ex = this.makeExecutable("ExecutableMoveHorizontal", tempMap);
+    tempMap.put("myAcceleration", .2);
+    Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(ex);
@@ -173,29 +170,50 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
-    
-    
+
+	article.setYVelocity(0);
+	article.setCollisionType("A");
+	
+	
+  }
+  
+  public void platformMovementDemo(Article article){
+		modelController.addNewCollisionType("A");
+		modelController.addNewCollisionType("B");
+	  article.setCollisionType("B");
+		
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+	    Executable ex = this.makeExecutable("ExecutableBounceVertical", tempMap);
+
+	    List<Executable> listExecutable = new ArrayList<Executable>();
+	    listExecutable.add(ex);
+	    List<Condition> listCondition = new ArrayList<Condition>();
+	    Event ev = this.makeEvent("event", listCondition, listExecutable);
+
+	    modelController.addCollision("Left", "A", "B", ev);
+	  
+
   }
 
-
-  public void addTemp(MouseEvent e){
+  public void addTemp(MouseEvent e) {
     System.out.println(e.getX());
     System.out.println(e.getY());
-    Article n = getArticleFromCoordinates(e.getX(),e.getY());
+    Article n = getArticleFromCoordinates(e.getX(), e.getY());
     high = n;
-    if(e.isPopupTrigger()||e.isControlDown())
-    {
-      if(n!=null){
-        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
+    if (e.isPopupTrigger() || e.isControlDown()) {
+      if (n != null) {
+        ArticlePropertyEditorMenu popupEditingMenu =
+        new ArticlePropertyEditorMenu("Object Editor", n, this);
       }
     } else {
       try {
         double tX = n.getX();
         double tY = n.getY();
 
-        //authoringController.removeArticle(n);
+        // authoringController.removeArticle(n);
         HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
-        //highlightedArticle.relocate(tX,tY);
+        // highlightedArticle.relocate(tX,tY);
         this.setHighlighted(true);
         ui.getDragAndDrop().getChildren().add(highlightedArticle);
         highlightedArticle.relocate(tX, tY);
@@ -205,25 +223,23 @@ public class AuthoringController implements IAuthoringController {
     }
   }
 
-  public List<Event> getEventList(){
-      return this.modelController.getAllEvents();
+  public List<Event> getEventList() {
+    return this.modelController.getAllEvents();
   }
 
-  public void tester(MouseEvent e){
+  public void tester(MouseEvent e) {
     double x = e.getX();
     double y = e.getY();
-    Article n = getArticleFromCoordinates(x,y);
-    if(e.isPopupTrigger()||e.isControlDown())
-    {
-      if(n!=null){
-        ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
+    Article n = getArticleFromCoordinates(x, y);
+    if (e.isPopupTrigger() || e.isControlDown()) {
+      if (n != null) {
+        ArticlePropertyEditorMenu popupEditingMenu =
+        new ArticlePropertyEditorMenu("Object Editor", n, this);
       }
-    }
-    else{
+    } else {
       Button b = (Button) e.getSource();
-      Pane p = (Pane)b.getParent();
+      Pane p = (Pane) b.getParent();
       p.getChildren().remove(b);
     }
   }
-
 }
