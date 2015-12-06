@@ -6,6 +6,7 @@ import gameengine.CollisionTypeEditor;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
+import model.randomgeneration.RandomGenerationUtility;
 
 public class Model extends Observable{
 	
@@ -20,6 +21,8 @@ public class Model extends Observable{
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
 	
+	private RandomGenerationUtility randomGenerator;
+	
 	public Model(){
 		allEvents = new ArrayList<Event>();
 		myActiveEvents = new ArrayList<Event>();
@@ -31,6 +34,10 @@ public class Model extends Observable{
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
 		
+	}
+	
+	public void update(){
+		randomGenerator.update();
 	}
 
 	public List<Event> getAllEvents(){

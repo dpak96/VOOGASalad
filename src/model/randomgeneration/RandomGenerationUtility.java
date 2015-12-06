@@ -4,14 +4,12 @@ import java.util.*;
 
 import model.article.Article;
 
-public class RandomGenerationUtility {
+public class RandomGenerationUtility extends AbstractGenerationUtility{
 
 	private Article myViewpoint;
 	private double myPrevX;
 	private double myPrevY;
-
-	private Article myCharacter;
-
+	
 	private List<Article> myArticles;
 
 	private Map<Article, Double> myGenerationProbabilities;
@@ -26,7 +24,6 @@ public class RandomGenerationUtility {
 		}
 		myViewpoint = viewpoint;
 		myArticles = allArticles;
-		myCharacter = character;
 		myPrevX = myViewpoint.getX();
 		myPrevY = myViewpoint.getY();
 	}
