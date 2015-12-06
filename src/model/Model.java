@@ -209,6 +209,12 @@ public class Model extends Observable{
 		myActiveEvents.add(event);
 	}
 	
+	public void initializeCollision(){
+		PresetCollision preset = new PresetCollision(myCollisionTypeEditor);
+		preset.intialize();
+		myCollisionTypeEditor = preset.getCollisonTypeEditor();
+	}
+	
 	public void addNewCollisionType(String type){
 		myCollisionTypeEditor.add(type);
 	}

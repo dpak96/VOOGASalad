@@ -6,7 +6,7 @@ import model.article.Article;
 
 public class ExecutableSetVerticalVelocity extends Executable{
 
-	double myYVelocity;
+	protected double myYVelocity;
 	
 	public ExecutableSetVerticalVelocity(Map<String, Object> parameters){
 		super(parameters);

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ExecutableAccelerateHorizontal extends Executable{
 
-	private double myAcceleration;
+	protected double myAcceleration;
 	
 	public ExecutableAccelerateHorizontal(Map<String, Object> parameters){
 		super(parameters);
