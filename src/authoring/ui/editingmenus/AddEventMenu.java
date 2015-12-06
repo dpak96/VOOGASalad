@@ -65,8 +65,19 @@ public class AddEventMenu extends AuthoringMenu {
         eventType.getItems().add("Button");
         menuPane.add(eventType, 1, 2);
         
-        
+        GridPane paramGrid= new GridPane();
+        menuPane.add(paramGrid, 1, 3,2,2);
+       
+        eventType.setOnAction(e-> this.populateEventParameters(paramGrid,eventType.getValue(),eventParams));
 
+    }
+    
+    private void populateEventParameters(GridPane paramGrid,String eventSelection,Map<String,String> eventParams){
+        CollisionEventParameters  collisionFiller=new CollisionEventParameters();
+       if( eventType.getValue().equals("Collision"))
+           collisionFiller.populateCollisionEventParameters(paramGrid);
+         
+        
     }
 
     
