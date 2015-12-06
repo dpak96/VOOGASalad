@@ -39,7 +39,6 @@ public class GameEngine implements IGameEngine {
 		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
-		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
@@ -130,11 +129,12 @@ public class GameEngine implements IGameEngine {
 		int size = art.size();
 		for(int i = 0; i < size; i++){
 			try {
-				activeArticles.add(art.get(i));
+				if(art.get(i).getStatus().equals(Article.Status.ACTIVE)) activeArticles.add(art.get(i));
 			} catch(Exception e){
 
 			}
 		}
+		System.out.println(activeArticles.size());
 		return activeArticles;
 	}
 	
@@ -159,7 +159,9 @@ public class GameEngine implements IGameEngine {
 						x, x + width, y, y + height)){
 					article.setActive();
 				}
-				else article.setInactive();
+				else{
+					article.setInactive();
+				}
 			}	
 		}
 	}

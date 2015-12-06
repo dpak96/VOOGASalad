@@ -44,10 +44,6 @@ public class GraphicHandler {
     	System.out.println(gameCreation.getLevel());
         currentStage.setScene(superController.init(gameCreation, gameCreation.getLevel()));
     }
-   
-    public void updateLevels(GameCreation gameCreation) {
-    	myLevelManager.updateLevels(gameCreation);
-    }
     
     public void reorderLevels(){
     	superController.reorderLevels();

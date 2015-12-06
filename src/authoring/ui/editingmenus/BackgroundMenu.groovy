@@ -16,7 +16,7 @@ public class BackgroundMenu extends AuthoringMenu {
     @Override
     public void executeYourMenuFunction () {
 
-            super.myController.getEditor().getLevelEditor().setBackgroundImage(imageBox.getValue());
+            super.myController.getEditor().getSubEditor("LevelEditor").setBackgroundImage(imageBox.getValue());
     }
 
     @Override

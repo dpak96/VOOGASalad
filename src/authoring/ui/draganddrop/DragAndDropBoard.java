@@ -38,30 +38,8 @@ public class DragAndDropBoard extends Pane {
         this.setOnDragDropped(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
-                /* data dropped */
-                if(event.getGestureSource() instanceof HighlightedArticle){
-                    HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-                   double tempX = highlightedArticle.getLayoutX()+0.1;
-                    double tempY = highlightedArticle.getLayoutY()+0.1;
-                    Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
-                    //System.out.println(n == null);
-                    n.setX(event.getX());
-                    n.setY(event.getY());
-                    Pane p = (Pane)highlightedArticle.getParent();
-                    p.getChildren().remove(highlightedArticle);
-                }
-                else {
-                    authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
-                }
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasImage()) {
-                    success = true;
-                }
-                event.setDropCompleted(success);
-                event.consume();
+                authoringController.thingy(event);
             }
-
         });
         this.setOnMouseClicked(e->
                 authoringController.addTemp(e));

@@ -94,14 +94,14 @@ public class AuthoringController {
 		Article article = null;
 		if (!highlighted) {
 			article =
-					editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
 		} else {
 			highlighted = false;
 			article =
-					editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
@@ -117,7 +117,7 @@ public class AuthoringController {
 	}
 
 	public void createAndPlaceArticle(double x, double y, String im, String name) {
-		editor.getArticleEditor().createNewArticleAndPlace(name, im,
+		editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(name, im,
 				x,
 				y,
 				true);
@@ -235,5 +235,31 @@ public class AuthoringController {
 			Pane p = (Pane) b.getParent();
 			p.getChildren().remove(b);
 		}
+	}
+
+
+	public void thingy(DragEvent event){
+		/* data dropped */
+		if(event.getGestureSource() instanceof HighlightedArticle){
+			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
+			double tempX = highlightedArticle.getLayoutX()+0.1;
+			double tempY = highlightedArticle.getLayoutY()+0.1;
+			Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
+			//System.out.println(n == null);
+			n.setX((double)event.getX() + modelController.getViewpoint().getX());
+			n.setY((double)event.getY() + modelController.getViewpoint().getY());
+			Pane p = (Pane)highlightedArticle.getParent();
+			p.getChildren().remove(highlightedArticle);
+		}
+		else {
+			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+		}
+		Dragboard db = event.getDragboard();
+		boolean success = false;
+		if (db.hasImage()) {
+			success = true;
+		}
+		event.setDropCompleted(success);
+		event.consume();
 	}
 }
