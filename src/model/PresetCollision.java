@@ -33,5 +33,9 @@ public class PresetCollision {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public CollisionTypeEditor getCollisonTypeEditor(){
+		return myCollisionTypeEditor;
+	}
 
 }
