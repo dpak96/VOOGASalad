@@ -13,9 +13,11 @@ import authoring.ui.draganddrop.HighlightedArticle;
 import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.PlatformButton;
 import authoring.ui.toolbar.ToolbarButton;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import model.Event;
 import model.article.Article;
@@ -29,6 +31,8 @@ public class AuthoringController implements IAuthoringController {
   private AuthoringUI ui;
   private ModelController modelController;
   private boolean highlighted = false;
+  private Article high;
+  private double nXRight,nXLeft;
 
   public void setHighlighted(boolean highlighted) {
     this.highlighted = highlighted;
@@ -38,6 +42,42 @@ public class AuthoringController implements IAuthoringController {
     ui = new AuthoringUI(this);
     modelController = mc;
     editor = new EditorManager(mc);
+  }
+
+  public void init(){
+    ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
+  }
+
+  public void addTile(KeyEvent event){
+    if (event.getCode() == KeyCode.B && event.isControlDown()) {
+
+      if(nXRight ==0){
+        nXRight = high.getX()+(high.getWidth()/2);
+      }
+      try {
+        createAndPlaceArticle(nXRight,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
+        nXRight+=high.getWidth();
+
+      }
+      catch (Exception e){
+      }
+
+    }
+    if (event.getCode() == KeyCode.V && event.isControlDown()) {
+
+      if(nXLeft ==0 ){
+        nXLeft = high.getX()-(high.getWidth()/2);
+      }
+      try {
+        createAndPlaceArticle(nXLeft,high.getY()+(high.getHeight()/2),high.getImageFile(),high.getImageFile());
+        nXLeft-=high.getWidth();
+
+      }
+      catch (Exception e){
+      }
+
+    }
+
   }
 
   public EditorManager getEditor() {
@@ -74,7 +114,6 @@ public class AuthoringController implements IAuthoringController {
       Pane p = (Pane) event.getParent();
       p.getChildren().remove(event);
     }
-
     if (event.getImageName().equals("Goomba")) {
       this.goombaMovementDemo(article);
     }
@@ -83,6 +122,15 @@ public class AuthoringController implements IAuthoringController {
     }
 
   }
+
+  public void createAndPlaceArticle(double x, double y,String im, String name) {
+    editor.getArticleEditor().createNewArticleAndPlace(name,im,
+            x,
+            y,
+            true);
+    }
+
+
 
   public Article getArticleFromCoordinates(double x, double y) {
     try {
@@ -129,7 +177,7 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
-    
+
 	article.setYVelocity(0);
 	article.setCollisionType("A");
 	
@@ -159,6 +207,7 @@ public class AuthoringController implements IAuthoringController {
     System.out.println(e.getX());
     System.out.println(e.getY());
     Article n = getArticleFromCoordinates(e.getX(),e.getY());
+    high = n;
     if(e.isPopupTrigger()||e.isControlDown())
     {
       if(n!=null){
@@ -194,6 +243,11 @@ public class AuthoringController implements IAuthoringController {
       if(n!=null){
         ArticlePropertyEditorMenu popupEditingMenu=new ArticlePropertyEditorMenu("Object Editor",n, this);
       }
+    }
+    else{
+      Button b = (Button) e.getSource();
+      Pane p = (Pane)b.getParent();
+      p.getChildren().remove(b);
     }
   }
 

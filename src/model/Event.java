@@ -18,9 +18,6 @@ public class Event {
 		myExecutables = executables;
 	}
 	
-	public String getMyName(){
-	    return myName;
-	}
 	
 	public List<Condition> getConditions(){
 		return myConditions;
@@ -46,7 +43,7 @@ public class Event {
 		myExecutables.addAll(execs);
 	}
 	
-	public String getName(){
+	public String getMyName(){
 		return myName;
 	}
 	
@@ -55,7 +52,9 @@ public class Event {
 			if(!c.isMet()) return;
 		}
 		for(Executable e : myExecutables){
-			e.execute();
+			if(e.checkActive()){
+				e.execute();
+			}
 		}
 	}
 

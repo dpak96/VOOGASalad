@@ -2,6 +2,7 @@ package model.controller;
 
 import gameengine.*;
 
+import java.io.File;
 import java.util.*;
 
 import javafx.stage.Window;
@@ -149,12 +150,26 @@ public class ModelController implements IModelController {
     myModel.setCharacter(toLoad.getCharacter());
   }
 
-  public void save(Window wind) {
-    myXMLUtility.saveModel(wind);
+  public void save(Window wind, String path) {
+    myXMLUtility.saveModel(wind, path);
   }
 
   public void load(Window wind) {
     loadFromFile(myXMLUtility.loadModel(wind));
+  }
+  public void load(File file){
+	  loadFromFile(myXMLUtility.load(file));
+  }
+
+  public void addCollisionType(String name) {
+    addCollision = new AddCollisionType(name);
+    addCollision.add();
+  }
+  
+  public void addCollisionType(String name, String one, String two, String collision, Double type) {
+    addCollision = new AddCollisionType(name);
+    addCollision.add();
+    addCollision.define(one, two, collision, type);
   }
   
   public void addNewCollisionType(String type){
@@ -171,6 +186,10 @@ public class ModelController implements IModelController {
   
   public void setBackgroundImage(String name){
     myModel.setBackgroundImage(name);
+  }
+  
+  public void setModel(Model model) {
+	  this.myModel = model;
   }
   
   public List<Event> getActiveEvents(){
@@ -192,5 +211,5 @@ public class ModelController implements IModelController {
   public List<Event> getAllEvents(){
 	  return myModel.getAllEvents();
   }
-
+  
 }

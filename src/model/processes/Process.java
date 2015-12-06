@@ -24,7 +24,7 @@ public abstract class Process {
 		myName = name;
 	}
 
-	public String getName(){
+	public String getMyName(){
 		return myName;
 	}
 }
