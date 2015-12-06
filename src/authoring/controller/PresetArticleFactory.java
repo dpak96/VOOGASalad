@@ -72,8 +72,8 @@ public class PresetArticleFactory {
 	public void playerMovement(Article article) {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myDisplacement", (double) -1);
-		Executable ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
+		tempMap.put("myXVelocity", (double) -1);
+		Executable ex = authoringController.makeExecutable("ExecutableSetHorizontalVelocity", tempMap);
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
@@ -84,8 +84,8 @@ public class PresetArticleFactory {
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myDisplacement", (double) 1);
-		ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
+		tempMap.put("myXVelocity", (double) 1);
+		ex = authoringController.makeExecutable("ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -96,8 +96,8 @@ public class PresetArticleFactory {
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myDisplacement", (double) -1);
-		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		tempMap.put("myYVelocity", (double) -1);
+		ex = authoringController.makeExecutable("ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -108,8 +108,8 @@ public class PresetArticleFactory {
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myDisplacement", (double) 1);
-		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		tempMap.put("myYVelocity", (double) 1);
+		ex = authoringController.makeExecutable("ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();

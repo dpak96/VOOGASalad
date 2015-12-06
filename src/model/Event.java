@@ -48,18 +48,14 @@ public class Event {
 	}
 	
 	public void fire(){
-		System.out.println("fire");
 		for(Condition c : myConditions){
 			if(!c.isMet()){
-				System.out.println("not met");
 				return;
 			}
 		}
-		System.out.println("execute");
 		for(Executable e : myExecutables){
 			if(e.checkActive()){
 				e.execute();
-				System.out.println("execute2");
 			}
 		}
 	}
