@@ -156,7 +156,7 @@ public class AuthoringController {
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", 0.2);
+		tempMap.put("myAcceleration", (double) 0.2);
 		Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
