@@ -1,4 +1,6 @@
-package authoring.controller;
+package authoring.controller
+
+import imageextender.ImageExtender;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +49,7 @@ public class AuthoringController {
 	}
 
 	public void init() {
-		//ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
+		ui.getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
 	}
 
 	public void addTile(KeyEvent event) {
@@ -57,21 +59,22 @@ public class AuthoringController {
 				nXRight = high.getX() + (high.getWidth() / 2);
 			}
 			try {
-				createAndPlaceArticle(nXRight, high.getY() + (high.getHeight() / 2), high.getImageFile(),
-						high.getImageFile());
-				nXRight += high.getWidth();
-			} catch (Exception e) {
+				high.setWidth(high.getWidth()*2);
+			}
+			catch (Exception e){
+
 			}
 		}
 		if (event.getCode() == KeyCode.V && event.isControlDown()) {
 
 			if (nXLeft == 0) {
-				nXLeft = high.getX() - (high.getWidth() / 2);
+				nXLeft = high.getX() - (high.getWidth() / 2)+modelController.getViewpoint().getX();
 			}
 			try {
-				createAndPlaceArticle(nXLeft, high.getY() + (high.getHeight() / 2), high.getImageFile(),
-						high.getImageFile());
 				nXLeft -= high.getWidth();
+				high.setWidth(high.getWidth()*2);
+				high.setX(nXLeft);
+
 			} catch (Exception e) {
 			}
 		}
@@ -110,6 +113,7 @@ public class AuthoringController {
 					true);
 			Pane p = (Pane) event.getParent();
 			p.getChildren().remove(event);
+			highlighted = false;
 		}
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
 		if (event.getImageName() in rb.keySet()){
@@ -156,27 +160,23 @@ public class AuthoringController {
 
 
 	public void addTemp(MouseEvent e) {
-		System.out.println(e.getX());
-		System.out.println(e.getY());
 		Article n = getArticleFromCoordinates(e.getX(), e.getY());
 		high = n;
+		ImageExtender dog = new ImageExtender();
+
 		if (e.isPopupTrigger() || e.isControlDown()) {
 			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu =
-						new ArticlePropertyEditorMenu("Object Editor", n, this);
+				ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, this);
 			}
 		} else {
 			try {
-				double tX = n.getX();
-				double tY = n.getY();
-
-				// authoringController.removeArticle(n);
-				HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
-				// highlightedArticle.relocate(tX,tY);
+				double tX = n.getX() - modelController.getViewpoint().getX()-19;
+				double tY = n.getY()- modelController.getViewpoint().getY()-15;
+				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
 				this.setHighlighted(true);
 				ui.getDragAndDrop().getChildren().add(highlightedArticle);
 				highlightedArticle.relocate(tX, tY);
-			} catch (Exception execption) {
+			} catch (Exception exception) {
 				System.out.println("hi");
 			}
 		}
@@ -186,11 +186,9 @@ public class AuthoringController {
 		return this.modelController.getAllEvents();
 	}
 
-	public void tester(MouseEvent e) {
-		double x = e.getX();
-		double y = e.getY();
-		Article n = getArticleFromCoordinates(x, y);
-		if (e.isPopupTrigger() || e.isControlDown()) {
+	public void TempButtonClick(MouseEvent e) {
+		Article n = getArticleFromCoordinates(e.getX(), e.getY());
+		if (controlCheck(e)) {
 			if (n != null) {
 				ArticlePropertyEditorMenu popupEditingMenu =
 						new ArticlePropertyEditorMenu("Object Editor", n, this);
@@ -199,22 +197,38 @@ public class AuthoringController {
 			Button b = (Button) e.getSource();
 			Pane p = (Pane) b.getParent();
 			p.getChildren().remove(b);
+			highlighted = false;
 		}
 	}
 
+	public boolean controlCheck(MouseEvent e){
+		return (e.isPopupTrigger() || e.isControlDown());
+	}
 
-	public void thingy(DragEvent event){
-		/* data dropped */
+
+	public void dragOn(DragEvent event){
+		if (event.getGestureSource() != this &&
+				event.getDragboard().hasImage()) {
+			/* allow for moving */
+			event.acceptTransferModes(TransferMode.MOVE);
+		}
+
+		event.consume();
+	}
+
+
+	public void dropElement(DragEvent event){
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+0.1;
-			double tempY = highlightedArticle.getLayoutY()+0.1;
-			Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
+			double tempX = highlightedArticle.getLayoutX()+19.1;
+			double tempY = highlightedArticle.getLayoutY()+15.1;
+			Article n = getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
-			n.setX((double)event.getX() + modelController.getViewpoint().getX());
-			n.setY((double)event.getY() + modelController.getViewpoint().getY());
+			n.setX((double)event.getX() + modelController.getViewpoint().getX()-27.5);
+			n.setY((double)event.getY() + modelController.getViewpoint().getY()-27.5);
 			Pane p = (Pane)highlightedArticle.getParent();
 			p.getChildren().remove(highlightedArticle);
+			highlighted = false;
 		}
 		else {
 			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());

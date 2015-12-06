@@ -39,6 +39,7 @@ public class SuperController {
     Scene mainScene = uiCore.getScene();
     uiCore.initPanels(gameCreation);
     uiCore.getMenu().loadGame(gameCreation, levelFile);
+    modelController.makeLevelManager(gameCreation);
     return mainScene;
   }
   

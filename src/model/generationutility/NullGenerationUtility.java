@@ -1,4 +1,4 @@
-package generationutility;
+package model.generationutility;
 
 public class NullGenerationUtility extends AbstractGenerationUtility{
 

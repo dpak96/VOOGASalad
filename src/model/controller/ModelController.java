@@ -17,6 +17,7 @@ import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
 public class ModelController implements IModelController {
+
 	private Model myModel;
 	private ModelFactory myModelFactory;
 	private xmlUtility myXMLUtility;
@@ -32,12 +33,17 @@ public class ModelController implements IModelController {
 		myXMLUtility = new xmlUtility(myModel);
 	}
 
+	public void update(){
+		myModel.update();
+		notifyObservers();
+	}
+	
 	public Map<String, Class<?>> getParameters(String className) {
 		return myModelFactory.getParameters(className);
 	}
 
 	public void makeLevelManager(GameCreation game) {
-		myLevelManager = new LevelManager(game);
+		myLevelManager = new LevelManager(this,game);
 	}
 
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
@@ -51,10 +57,12 @@ public class ModelController implements IModelController {
 	public Executable createExecutable(String executableName, Map<String, Object> data) {
 		ResourceBundle p = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager",
 					"extraparameters");
-		for (String propertyKey : p.keySet())
+		for (String propertyKey : p.keySet()){
 			for (String key : data.keySet()) {
+				System.out.println(key+"poop");
 				if (key.equals(propertyKey)) {
 					try {
+						System.out.println("C");
 						Field f = this.getClass().getDeclaredField(p.getString(key));
 						data.put(key, f.get(this));
 					} catch (Exception e) {
@@ -63,6 +71,7 @@ public class ModelController implements IModelController {
 					}
 				}
 			}
+		}
 		Executable newExecutable = myModelFactory.createExecutable(executableName, data);
 		addExecutable(newExecutable);
 		return newExecutable;
@@ -162,10 +171,15 @@ public class ModelController implements IModelController {
 	}
 
 	public void loadFromFile(Model toLoad) {
+		System.out.println("a");
 		myModel.destroyModel();
+		System.out.println("b");
 		myModel.initialize();
+		System.out.println("c");
 		myModel.addAllArticles(toLoad.getArticles());
+		System.out.println("d");
 		myModel.addAllEvents(toLoad.getAllEvents());
+		System.out.println("e");
 		myModel.addAllButtonMap(toLoad.getButtonMap());
 		myModel.addAllConditions(toLoad.getConditions());
 		myModel.addAllExecutables(toLoad.getExecutables());
@@ -210,6 +224,7 @@ public class ModelController implements IModelController {
 	// }
 
 	public void addNewCollisionType(String type) {
+
 		myModel.addNewCollisionType(type);
 	}
 
