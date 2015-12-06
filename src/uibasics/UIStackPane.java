@@ -3,14 +3,16 @@ package uibasics;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.controller.AuthoringController;
 import game.player.GamePlayerOverlay;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
 import model.controller.ModelController;
 import startscreen.GameCreation;
 import startscreen.GameCreation.Mode;
+import authoring.controller.AuthoringController;
+
 
 public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
