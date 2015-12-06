@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class LevelManager {
 	private String myFolderPath, myCurrentLevelName;
+	private String myGameName;
 	private List<String> myLevels;
 	private int myCurrentLevel;
 	private xmlUtility xmlUtil;
@@ -20,6 +21,7 @@ public class LevelManager {
     private Map<Integer,String> myLevelMap;
 	
 	public LevelManager(GameCreation game) {
+		myGameName = game.getGameName();
 		myFolderPath = game.getFolderPath();
 		xmlUtil = new xmlUtility();
 		try {
@@ -47,7 +49,22 @@ public class LevelManager {
 	public List<String> getLevels() {
 		return myLevels;
 	}
+	
 
+	/**Game over function that loads the default game over level 
+	 * params: none
+	 */
+	public void gameOver() {
+	
+		myCurrentLevel = 1;
+		myCurrentLevelName = myLevels.get(myCurrentLevel);
+		Model model = xmlUtil.load(new File(myFolderPath+myGameName+"_GAMEOVER"));
+		myModelCtr.setModel(model);
+	}
+	
+	/**nextLevel loads the next level of the game, but keeps the score/life of the previous level of the 
+	 * main character. 
+	 */
 	public void nextLevel() {
 		if (myCurrentLevel != 0) {
 			myCurrentLevel+=1;
@@ -69,6 +86,27 @@ public class LevelManager {
 			myModelCtr.setModel(model);
 		}
 	}
+	
+	public void changeLevelTo(int level) {
+		if (level != 0) {
+			myCurrentLevel = level;
+			myCurrentLevelName = myLevels.get(myCurrentLevel);
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
+			myModelCtr.setModel(model);
+		}
+	}
+	
+	public void resetLevel() {
+		if (myCurrentLevel != 0) {
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
+			myModelCtr.setModel(model);
+		}
+	}
+	
 //	
 //	public void updateLevels(GameCreation game) {
 //		myGame = game.getFolderPath();
