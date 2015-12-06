@@ -1,12 +1,9 @@
 package uibasics;
 
-import java.util.Optional;
-
 import action.controller.ActionController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import main.GraphicHandler;
 import main.VoogaProperties;
 import menu.MenuController;

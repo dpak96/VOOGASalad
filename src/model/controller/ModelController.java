@@ -1,7 +1,5 @@
 package model.controller;
 
-import gameengine.*;
-
 import java.io.File;
 import java.util.*;
 
@@ -13,7 +11,6 @@ import model.article.Article;
 import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
-import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
 
@@ -21,7 +18,6 @@ public class ModelController implements IModelController {
   private Model myModel;
   private ModelFactory myModelFactory;
   private xmlUtility myXMLUtility;
-  private AddCollisionType addCollision;
   private LevelManager myLevelManager;
 
   public ModelController(Model model) {
@@ -160,14 +156,26 @@ public class ModelController implements IModelController {
   }
 
   public void save(Window wind, String path) {
-    myXMLUtility.saveModel(wind, path);
+	  try {
+		    myXMLUtility.saveModel(wind, path);
+	  } catch (NullPointerException e) {
+			//User canceled from a save
+	  }
   }
 
   public void load(Window wind) {
-    loadFromFile(myXMLUtility.loadModel(wind));
+	  try {
+		  loadFromFile(myXMLUtility.loadModel(wind));
+	  } catch (NullPointerException e) {
+			//User canceled from a load
+	  }
   }
   public void load(File file){
-	  loadFromFile(myXMLUtility.load(file));
+	  try {
+		  loadFromFile(myXMLUtility.load(file));
+	  } catch (NullPointerException e) {
+		//User canceled from a load
+	  }
   }
 
 //  public void addCollisionType(String name) {
