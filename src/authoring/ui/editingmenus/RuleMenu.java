@@ -46,7 +46,7 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(eventTable, 1, 2);
         Button addEvent=new Button("Add new event");
         menuPane.add(addEvent, 1, 3);
-        addEvent.setOnAction(e-> new AddEventMenu("Add Event",this.myController));
+        addEvent.setOnAction(e-> new AddEventMenu("Add Event",this.myController,eventTable,super.myController.getEventList()));
 
         super.componentAdder.makeLabel(menuPane, 2, 1, "Conditions");
         menuPane.add(conditionTable, 2, 2);
