@@ -23,13 +23,13 @@ public class ModelController implements IModelController {
   private xmlUtility myXMLUtility;
   private AddCollisionType addCollision;
   private LevelManager myLevelManager;
-  // WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
 
   public ModelController(Model model) {
     myModel = model;
     myModel.initialize();
     myModelFactory = new ModelFactory();
     myXMLUtility = new xmlUtility(myModel);
+    
   }
 
   public Map<String, Class<?>> getParameters(String className) {
