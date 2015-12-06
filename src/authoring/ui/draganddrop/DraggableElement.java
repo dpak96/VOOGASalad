@@ -22,10 +22,7 @@ public class DraggableElement extends Button {
         this.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                /* drag was detected, start drag-and-drop gesture*/
-                System.out.println("OMG WE DRAGGIN");
-                /* allow MOVE transfer mode */
-              //  d.dragging();
+            	//  d.dragging();
                 Dragboard db = startDragAndDrop(TransferMode.MOVE);
                 /* put a string on dragboard */
                 ClipboardContent content = new ClipboardContent();
