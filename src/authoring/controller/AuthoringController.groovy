@@ -246,13 +246,11 @@ public class AuthoringController {
 		return modelController.getArticles()
 	}
     
-        public addEventToModel(Event eventToAdd,boolean activeEvent,boolean collisionEvent,boolean buttonEvent){
+        public addEventToModel(Event eventToAdd,boolean activeEvent){
             this.modelController.getAllEvents().add(eventToAdd);
             if(activeEvent)
             this.modelController.getActiveEvents().add(eventToAdd);
-          /*  if(collisionEvent)
-          //  this.modelController.getCollisionEvents(
-*/            
+         
         }
         
 }

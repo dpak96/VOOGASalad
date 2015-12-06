@@ -14,8 +14,6 @@ public class AddEventMenu  extends AuthoringMenu {
 
     private TextField eventNameField;
     private CheckBox realTimeEvent=new CheckBox();
-    private CheckBox collisionEvent=new CheckBox();
-    private CheckBox buttonEvent=new CheckBox();
     
     public AddEventMenu (String title, AuthoringController controller) {
         super(title, controller);
@@ -27,11 +25,8 @@ public class AddEventMenu  extends AuthoringMenu {
     public void executeYourMenuFunction () {
         try{
         Event newEvent=new Event(eventNameField.getText(),new ArrayList<Condition>(),new ArrayList<Executable>());
-        if(realTimeEvent.isSelected()){
-            
-        }
-            ///super.myController
-        }
+            super.myController.addEventToModel(newEvent, realTimeEvent.isSelected());
+                }
         catch(IllegalArgumentException e){
             super.displayErrorMessage();
         }
@@ -44,17 +39,14 @@ public class AddEventMenu  extends AuthoringMenu {
         eventNameField=super.componentAdder.makeField(menuPane, 2, 1);
         
         menuPane.add(realTimeEvent, 1, 2);
-        menuPane.add(collisionEvent, 1, 3);
-        menuPane.add(buttonEvent, 1, 4);
+        this.configureCheckBoxes(realTimeEvent);
         
-        this.configureCheckBoxes(realTimeEvent, collisionEvent, buttonEvent);
         
     }
 
     
-    private void configureCheckBoxes(CheckBox realTimeEvent, CheckBox collisionEvent,CheckBox buttonEvent){
+    private void configureCheckBoxes(CheckBox realTimeEvent){
         realTimeEvent.setText("Real time event");
-        collisionEvent.setText("Collision event");
-        buttonEvent.setText("Button press event");
+       
     }
 }

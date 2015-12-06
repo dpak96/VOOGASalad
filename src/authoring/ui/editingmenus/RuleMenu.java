@@ -68,21 +68,9 @@ public class RuleMenu extends AuthoringMenu {
         GridPane paramGrid = new GridPane();
         menuPane.add(paramGrid, 1, 4, 3, 1);
 
-        List<Event> eventList = new ArrayList<Event>();
-        eventList.add(new Event("MoveHorizontal", new ArrayList<Condition>(),
-                                new ArrayList<Executable>()));
-        eventList.add(new Event("asddsda", new ArrayList<Condition>(),new ArrayList<Executable>()));
-        
-        HashMap<String, Object> testMap = new HashMap<String, Object>();
-        testMap.put("myName", "2");
-        testMap.put("myFirst", null);
-        testMap.put("mySecond", null);
-        eventList.get(0).getConditions().add(new ConditionIsTouching(testMap));
-
-        eventList.get(0).getExecutables().add(new ExecutableGainLife(testMap));
 
         ObservableList<Event> eventData =
-                FXCollections.observableArrayList(eventList);
+                FXCollections.observableArrayList(super.myController.getEventList());
 
         eventTable.setItems(eventData);
 
@@ -112,7 +100,7 @@ public class RuleMenu extends AuthoringMenu {
 
    
     public void updateConditionsAndExecutables (Event selectedEvent) {
-
+        
         ObservableList<Condition> conditionData =
                 FXCollections.observableArrayList(selectedEvent.getConditions());
         conditionTable.setItems(conditionData);
