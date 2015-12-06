@@ -44,6 +44,7 @@ public class UIStackPane extends StackPane implements Observer {
 		} else {
 			edit=true;
 			this.getChildren().add(myAuthoringControllerPane);
+			myAuthoringController.getUi().init();
 		}
 	}
 	

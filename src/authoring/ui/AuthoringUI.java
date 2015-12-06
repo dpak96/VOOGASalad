@@ -19,6 +19,7 @@ public class AuthoringUI {
   private OverlayController myOverlayController;
   private ToolbarContainer myToolbarContainer;
   private OverlayController test;
+  private Pane ov2;
 
 
 
@@ -29,19 +30,19 @@ public class AuthoringUI {
   }
 
   public Pane tester(){
-    BorderPane ov2 = new BorderPane();
+    ov2 = new Pane();
     test = new OverlayController();
     Pane toolbar = myToolbarContainer.initializeToolbar();
-    test.getStyleClass().add("Test");
     test.getChildren().add(toolbar);
-    ov2.setRight(test);
-    //ov2.setMargin(toolbar, new Insets(0,0,0,5));
-    ov2.setLeft(dragAndDrop);
     VoogaProperties props = new VoogaProperties();
-    myOverlayController.setPrefSize(props.getSceneWidth(),props.getSceneHeight());
     dragAndDrop.getStyleClass().add("Thingy");
-    myOverlayController.addPane(ov2);
-    return myOverlayController;
+    return ov2;
+  }
+
+  public void init(){
+    ov2.getChildren().addAll(dragAndDrop,test);
+    dragAndDrop.setPrefSize(500,500);
+    test.setLayoutX(500);
   }
 
 
