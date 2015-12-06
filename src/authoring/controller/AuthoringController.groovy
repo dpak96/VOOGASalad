@@ -44,7 +44,7 @@ public class AuthoringController {
 	}
 
 	public void init() {
-		//ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
+		ui.getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
 	}
 
 	public void addTile(KeyEvent event) {
@@ -63,7 +63,7 @@ public class AuthoringController {
 		if (event.getCode() == KeyCode.V && event.isControlDown()) {
 
 			if (nXLeft == 0) {
-				nXLeft = high.getX() - (high.getWidth() / 2);
+				nXLeft = high.getX() - (high.getWidth() / 2)+modelController.getViewpoint().getX();
 			}
 			try {
 				createAndPlaceArticle(nXLeft, high.getY() + (high.getHeight() / 2), high.getImageFile(),
@@ -202,8 +202,8 @@ public class AuthoringController {
 			}
 		} else {
 			try {
-				double tX = n.getX();
-				double tY = n.getY();
+				double tX = n.getX() - modelController.getViewpoint().getX();
+				double tY = n.getY()- modelController.getViewpoint().getY();
 
 				// authoringController.removeArticle(n);
 				HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
@@ -244,7 +244,7 @@ public class AuthoringController {
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
 			double tempX = highlightedArticle.getLayoutX()+0.1;
 			double tempY = highlightedArticle.getLayoutY()+0.1;
-			Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
+			Article n = getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
 			n.setX((double)event.getX() + modelController.getViewpoint().getX());
 			n.setY((double)event.getY() + modelController.getViewpoint().getY());
