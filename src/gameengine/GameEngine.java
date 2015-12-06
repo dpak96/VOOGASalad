@@ -9,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 import model.Event;
+import model.article.Position;
 import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
@@ -33,7 +34,9 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
+		//System.out.println(allArticles.size());
 		setMyCharacter(myModelController.getCharacter());
+		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
 		myActiveArticles = allArticles;
@@ -50,6 +53,7 @@ public class GameEngine implements IGameEngine {
 		for(Article article : myActiveArticles){
 			article.clearCollisions();
 		}
+
 		
 		for(int i = 0; i < myActiveArticles.size(); i++){
 			Article first = myActiveArticles.get(i);
@@ -60,8 +64,10 @@ public class GameEngine implements IGameEngine {
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
 				}*/
+
 			}
 		}
+			
 	}
 	
 	private void runButtonPress(String input){
@@ -102,6 +108,24 @@ public class GameEngine implements IGameEngine {
 	 */
 	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
+
+//		for(Article article : myModelController.getArticles()){
+//			double x = article.getX();
+//			double y = article.getY();
+//			double width = article.getWidth();
+//			double height = article.getHeight();
+//			double viewpointX = myViewpoint.getX();
+//			double viewpointY = myViewpoint.getY();
+//			double viewpointWidth = myViewpoint.getWidth();
+//			double viewpointHeight = myViewpoint.getHeight();
+//			//System.out.println(viewpointHeight + " " + viewpointWidth);
+//			double xBuffer = article.getXBuffer();
+//			double yBuffer = article.getYBuffer();
+//			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+//					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+//					x, x + width, y, y + height)){
+//				myActiveArticles.add(article);
+
 		List<Article> art = myModelController.getArticles();
 		int size = art.size();
 		for(int i = 0; i < size; i++){
@@ -165,17 +189,27 @@ public class GameEngine implements IGameEngine {
     this.myCharacter = myCharacter;
   }
 	
-	/*
+	
 	public static void main(String args[]) {
-		Article one = new Article("GoombaRefinedAgain.png");
-		System.out.println(Arrays.deepToString((one.getBitMap().getByteArray())));
-		for(int[] a: one.getBitMap().getByteArray()) {
-			System.out.println(Arrays.toString(a));
+		Article one = new Article("Goomba", 100, 100, true);
+		CollisionFinder test = new CollisionFinder(one.getBitMap().getByteArray());
+//		while(test.hasNext()) {
+//			Position temp = test.next();
+//			System.out.println(temp.getX() + " " + temp.getY());
+//		}
+		
+		for(Position[] a: one.getBitMap().getByteArray()) {
+			for(Position p: a) {
+				if(p.isValidPosition()) {
+					System.out.print(" " + p.getX() + " " + p.getY());
+				} else {
+					System.out.print(" -1 -1");
+				}
+			}
+			System.out.println(" ");
 		}
-		CollisionManager temp = new CollisionManager();
-		System.out.println(temp.didCollide(one, two));
 	}
-	*/
+	
 	
 
 }
