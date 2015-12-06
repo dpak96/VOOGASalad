@@ -48,7 +48,7 @@ public class CollisionFinder implements Iterator<Position> {
 
         int maxIterations = array2D.length + array2D[0].length;
         fillSpiralArray(array2D, 0, 0, true, true, maxIterations);
-        System.out.println(" size is " + array2D.length);
+        //System.out.println(" size is " + array2D.length);
     }
 
     @Override

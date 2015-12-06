@@ -12,6 +12,7 @@ public class CollisionManager {
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 
 		if (checkSimpleCollision(articleOne, articleTwo)) {
+			//System.out.println(articleOne.getImageFile());
 			//System.out.println("simple collision true");
 			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			//System.out.println(temp.isRealCollision());
@@ -50,33 +51,31 @@ public class CollisionManager {
 
 	}
 
-	private CollisionInformation checkBitMapCollision(Article a, Article b) {
-		
+	private CollisionInformation checkBitMapCollision(Article b, Article a) {
+		//System.out.println(b.getImageFile());
 		CollisionFinder finder = new CollisionFinder(a.getBitMap().getByteArray());
 		while (finder.hasNext()) {
 			Position p = finder.next();
-			
+			//System.out.println(p.getX() + " " + p.getY());
 			if (p.getX() != -1 && p.getY() != -1) {
 				//System.out.println(p.getX() + " " + p.getY());
 				//System.out.println("first invalid");
-				
 				for (Position[] q: b.getBitMap().getByteArray()) {
 					for (Position r: q) {
 						if (r.getX() != -1 && r.getY() != -1) {
 							//System.out.println("both valid");
 							
-							//System.out.println(" valid comparing: " + p.getX() + " with + " + r.getX() + " and " + p.getY() + " with " + r.getY() );
+							System.out.println(" valid comparing: " + p.getX() + " with + " + r.getX() + " and " + p.getY() + " with " + r.getY() );
 							if (p.getX() == r.getX() && p.getY() == r.getY()) {
 //							if (Math.floor(p.getX()) == Math.floor( r.getX()) && Math.floor(p.getY()) == Math.floor(r.getY())) {
-								System.out.println("bitmap working");
+								System.out.println("AKSDJF;LKSJF;LKJF;LKJAS;DLFKJAS;LDKFJA;LSDKFJA;SLDKFJAS;LKDFJA;LKDFJ;LAKSDJF;LAJF;LASKDJFL;ASJDFL;AKSFJ");
 								return new CollisionInformation(getIncidenceDirection(a, r), true);
-							} else {
-								System.out.println("fail");
-								return new CollisionInformation("", false);
-							}
+							} 
 						}
 					}
 				}
+			} else {
+				//System.out.println("alpha is 0");
 			}
 		}
 		
