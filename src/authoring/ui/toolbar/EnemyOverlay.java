@@ -2,6 +2,7 @@ package authoring.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.controller.AuthoringController;
 import javafx.scene.control.Button;
 

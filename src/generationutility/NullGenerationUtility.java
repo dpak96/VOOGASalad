@@ -1,4 +1,4 @@
-package model.randomgeneration;
+package generationutility;
 
 public class NullGenerationUtility extends AbstractGenerationUtility{
 
