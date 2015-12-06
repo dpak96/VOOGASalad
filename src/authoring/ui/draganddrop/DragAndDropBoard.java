@@ -5,10 +5,7 @@ import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
 import authoring.ui.toolbar.ToolbarButton;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.article.Article;
@@ -50,6 +47,8 @@ public class DragAndDropBoard extends Pane {
                     //System.out.println(n == null);
                     n.setX(event.getX());
                     n.setY(event.getY());
+                    Pane p = (Pane)highlightedArticle.getParent();
+                    p.getChildren().remove(highlightedArticle);
                 }
                 else {
                     authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());

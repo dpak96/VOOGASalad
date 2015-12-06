@@ -19,6 +19,19 @@ public class Model extends Observable{
 	private Article myCharacter;
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
+	
+	public Model(){
+		allEvents = new ArrayList<Event>();
+		myActiveEvents = new ArrayList<Event>();
+		myButtonMap = new HashMap<String, List<Event>>();
+		myButtonMap.put("default", new ArrayList<Event>());
+		myArticles = new ArrayList<Article>();
+		myExecutables = new ArrayList<Executable>();
+		myConditions = new ArrayList<Condition>();
+		myViewpoint = new Article("Goomba", 0, 0);
+		myCharacter = new Article("Goomba", -100, -100);
+		
+	}
 
 	public List<Event> getAllEvents(){
 		return allEvents;
@@ -197,11 +210,11 @@ public class Model extends Observable{
 	}
 	
 	public void addNewCollisionType(String type){
-		myCollisionTypeEditor.addCollisionType(type);
+		myCollisionTypeEditor.add(type);
 	}
 	
-	public void defineCollision(String direction, String nameOne, String nameTwo, List<Event> event){
-		myCollisionTypeEditor.define(direction, nameOne, nameTwo, event);
+	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
 	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
