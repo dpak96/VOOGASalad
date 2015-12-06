@@ -117,7 +117,7 @@ public class xmlUtility {
 	public static void main (String args[]) {
 		Model model = new Model();
 		model.initialize();
-		Article test = new Article("Goomba.png", 100, 100, true);
+		Article test = new Article("Goomba", 100, 100, true);
 		model.addArticle(test);
 		xmlUtility xml = new xmlUtility(model);
 		//Model newModel = xml.loadModel("testing.xml");
