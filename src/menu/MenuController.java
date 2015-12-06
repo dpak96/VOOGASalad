@@ -65,8 +65,6 @@ public class MenuController {
     
     public void saveLevelCreation(GameCreation gameCreation){
     	game = gameCreation;
-    	System.out.println("Alex is a homosexual " + gameCreation.getGameName());
-    	System.out.println("Alex likes penis deep inside his asshole: " + gameCreation.getGameName() + " " + gameCreation.getFolderPath());
     	File levelDir = new File(gameCreation.getFolderPath());
     	FileChooser myFileChooser = new FileChooser();
     	myFileChooser.setTitle("New Level File");
