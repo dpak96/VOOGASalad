@@ -1,6 +1,6 @@
 package authoring.controller
 
-import imageextender.ImageExtender;
+import imageeditor.ImageExtender;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,7 +172,7 @@ public class AuthoringController {
 			try {
 				double tX = n.getX() - modelController.getViewpoint().getX()-19;
 				double tY = n.getY()- modelController.getViewpoint().getY()-15;
-				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
+				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth(), n.getHeight()), this);
 				this.setHighlighted(true);
 				ui.getDragAndDrop().getChildren().add(highlightedArticle);
 				highlightedArticle.relocate(tX, tY);
