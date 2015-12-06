@@ -231,4 +231,8 @@ public class AuthoringController {
 	public presetArticle(String function,x, Article article) {
 		presetArticleFactory."$function"(article);
 	  }
+
+    public List<Article> getArticles(){
+        return modelController.getArticles()
+    }
 }
