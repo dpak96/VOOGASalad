@@ -10,7 +10,7 @@ import model.article.Position;
 public class CollisionManager {
 
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
-
+		
 		if (checkSimpleCollision(articleOne, articleTwo)) {
 			//System.out.println(articleOne.getImageFile());
 			//System.out.println("simple collision true");
@@ -19,7 +19,7 @@ public class CollisionManager {
 			
 			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			//return temp;
-			return new CollisionInformation("Left", true);
+			return new CollisionInformation(getIncidenceDirection(articleOne, articleTwo), true);
 
 		} else {
 			return new CollisionInformation("", false);
@@ -30,29 +30,70 @@ public class CollisionManager {
 	// colliding with a2
 
 	// We want the incidence direction for the article that's colliding.
-	private String getIncidenceDirection(Article articleOne, Position p) {
-		double centerX = articleOne.getX() + articleOne.getWidth() / 2;
-		double centerY = articleOne.getY() + articleOne.getHeight() / 2;
-		double residualX = p.getX() - centerX;
-		double residualY = p.getY() - centerY;
-		if (residualX >= 0 || residualY >= 0) {
-			if (residualX > residualY) {
-				return "Right";
-			} else if (residualX < residualY) {
-				return "Bottom";
-			} else {
-				return "Bottom"; // Edge case (exactly on diag) returns bottom
-			}
-		} else {
-			if (residualX > residualY) {
-				return "Top";
-			} else if (residualX < residualY) {
+//	private String getIncidenceDirection(Article articleOne, Position p) {
+//		double centerX = articleOne.getX() + articleOne.getWidth() / 2;
+//		double centerY = articleOne.getY() + articleOne.getHeight() / 2;
+//		double residualX = p.getX() - centerX;
+//		double residualY = p.getY() - centerY;
+//		if (residualX >= 0 || residualY >= 0) {
+//			if (residualX > residualY) {
+//				return "Right";
+//			} else if (residualX < residualY) {
+//				return "Bottom";
+//			} else {
+//				return "Bottom"; // Edge case (exactly on diag) returns bottom
+//			}
+//		} else {
+//			if (residualX > residualY) {
+//				return "Top";
+//			} else if (residualX < residualY) {
+//				return "Left";
+//			} else {
+//				return "Top"; // Edge case (exactly on diag) returns top
+//			}
+//		}
+//
+//	}
+	
+	private String getIncidenceDirection(Article a, Article b) {
+		if (a.getX()+a.getWidth() <= b.getX()) {
+			if (a.getY()+a.getHeight() <= b.getY()+b.getHeight() && a.getY()+a.getHeight() >= b.getY()) {
+				return "Left";
+			} else if (a.getY() <= b.getY()+b.getHeight() && a.getY() >= b.getY()) {
 				return "Left";
 			} else {
-				return "Top"; // Edge case (exactly on diag) returns top
+				return "Left";
 			}
+			
+		} else if (a.getX() >= b.getX()+b.getWidth()) {
+			if (a.getY()+a.getHeight() <= b.getY()+b.getHeight() && a.getY()+a.getHeight() >= b.getY()) {
+				return "Right";
+			} else if (a.getY() <= b.getY()+b.getHeight() && a.getY() >= b.getY()) {
+				return "Right";
+			} else {
+				return "Right";
+			}
+		} 
+		
+		if (a.getY()+a.getHeight() <= b.getY()) {
+			if (a.getX()+a.getWidth() <= b.getX()+b.getWidth() && a.getX()+a.getWidth() >= b.getX()) {
+				return "Top";
+			} else if (a.getX() <= b.getX()+b.getWidth() && a.getX() >= b.getX()) {
+				return "Top"; 
+			} else {
+				return "Top";
+			}
+		} else if (a.getY() >= b.getY()+b.getHeight()) {
+			if (a.getX()+a.getWidth() <= b.getX()+b.getWidth() && a.getX()+a.getWidth() >= b.getX()) {
+				return "Bottom";
+			} else if (a.getX() <= b.getX()+b.getWidth() && a.getX() >= b.getX()) {
+				return "Bottom"; 
+			} else {
+				return "Bottom";
+			}
+			
 		}
-
+		return "";
 	}
 
 	private CollisionInformation checkBitMapCollision(Article b, Article a) {
