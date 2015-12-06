@@ -30,6 +30,7 @@ public class RuleMenu extends AuthoringMenu {
     private TableView eventTable = new TableView();
     private TableView conditionTable = new TableView();
     private TableView executableTable = new TableView();
+    private Event selectedEvent;
 
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
@@ -51,14 +52,14 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(conditionTable, 2, 2);
         Button addCondition=new Button("Add new condition");
         menuPane.add(addCondition, 2, 3);
-        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition"));
+        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition",selectedEvent));
         
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
         menuPane.add(executableTable, 3, 2);
         Button addExecutable=new Button("Add new executable");
         menuPane.add(addExecutable, 3, 3);
-        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable"));
+        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable",selectedEvent));
         
         RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
         tableConfig.configureTables(eventTable, conditionTable, executableTable);
@@ -86,7 +87,7 @@ public class RuleMenu extends AuthoringMenu {
         eventTable.getSelectionModel().selectedItemProperty()
                 .addListener( (observableValue, oldValue, newValue) -> {
                     if (eventTable.getSelectionModel().getSelectedItem() != null) {
-                        Event selectedEvent = (Event) newValue;
+                        selectedEvent = (Event) newValue;
                         this.updateConditionsAndExecutables(selectedEvent);
                     }
                 });

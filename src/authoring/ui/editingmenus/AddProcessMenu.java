@@ -7,7 +7,10 @@ import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import model.Event;
+import model.article.Article;
 import resourcemanager.ResourceManager;
 
 
@@ -16,16 +19,20 @@ public class AddProcessMenu extends AuthoringMenu {
     private Map<String, Control> parameters = new HashMap<String, Control>();
     private String myProcessType;
     Map<String, Class<?>> ruleParams;
+    private Event myEventToAddTo;
 
-    public AddProcessMenu (String title, AuthoringController controller, String myProcessName) {
+    public AddProcessMenu (String title,
+                           AuthoringController controller,
+                           String myProcessName,
+                           Event eventToAddTo) {
         super(title, controller);
         myProcessType = myProcessName;
+        myEventToAddTo = eventToAddTo;
         super.showMenu(300, 300);
     }
 
     @Override
     public void executeYourMenuFunction () {
-        // TODO Auto-generated method stub
 
     }
 
@@ -40,7 +47,7 @@ public class AddProcessMenu extends AuthoringMenu {
 
     }
 
-    public void addCondition (ComboBox<String> conditionBox, GridPane paramGrid) {
+    private void addCondition (ComboBox<String> conditionBox, GridPane paramGrid) {
         ResourceBundle conditionBundle =
                 (ResourceBundle) ResourceManager.getResourceManager()
                         .getResource("PropertiesManager", myProcessType + "Subclass");
@@ -52,7 +59,7 @@ public class AddProcessMenu extends AuthoringMenu {
         conditionBox.setOnAction(e -> this.addParameterFields(conditionBox.getValue(), paramGrid));
     }
 
-    public void addParameterFields (String selectedObject, GridPane paramGrid) {
+    private void addParameterFields (String selectedObject, GridPane paramGrid) {
         paramGrid.getChildren().clear();
         ruleParams =
                 super.myController
@@ -64,11 +71,35 @@ public class AddProcessMenu extends AuthoringMenu {
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
             if (ruleParams.get(key) == String.class || ruleParams.get(key) == double.class)
                 parameters.put(key, super.componentAdder.makeField(paramGrid, 2, rowIndex++));
-            else
-                parameters.put(key, super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++));
+            else {
+                ComboBox articleBox = super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
+                for (Article activeArticle : super.myController.getArticles())
+                    articleBox.getItems().add(activeArticle);
+
+                parameters.put(key, articleBox);
+
+            }
 
         }
 
+    }
+
+    private Map<String, Object> parseUserInput () {
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        for (String key : parameters.keySet()) {
+            if (ruleParams.get(key) == String.class) {
+                TextField field = (TextField) parameters.get(key);
+                if (ruleParams.get(key) == double.class) {
+                    dataMap.put(key, Double.parseDouble(field.getText()));
+                }
+                else
+                    dataMap.put(key, field.getText());
+
+            }
+
+        }
+
+        return dataMap;
     }
 
 }
