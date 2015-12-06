@@ -2,6 +2,7 @@ package authoring.ui.editingmenus;
 
 import java.security.NoSuchProviderException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,15 +72,12 @@ public class AddEventMenu extends AuthoringMenu {
     @Override
     protected void populateMenu (GridPane menuPane) {
 
-        super.componentAdder.makeLabel(menuPane, 1, 1, "Name :");
+        super.componentAdder.makeLabel(menuPane, 1, 1, "New Event Name :");
         eventNameField = super.componentAdder.makeField(menuPane, 2, 1);
         
-        eventType=new ComboBox();
-        eventType.getItems().add("Ordinary");
-        eventType.getItems().add("Active");
-        eventType.getItems().add("Collision");
-        eventType.getItems().add("Button");
-        menuPane.add(eventType, 1, 2);
+        super.componentAdder.makeLabel(menuPane, 1, 2, "Collision Type");
+        eventType=super.componentAdder.makeComboBox(menuPane, 2, 2);
+        eventType.getItems().addAll(Arrays.asList("Ordinary","Active","Collision","Button"));
         
         GridPane paramGrid= new GridPane();
         menuPane.add(paramGrid, 1, 3,2,2);
