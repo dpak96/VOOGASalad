@@ -67,6 +67,12 @@ public class MenuController {
         myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
             
     }
+    
+    public void reorderGame(){
+        game = myGraphicHandler.getGameCreation();
+        XMLOrderer reorder = new XMLOrderer(game);
+        reorder.makeXML(game.getName());
+    }
 
     public void loadGame(){
 //    	System.out.println("myMainMenu.getScene()");

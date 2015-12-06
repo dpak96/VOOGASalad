@@ -20,4 +20,8 @@ public abstract class Executable extends Process{
 	public void setMyActor(Article article){
 		myActor = article;
 	}
+	
+	public boolean checkActive(){
+		return myActor.getStatus().equals(Article.Status.ACTIVE);
+	}
 }
