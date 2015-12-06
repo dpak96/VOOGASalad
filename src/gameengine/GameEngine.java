@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import model.Event;
 import model.article.Article;
@@ -99,10 +102,13 @@ public class GameEngine implements IGameEngine {
 	 */
 	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		Collection<Article> art = myModelController.getArticles();
-		for(Article a: art.toArray(new Article[0])){
-			if(a.getStatus().equals(Article.Status.ACTIVE)){
-				myActiveArticles.add(a);
+		List<Article> art = myModelController.getArticles();
+		int size = art.size();
+		for(int i = 0; i < size; i++){
+			try {
+				activeArticles.add(art.get(i));
+			} catch(Exception e){
+
 			}
 		}
 		return activeArticles;
