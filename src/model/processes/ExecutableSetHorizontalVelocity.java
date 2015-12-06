@@ -6,7 +6,7 @@ import model.article.Article;
 
 public class ExecutableSetHorizontalVelocity extends Executable{
 
-	double myXVelocity;
+	protected double myXVelocity;
 	
 	public ExecutableSetHorizontalVelocity(Map<String, Object> parameters){
 		super(parameters);
