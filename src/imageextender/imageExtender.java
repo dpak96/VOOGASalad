@@ -9,10 +9,13 @@ import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import resourcemanager.ResourceManager;
 
-public class imageExtender {
-	public Image extendImage(int times, Image im){
-		java.awt.image.BufferedImage awtIm = SwingFXUtils.fromFXImage(im, null);
+public class ImageExtender {
+	public Image extendImage(String im, double width){
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", im);
+		int times = (int) (width/img.getWidth());
+		java.awt.image.BufferedImage awtIm = SwingFXUtils.fromFXImage(img, null);
 		int w = awtIm.getWidth();
 		int h = awtIm.getHeight();
 		
