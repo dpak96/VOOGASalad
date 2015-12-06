@@ -52,7 +52,9 @@ public class Event {
 			if(!c.isMet()) return;
 		}
 		for(Executable e : myExecutables){
-			e.execute();
+			if(e.checkActive()){
+				e.execute();
+			}
 		}
 	}
 

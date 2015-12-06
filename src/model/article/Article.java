@@ -15,7 +15,9 @@ import resourcemanager.ResourceManager;
  *
  */
 public class Article{
-	
+
+	public enum Status {ACTIVE, INACTIVE, HARDINACTIVE};
+
 	private String myImageFile;
 	private double myXBuffer;
 	private double myYBuffer;
@@ -26,8 +28,8 @@ public class Article{
 	private Position myPosition;
 	private Map<Article, CollisionInformation> myCollisions = new HashMap<Article, CollisionInformation>();
 	private String myCollisionType;
+	private Status myStatus;
 
-	
 	public Article(String image, double x, double y, boolean direction){
 		myImageFile = image;
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
@@ -36,22 +38,23 @@ public class Article{
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
+		myStatus = Status.ACTIVE;
 	}
 
 
-	
+
 	public Article(String file, double x, double y) {
 		myImageFile = file;
 		myPosition = new Position(x, y);
 		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
-		
+
 	}
-	
+
 	public void update(){
 		myPosition.update();
 	}
-	
-	
+
+
 	public double getX(){
 		return myPosition.getX();
 	}
@@ -64,7 +67,7 @@ public class Article{
 	public void setY(double value){
 		myPosition.setY(value);
 	}
-	
+
 	public String getImageFile(){
 		return myImageFile;
 	}
@@ -84,7 +87,7 @@ public class Article{
 	public void setYBuffer(double value){
 		myYBuffer = value;
 	}
-	
+
 	public double getXVelocity(){
 		return myPosition.getXVelocity();
 	}
@@ -97,22 +100,22 @@ public class Article{
 	public void setYVelocity(double value){
 		myPosition.setYVelocity(value);
 	}
-	
+
 	public double getOrientation(){
 		return myPosition.getOrientation();
 	}
 	public void setOrientation(double value){
 		myPosition.setOrientation(value);
 	}
-	
+
 	public boolean getDirection(){
 		return myPosition.isDirection();
 	}
-	
+
 	public double getWidth(){
 		return myWidth;
 	}
-	
+
 	public double getHeight(){
 		return myHeight;
 	}
@@ -120,69 +123,83 @@ public class Article{
 	public void removeHealth(double myDamage) {
 		myLife.removeHealth(myDamage);
 	}
-	
+
 	public void removeLife(){
 		myLife.removeLife();
 	}
-	
+
 	public void gainHealth(double myHealthGain){
 		myLife.addHealth(myHealthGain);
 	}
-	
+
 	public void gainLife(){
 		myLife.addLife();
 	}
 	public BitMap getBitMap() {
 		return myBitMap;
 	}
-	
+
 	public void destroyBitMap() {
 		myBitMap = null;
 	}
 	public void clearCollisions(){
 		myCollisions.clear();
 	}
-	
+
 	public void addCollision(Article article, CollisionInformation collision){
 		myCollisions.put(article, collision);
 	}
-	
+
 	public Set<Article> getCollisionArticles(){
 		return myCollisions.keySet();
 	}
-	
+
 	public CollisionInformation getCollisionInformation(Article article){
 		return myCollisions.get(article);
 	}
-	
+
 	public int getLife(){
 		return myLife.getLife();
 	}
-	
+
 	public double getHealth(){
 		return myLife.getHealth();
 	}
-	
+
 	public String getCollisionType(){
 		return myCollisionType;
 	}
-	
+
 	public void setCollisionType(String collisionType){
 		myCollisionType = collisionType;
 	}
 
+	public Status getStatus(){
+		return myStatus;
+	}
+	
+	public void setActive(){
+		myStatus = Status.ACTIVE;
+	}
+	
+	public void setHardInactive(){
+		myStatus = Status.HARDINACTIVE;
+	}
+	
+	public void setInactive(){
+		myStatus = Status.INACTIVE;
+	}
+
+	public void setDirection(boolean direction) {
+		// TODO Auto-generated method stub
+
+	}
 
 
-  public void setDirection(boolean direction) {
-    // TODO Auto-generated method stub
-    
-  }
 
+	public void setName(String name) {
+		// TODO Auto-generated method stub
 
+	}
 
-  public void setName(String name) {
-    // TODO Auto-generated method stub
-    
-  }
-  
 }
