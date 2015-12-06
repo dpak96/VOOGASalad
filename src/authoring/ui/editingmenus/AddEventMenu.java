@@ -20,6 +20,7 @@ public class AddEventMenu extends AuthoringMenu {
     private CheckBox realTimeEvent = new CheckBox();
     private TableView myEventTable;
     private List<Event> myEventList;
+    RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
 
     public AddEventMenu (String title, AuthoringController controller, TableView eventTable,  List<Event> tableList) {
         super(title, controller);
@@ -41,7 +42,8 @@ public class AddEventMenu extends AuthoringMenu {
             super.displayErrorMessage();
         }
         
-        this.refreshTable(myEventTable, myEventList);
+        
+        tableConfig.refreshTable(myEventTable, myEventList);
     }
 
     @Override
@@ -60,10 +62,5 @@ public class AddEventMenu extends AuthoringMenu {
 
     }
     
-    private void refreshTable(TableView table,List<Event> tableList){
-        table.setItems(null);
-        table.layout();
-        table.setItems(FXCollections.observableArrayList(tableList));
-        
-    }
+  
 }

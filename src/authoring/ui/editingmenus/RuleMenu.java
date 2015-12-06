@@ -52,14 +52,14 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(conditionTable, 2, 2);
         Button addCondition=new Button("Add new condition");
         menuPane.add(addCondition, 2, 3);
-        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition",selectedEvent));
+        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition",selectedEvent,conditionTable,selectedEvent.getConditions()));
         
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
         menuPane.add(executableTable, 3, 2);
         Button addExecutable=new Button("Add new executable");
         menuPane.add(addExecutable, 3, 3);
-        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable",selectedEvent));
+        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable",selectedEvent,executableTable,selectedEvent.getExecutables()));
         
         RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
         tableConfig.configureTables(eventTable, conditionTable, executableTable);
@@ -100,11 +100,14 @@ public class RuleMenu extends AuthoringMenu {
 
    
     public void updateConditionsAndExecutables (Event selectedEvent) {
-        
+        conditionTable.setItems(null);
+        conditionTable.layout();
         ObservableList<Condition> conditionData =
                 FXCollections.observableArrayList(selectedEvent.getConditions());
         conditionTable.setItems(conditionData);
 
+        executableTable.setItems(null);
+        executableTable.layout();
         ObservableList<Executable> executableData =
                 FXCollections.observableArrayList(selectedEvent.getExecutables());
         executableTable.setItems(executableData);

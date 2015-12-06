@@ -2,11 +2,13 @@ package authoring.ui.editingmenus;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.Event;
@@ -18,16 +20,20 @@ public class AddProcessMenu extends AuthoringMenu {
     private ComboBox<String> processBox = new ComboBox<String>();
     private Map<String, Control> parameters = new HashMap<String, Control>();
     private String myProcessType;
-    Map<String, Class<?>> ruleParams;
+    private Map<String, Class<?>> ruleParams;
     private Event myEventToAddTo;
-
+    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+    private TableView myProcessTable;
+    private List<?> myProcessList;
     public AddProcessMenu (String title,
                            AuthoringController controller,
                            String myProcessName,
-                           Event eventToAddTo) {
+                           Event eventToAddTo,TableView processTable,List<?> processList) {
         super(title, controller);
         myProcessType = myProcessName;
         myEventToAddTo = eventToAddTo;
+        myProcessTable=processTable;
+        myProcessList=processList;
         super.showMenu(300, 300);
     }
 
@@ -46,6 +52,7 @@ public class AddProcessMenu extends AuthoringMenu {
         catch (NullPointerException | IllegalArgumentException e) {
             super.displayErrorMessage();
         }
+        tableConfig.refreshTable(myProcessTable, myProcessList);
     }
 
     @Override
