@@ -102,5 +102,9 @@ public class SuperController {
   public void setModel(Model model) {
     this.model = model;
   }
+  
+  public void reorderLevels(){
+	  getUICore().getMenu().reorderGame();
+  }
 
 }
