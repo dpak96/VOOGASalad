@@ -1,9 +1,9 @@
 package model;
 import java.util.*;
 
-
 import gameengine.CollisionTypeEditor;
 import main.VoogaProperties;
+import generationutility.*;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
@@ -23,6 +23,8 @@ public class Model extends Observable{
 	private String myBackgroundImage;
 	private VoogaProperties vp;
 	
+	private AbstractGenerationUtility randomGenerator;
+	
 	public Model(){
 		allEvents = new ArrayList<Event>();
 		myActiveEvents = new ArrayList<Event>();
@@ -34,7 +36,15 @@ public class Model extends Observable{
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
 		vp = new VoogaProperties();
-		
+		randomGenerator = new NullGenerationUtility();
+	}
+	
+	public void update(){
+		randomGenerator.update();
+	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		randomGenerator = new RandomGenerationUtility(probabilities, myArticles, myViewpoint);
 	}
 
 	public List<Event> getAllEvents(){

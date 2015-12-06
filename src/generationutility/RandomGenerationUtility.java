@@ -1,48 +1,29 @@
-package model.randomgeneration;
+package generationutility;
 
 import java.util.*;
 
 import model.article.Article;
 
-public class RandomGenerationUtility {
+public class RandomGenerationUtility extends ConcreteGenerationUtility{
 
-	private Article myViewpoint;
-	private double myPrevX;
-	private double myPrevY;
-
-	private Article myCharacter;
-
-	private List<Article> myArticles;
 
 	private Map<Article, Double> myGenerationProbabilities;
 
-	public RandomGenerationUtility(HashMap<Article, Double> probabilities, List<Article> allArticles, Article viewpoint,
-			Article character) {
+	public RandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint) {
+		super(allArticles, viewpoint);
 		myGenerationProbabilities = probabilities;
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);
 			double adjustedProb = 1 - Math.pow(1 - prob, 0.01);
 			myGenerationProbabilities.put(a, adjustedProb);
 		}
-		myViewpoint = viewpoint;
-		myArticles = allArticles;
-		myCharacter = character;
-		myPrevX = myViewpoint.getX();
-		myPrevY = myViewpoint.getY();
 	}
 
-	public void update() {
-		double myXChange = myViewpoint.getX() - myPrevX;
-		double myYChange = myViewpoint.getY() - myPrevY;
+	public void typeUpdate() {
 		if (myXChange != 0)
 			xGenerate(myXChange);
 		else if (myYChange != 0)
 			yGenerate(myYChange);
-
-		deleteOutOfFrame();
-
-		myPrevX = myViewpoint.getX();
-		myPrevY = myViewpoint.getY();
 	}
 
 	private void xGenerate(double myXChange) {
@@ -79,16 +60,5 @@ public class RandomGenerationUtility {
 		}
 	}
 
-	private void deleteOutOfFrame() {
-		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
-			Article a = iterator.next();
-			if(a.getX()+a.getWidth() < myViewpoint.getX() ||
-					a.getX() > myViewpoint.getX() + myViewpoint.getWidth() ||
-					a.getY() + a.getHeight() < myViewpoint.getY() ||
-					a.getY() > myViewpoint.getY() + myViewpoint.getHeight()){
-				iterator.remove();
-			}
-		}
-	}
 
 }

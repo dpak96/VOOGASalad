@@ -28,6 +28,7 @@ public class PresetArticleFactory {
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
+		tempMap.put("myLevelManager", null);
 		//tempMap.put("myDisplacement", (double) 20);
 		Executable ex = authoringController.makeExecutable("ExecutableNextLevel", tempMap);
 
