@@ -54,10 +54,10 @@ public class AuthoringController {
 				nXRight = high.getX() + (high.getWidth() / 2);
 			}
 			try {
-				createAndPlaceArticle(nXRight, high.getY() + (high.getHeight() / 2), high.getImageFile(),
-						high.getImageFile());
-				nXRight += high.getWidth();
-			} catch (Exception e) {
+				high.setWidth(high.getWidth()*2);
+			}
+			catch (Exception e){
+
 			}
 		}
 		if (event.getCode() == KeyCode.V && event.isControlDown()) {
@@ -66,9 +66,10 @@ public class AuthoringController {
 				nXLeft = high.getX() - (high.getWidth() / 2)+modelController.getViewpoint().getX();
 			}
 			try {
-				createAndPlaceArticle(nXLeft, high.getY() + (high.getHeight() / 2), high.getImageFile(),
-						high.getImageFile());
 				nXLeft -= high.getWidth();
+				high.setWidth(high.getWidth()*2);
+				high.setX(nXLeft);
+
 			} catch (Exception e) {
 			}
 		}
@@ -107,6 +108,7 @@ public class AuthoringController {
 					true);
 			Pane p = (Pane) event.getParent();
 			p.getChildren().remove(event);
+			highlighted = false;
 		}
 		if (event.getImageName().equals("Goomba")) {
 			this.goombaMovementDemo(article);
@@ -202,8 +204,8 @@ public class AuthoringController {
 			}
 		} else {
 			try {
-				double tX = n.getX() - modelController.getViewpoint().getX();
-				double tY = n.getY()- modelController.getViewpoint().getY();
+				double tX = n.getX() - modelController.getViewpoint().getX()-24;
+				double tY = n.getY()- modelController.getViewpoint().getY()-17;
 
 				// authoringController.removeArticle(n);
 				HighlightedArticle highlightedArticle = new HighlightedArticle(n.getImageFile(), this);
@@ -234,6 +236,7 @@ public class AuthoringController {
 			Button b = (Button) e.getSource();
 			Pane p = (Pane) b.getParent();
 			p.getChildren().remove(b);
+			highlighted = false;
 		}
 	}
 
@@ -242,14 +245,15 @@ public class AuthoringController {
 		/* data dropped */
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+0.1;
-			double tempY = highlightedArticle.getLayoutY()+0.1;
+			double tempX = highlightedArticle.getLayoutX()+24.1;
+			double tempY = highlightedArticle.getLayoutY()+17.1;
 			Article n = getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
 			n.setX((double)event.getX() + modelController.getViewpoint().getX());
 			n.setY((double)event.getY() + modelController.getViewpoint().getY());
 			Pane p = (Pane)highlightedArticle.getParent();
 			p.getChildren().remove(highlightedArticle);
+			highlighted = false;
 		}
 		else {
 			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
