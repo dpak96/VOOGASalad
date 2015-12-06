@@ -1,12 +1,11 @@
 package model;
 import java.util.*;
 
-
 import gameengine.CollisionTypeEditor;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
-import model.randomgeneration.RandomGenerationUtility;
+import model.randomgeneration.*;
 
 public class Model extends Observable{
 	
@@ -21,7 +20,7 @@ public class Model extends Observable{
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
 	
-	private RandomGenerationUtility randomGenerator;
+	private AbstractGenerationUtility randomGenerator;
 	
 	public Model(){
 		allEvents = new ArrayList<Event>();
@@ -33,11 +32,15 @@ public class Model extends Observable{
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
-		
+		randomGenerator = new NullGenerationUtility();
 	}
 	
 	public void update(){
 		randomGenerator.update();
+	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		randomGenerator = new RandomGenerationUtility(probabilities, myArticles, myViewpoint);
 	}
 
 	public List<Event> getAllEvents(){

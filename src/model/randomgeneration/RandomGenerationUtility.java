@@ -14,8 +14,7 @@ public class RandomGenerationUtility extends AbstractGenerationUtility{
 
 	private Map<Article, Double> myGenerationProbabilities;
 
-	public RandomGenerationUtility(HashMap<Article, Double> probabilities, List<Article> allArticles, Article viewpoint,
-			Article character) {
+	public RandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint) {
 		myGenerationProbabilities = probabilities;
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);

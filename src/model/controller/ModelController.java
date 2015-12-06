@@ -234,5 +234,9 @@ public class ModelController implements IModelController {
 	public List<Event> getAllEvents() {
 		return myModel.getAllEvents();
 	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		myModel.setRandomGenerator(probabilities);
+	}
 
 }
