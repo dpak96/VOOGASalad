@@ -143,12 +143,20 @@ public class Article{
 		myLife.removeLife();
 	}
 	
+	public void setLife(int value) {
+		myLife.setLife(value);
+	}
+	
 	public void gainHealth(double myHealthGain){
 		myLife.addHealth(myHealthGain);
 	}
 	
-	public void addScore(double score) {
+	public void setScore(double score) {
 		myScore.setScore(myScore.getScore()+score);
+	}
+	
+	public double getScore() {
+		return myScore.getScore();
 	}
 	
 	

@@ -53,6 +53,8 @@ public class LevelManager {
 		if (currentLevel != 0) {
 			setLevel(currentLevel+1);
 			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel)+".xml"));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			myModelCtr.setModel(model);
 		}
 	}
