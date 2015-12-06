@@ -220,12 +220,12 @@ public class AuthoringController {
 	public void dropElement(DragEvent event){
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+18.6;
+			double tempX = highlightedArticle.getLayoutX()+19.1;
 			double tempY = highlightedArticle.getLayoutY()+15.1;
 			Article n = getArticleFromCoordinates(tempX,tempY);
 			//System.out.println(n == null);
-			n.setX((double)event.getX() + modelController.getViewpoint().getX()-15);
-			n.setY((double)event.getY() + modelController.getViewpoint().getY()-15);
+			n.setX((double)event.getX() + modelController.getViewpoint().getX()-27.5);
+			n.setY((double)event.getY() + modelController.getViewpoint().getY()-27.5);
 			Pane p = (Pane)highlightedArticle.getParent();
 			p.getChildren().remove(highlightedArticle);
 			highlighted = false;
