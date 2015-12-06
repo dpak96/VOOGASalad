@@ -70,6 +70,8 @@ public class PresetArticleFactory {
 	}
 
 	public void playerMovement(Article article) {
+		
+		//Key Press move left
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) -1);
@@ -82,6 +84,8 @@ public class PresetArticleFactory {
 		listEvent.add(ev);
 		authoringController.mapKey("A", listEvent);
 
+		
+		//Key Press move right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) 1);
@@ -94,6 +98,8 @@ public class PresetArticleFactory {
 		listEvent.add(ev);
 		authoringController.mapKey("D", listEvent);
 
+		
+		//key press move up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) -1);
@@ -106,6 +112,7 @@ public class PresetArticleFactory {
 		listEvent.add(ev);
 		authoringController.mapKey("W", listEvent);
 
+		//key press move down 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) 1);
@@ -118,6 +125,176 @@ public class PresetArticleFactory {
 		listEvent.add(ev);
 		authoringController.mapKey("S", listEvent);
 
-		article.setCollisionType("A");
+		//decel left
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myAcceleration", (double) -.05);
+		ex = authoringController.makeExecutable("ExecutableAccelerateHorizontal", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", 0.1);
+		Condition con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//stop left
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myXVelocity", (double) 0);
+		ex = authoringController.makeExecutable("ExecutableSetHorizontalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", 0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", 0);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//decel right
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myAcceleration", (double) .05);
+		ex = authoringController.makeExecutable("ExecutableAccelerateHorizontal", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", -0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//stop right
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myXVelocity", (double) 0);
+		ex = authoringController.makeExecutable("ExecutableSetHorizontalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", -0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "XVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", 0);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//decel down
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myAcceleration", (double) .05);
+		ex = authoringController.makeExecutable("ExecutableAccelerateVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", -0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//stop down
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myYVelocity", (double) 0);
+		ex = authoringController.makeExecutable("ExecutableSetVerticalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", -0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", 0);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//decel up
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myAcceleration", (double) -.05);
+		ex = authoringController.makeExecutable("ExecutableAccelerateVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", 0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		//stop up
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myYVelocity", (double) 0);
+		ex = authoringController.makeExecutable("ExecutableSetVerticalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "LessThan");
+		tempMap.put("myCompareValue", 0.1);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myFirstVariable", "YVelocity");
+		tempMap.put("myComparison", "GreaterThan");
+		tempMap.put("myCompareValue", 0);
+		con = authoringController.makeCondition("ConditionComparisonOneArticle", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("event99", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
 	}
 }
