@@ -32,6 +32,11 @@ public class ModelController implements IModelController {
 		myXMLUtility = new xmlUtility(myModel);
 	}
 
+	public void update(){
+		myModel.update();
+		notifyObservers();
+	}
+	
 	public Map<String, Class<?>> getParameters(String className) {
 		return myModelFactory.getParameters(className);
 	}
