@@ -56,13 +56,14 @@ public class RuleMenu extends AuthoringMenu {
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
         menuPane.add(executableTable, 3, 2);
-        Button addExecutable=new Button("Add new condition");
+        Button addExecutable=new Button("Add new executable");
         menuPane.add(addExecutable, 3, 3);
         addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable"));
         
-
-        this.addColumns(eventTable, conditionTable, executableTable);
-
+        RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+        tableConfig.configureTables(eventTable, conditionTable, executableTable);
+        
+        
         GridPane paramGrid = new GridPane();
         menuPane.add(paramGrid, 1, 4, 3, 1);
 
@@ -106,30 +107,7 @@ public class RuleMenu extends AuthoringMenu {
 
     }
 
-    public void addColumns (TableView eventTable,
-                            TableView conditionTable,
-                            TableView executableTable) {
-
-        TableColumn condNameCol = new TableColumn("Condition Name");
-        condNameCol.setMinWidth(100);
-        condNameCol.setCellValueFactory(
-                                        new PropertyValueFactory<Condition, String>("myName"));
-
-        conditionTable.getColumns().add(condNameCol);
-
-        TableColumn eventNameCol = new TableColumn("Event Name");
-        eventNameCol.setMinWidth(100);
-        eventNameCol.setCellValueFactory(
-                                         new PropertyValueFactory<Event, String>("myName"));
-        eventTable.getColumns().add(eventNameCol);
-
-        TableColumn execNameCol = new TableColumn("Executable Name");
-        execNameCol.setMinWidth(100);
-        execNameCol.setCellValueFactory(
-                                        new PropertyValueFactory<Executable, String>("myName"));
-        executableTable.getColumns().add(execNameCol);
-    }
-
+   
     public void updateConditionsAndExecutables (Event selectedEvent) {
 
         ObservableList<Condition> conditionData =
