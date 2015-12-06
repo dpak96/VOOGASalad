@@ -206,6 +206,17 @@ public class AuthoringController {
 	}
 
 
+	public void dragOn(DragEvent event){
+		if (event.getGestureSource() != this &&
+				event.getDragboard().hasImage()) {
+			/* allow for moving */
+			event.acceptTransferModes(TransferMode.MOVE);
+		}
+
+		event.consume();
+	}
+
+
 	public void dropElement(DragEvent event){
 		if(event.getGestureSource() instanceof HighlightedArticle){
 			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
