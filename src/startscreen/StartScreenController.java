@@ -4,12 +4,10 @@ import java.util.Optional;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import level.manager.LevelManager;
 import level.manager.LevelOrderDialog;
 import main.GraphicHandler;
-import model.controller.ModelController;
 
 /**
  * Created by Rob on 11/14/15.
@@ -19,16 +17,9 @@ public class StartScreenController {
     private StartScreen start;
     private Stage myStage;
     private GraphicHandler myGraphicHandler;
-    private LevelManager myLevelManager;
 
     
     public StartScreenController(){
-        game = new GameCreation();
-        start = new StartScreen();
-    }
-    
-    public StartScreenController(LevelManager levelManager){
-    	myLevelManager = levelManager;
         game = new GameCreation();
         start = new StartScreen();
     }
@@ -56,7 +47,6 @@ public class StartScreenController {
             game.setGame(value);
             start.removeLayer();
             start.addLevelChooser(game.getMode().toString(),game.getLevelMap());
-            myGraphicHandler.updateLevels(game);
         }
         catch(Exception e){
             throw e;
