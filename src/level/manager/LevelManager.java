@@ -75,12 +75,13 @@ public class LevelManager {
 			System.out.println("asdfasdf");
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
 			System.out.println(model);
+			System.out.println("test");
 			System.out.println(myFolderPath);
 			System.out.println(myCurrentLevelName);
 			System.out.println(myCurrentLevel);
 			// model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
 			// model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
-			System.out.println(model.getArticles().size());
+			System.out.println(model.getArticles());
 
 			myModelCtr.loadFromFile(model);
 
