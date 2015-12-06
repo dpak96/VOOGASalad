@@ -33,13 +33,17 @@ public class AddProcessMenu extends AuthoringMenu {
 
     @Override
     public void executeYourMenuFunction () {
-        try{
-        if(myProcessType.equals("Condition"))
-        this.myEventToAddTo.addCondition(this.myController.createCondition("Condition"+processBox.getValue(),  this.parseUserInput()));
-        else
-            this.myEventToAddTo.addExecutable(this.myController.createExecutable("Executable"+processBox.getValue(), this.parseUserInput()));
+        try {
+            if (myProcessType.equals("Condition"))
+                this.myEventToAddTo.addCondition(this.myController
+                        .createCondition("Condition" + processBox.getValue(),
+                                         this.parseUserInput()));
+            else
+                this.myEventToAddTo.addExecutable(this.myController
+                        .createExecutable("Executable" + processBox.getValue(),
+                                          this.parseUserInput()));
         }
-        catch(NullPointerException |IllegalArgumentException e){
+        catch (NullPointerException | IllegalArgumentException e) {
             super.displayErrorMessage();
         }
     }
@@ -76,21 +80,26 @@ public class AddProcessMenu extends AuthoringMenu {
 
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {
+            ResourceBundle editableParameters =
+                    (ResourceBundle) ResourceManager.getResourceManager()
+                            .getResource("PropertiesManager", "parameters");
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
-            if (ruleParams.get(key) == String.class || ruleParams.get(key) == double.class)
-                parameters.put(key, super.componentAdder.makeField(paramGrid, 2, rowIndex++));
-            else {
-                ComboBox articleBox = super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
-                for (Article activeArticle : super.myController.getArticles())
-                {
-                    articleBox.getItems().add(activeArticle);
-
-                }       
-                
-                super.renderer.renderArticleComboBox(articleBox);
-                parameters.put(key, articleBox);
-
+            if (editableParameters.containsKey(key)) {
+                if (ruleParams.get(key) == String.class || ruleParams.get(key) == double.class)
+                    parameters.put(key, super.componentAdder.makeField(paramGrid, 2, rowIndex++));
+                else {
+                    ComboBox articleBox =
+                            super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
+                    for (Article activeArticle : super.myController.getArticles()) {
+                        articleBox.getItems().add(activeArticle);
+                    }
+                    super.renderer.renderArticleComboBox(articleBox);
+                    parameters.put(key, articleBox);
+                }
             }
+            else
+                rowIndex++;
+            
 
         }
 
@@ -98,27 +107,30 @@ public class AddProcessMenu extends AuthoringMenu {
 
     private Map<String, Object> parseUserInput () {
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        for (String key : parameters.keySet()) {
+        for (String key : ruleParams.keySet()) {
             if (parameters.get(key) instanceof TextField) {
-                try{
-                TextField field = (TextField) parameters.get(key);
-                if (ruleParams.get(key) == double.class) {
-                    dataMap.put(key, Double.parseDouble(field.getText()));
+                try {
+                    TextField field = (TextField) parameters.get(key);
+                    if (ruleParams.get(key) == double.class) {
+                        dataMap.put(key, Double.parseDouble(field.getText()));
+                    }
+                    else
+                        dataMap.put(key, field.getText());
                 }
-                else
-                    dataMap.put(key, field.getText());
-                }
-                catch(NumberFormatException e)
-                {
+                catch (NumberFormatException e) {
                     super.displayErrorMessage();
                 }
             }
-            if(parameters.get(key) instanceof ComboBox){
-               ComboBox articleBox=(ComboBox) parameters.get(key);
-               Article selectedArticle= (Article) articleBox.getValue();
-               dataMap.put(key, selectedArticle);
+            else if (parameters.get(key) instanceof ComboBox) {
+                ComboBox articleBox = (ComboBox) parameters.get(key);
+                Article selectedArticle = (Article) articleBox.getValue();
+                dataMap.put(key, selectedArticle);
             }
-            
+            else{
+                dataMap.put(key, null);
+                System.out.println(key);
+            }
+
         }
 
         return dataMap;
