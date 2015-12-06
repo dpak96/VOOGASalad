@@ -154,6 +154,7 @@ public class ModelController implements IModelController {
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
     myModel.setCharacter(toLoad.getCharacter());
+    toLoad.destroyModel();
   }
 
   public void save(Window wind, String path) {
