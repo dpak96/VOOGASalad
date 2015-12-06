@@ -24,6 +24,9 @@ public class ResourceManager extends Manager {
                    new PropertiesManager(paths.getString("PropertiesManager")));
     managerMap.put("ImageManager", new ImageManager(paths.getString("ImageManager")));
     managerMap.put("SoundManager", new SoundManager(paths.getString("SoundManager")));
+    managerMap.put("BackgroundImageManager", new ImageManager(paths.getString("BackgroundImageManager")));
+    managerMap.put("ArticleImageManager", new ImageManager(paths.getString("ArticleImageManager")));
+
   }
 
   public static ResourceManager getResourceManager() {

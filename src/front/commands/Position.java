@@ -13,8 +13,8 @@ public class Position extends AbstractCommand {
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", article.getImageFile());
 		int iSizeX = (int) (article.getWidth()/img.getWidth());
 		for (int i = 0; i < iSizeX; i++) {
-			front.setX(article.getX()-modelController.getViewpoint().getX()+(i*img.getWidth()));
-			front.setY(article.getY()-modelController.getViewpoint().getY());
+			front.setX(article.getX()/*-modelController.getViewpoint().getX()+(i*img.getWidth())*/);
+			front.setY(article.getY()/*-modelController.getViewpoint().getY()*/);
 		}
 	}
 

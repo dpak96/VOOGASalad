@@ -32,6 +32,8 @@ public class xmlUtility {
 		myModel = model;
 	}
 	
+	
+	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
 		System.out.println("File Chooser 1");
