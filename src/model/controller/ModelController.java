@@ -41,7 +41,9 @@ public class ModelController implements IModelController {
   }
  
   public Article createArticle(String fileName, double x, double y, boolean direction) {
-    Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+	double viewX = myModel.getViewpoint().getX();
+	double viewY = myModel.getViewpoint().getY();
+    Article newArticle = myModelFactory.createArticle(fileName, x+viewX, y+viewY, direction);
     addArticle(newArticle);
     return newArticle;
   }
@@ -223,4 +225,5 @@ public class ModelController implements IModelController {
 	  return myModel.getAllEvents();
   }
   
+
 }

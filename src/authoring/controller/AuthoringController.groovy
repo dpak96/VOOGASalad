@@ -262,4 +262,7 @@ public class AuthoringController {
 		event.setDropCompleted(success);
 		event.consume();
 	}
+    public List<Article> getArticles(){
+        return modelController.getArticles()
+    }
 }
