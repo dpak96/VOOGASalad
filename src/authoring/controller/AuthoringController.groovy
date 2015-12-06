@@ -110,12 +110,12 @@ public class AuthoringController {
 			Pane p = (Pane) event.getParent();
 			p.getChildren().remove(event);
 		}
-		if (event.getImageName().equals("Goomba")) {
-			presetArticleFactory.goombaMovementDemo(article);
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
+
+		if (event.getImageName() in rb.keySet()){
+			System.out0.println("BLEH");
 		}
-		if(event.getImageName().equals("Platform")){
-			presetArticleFactory.platformMovementDemo(article);
-		}
+
 	}
 
 	public void createAndPlaceArticle(double x, double y, String im, String name) {
@@ -227,4 +227,8 @@ public class AuthoringController {
 		event.setDropCompleted(success);
 		event.consume();
 	}
+	
+	public presetArticle(String function,x, Article article) {
+		presetArticleFactory."$function"(article);
+	  }
 }

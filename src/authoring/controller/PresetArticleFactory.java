@@ -19,7 +19,7 @@ public class PresetArticleFactory {
 		modelController = mc;
 	}
 
-	public void platformMovementDemo(Article article) {
+	public void platformMovement(Article article) {
 		modelController.addNewCollisionType("A");
 		modelController.addNewCollisionType("B");
 		article.setCollisionType("B");
@@ -36,7 +36,7 @@ public class PresetArticleFactory {
 		modelController.addCollision("Left", "A", "B", ev);
 	}
 	
-	public void goombaMovementDemo(Article article) {
+	public void goombaMovement(Article article) {
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
