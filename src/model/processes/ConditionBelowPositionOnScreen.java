@@ -5,10 +5,9 @@ import java.util.Map;
 import model.article.Article;
 
 public class ConditionBelowPositionOnScreen extends Condition{
-	
-	private Article myViewpoint;
-	private Article myCheckArticle;
-	private double myFraction;
+
+	protected Article myViewpoint;
+	protected double myFraction;
 	
 	public ConditionBelowPositionOnScreen(Map<String, Object> parameters){
 		super(parameters);
@@ -16,7 +15,7 @@ public class ConditionBelowPositionOnScreen extends Condition{
 
 	@Override
 	public boolean isMet() {
-		double yMid = myCheckArticle.getY() + myCheckArticle.getHeight()/2;
+		double yMid = myFirst.getY() + myFirst.getHeight()/2;
 	
 		return yMid > myViewpoint.getY() + myViewpoint.getHeight()*myFraction;
 		

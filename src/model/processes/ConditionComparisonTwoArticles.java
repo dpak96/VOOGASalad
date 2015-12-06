@@ -6,11 +6,9 @@ import model.Maths;
 import model.article.Article;
 public class ConditionComparisonTwoArticles extends Condition{
 	
-	private Article myFirst;
-	private String myFirstVariable;
-	private Article mySecond;
-	private String mySecondVariable;
-	private String myComparison;
+	protected String myFirstVariable;
+	protected String mySecondVariable;
+	protected String myComparison;
 	
 	
 	

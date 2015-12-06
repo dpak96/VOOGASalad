@@ -117,6 +117,9 @@ public class AuthoringController implements IAuthoringController {
     if (event.getImageName().equals("Goomba")) {
       this.goombaMovementDemo(article);
     }
+    if(event.getImageName().equals("Platform")){
+    	this.platformMovementDemo(article);
+    }
 
   }
 
@@ -159,10 +162,11 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void goombaMovementDemo(Article article) {
+	
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
-    tempMap.put("myDisplacement", .5);
-    Executable ex = this.makeExecutable("ExecutableMoveHorizontal", tempMap);
+    tempMap.put("myAcceleration", .2);
+    Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(ex);
@@ -173,8 +177,29 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
-    
-    
+
+	article.setYVelocity(0);
+	article.setCollisionType("A");
+	
+	
+  }
+  
+  public void platformMovementDemo(Article article){
+		modelController.addNewCollisionType("A");
+		modelController.addNewCollisionType("B");
+	  article.setCollisionType("B");
+		
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+	    Executable ex = this.makeExecutable("ExecutableBounceVertical", tempMap);
+
+	    List<Executable> listExecutable = new ArrayList<Executable>();
+	    listExecutable.add(ex);
+	    List<Condition> listCondition = new ArrayList<Condition>();
+	    Event ev = this.makeEvent("event", listCondition, listExecutable);
+
+	    modelController.addCollision("Left", "A", "B", ev);
+	  
   }
 
 

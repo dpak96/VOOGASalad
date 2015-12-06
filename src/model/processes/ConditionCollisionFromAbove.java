@@ -5,7 +5,7 @@ import java.util.Map;
 import gameengine.CollisionInformation;
 
 public class ConditionCollisionFromAbove extends Condition{
-	private CollisionInformation myCollisionInformation;
+	protected CollisionInformation myCollisionInformation;
 	private final String ABOVE = "above";
 	
 	public ConditionCollisionFromAbove(Map<String, Object> parameters){
