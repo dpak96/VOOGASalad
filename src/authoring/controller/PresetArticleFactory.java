@@ -17,6 +17,7 @@ public class PresetArticleFactory {
 
 	public PresetArticleFactory(ModelController mc, AuthoringController ac) {
 		modelController = mc;
+		authoringController = ac;
 	}
 
 	public void platformMovement(Article article) {
@@ -32,12 +33,11 @@ public class PresetArticleFactory {
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
 		Event ev = authoringController.makeEvent("event", listCondition, listExecutable);
-
 		modelController.addCollision("Left", "A", "B", ev);
+
 	}
 	
 	public void goombaMovement(Article article) {
-
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) 0.2);
@@ -55,5 +55,6 @@ public class PresetArticleFactory {
 
 		article.setYVelocity(0);
 		article.setCollisionType("A");
+
 	}
 }

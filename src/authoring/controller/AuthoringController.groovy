@@ -23,6 +23,7 @@ import model.article.Article;
 import model.controller.ModelController;
 import model.processes.Condition;
 import model.processes.Executable;
+import resourcemanager.ResourceManager
 
 
 public class AuthoringController {
@@ -111,11 +112,10 @@ public class AuthoringController {
 			p.getChildren().remove(event);
 		}
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
-
 		if (event.getImageName() in rb.keySet()){
-			System.out0.println("BLEH");
+			String temp = rb.getString(event.getImageName());
+			this.presetArticle(temp, article);			
 		}
-
 	}
 
 	public void createAndPlaceArticle(double x, double y, String im, String name) {
@@ -227,12 +227,12 @@ public class AuthoringController {
 		event.setDropCompleted(success);
 		event.consume();
 	}
-	
-	public presetArticle(String function,x, Article article) {
-		presetArticleFactory."$function"(article);
-	  }
 
-    public List<Article> getArticles(){
-        return modelController.getArticles()
-    }
+	public presetArticle(String function, Article article) {
+		presetArticleFactory."$function"(article);
+	}
+
+	public List<Article> getArticles(){
+		return modelController.getArticles()
+	}
 }
