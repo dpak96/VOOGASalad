@@ -94,14 +94,14 @@ public class AuthoringController {
 		Article article = null;
 		if (!highlighted) {
 			article =
-					editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
 		} else {
 			highlighted = false;
 			article =
-					editor.getArticleEditor().createNewArticleAndPlace(event.getName(), event.getImageName(),
+					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
@@ -117,7 +117,7 @@ public class AuthoringController {
 	}
 
 	public void createAndPlaceArticle(double x, double y, String im, String name) {
-		editor.getArticleEditor().createNewArticleAndPlace(name, im,
+		editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(name, im,
 				x,
 				y,
 				true);
