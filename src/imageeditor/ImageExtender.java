@@ -1,4 +1,4 @@
-package imageextender;
+package imageeditor;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -12,30 +12,26 @@ import javafx.scene.image.Image;
 import resourcemanager.ResourceManager;
 
 public class ImageExtender {
-	public Image extendImage(String im, double width){
+
+	public Image extendImage(String im, double horizontalWidth, double verticalWidth){
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", im);
-		int times = (int) (width/img.getWidth());
+		int hTimes = (int) (horizontalWidth/img.getWidth());
+		int vTimes = (int) (verticalWidth/img.getHeight());
 		java.awt.image.BufferedImage awtIm = SwingFXUtils.fromFXImage(img, null);
 		int w = awtIm.getWidth();
 		int h = awtIm.getHeight();
 		
-		BufferedImage combined = new BufferedImage(times*w, h, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage combined = new BufferedImage(hTimes*w, vTimes*h, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = combined.getGraphics();
 		
-		for(int i = 0; i < times; i++){
-			g.drawImage(awtIm, i*w, 0, null);
+		for(int i = 0; i < hTimes; i++){
+			for(int j = 0; j < vTimes ; j++){
+				g.drawImage(awtIm, i*w, j*h, null);
+			}
 		}
 
 		javafx.scene.image.Image ans = SwingFXUtils.toFXImage(combined, null);		
 		return ans;
 	}
 	
-	public void saveImage(java.awt.image.BufferedImage im, String path){
-		try {
-			ImageIO.write(im, "PNG", new File(path, "combined.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

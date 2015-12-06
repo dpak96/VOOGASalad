@@ -1,11 +1,8 @@
 package authoring.controller
 
-import imageextender.ImageExtender
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
-import authoring.ui.draganddrop.HighlightedArticle;
-import authoring.ui.editingmenus.ArticlePropertyEditorMenu
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import model.Event;
@@ -21,14 +18,15 @@ public class AuthoringController {
 	private AuthoringUI ui;
 	private ModelController modelController;
 	private boolean highlighted = false;
-	private Article high;
+	private Article currentArticle;
 	private double nXRight, nXLeft;
 	private PresetArticleFactory presetArticleFactory;
 	private DragAndDropController dragAndDropController;
+	private ArticleExtenderController articleExtenderController;
 
-	public void setHighlighted(boolean highlighted) {
-		this.highlighted = highlighted;
-	}
+
+
+
 
 	public AuthoringController(ModelController mc) {
 		ui = new AuthoringUI(this);
@@ -36,39 +34,10 @@ public class AuthoringController {
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
 		dragAndDropController = new DragAndDropController();
+		articleExtenderController = new ArticleExtenderController();
+
 	}
 
-	public void init() {
-		ui.getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
-	}
-
-	public void addTile(KeyEvent event) {
-		if (event.getCode() == KeyCode.B && event.isControlDown()) {
-
-			if (nXRight == 0) {
-				nXRight = high.getX() + (high.getWidth() / 2);
-			}
-			try {
-				high.setWidth(high.getWidth()*2);
-			}
-			catch (Exception e){
-
-			}
-		}
-		if (event.getCode() == KeyCode.V && event.isControlDown()) {
-
-			if (nXLeft == 0) {
-				nXLeft = high.getX() - (high.getWidth() / 2)+modelController.getViewpoint().getX();
-			}
-			try {
-				nXLeft -= high.getWidth();
-				high.setWidth(high.getWidth()*2);
-				high.setX(nXLeft);
-
-			} catch (Exception e) {
-			}
-		}
-	}
 
 	public EditorManager getEditor() {
 		return editor;
@@ -148,9 +117,6 @@ public class AuthoringController {
 		modelController.remapButton(button, events);
 	}
 
-
-
-
 	public List<Event> getEventList() {
 		return this.modelController.getAllEvents();
 	}
@@ -161,6 +127,15 @@ public class AuthoringController {
 
 	public void dragEvent(String method,e){
 		dragAndDropController."$method"(e, this);
+	}
+
+
+	public void extendEvent(String method, e){
+		articleExtenderController."$method"(e,this);
+	}
+
+	public void extendEvent(String method){
+		articleExtenderController."$method"(this);
 	}
   
     
@@ -199,5 +174,23 @@ public class AuthoringController {
             
             return modelController.getAllCollisionTypes();
         }
-        
+
+	public Article getCurrentArticle() {
+		return currentArticle
+	}
+
+	public void setCurrentArticle(Article currentArticle) {
+		currentArticle = currentArticle
+	}
+
+	public void setHighlighted(boolean highlighted) {
+		this.highlighted = highlighted;
+	}
+
+	public boolean getHighlighted(){
+		return highlighted;
+	}
+
+
+
 }
