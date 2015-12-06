@@ -55,21 +55,23 @@ public class CollisionManager {
 		CollisionFinder finder = new CollisionFinder(a.getBitMap().getByteArray());
 		while (finder.hasNext()) {
 			Position p = finder.next();
-			if (!p.isValidPosition()) {
-				System.out.println("first invalid");
-				continue;
-			} else {
+			
+			if (p.getX() != -1 && p.getY() != -1) {
+				//System.out.println(p.getX() + " " + p.getY());
+				//System.out.println("first invalid");
+				
 				for (Position[] q: b.getBitMap().getByteArray()) {
 					for (Position r: q) {
-						if (!r.isValidPosition()) {
-							System.out.println("second invalid");
-							continue;
-						} else {
-							System.out.println("both valid");
-							if (Math.floor(p.getX()) == Math.floor( r.getX()) && Math.floor(p.getY()) == Math.floor(r.getY())) {
+						if (r.getX() != -1 && r.getY() != -1) {
+							//System.out.println("both valid");
+							
+							//System.out.println(" valid comparing: " + p.getX() + " with + " + r.getX() + " and " + p.getY() + " with " + r.getY() );
+							if (p.getX() == r.getX() && p.getY() == r.getY()) {
+//							if (Math.floor(p.getX()) == Math.floor( r.getX()) && Math.floor(p.getY()) == Math.floor(r.getY())) {
 								System.out.println("bitmap working");
 								return new CollisionInformation(getIncidenceDirection(a, r), true);
 							} else {
+								System.out.println("fail");
 								return new CollisionInformation("", false);
 							}
 						}

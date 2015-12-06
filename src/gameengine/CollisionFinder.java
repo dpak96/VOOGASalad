@@ -48,6 +48,7 @@ public class CollisionFinder implements Iterator<Position> {
 
         int maxIterations = array2D.length + array2D[0].length;
         fillSpiralArray(array2D, 0, 0, true, true, maxIterations);
+        System.out.println(" size is " + array2D.length);
     }
 
     @Override
@@ -58,6 +59,7 @@ public class CollisionFinder implements Iterator<Position> {
     @Override
     public Position next() throws NoSuchElementException {
         if (hasNext()) {
+        	//System.out.println(pos);
             return collection.get(pos++);
         } else {
             throw new NoSuchElementException();
