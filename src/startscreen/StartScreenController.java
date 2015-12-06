@@ -1,10 +1,13 @@
 package startscreen;
 
+import java.util.Optional;
+
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import level.manager.LevelManager;
+import level.manager.LevelOrderDialog;
 import main.GraphicHandler;
 import model.controller.ModelController;
 
@@ -114,6 +117,15 @@ public class StartScreenController {
     
     public GameCreation getGameCreation(){
     	return game;
+    }
+    
+    public void setLevelOrder(){
+    	LevelOrderDialog choose = new LevelOrderDialog(game);
+    	Optional<GameCreation> ret = choose.showAndWait();
+    	if(ret.isPresent()){
+    		game = ret.get();
+    	}
+    	myGraphicHandler.reorderLevels();
     }
 
 }
