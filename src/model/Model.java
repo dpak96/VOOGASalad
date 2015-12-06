@@ -1,8 +1,8 @@
 package model;
 import java.util.*;
 
-
 import gameengine.CollisionTypeEditor;
+import generationutility.*;
 import model.article.Article;
 import model.processes.Condition;
 import model.processes.Executable;
@@ -20,6 +20,8 @@ public class Model extends Observable{
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
 	
+	private AbstractGenerationUtility randomGenerator;
+	
 	public Model(){
 		allEvents = new ArrayList<Event>();
 		myActiveEvents = new ArrayList<Event>();
@@ -30,7 +32,15 @@ public class Model extends Observable{
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
-		
+		randomGenerator = new NullGenerationUtility();
+	}
+	
+	public void update(){
+		randomGenerator.update();
+	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		randomGenerator = new RandomGenerationUtility(probabilities, myArticles, myViewpoint);
 	}
 
 	public List<Event> getAllEvents(){
@@ -221,6 +231,10 @@ public class Model extends Observable{
 	
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
+	}
+	
+	public List<String> getAllCollisionTypes(){
+		return myCollisionTypeEditor.getCollisionTypeList();
 	}
 	
 	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){

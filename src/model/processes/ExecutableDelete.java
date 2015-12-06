@@ -6,7 +6,7 @@ import model.Model;
 
 public class ExecutableDelete extends Executable{
 	
-	private Model myModel;
+	protected Model myModel;
 
 	public ExecutableDelete(Map<String, Object> parameters) {
 		super(parameters);
