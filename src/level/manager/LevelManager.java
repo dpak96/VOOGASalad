@@ -7,97 +7,86 @@ import startscreen.GameCreation;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LevelManager {
-	private String myGame;
-	private List<String> levels;
-	private int currentLevel;
+	private String myFolderPath, myCurrentLevelName;
+	private List<String> myLevels;
+	private int myCurrentLevel;
 	private xmlUtility xmlUtil;
 	private ModelController myModelCtr;
     private Map<Integer,String> myLevelMap;
 	
-	public LevelManager(ModelController modelCtr) {
-		levels = new ArrayList<String>();
+	public LevelManager(GameCreation game) {
+		myLevelMap = game.getLevelMap();
 		xmlUtil = new xmlUtility();
-		myModelCtr = modelCtr;
-		myLevelMap = new HashMap<Integer,String>();
+		System.out.println("Folder path: " + game.getFolderPath());
+		System.out.println("Game name: " + game.getGameName());
+		System.out.println("Name: " + game.getName());
+		System.out.println("Current level " + game.getLevel());
+		myFolderPath = game.getFolderPath();
+		myCurrentLevelName = game.getLevel();
+		myLevels = new ArrayList<String>();
+		for (Map.Entry<Integer, String> entry : myLevelMap.entrySet()) {
+			myLevels.add(entry.getValue());
+			if (entry.getValue().equals(myCurrentLevelName))
+				myCurrentLevel = entry.getKey();
+		    System.out.println("Key: " + entry.getKey() + " / Value: " + entry.getValue());
+		}
 	}
 	
 	public List<String> getLevels() {
-		return levels;
+		return myLevels;
 	}
-	
-	public void setGame(String game) {
-		myGame = game;
-	}
-	
-	public String[] getLevelsArr() {
-		return (String[]) levels.toArray();
-	}
-	
-	public void setLevel(int level) {
-		currentLevel = level;
-	}
-	
-	public void addLevel(String levelName) {
-		levels.add(levelName);
-	}
-	
-	public void removeLevel(int levelOrder) {
-		levels.remove(levelOrder);
-	}
-	
+
 	public void nextLevel() {
-		if (currentLevel != 0) {
-			setLevel(currentLevel+1);
-			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel)+".xml"));
+		if (myCurrentLevel != 0) {
+			myCurrentLevel+=1;
+			myCurrentLevelName = myLevels.get(myCurrentLevel);
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			myModelCtr.setModel(model);
 		}
 	}
 	
 	public void previousLevel() {
-		if (currentLevel != (levels.size()-1)) {
-			setLevel(currentLevel-1);
-			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel-1)+".xml"));
+		if (myCurrentLevel != (myLevels.size()-1)) {
+			myCurrentLevel-=1;
+			myCurrentLevelName = myLevels.get(myCurrentLevel);
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			myModelCtr.setModel(model);
 		}
 	}
-	
-	public void updateLevels(GameCreation game) {
-		System.out.println("game is null at LevelManager: " + game == null);
-		myGame = game.getFolderPath();
-		System.out.println("game folder path is null at LevelManager: " + myGame == null);
-		System.out.println("dafdafdsafdsafdsafdsafdsafdsa");
-		System.out.println(myGame);
-		System.out.println("fadfdsafdsa");
-		myLevelMap = game.getLevelMap();
-//		if (game.getLevel().equals("Add New Level")) {
-////			setLevel(levels.size());
-////			addLevel("Level " + currentLevel);
-//			System.out.println("Level " + currentLevel);
-//		} else {
-//			System.out.println("Ass boners " + game.getLevel());
-////			setLevel(Integer.valueOf(game.getLevel()));
-//			Model model = xmlUtil.load(new File(myGame+levels.get(currentLevel)+".xml"));
-//			System.out.println("reading model");
-//			System.out.println("floopymcfloopyasspeniswanker");
-//			System.out.println(model == null);
-//			myModelCtr.setModel(model);
+//	
+//	public void updateLevels(GameCreation game) {
+//		myGame = game.getFolderPath();
+//		myLevelMap = game.getLevelMap();
+////		if (game.getLevel().equals("Add New Level")) {
+//////			setLevel(levels.size());
+//////			addLevel("Level " + myCurrentLevel);
+////			System.out.println("Level " + myCurrentLevel);
+////		} else {
+////			System.out.println("Ass boners " + game.getLevel());
+//////			setLevel(Integer.valueOf(game.getLevel()));
+////			Model model = xmlUtil.load(new File(myGame+levels.get(myCurrentLevel)+".xml"));
+////			System.out.println("reading model");
+////			System.out.println("floopymcfloopyasspeniswanker");
+////			System.out.println(model == null);
+////			myModelCtr.setModel(model);
+////		}
+//		File[] files = new File(myGame).listFiles();
+//		//If this pathname does not denote a directory, then listFiles() returns null. 
+//		try {
+//			for (File file : files) {
+//				myLevels.add(file.getName());
+//			}
+//		} catch (NullPointerException e) {
+//			
 //		}
-		System.out.println("LevelManager updateLevels: myGame bartk " + myGame);
-		System.out.println("LevelManager updateLevels: myGame wefe " + new File(myGame).listFiles());
-		File[] files = new File(myGame).listFiles();
-		//If this pathname does not denote a directory, then listFiles() returns null. 
-		try {
-			for (File file : files) {
-				levels.add(file.getName());
-			}
-		} catch (NullPointerException e) {
-			
-		}
-	}
+//	}
 	
 }

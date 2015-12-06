@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.*;
 
 import javafx.stage.Window;
+import level.manager.LevelManager;
 import model.*;
 import model.XMLutility.xmlUtility;
 import model.article.Article;
@@ -13,6 +14,7 @@ import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
 import resourcemanager.ResourceManager;
+import startscreen.GameCreation;
 
 
 public class ModelController implements IModelController {
@@ -20,6 +22,7 @@ public class ModelController implements IModelController {
   private ModelFactory myModelFactory;
   private xmlUtility myXMLUtility;
   private AddCollisionType addCollision;
+  private LevelManager myLevelManager;
   // WILL ADD CREATES FOR EVENTS AND STUFF AFTER WE DECIDE ON HOW TO PASS PARAMETERS
 
   public ModelController(Model model) {
@@ -30,12 +33,17 @@ public class ModelController implements IModelController {
   }
 
   public Map<String, Class<?>> getParameters(String className) {
-    return myModelFactory.getParameters(className);
+	  return myModelFactory.getParameters(className);
   }
 
+  public void makeLevelManager(GameCreation game) {
+	  myLevelManager = new LevelManager(game);
+  }
  
   public Article createArticle(String fileName, double x, double y, boolean direction) {
-    Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
+	double viewX = myModel.getViewpoint().getX();
+	double viewY = myModel.getViewpoint().getY();
+    Article newArticle = myModelFactory.createArticle(fileName, x+viewX, y+viewY, direction);
     addArticle(newArticle);
     return newArticle;
   }
@@ -148,6 +156,7 @@ public class ModelController implements IModelController {
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
     myModel.setCharacter(toLoad.getCharacter());
+    toLoad.destroyModel();
   }
 
   public void save(Window wind, String path) {
