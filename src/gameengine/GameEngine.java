@@ -97,12 +97,12 @@ public class GameEngine implements IGameEngine {
 	/*
 	 * Makes list of Active articles
 	 */
-	private List<Article> getActiveArticles(){
+	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		
-		for(Article article : myModelController.getArticles()){
-			if(article.getStatus().equals(Article.Status.ACTIVE)){
-				myActiveArticles.add(article);
+		Collection<Article> art = myModelController.getArticles();
+		for(Article a: art.toArray(new Article[0])){
+			if(a.getStatus().equals(Article.Status.ACTIVE)){
+				myActiveArticles.add(a);
 			}
 		}
 		return activeArticles;
