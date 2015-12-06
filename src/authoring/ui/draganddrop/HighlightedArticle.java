@@ -33,6 +33,7 @@ public class HighlightedArticle extends DraggableElement {
         super.dragDetected();
         super.dragEnd();
         this.setOnMouseClicked(event -> producePopup(event, authoringController));
+        authoringController.init();
     }
 
     public void producePopup(MouseEvent e, AuthoringController authoringController){

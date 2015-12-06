@@ -25,13 +25,7 @@ public class ModelFactory {
 		return null;
 	}
 
-	public Article createArticle(String fileName, double x, double y, boolean direction, List<Event> events){
-		Article temp = createArticle(fileName, x, y, direction);
-		for(Event event : events){
-			event.setExecutableArticle(temp);
-		}
-		return temp;
-	}
+	
 
 	public Map<String, Class<?>> getParameters(String className){
 		Class<?> cls = String.class;
@@ -57,8 +51,6 @@ public class ModelFactory {
 			Constructor<?> cons = cls.getConstructors()[0];
 			Object[] obj = {name, conditions, executables};
 			Event test = (Event) cons.newInstance(obj);
-			test.addAllConditions(conditions);
-			test.addAllExecutables(executables);
 			return test;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

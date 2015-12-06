@@ -7,10 +7,9 @@ import model.article.Article;
 
 public class ConditionComparisonOneArticle extends Condition{
 	
-	private Article myFirst;
-	private String myFirstVariable;
-	private double myCompareValue;
-	private String myComparison;
+	protected String myFirstVariable;
+	protected double myCompareValue;
+	protected String myComparison;
 	
 	
 	public ConditionComparisonOneArticle(Map<String, Object> parameters){

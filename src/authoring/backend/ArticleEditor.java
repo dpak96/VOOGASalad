@@ -4,11 +4,12 @@ import model.article.Article;
 import model.controller.ModelController;
 
 
-public class ArticleEditor {
-  private ModelController myModelController;
-
+public class ArticleEditor extends Editor{
+  //private PropertyEditor pe;
+  
   public ArticleEditor(ModelController modelController) {
-    myModelController = modelController;
+    super(modelController);
+    //pe = new PropertyEditor();
   }
 
   public Article createNewArticleAndPlace(String name,
@@ -22,55 +23,16 @@ public class ArticleEditor {
                                            direction);
   }
 
-  public void editArticleLocation(double x, double y, Article article) {
-    article.setX(x);
-    article.setY(y);
-
-  }
-
-  public void deleteObj(Article article) {
+  public void removeArticle(Article article) {
     myModelController.removeArticle(article);
 
   }
-
-  public void editArticleImage(String imageFileName, Article article) {
-    article.setImageFile(imageFileName);
-
+  
+  public void edit(String thing, Object edit, Article article){
+    //pe.editProperty(thing,edit,article);
   }
 
-  public void editArticleName(String name, Article article) {
-    article.setName(name);
-
-  }
-
-  public void editArticleImageDirection(boolean direction, Article article) {
-    article.setDirection(direction);
-
-  }
-
-  public void editArticleImageBufferX(double x, Article article) {
-    article.setXBuffer(x);
-
-  }
-
-  public void editArticleImageBufferY(double y, Article article) {
-    article.setYBuffer(y);
-
-  }
-
-  public void editArticleXVelocity(double x, Article article) {
-    article.setXVelocity(x);
-
-  }
-
-  public void editArticleYVelocity(double y, Article article) {
-    article.setYVelocity(y);
-  }
-
-  public void editArticleOrientation(double value, Article article) {
-    article.setOrientation(value);
-
-  }
+ 
 
   // TODO: collisions
 

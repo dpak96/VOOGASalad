@@ -12,13 +12,13 @@ import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
 
+
 public class GameEngine implements IGameEngine {
 	private List<Article> myActiveArticles;
 	private ModelController myModelController;
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
-	
 	private List<Article> allArticles;
 	
 	public GameEngine(ModelController modelController){
@@ -31,8 +31,9 @@ public class GameEngine implements IGameEngine {
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
 		setMyCharacter(myModelController.getCharacter());
+		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
-		//myActiveArticles = allArticles;
+		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
@@ -51,11 +52,11 @@ public class GameEngine implements IGameEngine {
 			Article first = myActiveArticles.get(i);
 			for(int j = i + 1; j < myActiveArticles.size(); j++){
 				Article second = myActiveArticles.get(j);
-				CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				/*CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
-				}
+				}*/
 			}
 		}
 	}
@@ -70,9 +71,12 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				//NEEDS COLLISION INFORMATION HERE
-				CollisionHandler handler = new CollisionHandler(article, collided, article.getCollisionInformation(collided));
-				handler.collide(myModelController);
+				System.out.println(article.getImageFile() + collided.getImageFile());
+				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
+						article.getCollisionType(), collided.getCollisionType());
+				for (Event e:events){
+					e.fire(article, collided);
+				}
 			}
 		}
 		
@@ -90,27 +94,47 @@ public class GameEngine implements IGameEngine {
 		}
 	}
 	
-	private List<Article> getActiveArticles(){
+	/*
+	 * Makes list of Active articles
+	 */
+	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		for(Article article : myModelController.getArticles()){
-			double x = article.getX();
-			double y = article.getY();
-			double width = article.getWidth();
-			double height = article.getHeight();
-			double viewpointX = myViewpoint.getX();
-			double viewpointY = myViewpoint.getY();
-			double viewpointWidth = myViewpoint.getWidth();
-			double viewpointHeight = myViewpoint.getHeight();
-			double xBuffer = article.getXBuffer();
-			double yBuffer = article.getYBuffer();
-			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
-					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
-					x, x + width, y, y + height)){
-				myActiveArticles.add(article);
+		Collection<Article> art = myModelController.getArticles();
+		for(Article a: art.toArray(new Article[0])){
+			if(a.getStatus().equals(Article.Status.ACTIVE)){
+				myActiveArticles.add(a);
 			}
-					
 		}
 		return activeArticles;
+	}
+	
+	/*
+	 * Updates articles within the viewpoint to active except for HardInactives
+	 */
+	private void updateActiveArticles(){
+		for(Article article : myModelController.getArticles()){
+			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
+				double x = article.getX();
+				double y = article.getY();
+				double width = article.getWidth();
+				double height = article.getHeight();
+				double viewpointX = myViewpoint.getX();
+				double viewpointY = myViewpoint.getY();
+				double viewpointWidth = myViewpoint.getWidth();
+				double viewpointHeight = myViewpoint.getHeight();
+				double xBuffer = article.getXBuffer();
+				double yBuffer = article.getYBuffer();
+				
+				//FIX THE VIEWPOINT CHECKER THINGY
+				/*
+				if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+						viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+						x, x + width, y, y + height)){
+					article.setActive();
+				}
+				else article.setInactive();*/
+			}	
+		}
 	}
 	
 	private boolean rectanglesOverlap(double minX1, double maxX1, double minY1, double maxY1,

@@ -18,9 +18,6 @@ public class Event {
 		myExecutables = executables;
 	}
 	
-	public String getMyName(){
-	    return myName;
-	}
 	
 	public List<Condition> getConditions(){
 		return myConditions;
@@ -46,7 +43,7 @@ public class Event {
 		myExecutables.addAll(execs);
 	}
 	
-	public String getName(){
+	public String getMyName(){
 		return myName;
 	}
 	
@@ -55,10 +52,30 @@ public class Event {
 			if(!c.isMet()) return;
 		}
 		for(Executable e : myExecutables){
-			e.execute();
+			if(e.checkActive()){
+				e.execute();
+			}
 		}
 	}
 
+	public void fire(Article first, Article second){
+		for(Condition c : myConditions){
+			Article firstTemp = c.getFirst();
+			Article secondTemp = c.getSecond();
+			c.setArticles(first, second);
+			if(!c.isMet()){
+				c.setArticles(firstTemp, secondTemp);
+				return;
+			}
+			c.setArticles(firstTemp, secondTemp);
+		}
+		for(Executable e : myExecutables){
+			Article tempActor = e.getMyActor();
+			e.setMyActor(first);
+			e.execute();
+			e.setMyActor(tempActor);
+		}
+	}
 	
 	public void removeExecutable(Executable exec){
 		myExecutables.remove(exec);
@@ -66,12 +83,6 @@ public class Event {
 	
 	public void removeCondition (Condition cond){
 		myConditions.remove(cond);
-	}
-	
-	public void setExecutableArticle(Article article){
-		for(Executable e : myExecutables){
-			e.setMyActor(article);
-		}
 	}
 	
 }

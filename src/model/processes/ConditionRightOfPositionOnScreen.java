@@ -6,9 +6,8 @@ import model.article.Article;
 
 public class ConditionRightOfPositionOnScreen extends Condition{
 	
-	private Article myViewpoint;
-	private Article myCheckArticle;
-	private double myFraction;
+	protected Article myViewpoint;
+	protected double myFraction;
 	
 	public ConditionRightOfPositionOnScreen(Map<String, Object> parameters){
 		super(parameters);
@@ -16,7 +15,7 @@ public class ConditionRightOfPositionOnScreen extends Condition{
 
 	@Override
 	public boolean isMet() {
-		double xMid = myCheckArticle.getX() + myCheckArticle.getWidth()/2;
+		double xMid = myFirst.getX() + myFirst.getWidth()/2;
 		
 		return xMid > myViewpoint.getX() + myViewpoint.getWidth()*myFraction;
 		
