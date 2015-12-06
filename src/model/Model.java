@@ -28,8 +28,8 @@ public class Model extends Observable{
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 0, 0);
-		myCharacter = new Article("Goomba", -100, -100);
+		myViewpoint = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Platform", 400, 400, true);
 		
 	}
 
@@ -86,8 +86,8 @@ public class Model extends Observable{
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 0, 0);
-		myCharacter = new Article("Goomba", -100, -100);
+		myViewpoint = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Platform", 500, 500, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
@@ -207,6 +207,12 @@ public class Model extends Observable{
 	
 	public void addActiveEvent(Event event){
 		myActiveEvents.add(event);
+	}
+	
+	public void initializeCollision(){
+		PresetCollision preset = new PresetCollision(myCollisionTypeEditor);
+		preset.intialize();
+		myCollisionTypeEditor = preset.getCollisonTypeEditor();
 	}
 	
 	public void addNewCollisionType(String type){

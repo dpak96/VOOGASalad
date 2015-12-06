@@ -185,6 +185,10 @@ public class ModelController implements IModelController {
   public void addCollision(String direction, String nameOne, String nameTwo, Event event){
 		myModel.addCollision(direction, nameOne, nameTwo, event);
   }
+  
+  public void initializeCollision(){
+	  myModel.initializeCollision();
+  }
 	
   public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
 		return myModel.getCollisionEvents(direction, nameOne, nameTwo);

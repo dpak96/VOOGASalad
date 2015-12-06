@@ -6,24 +6,23 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 
-
 public class ImageManager extends Manager {
 
-  public ImageManager(String path) {
-    filePath = path;
+	public ImageManager(String path) {
+		filePath = path;
 
-    this.initListImages();
-  }
+		this.initListImages();
+	}
 
-  public void initListImages() {
-    objectMap = new HashMap<String, Object>();
-    File[] folder = new File("src/" + filePath).listFiles();
-    for (File f : folder) {
-      Image temp =
-          new Image(getClass().getClassLoader().getResourceAsStream(filePath + f.getName()));
-      objectMap.put(f.getName().split("\\.")[0], temp);
-    }
-  }
-
+	public void initListImages() {
+		objectMap = new HashMap<String, Object>();
+		File[] folder = new File("src/" + filePath).listFiles();
+		if (folder != null) {
+			for (File f : folder) {
+				Image temp = new Image(getClass().getClassLoader().getResourceAsStream(filePath + f.getName()));
+				objectMap.put(f.getName().split("\\.")[0], temp);
+			}
+		}
+	}
 
 }
