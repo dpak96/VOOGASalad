@@ -23,38 +23,50 @@ public class PresetArticleFactory {
 	public void platformMovement(Article article) {
 		modelController.addNewCollisionType("A");
 		modelController.addNewCollisionType("B");
-		article.setCollisionType("B");
+
+		article.setCollisionType("A");
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		Executable ex = authoringController.makeExecutable("ExecutableBounceVertical", tempMap);
+		tempMap.put("myLevelManager", null);
+		// tempMap.put("myDisplacement", (double) 20);
+		Executable ex = authoringController.makeExecutable("ExecutableNextLevel", tempMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
 		Event ev = authoringController.makeEvent("event", listCondition, listExecutable);
 		modelController.addCollision("Left", "A", "B", ev);
-
 	}
 
 	public void goombaMovement(Article article) {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) 0.2);
+		tempMap.put("myAcceleration", (double) 0);
 		Executable ex = authoringController.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
+		Map<String, Object> poopMap = new HashMap<String, Object>();
+		poopMap.put("myActor", article);
+		poopMap.put("myDisplacement", (double) 10);
+		Executable moveEx = authoringController.makeExecutable("ExecutableMoveHorizontal", poopMap);
+
 		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
+		listExecutable.add(moveEx);
 		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = authoringController.makeEvent("event", listCondition, listExecutable);
+		// Event ev = authoringController.makeEvent("event", listCondition,
+		// listExecutable);
+
+		Event moveTest = authoringController.makeEvent("poop", listCondition, listExecutable);
+
 		List<Event> listEvent = new ArrayList<Event>();
-		listEvent.add(ev);
-		modelController.addActiveEvent(ev);
+		listEvent.add(moveTest);
+		// modelController.addActiveEvent(ev);
 
 		authoringController.mapKey("A", listEvent);
 
 		article.setYVelocity(0);
-		article.setCollisionType("A");
+
+		article.setCollisionType("B");
 	}
 
 	public void playerMovement(Article article) {
@@ -69,7 +81,7 @@ public class PresetArticleFactory {
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("A", listEvent);
-		
+
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myDisplacement", (double) 1);
@@ -81,7 +93,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("D", listEvent);
-		
+
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myDisplacement", (double) -1);
@@ -93,7 +105,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("W", listEvent);
-		
+
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myDisplacement", (double) 1);
