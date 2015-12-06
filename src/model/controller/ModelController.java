@@ -148,6 +148,24 @@ public class ModelController implements IModelController {
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
     myModel.setCharacter(toLoad.getCharacter());
+    toLoad.destroyModel();
+  }
+  
+  public void loadNewLevel(Model toLoad) {
+	  Article myCharacter = myModel.getCharacter();
+	  myCharacter.setX(toLoad.getCharacter().getX());
+	  myCharacter.setY(toLoad.getCharacter().getY());
+	  
+	  myModel.destroyModel();
+	  myModel.initialize();
+	  myModel.addAllArticles(toLoad.getArticles());
+	  myModel.addAllEvents(toLoad.getAllEvents());
+	  myModel.addAllButtonMap(toLoad.getButtonMap());
+	  myModel.addAllConditions(toLoad.getConditions());
+	  myModel.addAllExecutables(toLoad.getExecutables());
+	  myModel.setCharacter(myCharacter);
+	  
+	  toLoad.destroyModel();
   }
 
   public void save(Window wind, String path) {
