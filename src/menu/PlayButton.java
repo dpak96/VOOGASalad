@@ -11,8 +11,8 @@ public class PlayButton extends AbstractControlButton{
 	
 	public void resize(MenuPanel menuPanel){
 		ImageView image = new ImageView((Image) myImages.get("playButton"));
-		image.fitWidthProperty().bind(menuPanel.heightProperty().multiply(.65));
 		image.fitHeightProperty().bind(menuPanel.heightProperty().multiply(.65));
+		image.fitWidthProperty().bind(menuPanel.heightProperty().multiply(.65));
 		this.setGraphic(image);
 	}
 }
