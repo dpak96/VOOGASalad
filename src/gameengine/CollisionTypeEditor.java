@@ -74,4 +74,8 @@ public class CollisionTypeEditor {
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
 		return collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex);		
 	}
+	
+	public List<String> getCollisionTypeList(){
+		return collisionTypeName;
+	}
 }
