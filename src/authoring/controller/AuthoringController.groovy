@@ -260,5 +260,9 @@ public class AuthoringController {
                             
          
         }
+        public List<String> getCollisionTypes(){
+            
+            return modelController.getAllCollisionTypes();
+        }
         
 }

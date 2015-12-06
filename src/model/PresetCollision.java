@@ -21,7 +21,7 @@ public class PresetCollision {
 	private final String TOP = "Top";
 	private final String BOTTOM = "Bottom";
 	private final String PLAYER = "Player";
-	private final String PLATFORM = "platform";
+	private final String PLATFORM = "Platform";
 	private final String ENEMY = "Enemy";
 	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
 	public PresetCollision(CollisionTypeEditor editor) {
@@ -69,7 +69,7 @@ public class PresetCollision {
 		// TODO Auto-generated method stub
 		List<Condition> conditionList = new ArrayList<Condition>();
 		HashMap<String, Object> temp = new HashMap<String, Object>();
-		temp.put("myModel", "Brandon");
+		temp.put("myModel", null);
 		temp.put("myActor", null);
 		ExecutableDelete exe = new ExecutableDelete(temp);
 		List<Executable> exeList = new ArrayList<Executable>();

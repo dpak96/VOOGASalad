@@ -77,11 +77,10 @@ public class AddEventMenu extends AuthoringMenu {
     private void populateEventParameters(GridPane paramGrid,String eventSelection,Map<String,String> eventParams){
         Map<String,Control> fieldMap=new HashMap<String,Control>();
         
-        CollisionEventParameters  collisionFiller=new CollisionEventParameters();
+        CollisionEventParameters  collisionFiller=new CollisionEventParameters(super.myController);
         
        if( eventType.getValue().equals("Collision"))
            fieldMap=collisionFiller.populateCollisionEventParameters(paramGrid);
-       
        
        
        for(String key: fieldMap.keySet())
