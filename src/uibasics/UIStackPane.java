@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import game.player.GamePlayerOverlay;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
