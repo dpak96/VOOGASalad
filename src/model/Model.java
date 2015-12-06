@@ -141,7 +141,17 @@ public class Model extends Observable{
 		myArticles.addAll(articles);
 	}
 	public void removeArticle(Article article) {
-		myArticles.remove(article);		
+		// This is a clever way to create the iterator and call iterator.hasNext() like
+		// you would do in a while-loop. It would be the same as doing:
+//		     Iterator<String> iterator = list.iterator();
+//		     while (iterator.hasNext()) {
+		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
+		    Article a = iterator.next();
+		    if (article.equals(a)) {
+		        iterator.remove();
+		        return;
+		    }
+		}
 	}
 
 	public void addExecutable(Executable executable) {
