@@ -4,20 +4,17 @@ import java.util.*;
 
 import model.article.Article;
 
-public class RandomGenerationUtility {
+public class RandomGenerationUtility extends AbstractGenerationUtility{
 
 	private Article myViewpoint;
 	private double myPrevX;
 	private double myPrevY;
-
-	private Article myCharacter;
-
+	
 	private List<Article> myArticles;
 
 	private Map<Article, Double> myGenerationProbabilities;
 
-	public RandomGenerationUtility(HashMap<Article, Double> probabilities, List<Article> allArticles, Article viewpoint,
-			Article character) {
+	public RandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint) {
 		myGenerationProbabilities = probabilities;
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);
@@ -26,7 +23,6 @@ public class RandomGenerationUtility {
 		}
 		myViewpoint = viewpoint;
 		myArticles = allArticles;
-		myCharacter = character;
 		myPrevX = myViewpoint.getX();
 		myPrevY = myViewpoint.getY();
 	}

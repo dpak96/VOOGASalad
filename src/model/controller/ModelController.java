@@ -1,6 +1,7 @@
 package model.controller;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.*;
 
 import javafx.stage.Window;
@@ -11,8 +12,9 @@ import model.article.Article;
 import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
+import resourcemanager.PropertiesManager;
+import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
-
 
 public class ModelController implements IModelController {
   private Model myModel;
@@ -191,47 +193,50 @@ public class ModelController implements IModelController {
   
   public void addNewCollisionType(String type){
 		myModel.addNewCollisionType(type);
-  }
-	
-  public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+	}
+
+	public void addCollision(String direction, String nameOne, String nameTwo, Event event) {
 		myModel.addCollision(direction, nameOne, nameTwo, event);
-  }
-  
-  public void initializeCollision(){
-	  myModel.initializeCollision();
-  }
-	
-  public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+	}
+
+	public void initializeCollision() {
+		myModel.initializeCollision();
+	}
+
+	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo) {
 		return myModel.getCollisionEvents(direction, nameOne, nameTwo);
-  }
-  
-  public void setBackgroundImage(String name){
-    myModel.setBackgroundImage(name);
-  }
-  
-  public void setModel(Model model) {
-	  this.myModel = model;
-  }
-  
-  public List<Event> getActiveEvents(){
-	  return myModel.getActiveEvents();
-  }
-  
-  public void addActiveEvent(Event event){
-	  myModel.addActiveEvent(event);
-  }
-  
-  public void removeExecutableFromEvent(Event event, Executable exec){
-	  myModel.removeExecutableFromEvent(event, exec);
-  }
-  
-  public void removeConditionFromEvent(Event event, Condition cond){
-	  myModel.removeConditionFromEvent(event, cond);
-  }
-  
-  public List<Event> getAllEvents(){
-	  return myModel.getAllEvents();
-  }
-  
+	}
+
+	public void setBackgroundImage(String name) {
+		myModel.setBackgroundImage(name);
+	}
+
+	public void setModel(Model model) {
+		this.myModel = model;
+	}
+
+	public List<Event> getActiveEvents() {
+		return myModel.getActiveEvents();
+	}
+
+	public void addActiveEvent(Event event) {
+		myModel.addActiveEvent(event);
+	}
+
+	public void removeExecutableFromEvent(Event event, Executable exec) {
+		myModel.removeExecutableFromEvent(event, exec);
+	}
+
+	public void removeConditionFromEvent(Event event, Condition cond) {
+		myModel.removeConditionFromEvent(event, cond);
+	}
+
+	public List<Event> getAllEvents() {
+		return myModel.getAllEvents();
+	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		myModel.setRandomGenerator(probabilities);
+	}
 
 }
