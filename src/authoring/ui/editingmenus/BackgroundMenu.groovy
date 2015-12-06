@@ -24,7 +24,9 @@ public class BackgroundMenu extends AuthoringMenu {
         
         int rowIndex=1;
         imageBox=super.componentAdder.makeLabelAndBox(menuPane, 1, rowIndex, "Background Image: ");
-        imageHandler.addImages(imageBox);
+        imageHandler.addBackgroundImages(imageBox);
+        
+       
     }
     
 }
