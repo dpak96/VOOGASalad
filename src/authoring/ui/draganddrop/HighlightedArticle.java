@@ -25,7 +25,7 @@ public class HighlightedArticle extends DraggableElement {
     }
 
     public void producePopup(MouseEvent e, AuthoringController authoringController){
-        authoringController.TempButtonClick(e);
+        authoringController.dragEvent("tempButtonClick",e);
     }
 
 }

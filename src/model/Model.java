@@ -21,7 +21,7 @@ public class Model extends Observable{
 	private Article myCharacter;
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
-	private VoogaProperties vp;
+	//private VoogaProperties vp;
 	
 	private AbstractGenerationUtility randomGenerator;
 	
@@ -35,7 +35,7 @@ public class Model extends Observable{
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
 		myCharacter = new Article("Platform", 400, 400, true);
-		vp = new VoogaProperties();
+		//vp = new VoogaProperties();
 		randomGenerator = new NullGenerationUtility();
 	}
 	
@@ -101,8 +101,8 @@ public class Model extends Observable{
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 0, 0);
-		myViewpoint.setWidth(vp.getSceneWidth());
-		myViewpoint.setHeight(vp.getSceneHeight());
+		myViewpoint.setWidth(1000.0);
+		myViewpoint.setHeight(1000.0);
 		myCharacter = new Article("Platform", 500, 500, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
 	}
