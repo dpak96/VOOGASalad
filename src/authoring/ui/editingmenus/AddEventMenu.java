@@ -90,11 +90,13 @@ public class AddEventMenu extends AuthoringMenu {
     
     private void populateEventParameters(GridPane paramGrid,String eventSelection,Map<String,String> eventParams){
         
-        CollisionEventParameters  collisionFiller=new CollisionEventParameters(super.myController);
+        EventParameters  paramFiller=new EventParameters(super.myController);
+        paramGrid.getChildren().clear();
         
        if( eventType.getValue().equals("Collision"))
-           fieldMap=collisionFiller.populateCollisionEventParameters(paramGrid);
-       
+           fieldMap=paramFiller.populateCollisionEventParameters(paramGrid);
+       if(eventType.getValue().equals("Button"))
+           fieldMap=paramFiller.populateButtonEventParameters(paramGrid);
        
      
         
