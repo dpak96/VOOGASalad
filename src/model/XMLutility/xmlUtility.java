@@ -32,8 +32,6 @@ public class xmlUtility {
 		myModel = model;
 	}
 	
-	
-	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
 		System.out.println("File Chooser 1");
@@ -59,12 +57,12 @@ public class xmlUtility {
 			System.out.println("Read" + readObject);
 			return (Model) readObject;
 			
+		} catch (NullPointerException e) {
+			//User canceled from a save
+			return null;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
-
 	}
 	
 	public void saveModel(Window window, String path) {
@@ -80,8 +78,10 @@ public class xmlUtility {
 			XMLOrderer levelOrder = new XMLOrderer(path,game.getName());
 			levelOrder.makeXML(path);
 //	      o.writeObject(myController.getMyScene().getAllData().get(0));
+		} catch (NullPointerException e) {
+			//User canceled from a save
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 		private void save(File game){
@@ -98,6 +98,8 @@ public class xmlUtility {
 		myModel.getCharacter().destroyBitMap();
 		try{
 			myStream.toXML(myModel, new FileWriter(game));
+		} catch (NullPointerException e) {
+			//User canceled from a save
 		}catch (Exception e){
 			System.err.println("Error in XML Write: " + e.getMessage());
 		}
