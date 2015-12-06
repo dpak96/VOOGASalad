@@ -31,6 +31,8 @@ public class Model extends Observable{
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint.setWidth(1000.5);
+		myViewpoint.setHeight(1000.5);
 		myCharacter = new Article("Platform", 400, 400, true);
 		randomGenerator = new NullGenerationUtility();
 	}

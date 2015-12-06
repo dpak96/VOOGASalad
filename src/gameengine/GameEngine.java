@@ -72,6 +72,10 @@ public class GameEngine implements IGameEngine {
 	private void runButtonPress(String input){
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
 		for(Event e : buttonEvents){
+			System.out.println(e.getExecutables().size());
+			System.out.println(e.getExecutables().get(0).getClass().toString());
+			e.getExecutables().get(0).execute();
+			System.out.println(e.getExecutables().get(0).getMyName());
 			e.fire();
 		}
 	}

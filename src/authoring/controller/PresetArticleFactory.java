@@ -36,7 +36,7 @@ public class PresetArticleFactory {
 		modelController.addCollision("Left", "A", "B", ev);
 
 	}
-	
+
 	public void goombaMovement(Article article) {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -55,6 +55,57 @@ public class PresetArticleFactory {
 
 		article.setYVelocity(0);
 		article.setCollisionType("A");
+	}
 
+	public void playerMovement(Article article) {
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myDisplacement", (double) -1);
+		Executable ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
+		List<Executable> listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		List<Condition> listCondition = new ArrayList<Condition>();
+		Event ev = authoringController.makeEvent("event1", listCondition, listExecutable);
+		List<Event> listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		authoringController.mapKey("A", listEvent);
+		
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myDisplacement", (double) 1);
+		ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = authoringController.makeEvent("event2", listCondition, listExecutable);
+		listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		authoringController.mapKey("D", listEvent);
+		
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myDisplacement", (double) -1);
+		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = authoringController.makeEvent("event3", listCondition, listExecutable);
+		listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		authoringController.mapKey("W", listEvent);
+		
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myDisplacement", (double) 1);
+		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = authoringController.makeEvent("event4", listCondition, listExecutable);
+		listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		authoringController.mapKey("S", listEvent);
+
+		article.setCollisionType("A");
 	}
 }
