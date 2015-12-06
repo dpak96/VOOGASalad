@@ -236,4 +236,30 @@ public class AuthoringController {
 			p.getChildren().remove(b);
 		}
 	}
+
+
+	public void thingy(DragEvent event){
+		/* data dropped */
+		if(event.getGestureSource() instanceof HighlightedArticle){
+			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
+			double tempX = highlightedArticle.getLayoutX()+0.1;
+			double tempY = highlightedArticle.getLayoutY()+0.1;
+			Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
+			//System.out.println(n == null);
+			n.setX((double)event.getX() - modelController.getViewpoint().getX());
+			n.setY((double)event.getY() - modelController.getViewpoint().getY());
+			Pane p = (Pane)highlightedArticle.getParent();
+			p.getChildren().remove(highlightedArticle);
+		}
+		else {
+			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+		}
+		Dragboard db = event.getDragboard();
+		boolean success = false;
+		if (db.hasImage()) {
+			success = true;
+		}
+		event.setDropCompleted(success);
+		event.consume();
+	}
 }
