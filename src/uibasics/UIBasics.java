@@ -24,7 +24,7 @@ public class UIBasics {
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
   private ModelController myModelController;
-  private ImageView chara;
+//  private ImageView chara;
 
   public UIBasics(ModelController modelController) {
     load("commands");
@@ -32,7 +32,7 @@ public class UIBasics {
     myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-    chara = new ImageView();
+//    chara = new ImageView();
   }
 
   private void load(String identifier) {
@@ -100,7 +100,7 @@ public class UIBasics {
 	    BackgroundImage back =
 	        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
 	            .getResource("ImageManager", img),
-	                            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
+	                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
 
 	    myPane.setBackground(new Background(back));
 	} catch (NullPointerException e) {

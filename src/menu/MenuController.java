@@ -1,22 +1,15 @@
 package menu;
 
-import javafx.beans.property.Property;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import level.manager.XMLOrderer;
 import main.GraphicHandler;
 import model.Model;
 import model.controller.ModelController;
-import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
-import startscreen.StartScreenController;
 import uibasics.UIStackPane;
 
 import java.io.*;
-import java.util.ResourceBundle;
 
 public class MenuController {
     private GraphicHandler myGraphicHandler;
@@ -42,7 +35,7 @@ public class MenuController {
         myGraphicHandler.startScreen();
     }
 
-    public void saveGameCreation(GameCreation gameCreation){
+    public boolean saveGameCreation(GameCreation gameCreation){
     	game = gameCreation;
     	File gamesDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames");
     	if(!gamesDir.exists()){
@@ -59,8 +52,9 @@ public class MenuController {
         	levelOrder.makeXML(dir.getName());
         	game.setGame(dir.getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
     
     public void saveLevelCreation(GameCreation gameCreation){
@@ -81,14 +75,16 @@ public class MenuController {
 //        	game.setGame(game.getName());
         	myModelController.setModel(new Model());
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
     public void saveGame(){
-        game = myGraphicHandler.getGameCreation();
-        myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
-            
+    	try {
+	        game = myGraphicHandler.getGameCreation();
+	        myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
+    	} catch (Exception e) {
+    	}
     }
     
     public void reorderGame(){
@@ -98,15 +94,26 @@ public class MenuController {
     }
 
     public void loadGame(){
-//    	System.out.println("myMainMenu.getScene()");
-//    	System.out.println(myMainMenu.getScene() == null);
-//    	System.out.println("myMainMenu.getScene().getWindow()");
-//    	System.out.println(myMainMenu.getScene().getWindow() == null);
-        myModelController.load(myMainMenu.getScene().getWindow());
+    	try {
+//        	System.out.println("myMainMenu.getScene()");
+//        	System.out.println(myMainMenu.getScene() == null);
+//        	System.out.println("myMainMenu.getScene().getWindow()");
+//        	System.out.println(myMainMenu.getScene().getWindow() == null);
+            myModelController.load(myMainMenu.getScene().getWindow());
+    	} catch (NullPointerException e) {
+			//User canceled from a load
+    	}
+
     }
     
     public void loadGame(GameCreation gameCreation, String file){
-    	myModelController.load(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator") + gameCreation.getGameName() + System.getProperty("file.separator") + file));
+    	try {
+	    	myModelController.load(new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+	    	+ "SquirtleSquadGames" + System.getProperty("file.separator") + gameCreation.getGameName() 
+	    	+ System.getProperty("file.separator") + file));
+    	} catch (NullPointerException e) {
+			//User canceled from a load
+    	}
     }
 
 
