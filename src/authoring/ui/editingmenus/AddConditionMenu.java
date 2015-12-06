@@ -49,7 +49,6 @@ public class AddConditionMenu extends AuthoringMenu {
     
     public void addParameterFields (String selectedObject, GridPane paramGrid) {
         paramGrid.getChildren().clear();
-        System.out.println("asd");
         Map<String, Class<?>> ruleParams =
                 super.myController
                         .getFactoryParameters(("model.processes." + "Condition" + selectedObject));
@@ -57,7 +56,11 @@ public class AddConditionMenu extends AuthoringMenu {
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
+            if(ruleParams.get(key)==String.class||ruleParams.get(key)==Double.class)
             super.componentAdder.makeField(paramGrid, 2, rowIndex++);
+            else
+                super.componentAdder.makeComboBox(paramGrid, 2, rowIndex++);
+            
           /*  super.componentAdder.makeLabel(paramGrid, 2, rowIndex++,
                                            ruleParams.get(key).toString());*/
 
