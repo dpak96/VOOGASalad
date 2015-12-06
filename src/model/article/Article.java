@@ -111,7 +111,16 @@ public class Article{
 	public boolean getDirection(){
 		return myPosition.isDirection();
 	}
+	
+	public void setWidth(Double val){
+		myWidth = val;
+	}
 
+	public void setHeight(Double val){
+		myHeight = val;
+	}
+	
+	
 	public double getWidth(){
 		return myWidth;
 	}

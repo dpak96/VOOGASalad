@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ExecutableLoseHealth extends Executable {
 	
-	private double myDamage;
+	protected double myDamage;
 
 	public ExecutableLoseHealth(Map<String, Object> parameters){
 		super(parameters);
