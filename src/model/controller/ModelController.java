@@ -255,5 +255,9 @@ public class ModelController implements IModelController {
 	public void setRandomGenerator(Map<Article, Double> probabilities) {
 		myModel.setRandomGenerator(probabilities);
 	}
+	
+	public List<String> getAllCollisionTypes(){
+		return myModel.getAllCollisionTypes();
+	}
 
 }
