@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class LevelManager {
 	private String myFolderPath, myCurrentLevelName;
+	private String myGameName;
 	private List<String> myLevels;
 	private int myCurrentLevel;
 	private xmlUtility xmlUtil;
@@ -20,6 +21,7 @@ public class LevelManager {
     private Map<Integer,String> myLevelMap;
 	
 	public LevelManager(GameCreation game) {
+		myGameName = game.getGameName();
 		myFolderPath = game.getFolderPath();
 		xmlUtil = new xmlUtility();
 		try {
@@ -48,6 +50,20 @@ public class LevelManager {
 		return myLevels;
 	}
 
+	/**Game over function that loads the default game over level 
+	 * params: none
+	 */
+	public void gameOver() {
+	
+		myCurrentLevel = 1;
+		myCurrentLevelName = myLevels.get(myCurrentLevel);
+		Model model = xmlUtil.load(new File(myFolderPath+myGameName+"_GAMEOVER"));
+		myModelCtr.setModel(model);
+	}
+	
+	/**nextLevel loads the next level of the game, but keeps the score/life of the previous level of the 
+	 * main character. 
+	 */
 	public void nextLevel() {
 		if (myCurrentLevel != 0) {
 			myCurrentLevel+=1;
