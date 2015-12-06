@@ -111,10 +111,10 @@ public class AuthoringController {
 			p.getChildren().remove(event);
 		}
 		if (event.getImageName().equals("Goomba")) {
-			this.goombaMovementDemo(article);
+			presetArticleFactory.goombaMovementDemo(article);
 		}
 		if(event.getImageName().equals("Platform")){
-			this.platformMovementDemo(article);
+			presetArticleFactory.platformMovementDemo(article);
 		}
 	}
 
@@ -154,43 +154,6 @@ public class AuthoringController {
 		modelController.remapButton(button, events);
 	}
 
-	public void goombaMovementDemo(Article article) {
-
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) 0.2);
-		Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = this.makeEvent("event", listCondition, listExecutable);
-		List<Event> listEvent = new ArrayList<Event>();
-		listEvent.add(ev);
-		modelController.addActiveEvent(ev);
-
-		this.mapKey("A", listEvent);
-
-		article.setYVelocity(0);
-		article.setCollisionType("A");
-	}
-
-	public void platformMovementDemo(Article article){
-		modelController.addNewCollisionType("A");
-		modelController.addNewCollisionType("B");
-		article.setCollisionType("B");
-
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		Executable ex = this.makeExecutable("ExecutableBounceVertical", tempMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = this.makeEvent("event", listCondition, listExecutable);
-
-		modelController.addCollision("Left", "A", "B", ev);
-	}
 
 	public void addTemp(MouseEvent e) {
 		System.out.println(e.getX());
