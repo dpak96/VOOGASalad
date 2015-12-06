@@ -70,13 +70,11 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				//NEEDS COLLISION INFORMATION HERE
+				System.out.println(article.getImageFile() + collided.getImageFile());
 				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
 						article.getCollisionType(), collided.getCollisionType());
 				for (Event e:events){
-					System.out.println(article.getImageFile() + collided.getImageFile());
-					e.setExecutableArticle(article);
-					e.fire();
+					e.fire(article, collided);
 				}
 			}
 		}

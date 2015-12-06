@@ -59,6 +59,24 @@ public class Event {
 		}
 	}
 
+	public void fire(Article first, Article second){
+		for(Condition c : myConditions){
+			Article firstTemp = c.getFirst();
+			Article secondTemp = c.getSecond();
+			c.setArticles(first, second);
+			if(!c.isMet()){
+				c.setArticles(firstTemp, secondTemp);
+				return;
+			}
+			c.setArticles(firstTemp, secondTemp);
+		}
+		for(Executable e : myExecutables){
+			Article tempActor = e.getMyActor();
+			e.setMyActor(first);
+			e.execute();
+			e.setMyActor(tempActor);
+		}
+	}
 	
 	public void removeExecutable(Executable exec){
 		myExecutables.remove(exec);
@@ -66,12 +84,6 @@ public class Event {
 	
 	public void removeCondition (Condition cond){
 		myConditions.remove(cond);
-	}
-	
-	public void setExecutableArticle(Article article){
-		for(Executable e : myExecutables){
-			e.setMyActor(article);
-		}
 	}
 	
 }

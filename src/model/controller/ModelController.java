@@ -32,21 +32,7 @@ public class ModelController implements IModelController {
     return myModelFactory.getParameters(className);
   }
 
-  public Article createArticle(String fileName,
-                               double x,
-                               double y,
-                               boolean direction,
-                               List<Event> events) {
-    Article myViewpoint = myModel.getViewpoint();
-    double xAdjusted = x + myViewpoint.getX();
-    double yAdjusted = y + myViewpoint.getY();
-    Article newArticle =
-        myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
-    System.out.println("A"+ newArticle.getX());
-    addArticle(newArticle);
-    return newArticle;
-  }
-
+ 
   public Article createArticle(String fileName, double x, double y, boolean direction) {
     Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
     addArticle(newArticle);

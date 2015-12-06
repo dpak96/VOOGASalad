@@ -114,11 +114,11 @@ public class AuthoringController implements IAuthoringController {
   }
 
   public void goombaMovementDemo(Article article) {
-	  /*
+	
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
-    tempMap.put("myDisplacement", .5);
-    Executable ex = this.makeExecutable("ExecutableMoveHorizontal", tempMap);
+    tempMap.put("myAcceleration", .2);
+    Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
     List<Executable> listExecutable = new ArrayList<Executable>();
     listExecutable.add(ex);
@@ -129,39 +129,28 @@ public class AuthoringController implements IAuthoringController {
     modelController.addActiveEvent(ev);
 
     this.mapKey("A", listEvent);
-    */
-	article.setXVelocity(2);
+    
+	article.setYVelocity(0);
 	article.setCollisionType("A");
-	modelController.addNewCollisionType("A");
-	modelController.addNewCollisionType("B");
+	
+	
   }
   
   public void platformMovementDemo(Article article){
-	  article.setXVelocity(-2);
+		modelController.addNewCollisionType("A");
+		modelController.addNewCollisionType("B");
 	  article.setCollisionType("B");
 		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myDisplacement", 30);
-	    Executable ex = this.makeExecutable("ExecutableMoveHorizontal", tempMap);
+	    Executable ex = this.makeExecutable("ExecutableBounceVertical", tempMap);
 
 	    List<Executable> listExecutable = new ArrayList<Executable>();
 	    listExecutable.add(ex);
 	    List<Condition> listCondition = new ArrayList<Condition>();
 	    Event ev = this.makeEvent("event", listCondition, listExecutable);
-		
-		Map<String, Object> tempMap2 = new HashMap<String, Object>();
-		tempMap2.put("myActor", article);
-		tempMap2.put("myDisplacement", -30);
-	    Executable ex2 = this.makeExecutable("ExecutableMoveHorizontal", tempMap2);
 
-	    List<Executable> listExecutable2 = new ArrayList<Executable>();
-	    listExecutable2.add(ex2);
-	    List<Condition> listCondition2 = new ArrayList<Condition>();
-	    Event ev2 = this.makeEvent("event", listCondition2, listExecutable2);
-	    modelController.addCollision("Left", "A", "B", ev2);
-
-	    modelController.addCollision("Left", "B", "A", ev);
+	    modelController.addCollision("Left", "A", "B", ev);
 	  
   }
 
