@@ -32,6 +32,7 @@ public class StartScreen {
     public void addGameChooser(String value){
         GameChooserModule games = new GameChooserModule(getGames());
         games.init(myController, value);
+        System.out.println("Game chooser value" + value);
 
         skeleton.addLayer(games.getContainer());
     }

@@ -83,6 +83,10 @@ public class GameCreation {
     	return myGameName;
     }
     
+    public void addLevel() {
+    	myLevelMap.put(myLevelMap.size()+1, "NewLevel.xml");
+    }
+    
     public Map<Integer,String> getLevelMap(){
     	return myLevelMap;
     }

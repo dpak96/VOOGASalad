@@ -16,6 +16,12 @@ public class LevelChooserModule extends AbstractChooserModule {
     @Override
     protected void init(StartScreenController controller, String mode){
         super.init(controller, mode);
+        if(mode.equals("edit")){
+        	Button newLevel = new Button("New Level");
+        	buttons.add(newLevel);
+        	addToContainer(newLevel);
+        	newLevel.setOnAction(e->controller.setLevel(mode));
+        }
         setButtonID();
     }
 
@@ -29,7 +35,5 @@ public class LevelChooserModule extends AbstractChooserModule {
     protected void setController(StartScreenController controller, Button b){
         b.setOnAction(e -> controller.setLevel(b.getText() + ".xml"));
     }
-
-
 
 }
