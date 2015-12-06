@@ -13,8 +13,8 @@ class ArticleEditor extends Editor {
       Double x,
       Double y,
       Boolean direction) {
-    double xAdjusted = x + myModelController.getViewpoint().getX();
-    double yAdjusted = y + myModelController.getViewpoint().getY();
+    double xAdjusted = x;
+    double yAdjusted = y;
     return myModelController.createArticle(imageFileName, xAdjusted, yAdjusted,
         direction);
   }

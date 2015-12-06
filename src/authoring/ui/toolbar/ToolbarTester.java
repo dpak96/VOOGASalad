@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 
     @Override
     public void start (Stage arg0) throws Exception {
-        ToolbarContainer tester = new ToolbarContainer();
+        ToolbarContainer TempButtonClick = new ToolbarContainer();
         BorderPane testLayout=new BorderPane();
-        testLayout.setRight(tester.initializeToolbar());
+        testLayout.setRight(TempButtonClick.initializeToolbar());
         
         testLayout.setLeft(new HBox(200));
         Scene testScene = new Scene(testLayout);
