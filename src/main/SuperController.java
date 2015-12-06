@@ -42,12 +42,14 @@ public class SuperController {
     return mainScene;
   }
   
-  public Scene initNew(GameCreation gameCreation){
-		modelController.makeLevelManager(gameCreation);
-	  	Scene mainScene = uiCore.getScene();
-	    uiCore.initPanels(gameCreation);
-	    uiCore.getMenu().saveGameCreation(gameCreation);
-	    return mainScene;
+  public Scene initNew(GameCreation gameCreation, Scene oldScene){
+	  	if (uiCore.getMenu().saveGameCreation(gameCreation)) {
+	  		modelController.makeLevelManager(gameCreation);
+	  		Scene mainScene = uiCore.getScene();
+	  		uiCore.initPanels(gameCreation);
+	  		return mainScene;
+	  	}
+	    return oldScene;
   }
   
   public Scene initNewLevel(GameCreation gameCreation) {

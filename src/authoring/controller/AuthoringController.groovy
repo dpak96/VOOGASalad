@@ -23,6 +23,7 @@ import model.article.Article;
 import model.controller.ModelController;
 import model.processes.Condition;
 import model.processes.Executable;
+import resourcemanager.ResourceManager
 
 
 public class AuthoringController {
@@ -32,6 +33,7 @@ public class AuthoringController {
 	private boolean highlighted = false;
 	private Article high;
 	private double nXRight, nXLeft;
+	private PresetArticleFactory presetArticleFactory
 
 	public void setHighlighted(boolean highlighted) {
 		this.highlighted = highlighted;
@@ -41,6 +43,7 @@ public class AuthoringController {
 		ui = new AuthoringUI(this);
 		modelController = mc;
 		editor = new EditorManager(mc);
+		presetArticleFactory = new PresetArticleFactory(mc, this);
 	}
 
 	public void init() {
@@ -108,11 +111,10 @@ public class AuthoringController {
 			Pane p = (Pane) event.getParent();
 			p.getChildren().remove(event);
 		}
-		if (event.getImageName().equals("Goomba")) {
-			this.goombaMovementDemo(article);
-		}
-		if(event.getImageName().equals("Platform")){
-			this.platformMovementDemo(article);
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
+		if (event.getImageName() in rb.keySet()){
+			String temp = rb.getString(event.getImageName());
+			this.presetArticle(temp, article);			
 		}
 	}
 
@@ -152,43 +154,6 @@ public class AuthoringController {
 		modelController.remapButton(button, events);
 	}
 
-	public void goombaMovementDemo(Article article) {
-
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) 0.2);
-		Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = this.makeEvent("event", listCondition, listExecutable);
-		List<Event> listEvent = new ArrayList<Event>();
-		listEvent.add(ev);
-		modelController.addActiveEvent(ev);
-
-		this.mapKey("A", listEvent);
-
-		article.setYVelocity(0);
-		article.setCollisionType("A");
-	}
-
-	public void platformMovementDemo(Article article){
-		modelController.addNewCollisionType("A");
-		modelController.addNewCollisionType("B");
-		article.setCollisionType("B");
-
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		Executable ex = this.makeExecutable("ExecutableBounceVertical", tempMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = this.makeEvent("event", listCondition, listExecutable);
-
-		modelController.addCollision("Left", "A", "B", ev);
-	}
 
 	public void addTemp(MouseEvent e) {
 		System.out.println(e.getX());
@@ -262,9 +227,7 @@ public class AuthoringController {
 		event.setDropCompleted(success);
 		event.consume();
 	}
-    public List<Article> getArticles(){
-        return modelController.getArticles()
-    }
+  
     
     public Condition createCondition(String condName, Map<String,Object> params){
         this.modelController.createCondition(condName,params);
@@ -274,4 +237,12 @@ public class AuthoringController {
     public Executable createExecutable(String execName,Map<String,Object> params){
         this.modelController.createExecutable(execName,params);
     }
+
+	public presetArticle(String function, Article article) {
+		presetArticleFactory."$function"(article);
+	}
+
+	public List<Article> getArticles(){
+		return modelController.getArticles()
+	}
 }

@@ -33,7 +33,6 @@ public class EditorManager extends Editor {
 	}
 
 
-
 	public getSubEditor(String editor){
 		return editorMap.get(editor);
 	}
