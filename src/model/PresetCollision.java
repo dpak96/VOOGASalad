@@ -10,11 +10,11 @@ import model.processes.Condition;
 import model.processes.ConditionComparisonOneArticle;
 import model.processes.Executable;
 import model.processes.ExecutableBounceHorizontal;
+import model.processes.ExecutableBounceVertical;
+import model.processes.ExecutableDelete;
 import model.processes.ExecutableSetHorizontalVelocity;
 
 public class PresetCollision {
-	private List<List<List<List<Event>>>> collisionMatrix;
-	private List<String> collisionTypeName;
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private final String LEFT = "Left";
 	private final String RIGHT = "Right";
@@ -23,7 +23,6 @@ public class PresetCollision {
 	private final String PLAYER = "Player";
 	private final String PLATFORM = "platform";
 	private final String ENEMY = "Enemy";
-	
 	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
 	public PresetCollision(CollisionTypeEditor editor) {
 		// TODO Auto-generated constructor stub
@@ -37,16 +36,46 @@ public class PresetCollision {
 		collideWithPlatform(PLAYER);
 		collideWithPlatform(ENEMY);	
 		
-		Event bounce = getBounceEvent();
-		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounce);
+		Event bounceHorizontal = getBounceHorizontalEvent();
+		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceHorizontal);
+		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceHorizontal);
+		
+		Event bounceVertical = getBounceVerticalEvent();
+		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceVertical);
 		
 		Event die = getDieEvent();
+		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
+		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
+		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
+		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(BOTTOM, ENEMY, PLAYER, die);		
+	}
+
+	private Event getBounceVerticalEvent() {
+		// TODO Auto-generated method stub
+		List<Condition> conditionList = new ArrayList<Condition>();
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("myName", "Daniel");
+		temp.put("myActor", null);
+		ExecutableBounceVertical exe = new ExecutableBounceVertical(temp);
+		List<Executable> exeList = new ArrayList<Executable>();
+		exeList.add(exe);
+		Event event = new Event("BounceVertical", conditionList, exeList);
+		return event;
 	}
 
 	private Event getDieEvent() {
 		// TODO Auto-generated method stub
-		
-		return null;
+		List<Condition> conditionList = new ArrayList<Condition>();
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("myModel", "Brandon");
+		temp.put("myActor", null);
+		ExecutableDelete exe = new ExecutableDelete(temp);
+		List<Executable> exeList = new ArrayList<Executable>();
+		exeList.add(exe);
+		Event event = new Event("Die", conditionList, exeList);
+		return event;
 	}
 
 	public void collideWithPlatform(String str) {
@@ -60,7 +89,7 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(BOTTOM, str, PLATFORM, stopBottomVelocity);
 	}
 
-	private Event getBounceEvent() {
+	private Event getBounceHorizontalEvent() {
 		// TODO Auto-generated method stub
 		List<Condition> conditionList = new ArrayList<Condition>();
 		HashMap<String, Object> temp = new HashMap<String, Object>();
@@ -69,7 +98,7 @@ public class PresetCollision {
 		ExecutableBounceHorizontal exe = new ExecutableBounceHorizontal(temp);
 		List<Executable> exeList = new ArrayList<Executable>();
 		exeList.add(exe);
-		Event event = new Event("Bounce", conditionList, exeList);
+		Event event = new Event("BounceHorizontal", conditionList, exeList);
 		return event;
 	}
 
