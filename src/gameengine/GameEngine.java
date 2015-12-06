@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import model.Event;
 import model.article.Article;
@@ -33,7 +36,7 @@ public class GameEngine implements IGameEngine {
 		setMyCharacter(myModelController.getCharacter());
 		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
-		//myActiveArticles = allArticles;
+		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
@@ -71,9 +74,12 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				//NEEDS COLLISION INFORMATION HERE
-				CollisionHandler handler = new CollisionHandler(article, collided, article.getCollisionInformation(collided));
-				handler.collide(myModelController);
+				System.out.println(article.getImageFile() + collided.getImageFile());
+				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
+						article.getCollisionType(), collided.getCollisionType());
+				for (Event e:events){
+					e.fire(article, collided);
+				}
 			}
 		}
 		
@@ -94,12 +100,15 @@ public class GameEngine implements IGameEngine {
 	/*
 	 * Makes list of Active articles
 	 */
-	private List<Article> getActiveArticles(){
+	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		
-		for(Article article : myModelController.getArticles()){
-			if(article.getStatus().equals(Article.Status.ACTIVE)){
-				myActiveArticles.add(article);
+		List<Article> art = myModelController.getArticles();
+		int size = art.size();
+		for(int i = 0; i < size; i++){
+			try {
+				activeArticles.add(art.get(i));
+			} catch(Exception e){
+
 			}
 		}
 		return activeArticles;
