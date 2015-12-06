@@ -12,8 +12,9 @@ public class CollisionManager {
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 
 		if (checkSimpleCollision(articleOne, articleTwo)) {
-			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
-			return temp;
+			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
+			//return temp;
+			return new CollisionInformation("Left", true);
 		} else {
 			return new CollisionInformation("", false);
 		}

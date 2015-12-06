@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import level.manager.XMLOrderer;
 import main.GraphicHandler;
+import model.Model;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
@@ -57,6 +58,30 @@ public class MenuController {
         	XMLOrderer levelOrder = new XMLOrderer();
         	levelOrder.makeXML(dir.getName());
         	game.setGame(dir.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveLevelCreation(GameCreation gameCreation){
+    	game = gameCreation;
+    	System.out.println("Alex is a homosexual " + gameCreation.getGameName());
+    	System.out.println("Alex likes penis deep inside his asshole: " + gameCreation.getGameName() + " " + gameCreation.getFolderPath());
+    	File levelDir = new File(gameCreation.getFolderPath());
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Level File");
+		FileChooser.ExtensionFilter extensionFilter =
+				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
+		myFileChooser.getExtensionFilters().add(extensionFilter);
+    	myFileChooser.setInitialDirectory(levelDir);
+        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+        try {
+//        	dir.mkdir();
+//        	game.setFolderPath(dir.getPath());
+        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),dir.getName());
+        	levelOrder.makeXML(gameCreation.getName());
+//        	game.setGame(game.getName());
+        	myModelController.setModel(new Model());
         } catch (Exception e) {
             e.printStackTrace();
         }

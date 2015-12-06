@@ -3,7 +3,6 @@ package main;
 import action.controller.ActionController;
 import gameengine.GameEngine;
 import javafx.scene.Scene;
-import level.manager.LevelManager;
 import model.Model;
 import model.controller.ModelController;
 import observer.controller.ObserverController;
@@ -22,15 +21,19 @@ public class SuperController {
   private UICore uiCore;
 
   public SuperController(GraphicHandler graphicHandler) {
+	  myGraphicHandler = graphicHandler;
+	  newEverything();
+  }
+
+  private void newEverything() {
     model = new Model();
-    myGraphicHandler = graphicHandler;
     modelController = new ModelController(model);
     gameEngine = new GameEngine(modelController);
     actionController = new ActionController(gameEngine);
     uiCore = new UICore(myGraphicHandler, actionController, modelController);
     observerController = new ObserverController(model, uiCore.getUIStackPane());
   }
-
+  
   public Scene init(GameCreation gameCreation, String levelFile) {
     Scene mainScene = uiCore.getScene();
     uiCore.initPanels(gameCreation);
@@ -44,6 +47,14 @@ public class SuperController {
 	    uiCore.getMenu().saveGameCreation(gameCreation);
 	    return mainScene;
   }
+  
+  public Scene initNewLevel(GameCreation gameCreation) {
+	  newEverything();
+	  Scene mainScene = uiCore.getScene();
+	  uiCore.initPanels(gameCreation);
+	  return mainScene;
+  }
+  
   public ModelController getModelController() {
     return modelController;
   }
