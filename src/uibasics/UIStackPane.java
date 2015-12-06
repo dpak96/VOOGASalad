@@ -33,6 +33,7 @@ public class UIStackPane extends StackPane implements Observer {
 		myUIBasics = new UIBasics(myModelController);
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
+		myAuthoringController.getUi().init();
 	}
 	
 	public void initPanes(GameCreation game) {
@@ -44,6 +45,7 @@ public class UIStackPane extends StackPane implements Observer {
 		} else {
 			edit=true;
 			this.getChildren().add(myAuthoringControllerPane);
+
 		}
 	}
 	
