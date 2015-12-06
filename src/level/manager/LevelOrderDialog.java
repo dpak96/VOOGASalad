@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
@@ -39,8 +41,15 @@ public class LevelOrderDialog extends Dialog{
 		this.setResultConverter(new Callback<ButtonType,GameCreation>(){
 			public GameCreation call(ButtonType ok){
 				if(ok == myOKer){
+					HashMap<Integer,String> saver = new HashMap<Integer,String>(gameCreation.getLevelMap());
 					gameCreation.getLevelMap().clear();
 					for(ComboBox<Integer> i: myOrder.keySet()){
+						if(gameCreation.getLevelMap().keySet().contains(i.getValue())){
+							Alert dup = new Alert(AlertType.CONFIRMATION,"Please retry, and do not place two levels at the same order",ButtonType.OK);
+							dup.showAndWait();
+							gameCreation.setLevelMap(saver);
+							return gameCreation;						
+						}
 						gameCreation.getLevelMap().put(i.getValue(), myOrder.get(i));
 					}
 					return gameCreation;

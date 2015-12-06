@@ -2,6 +2,7 @@ package startscreen;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.xml.sax.SAXException;
@@ -89,5 +90,9 @@ public class GameCreation {
     
     public Map<Integer,String> getLevelMap(){
     	return myLevelMap;
+    }
+    
+    public void setLevelMap(HashMap<Integer,String> map){
+    	myLevelMap = map;
     }
 }
