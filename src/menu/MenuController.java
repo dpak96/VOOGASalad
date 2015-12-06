@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import level.manager.XMLOrderer;
 import main.GraphicHandler;
+import model.Model;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
@@ -57,6 +58,26 @@ public class MenuController {
         	XMLOrderer levelOrder = new XMLOrderer();
         	levelOrder.makeXML(dir.getName());
         	game.setGame(dir.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveLevelCreation(GameCreation gameCreation){
+    	game = gameCreation;
+    	File levelDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+    	+ "SquirtleSquadGames" + gameCreation.getGameName());
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Level File");
+    	myFileChooser.setInitialDirectory(levelDir);
+        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+        try {
+//        	dir.mkdir();
+//        	game.setFolderPath(dir.getPath());
+        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),dir.getName());
+        	levelOrder.makeXML(gameCreation.getName());
+//        	game.setGame(game.getName());
+        	myModelController.setModel(new Model());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -44,6 +44,14 @@ public class SuperController {
 	    uiCore.getMenu().saveGameCreation(gameCreation);
 	    return mainScene;
   }
+  
+  public Scene initNewLevel(GameCreation gameCreation) {
+	  Scene mainScene = uiCore.getScene();
+	  uiCore.initPanels(gameCreation);
+	  uiCore.getMenu().saveLevelCreation(gameCreation);
+	  return mainScene;
+  }
+  
   public ModelController getModelController() {
     return modelController;
   }
