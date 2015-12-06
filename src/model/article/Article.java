@@ -38,6 +38,7 @@ public class Article{
 		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
+		myBitMap = new BitMap(image, x, y);	
 		myStatus = Status.ACTIVE;
 	}
 

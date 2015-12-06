@@ -19,7 +19,12 @@ public class Position {
 	public Position(double x, double y){
 		myX = x;
 		myY = y;
-		isValid = true;
+		if (x == -1 && y == -1) {
+			isValid = false;
+			
+		} else {
+			isValid = true;
+		}
 	}
 	public Position(double x, double y, boolean direction){
 		myX = x;
