@@ -1,14 +1,11 @@
-package authoring.backend;
+package authoring.backend
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import model.Game;
-import model.article.Article;
-import model.article.Player;
+
 import model.controller.ModelController;
+import resourcemanager.ResourceManager;
 
 
 public class EditorManager extends Editor {
@@ -23,28 +20,39 @@ public class EditorManager extends Editor {
     super(modelController);
     this.register(modelController);
     setGameEditor(new GameEditor(modelController));
-    setArticleEditor(new ArticleEditor(modelController));
     setLevelEditor(new LevelEditor(modelController));
+    setArticleEditor(new ArticleEditor(modelController));
   }
   
   public void register(ModelController mc){
+    ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
     editorMap = new HashMap<String, Editor>();
-    editorMap.put("GameEditor", new GameEditor(mc));
-    editorMap.put("ArticleEditor", new ArticleEditor(mc));
+    for(String x: rb.keySet()){
+      editorMap.put(x, getNewInstance(rb.getString(x)));
+    }
+
+    /*editorMap.put("GameEditor", getNewInstance());
     editorMap.put("UserInterfaceEditor", new UserInterfaceEditor(mc));
     editorMap.put("LevelEditor", new LevelEditor(mc));
+    editorMap.put("ArticleEditor", new ArticleEditor(mc));*/
   }
 
-  public ArticleEditor getArticleEditor() {
-    return articleEditor;
+  private getNewInstance(String cName){
+    Class<?> cl = Class.forName(cName);
+    Constructor<?> ctor = cl.getConstructor(ModelController.class);
+    Object[] o = new Object[1];
+    o[0] = myModelController;
+    Object object = ctor.newInstance(o);
+    return object;
   }
 
-  public void setArticleEditor(ArticleEditor articleEditor) {
-    this.articleEditor = articleEditor;
-  }
 
   public GameEditor getGameEditor() {
     return gameEditor;
+  }
+
+  public getSubEditor(String editor){
+    return editorMap.get(editor);
   }
 
   public void setGameEditor(GameEditor gameEditor) {
@@ -66,5 +74,14 @@ public class EditorManager extends Editor {
   public void setLevelEditor(LevelEditor levelEditor) {
     this.levelEditor = levelEditor;
   }
+
+  public ArticleEditor getArticleEditor() {
+    return articleEditor;
+  }
+
+  public void setArticleEditor(ArticleEditor articleEditor) {
+    this.articleEditor = articleEditor;
+  }
+
 
 }

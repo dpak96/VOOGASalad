@@ -3,8 +3,8 @@ package authoring.backend
 import model.article.Article;
 import model.controller.ModelController
 
-class GArticleEditor extends Editor {
-  public GArticleEditor(ModelController mc){
+class ArticleEditor extends Editor {
+  public ArticleEditor(ModelController mc){
     super(mc);
   }
 

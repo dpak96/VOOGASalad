@@ -44,7 +44,7 @@ public class AuthoringController {
   }
 
   public void init() {
-    ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
+    //ui.getDragAndDrop().getScene().setOnKeyReleased(event -> addTile(event));
   }
 
   public void addTile(KeyEvent event) {
@@ -158,7 +158,7 @@ public class AuthoringController {
 	
     Map<String, Object> tempMap = new HashMap<String, Object>();
     tempMap.put("myActor", article);
-    tempMap.put("myAcceleration", .2);
+    tempMap.put("myAcceleration", 0.2);
     Executable ex = this.makeExecutable("ExecutableAccelerateVertical", tempMap);
 
     List<Executable> listExecutable = new ArrayList<Executable>();
