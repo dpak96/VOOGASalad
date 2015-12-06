@@ -49,7 +49,9 @@ public class Event {
 	
 	public void fire(){
 		for(Condition c : myConditions){
-			if(!c.isMet()) return;
+			if(!c.isMet()){
+				return;
+			}
 		}
 		for(Executable e : myExecutables){
 			if(e.checkActive()){
