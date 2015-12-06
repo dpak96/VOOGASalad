@@ -27,6 +27,7 @@ public class LevelOrderDialog extends Dialog{
 		this.setTitle("Change Level Order");
 		this.setResizable(true);
 		myGridPane = new GridPane();
+		myGridPane.setVgap(10);
 		for(int i:gameCreation.getLevelMap().keySet()){
 			Label levelOrder = new Label(gameCreation.getLevelMap().get(i));
 			ComboBox<Integer> num = makeComboBox(gameCreation.getLevelMap().size());
