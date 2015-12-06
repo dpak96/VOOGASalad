@@ -35,6 +35,7 @@ public class SuperController {
   }
   
   public Scene init(GameCreation gameCreation, String levelFile) {
+	modelController.makeLevelManager(gameCreation);
     Scene mainScene = uiCore.getScene();
     uiCore.initPanels(gameCreation);
     uiCore.getMenu().loadGame(gameCreation, levelFile);
@@ -42,6 +43,7 @@ public class SuperController {
   }
   
   public Scene initNew(GameCreation gameCreation){
+		modelController.makeLevelManager(gameCreation);
 	  	Scene mainScene = uiCore.getScene();
 	    uiCore.initPanels(gameCreation);
 	    uiCore.getMenu().saveGameCreation(gameCreation);

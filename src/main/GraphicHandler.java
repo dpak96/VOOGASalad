@@ -17,8 +17,7 @@ public class GraphicHandler {
     
     public GraphicHandler(){
         superController = new SuperController(this);
-        myLevelManager = new LevelManager(superController.getModelController());
-        start = new StartScreenController(myLevelManager);
+        start = new StartScreenController();
     }
 
     public void init(Stage s){
@@ -28,7 +27,7 @@ public class GraphicHandler {
 
 
     public void startScreen(){
-        start = new StartScreenController(myLevelManager);
+        start = new StartScreenController();
         baseScene = new Scene(start.getStart(), 400,400);
         baseScene.getStylesheets().add("startscreen/StartScreen.css");
         currentStage.setTitle("Test");
@@ -43,12 +42,7 @@ public class GraphicHandler {
     	System.out.println(levelFile);
     	gameCreation.setLevel(levelFile);
     	System.out.println(gameCreation.getLevel());
-//    	myLevelManager.startGame(gameCreation);
         currentStage.setScene(superController.init(gameCreation, gameCreation.getLevel()));
-    }
-    
-    public void updateLevels(GameCreation gameCreation) {
-    	myLevelManager.updateLevels(gameCreation);
     }
     
     public void startUpNew(GameCreation gameCreation){
