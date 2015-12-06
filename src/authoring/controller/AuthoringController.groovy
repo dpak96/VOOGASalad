@@ -32,6 +32,7 @@ public class AuthoringController {
 	private boolean highlighted = false;
 	private Article high;
 	private double nXRight, nXLeft;
+	private PresetArticleFactory presetArticleFactory
 
 	public void setHighlighted(boolean highlighted) {
 		this.highlighted = highlighted;
@@ -41,6 +42,7 @@ public class AuthoringController {
 		ui = new AuthoringUI(this);
 		modelController = mc;
 		editor = new EditorManager(mc);
+		presetArticleFactory = new PresetArticleFactory(mc, this);
 	}
 
 	public void init() {
