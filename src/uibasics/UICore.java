@@ -32,10 +32,12 @@ public class UICore {
   
 
   public void borderInit(VoogaProperties props) {
-    myRoot.setCenter(uiStackPane);
-    myRoot.setTop(menuController.getMenu());
+	myRoot.setCenter((Pane) uiStackPane);
+	myRoot.setTop(menuController.getMenu());
+	System.out.println(myRoot.getChildren().get(0).getClass());
     myRoot.setPrefWidth(props.getSceneWidth());
     myRoot.setPrefHeight(props.getSceneHeight());
+    
   }
   
   public void initPanels(GameCreation game) {
