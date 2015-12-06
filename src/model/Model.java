@@ -233,6 +233,10 @@ public class Model extends Observable{
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
+	public List<String> getAllCollisionTypes(){
+		return myCollisionTypeEditor.getCollisionTypeList();
+	}
+	
 	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
 		return myCollisionTypeEditor.getEvents(direction, nameOne, nameTwo);
 	}
