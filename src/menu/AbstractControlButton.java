@@ -13,6 +13,8 @@ public abstract class AbstractControlButton extends Button {
 	
 	public AbstractControlButton(){
 		super();
+		this.setPrefHeight(10);
+		this.setPrefWidth(10);
 	}
 	
 	public abstract void resize(MenuPanel menuPanel);

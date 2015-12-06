@@ -6,10 +6,10 @@ import resourcemanager.ResourceManager;
 
 public class MainMenu extends HBox {
 	
-	MenuPanel myMenuPanel;
-	PlayButton myPlayer;
-	PauseButton myPauser;
-	StepButton myStepper;
+	private MenuPanel myMenuPanel;
+	private PlayButton myPlayer;
+	private PauseButton myPauser;
+	private StepButton myStepper;
 	
 	public MainMenu(MenuController menuController){
 		super();

@@ -67,7 +67,6 @@ public class StartScreenController {
     protected void setLevel(String value){
         try{
             start.removeLayer();
-            System.out.println("Alex Rice fists orphans " + value);
             myGraphicHandler.startUp(game,value);
         }
         catch(Exception e){
