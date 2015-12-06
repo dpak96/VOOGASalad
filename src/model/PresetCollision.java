@@ -21,7 +21,7 @@ public class PresetCollision {
 	private final String TOP = "Top";
 	private final String BOTTOM = "Bottom";
 	private final String PLAYER = "Player";
-	private final String PLATFORM = "platform";
+	private final String PLATFORM = "Platform";
 	private final String ENEMY = "Enemy";
 	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
 	public PresetCollision(CollisionTypeEditor editor) {

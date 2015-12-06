@@ -19,6 +19,7 @@ public class CollisionManager {
 			
 			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			//return temp;
+			
 			return new CollisionInformation(getIncidenceDirection(articleOne, articleTwo), true);
 
 		} else {
@@ -55,6 +56,7 @@ public class CollisionManager {
 //
 //	}
 	
+	//NEED TO FIX LOGIC FROM LEFT
 	private String getIncidenceDirection(Article a, Article b) {
 		if (a.getX()+a.getWidth() <= b.getX()) {
 			if (a.getY()+a.getHeight() <= b.getY()+b.getHeight() && a.getY()+a.getHeight() >= b.getY()) {
@@ -93,7 +95,7 @@ public class CollisionManager {
 			}
 			
 		}
-		return "";
+		return "Left";
 	}
 
 	private CollisionInformation checkBitMapCollision(Article b, Article a) {
