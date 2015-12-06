@@ -4,12 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import level.manager.LevelManager;
 
 public class StartScreen {
     private StartScreenSkeleton skeleton;
