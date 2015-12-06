@@ -6,17 +6,17 @@ import javafx.scene.layout.GridPane;
 
 public class BackgroundMenu extends AuthoringMenu {
 
-    ComboBox imageBox=new ComboBox();
+    private ComboBox<String> imageBox=new ComboBox<String>();
+    private ComboBoxImageRendering imageHandler=new ComboBoxImageRendering();
     
     public BackgroundMenu (String title, AuthoringController controller) {
         super(title, controller);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void executeYourMenuFunction () {
-        // TODO Auto-generated method stub
-        
+
+            super.myController.getEditor().getLevelEditor().setBackgroundImage(imageBox.getValue());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BackgroundMenu extends AuthoringMenu {
         
         int rowIndex=1;
         imageBox=super.componentAdder.makeLabelAndBox(menuPane, 1, rowIndex, "Background Image: ");
-        
+        imageHandler.addImages(imageBox);
     }
-
+    
 }

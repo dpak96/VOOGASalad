@@ -11,8 +11,14 @@ public class GameChooserModule extends AbstractChooserModule {
     }
 
     @Override
-    protected void init(StartScreenController controller){
-        super.init(controller);
+    protected void init(StartScreenController controller, String mode){
+        super.init(controller, mode);
+        if(mode.equals("edit")){
+        	Button newGame = new Button("New Game");
+        	buttons.add(newGame);
+        	addToContainer(newGame);
+        	newGame.setOnAction(e->controller.newGame("1"));
+        }
         setButtonID();
     }
 

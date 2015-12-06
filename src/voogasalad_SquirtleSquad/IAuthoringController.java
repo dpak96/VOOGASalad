@@ -1,7 +1,7 @@
 package voogasalad_SquirtleSquad;
 
 import javafx.scene.Node;
-import model.Article;
+import model.article.Article;
 
 
 public interface IAuthoringController {

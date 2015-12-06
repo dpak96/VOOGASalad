@@ -14,11 +14,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 
-public class ButtonOverlay extends DraggableElement {
+public abstract class ButtonOverlay extends DraggableElement {
     private OverlayController myOverlayController;
     private FlowPane myToolBox;
     private Button back;
-    private AuthoringController myAuthoringController;
+    protected AuthoringController myAuthoringController;
     public ButtonOverlay(AuthoringController authoringController){
         myToolBox = new FlowPane();
         myOverlayController = new OverlayController();
@@ -43,12 +43,7 @@ public class ButtonOverlay extends DraggableElement {
     private void configureToolBox (FlowPane toolBox) {
     }
 
-    private List<Button> populateButtonList () {
-        List<Button> buttonList = new ArrayList<Button>();
-        buttonList.add(new RuleButton(myAuthoringController));
-        buttonList.add(new EnemyButton(myAuthoringController));
-        return buttonList;
-    }
+    protected abstract List<Button> populateButtonList () ;
 
 
 

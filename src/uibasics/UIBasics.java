@@ -1,10 +1,9 @@
 package uibasics;
 
-import model.Article;
+import model.article.Article;
 import model.controller.ModelController;
 import java.util.*;
-import javax.annotation.Resource;
-import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
+
 import config.Config;
 import front.commands.AbstractCommand;
 import javafx.scene.image.Image;
@@ -30,7 +29,6 @@ public class UIBasics {
     myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-    this.setBackImage("Goomba");
   }
 
   private void load(String identifier) {
@@ -42,8 +40,6 @@ public class UIBasics {
     }
     for (AbstractCommand c : myCommands) {
       System.out.println(c);
-      System.out.println("bark");
-
     }
   }
 
@@ -51,7 +47,7 @@ public class UIBasics {
     return myPane;
   }
 
-  public void update(List<Article> list, Article character) {
+  public void update(List<Article> list, Article character, String backImage) {
     clearAll();
     myBackArticles = list;
     for (Article value : myBackArticles) {
@@ -59,6 +55,7 @@ public class UIBasics {
     }
     articleUpdate(character);
     myPane.getChildren().addAll(myFrontArticles);
+    setBackImage(backImage);
   }
 
   public void articleUpdate(Article article) {
@@ -78,14 +75,20 @@ public class UIBasics {
   }
 
   public void setBackImage(String img) {
-    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
-    BackgroundPosition pos = new BackgroundPosition(null, 250, false, null, 0, false);
-    BackgroundImage back =
-        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
-            .getResource("ImageManager", img),
-                            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
+	try {
+	    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+	    BackgroundPosition pos = new BackgroundPosition(null, myModelController.getViewpoint().getX(), 
+	    		false, null, myModelController.getViewpoint().getY(), false);
+	    BackgroundImage back =
+	        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
+	            .getResource("ImageManager", img),
+	                            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
 
-    myPane.setBackground(new Background(back));
+	    myPane.setBackground(new Background(back));
+	} catch (NullPointerException e) {
+		//No set background image
+	}
+
   }
 
 }

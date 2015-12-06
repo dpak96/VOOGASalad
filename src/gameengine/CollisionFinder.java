@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import model.Position;
+import model.article.Position;
 
 /**
  * @version 1.0

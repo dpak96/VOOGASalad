@@ -1,20 +1,48 @@
 package model;
 import java.util.*;
 
+
+import gameengine.CollisionTypeEditor;
+import model.article.Article;
+import model.processes.Condition;
+import model.processes.Executable;
+
 public class Model extends Observable{
 	
-	private List<Event> myEvents;
 	private Map<String, List<Event>> myButtonMap;
 	private List<Article> myArticles;
 	private List<Executable> myExecutables;
 	private List<Condition> myConditions;
+	private List<Event> allEvents;
+	private List<Event> myActiveEvents;
 	private Article myViewpoint;
 	private Article myCharacter;
-
-
+	private CollisionTypeEditor myCollisionTypeEditor;
+	private String myBackgroundImage;
 	
-	public List<Event> getEvents(){
-		return myEvents;
+	public Model(){
+		allEvents = new ArrayList<Event>();
+		myActiveEvents = new ArrayList<Event>();
+		myButtonMap = new HashMap<String, List<Event>>();
+		myButtonMap.put("default", new ArrayList<Event>());
+		myArticles = new ArrayList<Article>();
+		myExecutables = new ArrayList<Executable>();
+		myConditions = new ArrayList<Condition>();
+		myViewpoint = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Platform", 400, 400, true);
+		
+	}
+
+	public List<Event> getAllEvents(){
+		return allEvents;
+	}
+	
+	public void removeExecutableFromEvent(Event ev, Executable exec){
+		ev.removeExecutable(exec);
+	}
+	
+	public void removeConditionFromEvent(Event ev, Condition cond){
+		ev.removeCondition(cond);
 	}
 	
 	public List<Article> getArticles(){
@@ -25,7 +53,7 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
-		System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
+		//System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
@@ -40,23 +68,27 @@ public class Model extends Observable{
 	}
 	
 	public void destroyModel() {
-		myEvents = null;
+		allEvents = null;
+		myActiveEvents = null;
 		myButtonMap = null;
 		myArticles = null;
 		myExecutables = null;
 		myConditions = null;
 		myViewpoint = null;
 		myCharacter = null;
+		myCollisionTypeEditor = null;
 	}
 	public void initialize() {
-		myEvents = new ArrayList<Event>();
+		allEvents = new ArrayList<Event>();
+		myActiveEvents = new ArrayList<Event>();
 		myButtonMap = new HashMap<String, List<Event>>();
 		myButtonMap.put("default", new ArrayList<Event>());
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 0, 0);
-		myCharacter = new Article("Goomba", -100, -100);
+		myViewpoint = new Article("Goomba", 100, 100);
+		myCharacter = new Article("Platform", 500, 500, true);
+		myCollisionTypeEditor = new CollisionTypeEditor();
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()
@@ -82,10 +114,6 @@ public class Model extends Observable{
 	}
 	public void setCharacter(Article character) {
 		myCharacter = character;
-	}
-
-	public void removeEventFromArticle(Article article, Event event){
-		article.getEvents().remove(event);
 	}
 
 	public void remapButton(String button, List<Event> events) {
@@ -139,15 +167,63 @@ public class Model extends Observable{
 	}
 
 	public void addEvent(Event newEvent) {
-		myEvents.add(newEvent);
+		allEvents.add(newEvent);
 	}
 	
 	public void addAllEvents(List<Event> events) {
-		myEvents.addAll(events);
+		allEvents.addAll(events);
 	}
 	
 	public void removeEvent(Event event){
-		myEvents.remove(event);
+		if(allEvents.contains(event)){
+			allEvents.remove(event);
+		}
+		if(myActiveEvents.contains(event)){
+			myActiveEvents.remove(event);
+		}
+		for(String k: myButtonMap.keySet()){
+			if(myButtonMap.get(k).contains(event)){
+				myButtonMap.get(k).remove(event);
+			}
+		}
+		//ADD REMOVE FROM COLLISION EVENTS!!!!
 	}
 	
+	public void setBackgroundImage(String backgroundImage){
+		myBackgroundImage = backgroundImage;
+	}
+	
+	public String getBackgroundImage(){
+		return myBackgroundImage;
+	}
+
+	public List<Event> getActiveEvents() {
+		return myActiveEvents;
+	}
+
+	public void setActiveEvents(List<Event> activeEvents) {
+		myActiveEvents = activeEvents;
+	}
+	
+	public void addActiveEvent(Event event){
+		myActiveEvents.add(event);
+	}
+	
+	public void initializeCollision(){
+		PresetCollision preset = new PresetCollision(myCollisionTypeEditor);
+		preset.intialize();
+		myCollisionTypeEditor = preset.getCollisonTypeEditor();
+	}
+	
+	public void addNewCollisionType(String type){
+		myCollisionTypeEditor.add(type);
+	}
+	
+	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
+	}
+	
+	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+		return myCollisionTypeEditor.getEvents(direction, nameOne, nameTwo);
+	}
 }

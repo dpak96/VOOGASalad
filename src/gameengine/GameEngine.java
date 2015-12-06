@@ -4,15 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
-import model.Article;
 import model.Event;
-import model.Position;
+import model.article.Position;
+import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
-import model.Article;
+
 
 public class GameEngine implements IGameEngine {
 	private List<Article> myActiveArticles;
@@ -20,7 +23,6 @@ public class GameEngine implements IGameEngine {
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
-	
 	private List<Article> allArticles;
 	
 	public GameEngine(ModelController modelController){
@@ -35,12 +37,13 @@ public class GameEngine implements IGameEngine {
 		//System.out.println(allArticles.size());
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
+		updateActiveArticles();
 		myActiveArticles = getActiveArticles();
 		myActiveArticles = allArticles;
 		checkAndAddCollisions();
 		runButtonPress(input);
 		runArticleCollisions();
-		runArticleEvents();
+		runActiveEvents();
 		runArticleUpdates();
 		myModelController.notifyObservers();
 		
@@ -50,17 +53,18 @@ public class GameEngine implements IGameEngine {
 		for(Article article : myActiveArticles){
 			article.clearCollisions();
 		}
-		if (myActiveArticles.size() >= 2){
-			for(int i = 0; i < myActiveArticles.size(); i++){
-				Article first = myActiveArticles.get(i);
-				for(int j = i + 1; j < myActiveArticles.size(); j++){
-					Article second = myActiveArticles.get(j);
-					CollisionInformation temp = myCollisionManager.didCollide(first,second);
-					if(temp.isRealCollision()){
-						first.addCollision(second, temp);
-						second.addCollision(first, temp);
-					}
-				}
+
+		
+		for(int i = 0; i < myActiveArticles.size(); i++){
+			Article first = myActiveArticles.get(i);
+			for(int j = i + 1; j < myActiveArticles.size(); j++){
+				Article second = myActiveArticles.get(j);
+				/*CollisionInformation temp = myCollisionManager.didCollide(first,second);
+				if(temp.isRealCollision()){
+					first.addCollision(second, temp);
+					second.addCollision(first, temp);
+				}*/
+
 			}
 		}
 			
@@ -76,20 +80,20 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				//NEEDS COLLISION INFORMATION HERE
-				CollisionHandler handler = new CollisionHandler(article, collided, article.getCollisionInformation(collided));
-				handler.collide();
+				System.out.println(article.getImageFile() + collided.getImageFile());
+				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
+						article.getCollisionType(), collided.getCollisionType());
+				for (Event e:events){
+					e.fire(article, collided);
+				}
 			}
 		}
 		
 	}
 	
-	private void runArticleEvents(){
-		for(Article article : allArticles){
-			List<Event> articleEvents = article.getEvents();
-			for(Event e : articleEvents){
-				e.fire();
-			}
+	private void runActiveEvents(){
+		for(Event e : myModelController.getActiveEvents()){
+			e.fire();
 		}
 	}
 	
@@ -99,28 +103,65 @@ public class GameEngine implements IGameEngine {
 		}
 	}
 	
-	private List<Article> getActiveArticles(){
+	/*
+	 * Makes list of Active articles
+	 */
+	private List<Article> getActiveArticles() {
 		List<Article> activeArticles = new ArrayList<Article>();
-		for(Article article : myModelController.getArticles()){
-			double x = article.getX();
-			double y = article.getY();
-			double width = article.getWidth();
-			double height = article.getHeight();
-			double viewpointX = myViewpoint.getX();
-			double viewpointY = myViewpoint.getY();
-			double viewpointWidth = myViewpoint.getWidth();
-			double viewpointHeight = myViewpoint.getHeight();
-			//System.out.println(viewpointHeight + " " + viewpointWidth);
-			double xBuffer = article.getXBuffer();
-			double yBuffer = article.getYBuffer();
-			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
-					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
-					x, x + width, y, y + height)){
-				myActiveArticles.add(article);
+
+//		for(Article article : myModelController.getArticles()){
+//			double x = article.getX();
+//			double y = article.getY();
+//			double width = article.getWidth();
+//			double height = article.getHeight();
+//			double viewpointX = myViewpoint.getX();
+//			double viewpointY = myViewpoint.getY();
+//			double viewpointWidth = myViewpoint.getWidth();
+//			double viewpointHeight = myViewpoint.getHeight();
+//			//System.out.println(viewpointHeight + " " + viewpointWidth);
+//			double xBuffer = article.getXBuffer();
+//			double yBuffer = article.getYBuffer();
+//			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+//					viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+//					x, x + width, y, y + height)){
+//				myActiveArticles.add(article);
+
+		List<Article> art = myModelController.getArticles();
+		int size = art.size();
+		for(int i = 0; i < size; i++){
+			try {
+				activeArticles.add(art.get(i));
+			} catch(Exception e){
+
 			}
-					
 		}
 		return activeArticles;
+	}
+	
+	/*
+	 * Updates articles within the viewpoint to active except for HardInactives
+	 */
+	private void updateActiveArticles(){
+		for(Article article : myModelController.getArticles()){
+			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
+				double x = article.getX();
+				double y = article.getY();
+				double width = article.getWidth();
+				double height = article.getHeight();
+				double viewpointX = myViewpoint.getX();
+				double viewpointY = myViewpoint.getY();
+				double viewpointWidth = myViewpoint.getWidth();
+				double viewpointHeight = myViewpoint.getHeight();
+				double xBuffer = article.getXBuffer();
+				double yBuffer = article.getYBuffer();				
+				if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
+						viewpointY - yBuffer, viewpointY + viewpointHeight + yBuffer + yBuffer,
+						x, x + width, y, y + height)){
+					article.setActive();
+				}
+				else article.setInactive();
+			}	
+		}
 	}
 	
 	private boolean rectanglesOverlap(double minX1, double maxX1, double minY1, double maxY1,
@@ -129,6 +170,11 @@ public class GameEngine implements IGameEngine {
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, minX2, maxY2) ||
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, minY2) ||
 			   rectangleContainsPoint(minX1, maxX1, minY1, maxY1, maxX2, maxY2);
+	}
+	
+	private void checker(double minX1, double maxX1, double minY1, double maxY1,
+			double minX2, double maxX2, double minY2, double maxY2){
+		System.out.println(rectanglesOverlap(minX1, maxX1, minY1, maxY1, minX2, maxX2, minY2, maxY2));
 	}
 	
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){

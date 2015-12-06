@@ -1,10 +1,14 @@
 package menu;
 
+import javafx.beans.property.Property;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import level.manager.XMLOrderer;
 import main.GraphicHandler;
+import model.Model;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
@@ -38,50 +42,73 @@ public class MenuController {
         myGraphicHandler.startScreen();
     }
 
-    public void something(ResourceBundle resourceBundle, FileChooser myFileChooser){ //what does this do?
-        myFileChooser.setTitle(resourceBundle.getString("OPEN"));
-        File file = myFileChooser.showOpenDialog(myMainMenu.getScene().getWindow());
+    public void saveGameCreation(GameCreation gameCreation){
+    	game = gameCreation;
+    	File gamesDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames");
+    	if(!gamesDir.exists()){
+    		gamesDir.mkdir();
+    	}
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Game Folder");
+    	myFileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" ));
+        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
         try {
-            if (file != null) {
-                FileInputStream f = new FileInputStream(file);
-                ObjectInputStream o = new ObjectInputStream(f);
-//				Data newDat = (Data) o.readObject();
-                o.close();
-//				newDat.recreate();
-//				myController.getGuiManager().getTurtScene();
-//				myController.getGuiManager().getMyHistory().clear();
-//				myController.getMyScene().setData(0, newDat);
-//				for (String i : newDat.getUserHistory()) {
-//					myController.getGuiManager().getMyHistory().addCommand(i);
-//				}
-//				for (String j : newDat.getUserCommandMap().keySet()) {
-//					myController.getGuiManager().getMyUserCommands().addCommand(j);
-//				}
-//				for (String k : newDat.getVariableMap().keySet()) {
-//					myController.getGuiManager().getMyUserCommands().addCommand(k);
-//				}
-            }
+        	dir.mkdir();
+        	game.setFolderPath(dir.getPath());
+        	XMLOrderer levelOrder = new XMLOrderer();
+        	levelOrder.makeXML(dir.getName());
+        	game.setGame(dir.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveLevelCreation(GameCreation gameCreation){
+    	game = gameCreation;
+    	System.out.println("Alex is a homosexual " + gameCreation.getGameName());
+    	System.out.println("Alex likes penis deep inside his asshole: " + gameCreation.getGameName() + " " + gameCreation.getFolderPath());
+    	File levelDir = new File(gameCreation.getFolderPath());
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Level File");
+		FileChooser.ExtensionFilter extensionFilter =
+				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
+		myFileChooser.getExtensionFilters().add(extensionFilter);
+    	myFileChooser.setInitialDirectory(levelDir);
+        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+        try {
+//        	dir.mkdir();
+//        	game.setFolderPath(dir.getPath());
+        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),dir.getName());
+        	levelOrder.makeXML(gameCreation.getName());
+//        	game.setGame(game.getName());
+        	myModelController.setModel(new Model());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    public void trySave(FileChooser fileChooser, String saveName) {
-           /* try {
-                saveGame(fileChooser, saveName);
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }*/
-    }
-
     public void saveGame(){
-            myModelController.save(myMainMenu.getScene().getWindow());
+        game = myGraphicHandler.getGameCreation();
+        myModelController.save(myMainMenu.getScene().getWindow(), game.getName());
+            
+    }
+    
+    public void reorderGame(){
+        game = myGraphicHandler.getGameCreation();
+        XMLOrderer reorder = new XMLOrderer(game);
+        reorder.makeXML(game.getName());
     }
 
     public void loadGame(){
+//    	System.out.println("myMainMenu.getScene()");
+//    	System.out.println(myMainMenu.getScene() == null);
+//    	System.out.println("myMainMenu.getScene().getWindow()");
+//    	System.out.println(myMainMenu.getScene().getWindow() == null);
         myModelController.load(myMainMenu.getScene().getWindow());
+    }
+    
+    public void loadGame(GameCreation gameCreation, String file){
+    	myModelController.load(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator") + gameCreation.getGameName() + System.getProperty("file.separator") + file));
     }
 
 

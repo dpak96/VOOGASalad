@@ -2,42 +2,29 @@ package authoring.backend;
 
 import javafx.scene.image.Image;
 import model.Game;
+import model.controller.ModelController;
 
 
-public class GameEditor implements IGameEditor{
-  private Game game;
-  
-  public GameEditor(){
-    
+public class GameEditor extends Editor{
+  public GameEditor(ModelController mc) {
+    super(mc);
+    // TODO Auto-generated constructor stub
   }
 
-  public Game getGame() {
-    return game;
-  }
 
-  public void setGame(Game game) {
-    this.game = game;
-  }
-
-  @Override
-  public void setSplash(Image img) {
+  public void setSplash(Image img, Game game) {
     // TODO Auto-generated method stub
     
   }
 
-
-
-  @Override
-  public void addNewLevel() {
+  public void addNewLevel(Game game) {
     // TODO Auto-generated method stub
     
   }
 
-  @Override
-  public void loadLevel() {
+  public void loadLevel(Game game) {
     // TODO Auto-generated method stub
     
   }
-  
-  
+    
 }

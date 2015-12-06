@@ -1,11 +1,17 @@
 package model.controller;
 
 import gameengine.*;
+
+import java.io.File;
 import java.util.*;
+
 import javafx.stage.Window;
 import model.*;
 import model.XMLutility.xmlUtility;
+import model.article.Article;
 import model.factory.*;
+import model.processes.Condition;
+import model.processes.Executable;
 import resourcemanager.ResourceManager;
 
 
@@ -27,20 +33,7 @@ public class ModelController implements IModelController {
     return myModelFactory.getParameters(className);
   }
 
-  public Article createArticle(String fileName,
-                               double x,
-                               double y,
-                               boolean direction,
-                               List<Event> events) {
-    Article myViewpoint = myModel.getViewpoint();
-    double xAdjusted = x + myViewpoint.getX();
-    double yAdjusted = y + myViewpoint.getY();
-    Article newArticle =
-        myModelFactory.createArticle(fileName, xAdjusted, yAdjusted, direction, events);
-    addArticle(newArticle);
-    return newArticle;
-  }
-
+ 
   public Article createArticle(String fileName, double x, double y, boolean direction) {
     Article newArticle = myModelFactory.createArticle(fileName, x, y, direction);
     addArticle(newArticle);
@@ -75,7 +68,7 @@ public class ModelController implements IModelController {
 
   @Override
   public List<Event> getEvents() {
-    return myModel.getEvents();
+    return myModel.getAllEvents();
   }
 
   public List<Article> getArticles() {
@@ -150,31 +143,77 @@ public class ModelController implements IModelController {
     myModel.destroyModel();
     myModel.initialize();
     myModel.addAllArticles(toLoad.getArticles());
-    myModel.addAllEvents(toLoad.getEvents());
+    myModel.addAllEvents(toLoad.getAllEvents());
     myModel.addAllButtonMap(toLoad.getButtonMap());
     myModel.addAllConditions(toLoad.getConditions());
     myModel.addAllExecutables(toLoad.getExecutables());
     myModel.setCharacter(toLoad.getCharacter());
   }
 
-  public void save(Window wind) {
-    myXMLUtility.saveModel(wind);
+  public void save(Window wind, String path) {
+    myXMLUtility.saveModel(wind, path);
   }
 
   public void load(Window wind) {
     loadFromFile(myXMLUtility.loadModel(wind));
   }
+  public void load(File file){
+	  loadFromFile(myXMLUtility.load(file));
+  }
 
-  public void addCollisionType(String name) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
+//  public void addCollisionType(String name) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//  }
+  
+//  public void addCollisionType(String name, String one, String two, String collision, Double type) {
+//    addCollision = new AddCollisionType(name);
+//    addCollision.add();
+//    addCollision.define(one, two, collision, type);
+//  }
+  
+  public void addNewCollisionType(String type){
+		myModel.addNewCollisionType(type);
+  }
+	
+  public void addCollision(String direction, String nameOne, String nameTwo, Event event){
+		myModel.addCollision(direction, nameOne, nameTwo, event);
   }
   
-  public void addCollisionType(String name, String one, String two, String collision, Double type) {
-    addCollision = new AddCollisionType(name);
-    addCollision.add();
-    addCollision.define(one, two, collision, type);
+  public void initializeCollision(){
+	  myModel.initializeCollision();
+  }
+	
+  public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){
+		return myModel.getCollisionEvents(direction, nameOne, nameTwo);
   }
   
-
+  public void setBackgroundImage(String name){
+    myModel.setBackgroundImage(name);
+  }
+  
+  public void setModel(Model model) {
+	  this.myModel = model;
+  }
+  
+  public List<Event> getActiveEvents(){
+	  return myModel.getActiveEvents();
+  }
+  
+  public void addActiveEvent(Event event){
+	  myModel.addActiveEvent(event);
+  }
+  
+  public void removeExecutableFromEvent(Event event, Executable exec){
+	  myModel.removeExecutableFromEvent(event, exec);
+  }
+  
+  public void removeConditionFromEvent(Event event, Condition cond){
+	  myModel.removeConditionFromEvent(event, cond);
+  }
+  
+  public List<Event> getAllEvents(){
+	  return myModel.getAllEvents();
+  }
+  
 }

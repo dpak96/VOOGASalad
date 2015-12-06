@@ -26,7 +26,6 @@ public class DraggableElement extends Button {
                 System.out.println("OMG WE DRAGGIN");
                 /* allow MOVE transfer mode */
               //  d.dragging();
-                
                 Dragboard db = startDragAndDrop(TransferMode.MOVE);
                 /* put a string on dragboard */
                 ClipboardContent content = new ClipboardContent();

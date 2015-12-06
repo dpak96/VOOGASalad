@@ -4,8 +4,8 @@
 
 package gameengine;
 
-import model.Article;
-import model.Position;
+import model.article.Article;
+import model.article.Position;
 
 public class CollisionManager {
 
@@ -14,9 +14,13 @@ public class CollisionManager {
 		if (checkSimpleCollision(articleOne, articleTwo)) {
 			//System.out.println(articleOne.getImageFile());
 			//System.out.println("simple collision true");
-			CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
+			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
 			//System.out.println(temp.isRealCollision());
-			return temp;
+			
+			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
+			//return temp;
+			return new CollisionInformation("Left", true);
+
 		} else {
 			return new CollisionInformation("", false);
 		}
@@ -124,7 +128,7 @@ public class CollisionManager {
 	
 	//Assume A is being collided with
 	private Boolean checkSimpleCollision(Article a, Article b) {
-		
+
 		//A or B intersect on the X plane
 		if((a.getX() >= b.getX() && a.getX() <= b.getX()+b.getWidth()) || (a.getX()+a.getWidth() >= b.getX() && a.getX()+a.getWidth() <= b.getX()+b.getWidth())) {
 			if ((a.getY() >= b.getY() && a.getY()<= b.getY()+b.getHeight()) || (a.getY()+a.getHeight() >= b.getY() && a.getY()+a.getHeight() <= b.getY()+b.getHeight())) {
