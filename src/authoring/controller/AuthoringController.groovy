@@ -165,7 +165,7 @@ public class AuthoringController {
             this.modelController.getCollisionEvents(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"));
             
             if(eventType.equals("Button"))
-                this.modelController.getButtonEvents(eventParamters.get("button"));
+                this.modelController.getButtonEvents(eventParameters.get("button"));
             
                             
          
