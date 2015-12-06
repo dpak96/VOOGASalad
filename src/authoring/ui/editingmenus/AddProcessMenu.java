@@ -36,7 +36,7 @@ public class AddProcessMenu extends AuthoringMenu {
         if(myProcessType.equals("Condition"))
         this.myEventToAddTo.addCondition(this.myController.createCondition("Condition"+processBox.getValue(),  this.parseUserInput()));
         else
-            this.myEventToAddTo.addExecutable(this.myController.createCondition("Executable"+processBox.getValue(), this.parseUserInput()));
+            this.myEventToAddTo.addExecutable(this.myController.createExecutable("Executable"+processBox.getValue(), this.parseUserInput()));
     }
 
     @Override
