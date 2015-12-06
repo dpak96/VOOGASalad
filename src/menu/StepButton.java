@@ -7,14 +7,13 @@ import javafx.scene.image.ImageView;
 public class StepButton extends AbstractControlButton {
 
   public StepButton() {
-    super();
-    this.setGraphic(new ImageView((Image) myImages.get("stepButton")));
-  }
-
-  public void resize(MenuPanel menuPanel) {
-    ImageView image = new ImageView((Image) myImages.get("stepButton"));
-    image.fitWidthProperty().bind(menuPanel.heightProperty().multiply(.65));
-    image.fitHeightProperty().bind(menuPanel.heightProperty().multiply(.65));
-    this.setGraphic(image);
-  }
+		super();
+	}
+	
+	public void resize(MenuPanel menuPanel){
+		ImageView image = new ImageView((Image) myImages.get("stepButton"));
+		image.fitHeightProperty().bind(menuPanel.heightProperty().multiply(.65));
+		image.fitWidthProperty().bind(menuPanel.heightProperty().multiply(.65));
+		this.setGraphic(image);
+	}
 }
