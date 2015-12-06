@@ -19,10 +19,9 @@ public class LevelManager {
 	private ModelController myModelCtr;
     private Map<Integer,String> myLevelMap;
 	
-	public LevelManager(ModelController modelCtr) {
+	public LevelManager(GameCreation game) {
 		levels = new ArrayList<String>();
 		xmlUtil = new xmlUtility();
-		myModelCtr = modelCtr;
 		myLevelMap = new HashMap<Integer,String>();
 	}
 	
@@ -67,12 +66,7 @@ public class LevelManager {
 	}
 	
 	public void updateLevels(GameCreation game) {
-		System.out.println("game is null at LevelManager: " + game == null);
 		myGame = game.getFolderPath();
-		System.out.println("game folder path is null at LevelManager: " + myGame == null);
-		System.out.println("dafdafdsafdsafdsafdsafdsafdsa");
-		System.out.println(myGame);
-		System.out.println("fadfdsafdsa");
 		myLevelMap = game.getLevelMap();
 //		if (game.getLevel().equals("Add New Level")) {
 ////			setLevel(levels.size());
@@ -87,8 +81,6 @@ public class LevelManager {
 //			System.out.println(model == null);
 //			myModelCtr.setModel(model);
 //		}
-		System.out.println("LevelManager updateLevels: myGame bartk " + myGame);
-		System.out.println("LevelManager updateLevels: myGame wefe " + new File(myGame).listFiles());
 		File[] files = new File(myGame).listFiles();
 		//If this pathname does not denote a directory, then listFiles() returns null. 
 		try {
