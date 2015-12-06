@@ -1,11 +1,9 @@
 package authoring.backend
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-
 import model.controller.ModelController;
-import resourcemanager.ResourceManager;
+import resourcemanager.ResourceManager
+
+import java.lang.reflect.Constructor;
 
 
 public class EditorManager extends Editor {
