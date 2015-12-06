@@ -46,7 +46,7 @@ public abstract class AuthoringMenu implements IMenuAction {
                 (ResourceBundle) ResourceManager.getResourceManager()
                         .getResource("PropertiesManager", "error");
         
-        invalidInput.setContentText(bundle.getString("error"));
+        invalidInput.setContentText(bundle.getString("numberInput"));
         invalidInput.show();
     }
 
