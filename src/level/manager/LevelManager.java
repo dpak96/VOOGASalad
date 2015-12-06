@@ -49,6 +49,7 @@ public class LevelManager {
 	public List<String> getLevels() {
 		return myLevels;
 	}
+	
 
 	/**Game over function that loads the default game over level 
 	 * params: none
@@ -85,6 +86,27 @@ public class LevelManager {
 			myModelCtr.setModel(model);
 		}
 	}
+	
+	public void changeLevelTo(int level) {
+		if (level != 0) {
+			myCurrentLevel = level;
+			myCurrentLevelName = myLevels.get(myCurrentLevel);
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
+			myModelCtr.setModel(model);
+		}
+	}
+	
+	public void resetLevel() {
+		if (myCurrentLevel != 0) {
+			Model model = xmlUtil.load(new File(myFolderPath+myCurrentLevelName));
+			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
+			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
+			myModelCtr.setModel(model);
+		}
+	}
+	
 //	
 //	public void updateLevels(GameCreation game) {
 //		myGame = game.getFolderPath();
