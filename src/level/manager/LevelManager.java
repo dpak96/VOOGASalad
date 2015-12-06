@@ -20,9 +20,8 @@ public class LevelManager {
     private Map<Integer,String> myLevelMap;
 	
 	public LevelManager(GameCreation game) {
-		levels = new ArrayList<String>();
+		myLevelMap = game.getLevelMap();
 		xmlUtil = new xmlUtility();
-		myLevelMap = new HashMap<Integer,String>();
 	}
 	
 	public List<String> getLevels() {
