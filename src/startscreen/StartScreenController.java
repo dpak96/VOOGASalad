@@ -41,7 +41,7 @@ public class StartScreenController {
         try{
             game.setMode(value);
             start.removeLayer();
-            start.addGameChooser(value);
+            start.addGameChooser(game.getMode().toString());
         }
         catch(Exception e){
             throw e;
@@ -52,7 +52,8 @@ public class StartScreenController {
         try{
             game.setGame(value);
             start.removeLayer();
-            start.addLevelChooser(value,game.getLevelMap());
+            start.addLevelChooser(game.getMode().toString(),game.getLevelMap());
+            myGraphicHandler.updateLevels(game);
         }
         catch(Exception e){
             throw e;
@@ -79,6 +80,17 @@ public class StartScreenController {
         catch(Exception e){
             throw e;
         }
+    }
+    
+    public void newLevel() {
+    	try {
+    		start.removeLayer();
+            game.addLevel();
+            System.out.println(game.getGameName());
+            myGraphicHandler.startUp(game,game.getGameName());
+    	} catch(Exception e) {
+    		throw e;
+    	}
     }
 
     public ScrollPane getStart(){

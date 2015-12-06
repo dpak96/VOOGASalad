@@ -33,6 +33,7 @@ public class StartScreen {
     public void addGameChooser(String value){
         GameChooserModule games = new GameChooserModule(getGames());
         games.init(myController, value);
+        System.out.println("Game chooser value" + value);
 
         skeleton.addLayer(games.getContainer());
     }
@@ -69,7 +70,9 @@ public class StartScreen {
     }
     
     private String[] allGames(){
-    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
+    	File allGames = new File(System.getProperty("user.home") + 
+    			System.getProperty("file.separator") + "SquirtleSquadGames" + 
+    			System.getProperty("file.separator"));
     	File[] all = allGames.listFiles();
     	try{
     	String[] ret = new String[all.length];
@@ -81,18 +84,5 @@ public class StartScreen {
     		return new String[0];
     	}
     }
-    
-    private String[] allLevels() {
-    	File allGames = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator"));
-    	File[] all = allGames.listFiles();
-    	try{
-    	String[] ret = new String[all.length];
-    	for(int i = 0; i<all.length; i++){
-    		ret[i]=(all[i].getName());
-    	}
-    	return ret;
-    	}catch(Exception e){
-    		return new String[0];
-    	}
-    }
+
 }
