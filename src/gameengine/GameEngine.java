@@ -134,7 +134,6 @@ public class GameEngine implements IGameEngine {
 
 			}
 		}
-		System.out.println(activeArticles.size());
 		return activeArticles;
 	}
 	
