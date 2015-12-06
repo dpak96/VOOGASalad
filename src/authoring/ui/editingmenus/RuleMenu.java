@@ -7,6 +7,7 @@ import authoring.controller.AuthoringController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -48,6 +49,10 @@ public class RuleMenu extends AuthoringMenu {
 
         super.componentAdder.makeLabel(menuPane, 2, 1, "Conditions");
         menuPane.add(conditionTable, 2, 2);
+        Button addCondition=new Button("Add new condition");
+        menuPane.add(addCondition, 2, 3);
+        addCondition.setOnAction(e -> new AddConditionMenu("Add Condition", this.myController));
+        
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
         menuPane.add(executableTable, 3, 2);
@@ -132,42 +137,9 @@ public class RuleMenu extends AuthoringMenu {
         executableTable.setItems(executableData);
 
     }
-    /*
-     * public void addParameterFields(String selectedObject, GridPane paramGrid) {
-     * paramGrid.getChildren().clear();
-     * ruleParameters = new HashMap<String, Control>();
-     * ResourceBundle rb =
-     * (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager",
-     * "rules");
-     * 
-     * Map<String, Class<?>> ruleParams =
-     * super.myController
-     * .getFactoryParameters(("model." +"Executable"+selectedObject));
-     * 
-     * int rowIndex = 2;
-     * for (String key : ruleParams.keySet()) {
-     * super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
-     * //super.componentAdder.makeLabel(paramGrid, 2, rowIndex++, ruleParams.get(key).toString());
-     * 
-     * }
-     * 
-     * }
-     */
 
     @Override
-    public void executeYourMenuFunction () {/*
-                                             * HashMap<String, Object> parametersToReturn = new
-                                             * HashMap<String, Object>();
-                                             * for (String key : ruleParameters.keySet()) {
-                                             * if (ruleParameters.get(key) instanceof TextField) {
-                                             * TextField parameterField = (TextField)
-                                             * ruleParameters.get(key);
-                                             * parametersToReturn.put(key,
-                                             * Double.parseDouble(parameterField.getText()));
-                                             * }
-                                             * 
-                                             * }
-                                             */
+    public void executeYourMenuFunction () {
         // TODO Auto-generated method stub
 
     }
