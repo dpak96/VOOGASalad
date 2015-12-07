@@ -41,6 +41,10 @@ public class ModelController implements IModelController {
 		notifyObservers();
 	}
 	
+	public void makeNewModel(){
+		myModel.initialize();
+	}
+	
 	public Map<String, Class<?>> getParameters(String className) {
 		return myModelFactory.getParameters(className);
 	}

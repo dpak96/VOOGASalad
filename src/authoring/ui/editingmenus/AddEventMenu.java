@@ -27,12 +27,13 @@ public class AddEventMenu extends AuthoringMenu {
     private ComboBox<String> eventType;
     private TableView myEventTable;
     private List<Event> myEventList;
-    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration(this.myController);
     private Map<String,Control> fieldMap=new HashMap<String,Control>();
 
     
     private  Map<String,String> eventParams=new HashMap<String,String>();
 
+    
     public AddEventMenu (String title, AuthoringController controller, TableView eventTable,  List<Event> tableList) {
         super(title, controller);
         myEventTable = eventTable;

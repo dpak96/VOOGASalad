@@ -22,7 +22,7 @@ public class AddProcessMenu extends AuthoringMenu {
     private String myProcessType;
     private Map<String, Class<?>> ruleParams;
     private Event myEventToAddTo;
-    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration(super.myController);
     private TableView myProcessTable;
     private List<?> myProcessList;
     public AddProcessMenu (String title,

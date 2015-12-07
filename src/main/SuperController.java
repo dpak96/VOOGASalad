@@ -45,6 +45,7 @@ public class SuperController {
   
   public Scene initNew(GameCreation gameCreation, Scene oldScene){
 	  	if (uiCore.getMenu().saveGameCreation(gameCreation)) {
+	  		modelController.makeNewModel();
 	  		modelController.makeLevelManager(gameCreation);
 	  		Scene mainScene = uiCore.getScene();
 	  		uiCore.initPanels(gameCreation);
@@ -54,7 +55,7 @@ public class SuperController {
   }
   
   public Scene initNewLevel(GameCreation gameCreation) {
-	  newEverything();
+	  modelController.makeNewModel();
 	  Scene mainScene = uiCore.getScene();
 	  uiCore.initPanels(gameCreation);
 	  return mainScene;
