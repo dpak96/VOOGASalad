@@ -37,8 +37,9 @@
 }
 
 .Butt {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: blue;
+    -fx-border-color: orange;
+    -fx-background-color: transparent;
     -fx-border-style: solid;
-    -fx-border-width: 10;
+    -fx-padding: 0;
+    -fx-border-width: 4;
 }

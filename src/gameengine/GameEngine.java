@@ -44,7 +44,7 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runActiveEvents();
 		runArticleUpdates();
-		myModelController.notifyObservers();
+		myModelController.update();
 		
 	}
 	
@@ -73,6 +73,8 @@ public class GameEngine implements IGameEngine {
 	private void runButtonPress(String input){
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
 		for(Event e : buttonEvents){
+
+			e.getExecutables().get(0).execute();
 			e.fire();
 		}
 	}
@@ -125,11 +127,10 @@ public class GameEngine implements IGameEngine {
 //					x, x + width, y, y + height)){
 //				myActiveArticles.add(article);
 
-		List<Article> art = myModelController.getArticles();
-		int size = art.size();
+		int size = allArticles.size();
 		for(int i = 0; i < size; i++){
 			try {
-				if(art.get(i).getStatus().equals(Article.Status.ACTIVE)) activeArticles.add(art.get(i));
+				if(allArticles.get(i).getStatus().equals(Article.Status.ACTIVE)) activeArticles.add(allArticles.get(i));
 			} catch(Exception e){
 
 			}
@@ -141,7 +142,7 @@ public class GameEngine implements IGameEngine {
 	 * Updates articles within the viewpoint to active except for HardInactives
 	 */
 	private void updateActiveArticles(){
-		for(Article article : myModelController.getArticles()){
+		for(Article article : allArticles){
 			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
 				double x = article.getX();
 				double y = article.getY();

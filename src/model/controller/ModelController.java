@@ -28,10 +28,16 @@ public class ModelController implements IModelController {
 	public ModelController(Model model) {
 		myModel = model;
 		myModel.initialize();
+		initializeCollision();
 		myModelFactory = new ModelFactory();
 		myXMLUtility = new xmlUtility(myModel);
 	}
 
+	public void update(){
+		myModel.update();
+		notifyObservers();
+	}
+	
 	public Map<String, Class<?>> getParameters(String className) {
 		return myModelFactory.getParameters(className);
 	}

@@ -1,23 +1,9 @@
 package authoring.controller
 
-import imageextender.ImageExtender;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import authoring.backend.Editor;
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
-import authoring.ui.draganddrop.DraggableElement;
+import authoring.ui.draganddrop.DraggableElement
 import authoring.ui.draganddrop.HighlightedArticle;
-import authoring.ui.editingmenus.ArticlePropertyEditorMenu;
-import authoring.ui.toolbar.PlatformButton;
-import authoring.ui.toolbar.ToolbarButton;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import model.Event;
@@ -33,52 +19,26 @@ public class AuthoringController {
 	private AuthoringUI ui;
 	private ModelController modelController;
 	private boolean highlighted = false;
-	private Article high;
-	private double nXRight, nXLeft;
-	private PresetArticleFactory presetArticleFactory
+	private Article currentArticle;
 
-	public void setHighlighted(boolean highlighted) {
-		this.highlighted = highlighted;
-	}
+	private PresetArticleFactory presetArticleFactory;
+	private DragAndDropController dragAndDropController;
+	private ArticleExtenderController articleExtenderController;
+
+
+
+
 
 	public AuthoringController(ModelController mc) {
 		ui = new AuthoringUI(this);
 		modelController = mc;
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
+		dragAndDropController = new DragAndDropController();
+		articleExtenderController = new ArticleExtenderController();
+
 	}
 
-	public void init() {
-		ui.getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
-	}
-
-	public void addTile(KeyEvent event) {
-		if (event.getCode() == KeyCode.B && event.isControlDown()) {
-
-			if (nXRight == 0) {
-				nXRight = high.getX() + (high.getWidth() / 2);
-			}
-			try {
-				high.setWidth(high.getWidth()*2);
-			}
-			catch (Exception e){
-
-			}
-		}
-		if (event.getCode() == KeyCode.V && event.isControlDown()) {
-
-			if (nXLeft == 0) {
-				nXLeft = high.getX() - (high.getWidth() / 2)+modelController.getViewpoint().getX();
-			}
-			try {
-				nXLeft -= high.getWidth();
-				high.setWidth(high.getWidth()*2);
-				high.setX(nXLeft);
-
-			} catch (Exception e) {
-			}
-		}
-	}
 
 	public EditorManager getEditor() {
 		return editor;
@@ -98,6 +58,7 @@ public class AuthoringController {
 
 	public void createAndPlaceArticle(double x, double y, DraggableElement event) {
 		Article article = null;
+
 		if (!highlighted) {
 			article =
 					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
@@ -105,15 +66,16 @@ public class AuthoringController {
 					y,
 					true);
 		} else {
-			highlighted = false;
 			article =
 					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
-			Pane p = (Pane) event.getParent();
-			p.getChildren().remove(event);
-			highlighted = false;
+			if(event instanceof HighlightedArticle) {
+				highlighted = false;
+				Pane p = (Pane) event.getParent();
+				p.getChildren().remove(event);
+			}
 		}
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
 		if (event.getImageName() in rb.keySet()){
@@ -158,89 +120,36 @@ public class AuthoringController {
 		modelController.remapButton(button, events);
 	}
 
-
-	public void addTemp(MouseEvent e) {
-		Article n = getArticleFromCoordinates(e.getX(), e.getY());
-		high = n;
-		ImageExtender dog = new ImageExtender();
-
-		if (e.isPopupTrigger() || e.isControlDown()) {
-			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, this);
-			}
-		} else {
-			try {
-				double tX = n.getX() - modelController.getViewpoint().getX()-19;
-				double tY = n.getY()- modelController.getViewpoint().getY()-15;
-				HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth()), this);
-				this.setHighlighted(true);
-				ui.getDragAndDrop().getChildren().add(highlightedArticle);
-				highlightedArticle.relocate(tX, tY);
-			} catch (Exception exception) {
-				System.out.println("hi");
-			}
-		}
-	}
-
 	public List<Event> getEventList() {
 		return this.modelController.getAllEvents();
 	}
 
-	public void TempButtonClick(MouseEvent e) {
-		Article n = getArticleFromCoordinates(e.getX(), e.getY());
-		if (controlCheck(e)) {
-			if (n != null) {
-				ArticlePropertyEditorMenu popupEditingMenu =
-						new ArticlePropertyEditorMenu("Object Editor", n, this);
-			}
-		} else {
-			Button b = (Button) e.getSource();
-			Pane p = (Pane) b.getParent();
-			p.getChildren().remove(b);
-			highlighted = false;
-		}
+	public ModelController getModelController(){
+		return modelController;
 	}
 
-	public boolean controlCheck(MouseEvent e){
-		return (e.isPopupTrigger() || e.isControlDown());
+	public void dragEvent(String method,e){
+		dragAndDropController."$method"(e, this);
 	}
 
 
-	public void dragOn(DragEvent event){
-		if (event.getGestureSource() != this &&
-				event.getDragboard().hasImage()) {
-			/* allow for moving */
-			event.acceptTransferModes(TransferMode.MOVE);
-		}
-
-		event.consume();
+	public void extendEvent(String method, e){
+		articleExtenderController."$method"(e,this);
 	}
 
-
-	public void dropElement(DragEvent event){
-		if(event.getGestureSource() instanceof HighlightedArticle){
-			HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-			double tempX = highlightedArticle.getLayoutX()+19.1;
-			double tempY = highlightedArticle.getLayoutY()+15.1;
-			Article n = getArticleFromCoordinates(tempX,tempY);
-			//System.out.println(n == null);
-			n.setX((double)event.getX() + modelController.getViewpoint().getX()-27.5);
-			n.setY((double)event.getY() + modelController.getViewpoint().getY()-27.5);
-			Pane p = (Pane)highlightedArticle.getParent();
-			p.getChildren().remove(highlightedArticle);
-			highlighted = false;
-		}
-		else {
-			createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
-		}
-		Dragboard db = event.getDragboard();
-		boolean success = false;
-		if (db.hasImage()) {
-			success = true;
-		}
-		event.setDropCompleted(success);
-		event.consume();
+	public void extendEvent(String method){
+		articleExtenderController."$method"(this);
 	}
+  
+    
+    public Condition createCondition(String condName, Map<String,Object> params){
+        this.modelController.createCondition(condName,params);
+        
+    }
+    
+    public Executable createExecutable(String execName,Map<String,Object> params){
+        this.modelController.createExecutable(execName,params);
+    }
 
 	public presetArticle(String function, Article article) {
 		presetArticleFactory."$function"(article);
@@ -249,4 +158,42 @@ public class AuthoringController {
 	public List<Article> getArticles(){
 		return modelController.getArticles()
 	}
+    
+        public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
+            this.modelController.getAllEvents().add(eventToAdd);
+            if(eventType.equals("Ordinary"))
+                this.modelController.getActiveEvents().add(eventToAdd);
+                
+            if(eventType.equals("Collision"))
+            this.modelController.getCollisionEvents(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"));
+            
+            if(eventType.equals("Button"))
+                this.modelController.getButtonEvents(eventParameters.get("button"));
+            
+                            
+         
+        }
+        public List<String> getCollisionTypes(){
+            
+            return modelController.getAllCollisionTypes();
+        }
+
+	public getCurrentArticle() {
+		return currentArticle;
+	}
+
+	public void setCurrentArticle(Article currArticle) {
+		currentArticle = currArticle;
+	}
+
+	public void setHighlighted(boolean highlighted) {
+		this.highlighted = highlighted;
+	}
+
+	public boolean getHighlighted(){
+		return highlighted;
+	}
+
+
+
 }
