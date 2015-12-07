@@ -13,7 +13,6 @@ import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
-import resourcemanager.PropertiesManager;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
@@ -31,7 +30,7 @@ public class ModelController implements IModelController {
 		myModel.initialize();
 		initializeCollision();
 		myModelFactory = new ModelFactory();
-		myXMLUtility = new xmlUtility(this,myModel);
+		myXMLUtility = new xmlUtility(this);
 	}
 	
 	public void makeNewModel() {

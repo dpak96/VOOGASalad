@@ -28,9 +28,8 @@ public class xmlUtility {
 	Model myModel;
 	ModelController myModelController;
 	
-	public xmlUtility(ModelController mc, Model model) {
+	public xmlUtility(ModelController mc) {
 		myStream = new XStream(new DomDriver());
-		myModel = model;
 		myModelController = mc;
 	}
 	
