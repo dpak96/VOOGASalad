@@ -85,20 +85,20 @@ public class RuleMenuTableConfiguration {
                              TableView executableTable) {
 
         TableColumn condNameCol = new TableColumn("Condition Name");
-        condNameCol.setMinWidth(100);
+     //   condNameCol.setMinWidth(100);
         condNameCol.setCellValueFactory(
                                         new PropertyValueFactory<Condition, String>("myName"));
 
         conditionTable.getColumns().add(condNameCol);
 
         TableColumn eventNameCol = new TableColumn("Event Name");
-        eventNameCol.setMinWidth(100);
+      //  eventNameCol.setMinWidth(100);
         eventNameCol.setCellValueFactory(
                                          new PropertyValueFactory<Event, String>("myName"));
         eventTable.getColumns().add(eventNameCol);
 
         TableColumn execNameCol = new TableColumn("Executable Name");
-        execNameCol.setMinWidth(100);
+       // execNameCol.setMinWidth(100);
         execNameCol.setCellValueFactory(
                                         new PropertyValueFactory<Executable, String>("myName"));
         executableTable.getColumns().add(execNameCol);
