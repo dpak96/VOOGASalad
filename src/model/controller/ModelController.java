@@ -50,14 +50,8 @@ public class ModelController implements IModelController {
 		myLevelManager = new LevelManager(this,game);
 	}
 	
-<<<<<<< HEAD
-	public void makeNewModel() {
-		//myModel = new Model();
-		myModel.initialize();
-=======
 	public LevelManager getLevelManager() {
 		return myLevelManager;
->>>>>>> master
 	}
 
 	public List<Executable> getExecutables() {
