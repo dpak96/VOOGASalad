@@ -16,4 +16,8 @@ public abstract class ExecutableLevelChanges extends Executable {
 	public void initialize(LevelManager levelManager) {
 		myLevelManager = levelManager;
 	}
+	
+	public void destroyLevelManager() {
+		myLevelManager = null;
+	}
 }

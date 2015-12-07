@@ -24,7 +24,7 @@ public class LevelManager {
 		myModelCtr = mc;
 		myGameName = game.getGameName();
 		myFolderPath = game.getFolderPath();
-		xmlUtil = new xmlUtility();
+		xmlUtil = mc.getXMLUtility();
 		try {
 			myLevelMap = game.getLevelMap();
 			System.out.println("Folder path: " + game.getFolderPath());
@@ -58,7 +58,7 @@ public class LevelManager {
 
 		myCurrentLevel = 1;
 		myCurrentLevelName = myLevels.get(myCurrentLevel);
-		Model model = xmlUtil.load(new File(myFolderPath + myGameName + "_GAMEOVER"));
+		Model model = myModelCtr.getXMLUtility().load(new File(myFolderPath + myGameName + "_GAMEOVER"));
 		myModelCtr.setModel(model);
 	}
 
