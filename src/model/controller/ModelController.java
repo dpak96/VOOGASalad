@@ -12,7 +12,7 @@ import model.article.Article;
 import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
-import resourcemanager.PropertiesManager;
+import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
@@ -30,12 +30,16 @@ public class ModelController implements IModelController {
 		myModel.initialize();
 		initializeCollision();
 		myModelFactory = new ModelFactory();
-		myXMLUtility = new xmlUtility(myModel);
+		myXMLUtility = new xmlUtility(this);
 	}
-
+	
 	public void update(){
 		myModel.update();
 		notifyObservers();
+	}
+	
+	public void makeNewModel(){
+		myModel.initialize();
 	}
 	
 	public Map<String, Class<?>> getParameters(String className) {
@@ -46,11 +50,19 @@ public class ModelController implements IModelController {
 		myLevelManager = new LevelManager(this,game);
 	}
 	
+<<<<<<< HEAD
 	public void makeNewModel() {
 		//myModel = new Model();
 		myModel.initialize();
+=======
+	public LevelManager getLevelManager() {
+		return myLevelManager;
+>>>>>>> master
 	}
 
+	public List<Executable> getExecutables() {
+		return myModel.getExecutables();
+	}
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
 		double viewX = myModel.getViewpoint().getX();
 		double viewY = myModel.getViewpoint().getY();
@@ -174,27 +186,34 @@ public class ModelController implements IModelController {
 	public void notifyObservers() {
 		myModel.notifyObservers();
 	}
-
+	
 	public void loadFromFile(Model toLoad) {
-		System.out.println("a");
+		
 		myModel.destroyModel();
-		System.out.println("b");
 		myModel.initialize();
-		System.out.println("c");
+		myModel.setCollisionTypeEditor(toLoad.getCollisionTypeEditor());
 		myModel.addAllArticles(toLoad.getArticles());
-		System.out.println("d");
 		myModel.addAllEvents(toLoad.getAllEvents());
-		System.out.println("e");
 		myModel.addAllButtonMap(toLoad.getButtonMap());
 		myModel.addAllConditions(toLoad.getConditions());
 		myModel.addAllExecutables(toLoad.getExecutables());
+		for(Executable e : toLoad.getExecutables()) {
+			if (e instanceof ExecutableLevelChanges) {
+				((ExecutableLevelChanges) e).initialize(myLevelManager);
+			}
+		}
 		myModel.setCharacter(toLoad.getCharacter());
+		myModel.setBackgroundImage(toLoad.getBackgroundImage());
 		toLoad.destroyModel();
 	}
 
+	public xmlUtility getXMLUtility() {
+		return myXMLUtility;
+	}
+	
 	public void save(Window wind, String path) {
 		try {
-			myXMLUtility.saveModel(wind, path);
+			myXMLUtility.saveModel(wind, path, myModel);
 		} catch (NullPointerException e) {
 			// User canceled from a save
 		}

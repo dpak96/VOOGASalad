@@ -18,7 +18,6 @@ public class ConditionRightOfPositionOnScreen extends Condition{
 		double xMid = myFirst.getX() + myFirst.getWidth()/2;
 		
 		return xMid > myViewpoint.getX() + myViewpoint.getWidth()*myFraction;
-		
 	}
 
 }

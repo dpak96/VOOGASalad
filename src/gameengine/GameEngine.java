@@ -12,6 +12,7 @@ import model.Event;
 import model.article.Position;
 import model.article.Article;
 import model.controller.ModelController;
+import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
@@ -44,7 +45,7 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runActiveEvents();
 		runArticleUpdates();
-		myModelController.update();
+		myModelController.update();		
 		
 	}
 	
@@ -60,7 +61,6 @@ public class GameEngine implements IGameEngine {
 				Article second = myActiveArticles.get(j);
 				CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
-					System.out.println("GameEngineCheckAndAddCollisions");
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
 				}
@@ -192,25 +192,25 @@ public class GameEngine implements IGameEngine {
   }
 	
 	
-	public static void main(String args[]) {
-		Article one = new Article("Goomba", 100, 100, true);
-		CollisionFinder test = new CollisionFinder(one.getBitMap().getByteArray());
-//		while(test.hasNext()) {
-//			Position temp = test.next();
-//			System.out.println(temp.getX() + " " + temp.getY());
+//	public static void main(String args[]) {
+//		Article one = new Article("Goomba", 100, 100, true);
+//		CollisionFinder test = new CollisionFinder(one.getBitMap().getByteArray());
+////		while(test.hasNext()) {
+////			Position temp = test.next();
+////			System.out.println(temp.getX() + " " + temp.getY());
+////		}
+//		
+//		for(Position[] a: one.getBitMap().getByteArray()) {
+//			for(Position p: a) {
+//				if(p.isValidPosition()) {
+//					System.out.print(" " + p.getX() + " " + p.getY());
+//				} else {
+//					System.out.print(" -1 -1");
+//				}
+//			}
+//			System.out.println(" ");
 //		}
-		
-		for(Position[] a: one.getBitMap().getByteArray()) {
-			for(Position p: a) {
-				if(p.isValidPosition()) {
-					System.out.print(" " + p.getX() + " " + p.getY());
-				} else {
-					System.out.print(" -1 -1");
-				}
-			}
-			System.out.println(" ");
-		}
-	}
+//	}
 	
 	
 

@@ -27,12 +27,13 @@ public class AddEventMenu extends AuthoringMenu {
     private ComboBox<String> eventType;
     private TableView myEventTable;
     private List<Event> myEventList;
-    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+    private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration(this.myController);
     private Map<String,Control> fieldMap=new HashMap<String,Control>();
 
     
     private  Map<String,String> eventParams=new HashMap<String,String>();
 
+    
     public AddEventMenu (String title, AuthoringController controller, TableView eventTable,  List<Event> tableList) {
         super(title, controller);
         myEventTable = eventTable;
@@ -65,7 +66,7 @@ public class AddEventMenu extends AuthoringMenu {
             super.displayErrorMessage();
         }
         
-        
+        System.out.println("refresh");
         tableConfig.refreshTable(myEventTable, myEventList);
     }
 
@@ -75,7 +76,7 @@ public class AddEventMenu extends AuthoringMenu {
         super.componentAdder.makeLabel(menuPane, 1, 1, "New Event Name :");
         eventNameField = super.componentAdder.makeField(menuPane, 2, 1);
         
-        super.componentAdder.makeLabel(menuPane, 1, 2, "Collision Type");
+        super.componentAdder.makeLabel(menuPane, 1, 2, "Event Type");
         eventType=super.componentAdder.makeComboBox(menuPane, 2, 2);
         eventType.getItems().addAll(Arrays.asList("Ordinary","Active","Collision","Button"));
         
