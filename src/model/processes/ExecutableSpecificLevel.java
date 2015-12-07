@@ -4,9 +4,8 @@ import java.util.Map;
 
 import level.manager.LevelManager;
 
-public class ExecutableSpecificLevel extends Executable {
+public class ExecutableSpecificLevel extends ExecutableLevelChanges {
 	
-	protected LevelManager myLevelManager;
 	protected int levelIndex;
 	
 	public ExecutableSpecificLevel(Map<String, Object> parameters) {
