@@ -31,9 +31,12 @@ public class ModelController implements IModelController {
 		myModel.initialize();
 		initializeCollision();
 		myModelFactory = new ModelFactory();
-		myXMLUtility = new xmlUtility(myModel);
+		myXMLUtility = new xmlUtility(this,myModel);
 	}
-
+	
+	public void makeNewModel() {
+		myModel = new Model();
+	}
 	public void update(){
 		myModel.update();
 		notifyObservers();
@@ -45,6 +48,10 @@ public class ModelController implements IModelController {
 
 	public void makeLevelManager(GameCreation game) {
 		myLevelManager = new LevelManager(this,game);
+	}
+	
+	public LevelManager getLevelManager() {
+		return myLevelManager;
 	}
 
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
@@ -170,7 +177,7 @@ public class ModelController implements IModelController {
 	public void notifyObservers() {
 		myModel.notifyObservers();
 	}
-
+	
 	public void loadFromFile(Model toLoad) {
 		System.out.println("a");
 		myModel.destroyModel();
@@ -194,6 +201,9 @@ public class ModelController implements IModelController {
 		toLoad.destroyModel();
 	}
 
+	public xmlUtility getXMLUtility() {
+		return myXMLUtility;
+	}
 	public void save(Window wind, String path) {
 		try {
 			myXMLUtility.saveModel(wind, path);
