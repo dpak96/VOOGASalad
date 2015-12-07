@@ -52,7 +52,6 @@ public class xmlUtility {
 		try {
 			myStream = new XStream(new DomDriver());
 			myStream.processAnnotations(ModelAnnotations.class);
-			System.out.println("fuck");
 			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			for (Executable f: ((Model) readObject).getExecutables()) {
