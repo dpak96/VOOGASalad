@@ -29,8 +29,8 @@ public class RuleMenu extends AuthoringMenu {
     private Event selectedEvent;
     private Condition selectedCondition;
     private Executable selectedExecutable;
-    private RuleMenuTableConfiguration tableConfig = new RuleMenuTableConfiguration(this.myController);
-
+    private RuleMenuTableConfiguration tableConfig =
+            new RuleMenuTableConfiguration(this.myController);
 
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
@@ -45,41 +45,12 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.setVgap(10);
         menuPane.setHgap(10);
 
-        super.componentAdder.makeLabel(menuPane, 1, 1, "Events");
-        menuPane.add(eventTable, 1, 2, 2, 1);
-        Button addEvent = new Button("Add new event");
-        menuPane.add(addEvent, 1, 3);
-        addEvent.setOnAction(e -> new AddEventMenu("Add Event", this.myController, eventTable,
-                                                   super.myController.getEventList()));
+        addEventTable(menuPane);
 
-        Button removeEvent = new Button("Remove event");
-        menuPane.add(removeEvent, 2, 3);
-        removeEvent.setOnAction(e -> tableConfig.deleteEvent(eventTable, selectedEvent));
+        addConditionTable(menuPane);
 
-        super.componentAdder.makeLabel(menuPane, 3, 1, "Conditions");
-        menuPane.add(conditionTable, 3, 2, 2, 1);
-        Button addCondition = new Button("Add new condition");
-        menuPane.add(addCondition, 3, 3);
-        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
-                                                         "Condition", selectedEvent, conditionTable,
-                                                         selectedEvent.getConditions()));
-        
-        Button removeCondition=new Button("Remove condition");
-        menuPane.add(removeCondition, 4, 3);
-        removeCondition.setOnAction(e-> conditionTable.getItems().remove(selectedCondition));
+        addExecutableTable(menuPane);
 
-        super.componentAdder.makeLabel(menuPane, 5, 1, "Executables");
-        menuPane.add(executableTable, 5, 2, 2, 1);
-        Button addExecutable = new Button("Add new executable");
-        menuPane.add(addExecutable, 5, 3);
-        addExecutable
-                .setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
-                                                     "Executable", selectedEvent, executableTable,
-                                                     selectedEvent.getExecutables()));
-        Button removeExecutable= new Button("Remove executable");
-        menuPane.add(removeExecutable, 6, 3);
-        removeExecutable.setOnAction(e-> executableTable.getItems().remove(executableTable.getSelectionModel().getSelectedItem()));
-        
         tableConfig.configureTables(eventTable, conditionTable, executableTable);
 
         GridPane paramGrid = new GridPane();
@@ -90,6 +61,24 @@ public class RuleMenu extends AuthoringMenu {
 
         eventTable.setItems(eventData);
 
+        setTableSelectionListeners();
+        /*
+         * conditionTable.getSelectionModel().selectedItemProperty().addListener((observableValue,
+         * oldValue, newValue) -> {
+         * //Check whether item is selected and set value of selected item to Label
+         * if (conditionTable.getSelectionModel().getSelectedItem() != null) {
+         * Condition selectedEvent=(Condition) newValue;
+         * this.addParameterFields(selectedEvent.getName(),paramGrid);
+         * }
+         * });
+         * 
+         * 
+         * 
+         */
+
+    }
+
+    public void setTableSelectionListeners () {
         eventTable.getSelectionModel().selectedItemProperty()
                 .addListener( (observableValue, oldValue, newValue) -> {
                     if (eventTable.getSelectionModel().getSelectedItem() != null) {
@@ -110,20 +99,57 @@ public class RuleMenu extends AuthoringMenu {
                         selectedExecutable = (Executable) newValue;
                     }
                 });
-        /*
-         * conditionTable.getSelectionModel().selectedItemProperty().addListener((observableValue,
-         * oldValue, newValue) -> {
-         * //Check whether item is selected and set value of selected item to Label
-         * if (conditionTable.getSelectionModel().getSelectedItem() != null) {
-         * Condition selectedEvent=(Condition) newValue;
-         * this.addParameterFields(selectedEvent.getName(),paramGrid);
-         * }
-         * });
-         * 
-         * 
-         * 
-         */
+    }
 
+    public void addExecutableTable (GridPane menuPane) {
+        super.componentAdder.makeLabel(menuPane, 5, 1, "Executables");
+        menuPane.add(executableTable, 5, 2, 2, 1);
+        Button addExecutable = new Button();
+        addExecutable.setGraphic(tableConfig.setImagePlus());
+        menuPane.add(addExecutable, 5, 3);
+        addExecutable
+                .setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
+                                                     "Executable", selectedEvent, executableTable,
+                                                     selectedEvent.getExecutables()));
+        Button removeExecutable = new Button();
+        removeExecutable.setGraphic(tableConfig.setImageMinus());
+        menuPane.add(removeExecutable, 6, 3);
+        removeExecutable.setOnAction(e -> executableTable.getItems()
+                .remove(executableTable.getSelectionModel().getSelectedItem()));
+    }
+
+    public void addConditionTable (GridPane menuPane) {
+        super.componentAdder.makeLabel(menuPane, 3, 1, "Conditions");
+        menuPane.add(conditionTable, 3, 2, 2, 1);
+        
+        Button addCondition = new Button();
+        menuPane.add(addCondition, 3, 3);
+        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
+                                                         "Condition", selectedEvent, conditionTable,
+                                                         selectedEvent.getConditions()));
+        addCondition.setGraphic(tableConfig.setImagePlus());
+
+        Button removeCondition = new Button();
+        menuPane.add(removeCondition, 4, 3);
+        removeCondition.setOnAction(e -> conditionTable.getItems().remove(selectedCondition));
+        removeCondition.setGraphic(tableConfig.setImageMinus());
+    }
+
+    public void addEventTable (GridPane menuPane) {
+        super.componentAdder.makeLabel(menuPane, 1, 1, "Events");
+        menuPane.add(eventTable, 1, 2, 2, 1);
+
+        Button addEvent = new Button();
+        addEvent.setOnAction(e -> new AddEventMenu("Add Event", myController, eventTable,
+                                                   myController.getEventList()));
+        addEvent.setGraphic(tableConfig.setImagePlus());
+
+        menuPane.add(addEvent, 1, 3);
+
+        Button removeEvent = new Button();
+        removeEvent.setOnAction(e -> tableConfig.deleteEvent(eventTable, selectedEvent));
+        removeEvent.setGraphic(tableConfig.setImageMinus());
+        menuPane.add(removeEvent, 2, 3);
     }
 
     public void updateConditionsAndExecutables (Event selectedEvent) {
