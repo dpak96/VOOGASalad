@@ -49,6 +49,7 @@ public class CollisionTypeEditor {
 	
 	public void add(String name){
 		collisionTypeName.add(name);
+		System.out.println("ADD IS BIENG CALLED ON " + name);
 		if(collisionMatrix.size() == 0){
 			for(int i = 0; i < MATRIX_NUMBER; i++){
 				collisionMatrix.add(createNewEventMatrix());
@@ -79,7 +80,7 @@ public class CollisionTypeEditor {
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
 		System.out.println(matrixIndex + " ASDF");
 		System.out.println(typeOneIndex + "BCDE");
-		System.out.println(typeTwoIndex + "DAEFE");
+		System.out.println(typeTwoIndex + "DAEFE");	
 		return collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex);		
 	}
 	
