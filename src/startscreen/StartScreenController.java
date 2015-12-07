@@ -5,6 +5,7 @@ import java.util.Optional;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import level.manager.DeleteLevelDialog;
 import level.manager.LevelManager;
 import level.manager.LevelOrderDialog;
 import main.GraphicHandler;
@@ -67,7 +68,6 @@ public class StartScreenController {
     protected void setLevel(String value){
         try{
             start.removeLayer();
-            System.out.println("Alex Rice fists orphans " + value);
             myGraphicHandler.startUp(game,value);
         }
         catch(Exception e){
@@ -78,7 +78,6 @@ public class StartScreenController {
     protected void setNewLevel(){
         try{
             start.removeLayer();
-            System.out.println("Alex Rice eats orphans ");
             myGraphicHandler.startUpNewLevel(game);
         }
         catch(Exception e){
@@ -116,6 +115,15 @@ public class StartScreenController {
     		game = ret.get();
     	}
     	myGraphicHandler.reorderLevels();
+    }
+    
+    public void deleteLevels() {
+    	DeleteLevelDialog delete = new DeleteLevelDialog(game);
+    	Optional<GameCreation> ret = delete.showAndWait();
+    	if(ret.isPresent()) {
+    		game = ret.get();
+    	}
+    	myGraphicHandler.deleteLevels();
     }
 
 }

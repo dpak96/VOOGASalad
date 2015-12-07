@@ -3,7 +3,6 @@ package uibasics;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.controller.AuthoringController;
 import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -11,6 +10,8 @@ import model.Model;
 import model.controller.ModelController;
 import startscreen.GameCreation;
 import startscreen.GameCreation.Mode;
+import authoring.controller.AuthoringController;
+
 
 public class UIStackPane extends StackPane implements Observer {
 	private UIBasics myUIBasics;
@@ -31,6 +32,7 @@ public class UIStackPane extends StackPane implements Observer {
 		myUIBasics = new UIBasics(myModelController);
 		myGamePlayer = new GamePlayerOverlay();
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
+		myAuthoringController.getUi().init();
 	}
 	
 	public void initPanes(GameCreation game) {
@@ -42,6 +44,7 @@ public class UIStackPane extends StackPane implements Observer {
 		} else {
 			edit=true;
 			this.getChildren().add(myAuthoringControllerPane);
+
 		}
 	}
 	

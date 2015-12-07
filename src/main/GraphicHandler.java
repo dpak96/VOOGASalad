@@ -50,7 +50,7 @@ public class GraphicHandler {
     }
     
     public void startUpNew(GameCreation gameCreation){
-    	currentStage.setScene(superController.initNew(gameCreation));
+    	currentStage.setScene(superController.initNew(gameCreation, currentStage.getScene()));
     }
     
     public void startUpNewLevel(GameCreation gameCreation) {
@@ -64,5 +64,9 @@ public class GraphicHandler {
     
     public GameCreation getGameCreation(){
     	return start.getGameCreation();
+    }
+    
+    public void deleteLevels(){
+    	superController.deleteLevels();
     }
 }

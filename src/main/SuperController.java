@@ -39,19 +39,23 @@ public class SuperController {
     Scene mainScene = uiCore.getScene();
     uiCore.initPanels(gameCreation);
     uiCore.getMenu().loadGame(gameCreation, levelFile);
+    modelController.makeLevelManager(gameCreation);
     return mainScene;
   }
   
-  public Scene initNew(GameCreation gameCreation){
-		modelController.makeLevelManager(gameCreation);
-	  	Scene mainScene = uiCore.getScene();
-	    uiCore.initPanels(gameCreation);
-	    uiCore.getMenu().saveGameCreation(gameCreation);
-	    return mainScene;
+  public Scene initNew(GameCreation gameCreation, Scene oldScene){
+	  	if (uiCore.getMenu().saveGameCreation(gameCreation)) {
+	  		modelController.makeNewModel();
+	  		modelController.makeLevelManager(gameCreation);
+	  		Scene mainScene = uiCore.getScene();
+	  		uiCore.initPanels(gameCreation);
+	  		return mainScene;
+	  	}
+	    return oldScene;
   }
   
   public Scene initNewLevel(GameCreation gameCreation) {
-	  newEverything();
+	  modelController.makeNewModel();
 	  Scene mainScene = uiCore.getScene();
 	  uiCore.initPanels(gameCreation);
 	  return mainScene;
@@ -107,6 +111,10 @@ public class SuperController {
   
   public void reorderLevels(){
 	  getUICore().getMenu().reorderGame();
+  }
+  
+  public void deleteLevels() {
+	  getUICore().getMenu().deleteGame();
   }
 
 }

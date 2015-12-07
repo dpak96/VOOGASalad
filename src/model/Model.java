@@ -1,11 +1,13 @@
 package model;
 import java.util.*;
 
-
 import gameengine.CollisionTypeEditor;
+import main.VoogaProperties;
 import model.article.Article;
+import model.generationutility.*;
 import model.processes.Condition;
 import model.processes.Executable;
+
 
 public class Model extends Observable{
 	
@@ -19,6 +21,9 @@ public class Model extends Observable{
 	private Article myCharacter;
 	private CollisionTypeEditor myCollisionTypeEditor;
 	private String myBackgroundImage;
+	//private VoogaProperties vp;
+	
+	private AbstractGenerationUtility randomGenerator;
 	
 	public Model(){
 		allEvents = new ArrayList<Event>();
@@ -29,8 +34,20 @@ public class Model extends Observable{
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
 		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint.setWidth(1000.5);
+		myViewpoint.setHeight(1000.5);
+		myViewpoint.setActive();
 		myCharacter = new Article("Platform", 400, 400, true);
-		
+		//vp = new VoogaProperties();
+		randomGenerator = new NullGenerationUtility();
+	}
+	
+	public void update(){
+		randomGenerator.update();
+	}
+	
+	public void setRandomGenerator(Map<Article, Double> probabilities){
+		randomGenerator = new RandomGenerationUtility(probabilities, myArticles, myViewpoint);
 	}
 
 	public List<Event> getAllEvents(){
@@ -86,7 +103,10 @@ public class Model extends Observable{
 		myArticles = new ArrayList<Article>();
 		myExecutables = new ArrayList<Executable>();
 		myConditions = new ArrayList<Condition>();
-		myViewpoint = new Article("Goomba", 100, 100);
+		myViewpoint = new Article("Goomba", 0, 0);
+		myViewpoint.setWidth(1000.0);
+		myViewpoint.setHeight(1000.0);
+		myViewpoint.setActive();
 		myCharacter = new Article("Platform", 500, 500, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
 	}
@@ -131,7 +151,17 @@ public class Model extends Observable{
 		myArticles.addAll(articles);
 	}
 	public void removeArticle(Article article) {
-		myArticles.remove(article);		
+		// This is a clever way to create the iterator and call iterator.hasNext() like
+		// you would do in a while-loop. It would be the same as doing:
+//		     Iterator<String> iterator = list.iterator();
+//		     while (iterator.hasNext()) {
+		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
+		    Article a = iterator.next();
+		    if (article.equals(a)) {
+		        iterator.remove();
+		        return;
+		    }
+		}
 	}
 
 	public void addExecutable(Executable executable) {
@@ -221,6 +251,10 @@ public class Model extends Observable{
 	
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
+	}
+	
+	public List<String> getAllCollisionTypes(){
+		return myCollisionTypeEditor.getCollisionTypeList();
 	}
 	
 	public List<Event> getCollisionEvents(String direction, String nameOne, String nameTwo){

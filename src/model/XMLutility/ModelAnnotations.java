@@ -8,6 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
+import gameengine.CollisionTypeEditor;
 import model.Event;
 import model.article.Article;
 import model.processes.Condition;
@@ -17,7 +18,9 @@ import model.processes.Executable;
 @XStreamAlias("Model")
 public class ModelAnnotations {
 	
-	
+
+   @XStreamAlias("allEvents")
+   private List<Event> allEvents;
 	
    @XStreamAlias("myEvents")
    private List<Event> myEvents;
@@ -40,6 +43,9 @@ public class ModelAnnotations {
    @XStreamAlias("myCharacter")
    private Article myCharacter;
  
+   @XStreamAlias("myCollisionTypeEditor") 
+   private CollisionTypeEditor myCollisionTypeEditor;
+   
    @XStreamAlias("default-attribute")
    @XStreamAsAttribute
    private String defaultAttribute;

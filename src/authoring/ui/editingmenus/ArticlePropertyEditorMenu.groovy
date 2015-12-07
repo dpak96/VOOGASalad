@@ -2,7 +2,8 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map
+import javax.swing.plaf.basic.ComboPopup;
 import action.controller.ActionController;
 import authoring.controller.AuthoringController;
 import javafx.scene.Node;
@@ -23,79 +24,79 @@ import resourcemanager.ResourceManager;
 
 public class ArticlePropertyEditorMenu extends AuthoringMenu {
 
-  private HashMap<String, TextField> textFieldPropertyMap;
-  private HashMap<String, ComboBox> comboBoxPropertyMap;
-  private Article myArticleToEdit;
-  private ComboBoxImageRendering imageBoxHandler=new ComboBoxImageRendering();
+    private HashMap<String, TextField> textFieldPropertyMap;
+    private HashMap<String, ComboBox> comboBoxPropertyMap;
+    private Article myArticleToEdit;
+    private ComboBoxImageRendering imageBoxHandler=new ComboBoxImageRendering();
 
-  public ArticlePropertyEditorMenu(String title,
-                               Article selectedArticle,
-                               AuthoringController myController) {
-    super(title, myController);
-    myArticleToEdit = selectedArticle;
-    super.showMenu(300,300);
-  }
+    public ArticlePropertyEditorMenu(String title,
+    Article selectedArticle,
+    AuthoringController myController) {
+        super(title, myController);
+        myArticleToEdit = selectedArticle;
+        super.showMenu(300,300);
+    }
 
-  protected void populateMenu(GridPane menuGrid) {
-    textFieldPropertyMap = new HashMap<String, TextField>();
-    comboBoxPropertyMap = new HashMap<String, ComboBox>();
-    int rowIndex = 1;
+    protected void populateMenu(GridPane menuGrid) {
+        textFieldPropertyMap = new HashMap<String, TextField>();
+        comboBoxPropertyMap = new HashMap<String, ComboBox>();
+        int rowIndex = 1;
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
-    textFieldPropertyMap.put("NAME", (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
+        textFieldPropertyMap.put("NAME", (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
-    textFieldPropertyMap.put("XVELOCITY",
-                             (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
+        textFieldPropertyMap.put("XVELOCITY",
+                (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
-    textFieldPropertyMap.put("YVELOCITY",
-                             (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
-    
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
-    comboBoxPropertyMap.put("IMAGE",
-                            super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
+        textFieldPropertyMap.put("YVELOCITY",
+                (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Action on Collision: ");
-    comboBoxPropertyMap.put("COLLISION",
-                            super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
+        comboBoxPropertyMap.put("IMAGE",
+                super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
 
-    super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Save as default?: ");
-    CheckBox defaultSave = new CheckBox();
-    menuGrid.add(defaultSave, 2, rowIndex++);
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Action on Collision: ");
+        comboBoxPropertyMap.put("COLLISION",
+                super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
 
-    
-    
-    imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
-    initializeFieldValues();
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Save as default?: ");
+        CheckBox defaultSave = new CheckBox();
+        menuGrid.add(defaultSave, 2, rowIndex++);
 
-  }
 
- 
-  public void initializeFieldValues(){
-      this.textFieldPropertyMap.get("XVELOCITY").setText(Double.toString(myArticleToEdit.getXVelocity()));
-      this.textFieldPropertyMap.get("YVELOCITY").setText(Double.toString(myArticleToEdit.getYVelocity()));
-      this.comboBoxPropertyMap.get("IMAGE").setValue(myArticleToEdit.getImageFile());
-      
-   }
-  @Override
-  public void executeYourMenuFunction() {
-    System.out.println(myArticleToEdit == null);
+        comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.getCollisionTypes());
+        imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
+        initializeFieldValues();
+    }
 
-    super.myController.getEditor().getArticleEditor()
-        .editProperty("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
-            .getText()),
-                              myArticleToEdit);
-    super.myController.getEditor().getArticleEditor()
-        .editProperty("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
-            .getText()),
-    myArticleToEdit);
-    super.myController.getEditor().getSubEditor("ArticleEditor")
-            .editProperty("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
-                    myArticleToEdit);
 
-    System.out.println("asdas");
-    // Pass on the edits to the thing being edited
-  }
+    public void initializeFieldValues(){
+        this.textFieldPropertyMap.get("XVELOCITY").setText(Double.toString(myArticleToEdit.getXVelocity()));
+        this.textFieldPropertyMap.get("YVELOCITY").setText(Double.toString(myArticleToEdit.getYVelocity()));
+        this.comboBoxPropertyMap.get("IMAGE").setValue(myArticleToEdit.getImageFile());
+        this.comboBoxPropertyMap.get("COLLISION").setValue(myArticleToEdit.getCollisionType());
+    }
+    @Override
+    public void executeYourMenuFunction() {
+        System.out.println(myArticleToEdit == null);
 
+        super.myController.getEditor().getSubEditor("ArticleEditor")
+                .editProperty("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+                .getText()),
+                myArticleToEdit);
+        super.myController.getEditor().getSubEditor("ArticleEditor")
+                .editProperty("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
+                .getText()),
+                myArticleToEdit);
+        super.myController.getEditor().getSubEditor("ArticleEditor")
+                .editProperty("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
+                myArticleToEdit);
+
+        super.myController.getEditor().getSubEditor("ArticleEditor")
+                .editProperty("setCollisionType",comboBoxPropertyMap.get("COLLISION").getValue().toString(),myArticleToEdit);
+      println myArticleToEdit.getCollisionType();
+                // Pass on the edits to the thing being edited
+    }
 }

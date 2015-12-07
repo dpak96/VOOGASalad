@@ -1,12 +1,9 @@
 package uibasics;
 
-import java.util.Optional;
-
 import action.controller.ActionController;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import main.GraphicHandler;
 import main.VoogaProperties;
 import menu.MenuController;
@@ -35,10 +32,12 @@ public class UICore {
   
 
   public void borderInit(VoogaProperties props) {
-    myRoot.setCenter(uiStackPane);
-    myRoot.setTop(menuController.getMenu());
+	myRoot.setCenter((Pane) uiStackPane);
+	myRoot.setTop(menuController.getMenu());
+	System.out.println(myRoot.getChildren().get(0).getClass());
     myRoot.setPrefWidth(props.getSceneWidth());
     myRoot.setPrefHeight(props.getSceneHeight());
+    
   }
   
   public void initPanels(GameCreation game) {
