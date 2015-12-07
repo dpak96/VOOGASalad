@@ -35,34 +35,7 @@ public class DraggableElement extends Button {
     }
 
     protected void dragExit(DragExit de){
-        this.setOnDragExited(new EventHandler <DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                /* mouse moved away, remove the graphical cues */
-                de.exit();
-                event.consume();
-            }
-        });
-    }
-
-    public void dragEnd(){
-        this.setOnDragDone(new EventHandler <DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                /* the drag-and-drop gesture ended */
-                //System.out.println("onDragDone");
-                /* if the data was successfully moved, clear it */
-                //if (event.getTransferMode() == TransferMode.MOVE) {
-                    //de.dragEnd();
-
-
-                    //System.out.println(event.getScreenY());
-
-
-                //}
-                event.consume();
-            }
-        });
+        //this.setOnDragExited();
     }
 
     public String getName(){

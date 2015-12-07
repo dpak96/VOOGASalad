@@ -69,7 +69,7 @@ public class PresetCollision {
 		// TODO Auto-generated method stub
 		List<Condition> conditionList = new ArrayList<Condition>();
 		HashMap<String, Object> temp = new HashMap<String, Object>();
-		temp.put("myModel", "Brandon");
+		temp.put("myModel", null);
 		temp.put("myActor", null);
 		ExecutableDelete exe = new ExecutableDelete(temp);
 		List<Executable> exeList = new ArrayList<Executable>();

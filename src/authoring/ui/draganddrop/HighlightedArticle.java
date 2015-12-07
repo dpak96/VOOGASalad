@@ -19,13 +19,13 @@ public class HighlightedArticle extends DraggableElement {
         this.setGraphic(i);
         this.getStyleClass().add("Butt");
         super.dragDetected();
-        super.dragEnd();
-        this.setOnMouseClicked(event -> producePopup(event, authoringController));
-        authoringController.init();
+        //super.dragEnd();
+        init(authoringController);
+        authoringController.extendEvent("init");
     }
 
-    public void producePopup(MouseEvent e, AuthoringController authoringController){
-        authoringController.TempButtonClick(e);
+    public void init(AuthoringController authoringController){
+        this.setOnMouseClicked(event -> authoringController.dragEvent("tempButtonClick",event));
     }
 
 }
