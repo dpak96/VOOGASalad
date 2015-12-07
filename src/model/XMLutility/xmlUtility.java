@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import level.manager.XMLOrderer;
+import main.VoogaProperties;
 import model.Model;
 import model.article.Article;
 import model.article.Position;
@@ -24,7 +25,7 @@ public class xmlUtility {
 	Model myModel;
 	
 	public xmlUtility() {
-		myStream = new XStream(new DomDriver());
+		this(new Model());
 	}
 	
 	public xmlUtility(Model model) {
@@ -90,6 +91,7 @@ public class xmlUtility {
 
 		myStream.omitField(Observable.class, "obs");
 		myStream.omitField(Observable.class, "changed");
+			//myStream.omitField(VoogaProperties.class, "vp");
 		for(Article a: myModel.getArticles()) {
 			a.destroyBitMap();
 			System.out.println("destroyed");

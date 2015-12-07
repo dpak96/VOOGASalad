@@ -21,7 +21,7 @@ public abstract class ToolbarButton  extends DraggableElement implements IObject
         myController=authoringController;
         this.setPrefSize(BUTTON_DIMENSION, BUTTON_DIMENSION);
         super.dragDetected();
-        super.dragEnd();
+        //super.dragEnd();
         this.setOnAction(e-> placeYourObject());
         this.setEffect(configureShadowEffect());
     }

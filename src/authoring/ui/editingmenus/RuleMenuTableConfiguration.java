@@ -1,5 +1,7 @@
 package authoring.ui.editingmenus;
 
+import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +25,15 @@ public class RuleMenuTableConfiguration {
         
     }
     
+    
+    public void refreshTable(TableView table, List<?> tableList){
+        
+            table.setItems(null);
+            table.layout();
+            table.setItems(FXCollections.observableArrayList(tableList));
+            
+       
+    }
     private void addColumns (TableView eventTable,
                             TableView conditionTable,
                             TableView executableTable) {
