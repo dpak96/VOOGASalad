@@ -178,14 +178,17 @@ public class ModelController implements IModelController {
 	}
 
 	public void notifyObservers() {
+		System.out.println("notifying" + myModel);
 		myModel.notifyObservers();
 	}
 	
 	public void loadFromFile(Model toLoad) {
+		
 		System.out.println("a");
 		myModel.destroyModel();
 		System.out.println("b");
 		myModel.initialize();
+		myModel.setCollisionTypeEditor(toLoad.getCollisionTypeEditor());
 		System.out.println("c");
 		myModel.addAllArticles(toLoad.getArticles());
 		System.out.println("d");
