@@ -104,7 +104,7 @@ public class UIBasics {
 
 	    myPane.setBackground(new Background(back));
 	} catch (NullPointerException e) {
-		//No set background image
+	    myPane.setBackground(null);
 	}
 
   }
