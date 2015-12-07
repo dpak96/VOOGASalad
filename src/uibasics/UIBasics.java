@@ -95,7 +95,7 @@ public class UIBasics {
   public void setBackImage(String img) {
 	try {
 	    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
-	    BackgroundPosition pos = new BackgroundPosition(null, myModelController.getViewpoint().getX(), 
+	    BackgroundPosition pos = new BackgroundPosition(null, -myModelController.getViewpoint().getX(), 
 	    		false, null, myModelController.getViewpoint().getY(), false);
 	    BackgroundImage back =
 	        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
