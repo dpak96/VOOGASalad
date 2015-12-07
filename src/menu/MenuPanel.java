@@ -45,7 +45,7 @@ public class MenuPanel extends MenuBar {
 	
 	private Menu editMenu() {
 		Menu menu = new Menu(myResource.getString("EDIT"));
-		AbstractMenuItem newImage = new ImageMenuItem(myResource, myMenuController);
+		AbstractMenuItem newImage = new ArticleMenuItem(myResource, myMenuController);
 		menu.getItems().addAll(newImage);
 
 		return menu;
