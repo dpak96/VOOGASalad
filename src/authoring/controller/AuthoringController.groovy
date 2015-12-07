@@ -58,6 +58,7 @@ public class AuthoringController {
 
 	public void createAndPlaceArticle(double x, double y, DraggableElement event) {
 		Article article = null;
+
 		if (!highlighted) {
 			article =
 					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),

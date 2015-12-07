@@ -23,8 +23,9 @@ class DragAndDropController {
 
     }
 
-    public void tempButtonClick(e, AuthoringController authoringController) {
-        Article n = authoringController.getArticleFromCoordinates(e.getX(), e.getY());
+    public void tempButtonClick(MouseEvent e, AuthoringController authoringController) {
+        HighlightedArticle button = (HighlightedArticle)e.getSource();
+        Article n = authoringController.getArticleFromCoordinates(button.getLayoutX()+borderwidth +0.1, button.getLayoutY()+borderwidth+0.01);
         if (controlCheck(e)) {
             if (n != null) {
                 ArticlePropertyEditorMenu popupEditingMenu =
@@ -32,6 +33,7 @@ class DragAndDropController {
             }
         } else {
             if(e.getSource() instanceof HighlightedArticle){
+                n.setActive();
                 Button b = (Button) e.getSource();
                 Pane p = (Pane) b.getParent();
                 p.getChildren().remove(b);
@@ -64,6 +66,7 @@ class DragAndDropController {
             //System.out.println(n == null);
             n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
             n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
+            n.setActive();
             Pane p = (Pane)highlightedArticle.getParent();
             p.getChildren().remove(highlightedArticle);
             authoringController.setHighlighted(false);
@@ -92,6 +95,7 @@ class DragAndDropController {
         }
         else {
             try {
+                n.setHardInactive();
                 double tX = n.getX() - authoringController.getModelController().getViewpoint().getX() -borderwidth;
                 double tY = n.getY() - authoringController.getModelController().getViewpoint().getY() -borderwidth;
                 HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth(),n.getHeight()), authoringController);
