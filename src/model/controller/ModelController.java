@@ -33,9 +33,6 @@ public class ModelController implements IModelController {
 		myXMLUtility = new xmlUtility(this);
 	}
 	
-	public void makeNewModel() {
-		myModel = new Model();
-	}
 	public void update(){
 		myModel.update();
 		notifyObservers();
