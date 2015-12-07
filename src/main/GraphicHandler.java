@@ -65,4 +65,8 @@ public class GraphicHandler {
     public GameCreation getGameCreation(){
     	return start.getGameCreation();
     }
+    
+    public void deleteLevels(){
+    	superController.deleteLevels();
+    }
 }

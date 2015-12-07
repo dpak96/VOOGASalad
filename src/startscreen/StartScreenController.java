@@ -5,6 +5,7 @@ import java.util.Optional;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import level.manager.DeleteLevelDialog;
 import level.manager.LevelManager;
 import level.manager.LevelOrderDialog;
 import main.GraphicHandler;
@@ -114,6 +115,15 @@ public class StartScreenController {
     		game = ret.get();
     	}
     	myGraphicHandler.reorderLevels();
+    }
+    
+    public void deleteLevels() {
+    	DeleteLevelDialog delete = new DeleteLevelDialog(game);
+    	Optional<GameCreation> ret = delete.showAndWait();
+    	if(ret.isPresent()) {
+    		game = ret.get();
+    	}
+    	myGraphicHandler.deleteLevels();
     }
 
 }
