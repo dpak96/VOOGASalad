@@ -61,7 +61,6 @@ public class GameEngine implements IGameEngine {
 				Article second = myActiveArticles.get(j);
 				CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
-					System.out.println("GameEngineCheckAndAddCollisions");
 					first.addCollision(second, temp);
 					second.addCollision(first, temp);
 				}

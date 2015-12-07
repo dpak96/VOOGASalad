@@ -178,29 +178,22 @@ public class ModelController implements IModelController {
 	}
 
 	public void notifyObservers() {
-		System.out.println("notifying" + myModel);
 		myModel.notifyObservers();
 	}
 	
 	public void loadFromFile(Model toLoad) {
 		
-		System.out.println("a");
 		myModel.destroyModel();
-		System.out.println("b");
 		myModel.initialize();
 		myModel.setCollisionTypeEditor(toLoad.getCollisionTypeEditor());
-		System.out.println("c");
 		myModel.addAllArticles(toLoad.getArticles());
-		System.out.println("d");
 		myModel.addAllEvents(toLoad.getAllEvents());
-		System.out.println("e");
 		myModel.addAllButtonMap(toLoad.getButtonMap());
 		myModel.addAllConditions(toLoad.getConditions());
 		myModel.addAllExecutables(toLoad.getExecutables());
 		for(Executable e : toLoad.getExecutables()) {
 			if (e instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) e).initialize(myLevelManager);
-				System.out.println("level manager initialized");
 			}
 		}
 		myModel.setCharacter(toLoad.getCharacter());
