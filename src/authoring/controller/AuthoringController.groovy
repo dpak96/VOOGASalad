@@ -3,7 +3,8 @@ package authoring.controller
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement
-import authoring.ui.draganddrop.HighlightedArticle;
+import authoring.ui.draganddrop.HighlightedArticle
+import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane
 import javafx.scene.layout.StackPane;
@@ -202,6 +203,16 @@ public class AuthoringController {
 
 	public boolean getHighlighted(){
 		return highlighted;
+	}
+
+
+	public void randomTest(){
+		Pane p = new Pane();
+		Button bb = new Button("Deuces")
+		p.getChildren().add(bb);
+		getTester().getChildren().add(p);
+		bb.setOnAction({event ->getTester().getChildren().remove(getTester().getChildren().size()-1)});
+
 	}
 
 

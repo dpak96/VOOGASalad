@@ -8,6 +8,7 @@ import authoring.ui.toolbar.ButtonOverlay;
 import authoring.ui.toolbar.ToolbarContainer;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -21,13 +22,14 @@ public class AuthoringUI {
   private OverlayController test, tester;
   private Pane ov2;
   private FlowPane toolbar;
-
+  AuthoringController ac;
 
 
   public AuthoringUI(AuthoringController authoringController){
     dragAndDrop = new DragAndDropBoard(authoringController);
     myOverlayController = new OverlayController();
     myToolbarContainer = new ToolbarContainer(authoringController);
+     ac = authoringController;
   }
 
   public Pane tester(){
@@ -46,6 +48,9 @@ public class AuthoringUI {
   }
 
   public void init(){
+   // Button b = new Button("hi");
+   // dragAndDrop.getChildren().add(b);
+    //b.setOnAction(e->ac.randomTest());
     ov2.getChildren().addAll(tester,test);
     VoogaProperties vp = new VoogaProperties();
     tester.setPrefSize(vp.getSceneWidth(),vp.getSceneHeight());
