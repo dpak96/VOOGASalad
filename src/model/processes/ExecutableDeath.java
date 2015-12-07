@@ -4,9 +4,7 @@ import java.util.Map;
 
 import level.manager.LevelManager;
 
-public class ExecutableDeath extends Executable {
-
-	protected LevelManager myLevelManager;
+public class ExecutableDeath extends ExecutableLevelChanges {
 	
 	public ExecutableDeath(Map<String, Object> parameters) {
 		super(parameters);
