@@ -8,6 +8,23 @@
     -fx-padding: 0;
 }
 
+.Thingy2 {
+    -fx-background-color: #D3D3D3;
+	
+}
+
+.ass {
+    -fx-background-color: #FFF;
+    -fx-border-color: blue;
+    -fx-border-size: 2px;
+    -fx-border-style: solid;
+}
+
+.random {
+	-fx-font-size: 30px;
+	-fx-font-weight: 900;
+}
+
 .Thinger {
     -fx-padding: 0;
 }

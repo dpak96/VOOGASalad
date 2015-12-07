@@ -48,9 +48,9 @@ public class AuthoringUI {
   }
 
   public void init(){
-   // Button b = new Button("hi");
-   // dragAndDrop.getChildren().add(b);
-    //b.setOnAction(e->ac.randomTest());
+//    Button b = new Button("hi");
+//    dragAndDrop.getChildren().add(b);
+//    b.setOnAction(e->ac.randomTest());
     ov2.getChildren().addAll(tester,test);
     VoogaProperties vp = new VoogaProperties();
     tester.setPrefSize(vp.getSceneWidth(),vp.getSceneHeight());
