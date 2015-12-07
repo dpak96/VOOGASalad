@@ -66,6 +66,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
         menuGrid.add(defaultSave, 2, rowIndex++);
 
 
+       
         comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.getCollisionTypes());
         imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
         initializeFieldValues();
