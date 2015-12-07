@@ -5,7 +5,8 @@ import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement
 import authoring.ui.draganddrop.HighlightedArticle;
 import javafx.scene.input.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Pane
+import javafx.scene.layout.StackPane;
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
@@ -24,6 +25,7 @@ public class AuthoringController {
 	private PresetArticleFactory presetArticleFactory;
 	private DragAndDropController dragAndDropController;
 	private ArticleExtenderController articleExtenderController;
+	private InfiniteController infiniteController;
 
 
 
@@ -36,6 +38,7 @@ public class AuthoringController {
 		presetArticleFactory = new PresetArticleFactory(mc, this);
 		dragAndDropController = new DragAndDropController();
 		articleExtenderController = new ArticleExtenderController();
+		infiniteController = new InfiniteController();
 
 	}
 
@@ -132,6 +135,9 @@ public class AuthoringController {
 		dragAndDropController."$method"(e, this);
 	}
 
+	public void infiniteEvent(String method,e){
+		infiniteController."$method"(e, this);
+	}
 
 	public void extendEvent(String method, e){
 		articleExtenderController."$method"(e,this);
@@ -139,6 +145,10 @@ public class AuthoringController {
 
 	public void extendEvent(String method){
 		articleExtenderController."$method"(this);
+	}
+
+	public getTester(){
+		return getUi().getTester();
 	}
   
     
