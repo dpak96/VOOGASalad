@@ -21,8 +21,8 @@ public class PresetArticleFactory {
 	}
 
 	public void platformMovement(Article article) {
-		modelController.addNewCollisionType("A");
-		modelController.addNewCollisionType("B");
+		//modelController.addNewCollisionType("A");
+		//modelController.addNewCollisionType("B");
 
 		article.setCollisionType("A");
 
@@ -320,8 +320,8 @@ public class PresetArticleFactory {
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
-		tempMap.put("myDisplacement", (double) -1);
-		ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
+		tempMap.put("actorToFollow", article);
+		ex = authoringController.makeExecutable("ExecutableMoveWithActor", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
