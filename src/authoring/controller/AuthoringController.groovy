@@ -2,7 +2,8 @@ package authoring.controller
 
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
-import authoring.ui.draganddrop.DraggableElement;
+import authoring.ui.draganddrop.DraggableElement
+import authoring.ui.draganddrop.HighlightedArticle;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import model.Event;
@@ -64,15 +65,16 @@ public class AuthoringController {
 					y,
 					true);
 		} else {
-			highlighted = false;
 			article =
 					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
 					x,
 					y,
 					true);
-			Pane p = (Pane) event.getParent();
-			p.getChildren().remove(event);
-			highlighted = false;
+			if(event instanceof HighlightedArticle) {
+				highlighted = false;
+				Pane p = (Pane) event.getParent();
+				p.getChildren().remove(event);
+			}
 		}
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
 		if (event.getImageName() in rb.keySet()){
