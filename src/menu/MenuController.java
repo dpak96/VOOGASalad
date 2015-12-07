@@ -92,6 +92,12 @@ public class MenuController {
         XMLOrderer reorder = new XMLOrderer(game);
         reorder.makeXML(game.getName());
     }
+    
+    public void deleteGame() {
+    	game = myGraphicHandler.getGameCreation();
+    	XMLOrderer reorder = new XMLOrderer(game);
+        reorder.makeXML(game.getName());
+    }
 
     public void loadGame(){
     	try {

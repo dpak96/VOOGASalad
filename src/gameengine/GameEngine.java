@@ -12,6 +12,7 @@ import model.Event;
 import model.article.Position;
 import model.article.Article;
 import model.controller.ModelController;
+import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
 import voogasalad_SquirtleSquad.Input;
