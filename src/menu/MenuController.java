@@ -132,7 +132,11 @@ public class MenuController {
 		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");  
 		myFileChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
 //    	myFileChooser.setInitialDirectory(levelDir);
-        List<File> dir = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
+        List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
+        for(File image : images){
+        	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
+        	image.renameTo(target);
+        }
 //        try {
 ////        	dir.mkdir();
 ////        	game.setFolderPath(dir.getPath());
