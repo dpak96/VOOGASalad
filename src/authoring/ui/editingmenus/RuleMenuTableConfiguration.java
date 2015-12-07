@@ -56,7 +56,6 @@ public class RuleMenuTableConfiguration {
     }
 
     public void deleteEvent (TableView table, Event selectedEvent) {
-        System.out.println("dasd");
         table.getItems().remove(selectedEvent);
         myController.getEventList().remove(selectedEvent);
         this.refreshTable(table, table.getItems());

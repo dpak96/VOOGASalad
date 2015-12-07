@@ -1,5 +1,6 @@
 package authoring.ui.editingmenus;
 
+import javafx.animation.ScaleTransition;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -8,6 +9,8 @@ import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.util.Duration;
 import model.article.Article;
 import resourcemanager.ResourceManager;
 
@@ -32,10 +35,15 @@ public abstract class AuthoringMenu implements IMenuAction {
         GridPane menuGrid = new GridPane();
         menuGrid.setPrefSize(menuWidth, menuHeight);
         populateMenu(menuGrid);
+        configureDialog(propertyMenu, menuGrid);
+    }
+
+    private void configureDialog (Dialog propertyMenu, GridPane menuGrid) {
         propertyMenu.getDialogPane().setContent(menuGrid);
         propertyMenu.getDialogPane().getButtonTypes().add(ButtonType.OK);
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
+        propertyMenu.show();
     }
 
     protected void displayErrorMessage () {
@@ -49,6 +57,6 @@ public abstract class AuthoringMenu implements IMenuAction {
         invalidInput.setContentText(bundle.getString("numberInput"));
         invalidInput.show();
     }
-
+    
     protected abstract void populateMenu (GridPane menuPane);
 }
