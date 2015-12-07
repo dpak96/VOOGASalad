@@ -10,7 +10,7 @@ public class CollisionMenu extends AuthoringMenu {
 
 	public CollisionMenu(String title, AuthoringController controller) {
 		super(title, controller);
-		super.showMenu(500, 300);
+		super.showMenu(300, 300);
 	}
 
 	@Override
