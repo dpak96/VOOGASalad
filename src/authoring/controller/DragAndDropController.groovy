@@ -29,7 +29,7 @@ class DragAndDropController {
         if (controlCheck(e)) {
             if (n != null) {
                 ArticlePropertyEditorMenu popupEditingMenu =
-                        new ArticlePropertyEditorMenu("Object Editor", n, this);
+                        new ArticlePropertyEditorMenu("Object Editor", n, authoringController);
             }
         } else {
             if(e.getSource() instanceof HighlightedArticle){

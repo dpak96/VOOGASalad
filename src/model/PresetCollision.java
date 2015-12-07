@@ -31,6 +31,7 @@ public class PresetCollision {
 	
 	public void intialize(){
 		for (String s: DEFAULT_TYPES){
+			System.out.println(s+"FUCKFUCK");
 			myCollisionTypeEditor.add(s);
 		}
 		collideWithPlatform(PLAYER);

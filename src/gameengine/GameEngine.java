@@ -45,7 +45,7 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runActiveEvents();
 		runArticleUpdates();
-		myModelController.update();
+		myModelController.update();		
 		
 	}
 	
