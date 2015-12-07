@@ -88,6 +88,10 @@ public class GameCreation {
     	myLevelMap.put(myLevelMap.size()+1, "NewLevel.xml");
     }
     
+    public void removeLevel() {
+    	
+    }
+    
     public Map<Integer,String> getLevelMap(){
     	return myLevelMap;
     }

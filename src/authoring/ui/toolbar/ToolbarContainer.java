@@ -3,17 +3,10 @@ package authoring.ui.toolbar;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.controller.AuthoringController;
-import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 
 public class ToolbarContainer extends DraggableElement {
