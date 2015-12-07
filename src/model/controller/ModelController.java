@@ -201,6 +201,7 @@ public class ModelController implements IModelController {
 			}
 		}
 		myModel.setCharacter(toLoad.getCharacter());
+		myModel.setBackgroundImage(toLoad.getBackgroundImage());
 		toLoad.destroyModel();
 	}
 

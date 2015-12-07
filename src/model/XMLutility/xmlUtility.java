@@ -86,6 +86,7 @@ public class xmlUtility {
 			levelOrder.makeXML(path);
 //	      o.writeObject(myController.getMyScene().getAllData().get(0));
 		} catch (NullPointerException e) {
+			System.out.println("not saving");
 			//User canceled from a save
 		} catch (Exception e) {
 			
