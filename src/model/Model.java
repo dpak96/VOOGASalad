@@ -74,7 +74,6 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
-		//System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
@@ -257,6 +256,13 @@ public class Model extends Observable{
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
+	public CollisionTypeEditor getCollisionTypeEditor() {
+		return myCollisionTypeEditor;
+	}
+	
+	public void setCollisionTypeEditor(CollisionTypeEditor myNewEditor) {
+		myCollisionTypeEditor = myNewEditor;
+	}
 	public List<String> getAllCollisionTypes(){
 		return myCollisionTypeEditor.getCollisionTypeList();
 	}
