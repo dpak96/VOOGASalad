@@ -28,7 +28,10 @@ public class RandomUI extends Pane {
 	private void makeDrag() {
 		myText = new Text("Add New Random Object");
 		myDrag = new Pane();
-		
+		myText.setLayoutX(LEFT_OFFSET);
+		myText.setLayoutY(TOP_OFFSET);
+		myDrag.setLayoutX(LEFT_OFFSET);
+		myDrag.setLayoutY(TOP_OFFSET);
 	}
 	
 }
