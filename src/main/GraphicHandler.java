@@ -30,7 +30,7 @@ public class GraphicHandler {
         start = new StartScreenController();
         baseScene = new Scene(start.getStart(), 400,400);
         baseScene.getStylesheets().add("startscreen/StartScreen.css");
-        currentStage.setTitle("Test");
+        currentStage.setTitle("Squirtle Squad Game Engine");
         currentStage.setScene(baseScene);
         start.init(currentStage, this);
         currentStage.show();
