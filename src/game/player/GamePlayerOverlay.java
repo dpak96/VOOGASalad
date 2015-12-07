@@ -57,7 +57,6 @@ public class GamePlayerOverlay extends Pane {
 			updateScore(character.getScore());
 			updateLife(character.getLife(), character);
 		} catch (NullPointerException e) {
-			System.out.println("No character yet");
 		}
 	}
 
