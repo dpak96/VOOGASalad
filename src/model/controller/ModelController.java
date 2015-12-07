@@ -195,6 +195,7 @@ public class ModelController implements IModelController {
 			}
 		}
 		myModel.setCharacter(toLoad.getCharacter());
+		initializeCollision();
 		toLoad.destroyModel();
 	}
 
