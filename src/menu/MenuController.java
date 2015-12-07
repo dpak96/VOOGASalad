@@ -10,6 +10,7 @@ import startscreen.GameCreation;
 import uibasics.UIStackPane;
 
 import java.io.*;
+import java.util.List;
 
 public class MenuController {
     private GraphicHandler myGraphicHandler;
@@ -120,6 +121,35 @@ public class MenuController {
     	} catch (NullPointerException e) {
 			//User canceled from a load
     	}
+    }
+    
+    public void addImage(String imageType){
+//    	File imageDir = new File(gameCreation.getFolderPath());
+    	FileChooser myFileChooser = new FileChooser();
+    	myFileChooser.setTitle("New Image File");
+		FileChooser.ExtensionFilter extensionFilter =
+				new FileChooser.ExtensionFilter("PNG Images (*.png)", "*.png");
+		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");  
+		myFileChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
+//    	myFileChooser.setInitialDirectory(levelDir);
+        List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
+        if(images != null){
+        	for(File image : images){
+            	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
+            	image.renameTo(target);
+            }
+        }
+        
+//        try {
+////        	dir.mkdir();
+////        	game.setFolderPath(dir.getPath());
+//        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),dir.getName());
+//        	levelOrder.makeXML(gameCreation.getName());
+////        	game.setGame(game.getName());
+//        	myModelController.setModel(new Model());
+//        } catch (Exception e) {
+//            
+//        }
     }
 
 

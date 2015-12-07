@@ -16,7 +16,7 @@ public class MenuPanel extends MenuBar {
 		super();
 		myResource = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "english");
 		myMenuController = menuController;
-		getMenus().addAll(fileMenu(), navigateMenu(), helpMenu());
+		getMenus().addAll(fileMenu(), editMenu(), navigateMenu(), helpMenu());
 	}
 
 	/**
@@ -39,6 +39,16 @@ public class MenuPanel extends MenuBar {
 		AbstractMenuItem mainMenu = new MainMenuItem(myResource, myMenuController);
 		AbstractMenuItem switchAE = new SwitchMenuItem(myResource, myMenuController);
 		menu.getItems().addAll(mainMenu, switchAE);
+
+		return menu;
+	}
+	
+	private Menu editMenu() {
+		Menu menu = new Menu(myResource.getString("EDIT"));
+		AbstractMenuItem newArticle = new ArticleMenuItem(myResource, myMenuController);
+		AbstractMenuItem newBackground = new BackgroundMenuItem(myResource, myMenuController);
+		
+		menu.getItems().addAll(newArticle, newBackground);
 
 		return menu;
 	}
