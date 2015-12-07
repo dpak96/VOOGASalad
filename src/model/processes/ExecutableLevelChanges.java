@@ -12,4 +12,8 @@ public abstract class ExecutableLevelChanges extends Executable {
 		super(parameters);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void initialize(LevelManager levelManager) {
+		myLevelManager = levelManager;
+	}
 }
