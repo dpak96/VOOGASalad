@@ -25,7 +25,6 @@ import model.processes.ExecutableLevelChanges;
 
 public class xmlUtility {
 	XStream myStream;
-	Model myModel;
 	ModelController myModelController;
 	
 	public xmlUtility(ModelController mc) {
@@ -73,7 +72,7 @@ public class xmlUtility {
 		}
 	}
 	
-	public void saveModel(Window window, String path) {
+	public void saveModel(Window window, String path, Model myModel) {
 		FileChooser myFileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
@@ -82,7 +81,7 @@ public class xmlUtility {
 		myFileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" + System.getProperty("file.separator")+path));
 		File game = myFileChooser.showSaveDialog(window);
 		try {
-			save(game);
+			save(game, myModel);
 			XMLOrderer levelOrder = new XMLOrderer(path,game.getName());
 			levelOrder.makeXML(path);
 //	      o.writeObject(myController.getMyScene().getAllData().get(0));
@@ -92,7 +91,7 @@ public class xmlUtility {
 			
 		}
 	}
-		private void save(File game){
+		private void save(File game, Model myModel){
 
 		FileOutputStream fos = null;
 
@@ -100,13 +99,13 @@ public class xmlUtility {
 		myStream.omitField(Observable.class, "changed");
 		//myStream.omitField(xmlUtility.class, "xmlUtil");
 		//myStream.omitField(LevelManager.class, "myLevelManager");
-		for(Article a: myModel.getArticles()) {
+		for(Article a: myModelController.getArticles()) {
 			a.destroyBitMap();
 			System.out.println("destroyed");
 		}
-		myModel.getViewpoint().destroyBitMap();
-		myModel.getCharacter().destroyBitMap();
-		for (Executable f: myModel.getExecutables()) {
+		myModelController.getViewpoint().destroyBitMap();
+		myModelController.getCharacter().destroyBitMap();
+		for (Executable f: myModelController.getExecutables()) {
 			if (f instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) f).destroyLevelManager();
 			}

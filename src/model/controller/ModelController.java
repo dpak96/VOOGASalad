@@ -54,6 +54,9 @@ public class ModelController implements IModelController {
 		return myLevelManager;
 	}
 
+	public List<Executable> getExecutables() {
+		return myModel.getExecutables();
+	}
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
 		double viewX = myModel.getViewpoint().getX();
 		double viewY = myModel.getViewpoint().getY();
@@ -204,9 +207,10 @@ public class ModelController implements IModelController {
 	public xmlUtility getXMLUtility() {
 		return myXMLUtility;
 	}
+	
 	public void save(Window wind, String path) {
 		try {
-			myXMLUtility.saveModel(wind, path);
+			myXMLUtility.saveModel(wind, path, myModel);
 		} catch (NullPointerException e) {
 			// User canceled from a save
 		}
