@@ -49,7 +49,7 @@ public class CollisionTypeEditor {
 	
 	public void add(String name){
 		collisionTypeName.add(name);
-		System.out.println("ADD IS BIENG CALLED ON " + name);
+//		System.out.println("ADD IS BIENG CALLED ON " + name);
 		if(collisionMatrix.size() == 0){
 			for(int i = 0; i < MATRIX_NUMBER; i++){
 				collisionMatrix.add(createNewEventMatrix());
@@ -63,24 +63,27 @@ public class CollisionTypeEditor {
 	}
 	
 	public void add(String direction, String nameOne, String nameTwo, Event event){
-		System.out.println("ADDING" + direction);
-		System.out.println("ADDING" + nameOne);
-		System.out.println("ADDING" + nameTwo);
+//		System.out.println("ADDING" + direction);
+//		System.out.println("ADDING" + nameOne);
+//		System.out.println("ADDING" + nameTwo);
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
+//		System.out.println(matrixIndex + " ASDF");
+//		System.out.println(typeOneIndex + "BCDE");
+//		System.out.println(typeTwoIndex + "DAEFE");	
 		collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex).add(event);
 	}
 	
 	public List<Event> getEvents(String direction, String nameOne, String nameTwo){
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
-		System.out.println(nameOne);
-		System.out.println(nameTwo);
+//		System.out.println(nameOne);
+//		System.out.println(nameTwo);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
-		System.out.println(matrixIndex + " ASDF");
-		System.out.println(typeOneIndex + "BCDE");
-		System.out.println(typeTwoIndex + "DAEFE");	
+//		System.out.println(matrixIndex + " ASDF");
+//		System.out.println(typeOneIndex + "BCDE");
+//		System.out.println(typeTwoIndex + "DAEFE");	
 		return collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex);		
 	}
 	
