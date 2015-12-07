@@ -66,7 +66,7 @@ public class AddEventMenu extends AuthoringMenu {
             super.displayErrorMessage();
         }
         
-        
+        System.out.println("refresh");
         tableConfig.refreshTable(myEventTable, myEventList);
     }
 
@@ -76,7 +76,7 @@ public class AddEventMenu extends AuthoringMenu {
         super.componentAdder.makeLabel(menuPane, 1, 1, "New Event Name :");
         eventNameField = super.componentAdder.makeField(menuPane, 2, 1);
         
-        super.componentAdder.makeLabel(menuPane, 1, 2, "Collision Type");
+        super.componentAdder.makeLabel(menuPane, 1, 2, "Event Type");
         eventType=super.componentAdder.makeComboBox(menuPane, 2, 2);
         eventType.getItems().addAll(Arrays.asList("Ordinary","Active","Collision","Button"));
         
