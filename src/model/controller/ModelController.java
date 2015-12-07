@@ -13,7 +13,6 @@ import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
-import resourcemanager.PropertiesManager;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 
@@ -31,9 +30,9 @@ public class ModelController implements IModelController {
 		myModel.initialize();
 		initializeCollision();
 		myModelFactory = new ModelFactory();
-		myXMLUtility = new xmlUtility(myModel);
+		myXMLUtility = new xmlUtility(this);
 	}
-
+	
 	public void update(){
 		myModel.update();
 		notifyObservers();
@@ -50,7 +49,14 @@ public class ModelController implements IModelController {
 	public void makeLevelManager(GameCreation game) {
 		myLevelManager = new LevelManager(this,game);
 	}
+	
+	public LevelManager getLevelManager() {
+		return myLevelManager;
+	}
 
+	public List<Executable> getExecutables() {
+		return myModel.getExecutables();
+	}
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
 		double viewX = myModel.getViewpoint().getX();
 		double viewY = myModel.getViewpoint().getY();
@@ -174,7 +180,7 @@ public class ModelController implements IModelController {
 	public void notifyObservers() {
 		myModel.notifyObservers();
 	}
-
+	
 	public void loadFromFile(Model toLoad) {
 		System.out.println("a");
 		myModel.destroyModel();
@@ -195,12 +201,17 @@ public class ModelController implements IModelController {
 			}
 		}
 		myModel.setCharacter(toLoad.getCharacter());
+		myModel.setBackgroundImage(toLoad.getBackgroundImage());
 		toLoad.destroyModel();
 	}
 
+	public xmlUtility getXMLUtility() {
+		return myXMLUtility;
+	}
+	
 	public void save(Window wind, String path) {
 		try {
-			myXMLUtility.saveModel(wind, path);
+			myXMLUtility.saveModel(wind, path, myModel);
 		} catch (NullPointerException e) {
 			// User canceled from a save
 		}
