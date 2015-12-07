@@ -1,5 +1,6 @@
 package authoring.ui.smalloverlay;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -17,7 +18,6 @@ public class OverlayController extends StackPane {
     public OverlayController(StackPane b){
         overlays = new ArrayList<>();
         getStyleClass().add("BaseP");
-        overlays.add(base);
     }
 
     public void addPane(Pane n){
@@ -26,7 +26,7 @@ public class OverlayController extends StackPane {
     }
 
     public void addOverlay(Pane ov){
-        Pane cover = new StackPane();
+        Pane cover = new Pane();
         cover.getStyleClass().addAll("Overlayed");
         getChildren().add(cover);
         overlays.add(cover);
