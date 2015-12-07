@@ -12,7 +12,6 @@ public class StartScreen {
     private StartScreenSkeleton skeleton;
     private PlayAuthorModule playEdit;
     private StartScreenController myController;
-    private Stage myStage;
 
     public StartScreen(){
         skeleton = new StartScreenSkeleton();
@@ -24,14 +23,11 @@ public class StartScreen {
         myController = controller;
         playEdit.init(controller);
         skeleton.addLayer(playEdit.getContainer());
-        myStage = s;
     }
 
     public void addGameChooser(String value){
         GameChooserModule games = new GameChooserModule(getGames());
         games.init(myController, value);
-        System.out.println("Game chooser value" + value);
-
         skeleton.addLayer(games.getContainer());
     }
 
