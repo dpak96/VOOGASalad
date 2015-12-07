@@ -45,6 +45,11 @@ public class ModelController implements IModelController {
 	public void makeLevelManager(GameCreation game) {
 		myLevelManager = new LevelManager(this,game);
 	}
+	
+	public void makeNewModel() {
+		//myModel = new Model();
+		myModel.initialize();
+	}
 
 	public Article createArticle(String fileName, double x, double y, boolean direction) {
 		double viewX = myModel.getViewpoint().getX();
