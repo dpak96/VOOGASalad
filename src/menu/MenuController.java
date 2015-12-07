@@ -133,10 +133,13 @@ public class MenuController {
 		myFileChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
 //    	myFileChooser.setInitialDirectory(levelDir);
         List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
-        for(File image : images){
-        	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
-        	image.renameTo(target);
+        if(images != null){
+        	for(File image : images){
+            	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
+            	image.renameTo(target);
+            }
         }
+        
 //        try {
 ////        	dir.mkdir();
 ////        	game.setFolderPath(dir.getPath());
