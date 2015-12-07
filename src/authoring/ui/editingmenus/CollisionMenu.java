@@ -22,6 +22,12 @@ public class CollisionMenu extends AuthoringMenu {
 
 	@Override
 	public void executeYourMenuFunction() {
+	    try{
+	    super.myController.getCollisionTypes().add(myCollisionName.getText());
+	}
+	    catch(IllegalArgumentException e){
+	        super.displayErrorMessage();
+	    }
 	}
 
 }
