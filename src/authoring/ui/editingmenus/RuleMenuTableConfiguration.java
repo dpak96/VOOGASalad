@@ -25,7 +25,7 @@ public class RuleMenuTableConfiguration {
         
     }
     
-    
+
     public void refreshTable(TableView table, List<?> tableList){
         
             table.setItems(null);
@@ -33,6 +33,12 @@ public class RuleMenuTableConfiguration {
             table.setItems(FXCollections.observableArrayList(tableList));
             
        
+    }
+    
+    public void deleteEvent(TableView table,Event selectedEvent){
+        table.getItems().remove(selectedEvent);
+        this.refreshTable(table, table.getItems());
+        
     }
     private void addColumns (TableView eventTable,
                             TableView conditionTable,

@@ -27,11 +27,12 @@ public class RuleMenu extends AuthoringMenu {
     private TableView conditionTable = new TableView();
     private TableView executableTable = new TableView();
     private Event selectedEvent;
+    private Condition selectedCondition;
+    private Executable selectedExecutable;
 
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
-        super.showMenu(500, 300);
-        
+        super.showMenu(600, 300);
 
     }
 
@@ -43,31 +44,45 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.setHgap(10);
 
         super.componentAdder.makeLabel(menuPane, 1, 1, "Events");
-        menuPane.add(eventTable, 1, 2);
-        Button addEvent=new Button("Add new event");
+        menuPane.add(eventTable, 1, 2, 2, 1);
+        Button addEvent = new Button("Add new event");
         menuPane.add(addEvent, 1, 3);
-        addEvent.setOnAction(e-> new AddEventMenu("Add Event",this.myController,eventTable,super.myController.getEventList()));
+        addEvent.setOnAction(e -> new AddEventMenu("Add Event", this.myController, eventTable,
+                                                   super.myController.getEventList()));
 
-        super.componentAdder.makeLabel(menuPane, 2, 1, "Conditions");
-        menuPane.add(conditionTable, 2, 2);
-        Button addCondition=new Button("Add new condition");
-        menuPane.add(addCondition, 2, 3);
-        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Condition",selectedEvent,conditionTable,selectedEvent.getConditions()));
-        
+        Button removeEvent = new Button("Remove event");
+        menuPane.add(removeEvent, 2, 3);
+        removeEvent.setOnAction(e -> eventTable.getItems().remove(selectedEvent));
 
-        super.componentAdder.makeLabel(menuPane, 3, 1, "Executables");
-        menuPane.add(executableTable, 3, 2);
-        Button addExecutable=new Button("Add new executable");
-        menuPane.add(addExecutable, 3, 3);
-        addExecutable.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,"Executable",selectedEvent,executableTable,selectedEvent.getExecutables()));
+        super.componentAdder.makeLabel(menuPane, 3, 1, "Conditions");
+        menuPane.add(conditionTable, 3, 2, 2, 1);
+        Button addCondition = new Button("Add new condition");
+        menuPane.add(addCondition, 3, 3);
+        addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
+                                                         "Condition", selectedEvent, conditionTable,
+                                                         selectedEvent.getConditions()));
         
-        RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration();
+        Button removeCondition=new Button("Remove condition");
+        menuPane.add(removeCondition, 4, 3);
+        removeCondition.setOnAction(e-> conditionTable.getItems().remove(selectedCondition));
+
+        super.componentAdder.makeLabel(menuPane, 5, 1, "Executables");
+        menuPane.add(executableTable, 5, 2, 2, 1);
+        Button addExecutable = new Button("Add new executable");
+        menuPane.add(addExecutable, 5, 3);
+        addExecutable
+                .setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
+                                                     "Executable", selectedEvent, executableTable,
+                                                     selectedEvent.getExecutables()));
+        Button removeExecutable= new Button("Remove executable");
+        menuPane.add(removeExecutable, 6, 3);
+        removeExecutable.setOnAction(e-> executableTable.getItems().remove(executableTable.getSelectionModel().getSelectedItem()));
+        
+        RuleMenuTableConfiguration tableConfig = new RuleMenuTableConfiguration();
         tableConfig.configureTables(eventTable, conditionTable, executableTable);
-        
-        
+
         GridPane paramGrid = new GridPane();
         menuPane.add(paramGrid, 1, 4, 3, 1);
-
 
         ObservableList<Event> eventData =
                 FXCollections.observableArrayList(super.myController.getEventList());
@@ -82,6 +97,18 @@ public class RuleMenu extends AuthoringMenu {
                     }
                 });
 
+        conditionTable.getSelectionModel().selectedItemProperty()
+                .addListener( (observableValue, oldValue, newValue) -> {
+                    if (conditionTable.getSelectionModel().getSelectedItem() != null) {
+                        selectedCondition = (Condition) newValue;
+                    }
+                });
+        executableTable.getSelectionModel().selectedItemProperty()
+                .addListener( (observableValue, oldValue, newValue) -> {
+                    if (executableTable.getSelectionModel().getSelectedItem() != null) {
+                        selectedExecutable = (Executable) newValue;
+                    }
+                });
         /*
          * conditionTable.getSelectionModel().selectedItemProperty().addListener((observableValue,
          * oldValue, newValue) -> {
@@ -98,7 +125,6 @@ public class RuleMenu extends AuthoringMenu {
 
     }
 
-   
     public void updateConditionsAndExecutables (Event selectedEvent) {
         conditionTable.setItems(null);
         conditionTable.layout();
