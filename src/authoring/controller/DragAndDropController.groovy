@@ -17,6 +17,8 @@ import model.article.Article
  */
 class DragAndDropController {
 
+    private double borderwidth = 4;
+
     public DragAndDropController(){
 
     }
@@ -56,12 +58,12 @@ class DragAndDropController {
     public void dropElement(DragEvent event, AuthoringController authoringController){
         if(event.getGestureSource() instanceof HighlightedArticle){
             HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-            double tempX = highlightedArticle.getLayoutX()+19.1;
-            double tempY = highlightedArticle.getLayoutY()+15.1;
+            double tempX = highlightedArticle.getLayoutX()+borderwidth +0.1;
+            double tempY = highlightedArticle.getLayoutY()+borderwidth +0.1;
             Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
             //System.out.println(n == null);
-            n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-27.5);
-            n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-27.5);
+            n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
+            n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
             Pane p = (Pane)highlightedArticle.getParent();
             p.getChildren().remove(highlightedArticle);
             authoringController.setHighlighted(false);
@@ -90,8 +92,8 @@ class DragAndDropController {
         }
         else {
             try {
-                double tX = n.getX() - authoringController.getModelController().getViewpoint().getX() -19;
-                double tY = n.getY() - authoringController.getModelController().getViewpoint().getY() -15;
+                double tX = n.getX() - authoringController.getModelController().getViewpoint().getX() -borderwidth;
+                double tY = n.getY() - authoringController.getModelController().getViewpoint().getY() -borderwidth;
                 HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth(),n.getHeight()), authoringController);
                 authoringController.setHighlighted(true);
                 authoringController.getUi().getDragAndDrop().getChildren().add(highlightedArticle);
