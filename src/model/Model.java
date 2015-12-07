@@ -40,6 +40,10 @@ public class Model extends Observable{
 		myCharacter = new Article("Platform", 400, 400, true);
 		//vp = new VoogaProperties();
 		randomGenerator = new NullGenerationUtility();
+		myCollisionTypeEditor = new CollisionTypeEditor();
+		PresetCollision myPresetCollision = new PresetCollision(myCollisionTypeEditor);
+		myPresetCollision.intialize();
+		myCollisionTypeEditor = myPresetCollision.getCollisonTypeEditor();
 	}
 	
 	public void update(){

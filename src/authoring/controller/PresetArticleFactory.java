@@ -21,10 +21,10 @@ public class PresetArticleFactory {
 	}
 
 	public void platformMovement(Article article) {
-		modelController.addNewCollisionType("A");
-		modelController.addNewCollisionType("B");
+		//modelController.addNewCollisionType("A");
+		//modelController.addNewCollisionType("B");
 
-		article.setCollisionType("A");
+		article.setCollisionType("Platform");
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -36,7 +36,7 @@ public class PresetArticleFactory {
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
 		Event ev = authoringController.makeEvent("event", listCondition, listExecutable);
-		modelController.addCollision("Left", "A", "B", ev);
+		modelController.addCollision("Left", "Platform", "Enemy", ev);
 	}
 
 	public void goombaMovement(Article article) {
@@ -66,7 +66,7 @@ public class PresetArticleFactory {
 
 		article.setYVelocity(0);
 
-		article.setCollisionType("B");
+		article.setCollisionType("Enemy");
 	}
 
 	public void playerMovement(Article article) {

@@ -62,6 +62,9 @@ public class CollisionTypeEditor {
 	}
 	
 	public void add(String direction, String nameOne, String nameTwo, Event event){
+		System.out.println("ADDING" + direction);
+		System.out.println("ADDING" + nameOne);
+		System.out.println("ADDING" + nameTwo);
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
@@ -70,6 +73,8 @@ public class CollisionTypeEditor {
 	
 	public List<Event> getEvents(String direction, String nameOne, String nameTwo){
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
+		System.out.println(nameOne);
+		System.out.println(nameTwo);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
 		System.out.println(matrixIndex + " ASDF");
