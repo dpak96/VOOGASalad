@@ -20,6 +20,7 @@ public class AuthoringUI {
   private ToolbarContainer myToolbarContainer;
   private OverlayController test;
   private Pane ov2;
+  private FlowPane toolbar;
 
 
 
@@ -32,17 +33,23 @@ public class AuthoringUI {
   public Pane tester(){
     ov2 = new Pane();
     test = new OverlayController();
-    Pane toolbar = myToolbarContainer.initializeToolbar();
+    toolbar = myToolbarContainer.initializeToolbar();
+    toolbar.setMaxWidth(100);
+    toolbar.getStyleClass().add("Thinger");
     test.getChildren().add(toolbar);
     VoogaProperties props = new VoogaProperties();
     dragAndDrop.getStyleClass().add("Thingy");
+    test.getStyleClass().add("Thingy");
     return ov2;
   }
 
   public void init(){
     ov2.getChildren().addAll(dragAndDrop,test);
-    dragAndDrop.setPrefSize(500,500);
-    test.setLayoutX(500);
+    VoogaProperties vp = new VoogaProperties();
+    dragAndDrop.setPrefSize(vp.getSceneWidth(),vp.getSceneHeight());
+    test.setLayoutY(0);
+    test.setLayoutX(vp.getSceneWidth()-(toolbar.getBoundsInParent().getWidth()*5));
+    test.setMaxWidth((toolbar.getBoundsInParent().getWidth()*4));
   }
 
 
