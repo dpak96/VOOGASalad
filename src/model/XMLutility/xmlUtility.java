@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
+import level.manager.LevelManager;
 import level.manager.XMLOrderer;
 import main.VoogaProperties;
 import model.Model;
@@ -56,6 +56,7 @@ public class xmlUtility {
 			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			System.out.println("Read" + readObject);
+			System.out.println(((Model) readObject));
 			return (Model) readObject;
 			
 		} catch (NullPointerException e) {
@@ -91,7 +92,7 @@ public class xmlUtility {
 
 		myStream.omitField(Observable.class, "obs");
 		myStream.omitField(Observable.class, "changed");
-			//myStream.omitField(VoogaProperties.class, "vp");
+		myStream.omitField(LevelManager.class, "myLevelManager");
 		for(Article a: myModel.getArticles()) {
 			a.destroyBitMap();
 			System.out.println("destroyed");
@@ -119,7 +120,7 @@ public class xmlUtility {
 	public static void main (String args[]) {
 		Model model = new Model();
 		model.initialize();
-		Article test = new Article("Goomba.png", 100, 100, true);
+		Article test = new Article("Goomba", 100, 100, true);
 		model.addArticle(test);
 		xmlUtility xml = new xmlUtility(model);
 		//Model newModel = xml.loadModel("testing.xml");

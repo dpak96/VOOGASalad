@@ -12,6 +12,7 @@ import model.article.Article;
 import model.factory.*;
 import model.processes.Condition;
 import model.processes.Executable;
+import model.processes.ExecutableLevelChanges;
 import resourcemanager.PropertiesManager;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
@@ -183,6 +184,12 @@ public class ModelController implements IModelController {
 		myModel.addAllButtonMap(toLoad.getButtonMap());
 		myModel.addAllConditions(toLoad.getConditions());
 		myModel.addAllExecutables(toLoad.getExecutables());
+		for(Executable e : toLoad.getExecutables()) {
+			if (e instanceof ExecutableLevelChanges) {
+				((ExecutableLevelChanges) e).initialize(myLevelManager);
+				System.out.println("level manager initialized");
+			}
+		}
 		myModel.setCharacter(toLoad.getCharacter());
 		toLoad.destroyModel();
 	}
