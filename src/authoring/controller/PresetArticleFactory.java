@@ -302,7 +302,7 @@ public class PresetArticleFactory {
 		Article myViewpoint = modelController.getViewpoint();
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
-		tempMap.put("myDisplacement", (double) 20);
+		tempMap.put("myDisplacement", (double) 1);
 		ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -320,7 +320,7 @@ public class PresetArticleFactory {
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
-		tempMap.put("myDisplacement", (double) -20);
+		tempMap.put("myDisplacement", (double) -1);
 		ex = authoringController.makeExecutable("ExecutableMoveHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
