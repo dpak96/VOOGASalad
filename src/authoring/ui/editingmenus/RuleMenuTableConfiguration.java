@@ -1,6 +1,7 @@
 package authoring.ui.editingmenus;
 
 import java.util.List;
+import authoring.controller.AuthoringController;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,7 +16,10 @@ public class RuleMenuTableConfiguration {
     private TableView eventTable = new TableView();
     private TableView conditionTable = new TableView();
     private TableView executableTable = new TableView();
-    
+    private AuthoringController myController;
+    public RuleMenuTableConfiguration(AuthoringController controller){
+        myController=controller;
+    }
     public void configureTables(TableView eventTable,
                                 TableView conditionTable,
                                 TableView executableTable)
@@ -37,6 +41,10 @@ public class RuleMenuTableConfiguration {
     
     public void deleteEvent(TableView table,Event selectedEvent){
         table.getItems().remove(selectedEvent);
+        System.out.println(myController.getEventList().size());
+
+        myController.getEventList().remove(selectedEvent);
+        System.out.println(myController.getEventList().size());
         this.refreshTable(table, table.getItems());
         
     }

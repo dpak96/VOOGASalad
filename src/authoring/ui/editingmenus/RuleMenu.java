@@ -29,6 +29,8 @@ public class RuleMenu extends AuthoringMenu {
     private Event selectedEvent;
     private Condition selectedCondition;
     private Executable selectedExecutable;
+    private RuleMenuTableConfiguration tableConfig = new RuleMenuTableConfiguration(this.myController);
+
 
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
@@ -52,7 +54,7 @@ public class RuleMenu extends AuthoringMenu {
 
         Button removeEvent = new Button("Remove event");
         menuPane.add(removeEvent, 2, 3);
-        removeEvent.setOnAction(e -> eventTable.getItems().remove(selectedEvent));
+        removeEvent.setOnAction(e -> tableConfig.deleteEvent(eventTable, selectedEvent));
 
         super.componentAdder.makeLabel(menuPane, 3, 1, "Conditions");
         menuPane.add(conditionTable, 3, 2, 2, 1);
@@ -78,7 +80,6 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(removeExecutable, 6, 3);
         removeExecutable.setOnAction(e-> executableTable.getItems().remove(executableTable.getSelectionModel().getSelectedItem()));
         
-        RuleMenuTableConfiguration tableConfig = new RuleMenuTableConfiguration();
         tableConfig.configureTables(eventTable, conditionTable, executableTable);
 
         GridPane paramGrid = new GridPane();
