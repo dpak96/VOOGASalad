@@ -4,6 +4,7 @@ import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement
 import authoring.ui.draganddrop.HighlightedArticle
+import authoring.ui.toolbar.RandomUI
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane
@@ -206,14 +207,6 @@ public class AuthoringController {
 	}
 
 
-	public void randomTest(){
-		Pane p = new Pane();
-		Button bb = new Button("Deuces")
-		p.getChildren().add(bb);
-		getTester().getChildren().add(p);
-		bb.setOnAction({event ->getTester().getChildren().remove(getTester().getChildren().size()-1)});
-
-	}
 
 
 
