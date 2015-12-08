@@ -19,9 +19,7 @@ public class RandomUI extends Pane {
 	public RandomUI(controller) {
 		myController = controller;
 		controller.getTester().getChildren().add(this);
-		init();
-		new RandomMenu("Random Element Editor",myController);
-		
+		init();		
 	}
 	
 	private void init() {
@@ -37,19 +35,19 @@ public class RandomUI extends Pane {
 		myDrag = new Pane();
 		myBox = new ComboBox();
 		getChildren().addAll(myText,myDrag);
-		myDrag.setPrefSize(100,100);
+		myDrag.setPrefSize(300,300);
 		myDrag.getStyleClass().add("ass");
 		myText.getStyleClass().add("random");
-		setOnDragDropped({event -> react()});
+		setOnDragDropped({event -> react(event)});
 		myText.setLayoutX(LEFT_OFFSET - myText.getBoundsInParent().getWidth());
-		println "LEFT_OFFSET " + LEFT_OFFSET + " myText width/2 " + myText.getBoundsInParent().getWidth()/2;
 		myText.setLayoutY(TOP_OFFSET);
 		myDrag.setLayoutX(LEFT_OFFSET - myDrag.getWidth()  - 20 /*myText.getBoundsInParent().getWidth()*/);
 		myDrag.setLayoutY(TOP_OFFSET + myText.getBoundsInParent().getHeight()/2);
 	}
 	
-	private void react() {
-		myController.dragEvent("dropElement",event);
+	private void react(event) {
+		myController.infiniteEvent("drag", event );
+		
 //		new RandomMenu("Random Element Editor",myController);
 	}
 	
