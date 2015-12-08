@@ -157,6 +157,10 @@ public class MenuController {
     public MainMenu getMenu(){
         return myMainMenu;
     }
+    
+    public String getGameName(){
+    	return game.getName();
+    }
 
 
 }
