@@ -138,6 +138,10 @@ public class Article{
 		myLife.removeHealth(myDamage);
 	}
 
+	public void gainLife(int life) {
+		myLife.addLife(life);
+	}
+	
 	public void gainLife(){
 		myLife.addLife();
 	}
@@ -154,8 +158,12 @@ public class Article{
 		myLife.addHealth(myHealthGain);
 	}
 	
-	public void setScore(double score) {
-		myScore.setScore(myScore.getScore()+score);
+	public void gainScore(double score) {
+		myScore.gainScore(myScore.getScore()+score);
+	}
+	
+	public void removeScore(double score) {
+		myScore.removeScore(score);
 	}
 	
 	public double getScore() {

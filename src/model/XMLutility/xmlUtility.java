@@ -102,7 +102,7 @@ public class xmlUtility {
 		for(Article a: myModelController.getArticles()) {
 			a.destroyBitMap();
 			System.out.println("destroyed");
-		}
+		} 
 		myModelController.getViewpoint().destroyBitMap();
 		myModelController.getCharacter().destroyBitMap();
 		for (Executable f: myModelController.getExecutables()) {
