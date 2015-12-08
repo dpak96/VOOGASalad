@@ -162,6 +162,10 @@ public class Article{
 		myLife.addHealth(myHealthGain);
 	}
 	
+	public void setScore(double score) {
+		myScore.removeScore(myScore.getScore());
+		myScore.gainScore(score);
+	}
 	public void gainScore(double score) {
 		myScore.gainScore(myScore.getScore()+score);
 	}
