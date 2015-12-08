@@ -142,7 +142,7 @@ public class MenuController {
         				+ "resources" + System.getProperty("file.separator")+ "images" 
         				+ System.getProperty("file.separator") + imageType + System.getProperty("file.separator") + image.getName());
             	try {
-					Files.move(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
