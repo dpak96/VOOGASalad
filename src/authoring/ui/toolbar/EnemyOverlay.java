@@ -19,11 +19,9 @@ public class EnemyOverlay extends ButtonOverlay{
     protected List<Button> populateButtonList () {
         List<Button> buttonList=new ArrayList<Button>();
         
-        ResourceBundle platformBundle=(ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "enemies");
-        Enumeration platformKeys=platformBundle.getKeys();
-        while(platformKeys.hasMoreElements()){
-            String imageName= (String) platformKeys.nextElement();
-            buttonList.add(new PlatformButton(myAuthoringController,imageName));
+        for(String imgName: ResourceManager.getResourceManager().getResourceMap("ArticleImageManager").keySet()){
+            System.out.println(imgName);
+            buttonList.add(new DraggablePlatformButton(imgName));
         }
 
         return buttonList;
