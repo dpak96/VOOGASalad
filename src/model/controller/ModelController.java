@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import javafx.scene.image.Image;
 import javafx.stage.Window;
 import level.manager.LevelManager;
 import model.*;
@@ -63,6 +64,13 @@ public class ModelController implements IModelController {
 		Article newArticle = myModelFactory.createArticle(fileName, x + viewX, y + viewY, direction);
 		addArticle(newArticle);
 		return newArticle;
+	}
+	
+	public Article createArticleFromCenter(String fileName, double x, double y, boolean direction){
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", fileName);
+		double adjustedX = x - img.getWidth();
+		double adjustedY = y - img.getHeight();
+		return createArticle(fileName, adjustedX, adjustedY, direction);
 	}
 
 	public Executable createExecutable(String executableName, Map<String, Object> data) {
