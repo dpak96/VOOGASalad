@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import resourcemanager.ResourceManager;
 
-public class DraggableButton  extends DraggableElement {
+public abstract class DraggableButton  extends DraggableElement {
     
     private static final int BUTTON_DIMENSION=50;
     
@@ -22,9 +22,13 @@ public class DraggableButton  extends DraggableElement {
    }
 
     protected ImageView setImage(String imgName){
-        ImageView buttonIcon = new ImageView((Image) ResourceManager.getResourceManager().getResource("ImageManager", imgName));
+        ImageView buttonIcon = this.getImage(imgName);
         buttonIcon.setFitWidth(this.getPrefWidth());
         buttonIcon.setFitHeight(this.getPrefHeight());
         return buttonIcon;
     }
+    
+    protected abstract ImageView getImage(String imgName);
+     
+    
 }
