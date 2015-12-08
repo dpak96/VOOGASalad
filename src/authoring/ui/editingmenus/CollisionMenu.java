@@ -10,7 +10,7 @@ public class CollisionMenu extends AuthoringMenu {
 
 	public CollisionMenu(String title, AuthoringController controller) {
 		super(title, controller);
-		super.showMenu(500, 300);
+		super.showMenu(300, 300);
 	}
 
 	@Override
@@ -22,6 +22,12 @@ public class CollisionMenu extends AuthoringMenu {
 
 	@Override
 	public void executeYourMenuFunction() {
+	    try{
+	    super.myController.getCollisionTypes().add(myCollisionName.getText());
+	}
+	    catch(IllegalArgumentException e){
+	        super.displayErrorMessage();
+	    }
 	}
 
 }

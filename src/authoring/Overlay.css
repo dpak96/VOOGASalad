@@ -1,39 +1,48 @@
 
 .OverlayP {
     -fx-background-color: #FFFFFF;
-    -fx-alignment: center;
-    -fx-min-width: 300;
-    -fx-min-height: 500;
-    -fx-max-width: 300;
-    -fx-max-height: 500;
     -fx-effect: dropshadow( GAUSSIAN , #333333 , 5 , 5.0 , 0 , 0 );
 }
 
 .Thingy {
+    -fx-padding: 0;
+}
 
+.Thingy2 {
+    -fx-background-color: #D3D3D3;
+	
+}
+
+.ass {
+    -fx-background-color: #FFF;
+    -fx-border-color: blue;
+    -fx-border-size: 2px;
+    -fx-border-style: solid;
+}
+
+.random {
+	-fx-font-size: 30px;
+	-fx-font-weight: 900;
+}
+
+.Thinger {
+    -fx-padding: 0;
 }
 
 
+
 .Test {
-    -fx-pref-height: 500;
-    -fx-pref-width: 200;
+    -fx-padding: 0;
 }
 
 
 .Overlayed{
-    -fx-pref-height: 500;
-    -fx-pref-width: 200;
-    -fx-min-height: 500;
-    -fx-min-width: 200;
     -fx-background-color: rgba(64, 64, 64, 0.85);
 }
 
 .BaseP {
-
-    -fx-padding: 200;
+    -fx-padding: 0;
     -fx-alignment: center;
-    -fx-min-width: 400;
-    -fx-min-height: 300;
 }
 
 .Butt {

@@ -24,6 +24,7 @@ public class BackgroundMenu extends AuthoringMenu {
         
         int rowIndex=1;
         imageBox=super.componentAdder.makeLabelAndBox(menuPane, 1, rowIndex, "Background Image: ");
+        imageBox.getItems().add(" ");
         imageHandler.addBackgroundImages(imageBox);
         
        

@@ -31,7 +31,7 @@ public abstract class ButtonOverlay extends DraggableElement {
         // toolBox.getChildren().add(new PlatformSelector());
         myToolBox.getChildren().addAll(populateButtonList());
         back = new Button("BACK");
-        uploadImage = new Button("Upload Image");
+        uploadImage = new Button("Upload");
         myToolBox.getChildren().addAll(back, uploadImage);
         //myToolBox.setPrefSize(600,200);
         return myToolBox;

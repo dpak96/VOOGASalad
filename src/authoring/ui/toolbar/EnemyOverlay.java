@@ -1,10 +1,12 @@
 package authoring.ui.toolbar;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
-
+import java.util.ResourceBundle;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.Button;
+import resourcemanager.ResourceManager;
 
 public class EnemyOverlay extends ButtonOverlay{
 
@@ -16,7 +18,11 @@ public class EnemyOverlay extends ButtonOverlay{
     @Override
     protected List<Button> populateButtonList () {
         List<Button> buttonList=new ArrayList<Button>();
-        buttonList.add(new EnemyButton(super.myAuthoringController,"Vegeta"));
+        
+        for(String imgName: ResourceManager.getResourceManager().getResourceMap("ArticleImageManager").keySet()){
+            System.out.println(imgName);
+            buttonList.add(new DraggablePlatformButton(imgName));
+        }
 
         return buttonList;
     }

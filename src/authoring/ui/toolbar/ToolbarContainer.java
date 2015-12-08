@@ -3,17 +3,10 @@ package authoring.ui.toolbar;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.controller.AuthoringController;
-import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 
 public class ToolbarContainer extends DraggableElement {
@@ -46,6 +39,8 @@ public class ToolbarContainer extends DraggableElement {
         buttonList.add(new BackgroundButton(myController));
         buttonList.add(new ControlButton(myController));
         buttonList.add(new RuleButton(myController));
+        buttonList.add(new CollisionButton(myController));
+        buttonList.add(new RandomButton(myController));
         return buttonList;
     }
     
