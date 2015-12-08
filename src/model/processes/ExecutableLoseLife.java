@@ -13,4 +13,7 @@ public class ExecutableLoseLife extends Executable{
 		myActor.removeLife();
 	}
 
+	public void execute(int life) {
+		myActor.removeLife(life);
+	}
 }
