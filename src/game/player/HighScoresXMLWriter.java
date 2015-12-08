@@ -42,7 +42,10 @@ public class HighScoresXMLWriter {
 			myXML.appendChild(myFile);
 		}
 		addHighScore(score,player);
-		makeXML();
+	}
+	
+	public HighScoresXMLWriter(){
+		
 	}
 
 	private void addHighScore(String score, String player) {

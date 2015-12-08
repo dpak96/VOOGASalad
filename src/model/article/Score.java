@@ -10,11 +10,30 @@ public class Score {
 	public Score() {
 		myScore = 0;
 	}
-	public void setScore(double score) {
-		myScore = score;
+	public void gainScore(double score) {
+		myScore += score;
 	}
 	
+	public void gainScore() {
+		myScore++;
+	}
 	public double getScore() {
 		return myScore;
+	}
+	
+	public void removeScore(double score) {
+		if (myScore-score < 0) {
+			myScore = 0;
+		} else {
+			myScore -= score;
+		}
+	}
+	
+	public void removeScore() {
+		if (myScore-- < 0) {
+			myScore = 0;
+		} else {
+			myScore--;
+		}
 	}
 }

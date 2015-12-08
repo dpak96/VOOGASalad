@@ -1,6 +1,7 @@
 package game.player;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -19,11 +20,14 @@ public class HighScoresModule extends HUDModule {
 	
 	private Button myButton;
 	private HighScoresDialog myHighScores;
+	private HighScoreInputDialog myInputScore;
+	private String myGameName;
 	
 	public HighScoresModule(String gameName){
 		super();
 		myButton = new Button();
 		myHighScores = new HighScoresDialog(gameName);
+		myGameName = gameName;
 	}
 	
 	@Override
@@ -34,15 +38,31 @@ public class HighScoresModule extends HUDModule {
 		buttonImg.setFitHeight(offset/5);
 		myButton.setPadding(new Insets(0,0,0,0));
 		myButton.setGraphic(buttonImg);
-		myButton.setOnAction(e->myHighScores.init());
+		myButton.setOnAction(e-> myHighScores.init());
 		this.getChildren().add(myButton);
 		
 	}
 
 	@Override
 	public void update(Article character) {
-		// TODO Auto-generated method stub
-		
+		if(character.getLife()==0){
+			myInputScore = new HighScoreInputDialog(myGameName,character.getScore());
+			Optional<HighScoresXMLWriter> xml = myInputScore.showAndWait();
+			if(xml.isPresent()){
+				HighScoresXMLWriter xml2 = xml.get();
+				xml2.makeXML();
+			}
+		}
+	}
+	public void tester() {
+		//if(character.getLife()==0){
+			myInputScore = new HighScoreInputDialog(myGameName,250);
+			Optional<HighScoresXMLWriter> xml = myInputScore.showAndWait();
+			if(xml.isPresent()){
+				HighScoresXMLWriter xml2 = xml.get();
+				xml2.makeXML();
+			//}
+		}
 	}
 	
 }
