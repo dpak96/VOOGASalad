@@ -36,7 +36,7 @@ public class Article{
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
 		myHeight = img.getHeight();
 		myWidth = img.getWidth();
-		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
+		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myBitMap = new BitMap(image, x, y);	
@@ -75,6 +75,9 @@ public class Article{
 	}
 	public void setImageFile(String fileName){
 		myImageFile = fileName;
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
+		myHeight = img.getHeight();
+		myWidth = img.getWidth();
 	}
 
 	public double getXBuffer(){
