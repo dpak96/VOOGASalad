@@ -13,7 +13,7 @@ public class BackgroundMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle(MenuController menuController) {
-		menuController.addImage("BackgroundImageManager");
+		menuController.addImage("backgrounds");
 	}
 	
 }
