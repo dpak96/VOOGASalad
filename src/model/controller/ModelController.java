@@ -68,8 +68,8 @@ public class ModelController implements IModelController {
 	
 	public Article createArticleFromCenter(String fileName, double x, double y, boolean direction){
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", fileName);
-		double adjustedX = x - img.getWidth();
-		double adjustedY = y - img.getHeight();
+		double adjustedX = x - (img.getWidth()/2);
+		double adjustedY = y - (img.getHeight()/2);
 		return createArticle(fileName, adjustedX, adjustedY, direction);
 	}
 
