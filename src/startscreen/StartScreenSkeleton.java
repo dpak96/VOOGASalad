@@ -19,7 +19,7 @@ public class StartScreenSkeleton {
     	myScrollPane = new ScrollPane();
     	border = new BorderPane();
         layers = new StackPane();
-        layerStack = new Stack();
+        layerStack = new Stack<Pane>();
     }
 
 

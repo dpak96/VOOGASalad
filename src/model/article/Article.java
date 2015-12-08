@@ -158,6 +158,10 @@ public class Article{
 		myLife.setLife(value);
 	}
 	
+	public void setHealth(double value){
+		myLife.setHealth(value);
+	}
+	
 	public void gainHealth(double myHealthGain){
 		myLife.addHealth(myHealthGain);
 	}

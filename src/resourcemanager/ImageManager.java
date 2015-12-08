@@ -19,6 +19,7 @@ public class ImageManager extends Manager {
 		File[] folder = new File("src/" + filePath).listFiles();
 		if (folder != null) {
 			for (File f : folder) {
+				System.out.println(f.getName());
 				Image temp = new Image(getClass().getClassLoader().getResourceAsStream(filePath + f.getName()));
 				objectMap.put(f.getName().split("\\.")[0], temp);
 			}
