@@ -3,12 +3,11 @@ package game.player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.article.Article;
 import resourcemanager.ResourceManager;
 
-public class LivesModule extends VBox {
+public class LivesModule extends HUDModule {
 	
 	private FlowPane myVisualLives;
 	private Text myLivesVal;
@@ -21,12 +20,14 @@ public class LivesModule extends VBox {
 	}
 	
 	public void init(double length){
-		myVisualLives.setPrefWrapLength(length*4/3);
+		myVisualLives.setPrefWrapLength(length*2/3);
 		myVisualLives.setVgap(3);
 		myVisualLives.setHgap(3);
 	}
 	
-	public void update(int life, Article character){
+	public void update(Article character){
+		double lives = character.getLife();
+		int life = ((Double) lives).intValue();
 		myLivesVal.setText("Lives: " + life);
 		for(int i = myVisualLives.getChildren().size()-1; i>=0;i--){
 			myVisualLives.getChildren().remove(i);
