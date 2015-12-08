@@ -2,7 +2,7 @@ package authoring.ui.editingmenus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map
+import java.util.Map;
 import javax.swing.plaf.basic.ComboPopup;
 import action.controller.ActionController;
 import authoring.controller.AuthoringController;
@@ -22,16 +22,14 @@ import model.article.Article;
 import resourcemanager.ResourceManager;
 
 
-public class ArticlePropertyEditorMenu extends AuthoringMenu {
+public class RandomMenu extends AuthoringMenu {
 
     private HashMap<String, TextField> textFieldPropertyMap;
     private HashMap<String, ComboBox> comboBoxPropertyMap;
     private Article myArticleToEdit;
     private ComboBoxImageRendering imageBoxHandler=new ComboBoxImageRendering();
 
-    public ArticlePropertyEditorMenu(String title,
-    Article selectedArticle,
-    AuthoringController myController) {
+    public RandomMenu(String title, Article selectedArticle, AuthoringController myController) {
         super(title, myController);
         myArticleToEdit = selectedArticle;
         super.showMenu(300,300);
@@ -45,13 +43,25 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Name: ");
         textFieldPropertyMap.put("NAME", (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Velocity: ");
-        textFieldPropertyMap.put("XVELOCITY",
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "X-Distance: ");
+        textFieldPropertyMap.put("XDISTANCE",
                 (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
-        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Velocity: ");
-        textFieldPropertyMap.put("YVELOCITY",
+        super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Y-Distance: ");
+        textFieldPropertyMap.put("YDISTANCE",
                 (super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+			
+		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Viewpoint X-Offset: ");
+		textFieldPropertyMap.put("XOFFSET",
+				(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+	
+		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Viewpoint Y-Offset: ");
+		textFieldPropertyMap.put("YOFFSET",
+				(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
+	
+		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Probability: ");
+		textFieldPropertyMap.put("PROBABIRITY",
+				(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
 
         super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
         comboBoxPropertyMap.put("IMAGE",
@@ -94,7 +104,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
         System.out.println(myArticleToEdit == null);
 
         super.myController.getEditor().getSubEditor("ArticleEditor")
-                .editProperty("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
+        .editProperty("setXVelocity", Double.parseDouble(textFieldPropertyMap.get("XVELOCITY")
                 .getText()),
                 myArticleToEdit);
         super.myController.getEditor().getSubEditor("ArticleEditor")
@@ -111,3 +121,4 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
                 // Pass on the edits to the thing being edited
     }
 }
+
