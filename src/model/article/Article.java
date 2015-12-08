@@ -150,6 +150,10 @@ public class Article{
 		myLife.removeLife();
 	}
 	
+	public void removeLife(int life) {
+		myLife.removeLife(life);
+	}
+	
 	public void setLife(int value) {
 		myLife.setLife(value);
 	}
@@ -162,8 +166,15 @@ public class Article{
 		myScore.gainScore(myScore.getScore()+score);
 	}
 	
+	public void gainScore() {
+		myScore.gainScore();
+	}
 	public void removeScore(double score) {
 		myScore.removeScore(score);
+	}
+	
+	public void removeScore() {
+		myScore.removeScore();
 	}
 	
 	public double getScore() {

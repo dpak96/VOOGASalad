@@ -14,11 +14,26 @@ public class Score {
 		myScore += score;
 	}
 	
+	public void gainScore() {
+		myScore++;
+	}
 	public double getScore() {
 		return myScore;
 	}
 	
 	public void removeScore(double score) {
-		myScore -= score;
+		if (myScore-score < 0) {
+			myScore = 0;
+		} else {
+			myScore -= score;
+		}
+	}
+	
+	public void removeScore() {
+		if (myScore-- < 0) {
+			myScore = 0;
+		} else {
+			myScore--;
+		}
 	}
 }
