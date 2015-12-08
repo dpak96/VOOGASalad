@@ -1,5 +1,11 @@
 package game.player;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -14,21 +20,21 @@ public class HighScoresModule extends HUDModule {
 	private Button myButton;
 	private HighScoresDialog myHighScores;
 	
-	public HighScoresModule(){
+	public HighScoresModule(String gameName){
 		super();
 		myButton = new Button();
-		myHighScores = new HighScoresDialog();
+		myHighScores = new HighScoresDialog(gameName);
 	}
 	
 	@Override
-	public void init(double offset) {
+	public void init(double offset) throws IOException, ParserConfigurationException, SAXException {
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", "highScoreButton");
 		ImageView buttonImg = new ImageView(img);
 		buttonImg.setFitWidth(offset/2);
 		buttonImg.setFitHeight(offset/5);
 		myButton.setPadding(new Insets(0,0,0,0));
 		myButton.setGraphic(buttonImg);
-		myButton.setOnAction(e->myHighScores.showAndWait());
+		myButton.setOnAction(e->myHighScores.init());
 		this.getChildren().add(myButton);
 		
 	}

@@ -1,7 +1,12 @@
 package game.player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
@@ -20,21 +25,20 @@ public class GamePlayerOverlay extends Pane {
 	private double width = props.getSceneWidth() - OFFSET;
 	private VBox container;
 
-	public GamePlayerOverlay() {
+	public GamePlayerOverlay(String name) throws IOException, ParserConfigurationException, SAXException {
 		myScoreModule = new ScoreModule();
 		myModules.add(myScoreModule);
 		myHealthModule = new HealthModule();
 		myModules.add(myHealthModule);
 		myLivesModule = new LivesModule();
 		myModules.add(myLivesModule);
-		myHighScores = new HighScoresModule();
-		myModules.add(myHighScores);
+		//myHighScores = new HighScoresModule(name);
 		init();
 		this.getChildren().add(container);
 		
 	}
 
-	private void init() {
+	private void init() throws IOException, ParserConfigurationException, SAXException {
 		for(int i = 0; i<myModules.size();i++){
 			myModules.get(i).init(OFFSET);
 		}
@@ -55,5 +59,16 @@ public class GamePlayerOverlay extends Pane {
 			}
 		} catch (NullPointerException e) {
 		}
+	}
+	
+	public void setName(String name) throws IOException, ParserConfigurationException, SAXException{
+		try{
+		container.getChildren().remove(3);
+		}catch(Exception e){
+		}
+		myHighScores = new HighScoresModule(name);
+		myModules.add(myHighScores);
+		myHighScores.init(OFFSET);
+		container.getChildren().add(myHighScores);
 	}
 }

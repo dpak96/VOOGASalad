@@ -27,9 +27,13 @@ public class HighScoresXMLReader {
 				+ "SquirtleSquadGames" + System.getProperty("file.separator") + gameName
 				+ System.getProperty("file.separator") + "scores" + ".xml");
 		if(file.exists()){
+		System.out.println("EXISTS");
 		myXML = xmlBuilder.parse(file);
 		myXML.getDocumentElement().normalize();
 		myScoresMap = makeMap();
+		}
+		else{
+			System.out.println(gameName + " DOESNT EXIST");
 		}
 	}
 	
