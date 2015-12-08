@@ -18,12 +18,9 @@ public class EnemyOverlay extends ButtonOverlay{
     @Override
     protected List<Button> populateButtonList () {
         List<Button> buttonList=new ArrayList<Button>();
-        
         for(String imgName: ResourceManager.getResourceManager().getResourceMap("ArticleImageManager").keySet()){
-            System.out.println(imgName);
             buttonList.add(new DraggablePlatformButton(imgName));
         }
-
         return buttonList;
     }
 

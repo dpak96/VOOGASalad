@@ -136,6 +136,9 @@ public class Model extends Observable{
 		return myButtonMap;
 	}
 	public void setCharacter(Article character) {
+		character.setLife(myCharacter.getLife());
+		character.setScore(myCharacter.getScore());
+		character.setHealth(myCharacter.getHealth());
 		myCharacter = character;
 	}
 
