@@ -1,7 +1,12 @@
 package uibasics;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
@@ -20,6 +25,7 @@ public class UIStackPane extends StackPane implements Observer {
 	private boolean edit;
 	private Pane myAuthoringControllerPane;
 	private ModelController myModelController;
+	private String myGameName;
 	
 	public UIStackPane(ModelController modelController) {
 		myModelController = modelController;
@@ -30,7 +36,18 @@ public class UIStackPane extends StackPane implements Observer {
 	public void initializePanes() {
 		edit = true;
 		myUIBasics = new UIBasics(myModelController);
-		myGamePlayer = new GamePlayerOverlay();
+		try {
+			myGamePlayer = new GamePlayerOverlay(myGameName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		myAuthoringControllerPane = myAuthoringController.getUi().tester();
 		myAuthoringController.getUi().init();
 	}
@@ -38,6 +55,18 @@ public class UIStackPane extends StackPane implements Observer {
 	public void initPanes(GameCreation game) {
 		this.getChildren().clear();
 		this.getChildren().add(myUIBasics.getPane());
+		try {
+			myGamePlayer.setName(game.getName());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (game.getMode() == Mode.play) {
 			edit=false;
 			this.getChildren().add(myGamePlayer);

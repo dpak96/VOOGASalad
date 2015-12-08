@@ -15,7 +15,7 @@ class ArticleEditor extends Editor {
       Boolean direction) {
     double xAdjusted = x;
     double yAdjusted = y;
-    return myModelController.createArticle(imageFileName, xAdjusted, yAdjusted,
+    return myModelController.createArticleFromCenter(imageFileName, xAdjusted, yAdjusted,
         direction);
   }
 
