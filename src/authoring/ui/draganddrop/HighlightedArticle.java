@@ -16,6 +16,7 @@ public class HighlightedArticle extends DraggableElement {
         imageName = img.toString();
         ImageView i = new ImageView();
         i.setImage(img);
+        i.setOpacity(0.0);
         this.setGraphic(i);
         this.getStyleClass().add("Butt");
         super.dragDetected();

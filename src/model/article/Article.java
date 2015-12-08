@@ -36,7 +36,7 @@ public class Article{
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
 		myHeight = img.getHeight();
 		myWidth = img.getWidth();
-		myPosition = new Position(x-myWidth/2, y-myHeight/2, direction);
+		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
 		myBitMap = new BitMap(image, x, y);	
@@ -75,6 +75,9 @@ public class Article{
 	}
 	public void setImageFile(String fileName){
 		myImageFile = fileName;
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImageFile);
+		myHeight = img.getHeight();
+		myWidth = img.getWidth();
 	}
 
 	public double getXBuffer(){
@@ -135,12 +138,20 @@ public class Article{
 		myLife.removeHealth(myDamage);
 	}
 
+	public void gainLife(int life) {
+		myLife.addLife(life);
+	}
+	
 	public void gainLife(){
 		myLife.addLife();
 	}
 	
 	public void removeLife(){
 		myLife.removeLife();
+	}
+	
+	public void removeLife(int life) {
+		myLife.removeLife(life);
 	}
 	
 	public void setLife(int value) {
@@ -152,7 +163,22 @@ public class Article{
 	}
 	
 	public void setScore(double score) {
-		myScore.setScore(myScore.getScore()+score);
+		myScore.removeScore(myScore.getScore());
+		myScore.gainScore(score);
+	}
+	public void gainScore(double score) {
+		myScore.gainScore(myScore.getScore()+score);
+	}
+	
+	public void gainScore() {
+		myScore.gainScore();
+	}
+	public void removeScore(double score) {
+		myScore.removeScore(score);
+	}
+	
+	public void removeScore() {
+		myScore.removeScore();
 	}
 	
 	public double getScore() {
