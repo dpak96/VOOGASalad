@@ -62,7 +62,7 @@ public class GameEngine implements IGameEngine {
 				CollisionInformation temp = myCollisionManager.didCollide(first,second);
 				if(temp.isRealCollision()){
 					first.addCollision(second, temp);
-					second.addCollision(first, temp);
+					second.addCollision(first, temp.makeReverseDirectionObject());
 				}
 
 			}
