@@ -45,14 +45,14 @@ public class HighScoresModule extends HUDModule {
 
 	@Override
 	public void update(Article character) {
-		if(character.getLife()==0){
+		/*if(character.getLife()==0){
 			myInputScore = new HighScoreInputDialog(myGameName,character.getScore());
 			Optional<HighScoresXMLWriter> xml = myInputScore.showAndWait();
 			if(xml.isPresent()){
 				HighScoresXMLWriter xml2 = xml.get();
 				xml2.makeXML();
 			}
-		}
+		}*/
 	}
 	public void tester() {
 		//if(character.getLife()==0){
