@@ -2,7 +2,9 @@ package game.player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,11 +17,11 @@ import org.xml.sax.SAXException;
 
 public class HighScoresXMLReader {
 
-	private Map<Integer,String> myScoresMap;
+	private Map<Integer,List<String>> myScoresMap;
 	private Document myXML;
 	
 	public HighScoresXMLReader(String gameName) throws SAXException, IOException, ParserConfigurationException{
-		myScoresMap = new HashMap<Integer, String>();
+		myScoresMap = new HashMap<Integer, List<String>>();
 		DocumentBuilderFactory xmlFac = DocumentBuilderFactory.newInstance();
 		DocumentBuilder xmlBuilder;
 		xmlBuilder = xmlFac.newDocumentBuilder();
@@ -37,12 +39,19 @@ public class HighScoresXMLReader {
 		}
 	}
 	
-	private HashMap<Integer, String> makeMap(){
+	private HashMap<Integer, List<String>> makeMap(){
 		int[] nums = getScores();
 		String[] files = getPlayers();
-		HashMap<Integer,String> ret = new HashMap<Integer,String>();
+		HashMap<Integer,List<String>> ret = new HashMap<Integer,List<String>>();
 		for(int k = 0; k<nums.length; k++){
-			ret.put(nums[k], files[k]);
+			if(!ret.containsKey(nums[k])){
+				List<String> val = new ArrayList<String>();
+				val.add(files[k]);
+				ret.put(nums[k],val);
+			}
+			else{
+			ret.get(nums[k]).add(files[k]);
+			}
 		}
 		return ret;
 	}
@@ -65,7 +74,7 @@ public class HighScoresXMLReader {
 		return ret;
 	}
 	
-	public Map<Integer,String> getScoreMap(){
+	public Map<Integer,List<String>> getScoreMap(){
 		return myScoresMap;
 	}
 }

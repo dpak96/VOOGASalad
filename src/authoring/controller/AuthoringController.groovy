@@ -172,16 +172,15 @@ public class AuthoringController {
 	}
     
         public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
-            this.modelController.getAllEvents().add(eventToAdd);
-            if(eventType.equals("Ordinary"))
-                this.modelController.getActiveEvents().add(eventToAdd);
+            this.modelController.addEvent(eventToAdd);
+            if(eventType.equals("Active"))
+                this.modelController.addActiveEvent(eventToAdd);
                 
             if(eventType.equals("Collision"))
-            this.modelController.getCollisionEvents(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"));
+            this.modelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
             
             if(eventType.equals("Button"))
-                this.modelController.getButtonEvents(eventParameters.get("button"));
-            
+                this.modelController.remapButton(eventParameters.get("button"), eventToAdd);
                             
          
         }
