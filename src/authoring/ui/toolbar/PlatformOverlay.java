@@ -21,10 +21,26 @@ public class PlatformOverlay extends ButtonOverlay{
         Enumeration platformKeys=platformBundle.getKeys();
         while(platformKeys.hasMoreElements()){
             String imageName= (String) platformKeys.nextElement();
-            buttonList.add(new PlatformButton(myAuthoringController,imageName));
+            buttonList.add(new DraggableButton(imageName));
         }
       
         return buttonList;
     }
+    public String getImageName() {
+        return imageName;
+      }
+
+      public void setImageName(String imageName) {
+        this.imageName = imageName;
+      }
+
+      public String getName() {
+        return name;
+      }
+
+      public void setName(String name) {
+        this.name = name;
+      }
+      
 
 }

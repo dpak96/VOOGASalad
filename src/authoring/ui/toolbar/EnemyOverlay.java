@@ -23,7 +23,7 @@ public class EnemyOverlay extends ButtonOverlay{
         Enumeration platformKeys=platformBundle.getKeys();
         while(platformKeys.hasMoreElements()){
             String imageName= (String) platformKeys.nextElement();
-            buttonList.add(new PlatformButton(myAuthoringController,imageName));
+            buttonList.add(new DraggableButton(imageName));
         }
 
         return buttonList;
