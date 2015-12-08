@@ -105,11 +105,13 @@ public class ModelController implements IModelController {
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables) {
 		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
 		addEvent(newEvent);
+		System.out.println("Creating Event named "+ newEvent.getMyName());
 		return newEvent;
 	}
 
 	public void addEvent(Event newEvent) {
 		myModel.addEvent(newEvent);
+		System.out.println("Adding Event named "+ newEvent.getMyName());
 	}
 
 	public void removeEvent(Event event) {
@@ -154,6 +156,12 @@ public class ModelController implements IModelController {
 	@Override
 	public void remapButton(String button, List<Event> events) {
 		myModel.remapButton(button, events);
+	}
+	
+	public void remapButton(String button, Event event){
+		List<Event> temp = new ArrayList<Event>();
+		temp.add(event);
+		remapButton(button, temp);
 	}
 
 	@Override
