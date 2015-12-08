@@ -3,6 +3,7 @@ package game.player;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -55,19 +56,23 @@ public class HighScoresDialog extends Dialog {
 		}
 		this.getDialogPane().getButtonTypes().add(myOKer);
 		this.getDialogPane().setContent(myScrollPane);
+		this.setTitle("High Scores List");
 	}
 	
 	public void init() {
-		Map<Integer,String> scores = myRead.getScoreMap();
+		Map<Integer,List<String>> scores = myRead.getScoreMap();
 		ArrayList<Integer> ordered = new ArrayList<Integer>(scores.keySet());
 		Collections.sort(ordered);
 		Collections.reverse(ordered);
+		Integer count = 1;
 		for(int i = 0; i<ordered.size(); i++){
-			Integer rank = i+1;
-			myScores.add(new Text(rank.toString()), 1,i+2);
+			for(int j = 0; j<scores.get(ordered.get(i)).size();j++){
+			myScores.add(new Text(count.toString()), 1,count+1);
 			Integer score = ordered.get(i);
-			myScores.add(new Text(score.toString()), 3, i+2);
-			myScores.add(new Text(scores.get(ordered.get(i))), 2,i+2);
+			myScores.add(new Text(score.toString()), 3, count+1);
+			myScores.add(new Text(scores.get(ordered.get(i)).get(j)), 2,count+1);
+			count++;
+			}
 		}		
 		this.showAndWait();
 	}
