@@ -13,6 +13,7 @@ public class ExecutableNextLevel extends ExecutableLevelChanges {
 	@Override
 	public void execute() {
 		System.out.println(myLevelManager);
+		System.out.println("GOING TO NEXT LEVEL");
 		myLevelManager.nextLevel();
 	}
 

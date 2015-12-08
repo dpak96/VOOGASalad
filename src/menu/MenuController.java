@@ -10,6 +10,8 @@ import startscreen.GameCreation;
 import uibasics.UIStackPane;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class MenuController {
@@ -135,8 +137,16 @@ public class MenuController {
         List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
         if(images != null){
         	for(File image : images){
-            	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
-            	image.renameTo(target);
+            	File target = new File("src"
+        				+ System.getProperty("file.separator")
+        				+ "resources" + System.getProperty("file.separator")+ "images" 
+        				+ System.getProperty("file.separator") + imageType + System.getProperty("file.separator") + image.getName());
+            	try {
+					Files.move(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
         
@@ -156,6 +166,10 @@ public class MenuController {
 
     public MainMenu getMenu(){
         return myMainMenu;
+    }
+    
+    public String getGameName(){
+    	return game.getName();
     }
 
 

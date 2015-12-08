@@ -35,7 +35,6 @@ public class RuleMenu extends AuthoringMenu {
     public RuleMenu (String title, AuthoringController controller) {
         super(title, controller);
         super.showMenu(800, 300);
-
     }
 
     @Override

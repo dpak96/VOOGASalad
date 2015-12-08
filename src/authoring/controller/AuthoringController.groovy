@@ -3,9 +3,12 @@ package authoring.controller
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
 import authoring.ui.draganddrop.DraggableElement
-import authoring.ui.draganddrop.HighlightedArticle;
+import authoring.ui.draganddrop.HighlightedArticle
+import authoring.ui.toolbar.RandomUI
+import javafx.scene.control.Button;
 import javafx.scene.input.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Pane
+import javafx.scene.layout.StackPane;
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
@@ -24,6 +27,7 @@ public class AuthoringController {
 	private PresetArticleFactory presetArticleFactory;
 	private DragAndDropController dragAndDropController;
 	private ArticleExtenderController articleExtenderController;
+	private InfiniteController infiniteController;
 
 
 
@@ -36,6 +40,7 @@ public class AuthoringController {
 		presetArticleFactory = new PresetArticleFactory(mc, this);
 		dragAndDropController = new DragAndDropController();
 		articleExtenderController = new ArticleExtenderController();
+		infiniteController = new InfiniteController();
 
 	}
 
@@ -132,6 +137,9 @@ public class AuthoringController {
 		dragAndDropController."$method"(e, this);
 	}
 
+	public void infiniteEvent(String method,e){
+		infiniteController."$method"(e, this);
+	}
 
 	public void extendEvent(String method, e){
 		articleExtenderController."$method"(e,this);
@@ -139,6 +147,10 @@ public class AuthoringController {
 
 	public void extendEvent(String method){
 		articleExtenderController."$method"(this);
+	}
+
+	public getTester(){
+		return getUi().getTester();
 	}
   
     
@@ -160,16 +172,15 @@ public class AuthoringController {
 	}
     
         public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
-            this.modelController.getAllEvents().add(eventToAdd);
-            if(eventType.equals("Ordinary"))
-                this.modelController.getActiveEvents().add(eventToAdd);
+            this.modelController.addEvent(eventToAdd);
+            if(eventType.equals("Active"))
+                this.modelController.addActiveEvent(eventToAdd);
                 
             if(eventType.equals("Collision"))
-            this.modelController.getCollisionEvents(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"));
+            this.modelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
             
             if(eventType.equals("Button"))
-                this.modelController.getButtonEvents(eventParameters.get("button"));
-            
+                this.modelController.remapButton(eventParameters.get("button"), eventToAdd);
                             
          
         }
@@ -193,6 +204,8 @@ public class AuthoringController {
 	public boolean getHighlighted(){
 		return highlighted;
 	}
+
+
 
 
 

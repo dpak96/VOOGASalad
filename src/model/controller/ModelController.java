@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import javafx.scene.image.Image;
 import javafx.stage.Window;
 import level.manager.LevelManager;
 import model.*;
@@ -64,6 +65,13 @@ public class ModelController implements IModelController {
 		addArticle(newArticle);
 		return newArticle;
 	}
+	
+	public Article createArticleFromCenter(String fileName, double x, double y, boolean direction){
+		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", fileName);
+		double adjustedX = x - (img.getWidth()/2);
+		double adjustedY = y - (img.getHeight()/2);
+		return createArticle(fileName, adjustedX, adjustedY, direction);
+	}
 
 	public Executable createExecutable(String executableName, Map<String, Object> data) {
 		ResourceBundle p = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager",
@@ -97,11 +105,13 @@ public class ModelController implements IModelController {
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables) {
 		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
 		addEvent(newEvent);
+		System.out.println("Creating Event named "+ newEvent.getMyName());
 		return newEvent;
 	}
 
 	public void addEvent(Event newEvent) {
 		myModel.addEvent(newEvent);
+		System.out.println("Adding Event named "+ newEvent.getMyName());
 	}
 
 	public void removeEvent(Event event) {
@@ -147,6 +157,12 @@ public class ModelController implements IModelController {
 	public void remapButton(String button, List<Event> events) {
 		myModel.remapButton(button, events);
 	}
+	
+	public void remapButton(String button, Event event){
+		List<Event> temp = new ArrayList<Event>();
+		temp.add(event);
+		remapButton(button, temp);
+	}
 
 	@Override
 	public List<Event> getButtonEvents(String button) {
@@ -182,22 +198,18 @@ public class ModelController implements IModelController {
 	}
 	
 	public void loadFromFile(Model toLoad) {
-		System.out.println("a");
+		
 		myModel.destroyModel();
-		System.out.println("b");
 		myModel.initialize();
-		System.out.println("c");
+		myModel.setCollisionTypeEditor(toLoad.getCollisionTypeEditor());
 		myModel.addAllArticles(toLoad.getArticles());
-		System.out.println("d");
 		myModel.addAllEvents(toLoad.getAllEvents());
-		System.out.println("e");
 		myModel.addAllButtonMap(toLoad.getButtonMap());
 		myModel.addAllConditions(toLoad.getConditions());
 		myModel.addAllExecutables(toLoad.getExecutables());
 		for(Executable e : toLoad.getExecutables()) {
 			if (e instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) e).initialize(myLevelManager);
-				System.out.println("level manager initialized");
 			}
 		}
 		myModel.setCharacter(toLoad.getCharacter());

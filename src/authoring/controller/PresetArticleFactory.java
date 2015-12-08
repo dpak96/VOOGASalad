@@ -21,10 +21,10 @@ public class PresetArticleFactory {
 	}
 
 	public void platformMovement(Article article) {
-		modelController.addNewCollisionType("A");
-		modelController.addNewCollisionType("B");
+		//modelController.addNewCollisionType("A");
+		//modelController.addNewCollisionType("B");
 
-		article.setCollisionType("A");
+		article.setCollisionType("Platform");
 
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -36,7 +36,7 @@ public class PresetArticleFactory {
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
 		Event ev = authoringController.makeEvent("event", listCondition, listExecutable);
-		modelController.addCollision("Left", "A", "B", ev);
+		modelController.addCollision("Left", "Platform", "Enemy", ev);
 	}
 
 	public void goombaMovement(Article article) {
@@ -66,7 +66,7 @@ public class PresetArticleFactory {
 
 		article.setYVelocity(0);
 
-		article.setCollisionType("B");
+		article.setCollisionType("Enemy");
 	}
 
 	public void playerMovement(Article article) {
@@ -316,7 +316,7 @@ public class PresetArticleFactory {
 		ev = authoringController.makeEvent("eventKevin", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
-		//ViewPoint move from left 
+		//ViewPoint move from right 
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
@@ -331,8 +331,41 @@ public class PresetArticleFactory {
 		tempMap.put("myFraction", 0.1);
 		con = authoringController.makeCondition("ConditionLeftOfPositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = authoringController.makeEvent("eventRob", listCondition, listExecutable);
+		ev = authoringController.makeEvent("eventPoop", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
+		
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", myViewpoint);
+		tempMap.put("myDisplacement", (double) 1);
+		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myViewpoint", myViewpoint);
+		tempMap.put("myFraction", 0.1);
+		con = authoringController.makeCondition("ConditionBelowPositionOnScreen", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("eventDown", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", myViewpoint);
+		tempMap.put("myDisplacement", (double) -1);
+		ex = authoringController.makeExecutable("ExecutableMoveVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myViewpoint", myViewpoint);
+		tempMap.put("myFraction", 0.9);
+		con = authoringController.makeCondition("ConditionAbovePositionOnScreen", tempMap);
+		listCondition.add(con);
+		ev = authoringController.makeEvent("eventUp", listCondition, listExecutable);
+		modelController.addActiveEvent(ev);
+		
 		
 		
 	}

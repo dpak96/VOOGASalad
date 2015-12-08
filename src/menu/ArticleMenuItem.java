@@ -15,7 +15,7 @@ public class ArticleMenuItem extends AbstractMenuItem {
 
 	@Override
 	public void handle(MenuController menuController) {
-		menuController.addImage("ArticleImageManager");
+		menuController.addImage("articles");
 	}
 
 }

@@ -17,14 +17,27 @@ public class PlatformOverlay extends ButtonOverlay{
     @Override
     protected List<Button> populateButtonList () {
         List<Button> buttonList = new ArrayList<Button>();
-        ResourceBundle platformBundle=(ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "platforms");
-        Enumeration platformKeys=platformBundle.getKeys();
-        while(platformKeys.hasMoreElements()){
-            String imageName= (String) platformKeys.nextElement();
-            buttonList.add(new PlatformButton(myAuthoringController,imageName));
+        for(String imageName: ResourceManager.getResourceManager().getResourceMap("PlatformImageManager").keySet()){
+            buttonList.add(new DraggablePlatformButton(imageName));
         }
       
         return buttonList;
     }
+    public String getImageName() {
+        return imageName;
+      }
+
+      public void setImageName(String imageName) {
+        this.imageName = imageName;
+      }
+
+      public String getName() {
+        return name;
+      }
+
+      public void setName(String name) {
+        this.name = name;
+      }
+      
 
 }

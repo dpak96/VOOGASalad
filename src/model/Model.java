@@ -40,6 +40,10 @@ public class Model extends Observable{
 		myCharacter = new Article("Platform", 400, 400, true);
 		//vp = new VoogaProperties();
 		randomGenerator = new NullGenerationUtility();
+//		myCollisionTypeEditor = new CollisionTypeEditor();
+//		PresetCollision myPresetCollision = new PresetCollision(myCollisionTypeEditor);
+//		myPresetCollision.intialize();
+//		myCollisionTypeEditor = myPresetCollision.getCollisonTypeEditor();
 	}
 	
 	public void update(){
@@ -70,7 +74,6 @@ public class Model extends Observable{
 	public Article getArticleFromCoordinates(double x, double y){
 		double xAdjusted = x + myViewpoint.getX();
 		double yAdjusted = y + myViewpoint.getY();
-		//System.out.println(myViewpoint.getX() + ", " +  myViewpoint.getY());
 		Article current = null;
 		double smallestArea = Double.MAX_VALUE;
 		for(Article article : myArticles){
@@ -93,7 +96,6 @@ public class Model extends Observable{
 		myConditions = null;
 		myViewpoint = null;
 		myCharacter = null;
-		myCollisionTypeEditor = null;
 	}
 	public void initialize() {
 		allEvents = new ArrayList<Event>();
@@ -109,6 +111,7 @@ public class Model extends Observable{
 		myViewpoint.setActive();
 		myCharacter = new Article("Platform", 500, 500, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
+		initializeCollision();
 	}
 	private boolean articleContainsPoint(Article article, double x, double y) {
 		return x > article.getX() && x < article.getX()+article.getWidth()
@@ -133,6 +136,9 @@ public class Model extends Observable{
 		return myButtonMap;
 	}
 	public void setCharacter(Article character) {
+		character.setLife(myCharacter.getLife());
+		character.setScore(myCharacter.getScore());
+		character.setHealth(myCharacter.getHealth());
 		myCharacter = character;
 	}
 
@@ -253,6 +259,13 @@ public class Model extends Observable{
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
+	public CollisionTypeEditor getCollisionTypeEditor() {
+		return myCollisionTypeEditor;
+	}
+	
+	public void setCollisionTypeEditor(CollisionTypeEditor myNewEditor) {
+		myCollisionTypeEditor = myNewEditor;
+	}
 	public List<String> getAllCollisionTypes(){
 		return myCollisionTypeEditor.getCollisionTypeList();
 	}
