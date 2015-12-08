@@ -97,7 +97,6 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 
         super.myController.getEditor().getSubEditor("ArticleEditor")
                 .editProperty("setCollisionType",comboBoxPropertyMap.get("COLLISION").getValue().toString(),myArticleToEdit);
-      println myArticleToEdit.getCollisionType();
                 // Pass on the edits to the thing being edited
     }
 }
