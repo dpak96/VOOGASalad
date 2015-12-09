@@ -81,16 +81,18 @@ class OtherController {
     }
 
     public deleteArticle(Article n){
-        modelController.removeArticle(n);
-        Button b = authoringController.getCurrentButton();
-        Pane p = (Pane) b.getParent();
-        p.getChildren().remove(b);
-        authoringController.setHighlighted(false);
-        authoringController.setCurrentButton(null);
+        if(myAuthoringController.getCurrentArticle()!=null){
+            myModelController.removeArticle(n);
+            Button b = myAuthoringController.getCurrentButton();
+            Pane p = (Pane) b.getParent();
+            p.getChildren().remove(b);
+            myAuthoringController.setHighlighted(false);
+            myAuthoringController.setCurrentButton(null);
+        }
     }
 
     public getViewPoint(){
-        modelController.getViewpoint();
+        myModelController.getViewpoint();
     }
 
 }
