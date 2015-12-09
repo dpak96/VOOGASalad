@@ -91,6 +91,7 @@ public class AddEventMenu extends AuthoringMenu {
         
         EventParameters  paramFiller=new EventParameters(super.myController);
         paramGrid.getChildren().clear();
+        fieldMap.clear();
         
        if( eventType.getValue().equals("Collision"))
            fieldMap=paramFiller.populateCollisionEventParameters(paramGrid);
