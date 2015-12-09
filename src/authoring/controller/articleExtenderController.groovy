@@ -29,24 +29,20 @@ class ArticleExtenderController {
 
     public void addTile(KeyEvent event) {
         updateArticle(event);
-        initRightAndLeft(event);
         buttonCheckAndExtend(event);
     }
 
     private updateArticle(event){
-        if(authoringController.getCurrentArticle().equals(current)){
+        if(!authoringController.getCurrentArticle().equals(current)){
             current = authoringController.getCurrentArticle();
             initWith = current.getWidth();
+            initRightAndLeft(event);
         }
     }
 
     private initRightAndLeft(event){
-        if (newXRight == 0) {
-            newXRight = current.getX() + (current.getWidth() / 2)+authoringController.getModelController().getViewpoint().getX();
-        }
-        if(newXLeft == 0){
-            newXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
-        }
+        newXRight = current.getX() + (current.getWidth() / 2)+authoringController.getModelController().getViewpoint().getX();
+        newXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
     }
 
     private buttonCheckAndExtend(event){
