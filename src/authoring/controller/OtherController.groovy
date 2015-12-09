@@ -60,7 +60,7 @@ class OtherController {
     }
     
     public void deleteEvent(Event event){
-        modelController.removeEvent(event);
+        myModelController.removeEvent(event);
     }
 
     public List<String> getCollisionTypes(){

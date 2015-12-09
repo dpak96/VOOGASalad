@@ -2,6 +2,10 @@ package authoring.controller
 
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
+import authoring.controller.presets.PresetArticleFactory
+import authoring.ui.AuthoringUI;
+import model.Event;
+
 import authoring.ui.AuthoringUI
 import authoring.ui.draganddrop.HighlightedArticle
 import javafx.scene.control.Button
@@ -26,7 +30,6 @@ public class AuthoringController {
 		myModelController = mc;
 		myEditor = new EditorManager(mc);
 		myPresetArticleFactory = new PresetArticleFactory(mc, this);
-
 	}
 
 	public void initalizeControllers(){
@@ -49,14 +52,14 @@ public class AuthoringController {
 		Class<?> cl = Class.forName(cName);
 		Object object;
 		Constructor<?> ctor = null;
-		if(cName.equals("authoring.controller.OtherController")){
+		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController")){
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = ModelController.class;
 			ctor = cl.getConstructor(hi);
 			Object[] o = new Object[2];
 			o[0] = this;
-			o[1] = modelController;
+			o[1] = myModelController;
 			object = ctor.newInstance(o);
 		}
 		else if(cName.equals("authoring.controller.ArticleCAndGController")){
@@ -75,14 +78,12 @@ public class AuthoringController {
 			Object[] o = new Object[1];
 			Object thing1 = this;
 			object = ctor.newInstance(thing1);
-
 		}
 
 		return object;
 	}
 
 	private pressDelete(){
-
 	}
 
 	public AuthoringUI getUi() {
@@ -162,11 +163,5 @@ public class AuthoringController {
 	public void flush() {
 		callEvent("KeyPressController", "deleteButton");
 		setCurrentArticle(null);
-		
 	}
-
-
-
-
-
 }
