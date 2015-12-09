@@ -260,6 +260,10 @@ public class Model extends Observable{
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
 	}
 	
+	public void removeExistingCollisonEvent(Event event){
+		myCollisionTypeEditor.remove(event);
+	}
+	
 	public CollisionTypeEditor getCollisionTypeEditor() {
 		return myCollisionTypeEditor;
 	}
