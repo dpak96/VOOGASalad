@@ -1,18 +1,23 @@
-package authoring.ui.toolbar;
+package authoring.ui.toolbar
 
-import authoring.controller.AuthoringController;
-import authoring.ui.editingmenus.RandomMenu
-import java.beans.EventHandler
-import javafx.beans.value.ChangeListener
-import javafx.beans.value.ObservableValue
-import javafx.event.ActionEvent
+import authoring.controller.AuthoringController
+import authoring.ui.draganddrop.InfiniteDrop
+import javafx.collections.ObservableList
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
+import javafx.scene.control.TableCell
 import javafx.scene.control.TableColumn
+import javafx.scene.control.TableRow
 import javafx.scene.control.TableView
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import main.VoogaProperties;
+import javafx.scene.control.TextField
+import javafx.scene.control.cell.MapValueFactory
+import javafx.scene.control.cell.TextFieldTableCell
+import javafx.scene.layout.Pane
+import javafx.scene.text.Text
+import javafx.util.Callback
+import javafx.util.StringConverter
+import main.VoogaProperties
+import model.article.Article
 
 public class RandomUI extends Pane {
 
@@ -20,27 +25,42 @@ public class RandomUI extends Pane {
 	private final String RANDOM = "Random Generation";
 	private final int LEFT_X = 50;
 	private final int LEFT_Y = 50;
-	private final int PANE_X = 500;
+	private final int PANE_X = 450;
 	private final int PANE_Y = 150;
 	private final int MARGIN = 30;
 	
 	private Text myText;
 	private Pane myDrag;
-	private TableView myTable;
+	private TextField myName, myProb, myXDist, myYDist, myXRepeat, myYRepeat;
+	private TableView myTableR, myTableC;
 	private ComboBox myMode, myArticles;
 	private AuthoringController myController;
 	private Button myEdit, mySave;
-	private List<RepeatingArticle> myRepeats;
+	private List<RepeatingArticle> myRandoms;
+	private List<RepeatingArticle> myConstants;
 
 	public RandomUI(controller) {
 		myController = controller;
 		myText = new Text();
 		myMode = new ComboBox();
-		myTable = new TableView();
-		myRepeats = new ArrayList<RepeatingArticle>();
+		myTableR = new TableView();
+		myTableC = new TableView();
+		myConstants = new ArrayList<RepeatingArticle>();
 		myEdit = new Button();
 		mySave = new Button();
-		myDrag = new Pane();
+		myDrag = new InfiniteDrop(controller);
+		myName = new TextField();
+		myName.setPromptText("Name of Article List");
+		myProb = new TextField();
+		myProb.setPromptText("Probability");
+		myXDist = new TextField();
+		myXDist.setPromptText("X Distance from Viewpoint");
+		myYDist = new TextField();
+		myYDist.setPromptText("Y Distance from Viewpoint");
+		myXRepeat = new TextField();
+		myXRepeat.setPromptText("X Distance to Repeat");
+		myYRepeat = new TextField();
+		myYRepeat.setPromptText("Y Distance to Repeat");
 		init();		
 	}
 	
@@ -50,19 +70,25 @@ public class RandomUI extends Pane {
 //		LEFT_OFFSET = vooga.getSceneWidth()/2 - 75;
 		setPrefSize(vooga.getSceneWidth(),vooga.getSceneHeight());
 		getStyleClass().add("Thingy2");
-		getChildren().addAll(myText, myMode, myTable, myEdit, mySave, myDrag);
+		getChildren().addAll(myText, myMode, myEdit, mySave, myDrag);
 		box();
 		buttons();
-		table();
 		drag();
 		setPositions();
+		myMode.setValue("Make " + RANDOM);
+		tableMaker(myTableR, ["Articles", "Probability"]);
+		tableMaker(myTableC, ["Articles"]);
 		makeRandom();
+	}
+	
+	private void input() {
+		
 	}
 	
 	private void box() {
 		myMode.getItems().addAll(RANDOM, CONSTANT);
 		myMode.setPrefSize(300,15);
-//		myMode.valueProperty().addListener({toggle();});
+		myMode.setOnAction({toggle()});
 	}
 	
 	private void buttons() {
@@ -70,22 +96,23 @@ public class RandomUI extends Pane {
 		mySave.setText("Save");
 		myEdit.setPrefSize(70,10);
 		mySave.setPrefSize(70,10);
-//		mySave.addEventHandler(event, save());
-//		myEdit.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override public void handle(ActionEvent e) {
-//				label.setText("Accepted");
-//			}
-//		});
+		mySave.setOnAction({save()});
+		myEdit.setOnAction({edit()});
 	}
 	
-	private void table() {
-		myTable.setEditable(true);
-		myTable.setPrefSize(300, 300);
-		TableColumn article = new TableColumn("Article Group");
-		article.setWidth(myTable.getPrefWidth()/2);
-		TableColumn prob = new TableColumn("Probilities");
-		prob.setPrefWidth(myTable.getPrefWidth()/2);
-		myTable.getColumns().addAll(article,prob);
+	private void tableMaker(TableView table, ArrayList<String> str) {
+		table.setEditable(true);
+		table.setPrefSize(300, 300);
+		for (String s: str) {
+			TableColumn col = new TableColumn(s);
+			col.setPrefWidth(table.getPrefWidth()/(str.size()));
+			table.getColumns().add(col);
+		}
+//		TableColumn article = new TableColumn("Article Group");
+//		article.setWidth(myTableR.getPrefWidth()/2);
+//		TableColumn prob = new TableColumn("Probilities");
+//		prob.setPrefWidth(myTableR.getPrefWidth()/2);
+//		myTableR.getColumns().addAll(article,prob);
 	}
 	
 	private void drag() {
@@ -93,11 +120,11 @@ public class RandomUI extends Pane {
 		myDrag.getStyleClass().add("ass");
 	}
 	
-	private void newEntry() {
-		TableColumn col = new TableColumn("Ass boners");
-		col.setCellValueFactory("Ching chong");
-		myTable.getColumns().add(col);
-	}
+//	private void newEntry() {
+//		TableColumn col = new TableColumn("Ass boners");
+//		col.setCellValueFactory("fuck slut");
+//		myTable.getColumns().add(col);
+//	}
 	
 	private void setPositions() {
 		myText.getStyleClass().add("random");
@@ -105,56 +132,136 @@ public class RandomUI extends Pane {
 		myText.setLayoutY(LEFT_Y);
 		myMode.setLayoutX(LEFT_X);
 		myMode.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
-		myTable.setLayoutX(LEFT_X);
-		myTable.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
+		myTableR.setLayoutX(LEFT_X);
+		myTableR.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
+		myTableC.setLayoutX(LEFT_X);
+		myTableC.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
 		myDrag.setLayoutX(PANE_X);
 		myDrag.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
 		myEdit.setLayoutX(PANE_X + myDrag.getPrefWidth()/2 - myEdit.getPrefWidth());
 		myEdit.setLayoutY(PANE_Y + myDrag.getPrefHeight());
 		mySave.setLayoutX(PANE_X + myDrag.getPrefWidth()/2);
 		mySave.setLayoutY(PANE_Y + myDrag.getPrefHeight());
-	}
-	
-	private void makeDrag() {
-		myText.getStyleClass().add("random");
-		setOnDragDropped({event -> react(event)});
-		myText.setLayoutX(200 /*- myText.getBoundsInParent().getWidth()*/);
-		myText.setLayoutY(TOP_OFFSET);
-		myDrag.setLayoutX(LEFT_OFFSET - myDrag.getWidth()  - 20 /*myText.getBoundsInParent().getWidth()*/);
-		myDrag.setLayoutY(TOP_OFFSET + myText.getBoundsInParent().getHeight()/2);
+		myName.setLayoutX(PANE_X);
+		myName.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
+		
+		myProb.setLayoutX(PANE_X);
+		myProb.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
+		myProb.setPrefWidth(myDrag.getPrefWidth()/2);
+		
+		myXDist.setLayoutX(PANE_X);
+		myXDist.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
+		myYDist.setLayoutX(PANE_X);
+		myYDist.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
+		myXRepeat.setLayoutX(PANE_X + myProb.getPrefWidth());
+		myXRepeat.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
+		myYRepeat.setLayoutX(PANE_X + myProb.getPrefWidth());
+		myYRepeat.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
+		
+		myXDist.setPrefWidth(myDrag.getPrefWidth()/2);
+		myYDist.setPrefWidth(myDrag.getPrefWidth()/2);
+		myXRepeat.setPrefWidth(myDrag.getPrefWidth()/2);
+		myYRepeat.setPrefWidth(myDrag.getPrefWidth()/2);
 	}
 	
 	private void makeRandom() {
 		myText.setText("Make " + RANDOM);
-		println(myText.getBoundsInLocal().getHeight() + "Ass Boners " + myText.getBoundsInParent().getHeight())
-		myMode.setValue(RANDOM);
-//		newEntry();
+		if (getChildren().contains(myTableC)) {
+			getChildren().removeAll(myTableC, myXDist, myYDist, myXRepeat, myYRepeat);
+		}
+		if (!getChildren().contains(myTableR))
+			getChildren().addAll(myTableR, myProb);
 	}
 	
 	private void makeConstant() {
 		myText.setText("Make " + CONSTANT);
-		myMode.setValue(CONSTANT);
+		if (getChildren().contains(myTableR))
+			getChildren().removeAll(myTableR, myProb);
+		if (!getChildren().contains(myTableC))
+			getChildren().addAll(myTableC, myXDist, myYDist, myXRepeat, myYRepeat);
 	}
 	
 	private void toggle() {
-		if (myMode.getValue().equals(RANDOM))
+		if (myMode.getValue().equals(CONSTANT))
 			makeConstant();
-		else
+		else if (myMode.getValue().equals(RANDOM))
 			makeRandom();
 	}
 	
-	private void edit() {
-		
-	}
-	
 	private void save() {
+		myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+		if (myMode.getValue().equals(RANDOM)) {
+			myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+			updateTableR();
+		} else {
+			updateTableC();
+		}
+		println(myProb.getText());
+	}
+
+	private void edit(){
+		myController.callEvent("InfiniteController", "genRandom");
+	}
+	
+	private void updateTableR() {
+		
+		myTableR.setItems(null);
+//		tableMaker(myTableR,["Articles", "Probability"]);
+		String Column1MapKey = "A";
+		String Column2MapKey = "P";
+		TableColumn<Map, String> firstDataColumn = new TableColumn<>("Articles");
+		TableColumn<Map, String> secondDataColumn = new TableColumn<>("Probabilities");
+		firstDataColumn.setCellValueFactory(new MapValueFactory(Column1MapKey));
+		secondDataColumn.setCellValueFactory(new MapValueFactory(Column2MapKey));
+ 
+		myTableR = new TableView<>(generateDataInMap(map));
+ 
+		myTableR.setEditable(true);
+		myTableR.getSelectionModel().setCellSelectionEnabled(true);
+		myTableR.getColumns().setAll(firstDataColumn, secondDataColumn);
+		Callback<TableColumn<Map, String>, TableCell<Map, String>>
+			cellFactoryForMap = new Callback<TableColumn<Map, String>,
+				TableCell<Map, String>>() {
+					@Override
+					public TableCell call(TableColumn p) {
+						return new TextFieldTableCell(new StringConverter() {
+							@Override
+							public String toString(Object t) {
+								return t.toString();
+							}
+							@Override
+							public Object fromString(String string) {
+								return string;
+							}
+						});
+					}
+		};
+		firstDataColumn.setCellFactory(cellFactoryForMap);
+		secondDataColumn.setCellFactory(cellFactoryForMap);
 		
 	}
 	
-	private void react(event) {
-		myController.infiniteEvent("drag", event );
-		
-//		new RandomMenu("Random Element Editor",myController);
+	private ObservableList<Map> generateDataInMap() {
+		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		ObservableList<HashMap> allData = FXCollections.observableArrayList();
+		for (Map.Entry<Article, Double> entry: map.entrySet()) {
+			Map<String, String> dataRow = new HashMap<>();
+			
+			String key = entry.getKey().getImageFile();
+			String value = entry.getValue().toString();
+ 
+			dataRow.put(Column1MapKey, key);
+			dataRow.put(Column2MapKey, value);
+ 
+			allData.add(dataRow);
+		}
+		return allData;
 	}
 	
+	
+	
+	private void updateTableC() {
+		
+	}
+
 }

@@ -1,5 +1,8 @@
 package game.player;
 
+import java.util.List;
+
+import action.controller.ActionController;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
 import model.article.Article;
@@ -8,12 +11,10 @@ public class HealthModule extends HUDModule {
 	
 	private Text myHealthVal;
 	private ProgressBar myHealthBar;
-	private Boolean myFirstUpdate;
-	private double myInitialHealth;
+
 	
 	public HealthModule(){
 		super();
-		myFirstUpdate = true;
 		myHealthVal = new Text("Health: ");
 		myHealthBar = new ProgressBar(1.0);
 	}
@@ -24,14 +25,10 @@ public class HealthModule extends HUDModule {
 		this.getChildren().addAll(myHealthVal,myHealthBar);
 	}
 	
-	public void update(Article character){
+	public void update(List<Article> arg, Article character, ActionController ac){
 		double health = character.getHealth();
-		if(myFirstUpdate||myInitialHealth==0||character.getHealth()>myInitialHealth){
-			myInitialHealth = health;
-			myFirstUpdate = !myFirstUpdate;
-		}
-		myHealthBar.setProgress(health/myInitialHealth);
-		myHealthVal.setText("Health: " + health + "/" + myInitialHealth);
+		myHealthBar.setProgress(health/character.getMaxHealth());
+		myHealthVal.setText("Health: " + health + "/" + character.getMaxHealth());
 	}
 	
 	public double getWide(){

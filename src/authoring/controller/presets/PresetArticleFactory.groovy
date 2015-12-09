@@ -30,6 +30,8 @@ public class PresetArticleFactory {
 	private PlatformPreset myPlatform;
 	private GoombaPreset myGoomba;
 	private VegetaPreset myVegeta;
+	private DoodleJumpPreset myDoodle;
+	private FlappyPreset myFlappy;
 
 	public PresetArticleFactory(ModelController mc, AuthoringController ac) {
 		myModelController = mc;
@@ -37,6 +39,8 @@ public class PresetArticleFactory {
 		myPlatform = new PlatformPreset(ac, mc);
 		myGoomba = new GoombaPreset(ac, mc);
 		myVegeta = new VegetaPreset(ac, mc);
+		myDoodle = new DoodleJumpPreset(ac, mc);
+		myFlappy = new FlappyPreset(ac, mc);
 	}
 
 	public void platformMovement(Article article) {
@@ -48,7 +52,14 @@ public class PresetArticleFactory {
 	}
 
 	public void noClipMovement(Article article) {
-		println("what");
 		myVegeta.noClipMovement(article);
+	}
+
+	public void doodlePlayer(Article article) {
+		myDoodle.player(article);
+	}
+
+	public void flappyPlayer(Article article){
+		myFlappy.player(article);
 	}
 }
