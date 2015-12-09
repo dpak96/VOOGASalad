@@ -6,6 +6,7 @@ import level.manager.XMLOrderer;
 import main.GraphicHandler;
 import model.Model;
 import model.controller.ModelController;
+import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIStackPane;
 
@@ -131,7 +132,7 @@ public class MenuController {
     	myFileChooser.setTitle("New Image File");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("PNG Images (*.png)", "*.png");
-		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");  
+		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");
 		myFileChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
 //    	myFileChooser.setInitialDirectory(levelDir);
         List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
@@ -141,14 +142,22 @@ public class MenuController {
         				+ System.getProperty("file.separator")
         				+ "resources" + System.getProperty("file.separator")+ "images" 
         				+ System.getProperty("file.separator") + imageType + System.getProperty("file.separator") + image.getName());
+            	File target2 = new File("src"
+        				+ System.getProperty("file.separator")
+        				+ "resources" + System.getProperty("file.separator")+ "images" 
+        				+ System.getProperty("file.separator") + image.getName());
             	try {
-					Files.move(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(image.toPath(), target2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
+        	ResourceManager.getResourceManager().refreshImages();
         }
+        
         
 //        try {
 ////        	dir.mkdir();
