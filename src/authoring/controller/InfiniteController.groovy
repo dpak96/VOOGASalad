@@ -33,12 +33,20 @@ class InfiniteController {
 
     public addToRandom(String prob){
         double d = Double.parseDouble(prob);
-        randomGenMap.put(currentArticle, d);
+		for (Map.Entry<Article, Double> blah: randomGenMap.entrySet()) {
+			if (blah.getValue() == 0.0) {
+				println("The map shoul not be fucking null");
+				randomGenMap.put(blah.getKey(), d);
+			}
+		}
         currentArticle = null;
-        println("yi");
+        //println("yi");
     }
 
     public getRandomMap(){
+		if (randomGenMap == null) {
+			println("the map is null");
+		}
         return randomGenMap;
     }
 
@@ -74,7 +82,9 @@ class InfiniteController {
 
     public makeArticle(e, Pane inf){
         String image = e.getGestureSource().getImageName();
-        currentArticle = new Article(image,0,0,true);
+		Article temp = new Article(image,0,0,true);
+		randomGenMap.put(temp,0.0);
+        currentArticle = temp;
         articleList.add(currentArticle);
         makePopup(currentArticle);
         Image im = (Image) ResourceManager.getResourceManager().getResource("ImageManager", currentArticle.getImageFile());
