@@ -35,12 +35,10 @@ class InfiniteController {
         double d = Double.parseDouble(prob);
 		for (Map.Entry<Article, Double> blah: randomGenMap.entrySet()) {
 			if (blah.getValue() == 0.0) {
-				println("The map shoul not be fucking null");
 				randomGenMap.put(blah.getKey(), d);
 			}
 		}
         currentArticle = null;
-        //println("yi");
     }
 
     public getRandomMap(){
@@ -55,7 +53,12 @@ class InfiniteController {
     }
 
     public addSetToConstant(){
-        constantGen.add(tempList);
+		ArrayList<Article> superTemp = new ArrayList<>();
+		for(Article a: tempList){
+			superTemp.add(a);
+			println(a)
+		}
+		constantGen.add(new ArrayList<>(superTemp));
         tempList = new ArrayList<>();
     }
 
@@ -80,6 +83,13 @@ class InfiniteController {
 		double e = Double.parseDouble(yDistance);
 		double f = Double.parseDouble(xOffset);
 		double g = Double.parseDouble(yOffset);
+		println(constantGen.size());
+		for (int i = 0; i < constantGen.size(); i++ ) {
+			for (int j = 0; j < constantGen.get(i).size(); j++ ) {
+				println(constantGen.get(i).get(j));
+			}
+			println("End of List " + i);
+		}
 		myModelController.setConstantGenerator(constantGen, d,
 		 e, f, g);
         constantGen = new ArrayList<>();
@@ -91,6 +101,8 @@ class InfiniteController {
 		randomGenMap.put(temp,0.0);
         currentArticle = temp;
         articleList.add(currentArticle);
+		tempList.add(temp);
+		println(tempList.size());
         makePopup(currentArticle);
         Image im = (Image) ResourceManager.getResourceManager().getResource("ImageManager", currentArticle.getImageFile());
         ImageView h = new ImageView();
