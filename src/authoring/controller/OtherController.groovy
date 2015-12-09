@@ -1,6 +1,5 @@
 package authoring.controller
 
-import com.sun.xml.internal.xsom.impl.WildcardImpl.Other
 import model.Event
 import model.article.Article
 import model.controller.ModelController

@@ -73,7 +73,11 @@ public class AuthoringController {
 	public ModelController getModelController(){
 		return modelController;
 	}
-
+	
+	public void callEvent(String controller,String method){
+		controllers.get(controller)."$method"(this);
+	}
+	
 	public void callEvent(String controller,String method,e){
 		controllers.get(controller)."$method"(e, this);
 	}

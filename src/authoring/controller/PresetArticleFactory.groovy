@@ -128,7 +128,7 @@ public class PresetArticleFactory {
 		//decel left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) -.05);
+		tempMap.put("myAcceleration", (double) -0.05);
 		ex = authoringController.makeExecutable("ExecutableAccelerateHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -171,7 +171,7 @@ public class PresetArticleFactory {
 		//decel right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) .05);
+		tempMap.put("myAcceleration", (double) 0.05);
 		ex = authoringController.makeExecutable("ExecutableAccelerateHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -214,7 +214,7 @@ public class PresetArticleFactory {
 		//decel down
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) .05);
+		tempMap.put("myAcceleration", (double) 0.05);
 		ex = authoringController.makeExecutable("ExecutableAccelerateVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -257,7 +257,7 @@ public class PresetArticleFactory {
 		//decel up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) -.05);
+		tempMap.put("myAcceleration", (double) -0.05);
 		ex = authoringController.makeExecutable("ExecutableAccelerateVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
