@@ -72,9 +72,6 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		comboBoxPropertyMap.put("COLLISION",
 				super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
 
-		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Save as default?: ");
-		CheckBox defaultSave = new CheckBox();
-		menuGrid.add(defaultSave, 2, rowIndex++);
 
 		super.componentAdder.makeLabel(menuGrid,1,rowIndex,"Save as Main Character?: ");
 		menuGrid.add(myCharSaver, 2, rowIndex++);
