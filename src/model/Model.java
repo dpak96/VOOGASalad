@@ -60,6 +60,7 @@ public class Model extends Observable{
 			double yDistance, double xOffset, double yOffset) {
 		randomGenerator = new ConstantGenerationUtility(constants, xDistance, yDistance, 
 				xOffset, yOffset, myArticles, myViewpoint);
+
 	}
 	
 	public void setRandomGenerator(Map<Article, Double> probabilities){

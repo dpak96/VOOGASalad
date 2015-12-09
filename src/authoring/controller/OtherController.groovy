@@ -67,6 +67,9 @@ class OtherController {
     public List<String> getCollisionTypes(){
         return myModelController.getAllCollisionTypes();
     }
+	public void addCollisionType(String collision){
+		myModelController.addNewCollisionType(collision);
+	}
     public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
         this.myModelController.addEvent(eventToAdd);
         if(eventType.equals("Active"))
