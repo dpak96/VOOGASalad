@@ -83,6 +83,7 @@ public class UIStackPane extends StackPane implements Observer {
 		if (edit) {
 			this.getChildren().add(myGamePlayer);
 		} else {
+			myAuthoringController.flush();
 			this.getChildren().add(myAuthoringControllerPane);
 			myAuthoringController.initalizeControllers();
 		}
