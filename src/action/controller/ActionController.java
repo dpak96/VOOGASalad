@@ -13,14 +13,25 @@ public class ActionController{
 	private GameEngine myGE;
 	private double rate;
 	Timeline animation;
+	private boolean paused;
 	
 	public ActionController(GameEngine engine){
 		myGE = engine;
 		set_up_timeline();
-		
+		paused = false;
 	}
 
 	public void update(String arg1) {
+		if(arg1.toUpperCase().equals("Q")){
+			if(paused){
+				this.resume();
+				paused = !paused;
+			}
+			else{
+				this.change_rate(0);
+				paused = !paused;
+			}
+		}
 		myGE.update(arg1);
 	}
 
