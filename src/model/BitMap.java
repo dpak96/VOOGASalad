@@ -16,7 +16,6 @@ public class BitMap {
 	
 
 	public BitMap(String myImage, Double x, Double y) {
-		System.out.println(myImage);
 		
 		Image image = (Image) ResourceManager.getResourceManager().getResource("ImageManager", myImage);
 		BufferedImage bfImage = SwingFXUtils.fromFXImage(image, null);
@@ -33,19 +32,15 @@ public class BitMap {
 	private static Position[][] makeBitMap(BufferedImage image, Double x, Double y) {
 	      final int width = image.getWidth();
 	      final int height = image.getHeight();
-	      System.out.println(width + " " + height);
 	      final boolean hasAlphaChannel = image.getAlphaRaster() != null;
-	      System.out.println(hasAlphaChannel);
 	      Position[][] result = new Position[height][width];
 	      
 	      for (int i = 0; i < height; i++) {
 	          for (int j = 0; j < width; j++) {
 	        	  int alpha = image.getRGB(j,i);
 		             if( (alpha>>24) == 0x00 ) {
-		            	 //System.out.println("absent");
 		                 result[i][j] = new Position(-1,-1);
 		             } else {
-		            	 //System.out.print("here");
 		            	 result[i][j] = new Position(x+j, y+i) ;
 		             }
 	          }
