@@ -48,6 +48,11 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(TOP, ENEMY, PLATFORM, bounceVertical);
 		myCollisionTypeEditor.add(BOTTOM, ENEMY, PLATFORM, bounceVertical);
 		
+//		Event jump = getJumpEvent();
+//		myCollisionTypeEditor.add(TOP, PLAYER, PLATFORM, jump);
+//		myCollisionTypeEditor.add(TOP, PLATFORM, PLAYER, jump);
+//		myCollisionTypeEditor.add(BOTTOM, PLAYER, PLATFORM, jump);
+//		myCollisionTypeEditor.add(BOTTOM, PLATFORM, PLAYER, jump);
 //		Event die = getDieEvent();
 //		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
 //		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
@@ -55,6 +60,28 @@ public class PresetCollision {
 //		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
 //		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
 	}
+
+//	private Event getJumpEvent() {
+//		// TODO Auto-generated method stub 
+//		HashMap<String, Object> temp = new HashMap<String, Object>();
+//		temp.put("myName", "Wu");
+//		temp.put("myFirst", null);
+//		temp.put("mySecond", null);
+//		temp.put("myFirstVariable", "Top");
+//		temp.put("myCompareValue", 0);
+//		temp.put("myComparison", "GreaterThan");
+//		ConditionComparisonOneArticle checkFirstArticleHorizontalVelocity = new ConditionComparisonOneArticle(temp);
+//		List<Condition> conditionList = new ArrayList<Condition>();
+//		conditionList.add(checkFirstArticleHorizontalVelocity);
+//		HashMap<String, Object> temp2 = new HashMap<String, Object>();
+//		temp2.put("myName", "Daniel");
+//		temp2.put("myActor", null);
+//		ExecutableBounceVertical exe = new ExecutableBounceVertical(temp);
+//		List<Executable> exeList = new ArrayList<Executable>();
+//		exeList.add(exe);
+//		Event event = new Event("BounceVertical", conditionList, exeList);
+//		return event;
+//	}
 
 	private Event getBounceVerticalEvent() {
 		// TODO Auto-generated method stub
