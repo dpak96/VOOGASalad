@@ -8,10 +8,6 @@ import model.Event;
 
 public class CollisionTypeEditor {
 	private List<List<List<List<Event>>>> collisionMatrix;
-//	private List<List<List<Event>>> leftCollisionMatrix;
-//	private List<List<List<Event>>> rightCollisionMatrix;
-//	private List<List<List<Event>>> topCollisionMatrix;
-//	private List<List<List<Event>>> bottomCollisionMatrix;
 	private List<String> collisionTypeName;
 	private final List<String> MATRIX_NAMES = new ArrayList<String>(Arrays.asList("Left","Right","Top","Bottom"));
 	private final int MATRIX_NUMBER = 4;
@@ -20,10 +16,6 @@ public class CollisionTypeEditor {
 		// TODO Auto-generated constructor stub
 		collisionTypeName = new ArrayList<String>();
 		collisionMatrix = new ArrayList<List<List<List<Event>>>>();
-//		leftCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		rightCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		topCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		bottomCollisionMatrix = new ArrayList<List<List<Event>>>();
 	}
 	
 	private List<List<List<Event>>> createNewEventMatrix(){

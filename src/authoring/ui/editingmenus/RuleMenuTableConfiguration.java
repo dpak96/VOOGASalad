@@ -15,7 +15,6 @@ import model.processes.Condition;
 import model.processes.Executable;
 import resourcemanager.ResourceManager;
 
-
 public class RuleMenuTableConfiguration {
 
     private TableView eventTable = new TableView();
