@@ -41,13 +41,19 @@ public class RandomUI extends Pane {
 		myConstants = new ArrayList<RepeatingArticle>();
 		myEdit = new Button();
 		mySave = new Button();
-		myDrag = new InfiniteDrop();
-		myName = new TextField("Name of Article List");
-		myProb = new TextField("Probability");
-		myXDist = new TextField("X Distance from Viewpoint");
-		myYDist = new TextField("Y Distance from Viewpoint");
-		myXRepeat = new TextField("X Distance to Repeat");
-		myYRepeat = new TextField("Y Distance to Repeat");
+		myDrag = new InfiniteDrop(controller);
+		myName = new TextField();
+		myName.setPromptText("Name of Article List");
+		myProb = new TextField();
+		myProb.setPromptText("Probability");
+		myXDist = new TextField();
+		myXDist.setPromptText("X Distance from Viewpoint");
+		myYDist = new TextField();
+		myYDist.setPromptText("Y Distance from Viewpoint");
+		myXRepeat = new TextField();
+		myXRepeat.setPromptText("X Distance to Repeat");
+		myYRepeat = new TextField();
+		myYRepeat.setPromptText("Y Distance to Repeat");
 		init();		
 	}
 	
@@ -57,7 +63,7 @@ public class RandomUI extends Pane {
 //		LEFT_OFFSET = vooga.getSceneWidth()/2 - 75;
 		setPrefSize(vooga.getSceneWidth(),vooga.getSceneHeight());
 		getStyleClass().add("Thingy2");
-		getChildren().addAll(myText, myMode, myEdit, mySave, myDrag, myProb);
+		getChildren().addAll(myText, myMode, myEdit, mySave, myDrag);
 		box();
 		buttons();
 		drag();
@@ -140,10 +146,10 @@ public class RandomUI extends Pane {
 		myXDist.setLayoutX(PANE_X);
 		myXDist.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
 		myYDist.setLayoutX(PANE_X);
-		myYDist.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
-		myXRepeat.setLayoutX(PANE_X);
-		myXRepeat.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
-		myYRepeat.setLayoutX(PANE_X);
+		myYDist.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
+		myXRepeat.setLayoutX(PANE_X + myProb.getPrefWidth());
+		myXRepeat.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight()-30);
+		myYRepeat.setLayoutX(PANE_X + myProb.getPrefWidth());
 		myYRepeat.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
 		
 		myXDist.setPrefWidth(myDrag.getPrefWidth()/2);
@@ -154,18 +160,19 @@ public class RandomUI extends Pane {
 	
 	private void makeRandom() {
 		myText.setText("Make " + RANDOM);
-		if (getChildren().contains(myTableC))
-			getChildren().remove(myTableC);
+		if (getChildren().contains(myTableC)) {
+			getChildren().removeAll(myTableC, myXDist, myYDist, myXRepeat, myYRepeat);
+		}
 		if (!getChildren().contains(myTableR))
-			getChildren().add(myTableR);
+			getChildren().addAll(myTableR, myProb);
 	}
 	
 	private void makeConstant() {
 		myText.setText("Make " + CONSTANT);
 		if (getChildren().contains(myTableR))
-			getChildren().remove(myTableR);
+			getChildren().removeAll(myTableR, myProb);
 		if (!getChildren().contains(myTableC))
-			getChildren().add(myTableC);
+			getChildren().addAll(myTableC, myXDist, myYDist, myXRepeat, myYRepeat);
 	}
 	
 	private void toggle() {
@@ -176,7 +183,9 @@ public class RandomUI extends Pane {
 	}
 	
 	private void save() {
-		myController.callEvent("infinite", "addToRandom", article, odds);
+		if (myMode.getValue().equals(RANDOM))
+			myController.callEvent("infinite", "addToRandom", article, myProb.getText());
+
 	}
 
 }
