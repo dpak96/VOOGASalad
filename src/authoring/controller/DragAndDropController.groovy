@@ -29,13 +29,7 @@ class DragAndDropController {
                         new ArticlePropertyEditorMenu("Object Editor", n, authoringController);
             }
         } else {
-            if(e.getSource() instanceof HighlightedArticle){
-                n.setActive();
-                Button b = (Button) e.getSource();
-                Pane p = (Pane) b.getParent();
-                p.getChildren().remove(b);
-                authoringController.setHighlighted(false);
-            }
+            removeButton(e,n);
         }
     }
 
@@ -51,6 +45,16 @@ class DragAndDropController {
         }
 
         event.consume();
+    }
+
+    public removeButton(e,n){
+        if(e.getSource() instanceof HighlightedArticle){
+            n.setActive();
+            Button b = (Button) e.getSource();
+            Pane p = (Pane) b.getParent();
+            p.getChildren().remove(b);
+            authoringController.setHighlighted(false);
+        }
     }
 
 
