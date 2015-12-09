@@ -136,6 +136,9 @@ public class Model extends Observable{
 		return myButtonMap;
 	}
 	public void setCharacter(Article character) {
+		character.setLife(myCharacter.getLife());
+		character.setScore(myCharacter.getScore());
+		character.setHealth(myCharacter.getHealth());
 		myCharacter = character;
 	}
 
@@ -224,6 +227,7 @@ public class Model extends Observable{
 	
 	public void setBackgroundImage(String backgroundImage){
 		myBackgroundImage = backgroundImage;
+		notifyObservers();
 	}
 	
 	public String getBackgroundImage(){
