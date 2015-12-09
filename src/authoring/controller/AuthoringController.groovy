@@ -50,7 +50,7 @@ public class AuthoringController {
 		Class<?> cl = Class.forName(cName);
 		Object object;
 		Constructor<?> ctor = null;
-		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController")){
+		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController") || cName.equals("authoring.controller.InfiniteController")){
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = ModelController.class;

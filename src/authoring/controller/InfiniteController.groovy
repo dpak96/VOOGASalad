@@ -18,9 +18,9 @@ class InfiniteController {
     private Article currentArticle;
     private List<Article> articleList;
 
-    public InfiniteController(AuthoringController ac){
+    public InfiniteController(AuthoringController ac, ModelController mc){
         myAuthoringController = ac;
-        //myModelController = mc;
+        myModelController = mc;
         randomGenMap = new HashMap<>();
         constantGen = new ArrayList<>();
         tempList = new ArrayList<>();
