@@ -17,17 +17,20 @@ class ArticleExtenderController {
     private myLeft,myRight;
 
 
+
     public ArticleExtenderController(AuthoringController authoring){
         myAuthoringController = authoring;
         setKeys();
         myAuthoringController.setHighlighted(false);
         //authoringController.callEvent("DragAndDropController",)
+
     }
 
     private setKeys(){
         myLeft = KeyCode.N;
         myRight = KeyCode.M;
     }
+
 
     public void addTile(KeyEvent event) {
         updateArticle(event);
@@ -39,11 +42,11 @@ class ArticleExtenderController {
             myCurrent = myAuthoringController.getCurrentArticle();
             myInitWidth = myCurrent.getWidth();
             initRightAndLeft(event);
+
         }
     }
 
     private initRightAndLeft(event){
-
         myNewXRight = myCurrent.getX() + (myCurrent.getWidth() / 2)+myAuthoringController.getModelController().getViewpoint().getX();
         myNewYRight = myCurrent.getX() +myAuthoringController.getModelController().getViewpoint().getX();
     }
@@ -66,7 +69,6 @@ class ArticleExtenderController {
 
     private extend(){
         try {
-
             myCurrent.setWidth(myCurrent.getWidth()+myInitWidth);
         }
         catch (Exception e){

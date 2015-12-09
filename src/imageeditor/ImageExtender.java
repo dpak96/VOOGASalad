@@ -23,7 +23,6 @@ public class ImageExtender {
 		
 		BufferedImage combined = new BufferedImage(hTimes*w, vTimes*h, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = combined.getGraphics();
-		
 		for(int i = 0; i < hTimes; i++){
 			for(int j = 0; j < vTimes ; j++){
 				g.drawImage(awtIm, i*w, j*h, null);

@@ -84,7 +84,6 @@ public class AuthoringController {
 		return object;
 	}
 
-	
 	private pressDelete(){
 	}
 
