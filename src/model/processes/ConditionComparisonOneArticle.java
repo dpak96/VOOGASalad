@@ -18,13 +18,12 @@ public class ConditionComparisonOneArticle extends Condition{
 
 	@Override
 	public boolean isMet() {
+		System.out.println(myFirst.getClass());
 		try{
 			Method method1 = myFirst.getClass().getMethod("get"+myFirstVariable);
 			double firstValue = (double) method1.invoke(myFirst);
 			Maths m = new Maths();
 			Method compare = m.getClass().getMethod(myComparison, double.class, double.class);
-			//System.out.println(firstValue+ " " + myCompareValue);
-			//System.out.println(compare.invoke(m, firstValue, myCompareValue));
 			return (boolean) compare.invoke(m, firstValue, myCompareValue);
 		}
 		catch(Exception e){
