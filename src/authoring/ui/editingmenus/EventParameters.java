@@ -32,11 +32,12 @@ public class EventParameters {
         fieldMap.put("direction", directionBox);
         componentAdder.makeLabel(paramGrid, 1, 2, "Collision Type One");
         ComboBox firstCollisionTypeBox=componentAdder.makeComboBox(paramGrid, 2, 2);
-        firstCollisionTypeBox.getItems().addAll(myController.callEvent("OtherController","getCollisionTypes"));
+        List<String> collisionTypes=(ArrayList<String>) myController.callEvent("OtherController","getCollisionTypes");
+        firstCollisionTypeBox.getItems().addAll(collisionTypes);
         fieldMap.put("nameOne",firstCollisionTypeBox);
         componentAdder.makeLabel(paramGrid, 1, 3, "Collision Type Two");
         ComboBox secondCollisionTypeBox=componentAdder.makeComboBox(paramGrid, 2, 3);
-        secondCollisionTypeBox.getItems().addAll(myController.callEvent("OtherController","getCollisionTypes"));
+        secondCollisionTypeBox.getItems().addAll(collisionTypes);
         fieldMap.put("nameTwo",secondCollisionTypeBox);
         return fieldMap;
        
