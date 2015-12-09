@@ -2,9 +2,7 @@ package authoring.ui.draganddrop
 
 import authoring.controller.AuthoringController
 
-/**
- * Created by Rob on 12/9/15.
- */
+
 public class InfiniteDrop extends AbstractDragAndDrop {
 
     public InfiniteDrop(AuthoringController ac){
@@ -13,7 +11,7 @@ public class InfiniteDrop extends AbstractDragAndDrop {
 
     @Override
     protected void setListeners(AuthoringController authoringController) {
-        this.setOnDragDropped({});
+        this.setOnDragDropped({event ->  authoringController.callEvent("InfiniteController", "makeArticle",event)});
         this.setOnDragOver({});
         this.setOnMouseClicked({});
     }
