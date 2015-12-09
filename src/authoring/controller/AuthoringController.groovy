@@ -5,6 +5,9 @@ import authoring.backend.EditorManager;
 import authoring.controller.presets.PresetArticleFactory
 import authoring.ui.AuthoringUI;
 import model.Event;
+
+import authoring.ui.AuthoringUI
+import javafx.scene.control.Button
 import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
@@ -16,9 +19,9 @@ public class AuthoringController {
 	private AuthoringUI myUI;
 	private boolean highlighted = false;
 	private Article myCurrentArticle;
+	private Button myCurrentButton;
 	private ModelController myModelController;
-
-	private Map<String, Object> myControlleMaps;
+	private Map<String, Object> myControllerMaps;
 	private PresetArticleFactory myPresetArticleFactory;
 
 	public AuthoringController(ModelController mc) {
@@ -31,14 +34,16 @@ public class AuthoringController {
 
 	public void initalizeControllers(){
 		register();
+
 	}
+
 
 
 	public void register(){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
-		myControlleMaps = new HashMap<String, Editor>();
+		myControllerMaps = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
-			myControlleMaps.put(x, getNewInstance(rb.getString(x)));
+			myControllerMaps.put(x, getNewInstance(rb.getString(x)));
 		}
 	}
 
@@ -47,10 +52,14 @@ public class AuthoringController {
 		Object object;
 		Constructor<?> ctor = null;
 		if(cName.equals("authoring.controller.OtherController")){
-			Object[] o = new Object[1];
-			ctor = cl.getConstructor(ModelController.class);
-			Object thing1 = myModelController;
-			object = ctor.newInstance(thing1);
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = ModelController.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = modelController;
+			object = ctor.newInstance(o);
 		}
 		else if(cName.equals("authoring.controller.ArticleCAndGController")){
 			Class[] hi = new Class[2];
@@ -74,6 +83,10 @@ public class AuthoringController {
 		return object;
 	}
 
+	private pressDelete(){
+
+	}
+
 	public AuthoringUI getUi() {
 		return myUI;
 	}
@@ -92,22 +105,22 @@ public class AuthoringController {
 	}
 
 	public callEvent(String controller,String method){
-		return myControlleMaps.get(controller)."$method"();
+		return myControllerMaps.get(controller)."$method"();
 	}
 
 	public callEvent(String controller,String method,e){
-		return myControlleMaps.get(controller)."$method"(e);
+		return myControllerMaps.get(controller)."$method"(e);
 	}
 
 	public callEvent(String controller,String method, e1, e2){
-		return myControlleMaps.get(controller)."$method"(e1, e2);
+		return myControllerMaps.get(controller)."$method"(e1, e2);
 	}
 
 	public callEvent(String controller,String method, e1, e2,e3){
-		return myControlleMaps.get(controller)."$method"(e1,e2,e3);
+		return myControllerMaps.get(controller)."$method"(e1,e2,e3);
 	}
 	public getController(String controller){
-		return myControlleMaps.get(controller);
+		return myControllerMaps.get(controller);
 	}
 
 	public getTester(){
@@ -132,6 +145,14 @@ public class AuthoringController {
 
 	public void setCurrentArticle(Article currArticle) {
 		myCurrentArticle = currArticle;
+	}
+
+	public getCurrentButton() {
+		return currentButton;
+	}
+
+	public void setCurrentButton(Button b) {
+		currentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {

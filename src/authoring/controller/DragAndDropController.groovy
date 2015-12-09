@@ -49,7 +49,9 @@ class DragAndDropController {
 
     public removeButton(e,n){
         if(e.getSource() instanceof HighlightedArticle){
-            n.setActive();
+            if(n != null){
+                n.setActive();
+            }
             Button b = (Button) e.getSource();
             Pane p = (Pane) b.getParent();
             p.getChildren().remove(b);
@@ -102,10 +104,13 @@ class DragAndDropController {
                 myAuthoringController.setHighlighted(true);
                 myAuthoringController.getUi().getDragAndDrop().getChildren().add(highlightedArticle);
                 highlightedArticle.relocate(tX, tY);
+                authoringController.setCurrentButton(highlightedArticle);
             } catch (Exception exception) {
                 System.out.println("hip");
             }
         }
     }
+
+
 
 }
