@@ -19,12 +19,17 @@ public class AuthoringController {
 
 	private Map<String, Object> controllerMap;
 	private PresetArticleFactory presetArticleFactory;
+	String test = "ArticleCAndGController";
 
 	public AuthoringController(ModelController mc) {
 		ui = new AuthoringUI(this);
 		modelController = mc;
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
+
+	}
+
+	public void initalizeControllers(){
 		register();
 	}
 
@@ -39,17 +44,33 @@ public class AuthoringController {
 
 	private getNewInstance(String cName){
 		Class<?> cl = Class.forName(cName);
-		Object[] o = new Object[1];
+		Object object;
 		Constructor<?> ctor = null;
-		if(!cName.equals("authoring.controller.OtherController")){
-			ctor = cl.getConstructor(AuthoringController.class);
-			o[0] = this;
-		}
-		else{
+		if(cName.equals("authoring.controller.OtherController")){
+			Object[] o = new Object[1];
 			ctor = cl.getConstructor(ModelController.class);
-			o[0] = modelController;
+			Object thing1 = modelController;
+			object = ctor.newInstance(thing1);
 		}
-		Object object = ctor.newInstance(o);
+		else if(cName.equals("authoring.controller.ArticleCAndGController")){
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = EditorManager.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = editor;
+			object = ctor.newInstance(o);
+		}
+
+		else{
+			ctor = cl.getConstructor(AuthoringController.class);
+			Object[] o = new Object[1];
+			Object thing1 = this;
+			object = ctor.newInstance(thing1);
+
+		}
+
 		return object;
 	}
 
