@@ -28,7 +28,7 @@ public class ToolbarContainer extends DraggableElement {
         toolBox.setVgap(4);
         toolBox.setHgap(4);
         toolBox.setPrefWrapLength(200);
-        toolBox.setPrefWidth(170);
+        toolBox.setPrefWidth(250);
     }
 
     private List<Button> populateButtonList () {

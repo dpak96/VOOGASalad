@@ -1,5 +1,6 @@
 package authoring.controller
 
+
 import javafx.scene.control.Button
 import javafx.scene.layout.Pane
 import model.Event
@@ -60,7 +61,7 @@ class OtherController {
     }
     
     public void deleteEvent(Event event){
-        modelController.removeEvent(event);
+        myModelController.removeEvent(event);
     }
 
     public List<String> getCollisionTypes(){
@@ -81,16 +82,18 @@ class OtherController {
     }
 
     public deleteArticle(Article n){
-        modelController.removeArticle(n);
-        Button b = authoringController.getCurrentButton();
-        Pane p = (Pane) b.getParent();
-        p.getChildren().remove(b);
-        authoringController.setHighlighted(false);
-        authoringController.setCurrentButton(null);
+        if(myAuthoringController.getCurrentArticle()!=null){
+            myModelController.removeArticle(n);
+            Button b = myAuthoringController.getCurrentButton();
+            Pane p = (Pane) b.getParent();
+            p.getChildren().remove(b);
+            myAuthoringController.setHighlighted(false);
+            myAuthoringController.setCurrentButton(null);
+        }
     }
 
     public getViewPoint(){
-        modelController.getViewpoint();
+        myModelController.getViewpoint();
     }
 
 }

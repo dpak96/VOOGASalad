@@ -24,6 +24,7 @@ import resourcemanager.ResourceManager;
 
 public class ArticlePropertyEditorMenu extends AuthoringMenu {
 
+
 	private HashMap<String, TextField> textFieldPropertyMap;
 	private HashMap<String, ComboBox> comboBoxPropertyMap;
 	private Article myArticleToEdit;
@@ -35,7 +36,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 	AuthoringController myController) {
 		super(title, myController);
 		myArticleToEdit = selectedArticle;
-		super.showMenu(300,300);
+		super.showMenu(400,300);
 	}
 
 	protected void populateMenu(GridPane menuGrid) {
@@ -72,13 +73,10 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		comboBoxPropertyMap.put("COLLISION",
 				super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
 
-		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Save as default?: ");
-		CheckBox defaultSave = new CheckBox();
-		menuGrid.add(defaultSave, 2, rowIndex++);
 
 		super.componentAdder.makeLabel(menuGrid,1,rowIndex,"Save as Main Character?: ");
 		menuGrid.add(myCharSaver, 2, rowIndex++);
-
+                
 		super.componentAdder.makeLabel(menuGrid,1,rowIndex, "Lives: ");
 		textFieldPropertyMap.put("LIVES", super.componentAdder.makeField(menuGrid, 2,rowIndex++));
 
@@ -91,6 +89,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.callEvent("OtherController","getCollisionTypes"));
 		imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
 		initializeFieldValues();
+       
 	}
 
 
