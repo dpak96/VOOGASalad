@@ -22,8 +22,8 @@ public class ModelAnnotations {
    @XStreamAlias("allEvents")
    private List<Event> allEvents;
 	
-   @XStreamAlias("myEvents")
-   private List<Event> myEvents;
+   @XStreamAlias("myActiveEvents")
+   private List<Event> myActiveEvents;
 
    @XStreamAlias("myButtonMap")
    private Map<String, List<Event>> myButtonMap;

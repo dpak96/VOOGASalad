@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 
 
 public class EditorManager extends Editor {
-	private Map<String, Editor> editorMap;
+	private Map<String, Editor> myEditorMap;
 
 
 	public EditorManager(ModelController modelController) {
@@ -17,9 +17,9 @@ public class EditorManager extends Editor {
 
 	public void register(ModelController mc){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
-		editorMap = new HashMap<String, Editor>();
+		myEditorMap = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
-			editorMap.put(x, getNewInstance(rb.getString(x)));
+			myEditorMap.put(x, getNewInstance(rb.getString(x)));
 		}
 	}
 
@@ -34,6 +34,6 @@ public class EditorManager extends Editor {
 
 
 	public getSubEditor(String editor){
-		return editorMap.get(editor);
+		return myEditorMap.get(editor);
 	}
 }

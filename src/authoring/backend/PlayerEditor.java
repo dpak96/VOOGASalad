@@ -10,16 +10,16 @@ public class PlayerEditor extends Editor{
     // TODO Auto-generated constructor stub
   }
 
-  private Article player;
+  private Article myPlayer;
   
 
 
   public Article getPlayer() {
-    return player;
+    return myPlayer;
   }
 
   public void setPlayer(Article player) {
-    this.player = player;
+    this.myPlayer = player;
     super.myModelController.setCharacter(player);
   }
 
