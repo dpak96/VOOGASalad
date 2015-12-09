@@ -122,6 +122,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		if(myCharSaver.isSelected()){
 			myArticleToEdit.setLife(Integer.parseInt(textFieldPropertyMap.get("LIVES").getText()));
 			myArticleToEdit.setScore(Integer.parseInt(textFieldPropertyMap.get("SCORE").getText()));
+			myArticleToEdit.setMaxHealth(Integer.parseInt(textFieldPropertyMap.get("HEALTH").getText()));
 			myArticleToEdit.setHealth(Integer.parseInt(textFieldPropertyMap.get("HEALTH").getText()));
 			super.myController.getEditor().getSubEditor("PlayerEditor").setPlayer(myArticleToEdit);
 		}

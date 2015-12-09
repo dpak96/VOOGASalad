@@ -56,7 +56,10 @@ public class ActionController{
 
 		}*/
 	}
-
+	
+	public double getRate(){
+		return animation.getRate();
+	}
 	public void change_rate(double dub){
 		animation.pause();
 		animation.setRate(dub);

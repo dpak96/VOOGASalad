@@ -1,5 +1,6 @@
 package game.player;
 
+import action.controller.ActionController;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -25,7 +26,7 @@ public class LivesModule extends HUDModule {
 		myVisualLives.setHgap(3);
 	}
 	
-	public void update(Article character){
+	public void update(Article character, ActionController ac){
 		double lives = character.getLife();
 		int life = ((Double) lives).intValue();
 		myLivesVal.setText("Lives: " + life);

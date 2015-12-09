@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import action.controller.ActionController;
 import game.player.GamePlayerOverlay;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -26,6 +27,7 @@ public class UIStackPane extends StackPane implements Observer {
 	private Pane myAuthoringControllerPane;
 	private ModelController myModelController;
 	private String myGameName;
+	private ActionController myActionController;
 	
 	public UIStackPane(ModelController modelController) {
 		myModelController = modelController;
@@ -108,12 +110,16 @@ public class UIStackPane extends StackPane implements Observer {
 	public GamePlayerOverlay getGamePlayer(){
 		return myGamePlayer;
 	}
+	
+	public void setActionController(ActionController ac){
+		myActionController = ac;
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		Model model = (Model) o;
 		myUIBasics.update(model.getArticles(), model.getCharacter(), model.getBackgroundImage());
-		myGamePlayer.update(model.getArticles(), model.getCharacter());
+		myGamePlayer.update(model.getArticles(), model.getCharacter(), myActionController);
 	}
 
 }
