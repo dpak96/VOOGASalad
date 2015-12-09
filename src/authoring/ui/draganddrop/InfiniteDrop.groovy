@@ -14,8 +14,8 @@ public class InfiniteDrop extends AbstractDragAndDrop {
     @Override
     protected void setListeners(AuthoringController authoringController) {
         this.setOnDragDropped({});
-        this.setOnDragOver({});
-        this.setOnMouseClicked({});
+//        this.setOnDragOver({});
+//        this.setOnMouseClicked({});
     }
 
 
