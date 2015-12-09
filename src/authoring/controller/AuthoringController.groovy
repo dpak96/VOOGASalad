@@ -3,6 +3,7 @@ package authoring.controller
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI
+import authoring.ui.draganddrop.HighlightedArticle
 import javafx.scene.control.Button
 import model.article.Article;
 import model.controller.ModelController;
@@ -13,9 +14,9 @@ import java.lang.reflect.Constructor
 public class AuthoringController {
 	private EditorManager myEditor;
 	private AuthoringUI myUI;
-	private boolean highlighted = false;
+	private boolean myHighlighted = false;
 	private Article myCurrentArticle;
-	private Button myCurrentButton;
+	private HighlightedArticle myCurrentButton;
 	private ModelController myModelController;
 	private Map<String, Object> myControllerMaps;
 	private PresetArticleFactory myPresetArticleFactory;
@@ -29,8 +30,9 @@ public class AuthoringController {
 	}
 
 	public void initalizeControllers(){
-		register();
-
+		if(myControllerMaps == null){
+			register();
+		}
 	}
 
 
@@ -131,8 +133,6 @@ public class AuthoringController {
 	public List<Article> getArticles(){
 		return myModelController.getArticles()
 	}
-    
-
 
 
 	public getCurrentArticle() {
@@ -144,24 +144,23 @@ public class AuthoringController {
 	}
 
 	public getCurrentButton() {
-		return currentButton;
+		return myCurrentButton;
 	}
 
-	public void setCurrentButton(Button b) {
-		currentButton = b;
+	public void setCurrentButton(b) {
+		myCurrentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {
-		this.highlighted = highlighted;
+		this.myHighlighted = highlighted;
 	}
 
 	public boolean getHighlighted(){
-		return highlighted;
+		return myHighlighted;
 	}
 
 	public void flush() {
-		setHighlighted(false);
-		setCurrentButton(null);
+		callEvent("KeyPressController", "deleteButton");
 		setCurrentArticle(null);
 		
 	}
