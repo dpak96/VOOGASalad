@@ -62,7 +62,7 @@ class InfiniteController {
     }
 
     public genRandom(){
-        myModelController.makeGen(randomGenMap);
+        myModelController.setRandomGenerator(randomGenMap);
         println("hi");
         randomGenMap = new HashMap<>();
     }

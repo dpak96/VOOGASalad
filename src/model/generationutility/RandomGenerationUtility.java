@@ -7,7 +7,7 @@ import model.article.Article;
 public class RandomGenerationUtility extends ConcreteGenerationUtility{
 
 	
-	private final double unitCheck = 0.05;
+	private final double unitCheck = 25;
 
 	private Map<Article, Double> myGenerationProbabilities;
 
