@@ -198,7 +198,7 @@ public class ModelController implements IModelController {
 		myModel.notifyObservers();
 	}
 	
-	public void loadFromFile(Model toLoad) {
+	public void updateModelWithNewModel(Model toLoad) {
 		
 		myModel.destroyModel();
 		myModel.initialize();
@@ -213,6 +213,7 @@ public class ModelController implements IModelController {
 				((ExecutableLevelChanges) e).initialize(myLevelManager);
 			}
 		}
+		myModel.setActiveEvents(toLoad.getActiveEvents());
 		myModel.setCharacter(toLoad.getCharacter());
 		myModel.setBackgroundImage(toLoad.getBackgroundImage());
 		toLoad.destroyModel();
@@ -232,7 +233,7 @@ public class ModelController implements IModelController {
 
 	public void load(Window wind) {
 		try {
-			loadFromFile(myXMLUtility.loadModel(wind));
+			updateModelWithNewModel(myXMLUtility.loadModel(wind));
 		} catch (NullPointerException e) {
 			// User canceled from a load
 		}
@@ -240,7 +241,7 @@ public class ModelController implements IModelController {
 
 	public void load(File file) {
 		try {
-			loadFromFile(myXMLUtility.load(file));
+			updateModelWithNewModel(myXMLUtility.load(file));
 		} catch (NullPointerException e) {
 			// User canceled from a load
 		}
