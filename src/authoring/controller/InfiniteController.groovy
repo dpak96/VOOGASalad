@@ -40,7 +40,7 @@ class InfiniteController {
 			}
 		}
         currentArticle = null;
-        println("yi");
+        //println("yi");
     }
 
     public getRandomMap(){
@@ -71,7 +71,6 @@ class InfiniteController {
 
     public genRandom(){
         myModelController.makeGen(randomGenMap);
-        println("hi");
         randomGenMap = new HashMap<>();
     }
 

@@ -45,5 +45,52 @@ class FlappyPreset extends Preset {
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "W", listEvent);
+
+
+		//MOVE RIGHT
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myXVelocity", (double) 0.5);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
+
+
+
+
+
+
+		//VIEWPOINT
+
+		//ViewPoint move from left
+
+		Article myViewpoint = myModelController.getViewpoint();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", myViewpoint);
+
+		tempMap.put("myDisplacement", (double) 1.0);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myViewpoint", myViewpoint);
+
+		tempMap.put("myFraction",(double) 0.4);
+
+		Condition con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
+		listCondition.add(con);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventKevin", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
+
+
+
+
 	}
 }

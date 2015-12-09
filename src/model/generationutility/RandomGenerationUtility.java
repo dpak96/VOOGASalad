@@ -10,7 +10,9 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	private final double unitCheck = 0.05;
 
 	private Map<Article, Double> myGenerationProbabilities;
-
+	
+	
+	//Set up the random generation utility
 	public RandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint) {
 		super(allArticles, viewpoint);
 		myGenerationProbabilities = probabilities;
@@ -21,14 +23,17 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 			myGenerationProbabilities.put(a, adjustedProb);
 		}
 	}
-
+	
+	//Switches between vertical and horizontal generation
 	public void typeUpdate() {
 		if (myXChange != 0)
 			xGenerate(myXChange);
 		if (myYChange != 0)
 			yGenerate(myYChange);
 	}
-
+	
+	
+	//Generates horizontally 
 	private void xGenerate(double myXChange) {
 		for (double i = 0; i < Math.abs(myXChange); i += unitCheck) {
 			for (double j = 0; j < myViewpoint.getHeight(); j += unitCheck) {
