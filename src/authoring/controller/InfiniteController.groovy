@@ -12,9 +12,9 @@ class InfiniteController {
     private List<List<Article>> constantGen;
     private List<Article> tempList;
 
-    public InfiniteController(AuthoringController ac, ModelController mc){
+    public InfiniteController(AuthoringController ac){
         myAuthoringController = ac;
-        myModelController = mc;
+        //myModelController = mc;
         randomGenMap = new HashMap<>();
         constantGen = new ArrayList<>();
         tempList = new ArrayList<>();
