@@ -32,7 +32,6 @@ public class UIBasics {
     myModelController = modelController;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
-//    chara = new ImageView();
   }
 
   private void load(String identifier) {

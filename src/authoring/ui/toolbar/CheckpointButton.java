@@ -1,6 +1,7 @@
 package authoring.ui.toolbar;
 
 import authoring.controller.AuthoringController;
+import authoring.ui.smalloverlay.OverlayController;
 import javafx.scene.control.Button;
 
 
@@ -16,8 +17,12 @@ public class CheckpointButton extends ToolbarButton {
 
   @Override
   public void placeYourObject() {
-    // TODO Auto-generated method stub
 
+      ButtonOverlay bo = new PortalOverlay(myController);
+      OverlayController oc = (OverlayController) this.getParent().getParent();
+      oc.addOverlay(bo.init());
+      bo.init2();
+      
   }
 
 }

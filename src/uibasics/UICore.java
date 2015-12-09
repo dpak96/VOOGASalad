@@ -2,7 +2,6 @@ package uibasics;
 
 import action.controller.ActionController;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.GraphicHandler;
@@ -17,7 +16,6 @@ public class UICore {
 	private UIStackPane uiStackPane;
 	private MenuController menuController;
 	private Scene myScene;
-	private String myRelease = "";
 
 	public UICore(GraphicHandler graphicHandler, ActionController actionController, ModelController modelController) {
 		menuController = new MenuController(graphicHandler, modelController);
@@ -34,7 +32,6 @@ public class UICore {
 	public void borderInit(VoogaProperties props) {
 		myRoot.setCenter((Pane) uiStackPane);
 		myRoot.setTop(menuController.getMenu());
-		System.out.println(myRoot.getChildren().get(0).getClass());
 		myRoot.setPrefWidth(props.getSceneWidth());
 		myRoot.setPrefHeight(props.getSceneHeight());
 
@@ -66,15 +63,12 @@ public class UICore {
 	}
 
 	private void pauseInit(ActionController actionController) {
+		uiStackPane.setActionController(actionController);
 		menuController.getMenu().getPlayer().setOnAction(e -> actionController.resume());
 		menuController.getMenu().getPauser().setOnAction(e -> actionController.change_rate(0));
 		menuController.getMenu().getStepper().setOnAction(e -> actionController.stepper());
 	}
 	
-	
-	private void setReleased(String val){
-		myRelease = val;
-	}
 
 	/*
 	 * HELPFUL CODE FOR FUTURE DIALOGS (EXIT, STOP, etc.) private void
