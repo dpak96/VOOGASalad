@@ -48,7 +48,7 @@ public class PresetArticleFactory {
 		Map<String, Object> poopMap = new HashMap<String, Object>();
 		poopMap.put("myActor", article);
 		poopMap.put("myDisplacement", (double) 10);
-		Executable moveEx = authoringController.makeExecutable("ExecutableMoveHorizontal", poopMap);
+		Executable moveEx = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(moveEx);

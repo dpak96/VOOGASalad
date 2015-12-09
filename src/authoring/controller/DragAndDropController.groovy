@@ -12,9 +12,6 @@ import javafx.scene.input.TransferMode
 import javafx.scene.layout.Pane
 import model.article.Article
 
-/**
- * Created by Rob on 12/6/15.
- */
 class DragAndDropController {
 
     private double borderwidth = 4;
