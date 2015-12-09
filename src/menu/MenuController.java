@@ -6,6 +6,7 @@ import level.manager.XMLOrderer;
 import main.GraphicHandler;
 import model.Model;
 import model.controller.ModelController;
+import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIStackPane;
 
@@ -148,7 +149,9 @@ public class MenuController {
 					e.printStackTrace();
 				}
             }
+        	ResourceManager.getResourceManager().refreshImages();
         }
+        
         
 //        try {
 ////        	dir.mkdir();
