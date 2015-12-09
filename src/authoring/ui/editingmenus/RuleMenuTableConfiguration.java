@@ -94,7 +94,6 @@ public class RuleMenuTableConfiguration {
      //   condNameCol.setMinWidth(100);
         condNameCol.setCellValueFactory(
                                         new PropertyValueFactory<Condition, String>("myName"));
-
         conditionTable.getColumns().add(condNameCol);
 
         TableColumn eventNameCol = new TableColumn("Event Name");
@@ -108,6 +107,10 @@ public class RuleMenuTableConfiguration {
         execNameCol.setCellValueFactory(
                                         new PropertyValueFactory<Executable, String>("myName"));
         executableTable.getColumns().add(execNameCol);
+        
+        conditionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        conditionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
 }

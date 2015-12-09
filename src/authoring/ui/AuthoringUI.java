@@ -37,7 +37,7 @@ public class AuthoringUI {
     test = new OverlayController();
     tester = new OverlayController();
     toolbar = myToolbarContainer.initializeToolbar();
-    toolbar.setMaxWidth(100);
+    toolbar.setPrefWidth(250);
     toolbar.getStyleClass().add("Thinger");
     test.getChildren().add(toolbar);
     VoogaProperties props = new VoogaProperties();
@@ -56,8 +56,8 @@ public class AuthoringUI {
     tester.setPrefSize(vp.getSceneWidth(),vp.getSceneHeight());
     dragAndDrop.setPrefSize(vp.getSceneWidth(),vp.getSceneHeight());
     test.setLayoutY(0);
-    test.setLayoutX(vp.getSceneWidth()-(toolbar.getBoundsInParent().getWidth()*5));
-    test.setMaxWidth((toolbar.getBoundsInParent().getWidth()*4));
+    test.setLayoutX(vp.getSceneWidth()-(toolbar.getBoundsInParent().getWidth()*9));
+    test.setMaxWidth((toolbar.getBoundsInParent().getWidth()*8));
   }
 
 
