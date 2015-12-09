@@ -30,6 +30,9 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	public void update() {
 		myXChange = myViewpoint.getX() - myPrevX;
 		myYChange = myViewpoint.getY() - myPrevY;
+//		System.out.println(myXChange);
+//		System.out.println(myYChange);
+//		System.out.println("I want to murder everyone");
 		typeUpdate();	
 		deleteOutOfFrame();
 		myPrevX = myViewpoint.getX();

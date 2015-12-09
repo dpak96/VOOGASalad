@@ -74,6 +74,7 @@ public class CollisionTypeEditor {
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);
 		int typeTwoIndex = collisionTypeName.indexOf(nameTwo);
+		System.out.println("matrixIndex " + matrixIndex + "typeOneIndex " + typeOneIndex + "typeTwoIndex " + typeTwoIndex);
 		return collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex);		
 	}
 	

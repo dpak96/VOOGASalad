@@ -70,7 +70,8 @@ class InfiniteController {
     }
 
     public genRandom(){
-        myModelController.makeGen(randomGenMap);
+        myModelController.setRandomGenerator(randomGenMap);
+		println("It's hitting the infinite controller");
         randomGenMap = new HashMap<>();
     }
 
