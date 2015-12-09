@@ -1,6 +1,7 @@
 package game.player;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -18,5 +19,5 @@ public abstract class HUDModule extends VBox {
 	
 	public abstract void init(double offset) throws IOException, ParserConfigurationException, SAXException;
 	
-	public abstract void update(Article character, ActionController ac);
+	public abstract void update(List<Article> arg, Article character, ActionController ac);
 }

@@ -20,6 +20,7 @@ public class GamePlayerOverlay extends Pane {
 	private HealthModule myHealthModule;
 	private ScoreModule myScoreModule;
 	private HighScoresModule myHighScores;
+	private MapOverviewModule myMapModule;
 	private ArrayList<HUDModule> myModules = new ArrayList<HUDModule>();
 	private VoogaProperties props = new VoogaProperties();
 	private Double OFFSET = props.getSceneWidth()/6.0;
@@ -33,7 +34,8 @@ public class GamePlayerOverlay extends Pane {
 		myModules.add(myHealthModule);
 		myLivesModule = new LivesModule();
 		myModules.add(myLivesModule);
-		//myHighScores = new HighScoresModule(name);
+		myMapModule = new MapOverviewModule();
+		myModules.add(myMapModule);
 		init();
 		this.getChildren().add(container);
 		
@@ -56,7 +58,7 @@ public class GamePlayerOverlay extends Pane {
 	public void update(List<Article> arg, Article character, ActionController ac) {
 		try {
 			for(HUDModule j:myModules){
-				j.update(character, ac);
+				j.update(arg, character, ac);
 			}
 		} catch (NullPointerException e) {
 		}
@@ -64,7 +66,7 @@ public class GamePlayerOverlay extends Pane {
 	
 	public void setName(String name) throws IOException, ParserConfigurationException, SAXException{
 		try{
-		container.getChildren().remove(3);
+		container.getChildren().remove(4);
 		}catch(Exception e){
 		}
 		myHighScores = new HighScoresModule(name);
