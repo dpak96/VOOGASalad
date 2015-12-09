@@ -40,7 +40,6 @@ public class ConditionComparisonTwoArticles extends Condition{
 		Article b = new Article("b", 0, 1, false);
 		
 		ConditionComparison c = new ConditionComparison("abc", a, "Y", b, "Y", "LessThan");
-		System.out.println(c.isMet());
 	}
 	*/
 

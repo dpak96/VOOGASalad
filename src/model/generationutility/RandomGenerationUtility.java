@@ -44,7 +44,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 						else
 							copy.setX(myViewpoint.getX() + i);
 						myArticles.add(copy);
-					//	System.out.println("articleX" + copy.getX() + "Y" + copy.getY());
 					}
 				}
 			}
@@ -79,8 +78,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		while(true){
 			r.update();
 			v.setX(v.getX()+0.5);
-			System.out.println("viewX" + v.getX());
-			System.out.println(all.size());
 		}
 	}
 	

@@ -11,8 +11,6 @@ public class RuleButton extends ToolbarButton {
     }
     @Override
     public void placeYourObject () {
-        if(super.myController==null)
-            System.out.println("null");
         RuleMenu ruleDialog=new RuleMenu("Rule Menu",super.myController);
     }
 
