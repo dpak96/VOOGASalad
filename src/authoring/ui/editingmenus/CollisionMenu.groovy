@@ -23,7 +23,7 @@ public class CollisionMenu extends AuthoringMenu {
 	@Override
 	public void executeYourMenuFunction() {
 	    try{
-	    super.myController.callEvent("OtherController","getCollisionTypes").add(myCollisionName.getText());
+	    super.myController.callEvent("OtherController","addCollisionType",myCollisionName.getText())
 	}
 	    catch(IllegalArgumentException e){
 	        super.displayErrorMessage();
