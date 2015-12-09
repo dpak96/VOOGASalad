@@ -1,5 +1,7 @@
 package authoring.controller
 
+import javafx.scene.control.Button
+import javafx.scene.layout.Pane
 import model.Event
 import model.article.Article
 import model.controller.ModelController
@@ -9,8 +11,11 @@ import model.processes.Executable
 class OtherController {
 
     private ModelController modelController;
-    public OtherController(ModelController mc){
+    private AuthoringController authoringController;
+    public OtherController(AuthoringController ac,ModelController mc){
         modelController = mc;
+        authoringController = ac;
+
     }
 
     public Map<String, Class<?>> getFactoryParameters(String s) {
@@ -72,5 +77,17 @@ class OtherController {
 
     }
 
+    public deleteArticle(Article n){
+        modelController.removeArticle(n);
+        Button b = authoringController.getCurrentButton();
+        Pane p = (Pane) b.getParent();
+        p.getChildren().remove(b);
+        authoringController.setHighlighted(false);
+        authoringController.setCurrentButton(null);
+    }
+
+    public getViewPoint(){
+        modelController.getViewpoint();
+    }
 
 }

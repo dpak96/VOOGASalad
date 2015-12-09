@@ -2,7 +2,8 @@ package authoring.controller
 
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
-import authoring.ui.AuthoringUI;
+import authoring.ui.AuthoringUI
+import javafx.scene.control.Button;
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
@@ -15,6 +16,7 @@ public class AuthoringController {
 	private AuthoringUI ui;
 	private boolean highlighted = false;
 	private Article currentArticle;
+	private Button currentButton;
 	private ModelController modelController;
 
 	private Map<String, Object> controllerMap;
@@ -30,7 +32,9 @@ public class AuthoringController {
 
 	public void initalizeControllers(){
 		register();
+
 	}
+
 
 
 	public void register(){
@@ -46,10 +50,14 @@ public class AuthoringController {
 		Object object;
 		Constructor<?> ctor = null;
 		if(cName.equals("authoring.controller.OtherController")){
-			Object[] o = new Object[1];
-			ctor = cl.getConstructor(ModelController.class);
-			Object thing1 = modelController;
-			object = ctor.newInstance(thing1);
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = ModelController.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = modelController;
+			object = ctor.newInstance(o);
 		}
 		else if(cName.equals("authoring.controller.ArticleCAndGController")){
 			Class[] hi = new Class[2];
@@ -71,6 +79,10 @@ public class AuthoringController {
 		}
 
 		return object;
+	}
+
+	private pressDelete(){
+
 	}
 
 	public AuthoringUI getUi() {
@@ -131,6 +143,14 @@ public class AuthoringController {
 
 	public void setCurrentArticle(Article currArticle) {
 		currentArticle = currArticle;
+	}
+
+	public getCurrentButton() {
+		return currentButton;
+	}
+
+	public void setCurrentButton(Button b) {
+		currentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {
