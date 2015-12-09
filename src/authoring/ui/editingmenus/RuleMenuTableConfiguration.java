@@ -17,80 +17,90 @@ import resourcemanager.ResourceManager;
 
 public class RuleMenuTableConfiguration {
 
-	private TableView eventTable = new TableView();
-	private TableView conditionTable = new TableView();
-	private TableView executableTable = new TableView();
-	private AuthoringController myController;
+    private TableView eventTable = new TableView();
+    private TableView conditionTable = new TableView();
+    private TableView executableTable = new TableView();
+    private AuthoringController myController;
 
-	public RuleMenuTableConfiguration(AuthoringController controller) {
-		myController = controller;
-	}
+    public RuleMenuTableConfiguration (AuthoringController controller) {
+        myController = controller;
+    }
 
-	public void configureTables(TableView eventTable, TableView conditionTable, TableView executableTable) {
+    public void configureTables (TableView eventTable,
+                                 TableView conditionTable,
+                                 TableView executableTable) {
 
-		this.addColumns(eventTable, conditionTable, executableTable);
+        this.addColumns(eventTable, conditionTable, executableTable);
 
-	}
+    }
+  
+    
+    public ImageView setImagePlus() {
+        ImageView buttonIcon = new ImageView((Image) ResourceManager.getResourceManager().getResource("ImageManager", "plus"));
+        buttonIcon.setFitWidth(20);
+        buttonIcon.setFitHeight(20);
+        return buttonIcon;
+}
+    public ImageView setImageMinus() {
+        ImageView buttonIcon = new ImageView((Image) ResourceManager.getResourceManager().getResource("ImageManager", "minus"));
+        buttonIcon.setFitWidth(20);
+        buttonIcon.setFitHeight(20);
+        return buttonIcon;
+}
 
-	public ImageView setImagePlus() {
-		ImageView buttonIcon = new ImageView(
-				(Image) ResourceManager.getResourceManager().getResource("ImageManager", "plus"));
-		buttonIcon.setFitWidth(20);
-		buttonIcon.setFitHeight(20);
-		return buttonIcon;
-	}
+    public void refreshTable (TableView table, List<?> tableList) {
+        table.setItems(null);
+        table.layout();
+        table.setItems(FXCollections.observableArrayList(tableList));
+    }
 
-	public ImageView setImageMinus() {
-		ImageView buttonIcon = new ImageView(
-				(Image) ResourceManager.getResourceManager().getResource("ImageManager", "minus"));
-		buttonIcon.setFitWidth(20);
-		buttonIcon.setFitHeight(20);
-		return buttonIcon;
-	}
+    public void deleteEvent (TableView table, Event selectedEvent) {
+        table.getItems().remove(selectedEvent);
+        List<Event> lister = (List<Event>)this.myController.callEvent("OtherController","getEventList");
+        lister.remove(selectedEvent);
+        this.refreshTable(table, table.getItems());
 
-	public void refreshTable(TableView table, List<?> tableList) {
-		table.setItems(null);
-		table.layout();
-		table.setItems(FXCollections.observableArrayList(tableList));
-	}
+    }
 
-	public void deleteEvent(TableView table, Event selectedEvent) {
-		table.getItems().remove(selectedEvent);
-		.callEvent("OtherController", "getEventList").remove(selectedEvent);
-		this.refreshTable(table, table.getItems());
+    public void deleteCondition (TableView table,
+                                 Event selectedEvent,
+                                 Condition selectedCondition) {
+        table.getItems().remove(selectedCondition);
+        selectedEvent.getConditions().remove(selectedCondition);
+        this.refreshTable(table, table.getItems());
 
-	}
+    }
 
-	public void deleteCondition(TableView table, Event selectedEvent, Condition selectedCondition) {
-		table.getItems().remove(selectedCondition);
-		selectedEvent.getConditions().remove(selectedCondition);
-		this.refreshTable(table, table.getItems());
+    public void deleteExecutable (TableView table,
+                                  Event selectedEvent,
+                                  Executable selectedExecutable) {
+        table.getItems().remove(selectedExecutable);
+        selectedEvent.getExecutables().remove(selectedExecutable);
+        this.refreshTable(table, table.getItems());
+    }
 
-	}
+    private void addColumns (TableView eventTable,
+                             TableView conditionTable,
+                             TableView executableTable) {
 
-	public void deleteExecutable(TableView table, Event selectedEvent, Executable selectedExecutable) {
-		table.getItems().remove(selectedExecutable);
-		selectedEvent.getExecutables().remove(selectedExecutable);
-		this.refreshTable(table, table.getItems());
-	}
+        TableColumn condNameCol = new TableColumn("Condition Name");
+     //   condNameCol.setMinWidth(100);
+        condNameCol.setCellValueFactory(
+                                        new PropertyValueFactory<Condition, String>("myName"));
 
-	private void addColumns(TableView eventTable, TableView conditionTable, TableView executableTable) {
+        conditionTable.getColumns().add(condNameCol);
 
-		TableColumn condNameCol = new TableColumn("Condition Name");
-		// condNameCol.setMinWidth(100);
-		condNameCol.setCellValueFactory(new PropertyValueFactory<Condition, String>("myName"));
+        TableColumn eventNameCol = new TableColumn("Event Name");
+      //  eventNameCol.setMinWidth(100);
+        eventNameCol.setCellValueFactory(
+                                         new PropertyValueFactory<Event, String>("myName"));
+        eventTable.getColumns().add(eventNameCol);
 
-		conditionTable.getColumns().add(condNameCol);
-
-		TableColumn eventNameCol = new TableColumn("Event Name");
-		// eventNameCol.setMinWidth(100);
-		eventNameCol.setCellValueFactory(new PropertyValueFactory<Event, String>("myName"));
-		eventTable.getColumns().add(eventNameCol);
-
-		TableColumn execNameCol = new TableColumn("Executable Name");
-		// execNameCol.setMinWidth(100);
-		execNameCol.setCellValueFactory(new PropertyValueFactory<Executable, String>("myName"));
-		executableTable.getColumns().add(execNameCol);
-	}
+        TableColumn execNameCol = new TableColumn("Executable Name");
+       // execNameCol.setMinWidth(100);
+        execNameCol.setCellValueFactory(
+                                        new PropertyValueFactory<Executable, String>("myName"));
+        executableTable.getColumns().add(execNameCol);
+    }
 
 }

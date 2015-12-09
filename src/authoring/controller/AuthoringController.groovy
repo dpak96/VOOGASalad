@@ -3,21 +3,16 @@ package authoring.controller
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
-import authoring.ui.draganddrop.DraggableElement
-import authoring.ui.draganddrop.HighlightedArticle
-import javafx.scene.layout.Pane
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
-import resourcemanager.ResourceManager
-
+import resourcemanager.ResourceManager;
 import java.lang.reflect.Constructor
 
 
 public class AuthoringController {
 	private EditorManager editor;
 	private AuthoringUI ui;
-
 	private boolean highlighted = false;
 	private Article currentArticle;
 	private ModelController modelController;
@@ -30,11 +25,12 @@ public class AuthoringController {
 		modelController = mc;
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
+		register();
 	}
 
 
-	public void register(ModelController mc){
-		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
+	public void register(){
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
 		controllerMap = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
 			controllerMap.put(x, getNewInstance(rb.getString(x)));
@@ -43,12 +39,14 @@ public class AuthoringController {
 
 	private getNewInstance(String cName){
 		Class<?> cl = Class.forName(cName);
-		Constructor<?> ctor = cl.getConstructor(AuthoringController.class);
 		Object[] o = new Object[1];
-		if(cName != "OtherController"){
+		Constructor<?> ctor = null;
+		if(!cName.equals("authoring.controller.OtherController")){
+			ctor = cl.getConstructor(AuthoringController.class);
 			o[0] = this;
 		}
 		else{
+			ctor = cl.getConstructor(ModelController.class);
 			o[0] = modelController;
 		}
 		Object object = ctor.newInstance(o);
@@ -68,18 +66,27 @@ public class AuthoringController {
 		return editor;
 	}
 
-
-
 	public ModelController getModelController(){
 		return modelController;
 	}
-	
-	public void callEvent(String controller,String method){
-		controllers.get(controller)."$method"(this);
+
+	public callEvent(String controller,String method){
+		return controllerMap.get(controller)."$method"();
 	}
-	
-	public void callEvent(String controller,String method,e){
-		controllers.get(controller)."$method"(e, this);
+
+	public callEvent(String controller,String method,e){
+		return controllerMap.get(controller)."$method"(e);
+	}
+
+	public callEvent(String controller,String method, e1, e2){
+		return controllerMap.get(controller)."$method"(e1, e2);
+	}
+
+	public callEvent(String controller,String method, e1, e2,e3){
+		return controllerMap.get(controller)."$method"(e1,e2,e3);
+	}
+	public getController(String controller){
+		return controllerMap.get(controller);
 	}
 
 	public getTester(){
@@ -108,10 +115,7 @@ public class AuthoringController {
                             
          
         }
-        public List<String> getCollisionTypes(){
-            
-            return modelController.getAllCollisionTypes();
-        }
+
 
 	public getCurrentArticle() {
 		return currentArticle;

@@ -6,9 +6,6 @@ import model.controller.ModelController
 import model.processes.Condition
 import model.processes.Executable
 
-/**
- * Created by Rob on 12/8/15.
- */
 class OtherController {
 
     private ModelController modelController;
@@ -47,6 +44,19 @@ class OtherController {
 
     public Executable createExecutable(String execName,Map<String,Object> params){
         this.modelController.createExecutable(execName,params);
+    }
+
+    public Article getArticleFromCoordinates(double x, double y) {
+        try {
+            return modelController.getArticleFromCoordinates(x, y);
+        } catch (Exception e) {
+            System.out.println("oops");
+            return null;
+        }
+    }
+
+    public List<String> getCollisionTypes(){
+        return modelController.getAllCollisionTypes();
     }
 
 

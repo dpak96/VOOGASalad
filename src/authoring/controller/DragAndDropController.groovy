@@ -13,11 +13,11 @@ import javafx.scene.layout.Pane
 import model.article.Article
 
 class DragAndDropController {
-
+    private authoringController;
     private double borderwidth = 4;
 
-    public DragAndDropController(){
-
+    public DragAndDropController(AuthoringController authoring){
+        authoringController = authoring;
     }
 
     public void tempButtonClick(MouseEvent e, AuthoringController authoringController) {
@@ -60,7 +60,6 @@ class DragAndDropController {
             double tempX = highlightedArticle.getLayoutX()+borderwidth +0.1;
             double tempY = highlightedArticle.getLayoutY()+borderwidth +0.1;
             Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
-            //System.out.println(n == null);
             n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
             n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
             n.setActive();
@@ -69,7 +68,7 @@ class DragAndDropController {
             authoringController.setHighlighted(false);
         }
         else {
-            authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+            authoringController.createAndPlaceArticle();
         }
         Dragboard db = event.getDragboard();
         boolean success = false;

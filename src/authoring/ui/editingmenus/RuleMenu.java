@@ -56,7 +56,7 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(paramGrid, 1, 4, 3, 1);
 
         ObservableList<Event> eventData =
-                FXCollections.observableArrayList(super.myController.getEventList());
+                FXCollections.observableArrayList((List<Event>)this.myController.callEvent("OtherController","getEventList"));
 
         eventTable.setItems(eventData);
 
@@ -144,7 +144,7 @@ public class RuleMenu extends AuthoringMenu {
 
         Button addEvent = new Button();
         addEvent.setOnAction(e -> new AddEventMenu("Add Event", myController, eventTable,
-                                                   myController.getEventList()));
+                (List<Event>)this.myController.callEvent("OtherController","getEventList")));
         addEvent.setGraphic(tableConfig.setImagePlus());
         menuPane.add(addEvent, 1, 3);
 

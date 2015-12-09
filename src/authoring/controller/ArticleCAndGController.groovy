@@ -11,53 +11,27 @@ class ArticleCAndGController {
     public editor;
     public authoring;
 
-    public ArticleCAndGController(edit, au){
-        editor = edit;
+    public ArticleCAndGController(AuthoringController au){
+        //editor = edit;
         authoring = au;
     }
 
-    public void createAndPlaceArticle(double x, double y, DraggableElement event) {
+    public void createAndPlaceArticle(DraggableElement event) {
         Article article = null;
-        if (!highlighted) {
             article =
                     editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
-                            x,
-                            y,
+                            event.getX(),
+                            event.getY(),
                             true);
-        } else {
-            article =
-                    editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
-                            x,
-                            y,
-                            true);
-            if(event instanceof HighlightedArticle) {
-                authoring.setHighlighted(false);
-                Pane p = (Pane) event.getParent();
-                p.getChildren().remove(event);
-            }
-        }
+        setPreset(event,article);
+    }
 
+
+    public setPreset(event, article){
         ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
         if (event.getImageName() in rb.keySet()){
-            String temp = rb.getString(event.getImageName());
-            this.presetArticle(temp, article);
+            String temp = rb.getString((String)event.getImageName());
+            authoring.presetArticle(temp, article);
         }
     }
-
-    public void createAndPlaceArticle(double x, double y, String im, String name) {
-        editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(name, im,
-                x,
-                y,
-                true);
-    }
-
-    public Article getArticleFromCoordinates(double x, double y) {
-        try {
-            return modelController.getArticleFromCoordinates(x, y);
-        } catch (Exception e) {
-            System.out.println("oops");
-            return null;
-        }
-    }
-
 }
