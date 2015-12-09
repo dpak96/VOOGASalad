@@ -154,7 +154,7 @@ public class AuthoringController {
 	}
   
     
-    public Condition createCondition(String condName, Map<String,Object> params) throws IllegalArgumentException{
+    public Condition createCondition(String condName, Map<String,Object> params) {
         this.modelController.createCondition(condName,params);
         
     }
