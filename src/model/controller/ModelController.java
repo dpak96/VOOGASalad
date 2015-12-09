@@ -11,6 +11,7 @@ import model.*;
 import model.XMLutility.xmlUtility;
 import model.article.Article;
 import model.factory.*;
+import model.generationutility.RandomGenerationUtility;
 import model.processes.Condition;
 import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
@@ -312,6 +313,10 @@ public class ModelController implements IModelController {
 	
 	public List<String> getAllCollisionTypes(){
 		return myModel.getAllCollisionTypes();
+	}
+
+	public void makeGen(Map<Article, Double> probabilities){
+		RandomGenerationUtility randomGenerationUtility = new RandomGenerationUtility(probabilities,getArticles(),getViewpoint());
 	}
 
 }
