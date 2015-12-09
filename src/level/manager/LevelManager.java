@@ -27,17 +27,12 @@ public class LevelManager {
 		xmlUtil = mc.getXMLUtility();
 		try {
 			myLevelMap = game.getLevelMap();
-			System.out.println("Folder path: " + game.getFolderPath());
-			System.out.println("Game name: " + game.getGameName());
-			System.out.println("Name: " + game.getName());
-			System.out.println("Current level " + game.getLevel());
 			myCurrentLevelName = game.getLevel();
 			myLevels = new ArrayList<String>();
 			for (Map.Entry<Integer, String> entry : myLevelMap.entrySet()) {
 				myLevels.add(entry.getValue());
 				if (entry.getValue().equals(myCurrentLevelName))
 					myCurrentLevel = entry.getKey();
-				System.out.println("Key: " + entry.getKey() + " / Value: " + entry.getValue());
 			}
 		} catch (NullPointerException e) {
 			myLevelMap = new HashMap<Integer, String>();
@@ -72,18 +67,11 @@ public class LevelManager {
 			myCurrentLevelName = myLevels.get(1);
 
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
-			System.out.println(model);
-			System.out.println("test");
-			System.out.println(myFolderPath);
-			System.out.println(myCurrentLevelName);
-			System.out.println(myCurrentLevel);
 			// model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
 			// model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
-			System.out.println(model.getArticles());
 
 			myModelCtr.updateModelWithNewModel(model);
 		} else {
-			System.out.println("else hit");
 		}
 	}
 
@@ -125,15 +113,10 @@ public class LevelManager {
 	//// if (game.getLevel().equals("Add New Level")) {
 	////// setLevel(levels.size());
 	////// addLevel("Level " + myCurrentLevel);
-	//// System.out.println("Level " + myCurrentLevel);
 	//// } else {
-	//// System.out.println("Ass boners " + game.getLevel());
 	////// setLevel(Integer.valueOf(game.getLevel()));
 	//// Model model = xmlUtil.load(new
 	// File(myGame+levels.get(myCurrentLevel)+".xml"));
-	//// System.out.println("reading model");
-	//// System.out.println("floopymcfloopyasspeniswanker");
-	//// System.out.println(model == null);
 	//// myModelCtr.setModel(model);
 	//// }
 	// File[] files = new File(myGame).listFiles();

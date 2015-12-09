@@ -11,9 +11,7 @@ public class ExecutableBounceHorizontal extends Executable{
 
 	@Override
 	public void execute() {
-		myActor.setXVelocity(myActor.getXVelocity() * -1);
-		System.out.println(myActor.getImageFile() + "a");
-		
+		myActor.setXVelocity(myActor.getXVelocity() * -1);		
 	}
 
 }

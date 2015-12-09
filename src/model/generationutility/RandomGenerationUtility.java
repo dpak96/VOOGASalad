@@ -19,7 +19,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);
 			double adjustedProb = 1 - Math.pow(1 - prob, unitCheck);
-			System.out.println(adjustedProb);
 			myGenerationProbabilities.put(a, adjustedProb);
 		}
 	}
@@ -35,8 +34,8 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	
 	//Generates horizontally 
 	private void xGenerate(double myXChange) {
-		for (double i = 0; i < Math.abs(myXChange); i += unitCheck) {
-			for (double j = 0; j < myViewpoint.getHeight(); j += unitCheck) {
+		for (double i = 0.0; i < Math.abs(myXChange); i += unitCheck) {
+			for (double j = 0.0; j < myViewpoint.getHeight(); j += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
 						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j, true);
@@ -45,7 +44,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 						else
 							copy.setX(myViewpoint.getX() + i);
 						myArticles.add(copy);
-					//	System.out.println("articleX" + copy.getX() + "Y" + copy.getY());
 					}
 				}
 			}
@@ -80,8 +78,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		while(true){
 			r.update();
 			v.setX(v.getX()+0.5);
-			System.out.println("viewX" + v.getX());
-			System.out.println(all.size());
 		}
 	}
 	
