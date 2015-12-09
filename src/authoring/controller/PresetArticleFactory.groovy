@@ -84,7 +84,7 @@ public class PresetArticleFactory {
 		listEvent.add(ev);
 		authoringController.mapKey("A", listEvent);
 
-		
+
 		//Key Press move right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -165,9 +165,10 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", 0);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event90", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
+
 		//decel right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -183,7 +184,7 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", -0.1);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event91", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
 		//stop right
@@ -208,7 +209,7 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", 0);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event93", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
 		//decel down
@@ -226,7 +227,7 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", -0.1);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event94", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
 		//stop down
@@ -251,7 +252,7 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", 0);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event96", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
 		//decel up
@@ -269,7 +270,7 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", 0.1);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event69", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
 		
 		//stop up
@@ -294,9 +295,9 @@ public class PresetArticleFactory {
 		tempMap.put("myCompareValue", 0);
 		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = authoringController.makeEvent("event3", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
-		
+
 		//ViewPoint move from left 
 
 		Article myViewpoint = modelController.getViewpoint();
