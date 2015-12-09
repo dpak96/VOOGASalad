@@ -26,59 +26,24 @@ import model.processes.Executable;
 public class PresetArticleFactory {
 	private ModelController myModelController;
 	private AuthoringController myAuthoringController;
+	
+	private PlatformPreset myPlatform;
+	private GoombaPreset myGoomba;
 
 	public PresetArticleFactory(ModelController mc, AuthoringController ac) {
 		myModelController = mc;
 		myAuthoringController = ac;
+		myPlatform = new PlatformPreset(ac, mc);
+		myGoomba = new GoombaPreset(ac, mc);
+		
 	}
 
 	public void platformMovement(Article article) {
-		//modelController.addNewCollisionType("A");
-		//modelController.addNewCollisionType("B");
-
-		article.setCollisionType("Platform");
-
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		tempMap.put("myLevelManager", null);
-		// tempMap.put("myDisplacement", (double) 20);
-		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableNextLevel", tempMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(ex);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = myAuthoringController.callEvent("OtherController", "makeEvent","event", listCondition, listExecutable);
-		myModelController.addCollision("Left", "Platform", "Enemy", ev);
+		myPlatform.platformMovement(article);
 	}
 
 	public void goombaMovement(Article article) {
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		tempMap.put("myActor", article);
-		tempMap.put("myAcceleration", (double) 0);
-		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
-
-		Map<String, Object> poopMap = new HashMap<String, Object>();
-		poopMap.put("myActor", article);
-		poopMap.put("myDisplacement", (double) 10);
-		Executable moveEx = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
-
-		List<Executable> listExecutable = new ArrayList<Executable>();
-		listExecutable.add(moveEx);
-		List<Condition> listCondition = new ArrayList<Condition>();
-		// Event ev = authoringController.callEvent("OtherController","makeEvent","event", listCondition,
-		// listExecutable);
-
-		Event moveTest = myAuthoringController.callEvent("OtherController","makeEvent","poop", listCondition, listExecutable);
-
-		List<Event> listEvent = new ArrayList<Event>();
-		listEvent.add(moveTest);
-		// modelController.addActiveEvent(ev);
-
-		myAuthoringController.callEvent("OtherController","mapKey","A", listEvent);
-
-		article.setYVelocity(0);
-
-		article.setCollisionType("Enemy");
+		myGoomba.goombaMovement(article);
 	}
 
 	public void playerMovement(Article article) {

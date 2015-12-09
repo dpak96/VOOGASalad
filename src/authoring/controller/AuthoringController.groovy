@@ -17,7 +17,7 @@ import java.lang.reflect.Constructor
 public class AuthoringController {
 	private EditorManager myEditor;
 	private AuthoringUI myUI;
-	private boolean highlighted = false;
+	private boolean myHighlighted = false;
 	private Article myCurrentArticle;
 	private Button myCurrentButton;
 	private ModelController myModelController;
@@ -58,7 +58,7 @@ public class AuthoringController {
 			ctor = cl.getConstructor(hi);
 			Object[] o = new Object[2];
 			o[0] = this;
-			o[1] = modelController;
+			o[1] = myModelController;
 			object = ctor.newInstance(o);
 		}
 		else if(cName.equals("authoring.controller.ArticleCAndGController")){
@@ -147,20 +147,20 @@ public class AuthoringController {
 		myCurrentArticle = currArticle;
 	}
 
-	public getCurrentButton() {
-		return currentButton;
+	public myCurrentButton() {
+		return myCurrentButton;
 	}
 
 	public void setCurrentButton(Button b) {
-		currentButton = b;
+		myCurrentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {
-		this.highlighted = highlighted;
+		this.myHighlighted = highlighted;
 	}
 
 	public boolean getHighlighted(){
-		return highlighted;
+		return myHighlighted;
 	}
 
 

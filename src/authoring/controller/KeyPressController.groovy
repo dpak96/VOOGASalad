@@ -46,8 +46,8 @@ class KeyPressController {
     }
 
     private deleteButton(){
-        if(authoringController.getCurrentButton() != null){
-            Button b = authoringController.getCurrentButton();
+        if(authoringController.myCurrentButton() != null){
+            Button b = authoringController.myCurrentButton();
             Pane p = (Pane) b.getParent();
             p.getChildren().remove(b);
             authoringController.setHighlighted(false);
