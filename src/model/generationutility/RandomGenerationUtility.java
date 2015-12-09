@@ -34,7 +34,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 			for (double j = 0; j < myViewpoint.getHeight(); j += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
-						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j);
+						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j, true);
 						if (myXChange > 0)
 							copy.setX(myViewpoint.getX() + myViewpoint.getWidth() - i);
 						else
@@ -52,7 +52,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 			for (int i = 0; j < myViewpoint.getWidth(); i += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
-						Article copy = new Article(a.getImageFile(), myViewpoint.getX() + i, a.getY());
+						Article copy = new Article(a.getImageFile(), myViewpoint.getX() + i, a.getY(), true);
 						if (myYChange > 0)
 							copy.setY(myViewpoint.getY() + myViewpoint.getHeight() - j);
 						else
