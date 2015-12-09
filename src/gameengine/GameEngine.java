@@ -47,7 +47,7 @@ public class GameEngine implements IGameEngine {
 		runActiveEvents();
 		runArticleUpdates();
 		myModelController.update();		
-		
+
 	}
 	
 	private void checkAndAddCollisions(){
@@ -95,7 +95,6 @@ public class GameEngine implements IGameEngine {
 	private void runActiveEvents(){
 		for(Event e : myModelController.getActiveEvents()){
 			e.fire();
-			//System.out.println(e.getMyName());
 		}
 	}
 	

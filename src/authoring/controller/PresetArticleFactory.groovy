@@ -45,10 +45,10 @@ public class PresetArticleFactory {
 		tempMap.put("myAcceleration", (double) 0);
 		Executable ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
 
-		Map<String, Object> poopMap = new HashMap<String, Object>();
-		poopMap.put("myActor", article);
-		poopMap.put("myDisplacement", (double) 10);
-		Executable moveEx = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
+		Map<String, Object> actorMap = new HashMap<String, Object>();
+		actorMap.put("myActor", article);
+		actorMap.put("myDisplacement", (double) 10);
+		Executable moveEx = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", actorMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(moveEx);
