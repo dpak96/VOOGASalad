@@ -18,12 +18,12 @@ class KeyPressController {
 	KeyPressController(AuthoringController authoring, ModelController model){
 		myAuthoringController = authoring;
 		myModelController = model;
-		myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  myAuthoringController.callEvent("ArticleExtenderController","addTile",event)});
-		myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyPressed({ event->  pressButtons(event)});
+		myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  pressButtons(event)});
+		//myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyPressed({ event->  pressButtons(event)});
 	}
 
 	private pressButtons(event){
-
+		myAuthoringController.callEvent("ArticleExtenderController","addTile",event);
 		if(event.getCode() == KeyCode.P){
 			println("hi")
 			myAuthoringController.callEvent("OtherController","deleteArticle",myAuthoringController.getCurrentArticle());
