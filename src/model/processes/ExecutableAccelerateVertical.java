@@ -12,7 +12,6 @@ public class ExecutableAccelerateVertical extends Executable{
 
 	@Override
 	public void execute(){
-		myActor.setYVelocity(myActor.getYVelocity() + myAcceleration);
 	}
 
 }

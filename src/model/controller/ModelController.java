@@ -79,10 +79,8 @@ public class ModelController implements IModelController {
 					"extraparameters");
 		for (String propertyKey : p.keySet()){
 			for (String key : data.keySet()) {
-				System.out.println(key+"poop");
 				if (key.equals(propertyKey)) {
 					try {
-						System.out.println("C");
 						Field f = this.getClass().getDeclaredField(p.getString(key));
 						data.put(key, f.get(this));
 					} catch (Exception e) {
@@ -106,13 +104,11 @@ public class ModelController implements IModelController {
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables) {
 		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
 		addEvent(newEvent);
-		System.out.println("Creating Event named "+ newEvent.getMyName());
 		return newEvent;
 	}
 
 	public void addEvent(Event newEvent) {
 		myModel.addEvent(newEvent);
-		System.out.println("Adding Event named "+ newEvent.getMyName());
 	}
 
 	public void removeEvent(Event event) {

@@ -78,8 +78,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		while(true){
 			r.update();
 			v.setX(v.getX()+0.5);
-			System.out.println("viewX" + v.getX());
-			System.out.println(all.size());
 		}
 	}
 	

@@ -34,7 +34,6 @@ public class XMLOrderer {
 			myOldFile = new File(System.getProperty("user.home") + System.getProperty("file.separator")
 					+ "SquirtleSquadGames" + System.getProperty("file.separator") + previous
 					+ System.getProperty("file.separator") + previous + ".xml");
-			//System.out.println(System.getProperty("user.home") + System.getProperty("file.separator")
 				//	+ "SquirtleSquadGames" + System.getProperty("file.separator") + previous);
 			DocumentBuilderFactory xmlFac = DocumentBuilderFactory.newInstance();
 			DocumentBuilder xmlBuilder = xmlFac.newDocumentBuilder();
