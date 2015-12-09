@@ -3,7 +3,8 @@ package authoring.controller
 
 class InfiniteController {
 
-    public InfiniteController(){
+
+    public InfiniteController(AuthoringController ac){
 
     }
 

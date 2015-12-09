@@ -12,20 +12,17 @@ import javafx.scene.input.TransferMode
 import javafx.scene.layout.Pane
 import model.article.Article
 
-/**
- * Created by Rob on 12/6/15.
- */
 class DragAndDropController {
-
+    private authoringController;
     private double borderwidth = 4;
 
-    public DragAndDropController(){
-
+    public DragAndDropController(AuthoringController authoring){
+        authoringController = authoring;
     }
 
-    public void tempButtonClick(MouseEvent e, AuthoringController authoringController) {
+    public void tempButtonClick(e) {
         HighlightedArticle button = (HighlightedArticle)e.getSource();
-        Article n = authoringController.getArticleFromCoordinates(button.getLayoutX()+borderwidth +0.1, button.getLayoutY()+borderwidth+0.01);
+        Article n = authoringController.callEvent("OtherController","getArticleFromCoordinates",button.getLayoutX()+borderwidth +0.1, button.getLayoutY()+borderwidth+0.01);
         if (controlCheck(e)) {
             if (n != null) {
                 ArticlePropertyEditorMenu popupEditingMenu =
@@ -46,7 +43,7 @@ class DragAndDropController {
         return (e.isPopupTrigger() || e.isControlDown());
     }
 
-    public void dragOn(event,AuthoringController authoringController){
+    public void dragOn(event){
         if (event.getGestureSource() != this &&
                 event.getDragboard().hasImage()) {
             /* allow for moving */
@@ -57,13 +54,12 @@ class DragAndDropController {
     }
 
 
-    public void dropElement(DragEvent event, AuthoringController authoringController){
+    public void dropElement(event){
         if(event.getGestureSource() instanceof HighlightedArticle){
             HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
             double tempX = highlightedArticle.getLayoutX()+borderwidth +0.1;
             double tempY = highlightedArticle.getLayoutY()+borderwidth +0.1;
-            Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
-            //System.out.println(n == null);
+            Article n = authoringController.callEvent("OtherController","getArticleFromCoordinates",tempX,tempY);
             n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
             n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
             n.setActive();
@@ -72,7 +68,7 @@ class DragAndDropController {
             authoringController.setHighlighted(false);
         }
         else {
-            authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+            authoringController.callEvent("ArticleCAndGController","createAndPlaceArticle",event);
         }
         Dragboard db = event.getDragboard();
         boolean success = false;
@@ -83,8 +79,8 @@ class DragAndDropController {
         event.consume();
     }
 
-    public void addTemp(MouseEvent e, AuthoringController authoringController) {
-        Article n = authoringController.getArticleFromCoordinates(e.getX(), e.getY());
+    public void addTemp(e) {
+        Article n = authoringController.callEvent("OtherController","getArticleFromCoordinates",e.getX(), e.getY());
         authoringController.setCurrentArticle(n);
         authoringController.setHighlighted(true);
         ImageExtender dog = new ImageExtender();
