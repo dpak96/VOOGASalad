@@ -11,7 +11,6 @@ public class ExecutableBounceVertical extends Executable{
 
 	@Override
 	public void execute() {
-		System.out.println("bounce" + myActor.getImageFile());
 		myActor.setYVelocity(myActor.getYVelocity() * -1);
 	}
 

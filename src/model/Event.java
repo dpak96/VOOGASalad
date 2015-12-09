@@ -65,7 +65,6 @@ public class Event {
 			Article firstTemp = c.getFirst();
 			Article secondTemp = c.getSecond();
 			c.setArticles(first, second);
-			System.out.println(c.isMet());
 			if(!c.isMet()){
 				c.setArticles(firstTemp, secondTemp);
 				return;
