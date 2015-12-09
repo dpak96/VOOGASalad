@@ -2,8 +2,8 @@ package authoring.controller
 
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
-import authoring.ui.AuthoringUI;
-import model.Event;
+import authoring.ui.AuthoringUI
+import javafx.scene.control.Button
 import model.article.Article;
 import model.controller.ModelController;
 import resourcemanager.ResourceManager;
@@ -11,33 +11,35 @@ import java.lang.reflect.Constructor
 
 
 public class AuthoringController {
-	private EditorManager editor;
-	private AuthoringUI ui;
+	private EditorManager myEditor;
+	private AuthoringUI myUI;
 	private boolean highlighted = false;
-	private Article currentArticle;
-	private ModelController modelController;
-
-	private Map<String, Object> controllerMap;
-	private PresetArticleFactory presetArticleFactory;
+	private Article myCurrentArticle;
+	private Button myCurrentButton;
+	private ModelController myModelController;
+	private Map<String, Object> myControllerMaps;
+	private PresetArticleFactory myPresetArticleFactory;
 
 	public AuthoringController(ModelController mc) {
-		ui = new AuthoringUI(this);
-		modelController = mc;
-		editor = new EditorManager(mc);
-		presetArticleFactory = new PresetArticleFactory(mc, this);
+		myUI = new AuthoringUI(this);
+		myModelController = mc;
+		myEditor = new EditorManager(mc);
+		myPresetArticleFactory = new PresetArticleFactory(mc, this);
 
 	}
 
 	public void initalizeControllers(){
 		register();
+
 	}
+
 
 
 	public void register(){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
-		controllerMap = new HashMap<String, Editor>();
+		myControllerMaps = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
-			controllerMap.put(x, getNewInstance(rb.getString(x)));
+			myControllerMaps.put(x, getNewInstance(rb.getString(x)));
 		}
 	}
 
@@ -46,10 +48,14 @@ public class AuthoringController {
 		Object object;
 		Constructor<?> ctor = null;
 		if(cName.equals("authoring.controller.OtherController")){
-			Object[] o = new Object[1];
-			ctor = cl.getConstructor(ModelController.class);
-			Object thing1 = modelController;
-			object = ctor.newInstance(thing1);
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = ModelController.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = modelController;
+			object = ctor.newInstance(o);
 		}
 		else if(cName.equals("authoring.controller.ArticleCAndGController")){
 			Class[] hi = new Class[2];
@@ -58,7 +64,7 @@ public class AuthoringController {
 			ctor = cl.getConstructor(hi);
 			Object[] o = new Object[2];
 			o[0] = this;
-			o[1] = editor;
+			o[1] = myEditor;
 			object = ctor.newInstance(o);
 		}
 
@@ -73,40 +79,44 @@ public class AuthoringController {
 		return object;
 	}
 
+	private pressDelete(){
+
+	}
+
 	public AuthoringUI getUi() {
-		return ui;
+		return myUI;
 	}
 
 	public void setUi(AuthoringUI ui) {
-		this.ui = ui;
+		this.myUI = ui;
 	}
 
 
 	public EditorManager getEditor() {
-		return editor;
+		return myEditor;
 	}
 
 	public ModelController getModelController(){
-		return modelController;
+		return myModelController;
 	}
 
 	public callEvent(String controller,String method){
-		return controllerMap.get(controller)."$method"();
+		return myControllerMaps.get(controller)."$method"();
 	}
 
 	public callEvent(String controller,String method,e){
-		return controllerMap.get(controller)."$method"(e);
+		return myControllerMaps.get(controller)."$method"(e);
 	}
 
 	public callEvent(String controller,String method, e1, e2){
-		return controllerMap.get(controller)."$method"(e1, e2);
+		return myControllerMaps.get(controller)."$method"(e1, e2);
 	}
 
 	public callEvent(String controller,String method, e1, e2,e3){
-		return controllerMap.get(controller)."$method"(e1,e2,e3);
+		return myControllerMaps.get(controller)."$method"(e1,e2,e3);
 	}
 	public getController(String controller){
-		return controllerMap.get(controller);
+		return myControllerMaps.get(controller);
 	}
 
 	public getTester(){
@@ -115,22 +125,30 @@ public class AuthoringController {
 
 
 	public presetArticle(String function, Article article) {
-		presetArticleFactory."$function"(article);
+		myPresetArticleFactory."$function"(article);
 	}
 
 	public List<Article> getArticles(){
-		return modelController.getArticles()
+		return myModelController.getArticles()
 	}
     
 
 
 
 	public getCurrentArticle() {
-		return currentArticle;
+		return myCurrentArticle;
 	}
 
 	public void setCurrentArticle(Article currArticle) {
-		currentArticle = currArticle;
+		myCurrentArticle = currArticle;
+	}
+
+	public getCurrentButton() {
+		return currentButton;
+	}
+
+	public void setCurrentButton(Button b) {
+		currentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {
