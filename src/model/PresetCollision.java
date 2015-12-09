@@ -41,8 +41,8 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceHorizontal);
 		
 		Event bounceVertical = getBounceVerticalEvent();
-		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceVertical);
-		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(TOP, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(TOP, ENEMY, ENEMY, bounceVertical);
 		
 		Event die = getDieEvent();
 		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
