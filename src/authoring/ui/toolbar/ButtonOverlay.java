@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 public abstract class ButtonOverlay extends DraggableElement {
     private OverlayController myOverlayController;
     private FlowPane myToolBox;
-    private Button back, uploadImage;
+    private Button back;
     protected AuthoringController myAuthoringController;
     public ButtonOverlay(AuthoringController authoringController){
         myToolBox = new FlowPane();
@@ -30,16 +30,15 @@ public abstract class ButtonOverlay extends DraggableElement {
         configureToolBox(myToolBox);
         // toolBox.getChildren().add(new PlatformSelector());
         myToolBox.getChildren().addAll(populateButtonList());
+        myToolBox.setPrefWrapLength(100);
         back = new Button("BACK");
-        uploadImage = new Button("Upload");
-        myToolBox.getChildren().addAll(back, uploadImage);
+        myToolBox.getChildren().add(back);
         //myToolBox.setPrefSize(600,200);
         return myToolBox;
     }
     public void init2(){
         OverlayController oc = (OverlayController) myToolBox.getParent();
         back.setOnAction(e-> oc.removeTop());
-//        uploadImage.setOnAction(e -> );
     }
 
     private void configureToolBox (FlowPane toolBox) {

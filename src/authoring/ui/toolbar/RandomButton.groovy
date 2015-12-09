@@ -3,15 +3,17 @@ package authoring.ui.toolbar;
 import authoring.controller.AuthoringController;
 import javafx.scene.control.Button;
 
-public class RandomButton extends Button {
+public class RandomButton extends ToolbarButton {
 	
 	public RandomButton(AuthoringController controller) {
-		super("Random shit");
-		setOnAction({e -> toggler(controller)});
+		super(controller);
+        this.setGraphic(super.setImage(super.toolbarProperties.getString("random")));
+                    
+        
 	}
 	
 	
-	public void toggler(controller){
+	public void toggler(AuthoringController controller){
 		if(controller.getTester().getChildren().size()>1){
 			controller.getTester().getChildren().remove(controller.getTester().getChildren().size()-1);
 		}
@@ -19,4 +21,10 @@ public class RandomButton extends Button {
 			new RandomUI(controller);
 		}
 	}
+
+
+    @Override
+    public void placeYourObject () {
+            toggler(super.myController);
+    }
 }
