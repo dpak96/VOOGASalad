@@ -17,14 +17,6 @@ public class CollisionManager {
 	public CollisionInformation didCollide(Article articleOne, Article articleTwo) {
 		
 		if (checkSimpleCollision(articleOne, articleTwo)) {
-			//System.out.println(articleOne.getImageFile());
-			//System.out.println("simple collision true");
-			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
-			//System.out.println(temp.isRealCollision());
-			
-			//CollisionInformation temp = checkBitMapCollision(articleOne, articleTwo);
-			//return temp;
-			
 			return new CollisionInformation(getIncidenceDirection(articleOne, articleTwo), true);
 
 		} else {
@@ -116,7 +108,6 @@ public class CollisionManager {
 	}
 
 	private CollisionInformation checkBitMapCollision(Article b, Article a) {
-		//System.out.println(b.getImageFile());
 		CollisionFinder finder = new CollisionFinder(a.getBitMap().getByteArray());
 		while (finder.hasNext()) {
 			Position p = finder.next();
@@ -129,7 +120,6 @@ public class CollisionManager {
 					Position q = secondArticle.next();
 					if (q.isValidPosition()) {
 						if (p.getX() == q.getX() && p.getY() == q.getY()) {
-							System.out.println("FOUND OFUDSALJF;SDKJASDKLF");
 							return new CollisionInformation("Left", true);
 						}
 					}
@@ -172,11 +162,9 @@ public class CollisionManager {
 			for (Position q : p) {
 				if (q.isValidPosition() && a.isValidPosition() && a.getX() != -1 && q.getX() != -1) {
 					//System.out.println("is valid position");
-					System.out.println("Comparing:" + a.getX() + " " + a.getY() + " with " + q.getX() + " " + q.getY());
 					//a.getX() == q.getX() && a.getY() == q.getY()
 				
 					if (a.getX() == q.getX() && a.getY() == q.getY()) {
-						System.out.println("found");
 						return new Position(a.getX(), a.getY());
 					}
 				}
