@@ -9,24 +9,24 @@ import uibasics.KeyPress
  * Created by Rob on 12/6/15.
  */
 class ArticleExtenderController {
-    private double newXRight, newXLeft;
-    private double initWith;
-    private Article current = null;
-    private AuthoringController authoringController;
-    private left,right;
+    private double myNewXRight, myNewYRight;
+    private double myInitWidth;
+    private Article myCurrent = null;
+    private AuthoringController myAuthoringController;
+    private myLeft,myRight;
 
 
     public ArticleExtenderController(AuthoringController authoring){
-        authoringController = authoring;
-        authoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
+        myAuthoringController = authoring;
+        myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
         setKeys();
-        authoringController.setHighlighted(false);
+        myAuthoringController.setHighlighted(false);
         //authoringController.callEvent("DragAndDropController",)
     }
 
     private setKeys(){
-        left = KeyCode.N;
-        right = KeyCode.M;
+        myLeft = KeyCode.N;
+        myRight = KeyCode.M;
     }
 
     public void addTile(KeyEvent event) {
@@ -35,26 +35,26 @@ class ArticleExtenderController {
     }
 
     private updateArticle(event){
-        if(!authoringController.getCurrentArticle().equals(current)){
-            current = authoringController.getCurrentArticle();
-            initWith = current.getWidth();
+        if(!myAuthoringController.getCurrentArticle().equals(myCurrent)){
+            myCurrent = myAuthoringController.getCurrentArticle();
+            myInitWidth = myCurrent.getWidth();
             initRightAndLeft(event);
         }
     }
 
     private initRightAndLeft(event){
-        newXRight = current.getX() + (current.getWidth() / 2)+authoringController.getModelController().getViewpoint().getX();
-        newXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
+        myNewXRight = myCurrent.getX() + (myCurrent.getWidth() / 2)+myAuthoringController.getModelController().getViewpoint().getX();
+        myNewYRight = myCurrent.getX() +myAuthoringController.getModelController().getViewpoint().getX();
     }
 
     private buttonCheckAndExtend(event){
-        if (checkClick(event,right)) {
+        if (checkClick(event,myRight)) {
             extend();
         }
-        if (checkClick(event,left)){
-            newXLeft -= initWith;
+        if (checkClick(event,myLeft)){
+            myNewYRight -= myInitWidth;
             extend();
-            current.setX(newXLeft);
+            myCurrent.setX(myNewYRight);
         }
 
     }
@@ -65,7 +65,7 @@ class ArticleExtenderController {
 
     private extend(){
         try {
-            current.setWidth(current.getWidth()+initWith);
+            myCurrent.setWidth(myCurrent.getWidth()+myInitWidth);
         }
         catch (Exception e){
 

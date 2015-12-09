@@ -6,18 +6,18 @@ import resourcemanager.ResourceManager
 
 
 class ArticleCAndGController {
-    public editor;
-    public authoring;
+    public myEditor;
+    public myAuthoring;
 
     public ArticleCAndGController(AuthoringController au, EditorManager edit){
-        editor = edit;
-        authoring = au;
+        myEditor = edit;
+        myAuthoring = au;
     }
 
     public void createAndPlaceArticle(event) {
         Article article = null;
             article =
-                    editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getGestureSource().getName(),event.getGestureSource().getImageName(), event.getX(), event.getY(), true);
+                    myEditor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getGestureSource().getName(),event.getGestureSource().getImageName(), event.getX(), event.getY(), true);
         setPreset(event,article);
     }
 
@@ -26,7 +26,7 @@ class ArticleCAndGController {
         ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
         if (event.getGestureSource().getImageName() in rb.keySet()){
             String temp = rb.getString((String)event.getImageName());
-            authoring.presetArticle(temp, article);
+            myAuthoring.presetArticle(temp, article);
         }
     }
 }
