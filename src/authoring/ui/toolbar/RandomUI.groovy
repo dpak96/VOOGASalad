@@ -41,7 +41,7 @@ public class RandomUI extends Pane {
 		myConstants = new ArrayList<RepeatingArticle>();
 		myEdit = new Button();
 		mySave = new Button();
-		myDrag = new InfiniteDrop();
+		myDrag = new InfiniteDrop(controller);
 		myName = new TextField();
 		myName.setPromptText("Name of Article List");
 		myProb = new TextField();
@@ -185,8 +185,7 @@ public class RandomUI extends Pane {
 	private void save() {
 		if (myMode.getValue().equals(RANDOM))
 			myController.callEvent("infinite", "addToRandom", article, myProb.getText());
-		else
-//			myController.callEvent("infinite", "addToConstant", article, );
+
 	}
 
 }
