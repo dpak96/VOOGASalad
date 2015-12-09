@@ -227,6 +227,7 @@ public class Model extends Observable{
 	
 	public void setBackgroundImage(String backgroundImage){
 		myBackgroundImage = backgroundImage;
+		notifyObservers();
 	}
 	
 	public String getBackgroundImage(){
