@@ -159,6 +159,11 @@ public class AuthoringController {
 		return highlighted;
 	}
 
+	public void flush() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 
