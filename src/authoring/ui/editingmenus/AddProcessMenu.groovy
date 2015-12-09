@@ -1,4 +1,7 @@
-package authoring.ui.editingmenus;
+package authoring.ui.editingmenus
+
+import model.processes.Condition
+import model.processes.Executable;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -41,12 +44,12 @@ public class AddProcessMenu extends AuthoringMenu {
     public void executeYourMenuFunction () {
         try {
             if (myProcessType.equals("Condition"))
-                this.myEventToAddTo.addCondition(this.myController
-                        .createCondition("Condition" + processBox.getValue(),
+                this.myEventToAddTo.addCondition((Condition)this.myController
+                        .callEvent("OtherController","createCondition","Condition" + processBox.getValue(),
                                          this.parseUserInput()));
             else
-                this.myEventToAddTo.addExecutable(this.myController
-                        .createExecutable("Executable" + processBox.getValue(),
+                this.myEventToAddTo.addExecutable((Executable)this.myController
+                        .callEvent("OtherController","createExecutable","Executable" + processBox.getValue(),
                                           this.parseUserInput()));
         }
         catch (NullPointerException | IllegalArgumentException e) {
@@ -75,15 +78,15 @@ public class AddProcessMenu extends AuthoringMenu {
             String className = (String) bundleKeys.nextElement();
             processBox.getItems().add(className);
         }
-        processBox.setOnAction(e -> this.addParameterFields(processBox.getValue(), paramGrid));
+        processBox.setOnAction({e -> this.addParameterFields(processBox.getValue(), paramGrid)});
     }
 
     private void addParameterFields (String selectedObject, GridPane paramGrid) {
         paramGrid.getChildren().clear();
         ruleParams =
-                super.myController
-                        .getFactoryParameters(("model.processes." + myProcessType +
-                                               selectedObject));
+                super.myController.callEvent("OtherController", "getFactoryParameters", "model.processes." + myProcessType +
+                        selectedObject)
+
 
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {

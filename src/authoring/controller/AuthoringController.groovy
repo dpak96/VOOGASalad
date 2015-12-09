@@ -3,9 +3,6 @@ package authoring.controller
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
 import authoring.ui.AuthoringUI;
-import authoring.ui.draganddrop.DraggableElement
-import authoring.ui.draganddrop.HighlightedArticle
-import javafx.scene.layout.Pane
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
@@ -17,7 +14,6 @@ import java.lang.reflect.Constructor
 public class AuthoringController {
 	private EditorManager editor;
 	private AuthoringUI ui;
-
 	private boolean highlighted = false;
 	private Article currentArticle;
 	private ModelController modelController;
@@ -68,14 +64,27 @@ public class AuthoringController {
 		return editor;
 	}
 
-
-
 	public ModelController getModelController(){
 		return modelController;
 	}
 
-	public void callEvent(String controller,String method,e){
-		controllers.get(controller)."$method"(e, this);
+	public callEvent(String controller,String method){
+		return controllerMap.get(controller)."$method"();
+	}
+
+	public callEvent(String controller,String method,e){
+		return controllerMap.get(controller)."$method"(e);
+	}
+
+	public callEvent(String controller,String method, e1, e2){
+		return controllerMap.get(controller)."$method"(e1, e2);
+	}
+
+	public callEvent(String controller,String method, e1, e2,e3){
+		return controllerMap.get(controller)."$method"(e1,e2,e3);
+	}
+	public getController(String controller){
+		return controllerMap.get(controller);
 	}
 
 	public getTester(){
@@ -104,10 +113,7 @@ public class AuthoringController {
                             
          
         }
-        public List<String> getCollisionTypes(){
-            
-            return modelController.getAllCollisionTypes();
-        }
+
 
 	public getCurrentArticle() {
 		return currentArticle;

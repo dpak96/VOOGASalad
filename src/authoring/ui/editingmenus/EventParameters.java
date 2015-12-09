@@ -1,10 +1,7 @@
 package authoring.ui.editingmenus;
 
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import authoring.controller.AuthoringController;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
@@ -35,11 +32,11 @@ public class EventParameters {
         fieldMap.put("direction", directionBox);
         componentAdder.makeLabel(paramGrid, 1, 2, "Collision Type One");
         ComboBox firstCollisionTypeBox=componentAdder.makeComboBox(paramGrid, 2, 2);
-        firstCollisionTypeBox.getItems().addAll(myController.getCollisionTypes());
+        firstCollisionTypeBox.getItems().addAll(myController.callEvent("OtherController","getCollisionTypes"));
         fieldMap.put("nameOne",firstCollisionTypeBox);
         componentAdder.makeLabel(paramGrid, 1, 3, "Collision Type Two");
         ComboBox secondCollisionTypeBox=componentAdder.makeComboBox(paramGrid, 2, 3);
-        secondCollisionTypeBox.getItems().addAll(myController.getCollisionTypes());
+        secondCollisionTypeBox.getItems().addAll(myController.callEvent("OtherController","getCollisionTypes"));
         fieldMap.put("nameTwo",secondCollisionTypeBox);
         return fieldMap;
        
