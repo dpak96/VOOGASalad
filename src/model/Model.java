@@ -43,7 +43,7 @@ public class Model extends Observable{
 		myViewpoint.setWidth(1000.5);
 		myViewpoint.setHeight(1000.5);
 		myViewpoint.setActive();
-		myCharacter = new Article("Platform", 400, 400, true);
+		myCharacter = null;
 		//vp = new VoogaProperties();
 		randomGenerator = new NullGenerationUtility();
 //		myCollisionTypeEditor = new CollisionTypeEditor();
@@ -115,7 +115,7 @@ public class Model extends Observable{
 		myViewpoint.setWidth(1000.0);
 		myViewpoint.setHeight(1000.0);
 		myViewpoint.setActive();
-		myCharacter = new Article("Platform", 500, 500, true);
+		myCharacter = new Article("Goomba", -10000, -10000, true);
 		myCollisionTypeEditor = new CollisionTypeEditor();
 		initializeCollision();
 	}
