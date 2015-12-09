@@ -60,11 +60,8 @@ public class RuleMenuTableConfiguration {
         
         List eventList= (List) myController.callEvent("OtherController", "getEventList");
    
-        System.out.println(eventList.size());
-
         myController.callEvent("OtherController", "deleteEvent", selectedEvent);
         //lister.remove(selectedEvent);
-        System.out.println(eventList.size());
         this.refreshTable(table, table.getItems());
 
     }

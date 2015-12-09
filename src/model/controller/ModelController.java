@@ -306,6 +306,12 @@ public class ModelController implements IModelController {
 	    return eventLists;
 	    
 	}
+	
+	public void setConstantGenerator(List<List<Article>> constants, double xDistance,
+			double yDistance, double xOffset, double yOffset) {
+		myModel.setConstantGenerator(constants, xDistance, yDistance, 
+				xOffset, yOffset);
+	}
 
 	public void setRandomGenerator(Map<Article, Double> probabilities) {
 		myModel.setRandomGenerator(probabilities);
