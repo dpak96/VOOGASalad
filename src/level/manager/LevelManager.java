@@ -113,15 +113,10 @@ public class LevelManager {
 	//// if (game.getLevel().equals("Add New Level")) {
 	////// setLevel(levels.size());
 	////// addLevel("Level " + myCurrentLevel);
-	//// System.out.println("Level " + myCurrentLevel);
 	//// } else {
-	//// System.out.println("Ass boners " + game.getLevel());
 	////// setLevel(Integer.valueOf(game.getLevel()));
 	//// Model model = xmlUtil.load(new
 	// File(myGame+levels.get(myCurrentLevel)+".xml"));
-	//// System.out.println("reading model");
-	//// System.out.println("floopymcfloopyasspeniswanker");
-	//// System.out.println(model == null);
 	//// myModelCtr.setModel(model);
 	//// }
 	// File[] files = new File(myGame).listFiles();
