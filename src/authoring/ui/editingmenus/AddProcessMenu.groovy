@@ -29,15 +29,15 @@ public class AddProcessMenu extends AuthoringMenu {
     private TableView myProcessTable;
     private List<?> myProcessList;
     public AddProcessMenu (String title,
-                           AuthoringController controller,
-                           String myProcessName,
-                           Event eventToAddTo,TableView processTable,List<?> processList) {
-        super(title, controller);
+    AuthoringController controller,
+    String myProcessName,
+    Event eventToAddTo,TableView processTable,List<?> processList) {
+        super("Add "+myProcessName, controller);
         myProcessType = myProcessName;
         myEventToAddTo = eventToAddTo;
         myProcessTable=processTable;
         myProcessList=processList;
-        super.showMenu(300, 300);
+        super.showMenu(400, 300);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class AddProcessMenu extends AuthoringMenu {
             if (myProcessType.equals("Condition"))
                 this.myEventToAddTo.addCondition((Condition)this.myController
                         .callEvent("OtherController","createCondition","Condition" + processBox.getValue(),
-                                         this.parseUserInput()));
+                        this.parseUserInput()));
             else
                 this.myEventToAddTo.addExecutable((Executable)this.myController
                         .callEvent("OtherController","createExecutable","Executable" + processBox.getValue(),
-                                          this.parseUserInput()));
+                        this.parseUserInput()));
         }
         catch (NullPointerException | IllegalArgumentException e) {
             super.displayErrorMessage();
@@ -66,13 +66,12 @@ public class AddProcessMenu extends AuthoringMenu {
         GridPane paramGrid = new GridPane();
         menuPane.add(paramGrid, 1, 2, 2, 2);
         this.addProcesses(processBox, paramGrid);
-
     }
 
     private void addProcesses (ComboBox<String> processBox, GridPane paramGrid) {
         ResourceBundle conditionBundle =
                 (ResourceBundle) ResourceManager.getResourceManager()
-                        .getResource("PropertiesManager", myProcessType + "Subclass");
+                .getResource("PropertiesManager", myProcessType + "Subclass");
         Enumeration bundleKeys = conditionBundle.getKeys();
         while (bundleKeys.hasMoreElements()) {
             String className = (String) bundleKeys.nextElement();
@@ -85,14 +84,14 @@ public class AddProcessMenu extends AuthoringMenu {
         paramGrid.getChildren().clear();
         ruleParams =
                 super.myController.callEvent("OtherController", "getFactoryParameters", "model.processes." + myProcessType +
-                        selectedObject)
+                selectedObject)
 
 
         int rowIndex = 2;
         for (String key : ruleParams.keySet()) {
             ResourceBundle editableParameters =
                     (ResourceBundle) ResourceManager.getResourceManager()
-                            .getResource("PropertiesManager", "parameters");
+                    .getResource("PropertiesManager", "parameters");
             super.componentAdder.makeLabel(paramGrid, 1, rowIndex, key);
             if (editableParameters.containsKey(key)) {
                 if (ruleParams.get(key) == String.class || ruleParams.get(key) == double.class)
@@ -109,10 +108,7 @@ public class AddProcessMenu extends AuthoringMenu {
             }
             else
                 rowIndex++;
-            
-
         }
-
     }
 
     private Map<String, Object> parseUserInput () {
@@ -139,10 +135,8 @@ public class AddProcessMenu extends AuthoringMenu {
             else{
                 dataMap.put(key, null);
             }
-
         }
 
         return dataMap;
     }
-
 }
