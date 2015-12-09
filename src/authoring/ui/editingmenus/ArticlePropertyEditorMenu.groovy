@@ -30,7 +30,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 	private Article myArticleToEdit;
 	private ComboBoxImageRendering imageBoxHandler=new ComboBoxImageRendering();
 	private CheckBox myCharSaver = new CheckBox();
-
+        private boolean imageChanged=false;
 	public ArticlePropertyEditorMenu(String title,
 	Article selectedArticle,
 	AuthoringController myController) {
@@ -111,10 +111,13 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 				.editProperty("setYVelocity", Double.parseDouble(textFieldPropertyMap.get("YVELOCITY")
 				.getText()),
 				myArticleToEdit);
+            if(myArticleToEdit.getImageFile()!=comboBoxPropertyMap.get("IMAGE").getValue().toString())
+            {
+               println("asdasd");
 		super.myController.getEditor().getSubEditor("ArticleEditor")
 				.editProperty("setImageFile",comboBoxPropertyMap.get("IMAGE").getValue().toString(),
 				myArticleToEdit);
-
+            }
 		super.myController.getEditor().getSubEditor("ArticleEditor")
 				.editProperty("setCollisionType",comboBoxPropertyMap.get("COLLISION").getValue().toString(),myArticleToEdit);
 		// Pass on the edits to the thing being edited
