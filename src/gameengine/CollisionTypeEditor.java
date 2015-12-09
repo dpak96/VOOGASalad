@@ -71,8 +71,8 @@ public class CollisionTypeEditor {
 	public void remove(Event event){
 		for(int matrixIndex = 0; matrixIndex < MATRIX_NUMBER; matrixIndex++){
 			for (int typeOneIndex = 0; typeOneIndex < collisionMatrix.get(matrixIndex).size(); typeOneIndex++){
-				for (int typeTwoIndex = 0; typeTwoIndex < collisionMatrix.get(matrixIndex).get(typeTwoIndex).size(); typeTwoIndex++){
-					collisionMatrix.get(matrixIndex).get(typeTwoIndex).remove(event);
+				for (int typeTwoIndex = 0; typeTwoIndex < collisionMatrix.get(matrixIndex).get(typeOneIndex).size(); typeTwoIndex++){
+					collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex).remove(event);
 				}
 			}
 		}
