@@ -35,7 +35,6 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
-		//System.out.println(allArticles.size());
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
@@ -82,7 +81,6 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
-				System.out.println(article.getImageFile() + article.getCollisionInformation(collided).getCollideDirection());
 				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
 						article.getCollisionType(), collided.getCollisionType());
 				for (Event e:events){
@@ -145,7 +143,6 @@ public class GameEngine implements IGameEngine {
 	private void updateActiveArticles(){
 		for(Article article : allArticles){
 			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
-				System.out.println(myModelController.getActiveEvents().size());
 				double x = article.getX();
 				double y = article.getY();
 				double width = article.getWidth();
@@ -178,7 +175,6 @@ public class GameEngine implements IGameEngine {
 	
 	private void checker(double minX1, double maxX1, double minY1, double maxY1,
 			double minX2, double maxX2, double minY2, double maxY2){
-		System.out.println(rectanglesOverlap(minX1, maxX1, minY1, maxY1, minX2, maxX2, minY2, maxY2));
 	}
 	
 	private boolean rectangleContainsPoint(double minX, double maxX, double minY, double maxY, double x, double y){
