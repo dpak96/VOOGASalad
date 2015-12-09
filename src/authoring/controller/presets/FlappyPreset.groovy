@@ -27,7 +27,7 @@ class FlappyPreset extends Preset {
 		List<Condition> listCondition = new ArrayList<Condition>();
 
 
-		Event ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		Event ev = myAuthoringController.callEvent("OtherController","makeEvent","Gravity", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 
@@ -41,7 +41,7 @@ class FlappyPreset extends Preset {
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event3", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Up", listCondition, listExecutable);
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "W", listEvent);
@@ -50,13 +50,13 @@ class FlappyPreset extends Preset {
 		//MOVE RIGHT
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myXVelocity", (double) 0.05);
+		tempMap.put("myXVelocity", (double) 0.5);
 
 		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Right", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 
@@ -86,7 +86,7 @@ class FlappyPreset extends Preset {
 
 		Condition con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventKevin", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Viewpoint", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 

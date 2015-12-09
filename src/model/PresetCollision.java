@@ -23,7 +23,7 @@ public class PresetCollision {
 	private final String PLAYER = "Player";
 	private final String PLATFORM = "Platform";
 	private final String ENEMY = "Enemy";
-	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy","JumpPlatform"));
+	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
 	public PresetCollision(CollisionTypeEditor editor) {
 		// TODO Auto-generated constructor stub
 		myCollisionTypeEditor = editor;
@@ -33,7 +33,7 @@ public class PresetCollision {
 		for (String s: DEFAULT_TYPES){
 			myCollisionTypeEditor.add(s);
 		}
-		collideWithPlatform(PLAYER);
+//		collideWithPlatform(PLAYER);
 //		collideWithPlatform(ENEMY);	
 		
 		Event bounceHorizontal = getBounceHorizontalEvent();
@@ -48,12 +48,12 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(TOP, ENEMY, PLATFORM, bounceVertical);
 		myCollisionTypeEditor.add(BOTTOM, PLATFORM, ENEMY, bounceVertical);
 		
-		Event die = getDieEvent();
-		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
+//		Event die = getDieEvent();
+//		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
 	}
 
 	private Event getBounceVerticalEvent() {
