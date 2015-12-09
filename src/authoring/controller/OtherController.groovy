@@ -1,5 +1,6 @@
 package authoring.controller
 
+
 import model.Event
 import model.article.Article
 import model.controller.ModelController

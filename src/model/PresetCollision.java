@@ -41,15 +41,15 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceHorizontal);
 		
 		Event bounceVertical = getBounceVerticalEvent();
-		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceVertical);
-		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(TOP, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(BOTTOM, ENEMY, ENEMY, bounceVertical);
 		
 		Event die = getDieEvent();
 		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
 		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
 		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
 		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, bounceVertical);
-		myCollisionTypeEditor.add(BOTTOM, ENEMY, PLAYER, die);		
+		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, die);		
 	}
 
 	private Event getBounceVerticalEvent() {
@@ -79,13 +79,13 @@ public class PresetCollision {
 	}
 
 	public void collideWithPlatform(String str) {
-		Event stopLeftVelocity = getStopVelocityEvent("XVelocity", "Less");
+		Event stopLeftVelocity = getStopVelocityEvent("XVelocity", "Greater");
 		myCollisionTypeEditor.add(LEFT, str, PLATFORM, stopLeftVelocity);
-		Event stopRightVelocity = getStopVelocityEvent("XVelocity", "Greater");
+		Event stopRightVelocity = getStopVelocityEvent("XVelocity", "Less");
 		myCollisionTypeEditor.add(RIGHT, str, PLATFORM, stopRightVelocity);
-		Event stopTopVelocity = getStopVelocityEvent("YVelocity", "Less");
+		Event stopTopVelocity = getStopVelocityEvent("YVelocity", "Greater");
 		myCollisionTypeEditor.add(TOP, str, PLATFORM, stopTopVelocity);
-		Event stopBottomVelocity = getStopVelocityEvent("YVelocity", "Greater");
+		Event stopBottomVelocity = getStopVelocityEvent("YVelocity", "Less");
 		myCollisionTypeEditor.add(BOTTOM, str, PLATFORM, stopBottomVelocity);
 	}
 
