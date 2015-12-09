@@ -1,5 +1,6 @@
 package authoring.controller
 
+
 import javafx.scene.control.Button
 import javafx.scene.layout.Pane
 import model.Event
@@ -60,7 +61,7 @@ class OtherController {
     }
     
     public void deleteEvent(Event event){
-        modelController.removeEvent(event);
+        myModelController.removeEvent(event);
     }
 
     public List<String> getCollisionTypes(){

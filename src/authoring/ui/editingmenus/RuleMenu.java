@@ -107,8 +107,7 @@ public class RuleMenu extends AuthoringMenu {
         addExecutable.setGraphic(tableConfig.setImagePlus());
         addExecutable
                 .setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
-                                                     "Executable", selectedEvent, executableTable,
-                                                     selectedEvent.getExecutables()));
+                                                     "Executable", selectedEvent, executableTable));
         menuPane.add(addExecutable, 5, 3);
 
         Button removeExecutable = new Button();
@@ -124,8 +123,7 @@ public class RuleMenu extends AuthoringMenu {
         
         Button addCondition = new Button();
         addCondition.setOnAction(e -> new AddProcessMenu("Add Condition", this.myController,
-                                                         "Condition", selectedEvent, conditionTable,
-                                                         selectedEvent.getConditions()));
+                                                         "Condition", selectedEvent, conditionTable));
         addCondition.setGraphic(tableConfig.setImagePlus());
         menuPane.add(addCondition, 3, 3);
 

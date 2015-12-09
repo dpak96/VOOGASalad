@@ -13,7 +13,7 @@ public class ExecutableMoveHorizontal extends Executable{
 	@Override
 	public void execute(){
 		myActor.setX(myActor.getX() + myDisplacement);
-		System.out.println("moving horizontal");
+
 	}
 
 }

@@ -1,7 +1,14 @@
 package authoring.ui.draganddrop
 
-/**
- * Created by Rob on 12/8/15.
- */
-class AbstractDragAndDrop {
+
+import authoring.controller.AuthoringController
+import javafx.scene.layout.Pane
+
+public abstract class AbstractDragAndDrop extends Pane {
+    public AbstractDragAndDrop(AuthoringController authoringController) {
+        setListeners(authoringController);
+    }
+
+    protected abstract void setListeners(AuthoringController authoringController);
+
 }

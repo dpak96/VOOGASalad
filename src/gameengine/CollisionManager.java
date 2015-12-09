@@ -90,7 +90,6 @@ public class CollisionManager {
 		    	intersect_diffs.add(3, Math.abs(tT - pB));
 		    Collections.min(intersect_diffs);
 		    // return the closest intersection
-		    System.out.println(directions[intersect_diffs.indexOf(Collections.min(intersect_diffs))]);
 		    return directions[intersect_diffs.indexOf(Collections.min(intersect_diffs))];
 
 		
