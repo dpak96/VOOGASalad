@@ -23,7 +23,7 @@ public class PresetCollision {
 	private final String PLAYER = "Player";
 	private final String PLATFORM = "Platform";
 	private final String ENEMY = "Enemy";
-	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy","JumpPlatform"));
+	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
 	public PresetCollision(CollisionTypeEditor editor) {
 		// TODO Auto-generated constructor stub
 		myCollisionTypeEditor = editor;
@@ -33,28 +33,55 @@ public class PresetCollision {
 		for (String s: DEFAULT_TYPES){
 			myCollisionTypeEditor.add(s);
 		}
-		collideWithPlatform(PLAYER);
+//		collideWithPlatform(PLAYER);
 //		collideWithPlatform(ENEMY);	
 		
 		Event bounceHorizontal = getBounceHorizontalEvent();
 		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceHorizontal);
 		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceHorizontal);
 		myCollisionTypeEditor.add(LEFT, ENEMY, PLATFORM, bounceHorizontal);
-		myCollisionTypeEditor.add(RIGHT, PLATFORM, ENEMY, bounceHorizontal);
+		myCollisionTypeEditor.add(RIGHT, ENEMY, PLATFORM, bounceHorizontal);
 		
 		Event bounceVertical = getBounceVerticalEvent();
 		myCollisionTypeEditor.add(TOP, ENEMY, ENEMY, bounceVertical);
 		myCollisionTypeEditor.add(BOTTOM, ENEMY, ENEMY, bounceVertical);
 		myCollisionTypeEditor.add(TOP, ENEMY, PLATFORM, bounceVertical);
-		myCollisionTypeEditor.add(BOTTOM, PLATFORM, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(BOTTOM, ENEMY, PLATFORM, bounceVertical);
 		
-		Event die = getDieEvent();
-		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
+//		Event jump = getJumpEvent();
+//		myCollisionTypeEditor.add(TOP, PLAYER, PLATFORM, jump);
+//		myCollisionTypeEditor.add(TOP, PLATFORM, PLAYER, jump);
+//		myCollisionTypeEditor.add(BOTTOM, PLAYER, PLATFORM, jump);
+//		myCollisionTypeEditor.add(BOTTOM, PLATFORM, PLAYER, jump);
+//		Event die = getDieEvent();
+//		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
+//		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
 	}
+
+//	private Event getJumpEvent() {
+//		// TODO Auto-generated method stub 
+//		HashMap<String, Object> temp = new HashMap<String, Object>();
+//		temp.put("myName", "Wu");
+//		temp.put("myFirst", null);
+//		temp.put("mySecond", null);
+//		temp.put("myFirstVariable", "Top");
+//		temp.put("myCompareValue", 0);
+//		temp.put("myComparison", "GreaterThan");
+//		ConditionComparisonOneArticle checkFirstArticleHorizontalVelocity = new ConditionComparisonOneArticle(temp);
+//		List<Condition> conditionList = new ArrayList<Condition>();
+//		conditionList.add(checkFirstArticleHorizontalVelocity);
+//		HashMap<String, Object> temp2 = new HashMap<String, Object>();
+//		temp2.put("myName", "Daniel");
+//		temp2.put("myActor", null);
+//		ExecutableBounceVertical exe = new ExecutableBounceVertical(temp);
+//		List<Executable> exeList = new ArrayList<Executable>();
+//		exeList.add(exe);
+//		Event event = new Event("BounceVertical", conditionList, exeList);
+//		return event;
+//	}
 
 	private Event getBounceVerticalEvent() {
 		// TODO Auto-generated method stub

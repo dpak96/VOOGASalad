@@ -71,12 +71,11 @@ class InfiniteController {
 
     public genRandom(){
         myModelController.setRandomGenerator(randomGenMap);
-        println("hi");
         randomGenMap = new HashMap<>();
     }
 
     public genConstant(){
-
+		myModelController.setConstantGenerator(constantGen);
         constantGen = new ArrayList<>();
     }
 

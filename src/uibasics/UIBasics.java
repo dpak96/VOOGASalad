@@ -41,9 +41,6 @@ public class UIBasics {
     for (String s : myVals) {
       myCommands.add(Config.getObject(s));
     }
-    for (AbstractCommand c : myCommands) {
-      System.out.println(c);
-    }
   }
 
   public Pane getPane() {
