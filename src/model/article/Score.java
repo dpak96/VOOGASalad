@@ -15,7 +15,7 @@ public class Score {
 	}
 	
 	public void gainScore() {
-		myScore++;
+		myScore+=10;
 	}
 	public double getScore() {
 		return myScore;
