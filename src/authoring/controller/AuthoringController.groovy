@@ -19,7 +19,6 @@ public class AuthoringController {
 
 	private Map<String, Object> controllerMap;
 	private PresetArticleFactory presetArticleFactory;
-	String test = "ArticleCAndGController";
 
 	public AuthoringController(ModelController mc) {
 		ui = new AuthoringUI(this);
