@@ -227,6 +227,7 @@ public class Model extends Observable{
 	
 	public void setBackgroundImage(String backgroundImage){
 		myBackgroundImage = backgroundImage;
+		notifyObservers();
 	}
 	
 	public String getBackgroundImage(){
@@ -257,6 +258,10 @@ public class Model extends Observable{
 	
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
+	}
+	
+	public void removeExistingCollisonEvent(Event event){
+		myCollisionTypeEditor.remove(event);
 	}
 	
 	public CollisionTypeEditor getCollisionTypeEditor() {
