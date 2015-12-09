@@ -50,7 +50,7 @@ class FlappyPreset extends Preset {
 		//MOVE RIGHT
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
-		tempMap.put("myXVelocity", (double) 0.05);
+		tempMap.put("myXVelocity", (double) 0.5);
 
 		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();

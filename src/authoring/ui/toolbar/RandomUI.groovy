@@ -1,6 +1,7 @@
 package authoring.ui.toolbar
 
 import authoring.controller.AuthoringController
+import javafx.collections.FXCollections;
 import authoring.ui.draganddrop.InfiniteDrop
 import javafx.collections.ObservableList
 import javafx.scene.control.Button
@@ -18,6 +19,8 @@ import javafx.util.Callback
 import javafx.util.StringConverter
 import main.VoogaProperties
 import model.article.Article
+
+
 
 public class RandomUI extends Pane {
 
@@ -38,6 +41,8 @@ public class RandomUI extends Pane {
 	private Button myEdit, mySave;
 	private List<RepeatingArticle> myRandoms;
 	private List<RepeatingArticle> myConstants;
+	private String Column1MapKey = "A";
+	private String Column2MapKey = "P";
 
 	public RandomUI(controller) {
 		myController = controller;
@@ -189,17 +194,18 @@ public class RandomUI extends Pane {
 	}
 	
 	private void save() {
-		myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
-		if (myMode.getValue().equals(RANDOM)) {
-			myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
-			updateTableR();
-		} else {
-			updateTableC();
-		}
 		println(myProb.getText());
+		myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+//		if (myMode.getValue().equals(RANDOM)) {
+//			myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+//			updateTableR();
+//		} else {
+//			updateTableC();
+//		}
 	}
 
 	private void edit(){
+		updateTableR();
 		myController.callEvent("InfiniteController", "genRandom");
 	}
 	
@@ -207,14 +213,13 @@ public class RandomUI extends Pane {
 		
 		myTableR.setItems(null);
 //		tableMaker(myTableR,["Articles", "Probability"]);
-		String Column1MapKey = "A";
-		String Column2MapKey = "P";
+		
 		TableColumn<Map, String> firstDataColumn = new TableColumn<>("Articles");
 		TableColumn<Map, String> secondDataColumn = new TableColumn<>("Probabilities");
 		firstDataColumn.setCellValueFactory(new MapValueFactory(Column1MapKey));
 		secondDataColumn.setCellValueFactory(new MapValueFactory(Column2MapKey));
  
-		myTableR = new TableView<>(generateDataInMap(map));
+		myTableR = new TableView<>(generateDataInMap());
  
 		myTableR.setEditable(true);
 		myTableR.getSelectionModel().setCellSelectionEnabled(true);
@@ -242,7 +247,7 @@ public class RandomUI extends Pane {
 	}
 	
 	private ObservableList<Map> generateDataInMap() {
-		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		HashMap<Article, Double> map = myController.callEvent("InfiniteController", "getRandomMap");
 		ObservableList<HashMap> allData = FXCollections.observableArrayList();
 		for (Map.Entry<Article, Double> entry: map.entrySet()) {
 			Map<String, String> dataRow = new HashMap<>();
