@@ -74,6 +74,7 @@ public class UIStackPane extends StackPane implements Observer {
 			edit=true;
 			this.getChildren().add(myAuthoringControllerPane);
 			myAuthoringController.initalizeControllers();
+			myAuthoringController.flush();
 
 		}
 	}
@@ -85,6 +86,7 @@ public class UIStackPane extends StackPane implements Observer {
 		} else {
 			this.getChildren().add(myAuthoringControllerPane);
 			myAuthoringController.initalizeControllers();
+			myAuthoringController.flush();
 		}
 		edit=!edit;
 	}
