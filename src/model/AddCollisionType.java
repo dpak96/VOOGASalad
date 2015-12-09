@@ -41,7 +41,6 @@ public class AddCollisionType {
 				LoadMatrixFromXML loadMatrix = new LoadMatrixFromXML(str);
 				double[][] tempMatrix = loadMatrix.getMatrix();
 				outputMatrix = new double[tempMatrix.length+1][tempMatrix.length+1];
-				System.out.println("length: "+outputMatrix.length);
 				for (int i = 0; i < outputMatrix.length; i++){
 					for (int j = 0; j < outputMatrix.length; j++){
 						if (i < outputMatrix.length-1 && j < outputMatrix.length-1){
@@ -88,7 +87,6 @@ public class AddCollisionType {
 			WriteMatrixToXML cellWriter = new WriteMatrixToXML(tempMatrix, collision);
 		}
 		else{
-			System.out.println("CollisionTypeLibrary.xml doesn't exist");
 		}
   }
 

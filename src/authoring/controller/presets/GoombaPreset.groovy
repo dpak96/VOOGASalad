@@ -18,10 +18,10 @@ class GoombaPreset extends Preset {
 		tempMap.put("myAcceleration", (double) 0);
 		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
 
-		Map<String, Object> poopMap = new HashMap<String, Object>();
-		poopMap.put("myActor", article);
-		poopMap.put("myDisplacement", (double) 10);
-		Executable moveEx = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
+		Map<String, Object> goombaMap = new HashMap<String, Object>();
+		goombaMap.put("myActor", article);
+		goombaMap.put("myDisplacement", (double) 10);
+		Executable moveEx = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", goombaMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(moveEx);

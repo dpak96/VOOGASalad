@@ -7,7 +7,7 @@ import model.article.Article;
 public class RandomGenerationUtility extends ConcreteGenerationUtility{
 
 	
-	private final double unitCheck = 0.05;
+	private final double unitCheck = 25;
 
 	private Map<Article, Double> myGenerationProbabilities;
 	
@@ -39,6 +39,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
 						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j, true);
+						copy.setCollisionType(a.getCollisionType());
 						if (myXChange > 0)
 							copy.setX(myViewpoint.getX() + myViewpoint.getWidth() - i);
 						else
@@ -52,14 +53,15 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 
 	private void yGenerate(double myYChange) {
 		for (int j = 0; j < Math.abs(myYChange); j += unitCheck) {
-			for (int i = 0; j < myViewpoint.getWidth(); i += unitCheck) {
+			for (int i = 0; i < myViewpoint.getWidth(); i += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
 						Article copy = new Article(a.getImageFile(), myViewpoint.getX() + i, a.getY(), true);
+						copy.setCollisionType(a.getCollisionType());
 						if (myYChange > 0)
 							copy.setY(myViewpoint.getY() + myViewpoint.getHeight() - j);
 						else
-							copy.setY(myViewpoint.getY() + i);
+							copy.setY(myViewpoint.getY() + j);
 						myArticles.add(copy);
 					}
 				}

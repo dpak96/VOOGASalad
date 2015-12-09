@@ -116,6 +116,11 @@ public class AuthoringController {
 	public callEvent(String controller,String method, e1, e2,e3){
 		return myControllerMaps.get(controller)."$method"(e1,e2,e3);
 	}
+	
+	public callEvent(String controller,String method, e1, e2, e3, e4){
+		return myControllerMaps.get(controller)."$method"(e1,e2,e3,e4);
+	}
+	
 	public getController(String controller){
 		return myControllerMaps.get(controller);
 	}
