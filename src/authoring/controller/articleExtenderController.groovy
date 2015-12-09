@@ -18,7 +18,7 @@ class ArticleExtenderController {
 
     public ArticleExtenderController(AuthoringController authoring){
         authoringController = authoring;
-        authoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event,authoringController)});
+        authoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
         setKeys();
     }
 
@@ -29,38 +29,35 @@ class ArticleExtenderController {
 
     public void addTile(KeyEvent event) {
         updateArticle(event);
-        initRightAndLeft(event);
-        buttonCheckAndExtend();
+        buttonCheckAndExtend(event);
     }
 
     private updateArticle(event){
-        if(authoringController.getCurrentArticle() != current){
+        if(!authoringController.getCurrentArticle().equals(current)){
             current = authoringController.getCurrentArticle();
             initWith = current.getWidth();
+            initRightAndLeft(event);
         }
     }
 
     private initRightAndLeft(event){
-        if (newXRight == 0) {
-            newXRight = current.getX() + (current.getWidth() / 2)+authoringController.getModelController().getViewpoint().getX();
-        }
-        if(newXLeft == 0){
-            newXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
-        }
+        newXRight = current.getX() + (current.getWidth() / 2)+authoringController.getModelController().getViewpoint().getX();
+        newXLeft = current.getX() +authoringController.getModelController().getViewpoint().getX();
     }
 
     private buttonCheckAndExtend(event){
-        if (checkClick(right)) {
+        if (checkClick(event,right)) {
             extend();
         }
-        else(checkClick(left)){
-            newXLeft -= current.getwidth();
+        if (checkClick(event,left)){
+            newXLeft -= initWith;
             extend();
+            current.setX(newXLeft);
         }
 
     }
 
-    private whichClick(input){
+    private checkClick(event,input){
         return (event.getCode() == input && event.isControlDown());
     }
 
