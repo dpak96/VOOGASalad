@@ -72,7 +72,7 @@ public class CollisionManager {
 		double tR = tL + b.getWidth();
 		double tT = b.getY();
 		double tB = tT + b.getHeight();
-			String[] directions = {"Right", "Left", "Top", "Bottom"};
+			String[] directions = {"Left", "Right", "Bottom", "Top"};
 		    Double inf = Double.MAX_VALUE;
 		    List<Double> intersect_diffs = new ArrayList<Double>(Arrays.asList(inf, inf, inf, inf));
 		    if(pR > tL && pL < tL)         
