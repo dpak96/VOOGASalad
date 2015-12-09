@@ -201,6 +201,7 @@ public class ModelController implements IModelController {
 		
 		myModel.destroyModel();
 		myModel.initialize();
+		myModel.setActiveEvents(toLoad.getActiveEvents());
 		myModel.setCollisionTypeEditor(toLoad.getCollisionTypeEditor());
 		myModel.addAllArticles(toLoad.getArticles());
 		myModel.addAllEvents(toLoad.getAllEvents());

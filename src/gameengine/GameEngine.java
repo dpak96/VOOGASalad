@@ -74,7 +74,6 @@ public class GameEngine implements IGameEngine {
 	private void runButtonPress(String input){
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
 		for(Event e : buttonEvents){
-			e.getExecutables().get(0).execute();
 			e.fire();
 		}
 	}
@@ -85,6 +84,7 @@ public class GameEngine implements IGameEngine {
 				//System.out.println(article.getImageFile() + article.getCollisionInformation(collided).getCollideDirection());
 				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
 						article.getCollisionType(), collided.getCollisionType());
+				System.out.println(article.getCollisionInformation(collided).getCollideDirection());
 				for (Event e:events){
 					e.fire(article, collided);
 				}

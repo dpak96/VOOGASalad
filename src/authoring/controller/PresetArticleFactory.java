@@ -111,7 +111,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("W", listEvent);
-
+		/**
 		//key press move down 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -124,7 +124,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("S", listEvent);
-
+		**/
 		//decel left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -213,6 +213,7 @@ public class PresetArticleFactory {
 		modelController.addActiveEvent(ev);
 		
 		//decel down
+		/**
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) .05);
@@ -297,7 +298,8 @@ public class PresetArticleFactory {
 		listCondition.add(con);
 		ev = authoringController.makeEvent("event3", listCondition, listExecutable);
 		modelController.addActiveEvent(ev);
-
+		**/
+		
 		//ViewPoint move from left 
 
 		Article myViewpoint = modelController.getViewpoint();

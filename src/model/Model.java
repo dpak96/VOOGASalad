@@ -143,7 +143,12 @@ public class Model extends Observable{
 	}
 
 	public void remapButton(String button, List<Event> events) {
-		myButtonMap.put(button, events);
+		if(myButtonMap.containsKey(button)){
+			myButtonMap.get(button).addAll(events);
+		}
+		else{
+			myButtonMap.put(button, events);
+		}
 	}
 	
 	public List<Event> getButtonEvents(String button){

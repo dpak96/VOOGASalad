@@ -92,7 +92,6 @@ public class xmlUtility {
 		}
 	}
 		private void save(File game, Model myModel){
-
 		FileOutputStream fos = null;
 
 		myStream.omitField(Observable.class, "obs");
