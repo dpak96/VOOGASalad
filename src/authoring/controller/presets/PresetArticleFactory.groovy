@@ -48,6 +48,7 @@ public class PresetArticleFactory {
 	}
 
 	public void noClipMovement(Article article) {
+		println("what");
 		myVegeta.noClipMovement(article);
 	}
 }

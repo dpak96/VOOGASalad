@@ -30,7 +30,6 @@ public class AuthoringController {
 		myModelController = mc;
 		myEditor = new EditorManager(mc);
 		myPresetArticleFactory = new PresetArticleFactory(mc, this);
-
 	}
 
 	public void initalizeControllers(){
@@ -53,7 +52,7 @@ public class AuthoringController {
 		Class<?> cl = Class.forName(cName);
 		Object object;
 		Constructor<?> ctor = null;
-		if(cName.equals("authoring.controller.OtherController")){
+		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController")){
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = ModelController.class;
@@ -79,14 +78,12 @@ public class AuthoringController {
 			Object[] o = new Object[1];
 			Object thing1 = this;
 			object = ctor.newInstance(thing1);
-
 		}
 
 		return object;
 	}
 
 	private pressDelete(){
-
 	}
 
 	public AuthoringUI getUi() {
@@ -161,17 +158,10 @@ public class AuthoringController {
 
 	public boolean getHighlighted(){
 		return myHighlighted;
-
 	}
 
 	public void flush() {
 		callEvent("KeyPressController", "deleteButton");
 		setCurrentArticle(null);
-		
 	}
-
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package authoring.controller
 
 import authoring.backend.EditorManager
+import authoring.ui.draganddrop.DraggableElement
 import model.article.Article
 import resourcemanager.ResourceManager
 
@@ -25,7 +26,7 @@ class ArticleCAndGController {
     public setPreset(event, article){
         ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
         if (event.getGestureSource().getImageName() in rb.keySet()){
-            String temp = rb.getString((String)event.getImageName());
+            String temp = rb.getString((String)event.getGestureSource().getImageName());
             myAuthoring.presetArticle(temp, article);
         }
     }
