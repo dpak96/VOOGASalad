@@ -160,7 +160,9 @@ public class AuthoringController {
 	}
 
 	public void flush() {
-		// TODO Auto-generated method stub
+		setHighlighted(false);
+		setCurrentButton(null);
+		setCurrentArticle(null);
 		
 	}
 
