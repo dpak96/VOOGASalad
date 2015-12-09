@@ -57,7 +57,8 @@ public class RuleMenuTableConfiguration {
 
     public void deleteEvent (TableView table, Event selectedEvent) {
         table.getItems().remove(selectedEvent);
-        myController.getEventList().remove(selectedEvent);
+        List<Event> lister = (List<Event>)this.myController.callEvent("OtherController","getEventList");
+        lister.remove(selectedEvent);
         this.refreshTable(table, table.getItems());
 
     }
