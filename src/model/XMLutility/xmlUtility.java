@@ -28,7 +28,6 @@ public class xmlUtility {
 	
 	public Model loadModel(Window window) {
 		FileChooser myFileChooser = new FileChooser();
-		System.out.println("File Chooser 1");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);
@@ -48,15 +47,12 @@ public class xmlUtility {
 			//myStream.processAnnotations(ModelAnnotations.class);
 			myStream.alias("model", Model.class);
 			myStream.alias("CollisionTypeEditor", CollisionTypeEditor.class);
-			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			for (Executable f: ((Model) readObject).getExecutables()) {
 				if (f instanceof ExecutableLevelChanges) {
 					((ExecutableLevelChanges) f).initialize(myModelController.getLevelManager());
 				}
 			}
-			System.out.println("Read" + readObject);
-			System.out.println(((Model) readObject));
 			return (Model) readObject;
 			
 		} catch (NullPointerException e) {
@@ -79,9 +75,7 @@ public class xmlUtility {
 			save(game, myModel);
 			XMLOrderer levelOrder = new XMLOrderer(path,game.getName());
 			levelOrder.makeXML(path);
-//	      o.writeObject(myController.getMyScene().getAllData().get(0));
 		} catch (NullPointerException e) {
-			System.out.println("not saving");
 			//User canceled from a save
 		} catch (Exception e) {
 			
@@ -92,14 +86,7 @@ public class xmlUtility {
 
 		myStream.omitField(Observable.class, "obs");
 		myStream.omitField(Observable.class, "changed");
-		//myStream.omitField(xmlUtility.class, "xmlUtil");
-		//myStream.omitField(LevelManager.class, "myLevelManager");
-		//for(Article a: myModelController.getArticles()) {
-			//a.destroyBitMap();
-			//System.out.println("destroyed");
-		//} 
-		//myModelController.getViewpoint().destroyBitMap();
-		//myModelController.getCharacter().destroyBitMap();
+		
 		for (Executable f: myModelController.getExecutables()) {
 			if (f instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) f).destroyLevelManager();
@@ -123,19 +110,4 @@ public class xmlUtility {
 			}
 		}
 	}
-	
-//	public static void main (String args[]) {
-//		Model model = new Model();
-//		model.initialize();
-//		Article test = new Article("Goomba", 100, 100, true);
-//		model.addArticle(test);
-//		xmlUtility xml = new xmlUtility(model);
-//		//Model newModel = xml.loadModel("testing.xml");
-//		System.out.println("loaded");
-//		/*for(Article a: newModel.getArticles()) {
-//			System.out.println(a.getX());
-//		}*/
-//		System.out.println("saved");
-//	}
-
 }

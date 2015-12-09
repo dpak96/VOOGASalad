@@ -91,6 +91,7 @@ public class RandomUI extends Pane {
 		myEdit.setPrefSize(70,10);
 		mySave.setPrefSize(70,10);
 		mySave.setOnAction({save()});
+		myEdit.setOnAction({edit()});
 	}
 	
 	private void tableMaker(TableView table, ArrayList<String> str) {
@@ -111,7 +112,6 @@ public class RandomUI extends Pane {
 	private void drag() {
 		myDrag.setPrefSize(300,300);
 		myDrag.getStyleClass().add("ass");
-//		myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
 	}
 	
 //	private void newEntry() {
@@ -183,13 +183,18 @@ public class RandomUI extends Pane {
 	}
 	
 	private void save() {
+		myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
 		if (myMode.getValue().equals(RANDOM)) {
-			myController.callEvent("infinite", "addToRandom", myProb.getText());
+			myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
 			updateTableR();
 		} else {
 			updateTableC();
 		}
 		println(myProb.getText());
+	}
+
+	private void edit(){
+		myController.callEvent("InfiniteController", "genRandom");
 	}
 	
 	private void updateTableR() {
