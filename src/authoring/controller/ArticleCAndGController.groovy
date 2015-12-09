@@ -1,10 +1,6 @@
 package authoring.controller
 
 import authoring.backend.EditorManager
-import authoring.ui.draganddrop.DraggableElement
-import authoring.ui.draganddrop.HighlightedArticle
-import javafx.scene.input.DragEvent
-import javafx.scene.layout.Pane
 import model.article.Article
 import resourcemanager.ResourceManager
 
