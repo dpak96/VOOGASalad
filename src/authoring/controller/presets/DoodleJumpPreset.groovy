@@ -19,7 +19,7 @@ class DoodleJumpPreset extends Preset {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 
-		tempMap.put("myXVelocity", (double) -7.0);
+		tempMap.put("myXVelocity", (double) -3.0);
 
 		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		List<Executable> listExecutable = new ArrayList<Executable>();
@@ -35,7 +35,7 @@ class DoodleJumpPreset extends Preset {
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 
-		tempMap.put("myXVelocity", (double) 7.0);
+		tempMap.put("myXVelocity", (double) 3.0);
 		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -168,7 +168,7 @@ class DoodleJumpPreset extends Preset {
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
 
-		tempMap.put("myDisplacement", (double) 1.0);
+		tempMap.put("myDisplacement", (double) -1.0);
 
 		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
@@ -178,12 +178,31 @@ class DoodleJumpPreset extends Preset {
 		tempMap.put("myFirst", article);
 		tempMap.put("myViewpoint", myViewpoint);
 
-		tempMap.put("myFraction",(double) 0.6);
+		tempMap.put("myFraction",(double) 0.3);
 
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionAbovePositionOnScreen", tempMap);
 		listCondition.add(con);
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","viewpoint", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
+		
+		
+		//key press move up
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+
+		tempMap.put("myYVelocity", (double) -3.0);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Up", listCondition, listExecutable);
+		listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		myAuthoringController.callEvent("KeyPressController", "mapKey", "W", listEvent);
+
+		
+		article.setCollisionType("Enemy");
 
 	}
 }
