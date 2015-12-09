@@ -84,7 +84,7 @@ class FlappyPreset extends Preset {
 
 		tempMap.put("myFraction",(double) 0.4);
 
-		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
+		Condition con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
 		listCondition.add(con);
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventKevin", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
