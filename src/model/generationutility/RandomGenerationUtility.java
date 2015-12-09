@@ -34,8 +34,8 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	
 	//Generates horizontally 
 	private void xGenerate(double myXChange) {
-		for (double i = 0; i < Math.abs(myXChange); i += unitCheck) {
-			for (double j = 0; j < myViewpoint.getHeight(); j += unitCheck) {
+		for (double i = 0.0; i < Math.abs(myXChange); i += unitCheck) {
+			for (double j = 0.0; j < myViewpoint.getHeight(); j += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
 						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j, true);
