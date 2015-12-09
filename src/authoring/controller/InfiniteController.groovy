@@ -74,8 +74,14 @@ class InfiniteController {
         randomGenMap = new HashMap<>();
     }
 
-    public genConstant(){
-		myModelController.setConstantGenerator(constantGen);
+    public genConstant(String xDistance,
+			String yDistance, String xOffset, String yOffset){
+		double d = Double.parseDouble(xDistance);
+		double e = Double.parseDouble(yDistance);
+		double f = Double.parseDouble(xOffset);
+		double g = Double.parseDouble(yOffset);
+		myModelController.setConstantGenerator(constantGen, d,
+		 e, f, g);
         constantGen = new ArrayList<>();
     }
 

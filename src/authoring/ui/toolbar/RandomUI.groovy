@@ -96,7 +96,7 @@ public class RandomUI extends Pane {
 	}
 	
 	private void buttons() {
-		myGenerate.setText("Edit");
+		myGenerate.setText("Generate");
 		mySave.setText("Save");
 		myAdd.setText("Add");
 		myGenerate.setPrefSize(70,10);
@@ -205,7 +205,9 @@ public class RandomUI extends Pane {
 		if (myMode.getValue().equals(RANDOM)) {
 			myController.callEvent("InfiniteController", "genRandom");
 		} else {
-			myController.callEvent("InfiniteController", "genConstant");
+			myController.callEvent("InfiniteController", "genConstant", 
+				myXDist.getText(), myYDist.getText(), 
+				myXRepeat.getText(), myYRepeat.getText());
 		}
 	}
 	
