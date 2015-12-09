@@ -2,6 +2,7 @@ package uibasics;
 
 import action.controller.ActionController;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.GraphicHandler;
@@ -16,6 +17,7 @@ public class UICore {
 	private UIStackPane uiStackPane;
 	private MenuController menuController;
 	private Scene myScene;
+	private String myRelease = "";
 
 	public UICore(GraphicHandler graphicHandler, ActionController actionController, ModelController modelController) {
 		menuController = new MenuController(graphicHandler, modelController);
@@ -67,6 +69,11 @@ public class UICore {
 		menuController.getMenu().getPlayer().setOnAction(e -> actionController.resume());
 		menuController.getMenu().getPauser().setOnAction(e -> actionController.change_rate(0));
 		menuController.getMenu().getStepper().setOnAction(e -> actionController.stepper());
+	}
+	
+	
+	private void setReleased(String val){
+		myRelease = val;
 	}
 
 	/*
