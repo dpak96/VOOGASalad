@@ -14,6 +14,10 @@ public class Life {
 		health = value;
 	}
 	
+	public void setMaxHealth(double value){
+		maxHealth = value;
+	}
+	
 	public int getLife(){
 		return lives;
 	}
@@ -25,7 +29,8 @@ public class Life {
 	public void removeHealth(double damage){
 		health -= damage;
 		if(health < 0){
-			health = 0;
+			health = maxHealth;
+			lives--;
 		}
 	}
 	
@@ -50,6 +55,10 @@ public class Life {
 	
 	public void addLife(){
 		lives++;
+	}
+	
+	public double getMaxHealth(){
+		return maxHealth;
 	}
 
 }

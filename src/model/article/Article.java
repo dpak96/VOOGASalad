@@ -137,7 +137,14 @@ public class Article{
 	public void removeHealth(double myDamage) {
 		myLife.removeHealth(myDamage);
 	}
-
+	
+	public void setMaxHealth(double maxHealth){
+		myLife.setMaxHealth(maxHealth);
+	}
+	
+	public double getMaxHealth(){
+		return myLife.getMaxHealth();
+	}
 	public void gainLife(int life) {
 		myLife.addLife(life);
 	}

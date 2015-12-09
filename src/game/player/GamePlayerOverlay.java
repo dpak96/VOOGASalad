@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import action.controller.ActionController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -52,10 +53,10 @@ public class GamePlayerOverlay extends Pane {
 		container.getChildren().addAll(myModules);
 	}
 	
-	public void update(List<Article> arg, Article character) {
+	public void update(List<Article> arg, Article character, ActionController ac) {
 		try {
 			for(HUDModule j:myModules){
-				j.update(character);
+				j.update(character, ac);
 			}
 		} catch (NullPointerException e) {
 		}
