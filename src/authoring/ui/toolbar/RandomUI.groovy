@@ -11,6 +11,7 @@ import javafx.scene.control.TextField
 import javafx.scene.layout.Pane
 import javafx.scene.text.Text
 import main.VoogaProperties
+import model.article.Article
 
 public class RandomUI extends Pane {
 
@@ -110,8 +111,7 @@ public class RandomUI extends Pane {
 	private void drag() {
 		myDrag.setPrefSize(300,300);
 		myDrag.getStyleClass().add("ass");
-		myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
-		
+//		myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
 	}
 	
 //	private void newEntry() {
@@ -183,9 +183,23 @@ public class RandomUI extends Pane {
 	}
 	
 	private void save() {
-		if (myMode.getValue().equals(RANDOM))
-			myController.callEvent("infinite", "addToRandom", article, myProb.getText());
-
+		if (myMode.getValue().equals(RANDOM)) {
+			myController.callEvent("infinite", "addToRandom", myProb.getText());
+			updateTableR();
+		} else {
+			updateTableC();
+		}
+		println(myProb.getText());
+	}
+	
+	private void updateTableR() {
+		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		myTableR.setItems(null);
+		tableMaker(myTableR,["Articles", "Probability"]);
+	}
+	
+	private void updateTableC() {
+		
 	}
 
 }
