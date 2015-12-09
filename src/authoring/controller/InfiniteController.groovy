@@ -22,7 +22,7 @@ class InfiniteController {
     private Article currentArticle;
     private List<Article> articleList;
 
-    public InfiniteController(AuthoringController ac, mc){
+    public InfiniteController(AuthoringController ac, ModelController mc){
         myAuthoringController = ac;
         myModelController = mc;
         randomGenMap = new HashMap<>();
@@ -31,10 +31,11 @@ class InfiniteController {
         articleList = new ArrayList<>();
     }
 
-    public addToRandom(double d){
+    public addToRandom(String prob){
+        double d = Double.parseDouble(prob);
         randomGenMap.put(currentArticle, d);
         currentArticle = null;
-        println("hi");
+        println("yi");
     }
 
     public getRandomMap(){
@@ -61,7 +62,8 @@ class InfiniteController {
     }
 
     public genRandom(){
-        myModelController.g
+        myModelController.makeGen(randomGenMap);
+        println("hi");
         randomGenMap = new HashMap<>();
     }
 
@@ -71,7 +73,6 @@ class InfiniteController {
     }
 
     public makeArticle(e, Pane inf){
-        println("po")
         String image = e.getGestureSource().getImageName();
         currentArticle = new Article(image,0,0,true);
         articleList.add(currentArticle);

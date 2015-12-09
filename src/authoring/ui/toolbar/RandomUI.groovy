@@ -11,6 +11,7 @@ import javafx.scene.control.TextField
 import javafx.scene.layout.Pane
 import javafx.scene.text.Text
 import main.VoogaProperties
+import model.article.Article
 
 public class RandomUI extends Pane {
 
@@ -90,6 +91,7 @@ public class RandomUI extends Pane {
 		myEdit.setPrefSize(70,10);
 		mySave.setPrefSize(70,10);
 		mySave.setOnAction({save()});
+		myEdit.setOnAction({edit()});
 	}
 	
 	private void tableMaker(TableView table, ArrayList<String> str) {
@@ -110,8 +112,6 @@ public class RandomUI extends Pane {
 	private void drag() {
 		myDrag.setPrefSize(300,300);
 		myDrag.getStyleClass().add("ass");
-		//myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
-		
 	}
 	
 //	private void newEntry() {
@@ -183,9 +183,28 @@ public class RandomUI extends Pane {
 	}
 	
 	private void save() {
-		if (myMode.getValue().equals(RANDOM))
-			myController.callEvent("infinite", "addToRandom", article, myProb.getText());
+		myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+		if (myMode.getValue().equals(RANDOM)) {
+			myController.callEvent("InfiniteController", "addToRandom", myProb.getText());
+			updateTableR();
+		} else {
+			updateTableC();
+		}
+		println(myProb.getText());
+	}
 
+	private void edit(){
+		myController.callEvent("InfiniteController", "genRandom");
+	}
+	
+	private void updateTableR() {
+		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		myTableR.setItems(null);
+		tableMaker(myTableR,["Articles", "Probability"]);
+	}
+	
+	private void updateTableC() {
+		
 	}
 
 }
