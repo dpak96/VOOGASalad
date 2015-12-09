@@ -137,6 +137,9 @@ public class Model extends Observable{
 	}
 	public void setCharacter(Article character) {
 		myCharacter = character;
+		myCharacter.setLife(character.getLife());
+		myCharacter.setScore(character.getScore());
+		myCharacter.setHealth(character.getHealth());
 	}
 
 	public void remapButton(String button, List<Event> events) {
@@ -224,6 +227,7 @@ public class Model extends Observable{
 	
 	public void setBackgroundImage(String backgroundImage){
 		myBackgroundImage = backgroundImage;
+		notifyObservers();
 	}
 	
 	public String getBackgroundImage(){
@@ -254,6 +258,10 @@ public class Model extends Observable{
 	
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event){
 		myCollisionTypeEditor.add(direction, nameOne, nameTwo, event);
+	}
+	
+	public void removeExistingCollisonEvent(Event event){
+		myCollisionTypeEditor.remove(event);
 	}
 	
 	public CollisionTypeEditor getCollisionTypeEditor() {

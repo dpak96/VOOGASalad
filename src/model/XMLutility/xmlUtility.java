@@ -52,7 +52,6 @@ public class xmlUtility {
 		try {
 			myStream = new XStream(new DomDriver());
 			myStream.processAnnotations(ModelAnnotations.class);
-			System.out.println("fuck");
 			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			for (Executable f: ((Model) readObject).getExecutables()) {
@@ -100,12 +99,12 @@ public class xmlUtility {
 		myStream.omitField(Observable.class, "changed");
 		//myStream.omitField(xmlUtility.class, "xmlUtil");
 		//myStream.omitField(LevelManager.class, "myLevelManager");
-		for(Article a: myModelController.getArticles()) {
-			a.destroyBitMap();
-			System.out.println("destroyed");
-		}
-		myModelController.getViewpoint().destroyBitMap();
-		myModelController.getCharacter().destroyBitMap();
+		//for(Article a: myModelController.getArticles()) {
+			//a.destroyBitMap();
+			//System.out.println("destroyed");
+		//} 
+		//myModelController.getViewpoint().destroyBitMap();
+		//myModelController.getCharacter().destroyBitMap();
 		for (Executable f: myModelController.getExecutables()) {
 			if (f instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) f).destroyLevelManager();

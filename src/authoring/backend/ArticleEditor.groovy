@@ -8,14 +8,12 @@ class ArticleEditor extends Editor {
     super(mc);
   }
 
-  public Article createNewArticleAndPlace(String name,
-      String imageFileName,
-      Double x,
-      Double y,
-      Boolean direction) {
+  public Article createNewArticleAndPlace(String name,imageFileName,
+      x,
+      y, direction) {
     double xAdjusted = x;
     double yAdjusted = y;
-    return myModelController.createArticle(imageFileName, xAdjusted, yAdjusted,
+    return myModelController.createArticleFromCenter(imageFileName, xAdjusted, yAdjusted,
         direction);
   }
 

@@ -68,8 +68,8 @@ public class ModelController implements IModelController {
 	
 	public Article createArticleFromCenter(String fileName, double x, double y, boolean direction){
 		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", fileName);
-		double adjustedX = x - img.getWidth();
-		double adjustedY = y - img.getHeight();
+		double adjustedX = x - (img.getWidth()/2);
+		double adjustedY = y - (img.getHeight()/2);
 		return createArticle(fileName, adjustedX, adjustedY, direction);
 	}
 
@@ -105,11 +105,13 @@ public class ModelController implements IModelController {
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables) {
 		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
 		addEvent(newEvent);
+		System.out.println("Creating Event named "+ newEvent.getMyName());
 		return newEvent;
 	}
 
 	public void addEvent(Event newEvent) {
 		myModel.addEvent(newEvent);
+		System.out.println("Adding Event named "+ newEvent.getMyName());
 	}
 
 	public void removeEvent(Event event) {
@@ -154,6 +156,12 @@ public class ModelController implements IModelController {
 	@Override
 	public void remapButton(String button, List<Event> events) {
 		myModel.remapButton(button, events);
+	}
+	
+	public void remapButton(String button, Event event){
+		List<Event> temp = new ArrayList<Event>();
+		temp.add(event);
+		remapButton(button, temp);
 	}
 
 	@Override
@@ -257,6 +265,10 @@ public class ModelController implements IModelController {
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event) {
 		myModel.addCollision(direction, nameOne, nameTwo, event);
 	}
+	
+	public void removeCollisionEvent(Event event){
+		myModel.removeExistingCollisonEvent(event);
+	}
 
 	public void initializeCollision() {
 		myModel.initializeCollision();
@@ -292,6 +304,15 @@ public class ModelController implements IModelController {
 
 	public List<Event> getAllEvents() {
 		return myModel.getAllEvents();
+	}
+	
+	public List<List<Event>> getAllEventLists(){
+	    List<List<Event>> eventLists=new ArrayList<List<Event>>();
+	    eventLists.add(myModel.getAllEvents());
+	    eventLists.add(myModel.getActiveEvents());
+	   
+	    return eventLists;
+	    
 	}
 
 	public void setRandomGenerator(Map<Article, Double> probabilities) {

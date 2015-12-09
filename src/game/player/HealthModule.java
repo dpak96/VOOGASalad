@@ -1,10 +1,10 @@
 package game.player;
 
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.article.Article;
 
-public class HealthModule extends VBox {
+public class HealthModule extends HUDModule {
 	
 	private Text myHealthVal;
 	private ProgressBar myHealthBar;
@@ -24,8 +24,9 @@ public class HealthModule extends VBox {
 		this.getChildren().addAll(myHealthVal,myHealthBar);
 	}
 	
-	public void update(double health){
-		if(myFirstUpdate){
+	public void update(Article character){
+		double health = character.getHealth();
+		if(myFirstUpdate||myInitialHealth==0||character.getHealth()>myInitialHealth){
 			myInitialHealth = health;
 			myFirstUpdate = !myFirstUpdate;
 		}

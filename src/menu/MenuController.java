@@ -6,10 +6,13 @@ import level.manager.XMLOrderer;
 import main.GraphicHandler;
 import model.Model;
 import model.controller.ModelController;
+import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
 import uibasics.UIStackPane;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class MenuController {
@@ -129,16 +132,32 @@ public class MenuController {
     	myFileChooser.setTitle("New Image File");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("PNG Images (*.png)", "*.png");
-		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");  
+		FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG Images (*.jpg)", "*.jpg");
 		myFileChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
 //    	myFileChooser.setInitialDirectory(levelDir);
         List<File> images = myFileChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
         if(images != null){
         	for(File image : images){
-            	File target = new File("resources/images/articles" + File.pathSeparator + image.getName());
-            	image.renameTo(target);
+            	File target = new File("src"
+        				+ System.getProperty("file.separator")
+        				+ "resources" + System.getProperty("file.separator")+ "images" 
+        				+ System.getProperty("file.separator") + imageType + System.getProperty("file.separator") + image.getName());
+            	File target2 = new File("src"
+        				+ System.getProperty("file.separator")
+        				+ "resources" + System.getProperty("file.separator")+ "images" 
+        				+ System.getProperty("file.separator") + image.getName());
+            	try {
+					Files.copy(image.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(image.toPath(), target2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
+        	ResourceManager.getResourceManager().refreshImages();
         }
+        
         
 //        try {
 ////        	dir.mkdir();
@@ -156,6 +175,10 @@ public class MenuController {
 
     public MainMenu getMenu(){
         return myMainMenu;
+    }
+    
+    public String getGameName(){
+    	return game.getName();
     }
 
 

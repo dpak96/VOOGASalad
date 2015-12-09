@@ -22,11 +22,11 @@ public class HighlightedArticle extends DraggableElement {
         super.dragDetected();
         //super.dragEnd();
         init(authoringController);
-        authoringController.extendEvent("init");
+        //authoringController.callEvent("ArticleExtenderController","init");
     }
 
     public void init(AuthoringController authoringController){
-        this.setOnMouseClicked(event -> authoringController.dragEvent("tempButtonClick",event));
+        this.setOnMouseClicked(event -> authoringController.callEvent("DragAndDropController","tempButtonClick",event));
     }
 
 }

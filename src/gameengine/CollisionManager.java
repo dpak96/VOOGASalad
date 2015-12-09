@@ -4,6 +4,11 @@
 
 package gameengine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import model.article.Article;
 import model.article.Position;
 
@@ -58,44 +63,57 @@ public class CollisionManager {
 	
 	//NEED TO FIX LOGIC FROM LEFT
 	private String getIncidenceDirection(Article a, Article b) {
-		if (a.getX()+a.getWidth() <= b.getX()) {
-			if (a.getY()+a.getHeight() <= b.getY()+b.getHeight() && a.getY()+a.getHeight() >= b.getY()) {
-				return "Left";
-			} else if (a.getY() <= b.getY()+b.getHeight() && a.getY() >= b.getY()) {
-				return "Left";
-			} else {
-				return "Left";
-			}
+		
+		double pL = a.getX();             //left
+		double pR = pL + a.getWidth();   //right
+		double pT = a.getY();             //bottom
+		double pB = pT + a.getHeight();
+		double tL = b.getX();               //left
+		double tR = tL + b.getWidth();
+		double tT = b.getY();
+		double tB = tT + b.getHeight();
+			String[] directions = {"Left", "Right", "Bottom", "Top"};
+		    Double inf = Double.MAX_VALUE;
+		    List<Double> intersect_diffs = new ArrayList<Double>(Arrays.asList(inf, inf, inf, inf));
+		    if(pR > tL && pL < tL)         
+		    	// Player on left
+		    	intersect_diffs.remove(0);
+		        intersect_diffs.add(0, Math.abs(pR - tL));
+		    if(pL < tR && pR > tR)             // Player on Right
+		    	intersect_diffs.remove(1);
+		        intersect_diffs.add(1, Math.abs(tR - pL));
+		    if(pT > tB && pB < tB)             // Player on Bottom
+		        intersect_diffs.remove(2);
+		    	intersect_diffs.add(2, Math.abs(pT - tB));
+		    if(pB < tT && pT > tT)             // Player on Top
+		    	intersect_diffs.remove(3);
+		    	intersect_diffs.add(3, Math.abs(tT - pB));
+		    Collections.min(intersect_diffs);
+		    // return the closest intersection
+		    System.out.println(directions[intersect_diffs.indexOf(Collections.min(intersect_diffs))]);
+		    return directions[intersect_diffs.indexOf(Collections.min(intersect_diffs))];
+
+		
+		/**System.out.println("Article A X: " + a.getX());
+		System.out.println("Article A Width: " + a.getWidth());
+		System.out.println("Article B X: " + b );
+
+		if (a.getX()+a.getWidth()/2 <= b.getX()) {
+			System.out.println("Left");
+			return "Left";
 			
-		} else if (a.getX() >= b.getX()+b.getWidth()) {
-			if (a.getY()+a.getHeight() <= b.getY()+b.getHeight() && a.getY()+a.getHeight() >= b.getY()) {
-				return "Right";
-			} else if (a.getY() <= b.getY()+b.getHeight() && a.getY() >= b.getY()) {
-				return "Right";
-			} else {
-				return "Right";
-			}
+		} else if (a.getX() >= b.getX()+b.getWidth()/2 && (a.getY()+a.getHeight() >= b.getY())) {
+			System.out.println("Right");
+			return "Right";
 		} 
 		
-		if (a.getY()+a.getHeight() <= b.getY()) {
-			if (a.getX()+a.getWidth() <= b.getX()+b.getWidth() && a.getX()+a.getWidth() >= b.getX()) {
-				return "Top";
-			} else if (a.getX() <= b.getX()+b.getWidth() && a.getX() >= b.getX()) {
-				return "Top"; 
-			} else {
-				return "Top";
-			}
-		} else if (a.getY() >= b.getY()+b.getHeight()) {
-			if (a.getX()+a.getWidth() <= b.getX()+b.getWidth() && a.getX()+a.getWidth() >= b.getX()) {
-				return "Bottom";
-			} else if (a.getX() <= b.getX()+b.getWidth() && a.getX() >= b.getX()) {
-				return "Bottom"; 
-			} else {
-				return "Bottom";
-			}
-			
-		}
-		return "Left";
+		if (a.getY()+a.getHeight()/2 <= b.getY()) {
+			System.out.println("Top");
+			return "Top";
+		} else if (a.getY() >= b.getY()+b.getHeight()/2) {
+			System.out.println("Bottom");
+			return "Bottom";
+		}**/
 	}
 
 	private CollisionInformation checkBitMapCollision(Article b, Article a) {

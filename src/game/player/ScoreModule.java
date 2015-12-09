@@ -7,12 +7,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import model.article.Article;
 
-public class ScoreModule extends VBox {
+public class ScoreModule extends HUDModule {
 	
 	private Text myHeader;
 	private HBox myScore;
 	private Double myOffset;
+	
 	
 	public ScoreModule(){
 		super();
@@ -22,7 +24,8 @@ public class ScoreModule extends VBox {
 		this.getChildren().addAll(myHeader,myScore);
 	}
 	
-	public void initScore(Double offset){
+	@Override
+	public void init(double offset){
 		ArrayList<VBox> ret = new ArrayList<VBox>();
 		myOffset = offset;
 		for(int i = 0; i<4; i++){
@@ -37,8 +40,10 @@ public class ScoreModule extends VBox {
 		myScore.getChildren().addAll(ret);
 	}
 	
-	public void update(double score){
+	@Override
+	public void update(Article character){
 		//scoreCheck(score);
+		double score = character.getScore();
 		Double score2 = score;
 		int score3 = score2.intValue();
 		for(int i = myScore.getChildren().size()-1; i>=0; i--){

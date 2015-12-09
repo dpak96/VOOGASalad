@@ -39,7 +39,7 @@ public class Article{
 		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
-		myBitMap = new BitMap(image, x, y);	
+		//myBitMap = new BitMap(image, x, y);	
 		myStatus = Status.ACTIVE;
 	}
 
@@ -48,7 +48,7 @@ public class Article{
 	public Article(String file, double x, double y) {
 		myImageFile = file;
 		myPosition = new Position(x, y);
-		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		//myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
 
 	}
 
@@ -138,6 +138,10 @@ public class Article{
 		myLife.removeHealth(myDamage);
 	}
 
+	public void gainLife(int life) {
+		myLife.addLife(life);
+	}
+	
 	public void gainLife(){
 		myLife.addLife();
 	}
@@ -146,8 +150,16 @@ public class Article{
 		myLife.removeLife();
 	}
 	
+	public void removeLife(int life) {
+		myLife.removeLife(life);
+	}
+	
 	public void setLife(int value) {
 		myLife.setLife(value);
+	}
+	
+	public void setHealth(double value){
+		myLife.setHealth(value);
 	}
 	
 	public void gainHealth(double myHealthGain){
@@ -155,7 +167,22 @@ public class Article{
 	}
 	
 	public void setScore(double score) {
-		myScore.setScore(myScore.getScore()+score);
+		myScore.removeScore(myScore.getScore());
+		myScore.gainScore(score);
+	}
+	public void gainScore(double score) {
+		myScore.gainScore(myScore.getScore()+score);
+	}
+	
+	public void gainScore() {
+		myScore.gainScore();
+	}
+	public void removeScore(double score) {
+		myScore.removeScore(score);
+	}
+	
+	public void removeScore() {
+		myScore.removeScore();
 	}
 	
 	public double getScore() {

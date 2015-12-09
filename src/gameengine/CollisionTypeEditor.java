@@ -68,6 +68,16 @@ public class CollisionTypeEditor {
 		collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex).add(event);
 	}
 	
+	public void remove(Event event){
+		for(int matrixIndex = 0; matrixIndex < MATRIX_NUMBER; matrixIndex++){
+			for (int typeOneIndex = 0; typeOneIndex < collisionMatrix.get(matrixIndex).size(); typeOneIndex++){
+				for (int typeTwoIndex = 0; typeTwoIndex < collisionMatrix.get(matrixIndex).get(typeTwoIndex).size(); typeTwoIndex++){
+					collisionMatrix.get(matrixIndex).get(typeTwoIndex).remove(event);
+				}
+			}
+		}
+	}
+	
 	public List<Event> getEvents(String direction, String nameOne, String nameTwo){
 		int matrixIndex = MATRIX_NAMES.indexOf(direction);
 		int typeOneIndex = collisionTypeName.indexOf(nameOne);

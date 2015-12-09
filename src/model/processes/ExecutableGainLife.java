@@ -12,5 +12,8 @@ public class ExecutableGainLife extends Executable{
 	public void execute() {
 		myActor.gainLife();
 	}
-
+	
+	public void execute(int life) {
+		myActor.gainLife(life);
+	}
 }
