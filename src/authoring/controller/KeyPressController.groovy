@@ -11,20 +11,20 @@ import uibasics.KeyPress
  */
 class KeyPressController {
 
-    private AuthoringController authoringController;
+    private AuthoringController myAuthoringController;
     KeyPressController(AuthoringController authoring){
-        authoringController = authoring;
-        authoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  authoringController.callEvent("ArticleExtenderController","addTile",event)});
-        authoringController.getUi().getDragAndDrop().getScene().setOnKeyPressed({ event->  pressButtons(event)});
+        myAuthoringController = authoring;
+        myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  myAuthoringController.callEvent("ArticleExtenderController","addTile",event)});
+        myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyPressed({ event->  pressButtons(event)});
     }
 
     private pressButtons(event){
         println("i")
-        if(event.getCode() == KeyCode.D){
+        if(event.getCode() == KeyCode.P){
             println("hi")
-            authoringController.callEvent("OtherController","deleteArticle",authoringController.getCurrentArticle());
+            myAuthoringController.callEvent("OtherController","deleteArticle",myAuthoringController.getCurrentArticle());
         }
-        Article view = authoringController.callEvent("OtherController", "getViewPoint")
+        Article view = myAuthoringController.callEvent("OtherController", "getViewPoint")
         if(event.getCode() == KeyCode.RIGHT){
             view.setX(view.getX()+50);
             deleteButton();
@@ -46,12 +46,12 @@ class KeyPressController {
     }
 
     private deleteButton(){
-        if(authoringController.getCurrentButton() != null){
-            Button b = authoringController.getCurrentButton();
+        if(myAuthoringController.getCurrentButton() != null){
+            Button b = myAuthoringController.getCurrentButton();
             Pane p = (Pane) b.getParent();
             p.getChildren().remove(b);
-            authoringController.setHighlighted(false);
-            authoringController.setCurrentButton(null);
+            myAuthoringController.setHighlighted(false);
+            myAuthoringController.setCurrentButton(null);
         }
     }
 }
