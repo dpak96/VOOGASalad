@@ -1,18 +1,13 @@
-package authoring.ui.toolbar;
+package authoring.ui.toolbar
 
-import authoring.controller.AuthoringController;
-import authoring.ui.editingmenus.RandomMenu
-import java.beans.EventHandler
-import javafx.beans.value.ChangeListener
-import javafx.beans.value.ObservableValue
-import javafx.event.ActionEvent
+import authoring.controller.AuthoringController
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import main.VoogaProperties;
+import javafx.scene.layout.Pane
+import javafx.scene.text.Text
+import main.VoogaProperties
 
 public class RandomUI extends Pane {
 
@@ -26,7 +21,7 @@ public class RandomUI extends Pane {
 	
 	private Text myText;
 	private Pane myDrag;
-	private TableView myTable;
+	private TableView myTableR, myTableC;
 	private ComboBox myMode, myArticles;
 	private AuthoringController myController;
 	private Button myEdit, mySave;
@@ -36,7 +31,8 @@ public class RandomUI extends Pane {
 		myController = controller;
 		myText = new Text();
 		myMode = new ComboBox();
-		myTable = new TableView();
+		myTableR = new TableView();
+		myTableC = new TableView();
 		myRepeats = new ArrayList<RepeatingArticle>();
 		myEdit = new Button();
 		mySave = new Button();
@@ -50,19 +46,21 @@ public class RandomUI extends Pane {
 //		LEFT_OFFSET = vooga.getSceneWidth()/2 - 75;
 		setPrefSize(vooga.getSceneWidth(),vooga.getSceneHeight());
 		getStyleClass().add("Thingy2");
-		getChildren().addAll(myText, myMode, myTable, myEdit, mySave, myDrag);
+		getChildren().addAll(myText, myMode, myEdit, mySave, myDrag);
 		box();
 		buttons();
-		table();
 		drag();
 		setPositions();
+		myMode.setValue("Make " + RANDOM);
+		tableMaker(myTableR, ["Articles", "Probability"]);
+		tableMaker(myTableC, ["Articles"]);
 		makeRandom();
 	}
 	
 	private void box() {
 		myMode.getItems().addAll(RANDOM, CONSTANT);
 		myMode.setPrefSize(300,15);
-//		myMode.valueProperty().addListener({toggle();});
+		myMode.setOnAction({toggle()});
 	}
 	
 	private void buttons() {
@@ -70,22 +68,21 @@ public class RandomUI extends Pane {
 		mySave.setText("Save");
 		myEdit.setPrefSize(70,10);
 		mySave.setPrefSize(70,10);
-//		mySave.addEventHandler(event, save());
-//		myEdit.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override public void handle(ActionEvent e) {
-//				label.setText("Accepted");
-//			}
-//		});
 	}
 	
-	private void table() {
-		myTable.setEditable(true);
-		myTable.setPrefSize(300, 300);
-		TableColumn article = new TableColumn("Article Group");
-		article.setWidth(myTable.getPrefWidth()/2);
-		TableColumn prob = new TableColumn("Probilities");
-		prob.setPrefWidth(myTable.getPrefWidth()/2);
-		myTable.getColumns().addAll(article,prob);
+	private void tableMaker(TableView table, ArrayList<String> str) {
+		table.setEditable(true);
+		table.setPrefSize(300, 300);
+		for (String s: str) {
+			TableColumn col = new TableColumn(s);
+			col.setPrefWidth(table.getPrefWidth()/(str.size()));
+			table.getColumns().add(col);
+		}
+//		TableColumn article = new TableColumn("Article Group");
+//		article.setWidth(myTableR.getPrefWidth()/2);
+//		TableColumn prob = new TableColumn("Probilities");
+//		prob.setPrefWidth(myTableR.getPrefWidth()/2);
+//		myTableR.getColumns().addAll(article,prob);
 	}
 	
 	private void drag() {
@@ -93,11 +90,11 @@ public class RandomUI extends Pane {
 		myDrag.getStyleClass().add("ass");
 	}
 	
-	private void newEntry() {
-		TableColumn col = new TableColumn("Ass boners");
-		col.setCellValueFactory("Ching chong");
-		myTable.getColumns().add(col);
-	}
+//	private void newEntry() {
+//		TableColumn col = new TableColumn("Ass boners");
+//		col.setCellValueFactory("fuck slut");
+//		myTable.getColumns().add(col);
+//	}
 	
 	private void setPositions() {
 		myText.getStyleClass().add("random");
@@ -105,8 +102,10 @@ public class RandomUI extends Pane {
 		myText.setLayoutY(LEFT_Y);
 		myMode.setLayoutX(LEFT_X);
 		myMode.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight());
-		myTable.setLayoutX(LEFT_X);
-		myTable.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
+		myTableR.setLayoutX(LEFT_X);
+		myTableR.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
+		myTableC.setLayoutX(LEFT_X);
+		myTableC.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
 		myDrag.setLayoutX(PANE_X);
 		myDrag.setLayoutY(LEFT_Y + myText.getBoundsInParent().getHeight() + myMode.getPrefHeight() + MARGIN);
 		myEdit.setLayoutX(PANE_X + myDrag.getPrefWidth()/2 - myEdit.getPrefWidth());
@@ -115,31 +114,26 @@ public class RandomUI extends Pane {
 		mySave.setLayoutY(PANE_Y + myDrag.getPrefHeight());
 	}
 	
-	private void makeDrag() {
-		myText.getStyleClass().add("random");
-		setOnDragDropped({event -> react(event)});
-		myText.setLayoutX(200 /*- myText.getBoundsInParent().getWidth()*/);
-		myText.setLayoutY(TOP_OFFSET);
-		myDrag.setLayoutX(LEFT_OFFSET - myDrag.getWidth()  - 20 /*myText.getBoundsInParent().getWidth()*/);
-		myDrag.setLayoutY(TOP_OFFSET + myText.getBoundsInParent().getHeight()/2);
-	}
-	
 	private void makeRandom() {
 		myText.setText("Make " + RANDOM);
-		println(myText.getBoundsInLocal().getHeight() + "Ass Boners " + myText.getBoundsInParent().getHeight())
-		myMode.setValue(RANDOM);
-//		newEntry();
+		if (getChildren().contains(myTableC))
+			getChildren().remove(myTableC);
+		if (!getChildren().contains(myTableR))
+			getChildren().add(myTableR);
 	}
 	
 	private void makeConstant() {
 		myText.setText("Make " + CONSTANT);
-		myMode.setValue(CONSTANT);
+		if (getChildren().contains(myTableR))
+			getChildren().remove(myTableR);
+		if (!getChildren().contains(myTableC))
+			getChildren().add(myTableC);
 	}
 	
 	private void toggle() {
-		if (myMode.getValue().equals(RANDOM))
+		if (myMode.getValue().equals(CONSTANT))
 			makeConstant();
-		else
+		else if (myMode.getValue().equals(RANDOM))
 			makeRandom();
 	}
 	
