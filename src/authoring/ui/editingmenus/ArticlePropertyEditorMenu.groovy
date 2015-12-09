@@ -88,7 +88,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		super.componentAdder.makeLabel(menuGrid,1,rowIndex, "Initial Score: ");
 		textFieldPropertyMap.put("SCORE", super.componentAdder.makeField(menuGrid, 2,rowIndex++));
 
-		comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.getCollisionTypes());
+		comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.callEvent("OtherController","getCollisionTypes"));
 		imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
 		initializeFieldValues();
 	}
