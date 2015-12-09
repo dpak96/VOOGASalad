@@ -11,7 +11,7 @@ class ArticleCAndGController {
     public editor;
     public authoring;
 
-    public ArticleCAndGController(edit, au){
+    public ArticleCAndGController(AuthoringController au){
         editor = edit;
         authoring = au;
     }

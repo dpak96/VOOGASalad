@@ -16,7 +16,7 @@ class DragAndDropController {
     private authoringController;
     private double borderwidth = 4;
 
-    public DragAndDropController(authoring){
+    public DragAndDropController(AuthoringController authoring){
         authoringController = authoring;
     }
 

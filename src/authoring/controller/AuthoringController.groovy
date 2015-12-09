@@ -6,8 +6,7 @@ import authoring.ui.AuthoringUI;
 import model.Event;
 import model.article.Article;
 import model.controller.ModelController;
-import resourcemanager.ResourceManager
-
+import resourcemanager.ResourceManager;
 import java.lang.reflect.Constructor
 
 
@@ -26,11 +25,12 @@ public class AuthoringController {
 		modelController = mc;
 		editor = new EditorManager(mc);
 		presetArticleFactory = new PresetArticleFactory(mc, this);
+		register();
 	}
 
 
-	public void register(ModelController mc){
-		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
+	public void register(){
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
 		controllerMap = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
 			controllerMap.put(x, getNewInstance(rb.getString(x)));
@@ -39,12 +39,14 @@ public class AuthoringController {
 
 	private getNewInstance(String cName){
 		Class<?> cl = Class.forName(cName);
-		Constructor<?> ctor = cl.getConstructor(AuthoringController.class);
 		Object[] o = new Object[1];
-		if(cName != "OtherController"){
+		Constructor<?> ctor = null;
+		if(!cName.equals("authoring.controller.OtherController")){
+			ctor = cl.getConstructor(AuthoringController.class);
 			o[0] = this;
 		}
 		else{
+			ctor = cl.getConstructor(ModelController.class);
 			o[0] = modelController;
 		}
 		Object object = ctor.newInstance(o);
