@@ -87,7 +87,7 @@ public class RandomMenu extends AuthoringMenu {
 
 
        
-        comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.getCollisionTypes());
+        comboBoxPropertyMap.get("COLLISION").getItems().addAll(super.myController.callEvent("OtherController","getCollisionTypes"));
         imageBoxHandler.addImages(comboBoxPropertyMap.get("IMAGE"));
         initializeFieldValues();
     }

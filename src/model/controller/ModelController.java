@@ -293,6 +293,15 @@ public class ModelController implements IModelController {
 	public List<Event> getAllEvents() {
 		return myModel.getAllEvents();
 	}
+	
+	public List<List<Event>> getAllEventLists(){
+	    List<List<Event>> eventLists=new ArrayList<List<Event>>();
+	    eventLists.add(myModel.getAllEvents());
+	    eventLists.add(myModel.getActiveEvents());
+	   
+	    return eventLists;
+	    
+	}
 
 	public void setRandomGenerator(Map<Article, Double> probabilities) {
 		myModel.setRandomGenerator(probabilities);

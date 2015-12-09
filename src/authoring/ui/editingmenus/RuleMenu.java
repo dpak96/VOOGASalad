@@ -56,7 +56,7 @@ public class RuleMenu extends AuthoringMenu {
         menuPane.add(paramGrid, 1, 4, 3, 1);
 
         ObservableList<Event> eventData =
-                FXCollections.observableArrayList(super.myController.getEventList());
+                FXCollections.observableArrayList((List<Event>)this.myController.callEvent("OtherController","getEventList"));
 
         eventTable.setItems(eventData);
 
@@ -113,8 +113,7 @@ public class RuleMenu extends AuthoringMenu {
 
         Button removeExecutable = new Button();
         removeExecutable.setGraphic(tableConfig.setImageMinus());
-        removeExecutable.setOnAction(e -> executableTable.getItems()
-                .remove(executableTable.getSelectionModel().getSelectedItem()));
+        removeExecutable.setOnAction(e -> tableConfig.deleteExecutable(executableTable, selectedEvent, selectedExecutable));
         menuPane.add(removeExecutable, 6, 3);
 
     }
@@ -132,7 +131,7 @@ public class RuleMenu extends AuthoringMenu {
 
         
         Button removeCondition = new Button();
-        removeCondition.setOnAction(e -> conditionTable.getItems().remove(selectedCondition));
+        removeCondition.setOnAction(e ->tableConfig.deleteCondition(conditionTable, selectedEvent, selectedCondition));
         removeCondition.setGraphic(tableConfig.setImageMinus());
         menuPane.add(removeCondition, 4, 3);
 
@@ -144,7 +143,7 @@ public class RuleMenu extends AuthoringMenu {
 
         Button addEvent = new Button();
         addEvent.setOnAction(e -> new AddEventMenu("Add Event", myController, eventTable,
-                                                   myController.getEventList()));
+                (List<Event>)this.myController.callEvent("OtherController","getEventList")));
         addEvent.setGraphic(tableConfig.setImagePlus());
         menuPane.add(addEvent, 1, 3);
 
