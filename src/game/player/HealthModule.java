@@ -26,7 +26,7 @@ public class HealthModule extends HUDModule {
 	
 	public void update(Article character){
 		double health = character.getHealth();
-		if(myFirstUpdate||myInitialHealth==0){
+		if(myFirstUpdate||myInitialHealth==0||character.getHealth()>myInitialHealth){
 			myInitialHealth = health;
 			myFirstUpdate = !myFirstUpdate;
 		}
