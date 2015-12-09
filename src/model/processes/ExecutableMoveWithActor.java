@@ -16,9 +16,7 @@ public class ExecutableMoveWithActor extends Executable {
 	@Override
 	public void execute() {
 		myActor.setXVelocity(actorToFollow.getXVelocity());
-		System.out.println("myVelocity: " + myActor.getX());
 		myActor.setYVelocity(actorToFollow.getYVelocity());
-		System.out.println("myVelocity: " + myActor.getY());
 	}
 
 }

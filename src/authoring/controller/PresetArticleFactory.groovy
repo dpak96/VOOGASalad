@@ -301,7 +301,6 @@ public class PresetArticleFactory {
 
 		
 		//ViewPoint move from left 
-
 		Article myViewpoint = modelController.getViewpoint();
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);

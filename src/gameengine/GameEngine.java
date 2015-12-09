@@ -46,8 +46,7 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runActiveEvents();
 		runArticleUpdates();
-		myModelController.update();		
-
+		myModelController.update();	
 	}
 	
 	private void checkAndAddCollisions(){
@@ -119,7 +118,6 @@ public class GameEngine implements IGameEngine {
 //			double viewpointY = myViewpoint.getY();
 //			double viewpointWidth = myViewpoint.getWidth();
 //			double viewpointHeight = myViewpoint.getHeight();
-//			//System.out.println(viewpointHeight + " " + viewpointWidth);
 //			double xBuffer = article.getXBuffer();
 //			double yBuffer = article.getYBuffer();
 //			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
@@ -196,18 +194,14 @@ public class GameEngine implements IGameEngine {
 //		CollisionFinder test = new CollisionFinder(one.getBitMap().getByteArray());
 ////		while(test.hasNext()) {
 ////			Position temp = test.next();
-////			System.out.println(temp.getX() + " " + temp.getY());
 ////		}
 //		
 //		for(Position[] a: one.getBitMap().getByteArray()) {
 //			for(Position p: a) {
 //				if(p.isValidPosition()) {
-//					System.out.print(" " + p.getX() + " " + p.getY());
 //				} else {
-//					System.out.print(" -1 -1");
 //				}
 //			}
-//			System.out.println(" ");
 //		}
 //	}
 	

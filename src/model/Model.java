@@ -54,6 +54,7 @@ public class Model extends Observable{
 	
 	public void update(){
 		randomGenerator.update();
+		System.out.println(myArticles.size());
 	}
 	
 	public void setRandomGenerator(Map<Article, Double> probabilities){
