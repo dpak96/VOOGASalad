@@ -15,6 +15,7 @@ public class CollisionTypeEditor {
 	public CollisionTypeEditor() {
 		// TODO Auto-generated constructor stub
 		collisionTypeName = new ArrayList<String>();
+		collisionMatrix = new ArrayList<List<List<List<Event>>>>();
 	}
 	
 	private List<List<List<Event>>> createNewEventMatrix(){
