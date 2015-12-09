@@ -62,7 +62,6 @@ class DragAndDropController {
 
 
     public void dropElement(event){
-        println("WHAT ON EARTH");
         if(event.getGestureSource() instanceof HighlightedArticle){
             HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
             double tempX = highlightedArticle.getLayoutX()+myBorderWidth +0.1;
