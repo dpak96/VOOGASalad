@@ -41,7 +41,6 @@ public class PresetArticleFactory {
 		myVegeta = new VegetaPreset(ac, mc);
 		myDoodle = new DoodleJumpPreset(ac, mc);
 		myFlappy = new FlappyPreset(ac, mc);
-		
 	}
 
 	public void platformMovement(Article article) {
@@ -55,11 +54,11 @@ public class PresetArticleFactory {
 	public void noClipMovement(Article article) {
 		myVegeta.noClipMovement(article);
 	}
-	
+
 	public void doodlePlayer(Article article) {
 		myDoodle.player(article);
 	}
-	
+
 	public void flappyPlayer(Article article){
 		myFlappy.player(article);
 	}
