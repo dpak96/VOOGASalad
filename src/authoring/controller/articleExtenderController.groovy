@@ -30,11 +30,11 @@ class ArticleExtenderController {
     public void addTile(KeyEvent event) {
         updateArticle(event);
         initRightAndLeft(event);
-        buttonCheckAndExtend();
+        buttonCheckAndExtend(event);
     }
 
     private updateArticle(event){
-        if(authoringController.getCurrentArticle() != current){
+        if(authoringController.getCurrentArticle().equals(current)){
             current = authoringController.getCurrentArticle();
             initWith = current.getWidth();
         }
@@ -50,17 +50,18 @@ class ArticleExtenderController {
     }
 
     private buttonCheckAndExtend(event){
-        if (checkClick(right)) {
+        if (checkClick(event,right)) {
             extend();
         }
-        else(checkClick(left)){
-            newXLeft -= current.getwidth();
+        if (checkClick(event,left)){
+            newXLeft -= initWith;
             extend();
+            current.setX(newXLeft);
         }
 
     }
 
-    private whichClick(input){
+    private checkClick(event,input){
         return (event.getCode() == input && event.isControlDown());
     }
 
