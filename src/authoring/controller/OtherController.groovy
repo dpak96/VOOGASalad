@@ -1,10 +1,8 @@
 package authoring.controller
 
-<<<<<<< Updated upstream
+
 import javafx.scene.control.Button
 import javafx.scene.layout.Pane
-=======
->>>>>>> Stashed changes
 import model.Event
 import model.article.Article
 import model.controller.ModelController
