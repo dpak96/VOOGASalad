@@ -11,6 +11,8 @@ import model.*;
 import model.XMLutility.xmlUtility;
 import model.article.Article;
 import model.factory.*;
+import model.generationutility.ConstantGenerationUtility;
+import model.generationutility.RandomGenerationUtility;
 import model.processes.Condition;
 import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
@@ -32,6 +34,17 @@ public class ModelController implements IModelController {
 		initializeCollision();
 		myModelFactory = new ModelFactory();
 		myXMLUtility = new xmlUtility(this);
+	}
+	
+	public ConstantGenerationUtility makeConstantGenerationUtility(List<List<Article>> generationOptions, 
+			double xDistance, double yDistance, 
+			double viewpointXOffset, double viewpointYOffset,
+			List<Article> allArticles, Article viewpoint){
+		return new ConstantGenerationUtility(generationOptions, xDistance, yDistance, viewpointXOffset, viewpointYOffset, allArticles, viewpoint);
+	}
+	
+	public RandomGenerationUtility makeRandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint){
+		return new RandomGenerationUtility(probabilities, allArticles, viewpoint);
 	}
 	
 	public void update(){
