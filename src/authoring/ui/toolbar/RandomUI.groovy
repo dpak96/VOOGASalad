@@ -110,7 +110,7 @@ public class RandomUI extends Pane {
 	private void drag() {
 		myDrag.setPrefSize(300,300);
 		myDrag.getStyleClass().add("ass");
-		myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
+		//myDrag.setOnDragDropped({event -> myController.callEvent("DragAndDropController","dropElement",event)});
 		
 	}
 	
