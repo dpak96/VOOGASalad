@@ -1,5 +1,6 @@
 package authoring.backend;
 
+import model.article.Article;
 import model.article.Player;
 import model.controller.ModelController;
 
@@ -9,16 +10,17 @@ public class PlayerEditor extends Editor{
     // TODO Auto-generated constructor stub
   }
 
-  private Player player;
+  private Article myPlayer;
   
 
 
-  public Player getPlayer() {
-    return player;
+  public Article getPlayer() {
+    return myPlayer;
   }
 
-  public void setPlayer(Player player) {
-    this.player = player;
+  public void setPlayer(Article player) {
+    this.myPlayer = player;
+    super.myModelController.setCharacter(player);
   }
 
   public void addPlayer() {

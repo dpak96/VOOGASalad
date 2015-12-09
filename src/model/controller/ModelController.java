@@ -116,6 +116,7 @@ public class ModelController implements IModelController {
 
 	public void removeEvent(Event event) {
 		myModel.removeEvent(event);
+		this.removeCollisionEvent(event);
 	}
 
 	@Override
@@ -245,18 +246,6 @@ public class ModelController implements IModelController {
 			// User canceled from a load
 		}
 	}
-
-	// public void addCollisionType(String name) {
-	// addCollision = new AddCollisionType(name);
-	// addCollision.add();
-	// }
-
-	// public void addCollisionType(String name, String one, String two, String
-	// collision, Double type) {
-	// addCollision = new AddCollisionType(name);
-	// addCollision.add();
-	// addCollision.define(one, two, collision, type);
-	// }
 
 	public void addNewCollisionType(String type) {
 

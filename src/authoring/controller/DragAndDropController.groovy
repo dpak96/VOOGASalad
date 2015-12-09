@@ -12,33 +12,24 @@ import javafx.scene.input.TransferMode
 import javafx.scene.layout.Pane
 import model.article.Article
 
-/**
- * Created by Rob on 12/6/15.
- */
 class DragAndDropController {
+    private myAuthoringController;
+    private double myBorderWidth = 4;
 
-    private double borderwidth = 4;
-
-    public DragAndDropController(){
-
+    public DragAndDropController(AuthoringController authoring){
+        myAuthoringController = authoring;
     }
 
-    public void tempButtonClick(MouseEvent e, AuthoringController authoringController) {
+    public void tempButtonClick(e) {
         HighlightedArticle button = (HighlightedArticle)e.getSource();
-        Article n = authoringController.getArticleFromCoordinates(button.getLayoutX()+borderwidth +0.1, button.getLayoutY()+borderwidth+0.01);
+        Article n = myAuthoringController.callEvent("OtherController","getArticleFromCoordinates",button.getLayoutX()+myBorderWidth +0.1, button.getLayoutY()+myBorderWidth+0.01);
         if (controlCheck(e)) {
             if (n != null) {
                 ArticlePropertyEditorMenu popupEditingMenu =
-                        new ArticlePropertyEditorMenu("Object Editor", n, authoringController);
+                        new ArticlePropertyEditorMenu("Object Editor", n, myAuthoringController);
             }
         } else {
-            if(e.getSource() instanceof HighlightedArticle){
-                n.setActive();
-                Button b = (Button) e.getSource();
-                Pane p = (Pane) b.getParent();
-                p.getChildren().remove(b);
-                authoringController.setHighlighted(false);
-            }
+            removeButton(e,n);
         }
     }
 
@@ -46,7 +37,7 @@ class DragAndDropController {
         return (e.isPopupTrigger() || e.isControlDown());
     }
 
-    public void dragOn(event,AuthoringController authoringController){
+    public void dragOn(event){
         if (event.getGestureSource() != this &&
                 event.getDragboard().hasImage()) {
             /* allow for moving */
@@ -56,23 +47,34 @@ class DragAndDropController {
         event.consume();
     }
 
+    public removeButton(e,n){
+        if(e.getSource() instanceof HighlightedArticle){
+            if(n != null){
+                n.setActive();
+            }
+            Button b = (Button) e.getSource();
+            Pane p = (Pane) b.getParent();
+            p.getChildren().remove(b);
+            myAuthoringController.setHighlighted(false);
+        }
+    }
 
-    public void dropElement(DragEvent event, AuthoringController authoringController){
+
+    public void dropElement(event){
         if(event.getGestureSource() instanceof HighlightedArticle){
             HighlightedArticle highlightedArticle = (HighlightedArticle) event.getGestureSource();
-            double tempX = highlightedArticle.getLayoutX()+borderwidth +0.1;
-            double tempY = highlightedArticle.getLayoutY()+borderwidth +0.1;
-            Article n = authoringController.getArticleFromCoordinates(tempX,tempY);
-            //System.out.println(n == null);
-            n.setX((double)event.getX() + authoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
-            n.setY((double)event.getY() + authoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
+            double tempX = highlightedArticle.getLayoutX()+myBorderWidth +0.1;
+            double tempY = highlightedArticle.getLayoutY()+myBorderWidth +0.1;
+            Article n = myAuthoringController.callEvent("OtherController","getArticleFromCoordinates",tempX,tempY);
+            n.setX((double)event.getX() + myAuthoringController.getModelController().getViewpoint().getX()-(n.getWidth()/2));
+            n.setY((double)event.getY() + myAuthoringController.getModelController().getViewpoint().getY()-(n.getHeight()/2));
             n.setActive();
             Pane p = (Pane)highlightedArticle.getParent();
             p.getChildren().remove(highlightedArticle);
-            authoringController.setHighlighted(false);
+            myAuthoringController.setHighlighted(false);
         }
         else {
-            authoringController.createAndPlaceArticle(event.getX(), event.getY(), (DraggableElement) event.getGestureSource());
+            myAuthoringController.callEvent("ArticleCAndGController","createAndPlaceArticle",event);
         }
         Dragboard db = event.getDragboard();
         boolean success = false;
@@ -83,29 +85,32 @@ class DragAndDropController {
         event.consume();
     }
 
-    public void addTemp(MouseEvent e, AuthoringController authoringController) {
-        Article n = authoringController.getArticleFromCoordinates(e.getX(), e.getY());
-        authoringController.setCurrentArticle(n);
-        authoringController.setHighlighted(true);
+    public void addTemp(e) {
+        Article n = myAuthoringController.callEvent("OtherController","getArticleFromCoordinates",e.getX(), e.getY());
+        myAuthoringController.setCurrentArticle(n);
+        myAuthoringController.setHighlighted(true);
         ImageExtender dog = new ImageExtender();
         if (e.isPopupTrigger() || e.isControlDown()) {
             if (n != null) {
-                ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, authoringController);
+                ArticlePropertyEditorMenu popupEditingMenu = new ArticlePropertyEditorMenu("Object Editor", n, myAuthoringController);
             }
         }
         else {
             try {
                 n.setHardInactive();
-                double tX = n.getX() - authoringController.getModelController().getViewpoint().getX() -borderwidth;
-                double tY = n.getY() - authoringController.getModelController().getViewpoint().getY() -borderwidth;
-                HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth(),n.getHeight()), authoringController);
-                authoringController.setHighlighted(true);
-                authoringController.getUi().getDragAndDrop().getChildren().add(highlightedArticle);
+                double tX = n.getX() - myAuthoringController.getModelController().getViewpoint().getX() -myBorderWidth;
+                double tY = n.getY() - myAuthoringController.getModelController().getViewpoint().getY() -myBorderWidth;
+                HighlightedArticle highlightedArticle = new HighlightedArticle(dog.extendImage(n.getImageFile(),n.getWidth(),n.getHeight()), myAuthoringController);
+                myAuthoringController.setHighlighted(true);
+                myAuthoringController.getUi().getDragAndDrop().getChildren().add(highlightedArticle);
                 highlightedArticle.relocate(tX, tY);
+                myAuthoringController.setCurrentButton(highlightedArticle);
             } catch (Exception exception) {
                 System.out.println("hip");
             }
         }
     }
+
+
 
 }

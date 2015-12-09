@@ -1,208 +1,168 @@
 package authoring.controller
 
+import authoring.backend.Editor
 import authoring.backend.EditorManager;
-import authoring.ui.AuthoringUI;
-import authoring.ui.draganddrop.DraggableElement
+import authoring.ui.AuthoringUI
 import authoring.ui.draganddrop.HighlightedArticle
-import authoring.ui.toolbar.RandomUI
-import javafx.scene.control.Button;
-import javafx.scene.input.*;
-import javafx.scene.layout.Pane
-import javafx.scene.layout.StackPane;
-import model.Event;
+import javafx.scene.control.Button
 import model.article.Article;
 import model.controller.ModelController;
-import model.processes.Condition;
-import model.processes.Executable;
-import resourcemanager.ResourceManager
+import resourcemanager.ResourceManager;
+import java.lang.reflect.Constructor
 
 
 public class AuthoringController {
-	private EditorManager editor;
-	private AuthoringUI ui;
-	private ModelController modelController;
-	private boolean highlighted = false;
-	private Article currentArticle;
-
-	private PresetArticleFactory presetArticleFactory;
-	private DragAndDropController dragAndDropController;
-	private ArticleExtenderController articleExtenderController;
-	private InfiniteController infiniteController;
-
-
-
-
+	private EditorManager myEditor;
+	private AuthoringUI myUI;
+	private boolean myHighlighted = false;
+	private Article myCurrentArticle;
+	private HighlightedArticle myCurrentButton;
+	private ModelController myModelController;
+	private Map<String, Object> myControllerMaps;
+	private PresetArticleFactory myPresetArticleFactory;
 
 	public AuthoringController(ModelController mc) {
-		ui = new AuthoringUI(this);
-		modelController = mc;
-		editor = new EditorManager(mc);
-		presetArticleFactory = new PresetArticleFactory(mc, this);
-		dragAndDropController = new DragAndDropController();
-		articleExtenderController = new ArticleExtenderController();
-		infiniteController = new InfiniteController();
+		myUI = new AuthoringUI(this);
+		myModelController = mc;
+		myEditor = new EditorManager(mc);
+		myPresetArticleFactory = new PresetArticleFactory(mc, this);
 
+	}
+
+	public void initalizeControllers(){
+		if(myControllerMaps == null){
+			register();
+		}
+	}
+
+
+
+	public void register(){
+		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
+		myControllerMaps = new HashMap<String, Editor>();
+		for(String x: rb.keySet()){
+			myControllerMaps.put(x, getNewInstance(rb.getString(x)));
+		}
+	}
+
+	private getNewInstance(String cName){
+		Class<?> cl = Class.forName(cName);
+		Object object;
+		Constructor<?> ctor = null;
+		if(cName.equals("authoring.controller.OtherController")){
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = ModelController.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = modelController;
+			object = ctor.newInstance(o);
+		}
+		else if(cName.equals("authoring.controller.ArticleCAndGController")){
+			Class[] hi = new Class[2];
+			hi[0] = AuthoringController.class;
+			hi[1] = EditorManager.class;
+			ctor = cl.getConstructor(hi);
+			Object[] o = new Object[2];
+			o[0] = this;
+			o[1] = myEditor;
+			object = ctor.newInstance(o);
+		}
+
+		else{
+			ctor = cl.getConstructor(AuthoringController.class);
+			Object[] o = new Object[1];
+			Object thing1 = this;
+			object = ctor.newInstance(thing1);
+
+		}
+
+		return object;
+	}
+
+	private pressDelete(){
+
+	}
+
+	public AuthoringUI getUi() {
+		return myUI;
+	}
+
+	public void setUi(AuthoringUI ui) {
+		this.myUI = ui;
 	}
 
 
 	public EditorManager getEditor() {
-		return editor;
-	}
-
-	public void setEditor(EditorManager editor) {
-		this.editor = editor;
-	}
-
-	public AuthoringUI getUi() {
-		return ui;
-	}
-
-	public void setUi(AuthoringUI ui) {
-		this.ui = ui;
-	}
-
-	public void createAndPlaceArticle(double x, double y, DraggableElement event) {
-		Article article = null;
-
-		if (!highlighted) {
-			article =
-					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
-					x,
-					y,
-					true);
-		} else {
-			article =
-					editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getName(), event.getImageName(),
-					x,
-					y,
-					true);
-			if(event instanceof HighlightedArticle) {
-				highlighted = false;
-				Pane p = (Pane) event.getParent();
-				p.getChildren().remove(event);
-			}
-		}
-		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "presetFunction");
-		if (event.getImageName() in rb.keySet()){
-			String temp = rb.getString(event.getImageName());
-			this.presetArticle(temp, article);			
-		}
-	}
-
-	public void createAndPlaceArticle(double x, double y, String im, String name) {
-		editor.getSubEditor("ArticleEditor").createNewArticleAndPlace(name, im,
-				x,
-				y,
-				true);
-	}
-
-	public Article getArticleFromCoordinates(double x, double y) {
-		try {
-			return modelController.getArticleFromCoordinates(x, y);
-		} catch (Exception e) {
-			System.out.println("oops");
-			return null;
-		}
-	}
-
-	public Map<String, Class<?>> getFactoryParameters(String s) {
-		return modelController.getParameters(s);
-	}
-
-	public Executable makeExecutable(String s, Map<String, Object> map) {
-		return modelController.createExecutable(s, map);
-	}
-
-	public Condition makeCondition(String s, Map<String, Object> map) {
-		return modelController.createCondition(s, map);
-	}
-
-	public Event makeEvent(String s, List<Condition> lc, List<Executable> le) {
-		return modelController.createEvent(s, lc, le);
-	}
-
-	public void mapKey(String button, List<Event> events) {
-		modelController.remapButton(button, events);
-	}
-
-	public List<Event> getEventList() {
-		return this.modelController.getAllEvents();
+		return myEditor;
 	}
 
 	public ModelController getModelController(){
-		return modelController;
+		return myModelController;
 	}
 
-	public void dragEvent(String method,e){
-		dragAndDropController."$method"(e, this);
+	public callEvent(String controller,String method){
+		return myControllerMaps.get(controller)."$method"();
 	}
 
-	public void infiniteEvent(String method,e){
-		infiniteController."$method"(e, this);
+	public callEvent(String controller,String method,e){
+		return myControllerMaps.get(controller)."$method"(e);
 	}
 
-	public void extendEvent(String method, e){
-		articleExtenderController."$method"(e,this);
+	public callEvent(String controller,String method, e1, e2){
+		return myControllerMaps.get(controller)."$method"(e1, e2);
 	}
 
-	public void extendEvent(String method){
-		articleExtenderController."$method"(this);
+	public callEvent(String controller,String method, e1, e2,e3){
+		return myControllerMaps.get(controller)."$method"(e1,e2,e3);
+	}
+	public getController(String controller){
+		return myControllerMaps.get(controller);
 	}
 
 	public getTester(){
 		return getUi().getTester();
 	}
-  
-    
-    public Condition createCondition(String condName, Map<String,Object> params) {
-        this.modelController.createCondition(condName,params);
-        
-    }
-    
-    public Executable createExecutable(String execName,Map<String,Object> params){
-        this.modelController.createExecutable(execName,params);
-    }
+
 
 	public presetArticle(String function, Article article) {
-		presetArticleFactory."$function"(article);
+		myPresetArticleFactory."$function"(article);
 	}
 
 	public List<Article> getArticles(){
-		return modelController.getArticles()
+		return myModelController.getArticles()
 	}
-    
-        public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
-            this.modelController.addEvent(eventToAdd);
-            if(eventType.equals("Active"))
-                this.modelController.addActiveEvent(eventToAdd);
-                
-            if(eventType.equals("Collision"))
-            this.modelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
-            
-            if(eventType.equals("Button"))
-                this.modelController.remapButton(eventParameters.get("button"), eventToAdd);
-                            
-         
-        }
-        public List<String> getCollisionTypes(){
-            
-            return modelController.getAllCollisionTypes();
-        }
+
 
 	public getCurrentArticle() {
-		return currentArticle;
+		return myCurrentArticle;
 	}
 
 	public void setCurrentArticle(Article currArticle) {
-		currentArticle = currArticle;
+		myCurrentArticle = currArticle;
+	}
+
+	public getCurrentButton() {
+		return myCurrentButton;
+	}
+
+	public void setCurrentButton(b) {
+		myCurrentButton = b;
 	}
 
 	public void setHighlighted(boolean highlighted) {
-		this.highlighted = highlighted;
+		this.myHighlighted = highlighted;
 	}
 
 	public boolean getHighlighted(){
-		return highlighted;
+		return myHighlighted;
+	}
+
+	public void flush() {
+		callEvent("KeyPressController", "deleteButton");
+		setCurrentArticle(null);
+		
 	}
 
 

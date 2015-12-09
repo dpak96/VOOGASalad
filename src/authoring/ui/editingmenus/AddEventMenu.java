@@ -60,7 +60,7 @@ public class AddEventMenu extends AuthoringMenu {
             Event newEvent =
                     new Event(eventNameField.getText(), new ArrayList<Condition>(),
                               new ArrayList<Executable>());
-            super.myController.addEventToModel(newEvent, eventType.getValue(),eventParams);
+            myController.callEvent("OtherController","addEventToModel",newEvent, eventType.getValue(),eventParams);
         }
         catch (IllegalArgumentException e) {
             super.displayErrorMessage();
@@ -91,6 +91,7 @@ public class AddEventMenu extends AuthoringMenu {
         
         EventParameters  paramFiller=new EventParameters(super.myController);
         paramGrid.getChildren().clear();
+        fieldMap.clear();
         
        if( eventType.getValue().equals("Collision"))
            fieldMap=paramFiller.populateCollisionEventParameters(paramGrid);

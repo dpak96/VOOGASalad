@@ -8,10 +8,6 @@ import model.Event;
 
 public class CollisionTypeEditor {
 	private List<List<List<List<Event>>>> collisionMatrix;
-//	private List<List<List<Event>>> leftCollisionMatrix;
-//	private List<List<List<Event>>> rightCollisionMatrix;
-//	private List<List<List<Event>>> topCollisionMatrix;
-//	private List<List<List<Event>>> bottomCollisionMatrix;
 	private List<String> collisionTypeName;
 	private final List<String> MATRIX_NAMES = new ArrayList<String>(Arrays.asList("Left","Right","Top","Bottom"));
 	private final int MATRIX_NUMBER = 4;
@@ -20,10 +16,6 @@ public class CollisionTypeEditor {
 		// TODO Auto-generated constructor stub
 		collisionTypeName = new ArrayList<String>();
 		collisionMatrix = new ArrayList<List<List<List<Event>>>>();
-//		leftCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		rightCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		topCollisionMatrix = new ArrayList<List<List<Event>>>();
-//		bottomCollisionMatrix = new ArrayList<List<List<Event>>>();
 	}
 	
 	private List<List<List<Event>>> createNewEventMatrix(){
@@ -71,8 +63,8 @@ public class CollisionTypeEditor {
 	public void remove(Event event){
 		for(int matrixIndex = 0; matrixIndex < MATRIX_NUMBER; matrixIndex++){
 			for (int typeOneIndex = 0; typeOneIndex < collisionMatrix.get(matrixIndex).size(); typeOneIndex++){
-				for (int typeTwoIndex = 0; typeTwoIndex < collisionMatrix.get(matrixIndex).get(typeTwoIndex).size(); typeTwoIndex++){
-					collisionMatrix.get(matrixIndex).get(typeTwoIndex).remove(event);
+				for (int typeTwoIndex = 0; typeTwoIndex < collisionMatrix.get(matrixIndex).get(typeOneIndex).size(); typeTwoIndex++){
+					collisionMatrix.get(matrixIndex).get(typeOneIndex).get(typeTwoIndex).remove(event);
 				}
 			}
 		}

@@ -73,6 +73,8 @@ public class UIStackPane extends StackPane implements Observer {
 		} else {
 			edit=true;
 			this.getChildren().add(myAuthoringControllerPane);
+			myAuthoringController.initalizeControllers();
+			myAuthoringController.flush();
 
 		}
 	}
@@ -83,6 +85,8 @@ public class UIStackPane extends StackPane implements Observer {
 			this.getChildren().add(myGamePlayer);
 		} else {
 			this.getChildren().add(myAuthoringControllerPane);
+			myAuthoringController.initalizeControllers();
+			myAuthoringController.flush();
 		}
 		edit=!edit;
 	}
