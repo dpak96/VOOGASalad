@@ -31,6 +31,7 @@ public class PresetArticleFactory {
 	private GoombaPreset myGoomba;
 	private VegetaPreset myVegeta;
 	private DoodleJumpPreset myDoodle;
+	private FlappyPreset myFlappy;
 
 	public PresetArticleFactory(ModelController mc, AuthoringController ac) {
 		myModelController = mc;
@@ -39,6 +40,7 @@ public class PresetArticleFactory {
 		myGoomba = new GoombaPreset(ac, mc);
 		myVegeta = new VegetaPreset(ac, mc);
 		myDoodle = new DoodleJumpPreset(ac, mc);
+		myFlappy = new FlappyPreset(ac, mc);
 		
 	}
 
@@ -56,5 +58,9 @@ public class PresetArticleFactory {
 	
 	public void doodlePlayer(Article article) {
 		myDoodle.player(article);
+	}
+	
+	public void flappyPlayer(Article article){
+		myFlappy.player(article);
 	}
 }

@@ -145,5 +145,20 @@ class DoodleJumpPreset extends Preset {
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
+		//decel down
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+		tempMap.put("myAcceleration", (double) 0.1);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+
+
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
+
 	}
 }
