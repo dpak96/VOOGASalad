@@ -131,6 +131,10 @@ public class CollisionManager {
 		for (Position[] p : b) {
 			for (Position q : p) {
 				if (q.isValidPosition() && a.isValidPosition() && a.getX() != -1 && q.getX() != -1) {
+<<<<<<< Updated upstream
+=======
+					//System.out.println("is valid position");
+>>>>>>> Stashed changes
 					//a.getX() == q.getX() && a.getY() == q.getY()
 				
 					if (a.getX() == q.getX() && a.getY() == q.getY()) {

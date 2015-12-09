@@ -19,7 +19,7 @@ public class VegetaPreset extends Preset {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 
-		tempMap.put("myXVelocity", (double) -1.0);
+		tempMap.put("myXVelocity", (double) -2.0);
 
 		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		List<Executable> listExecutable = new ArrayList<Executable>();
@@ -35,7 +35,7 @@ public class VegetaPreset extends Preset {
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 
-		tempMap.put("myXVelocity", (double) 1.0);
+		tempMap.put("myXVelocity", (double) 2.0);
 		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
@@ -45,7 +45,7 @@ public class VegetaPreset extends Preset {
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "D", listEvent);
 
-
+		/**
 		//key press move up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -75,7 +75,7 @@ public class VegetaPreset extends Preset {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "S", listEvent);
-
+		**/
 		//decel left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -119,7 +119,7 @@ public class VegetaPreset extends Preset {
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 
-		tempMap.put("myCompareValue", 0.0);
+		tempMap.put("myCompareValue", 0.1);
 
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
@@ -175,7 +175,8 @@ public class VegetaPreset extends Preset {
 		listCondition.add(con);
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
-
+		
+		/**
 		//decel down
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -279,7 +280,7 @@ public class VegetaPreset extends Preset {
 		listCondition.add(con);
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
-
+**/
 		//ViewPoint move from left
 
 		Article myViewpoint = myModelController.getViewpoint();
