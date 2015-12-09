@@ -34,15 +34,19 @@ public class PresetCollision {
 			myCollisionTypeEditor.add(s);
 		}
 		collideWithPlatform(PLAYER);
-		collideWithPlatform(ENEMY);	
+//		collideWithPlatform(ENEMY);	
 		
 		Event bounceHorizontal = getBounceHorizontalEvent();
 		myCollisionTypeEditor.add(LEFT, ENEMY, ENEMY, bounceHorizontal);
 		myCollisionTypeEditor.add(RIGHT, ENEMY, ENEMY, bounceHorizontal);
+		myCollisionTypeEditor.add(LEFT, ENEMY, PLATFORM, bounceHorizontal);
+		myCollisionTypeEditor.add(RIGHT, PLATFORM, ENEMY, bounceHorizontal);
 		
 		Event bounceVertical = getBounceVerticalEvent();
 		myCollisionTypeEditor.add(TOP, ENEMY, ENEMY, bounceVertical);
 		myCollisionTypeEditor.add(BOTTOM, ENEMY, ENEMY, bounceVertical);
+		myCollisionTypeEditor.add(TOP, ENEMY, PLATFORM, bounceVertical);
+		myCollisionTypeEditor.add(BOTTOM, PLATFORM, ENEMY, bounceVertical);
 		
 		Event die = getDieEvent();
 		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
@@ -113,7 +117,7 @@ public class PresetCollision {
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		temp.put("myName", "Wu");
 		temp.put("myFirst", null);
-//		temp.put("mySecond", null);
+		temp.put("mySecond", null);
 		temp.put("myFirstVariable", velocityDirection);
 		temp.put("myCompareValue", 0);
 		temp.put("myComparison", compare);
