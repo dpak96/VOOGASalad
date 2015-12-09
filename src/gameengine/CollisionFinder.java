@@ -37,7 +37,6 @@ public class CollisionFinder implements Iterator<Position> {
     	//Position[][] arr = {{1,2,3}, {7,4,5}, {12, 7, 45}};
     	//CollisionFinder test = new CollisionFinder(arr);
     	//while(test.hasNext()) {
-    	//	System.out.println(test.next());
 //    	}
 //    }
     
@@ -48,7 +47,6 @@ public class CollisionFinder implements Iterator<Position> {
 
         int maxIterations = array2D.length + array2D[0].length;
         fillSpiralArray(array2D, 0, 0, true, true, maxIterations);
-        //System.out.println(" size is " + array2D.length);
     }
 
     @Override
@@ -139,24 +137,19 @@ public class CollisionFinder implements Iterator<Position> {
 
         // TODO - find a better approach to break the recursive loop
         if (countDown < 1) {
-            //System.out.println("All array elements processed :" + countDown);
             return;
         }
 
         if (plusIter) {
 
             // TO DO - use logger debug
-            //System.out.println("===== Processing increment loop =====");
 
             if (colIter) {
 
-                //System.out.println("===== process Column index increment =====");
 
                 for (int col = rowPos; col < columnHeight; col++) {
-                    //System.out.println("row [" + rowPos + "] and col [" + col + "] =>" + arr2D[rowPos][col]);
 
                     if (collection.contains(arr2D[rowPos][col])) {
-                        //System.out.println("Done row/column processing :");
                         //return; 
                         continue;
                     } else {
@@ -171,7 +164,6 @@ public class CollisionFinder implements Iterator<Position> {
 
             } else {
 
-                //System.out.println("===== process Row index increment =====");
 
                 for (int row = rowPos; row < rowHeight; row++) {
 
@@ -193,11 +185,9 @@ public class CollisionFinder implements Iterator<Position> {
         } else {
 
             // TO DO - use logger debug
-            //System.out.println("===== Processing decrement loop =====");
 
             if (colIter) {
 
-                //System.out.println("===== process Column index decrement =====");
 
                 for (int col = colPos; col >= 0; col--) {
 
@@ -218,7 +208,6 @@ public class CollisionFinder implements Iterator<Position> {
 
             } else {
 
-                //System.out.println("===== process Row index decrement =====");
 
                 for (int row = rowPos; row > 0; row--) {
 

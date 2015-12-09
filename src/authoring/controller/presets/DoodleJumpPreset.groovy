@@ -25,7 +25,7 @@ class DoodleJumpPreset extends Preset {
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = myAuthoringController.callEvent("OtherController","makeEvent","event1", listCondition, listExecutable);
+		Event ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Left", listCondition, listExecutable);
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "A", listEvent);
@@ -40,7 +40,7 @@ class DoodleJumpPreset extends Preset {
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event2", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Right", listCondition, listExecutable);
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		myAuthoringController.callEvent("KeyPressController", "mapKey", "D", listEvent);
@@ -63,7 +63,7 @@ class DoodleJumpPreset extends Preset {
 
 		Condition con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","slow left", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 		//stop left
@@ -92,7 +92,7 @@ class DoodleJumpPreset extends Preset {
 
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","stop left", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 		//decel right
@@ -111,7 +111,7 @@ class DoodleJumpPreset extends Preset {
 		tempMap.put("myCompareValue", (double) -0.1);
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","slow right", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 		//stop right
@@ -142,7 +142,7 @@ class DoodleJumpPreset extends Preset {
 
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","stop right", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 		//decel down
@@ -157,7 +157,32 @@ class DoodleJumpPreset extends Preset {
 		tempMap = new HashMap<String, Object>();
 
 
-		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","gravity", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
+		
+		
+		//VIEWPOINT
+		
+		
+		Article myViewpoint = myModelController.getViewpoint();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", myViewpoint);
+
+		tempMap.put("myDisplacement", (double) 1.0);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myFirst", article);
+		tempMap.put("myViewpoint", myViewpoint);
+
+		tempMap.put("myFraction",(double) 0.6);
+
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionAbovePositionOnScreen", tempMap);
+		listCondition.add(con);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","viewpoint", listCondition, listExecutable);
 		myModelController.addActiveEvent(ev);
 
 	}

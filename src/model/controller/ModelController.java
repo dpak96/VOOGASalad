@@ -12,6 +12,7 @@ import model.XMLutility.xmlUtility;
 import model.article.Article;
 import model.factory.*;
 import model.generationutility.ConstantGenerationUtility;
+
 import model.generationutility.RandomGenerationUtility;
 import model.processes.Condition;
 import model.processes.Executable;
@@ -91,10 +92,8 @@ public class ModelController implements IModelController {
 					"extraparameters");
 		for (String propertyKey : p.keySet()){
 			for (String key : data.keySet()) {
-				System.out.println(key+"poop");
 				if (key.equals(propertyKey)) {
 					try {
-						System.out.println("C");
 						Field f = this.getClass().getDeclaredField(p.getString(key));
 						data.put(key, f.get(this));
 					} catch (Exception e) {
@@ -118,13 +117,11 @@ public class ModelController implements IModelController {
 	public Event createEvent(String name, List<Condition> conditions, List<Executable> executables) {
 		Event newEvent = myModelFactory.createEvent(name, conditions, executables);
 		addEvent(newEvent);
-		System.out.println("Creating Event named "+ newEvent.getMyName());
 		return newEvent;
 	}
 
 	public void addEvent(Event newEvent) {
 		myModel.addEvent(newEvent);
-		System.out.println("Adding Event named "+ newEvent.getMyName());
 	}
 
 	public void removeEvent(Event event) {
@@ -318,6 +315,12 @@ public class ModelController implements IModelController {
 	    return eventLists;
 	    
 	}
+	
+	public void setConstantGenerator(List<List<Article>> constants, double xDistance,
+			double yDistance, double xOffset, double yOffset) {
+		myModel.setConstantGenerator(constants, xDistance, yDistance, 
+				xOffset, yOffset);
+	}
 
 	public void setRandomGenerator(Map<Article, Double> probabilities) {
 		myModel.setRandomGenerator(probabilities);
@@ -325,6 +328,10 @@ public class ModelController implements IModelController {
 	
 	public List<String> getAllCollisionTypes(){
 		return myModel.getAllCollisionTypes();
+	}
+
+	public void makeGen(Map<Article, Double> probabilities){
+		RandomGenerationUtility randomGenerationUtility = new RandomGenerationUtility(probabilities,getArticles(),getViewpoint());
 	}
 
 }

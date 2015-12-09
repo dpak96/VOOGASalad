@@ -12,6 +12,7 @@ import model.Event;
 import model.article.Position;
 import model.article.Article;
 import model.controller.ModelController;
+import model.generationutility.AbstractGenerationUtility;
 import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
@@ -25,6 +26,7 @@ public class GameEngine implements IGameEngine {
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
 	private List<Article> allArticles;
+	private AbstractGenerationUtility genUtil; 
 	
 	public GameEngine(ModelController modelController){
 		myModelController = modelController;
@@ -35,7 +37,6 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
-
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
@@ -45,8 +46,7 @@ public class GameEngine implements IGameEngine {
 		runArticleCollisions();
 		runActiveEvents();
 		runArticleUpdates();
-		myModelController.update();		
-		
+		myModelController.update();	
 	}
 	
 	private void checkAndAddCollisions(){
@@ -94,7 +94,6 @@ public class GameEngine implements IGameEngine {
 	private void runActiveEvents(){
 		for(Event e : myModelController.getActiveEvents()){
 			e.fire();
-			//System.out.println(e.getMyName());
 		}
 	}
 	
@@ -119,7 +118,6 @@ public class GameEngine implements IGameEngine {
 //			double viewpointY = myViewpoint.getY();
 //			double viewpointWidth = myViewpoint.getWidth();
 //			double viewpointHeight = myViewpoint.getHeight();
-//			//System.out.println(viewpointHeight + " " + viewpointWidth);
 //			double xBuffer = article.getXBuffer();
 //			double yBuffer = article.getYBuffer();
 //			if(rectanglesOverlap(viewpointX - xBuffer, viewpointX + viewpointWidth + xBuffer,
@@ -196,18 +194,14 @@ public class GameEngine implements IGameEngine {
 //		CollisionFinder test = new CollisionFinder(one.getBitMap().getByteArray());
 ////		while(test.hasNext()) {
 ////			Position temp = test.next();
-////			System.out.println(temp.getX() + " " + temp.getY());
 ////		}
 //		
 //		for(Position[] a: one.getBitMap().getByteArray()) {
 //			for(Position p: a) {
 //				if(p.isValidPosition()) {
-//					System.out.print(" " + p.getX() + " " + p.getY());
 //				} else {
-//					System.out.print(" -1 -1");
 //				}
 //			}
-//			System.out.println(" ");
 //		}
 //	}
 	

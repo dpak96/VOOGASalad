@@ -38,9 +38,6 @@ public class AuthoringController {
 			register();
 		}
 	}
-
-
-
 	public void register(){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
 		myControllerMaps = new HashMap<String, Editor>();
@@ -53,7 +50,7 @@ public class AuthoringController {
 		Class<?> cl = Class.forName(cName);
 		Object object;
 		Constructor<?> ctor = null;
-		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController")){
+		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController") || cName.equals("authoring.controller.InfiniteController")){
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = ModelController.class;
@@ -77,8 +74,8 @@ public class AuthoringController {
 		else{
 			ctor = cl.getConstructor(AuthoringController.class);
 			Object[] o = new Object[1];
-			Object thing1 = this;
-			object = ctor.newInstance(thing1);
+			o[0] = this;
+			object = ctor.newInstance(o);
 		}
 
 		return object;
@@ -119,6 +116,11 @@ public class AuthoringController {
 	public callEvent(String controller,String method, e1, e2,e3){
 		return myControllerMaps.get(controller)."$method"(e1,e2,e3);
 	}
+	
+	public callEvent(String controller,String method, e1, e2, e3, e4){
+		return myControllerMaps.get(controller)."$method"(e1,e2,e3,e4);
+	}
+	
 	public getController(String controller){
 		return myControllerMaps.get(controller);
 	}
