@@ -63,21 +63,22 @@ class InfiniteController {
         constantGen = new ArrayList<>();
     }
 
-    public makeArticle(Event){
-        String image = Event.getGestureSource().getImageName();
+    public makeArticle(e){
+        println("po")
+        String image = e.getGestureSource().getImageName();
         currentArticle = new Article(image,0,0,true);
         articleList.add(currentArticle);
-        makePopup(currentArticle);
+        //makePopup(currentArticle);
         ImageExtender dog = new ImageExtender();
         Image im = dog.extendImage(image,currentArticle.getWidth(),currentArticle.getHeight());
         //return im;
     }
 
     public void dragOn(event){
-        if (event.getGestureSource() != this &&
-                event.getDragboard().hasImage()) {
+        if (event.getGestureSource() != this && event.getDragboard().hasImage()) {
             /* allow for moving */
             event.acceptTransferModes(TransferMode.MOVE);
+            //println("yo");
         }
 
         event.consume();

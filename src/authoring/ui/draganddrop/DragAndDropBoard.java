@@ -14,9 +14,6 @@ public class DragAndDropBoard extends AbstractDragAndDrop {
 
 
     public void setListeners() {
-        this.setOnDragDropped(event -> myAuthoringController.callEvent("DragAndDropController","dropElement",event));
-        this.setOnDragOver(event -> myAuthoringController.callEvent("DragAndDropController","dragOn",event));
-        this.setOnMouseClicked(event -> myAuthoringController.callEvent("DragAndDropController","addTemp",event));
     }
 
 

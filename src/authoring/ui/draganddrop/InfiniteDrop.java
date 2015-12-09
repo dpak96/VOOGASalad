@@ -11,7 +11,7 @@ public class InfiniteDrop extends AbstractDragAndDrop {
     }
 
     public void setListeners() {
-        this.setOnDragDropped(event ->  myAuthoringController.callEvent("InfiniteController", "makeArticle",event));
+        this.setOnDragDropped(event ->  System.out.println("hi"));
         this.setOnDragOver(event -> myAuthoringController.callEvent("InfiniteController","dragOn",event));
     }
 
