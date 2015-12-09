@@ -7,6 +7,7 @@ import resourcemanager.ResourceManager
 
 
 class ArticleCAndGController {
+
     public myEditor;
     public myAuthoring;
 
@@ -18,6 +19,7 @@ class ArticleCAndGController {
     public void createAndPlaceArticle(event) {
         Article article = null;
             article =
+
                     myEditor.getSubEditor("ArticleEditor").createNewArticleAndPlace(event.getGestureSource().getName(),event.getGestureSource().getImageName(), event.getX(), event.getY(), true);
         setPreset(event,article);
     }

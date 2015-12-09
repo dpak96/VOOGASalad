@@ -61,6 +61,7 @@ public class AddEventMenu extends AuthoringMenu {
                     new Event(eventNameField.getText(), new ArrayList<Condition>(),
                               new ArrayList<Executable>());
             myController.callEvent("OtherController","addEventToModel",newEvent, eventType.getValue(),eventParams);
+
         }
         catch (IllegalArgumentException e) {
             super.displayErrorMessage();

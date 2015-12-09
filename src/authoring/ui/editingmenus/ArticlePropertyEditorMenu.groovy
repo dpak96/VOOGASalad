@@ -24,6 +24,7 @@ import resourcemanager.ResourceManager;
 
 public class ArticlePropertyEditorMenu extends AuthoringMenu {
 
+
 	private HashMap<String, TextField> textFieldPropertyMap;
 	private HashMap<String, ComboBox> comboBoxPropertyMap;
 	private Article myArticleToEdit;
