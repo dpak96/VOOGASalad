@@ -28,39 +28,48 @@ public class AddProcessMenu extends AuthoringMenu {
     private RuleMenuTableConfiguration tableConfig=new RuleMenuTableConfiguration(super.myController);
     private TableView myProcessTable;
     private List<?> myProcessList;
+    
+    
     public AddProcessMenu (String title,
     AuthoringController controller,
     String myProcessName,
-    Event eventToAddTo,TableView processTable,List<?> processList) {
+    Event eventToAddTo,TableView processTable) {
         super("Add "+myProcessName, controller);
         myProcessType = myProcessName;
         myEventToAddTo = eventToAddTo;
         myProcessTable=processTable;
-        myProcessList=processList;
-        super.showMenu(400, 300);
+        this.showIfNotNull();
     }
 
+    public void showIfNotNull(){
+        if(myEventToAddTo!=null)
+            super.showMenu(400, 300);
+    }
     @Override
     public void executeYourMenuFunction () {
         try {
-            if (myProcessType.equals("Condition"))
+            if (myProcessType.equals("Condition")){
                 this.myEventToAddTo.addCondition((Condition)this.myController
                         .callEvent("OtherController","createCondition","Condition" + processBox.getValue(),
                         this.parseUserInput()));
-            else
+                    tableConfig.refreshTable(myProcessTable, myEventToAddTo.getConditions());
+                    
+                    }
+            else{
                 this.myEventToAddTo.addExecutable((Executable)this.myController
                         .callEvent("OtherController","createExecutable","Executable" + processBox.getValue(),
                         this.parseUserInput()));
+                    tableConfig.refreshTable(myProcessTable, myEventToAddTo.getExecutables());
+                    
+            }
         }
         catch (NullPointerException | IllegalArgumentException e) {
             super.displayErrorMessage();
         }
-        tableConfig.refreshTable(myProcessTable, myProcessList);
     }
 
     @Override
     protected void populateMenu (GridPane menuPane) {
-
         super.componentAdder.makeLabel(menuPane, 1, 1, myProcessType + ":");
         menuPane.add(processBox, 2, 1);
         GridPane paramGrid = new GridPane();
