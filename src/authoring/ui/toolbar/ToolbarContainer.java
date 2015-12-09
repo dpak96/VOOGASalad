@@ -37,7 +37,6 @@ public class ToolbarContainer extends DraggableElement {
         buttonList.add(new EnemyButton(myController, "Goomba"));
         buttonList.add(new CheckpointButton(myController));
         buttonList.add(new BackgroundButton(myController));
-        buttonList.add(new ControlButton(myController));
         buttonList.add(new RuleButton(myController));
         buttonList.add(new CollisionButton(myController));
         buttonList.add(new RandomButton(myController));
