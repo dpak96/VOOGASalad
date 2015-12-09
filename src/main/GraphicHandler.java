@@ -38,10 +38,7 @@ public class GraphicHandler {
 
 
     public void startUp(GameCreation gameCreation, String levelFile){
-    	System.out.println("It should be making a new level");
-    	System.out.println(levelFile);
     	gameCreation.setLevel(levelFile);
-    	System.out.println(gameCreation.getLevel());
         currentStage.setScene(superController.init(gameCreation, gameCreation.getLevel()));
     }
     

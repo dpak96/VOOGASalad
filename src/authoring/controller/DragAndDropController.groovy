@@ -43,7 +43,6 @@ class DragAndDropController {
                 event.getDragboard().hasImage()) {
             /* allow for moving */
             event.acceptTransferModes(TransferMode.MOVE);
-            println("wtf")
         }
 
         event.consume();

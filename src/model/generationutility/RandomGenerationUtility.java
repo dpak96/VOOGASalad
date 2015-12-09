@@ -19,7 +19,6 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);
 			double adjustedProb = 1 - Math.pow(1 - prob, unitCheck);
-			System.out.println(adjustedProb);
 			myGenerationProbabilities.put(a, adjustedProb);
 		}
 	}
