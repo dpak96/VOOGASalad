@@ -265,6 +265,10 @@ public class ModelController implements IModelController {
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event) {
 		myModel.addCollision(direction, nameOne, nameTwo, event);
 	}
+	
+	public void removeCollisionEvent(Event event){
+		myModel.removeExistingCollisonEvent(event);
+	}
 
 	public void initializeCollision() {
 		myModel.initializeCollision();
