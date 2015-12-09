@@ -104,7 +104,7 @@ class DragAndDropController {
                 myAuthoringController.setHighlighted(true);
                 myAuthoringController.getUi().getDragAndDrop().getChildren().add(highlightedArticle);
                 highlightedArticle.relocate(tX, tY);
-                authoringController.setCurrentButton(highlightedArticle);
+                myAuthoringController.setCurrentButton(highlightedArticle);
             } catch (Exception exception) {
                 System.out.println("hip");
             }

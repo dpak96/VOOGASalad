@@ -6,6 +6,8 @@ import model.article.Article;
 
 public class RandomGenerationUtility extends ConcreteGenerationUtility{
 
+	
+	private final double unitCheck = 0.05;
 
 	private Map<Article, Double> myGenerationProbabilities;
 
@@ -14,7 +16,8 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		myGenerationProbabilities = probabilities;
 		for (Article a : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(a);
-			double adjustedProb = 1 - Math.pow(1 - prob, 0.01);
+			double adjustedProb = 1 - Math.pow(1 - prob, unitCheck);
+			System.out.println(adjustedProb);
 			myGenerationProbabilities.put(a, adjustedProb);
 		}
 	}
@@ -22,21 +25,22 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	public void typeUpdate() {
 		if (myXChange != 0)
 			xGenerate(myXChange);
-		else if (myYChange != 0)
+		if (myYChange != 0)
 			yGenerate(myYChange);
 	}
 
 	private void xGenerate(double myXChange) {
-		for (int i = 0; i < Math.abs(myXChange); i += 0.01) {
-			for (int j = 0; j < myViewpoint.getHeight(); j += 0.01) {
+		for (double i = 0; i < Math.abs(myXChange); i += unitCheck) {
+			for (double j = 0; j < myViewpoint.getHeight(); j += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
-						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j);
+						Article copy = new Article(a.getImageFile(), a.getX(), myViewpoint.getY() + j, true);
 						if (myXChange > 0)
 							copy.setX(myViewpoint.getX() + myViewpoint.getWidth() - i);
 						else
 							copy.setX(myViewpoint.getX() + i);
 						myArticles.add(copy);
+					//	System.out.println("articleX" + copy.getX() + "Y" + copy.getY());
 					}
 				}
 			}
@@ -44,11 +48,11 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	}
 
 	private void yGenerate(double myYChange) {
-		for (int j = 0; j < Math.abs(myYChange); j += 0.01) {
-			for (int i = 0; j < myViewpoint.getWidth(); i += 0.01) {
+		for (int j = 0; j < Math.abs(myYChange); j += unitCheck) {
+			for (int i = 0; j < myViewpoint.getWidth(); i += unitCheck) {
 				for (Article a : myGenerationProbabilities.keySet()) {
 					if (Math.random() < myGenerationProbabilities.get(a)) {
-						Article copy = new Article(a.getImageFile(), myViewpoint.getX() + i, a.getY());
+						Article copy = new Article(a.getImageFile(), myViewpoint.getX() + i, a.getY(), true);
 						if (myYChange > 0)
 							copy.setY(myViewpoint.getY() + myViewpoint.getHeight() - j);
 						else
@@ -59,6 +63,24 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 			}
 		}
 	}
+	
+	/* Testing RandomGenerationUtiltiy
+	
+	public static void main(String[] args){
+		Map<Article, Double> prob = new HashMap<Article, Double>();
+		prob.put(new Article("Goomba", 0, 10), 0.0001);
+		Article v = new Article("Goomba", 0, 0, true);
+		List<Article> all = new ArrayList<Article>();
+		RandomGenerationUtility r = new RandomGenerationUtility(prob, all, v);
+		while(true){
+			r.update();
+			v.setX(v.getX()+0.5);
+			System.out.println("viewX" + v.getX());
+			System.out.println(all.size());
+		}
+	}
+	
+	*/
 
 
 }

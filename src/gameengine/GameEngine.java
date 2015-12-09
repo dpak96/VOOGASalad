@@ -145,6 +145,7 @@ public class GameEngine implements IGameEngine {
 	private void updateActiveArticles(){
 		for(Article article : allArticles){
 			if(!article.getStatus().equals( Article.Status.HARDINACTIVE)){
+				System.out.println(myModelController.getActiveEvents().size());
 				double x = article.getX();
 				double y = article.getY();
 				double width = article.getWidth();

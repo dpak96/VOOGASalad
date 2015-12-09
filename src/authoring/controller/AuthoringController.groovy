@@ -7,6 +7,7 @@ import authoring.ui.AuthoringUI;
 import model.Event;
 
 import authoring.ui.AuthoringUI
+import authoring.ui.draganddrop.HighlightedArticle
 import javafx.scene.control.Button
 import model.article.Article;
 import model.controller.ModelController;
@@ -19,7 +20,7 @@ public class AuthoringController {
 	private AuthoringUI myUI;
 	private boolean myHighlighted = false;
 	private Article myCurrentArticle;
-	private Button myCurrentButton;
+	private HighlightedArticle myCurrentButton;
 	private ModelController myModelController;
 	private Map<String, Object> myControllerMaps;
 	private PresetArticleFactory myPresetArticleFactory;
@@ -33,8 +34,9 @@ public class AuthoringController {
 	}
 
 	public void initalizeControllers(){
-		register();
-
+		if(myControllerMaps == null){
+			register();
+		}
 	}
 
 
@@ -135,8 +137,6 @@ public class AuthoringController {
 	public List<Article> getArticles(){
 		return myModelController.getArticles()
 	}
-    
-
 
 
 	public getCurrentArticle() {
@@ -147,11 +147,11 @@ public class AuthoringController {
 		myCurrentArticle = currArticle;
 	}
 
-	public myCurrentButton() {
+	public getCurrentButton() {
 		return myCurrentButton;
 	}
 
-	public void setCurrentButton(Button b) {
+	public void setCurrentButton(b) {
 		myCurrentButton = b;
 	}
 
@@ -161,6 +161,13 @@ public class AuthoringController {
 
 	public boolean getHighlighted(){
 		return myHighlighted;
+
+	}
+
+	public void flush() {
+		callEvent("KeyPressController", "deleteButton");
+		setCurrentArticle(null);
+		
 	}
 
 

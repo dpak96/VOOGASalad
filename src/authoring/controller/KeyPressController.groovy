@@ -19,8 +19,7 @@ class KeyPressController {
     }
 
     private pressButtons(event){
-        println("i")
-        if(event.getCode() == KeyCode.D){
+        if(event.getCode() == KeyCode.P){
             println("hi")
             authoringController.callEvent("OtherController","deleteArticle",authoringController.getCurrentArticle());
         }
@@ -46,8 +45,8 @@ class KeyPressController {
     }
 
     private deleteButton(){
-        if(authoringController.myCurrentButton() != null){
-            Button b = authoringController.myCurrentButton();
+        if(authoringController.getCurrentButton() != null){
+            Button b = authoringController.getCurrentButton();
             Pane p = (Pane) b.getParent();
             p.getChildren().remove(b);
             authoringController.setHighlighted(false);
