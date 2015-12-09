@@ -3,6 +3,7 @@ package authoring.controller
 import authoring.ui.editingmenus.ArticlePropertyEditorMenu
 import imageeditor.ImageExtender
 import javafx.scene.image.Image
+import javafx.scene.input.TransferMode
 import model.article.Article
 import model.controller.ModelController
 
@@ -70,6 +71,16 @@ class InfiniteController {
         ImageExtender dog = new ImageExtender();
         Image im = dog.extendImage(image,currentArticle.getWidth(),currentArticle.getHeight());
         //return im;
+    }
+
+    public void dragOn(event){
+        if (event.getGestureSource() != this &&
+                event.getDragboard().hasImage()) {
+            /* allow for moving */
+            event.acceptTransferModes(TransferMode.MOVE);
+        }
+
+        event.consume();
     }
 
     public void makePopup(Article selectedArticle){

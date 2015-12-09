@@ -38,9 +38,6 @@ public class AuthoringController {
 			register();
 		}
 	}
-
-
-
 	public void register(){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Controller");
 		myControllerMaps = new HashMap<String, Editor>();
@@ -77,8 +74,8 @@ public class AuthoringController {
 		else{
 			ctor = cl.getConstructor(AuthoringController.class);
 			Object[] o = new Object[1];
-			Object thing1 = this;
-			object = ctor.newInstance(thing1);
+			o[0] = this;
+			object = ctor.newInstance(o);
 		}
 
 		return object;
