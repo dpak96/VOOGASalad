@@ -107,7 +107,6 @@ class DragAndDropController {
                 highlightedArticle.relocate(tX, tY);
                 myAuthoringController.setCurrentButton(highlightedArticle);
             } catch (Exception exception) {
-                System.out.println("hip");
             }
         }
     }
