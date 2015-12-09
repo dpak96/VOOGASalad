@@ -1,7 +1,10 @@
 package authoring.controller
 
+<<<<<<< Updated upstream
 import javafx.scene.control.Button
 import javafx.scene.layout.Pane
+=======
+>>>>>>> Stashed changes
 import model.Event
 import model.article.Article
 import model.controller.ModelController
@@ -60,7 +63,7 @@ class OtherController {
     }
     
     public void deleteEvent(Event event){
-        modelController.removeEvent(event);
+        myModelController.removeEvent(event);
     }
 
     public List<String> getCollisionTypes(){
