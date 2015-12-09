@@ -1,6 +1,7 @@
 package game.player;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,7 +46,7 @@ public class HighScoresModule extends HUDModule {
 	}
 
 	@Override
-	public void update(Article character, ActionController ac) {
+	public void update(List<Article> arg,Article character, ActionController ac) {
 		if(character.getLife()==0 && myPreviousLives != 0){
 			myInputScore = new HighScoreInputDialog(myGameName,character.getScore());
 			ac.change_rate(0);

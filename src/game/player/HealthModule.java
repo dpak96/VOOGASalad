@@ -1,5 +1,7 @@
 package game.player;
 
+import java.util.List;
+
 import action.controller.ActionController;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
@@ -23,7 +25,7 @@ public class HealthModule extends HUDModule {
 		this.getChildren().addAll(myHealthVal,myHealthBar);
 	}
 	
-	public void update(Article character, ActionController ac){
+	public void update(List<Article> arg, Article character, ActionController ac){
 		double health = character.getHealth();
 		myHealthBar.setProgress(health/character.getMaxHealth());
 		myHealthVal.setText("Health: " + health + "/" + character.getMaxHealth());

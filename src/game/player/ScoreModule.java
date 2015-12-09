@@ -1,6 +1,7 @@
 package game.player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import action.controller.ActionController;
 import javafx.geometry.Insets;
@@ -42,7 +43,7 @@ public class ScoreModule extends HUDModule {
 	}
 	
 	@Override
-	public void update(Article character, ActionController ac){
+	public void update(List<Article> arg, Article character, ActionController ac){
 		//scoreCheck(score);
 		double score = character.getScore();
 		Double score2 = score;
