@@ -31,7 +31,9 @@ public class ResourceManager extends Manager {
   }
   public void refreshImages(){
      ImageManager backgroundManager=(ImageManager) managerMap.get("BackgroundImageManager");
+     System.out.println(backgroundManager.getObjectMap().size());
      backgroundManager.initListImages();
+     System.out.println(backgroundManager.getObjectMap().size());
      ImageManager articleManager=(ImageManager) managerMap.get("ArticleImageManager");
      articleManager.initListImages();
      ImageManager platformManager=(ImageManager) managerMap.get("PlatformImageManager");
