@@ -18,7 +18,6 @@ class ArticleExtenderController {
 
     public ArticleExtenderController(AuthoringController authoring){
         myAuthoringController = authoring;
-        myAuthoringController.getUi().getDragAndDrop().getScene().setOnKeyReleased({ event->  addTile(event)});
         setKeys();
         myAuthoringController.setHighlighted(false);
         //authoringController.callEvent("DragAndDropController",)
