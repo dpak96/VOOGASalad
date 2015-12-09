@@ -12,6 +12,7 @@ import model.Event;
 import model.article.Position;
 import model.article.Article;
 import model.controller.ModelController;
+import model.generationutility.AbstractGenerationUtility;
 import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import voogasalad_SquirtleSquad.IGameEngine;
@@ -25,6 +26,7 @@ public class GameEngine implements IGameEngine {
 	private Article myCharacter;
 	private CollisionManager myCollisionManager;
 	private List<Article> allArticles;
+	private AbstractGenerationUtility genUtil; 
 	
 	public GameEngine(ModelController modelController){
 		myModelController = modelController;
@@ -35,7 +37,6 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
-
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
