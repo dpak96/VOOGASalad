@@ -2,14 +2,20 @@ package authoring.ui.toolbar
 
 import authoring.controller.AuthoringController
 import authoring.ui.draganddrop.InfiniteDrop
+import javafx.collections.ObservableList
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
+import javafx.scene.control.TableCell
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableRow
 import javafx.scene.control.TableView
 import javafx.scene.control.TextField
+import javafx.scene.control.cell.MapValueFactory
+import javafx.scene.control.cell.TextFieldTableCell
 import javafx.scene.layout.Pane
 import javafx.scene.text.Text
+import javafx.util.Callback
+import javafx.util.StringConverter
 import main.VoogaProperties
 import model.article.Article
 
@@ -198,10 +204,61 @@ public class RandomUI extends Pane {
 	}
 	
 	private void updateTableR() {
-		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		
 		myTableR.setItems(null);
-		tableMaker(myTableR,["Articles", "Probability"]);
+//		tableMaker(myTableR,["Articles", "Probability"]);
+		String Column1MapKey = "A";
+		String Column2MapKey = "P";
+		TableColumn<Map, String> firstDataColumn = new TableColumn<>("Articles");
+		TableColumn<Map, String> secondDataColumn = new TableColumn<>("Probabilities");
+		firstDataColumn.setCellValueFactory(new MapValueFactory(Column1MapKey));
+		secondDataColumn.setCellValueFactory(new MapValueFactory(Column2MapKey));
+ 
+		myTableR = new TableView<>(generateDataInMap(map));
+ 
+		myTableR.setEditable(true);
+		myTableR.getSelectionModel().setCellSelectionEnabled(true);
+		myTableR.getColumns().setAll(firstDataColumn, secondDataColumn);
+		Callback<TableColumn<Map, String>, TableCell<Map, String>>
+			cellFactoryForMap = new Callback<TableColumn<Map, String>,
+				TableCell<Map, String>>() {
+					@Override
+					public TableCell call(TableColumn p) {
+						return new TextFieldTableCell(new StringConverter() {
+							@Override
+							public String toString(Object t) {
+								return t.toString();
+							}
+							@Override
+							public Object fromString(String string) {
+								return string;
+							}
+						});
+					}
+		};
+		firstDataColumn.setCellFactory(cellFactoryForMap);
+		secondDataColumn.setCellFactory(cellFactoryForMap);
+		
 	}
+	
+	private ObservableList<Map> generateDataInMap() {
+		HashMap<Article, Double> map = myController.callEvent("infinite", "getRandomMap");
+		ObservableList<HashMap> allData = FXCollections.observableArrayList();
+		for (Map.Entry<Article, Double> entry: map.entrySet()) {
+			Map<String, String> dataRow = new HashMap<>();
+			
+			String key = entry.getKey().getImageFile();
+			String value = entry.getValue().toString();
+ 
+			dataRow.put(Column1MapKey, key);
+			dataRow.put(Column2MapKey, value);
+ 
+			allData.add(dataRow);
+		}
+		return allData;
+	}
+	
+	
 	
 	private void updateTableC() {
 		
