@@ -1,5 +1,17 @@
-package authoring.controller;
+/*
+ *  NOTE: THIS CLASS IS MEANT TO HELP US SAVE TIME ON THE DEMO.
+ *  
+ *  I am aware there is a lot of duplicated code, but it is meant to attach as a module onto the authoring controller
+ *  
+ *  Each line of code is meant to replace a user function on the front end!!
+ *  
+ *  In this way we are allowed to keep the massive amount of flexibility but to save user time
+ * 
+ */
 
+package authoring.controller.presets;
+
+import authoring.controller.AuthoringController
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

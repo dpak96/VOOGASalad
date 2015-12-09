@@ -2,6 +2,7 @@ package authoring.controller
 
 import authoring.backend.Editor
 import authoring.backend.EditorManager;
+import authoring.controller.presets.PresetArticleFactory
 import authoring.ui.AuthoringUI;
 import model.Event;
 import model.article.Article;
