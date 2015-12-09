@@ -16,6 +16,8 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	protected double myXChange;
 	protected double myYChange;
 	
+	private final int boundsExtension = 200;
+	
 
 	public ConcreteGenerationUtility(List<Article> allArticles, Article viewpoint) {
 		myArticles = allArticles;
@@ -40,10 +42,10 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	private void deleteOutOfFrame() {
 		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
 			Article a = iterator.next();
-			if(a.getX()+a.getWidth() < myViewpoint.getX() ||
-					a.getX() > myViewpoint.getX() + myViewpoint.getWidth() ||
-					a.getY() + a.getHeight() < myViewpoint.getY() ||
-					a.getY() > myViewpoint.getY() + myViewpoint.getHeight()){
+			if(a.getX()+a.getWidth() + boundsExtension < myViewpoint.getX() ||
+					a.getX() > myViewpoint.getX() + myViewpoint.getWidth() + boundsExtension ||
+					a.getY() + a.getHeight() + boundsExtension < myViewpoint.getY() ||
+					a.getY() > myViewpoint.getY() + myViewpoint.getHeight() + boundsExtension){
 				iterator.remove();
 			}
 		}
