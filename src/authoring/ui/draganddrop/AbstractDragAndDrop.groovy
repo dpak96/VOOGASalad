@@ -1,5 +1,6 @@
 package authoring.ui.draganddrop
 
+
 import authoring.controller.AuthoringController
 
 public abstract class AbstractDragAndDrop {

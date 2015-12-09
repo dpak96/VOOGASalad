@@ -35,6 +35,7 @@ public class GameEngine implements IGameEngine {
 	public void update(String input){
 		myViewpoint = myModelController.getViewpoint();
 		allArticles = myModelController.getArticles();
+
 		setMyCharacter(myModelController.getCharacter());
 		//myActiveArticles = getActiveArticles();
 		updateActiveArticles();
@@ -72,8 +73,6 @@ public class GameEngine implements IGameEngine {
 	private void runButtonPress(String input){
 		List<Event> buttonEvents = myModelController.getButtonEvents(input);
 		for(Event e : buttonEvents){
-
-			e.getExecutables().get(0).execute();
 			e.fire();
 		}
 	}
@@ -81,6 +80,7 @@ public class GameEngine implements IGameEngine {
 	private void runArticleCollisions(){
 		for(Article article : myActiveArticles){
 			for(Article collided : article.getCollisionArticles()){
+
 				List<Event> events = myModelController.getCollisionEvents(article.getCollisionInformation(collided).getCollideDirection(), 
 						article.getCollisionType(), collided.getCollisionType());
 				for (Event e:events){
@@ -94,6 +94,7 @@ public class GameEngine implements IGameEngine {
 	private void runActiveEvents(){
 		for(Event e : myModelController.getActiveEvents()){
 			e.fire();
+			//System.out.println(e.getMyName());
 		}
 	}
 	

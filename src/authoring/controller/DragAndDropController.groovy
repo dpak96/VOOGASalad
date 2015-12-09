@@ -23,6 +23,7 @@ class DragAndDropController {
     public void tempButtonClick(e) {
         HighlightedArticle button = (HighlightedArticle)e.getSource();
         Article n = myAuthoringController.callEvent("OtherController","getArticleFromCoordinates",button.getLayoutX()+myBorderWidth +0.1, button.getLayoutY()+myBorderWidth+0.01);
+
         if (controlCheck(e)) {
             if (n != null) {
                 ArticlePropertyEditorMenu popupEditingMenu =

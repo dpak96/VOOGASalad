@@ -16,6 +16,7 @@ import java.lang.reflect.Constructor
 
 
 public class AuthoringController {
+
 	private EditorManager myEditor;
 	private AuthoringUI myUI;
 	private boolean myHighlighted = false;
