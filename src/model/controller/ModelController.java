@@ -116,6 +116,7 @@ public class ModelController implements IModelController {
 
 	public void removeEvent(Event event) {
 		myModel.removeEvent(event);
+		this.removeCollisionEvent(event);
 	}
 
 	@Override

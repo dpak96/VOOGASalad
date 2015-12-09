@@ -58,6 +58,10 @@ class OtherController {
             return null;
         }
     }
+    
+    public void deleteEvent(Event event){
+        modelController.removeEvent(event);
+    }
 
     public List<String> getCollisionTypes(){
         return myModelController.getAllCollisionTypes();
