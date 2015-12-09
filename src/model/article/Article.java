@@ -39,7 +39,7 @@ public class Article{
 		myPosition = new Position(x, y, direction);
 		myXBuffer = 40; //CHANGE IF NECESSARY
 		myYBuffer = 40; //CHANGE IF NECESSARY
-		myBitMap = new BitMap(image, x, y);	
+		//myBitMap = new BitMap(image, x, y);	
 		myStatus = Status.ACTIVE;
 	}
 
@@ -48,7 +48,7 @@ public class Article{
 	public Article(String file, double x, double y) {
 		myImageFile = file;
 		myPosition = new Position(x, y);
-		myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
+		//myBitMap = new BitMap(file, myPosition.getX(), myPosition.getY());
 
 	}
 

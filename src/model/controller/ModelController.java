@@ -265,6 +265,10 @@ public class ModelController implements IModelController {
 	public void addCollision(String direction, String nameOne, String nameTwo, Event event) {
 		myModel.addCollision(direction, nameOne, nameTwo, event);
 	}
+	
+	public void removeCollisionEvent(Event event){
+		myModel.removeExistingCollisonEvent(event);
+	}
 
 	public void initializeCollision() {
 		myModel.initializeCollision();
@@ -300,6 +304,15 @@ public class ModelController implements IModelController {
 
 	public List<Event> getAllEvents() {
 		return myModel.getAllEvents();
+	}
+	
+	public List<List<Event>> getAllEventLists(){
+	    List<List<Event>> eventLists=new ArrayList<List<Event>>();
+	    eventLists.add(myModel.getAllEvents());
+	    eventLists.add(myModel.getActiveEvents());
+	   
+	    return eventLists;
+	    
 	}
 
 	public void setRandomGenerator(Map<Article, Double> probabilities) {

@@ -99,12 +99,12 @@ public class xmlUtility {
 		myStream.omitField(Observable.class, "changed");
 		//myStream.omitField(xmlUtility.class, "xmlUtil");
 		//myStream.omitField(LevelManager.class, "myLevelManager");
-		for(Article a: myModelController.getArticles()) {
-			a.destroyBitMap();
-			System.out.println("destroyed");
-		} 
-		myModelController.getViewpoint().destroyBitMap();
-		myModelController.getCharacter().destroyBitMap();
+		//for(Article a: myModelController.getArticles()) {
+			//a.destroyBitMap();
+			//System.out.println("destroyed");
+		//} 
+		//myModelController.getViewpoint().destroyBitMap();
+		//myModelController.getCharacter().destroyBitMap();
 		for (Executable f: myModelController.getExecutables()) {
 			if (f instanceof ExecutableLevelChanges) {
 				((ExecutableLevelChanges) f).destroyLevelManager();
