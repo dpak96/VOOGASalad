@@ -83,38 +83,13 @@ public class CollisionManager {
 		    Collections.min(intersect_diffs);
 		    // return the closest intersection
 		    return directions[intersect_diffs.indexOf(Collections.min(intersect_diffs))];
-
-		
-		/**System.out.println("Article A X: " + a.getX());
-		System.out.println("Article A Width: " + a.getWidth());
-		System.out.println("Article B X: " + b );
-
-		if (a.getX()+a.getWidth()/2 <= b.getX()) {
-			System.out.println("Left");
-			return "Left";
-			
-		} else if (a.getX() >= b.getX()+b.getWidth()/2 && (a.getY()+a.getHeight() >= b.getY())) {
-			System.out.println("Right");
-			return "Right";
-		} 
-		
-		if (a.getY()+a.getHeight()/2 <= b.getY()) {
-			System.out.println("Top");
-			return "Top";
-		} else if (a.getY() >= b.getY()+b.getHeight()/2) {
-			System.out.println("Bottom");
-			return "Bottom";
-		}**/
 	}
 
 	private CollisionInformation checkBitMapCollision(Article b, Article a) {
 		CollisionFinder finder = new CollisionFinder(a.getBitMap().getByteArray());
 		while (finder.hasNext()) {
 			Position p = finder.next();
-			//System.out.println(p.getX() + " " + p.getY());
 			if (p.getX() != -1 && p.getY() != -1) {
-				//System.out.println(p.getX() + " " + p.getY());
-				//System.out.println("first invalid");
 				CollisionFinder secondArticle = new CollisionFinder(b.getBitMap().getByteArray());
 				while (secondArticle.hasNext()) {
 					Position q = secondArticle.next();
@@ -127,19 +102,15 @@ public class CollisionManager {
 //				for (Position[] q: b.getBitMap().getByteArray()) {
 //					for (Position r: q) {
 //						if (r.getX() != -1 && r.getY() != -1) {
-//							//System.out.println("both valid");
 //							
-//							System.out.println(" valid comparing: " + p.getX() + " with + " + r.getX() + " and " + p.getY() + " with " + r.getY() );
 //							if (p.getX() == r.getX() && p.getY() == r.getY()) {
 ////							if (Math.floor(p.getX()) == Math.floor( r.getX()) && Math.floor(p.getY()) == Math.floor(r.getY())) {
-//								System.out.println("AKSDJF;LKSJF;LKJF;LKJAS;DLFKJAS;LDKFJA;LSDKFJA;SLDKFJAS;LKDFJA;LKDFJ;LAKSDJF;LAJF;LASKDJFL;ASJDFL;AKSFJ");
 //								return new CollisionInformation(getIncidenceDirection(a, r), true);
 //							} 
 //						}
 //					}
 //				}
 			} else {
-				//System.out.println("alpha is 0");
 			}
 		}
 		
@@ -148,7 +119,6 @@ public class CollisionManager {
 //			for (Position q : p) {
 //				Position temp = checkPixelCollision(q, b.getBitMap().getByteArray());
 //				if (temp.isValidPosition()) {
-//					System.out.println("found an intersection");
 //					return new CollisionInformation(getIncidenceDirection(a, temp), true);
 //				}
 //
@@ -161,7 +131,6 @@ public class CollisionManager {
 		for (Position[] p : b) {
 			for (Position q : p) {
 				if (q.isValidPosition() && a.isValidPosition() && a.getX() != -1 && q.getX() != -1) {
-					//System.out.println("is valid position");
 					//a.getX() == q.getX() && a.getY() == q.getY()
 				
 					if (a.getX() == q.getX() && a.getY() == q.getY()) {
