@@ -1,24 +1,18 @@
 package model.XMLutility;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Observable;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import gameengine.CollisionTypeEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import level.manager.LevelManager;
 import level.manager.XMLOrderer;
-import main.VoogaProperties;
 import model.Model;
-import model.article.Article;
-import model.article.Position;
 import model.controller.ModelController;
 import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
@@ -51,7 +45,9 @@ public class xmlUtility {
 	public Model load(File file){
 		try {
 			myStream = new XStream(new DomDriver());
-			myStream.processAnnotations(ModelAnnotations.class);
+			//myStream.processAnnotations(ModelAnnotations.class);
+			myStream.alias("model", Model.class);
+			myStream.alias("CollisionTypeEditor", CollisionTypeEditor.class);
 			System.out.println(file.toString());
 			Object readObject = myStream.fromXML(file);
 			for (Executable f: ((Model) readObject).getExecutables()) {

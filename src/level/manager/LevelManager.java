@@ -59,7 +59,7 @@ public class LevelManager {
 		myCurrentLevel = 1;
 		myCurrentLevelName = myLevels.get(myCurrentLevel);
 		Model model = myModelCtr.getXMLUtility().load(new File(myFolderPath + myGameName + "_GAMEOVER"));
-		myModelCtr.loadFromFile(model);
+		myModelCtr.updateModelWithNewModel(model);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class LevelManager {
 			// model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
 			System.out.println(model.getArticles());
 
-			myModelCtr.loadFromFile(model);
+			myModelCtr.updateModelWithNewModel(model);
 		} else {
 			System.out.println("else hit");
 		}
@@ -94,7 +94,7 @@ public class LevelManager {
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
 			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
 			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
-			myModelCtr.loadFromFile(model);
+			myModelCtr.updateModelWithNewModel(model);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class LevelManager {
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
 			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
 			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
-			myModelCtr.loadFromFile(model);
+			myModelCtr.updateModelWithNewModel(model);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class LevelManager {
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
 			model.getCharacter().setScore(myModelCtr.getCharacter().getScore());
 			model.getCharacter().setLife(myModelCtr.getCharacter().getLife());
-			myModelCtr.loadFromFile(model);
+			myModelCtr.updateModelWithNewModel(model);
 		}
 	}
 

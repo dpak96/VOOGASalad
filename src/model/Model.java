@@ -1,8 +1,9 @@
 package model;
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
 import gameengine.CollisionTypeEditor;
-import main.VoogaProperties;
 import model.article.Article;
 import model.generationutility.*;
 import model.processes.Condition;
@@ -15,8 +16,13 @@ public class Model extends Observable{
 	private List<Article> myArticles;
 	private List<Executable> myExecutables;
 	private List<Condition> myConditions;
+	
+	@XStreamImplicit(itemFieldName = "allEvents")
 	private List<Event> allEvents;
+	
+	@XStreamImplicit(itemFieldName="myActiveEvents")
 	private List<Event> myActiveEvents;
+	
 	private Article myViewpoint;
 	private Article myCharacter;
 	private CollisionTypeEditor myCollisionTypeEditor;
@@ -136,10 +142,10 @@ public class Model extends Observable{
 		return myButtonMap;
 	}
 	public void setCharacter(Article character) {
-		character.setLife(myCharacter.getLife());
-		character.setScore(myCharacter.getScore());
-		character.setHealth(myCharacter.getHealth());
 		myCharacter = character;
+		myCharacter.setLife(character.getLife());
+		myCharacter.setScore(character.getScore());
+		myCharacter.setHealth(character.getHealth());
 	}
 
 	public void remapButton(String button, List<Event> events) {
@@ -244,7 +250,7 @@ public class Model extends Observable{
 	}
 
 	public void setActiveEvents(List<Event> activeEvents) {
-		myActiveEvents = activeEvents;
+		myActiveEvents.addAll(activeEvents);
 	}
 	
 	public void addActiveEvent(Event event){

@@ -1,5 +1,8 @@
 package authoring.controller
 
+
+import javafx.scene.control.Button
+import javafx.scene.layout.Pane
 import model.Event
 import model.article.Article
 import model.controller.ModelController
@@ -8,56 +11,89 @@ import model.processes.Executable
 
 class OtherController {
 
-    private ModelController modelController;
-    public OtherController(ModelController mc){
-        modelController = mc;
+    private ModelController myModelController;
+    private AuthoringController myAuthoringController;
+    public OtherController(AuthoringController ac,ModelController mc){
+        myModelController = mc;
+        myAuthoringController = ac;
     }
 
     public Map<String, Class<?>> getFactoryParameters(String s) {
-        return modelController.getParameters(s);
+        return myModelController.getParameters(s);
     }
 
     public Executable makeExecutable(String s, Map<String, Object> map) {
-        return modelController.createExecutable(s, map);
+        return myModelController.createExecutable(s, map);
     }
 
     public Condition makeCondition(String s, Map<String, Object> map) {
-        return modelController.createCondition(s, map);
+        return myModelController.createCondition(s, map);
     }
 
     public Event makeEvent(String s, List<Condition> lc, List<Executable> le) {
-        return modelController.createEvent(s, lc, le);
+        return myModelController.createEvent(s, lc, le);
     }
 
     public void mapKey(String button, List<Event> events) {
-        modelController.remapButton(button, events);
+        myModelController.remapButton(button, events);
     }
 
     public List<Event> getEventList() {
-        return this.modelController.getAllEvents();
+        return this.myModelController.getAllEvents();
     }
 
     public Condition createCondition(String condName, Map<String,Object> params){
-        this.modelController.createCondition(condName,params);
+        this.myModelController.createCondition(condName,params);
 
     }
 
     public Executable createExecutable(String execName,Map<String,Object> params){
-        this.modelController.createExecutable(execName,params);
+        this.myModelController.createExecutable(execName,params);
     }
 
     public Article getArticleFromCoordinates(double x, double y) {
         try {
-            return modelController.getArticleFromCoordinates(x, y);
+            return myModelController.getArticleFromCoordinates(x, y);
         } catch (Exception e) {
             System.out.println("oops");
             return null;
         }
     }
-
-    public List<String> getCollisionTypes(){
-        return modelController.getAllCollisionTypes();
+    
+    public void deleteEvent(Event event){
+        myModelController.removeEvent(event);
     }
 
+    public List<String> getCollisionTypes(){
+        return myModelController.getAllCollisionTypes();
+    }
+    public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
+        this.myModelController.addEvent(eventToAdd);
+        if(eventType.equals("Active"))
+            this.myModelController.addActiveEvent(eventToAdd);
+
+        if(eventType.equals("Collision"))
+            this.myModelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
+
+        if(eventType.equals("Button"))
+            this.myModelController.remapButton(eventParameters.get("button"), eventToAdd);
+
+
+    }
+
+    public deleteArticle(Article n){
+        if(myAuthoringController.getCurrentArticle()!=null){
+            myModelController.removeArticle(n);
+            Button b = myAuthoringController.getCurrentButton();
+            Pane p = (Pane) b.getParent();
+            p.getChildren().remove(b);
+            myAuthoringController.setHighlighted(false);
+            myAuthoringController.setCurrentButton(null);
+        }
+    }
+
+    public getViewPoint(){
+        myModelController.getViewpoint();
+    }
 
 }

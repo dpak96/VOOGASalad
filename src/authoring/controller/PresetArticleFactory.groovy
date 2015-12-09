@@ -111,7 +111,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("W", listEvent);
-		/**
+
 		//key press move down 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
@@ -124,7 +124,7 @@ public class PresetArticleFactory {
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
 		authoringController.mapKey("S", listEvent);
-		**/
+
 		//decel left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
