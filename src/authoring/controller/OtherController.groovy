@@ -8,47 +8,47 @@ import model.processes.Executable
 
 class OtherController {
 
-    private ModelController modelController;
+    private ModelController myModelController;
     public OtherController(ModelController mc){
-        modelController = mc;
+        myModelController = mc;
     }
 
     public Map<String, Class<?>> getFactoryParameters(String s) {
-        return modelController.getParameters(s);
+        return myModelController.getParameters(s);
     }
 
     public Executable makeExecutable(String s, Map<String, Object> map) {
-        return modelController.createExecutable(s, map);
+        return myModelController.createExecutable(s, map);
     }
 
     public Condition makeCondition(String s, Map<String, Object> map) {
-        return modelController.createCondition(s, map);
+        return myModelController.createCondition(s, map);
     }
 
     public Event makeEvent(String s, List<Condition> lc, List<Executable> le) {
-        return modelController.createEvent(s, lc, le);
+        return myModelController.createEvent(s, lc, le);
     }
 
     public void mapKey(String button, List<Event> events) {
-        modelController.remapButton(button, events);
+        myModelController.remapButton(button, events);
     }
 
     public List<Event> getEventList() {
-        return this.modelController.getAllEvents();
+        return this.myModelController.getAllEvents();
     }
 
     public Condition createCondition(String condName, Map<String,Object> params){
-        this.modelController.createCondition(condName,params);
+        this.myModelController.createCondition(condName,params);
 
     }
 
     public Executable createExecutable(String execName,Map<String,Object> params){
-        this.modelController.createExecutable(execName,params);
+        this.myModelController.createExecutable(execName,params);
     }
 
     public Article getArticleFromCoordinates(double x, double y) {
         try {
-            return modelController.getArticleFromCoordinates(x, y);
+            return myModelController.getArticleFromCoordinates(x, y);
         } catch (Exception e) {
             System.out.println("oops");
             return null;
@@ -56,18 +56,18 @@ class OtherController {
     }
 
     public List<String> getCollisionTypes(){
-        return modelController.getAllCollisionTypes();
+        return myModelController.getAllCollisionTypes();
     }
     public addEventToModel(Event eventToAdd,String eventType, Map<String,String> eventParameters){
-        this.modelController.addEvent(eventToAdd);
+        this.myModelController.addEvent(eventToAdd);
         if(eventType.equals("Active"))
-            this.modelController.addActiveEvent(eventToAdd);
+            this.myModelController.addActiveEvent(eventToAdd);
 
         if(eventType.equals("Collision"))
-            this.modelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
+            this.myModelController.addCollision(eventParameters.get("direction"),eventParameters.get("nameOne"),eventParameters.get("nameTwo"), eventToAdd);
 
         if(eventType.equals("Button"))
-            this.modelController.remapButton(eventParameters.get("button"), eventToAdd);
+            this.myModelController.remapButton(eventParameters.get("button"), eventToAdd);
 
 
     }

@@ -8,90 +8,90 @@ import model.processes.Executable;
 
 
 public class FactoryData {
-  private String condition;
+  private String myCondition;
 
-  private String executableName;
-  private Article executableArticle;
-  private double executableDouble;
-  private Object[] executableArray = {executableName, executableArticle, executableDouble};
+  private String myExecutableName;
+  private Article myExecutableArticle;
+  private double myExecutableDouble;
+  private Object[] myExecutableArray = {myExecutableName, myExecutableArticle, myExecutableDouble};
 
-  private String eventName;
-  private List<Condition> eventCondition;
-  private List<Executable> eventExecutable;
-  private Object[] eventArray = {eventName, eventCondition, eventExecutable};
+  private String myEventName;
+  private List<Condition> myEventCondition;
+  private List<Executable> myEventExecutable;
+  private Object[] myEventArray = {myEventName, myEventCondition, myEventExecutable};
   
 
 
   public String getCondition() {
-    return condition;
+    return myCondition;
   }
 
   public void setCondition(String condition) {
-    this.condition = condition;
+    this.myCondition = condition;
   }
 
   public String getExecutableName() {
-    return executableName;
+    return myExecutableName;
   }
 
   public void setExecutableName(String executableName) {
-    this.executableName = executableName;
+    this.myExecutableName = executableName;
   }
 
   public double getExecutableDouble() {
-    return executableDouble;
+    return myExecutableDouble;
   }
 
   public void setExecutableDouble(double executableDouble) {
-    this.executableDouble = executableDouble;
+    this.myExecutableDouble = executableDouble;
   }
 
   public Article getExecutableArticle() {
-    return executableArticle;
+    return myExecutableArticle;
   }
 
   public void setExecutableArticle(Article executableArticle) {
-    this.executableArticle = executableArticle;
+    this.myExecutableArticle = executableArticle;
   }
 
   public String getEventName() {
-    return eventName;
+    return myEventName;
   }
 
   public void setEventName(String eventName) {
-    this.eventName = eventName;
+    this.myEventName = eventName;
   }
 
   public List<Condition> getEventCondition() {
-    return eventCondition;
+    return myEventCondition;
   }
 
   public void setEventCondition(List<Condition> eventCondition) {
-    this.eventCondition = eventCondition;
+    this.myEventCondition = eventCondition;
   }
 
   public List<Executable> getEventExecutable() {
-    return eventExecutable;
+    return myEventExecutable;
   }
 
   public void setEventExecutable(List<Executable> eventExecutable) {
-    this.eventExecutable = eventExecutable;
+    this.myEventExecutable = eventExecutable;
   }
 
   public Object[] getExecutableArray() {
-    return executableArray;
+    return myExecutableArray;
   }
 
   public void setExecutableArray(Object[] executableArray) {
-    this.executableArray = executableArray;
+    this.myExecutableArray = executableArray;
   }
 
   public Object[] getEventArray() {
-    return eventArray;
+    return myEventArray;
   }
 
   public void setEventArray(Object[] eventArray) {
-    this.eventArray = eventArray;
+    this.myEventArray = eventArray;
   }
 
 }

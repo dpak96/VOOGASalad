@@ -12,12 +12,12 @@ import model.processes.Condition;
 import model.processes.Executable;
 
 public class PresetArticleFactory {
-	private ModelController modelController;
-	private AuthoringController authoringController;
+	private ModelController myModelController;
+	private AuthoringController myAuthoringController;
 
 	public PresetArticleFactory(ModelController mc, AuthoringController ac) {
-		modelController = mc;
-		authoringController = ac;
+		myModelController = mc;
+		myAuthoringController = ac;
 	}
 
 	public void platformMovement(Article article) {
@@ -30,25 +30,25 @@ public class PresetArticleFactory {
 		tempMap.put("myActor", article);
 		tempMap.put("myLevelManager", null);
 		// tempMap.put("myDisplacement", (double) 20);
-		Executable ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableNextLevel", tempMap);
+		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableNextLevel", tempMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = authoringController.callEvent("OtherController", "makeEvent","event", listCondition, listExecutable);
-		modelController.addCollision("Left", "Platform", "Enemy", ev);
+		Event ev = myAuthoringController.callEvent("OtherController", "makeEvent","event", listCondition, listExecutable);
+		myModelController.addCollision("Left", "Platform", "Enemy", ev);
 	}
 
 	public void goombaMovement(Article article) {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) 0);
-		Executable ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
+		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
 
 		Map<String, Object> poopMap = new HashMap<String, Object>();
 		poopMap.put("myActor", article);
 		poopMap.put("myDisplacement", (double) 10);
-		Executable moveEx = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
+		Executable moveEx = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", poopMap);
 
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(moveEx);
@@ -56,13 +56,13 @@ public class PresetArticleFactory {
 		// Event ev = authoringController.callEvent("OtherController","makeEvent","event", listCondition,
 		// listExecutable);
 
-		Event moveTest = authoringController.callEvent("OtherController","makeEvent","poop", listCondition, listExecutable);
+		Event moveTest = myAuthoringController.callEvent("OtherController","makeEvent","poop", listCondition, listExecutable);
 
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(moveTest);
 		// modelController.addActiveEvent(ev);
 
-		authoringController.callEvent("OtherController","mapKey","A", listEvent);
+		myAuthoringController.callEvent("OtherController","mapKey","A", listEvent);
 
 		article.setYVelocity(0);
 
@@ -75,62 +75,62 @@ public class PresetArticleFactory {
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) -1);
-		Executable ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
+		Executable ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		List<Executable> listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		List<Condition> listCondition = new ArrayList<Condition>();
-		Event ev = authoringController.callEvent("OtherController","makeEvent","event1", listCondition, listExecutable);
+		Event ev = myAuthoringController.callEvent("OtherController","makeEvent","event1", listCondition, listExecutable);
 		List<Event> listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
-		authoringController.mapKey("A", listEvent);
+		myAuthoringController.mapKey("A", listEvent);
 
 		
 		//Key Press move right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) 1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = authoringController.callEvent("OtherController","makeEvent","event2", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event2", listCondition, listExecutable);
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
-		authoringController.mapKey("D", listEvent);
+		myAuthoringController.mapKey("D", listEvent);
 
 		
 		//key press move up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) -1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = authoringController.callEvent("OtherController","makeEvent","event3", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event3", listCondition, listExecutable);
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
-		authoringController.mapKey("W", listEvent);
+		myAuthoringController.mapKey("W", listEvent);
 
 		//key press move down 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) 1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
-		ev = authoringController.callEvent("OtherController","makeEvent","event4", listCondition, listExecutable);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event4", listCondition, listExecutable);
 		listEvent = new ArrayList<Event>();
 		listEvent.add(ev);
-		authoringController.mapKey("S", listEvent);
+		myAuthoringController.mapKey("S", listEvent);
 
 		//decel left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) -0.05);
 
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateHorizontal", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -139,16 +139,16 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", 0.1);
-		Condition con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		Condition con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//stop left
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) 0);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -157,24 +157,24 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", 0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myFirst", article);
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", 0);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//decel right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) 0.05);
 
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateHorizontal", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -183,16 +183,16 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", -0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//stop right
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myXVelocity", (double) 0);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetHorizontalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -201,24 +201,24 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", -0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myFirst", article);
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", 0);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//decel down
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) 0.05);
 
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -227,16 +227,16 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", -0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//stop down
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) 0);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -245,24 +245,24 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", -0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myFirst", article);
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", 0);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//decel up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myAcceleration", (double) -0.05);
 
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableAccelerateVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -271,16 +271,16 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", 0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//stop up
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", article);
 		tempMap.put("myYVelocity", (double) 0);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -289,25 +289,25 @@ public class PresetArticleFactory {
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "LessThan");
 		tempMap.put("myCompareValue", 0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myFirst", article);
 		tempMap.put("myFirstVariable", "YVelocity");
 		tempMap.put("myComparison", "GreaterThan");
 		tempMap.put("myCompareValue", 0);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//ViewPoint move from left 
 
-		Article myViewpoint = modelController.getViewpoint();
+		Article myViewpoint = myModelController.getViewpoint();
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
 		tempMap.put("myDisplacement", (double) 1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -315,17 +315,17 @@ public class PresetArticleFactory {
 		tempMap.put("myFirst", article);
 		tempMap.put("myViewpoint", myViewpoint);
 		tempMap.put("myFraction", 0.9);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionRightOfPositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","eventKevin", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventKevin", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		//ViewPoint move from right 
 
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
 		tempMap.put("myDisplacement", (double) -1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveHorizontal", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -333,15 +333,15 @@ public class PresetArticleFactory {
 		tempMap.put("myFirst", article);
 		tempMap.put("myViewpoint", myViewpoint);
 		tempMap.put("myFraction", 0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionLeftOfPositionOnScreen", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionLeftOfPositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","eventPoop", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventPoop", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
 		tempMap.put("myDisplacement", (double) 1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -349,15 +349,15 @@ public class PresetArticleFactory {
 		tempMap.put("myFirst", article);
 		tempMap.put("myViewpoint", myViewpoint);
 		tempMap.put("myFraction", 0.1);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionBelowPositionOnScreen", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionBelowPositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","eventDown", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventDown", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		tempMap = new HashMap<String, Object>();
 		tempMap.put("myActor", myViewpoint);
 		tempMap.put("myDisplacement", (double) -1);
-		ex = authoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableMoveVertical", tempMap);
 		listExecutable = new ArrayList<Executable>();
 		listExecutable.add(ex);
 		listCondition = new ArrayList<Condition>();
@@ -365,10 +365,10 @@ public class PresetArticleFactory {
 		tempMap.put("myFirst", article);
 		tempMap.put("myViewpoint", myViewpoint);
 		tempMap.put("myFraction", 0.9);
-		con = authoringController.callEvent("OtherController","makeCondition","ConditionAbovePositionOnScreen", tempMap);
+		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionAbovePositionOnScreen", tempMap);
 		listCondition.add(con);
-		ev = authoringController.callEvent("OtherController","makeEvent","eventUp", listCondition, listExecutable);
-		modelController.addActiveEvent(ev);
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","eventUp", listCondition, listExecutable);
+		myModelController.addActiveEvent(ev);
 		
 		
 		
