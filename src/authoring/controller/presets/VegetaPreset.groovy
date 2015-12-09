@@ -139,7 +139,7 @@ public class VegetaPreset extends Preset {
 		tempMap.put("myFirst", article);
 		tempMap.put("myFirstVariable", "XVelocity");
 		tempMap.put("myComparison", "LessThan");
-		tempMap.put("myCompareValue", -0.1);
+		tempMap.put("myCompareValue", (double) -0.1);
 		con = myAuthoringController.callEvent("OtherController","makeCondition","ConditionComparisonOneArticle", tempMap);
 		listCondition.add(con);
 		ev = myAuthoringController.callEvent("OtherController","makeEvent","event99", listCondition, listExecutable);
