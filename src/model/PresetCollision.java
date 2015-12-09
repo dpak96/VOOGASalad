@@ -23,7 +23,7 @@ public class PresetCollision {
 	private final String PLAYER = "Player";
 	private final String PLATFORM = "Platform";
 	private final String ENEMY = "Enemy";
-	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy"));
+	private final List<String> DEFAULT_TYPES= new ArrayList<String>(Arrays.asList("Player","Platform","Enemy","JumpPlatform"));
 	public PresetCollision(CollisionTypeEditor editor) {
 		// TODO Auto-generated constructor stub
 		myCollisionTypeEditor = editor;
@@ -48,8 +48,8 @@ public class PresetCollision {
 		myCollisionTypeEditor.add(LEFT, PLAYER, ENEMY, die);
 		myCollisionTypeEditor.add(RIGHT, PLAYER, ENEMY, die);
 		myCollisionTypeEditor.add(TOP, PLAYER, ENEMY, die);
-		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, bounceVertical);
-		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, die);		
+		myCollisionTypeEditor.add(BOTTOM, PLAYER, ENEMY, die);
+		myCollisionTypeEditor.add(TOP, ENEMY, PLAYER, bounceVertical);		
 	}
 
 	private Event getBounceVerticalEvent() {
@@ -69,6 +69,7 @@ public class PresetCollision {
 		// TODO Auto-generated method stub
 		List<Condition> conditionList = new ArrayList<Condition>();
 		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("myName", "Brandon");
 		temp.put("myModel", null);
 		temp.put("myActor", null);
 		ExecutableDelete exe = new ExecutableDelete(temp);
@@ -104,10 +105,15 @@ public class PresetCollision {
 
 	private Event getStopVelocityEvent(String velocityDirection, String compare) {
 		// TODO Auto-generated method stub
-		ExecutableSetHorizontalVelocity exe = new ExecutableSetHorizontalVelocity("horizontalStop", null, 0);
+		HashMap<String, Object> tempMap = new HashMap<String, Object>();
+		tempMap.put("myName", "ok");
+		tempMap.put("myXVelocity", (double) 0);
+//		ExecutableSetHorizontalVelocity exe = new ExecutableSetHorizontalVelocity("horizontalStop", null, 0);
+		ExecutableSetHorizontalVelocity exe = new ExecutableSetHorizontalVelocity(tempMap);
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		temp.put("myName", "Wu");
 		temp.put("myFirst", null);
+//		temp.put("mySecond", null);
 		temp.put("myFirstVariable", velocityDirection);
 		temp.put("myCompareValue", 0);
 		temp.put("myComparison", compare);
