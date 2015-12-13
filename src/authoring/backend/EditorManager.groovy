@@ -47,11 +47,11 @@ public class EditorManager extends Editor {
 	}
 
 	public callEvent(String editor, String method, e1,e2){
-		return myEditorMap.get(editor)."$method"(e1);
+		return myEditorMap.get(editor)."$method"(e1,e2);
 	}
 
 	public callEvent(String editor, String method, e1,e2,e3){
-		return myEditorMap.get(editor)."$method"(e1);
+		return myEditorMap.get(editor)."$method"(e1,e2,e3);
 	}
 
 	public callEvent(String editor, String method, e1,e2,e3,e4){
