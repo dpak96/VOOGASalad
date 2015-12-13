@@ -35,7 +35,7 @@ public class RandomMenu extends AuthoringMenu {
         super.showMenu(300,300);
     }
 
-    protected void populateMenu(GridPane menuGrid) {
+    public void populateMenu(GridPane menuGrid) {
         textFieldPropertyMap = new HashMap<String, TextField>();
         comboBoxPropertyMap = new HashMap<String, ComboBox>();
         int rowIndex = 1;

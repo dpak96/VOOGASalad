@@ -69,7 +69,7 @@ public class AddProcessMenu extends AuthoringMenu {
     }
 
     @Override
-    protected void populateMenu (GridPane menuPane) {
+    public void populateMenu (GridPane menuPane) {
         super.componentAdder.makeLabel(menuPane, 1, 1, myProcessType + ":");
         menuPane.add(processBox, 2, 1);
         GridPane paramGrid = new GridPane();

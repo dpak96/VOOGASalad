@@ -39,7 +39,7 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		super.showMenu(400,300);
 	}
 
-	protected void populateMenu(GridPane menuGrid) {
+	public void populateMenu(GridPane menuGrid) {
 		textFieldPropertyMap = new HashMap<String, TextField>();
 		comboBoxPropertyMap = new HashMap<String, ComboBox>();
 		int rowIndex = 1;
@@ -58,16 +58,6 @@ public class ArticlePropertyEditorMenu extends AuthoringMenu {
 		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Image: ");
 		comboBoxPropertyMap.put("IMAGE",
 				super.componentAdder.makeComboBox(menuGrid, 2, rowIndex++));
-
-		//		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Repeat?: ");
-		//		CheckBox repeat = new CheckBox();
-		//		menuGrid.add(repeat, 2, rowIndex++);
-		//
-		//		if (repeat.isSelected()) {
-		//			super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Probability: ");
-		//			textFieldPropertyMap.put("Probability",
-		//					(super.componentAdder.makeField(menuGrid, 2, rowIndex++)));
-		//		}
 
 		super.componentAdder.makeLabel(menuGrid, 1, rowIndex, "Action on Collision: ");
 		comboBoxPropertyMap.put("COLLISION",

@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece
+// Jasper Hancock
+
 package authoring.ui.editingmenus;
 
 import javafx.animation.ScaleTransition;
@@ -15,21 +18,20 @@ import model.article.Article;
 import resourcemanager.ResourceManager;
 
 
-public abstract class AuthoringMenu implements IMenuAction {
+public abstract class AuthoringMenu implements IMenuAction, ICreateMenu {
     protected MenuBuilder componentAdder = new MenuBuilder();
     protected AuthoringController myController;
-    protected ComboBoxImageRendering renderer=new ComboBoxImageRendering();
     private String myTitle;
 
-    public AuthoringMenu (String title, AuthoringController controller) {
+    public AuthoringMenu (String title, AuthoringController controller, int menuWidth, int menuHeight) {
         myController = controller;
         myTitle = title;
+        showMenu(menuWidth,menuHeight);
     }
 
     public void showMenu (int menuWidth, int menuHeight) {
 
         Dialog propertyMenu = new Dialog();
-
         propertyMenu.setTitle(myTitle);
 
         GridPane menuGrid = new GridPane();
@@ -45,17 +47,4 @@ public abstract class AuthoringMenu implements IMenuAction {
                 .ifPresent(action -> this.executeYourMenuFunction());
     }
 
-    protected void displayErrorMessage () {
-
-        Alert invalidInput = new Alert(AlertType.INFORMATION);
-        invalidInput.setTitle("Invalid input");
-        ResourceBundle bundle =
-                (ResourceBundle) ResourceManager.getResourceManager()
-                        .getResource("PropertiesManager", "error");
-        
-        invalidInput.setContentText(bundle.getString("numberInput"));
-        invalidInput.show();
-    }
-    
-    protected abstract void populateMenu (GridPane menuPane);
 }

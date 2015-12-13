@@ -35,10 +35,9 @@ public class AddEventMenu extends AuthoringMenu {
 
     
     public AddEventMenu (String title, AuthoringController controller, TableView eventTable,  List<Event> tableList) {
-        super(title, controller);
+        super(title, controller,300,300);
         myEventTable = eventTable;
         myEventList=tableList;
-        super.showMenu(300, 300);
 
     }
 
@@ -64,7 +63,8 @@ public class AddEventMenu extends AuthoringMenu {
 
         }
         catch (IllegalArgumentException e) {
-            super.displayErrorMessage();
+            ErrorPopup popup=new ErrorPopup();
+            popup.displayErrorMessage();
         }
         
         System.out.println("refresh");
@@ -72,7 +72,7 @@ public class AddEventMenu extends AuthoringMenu {
     }
 
     @Override
-    protected void populateMenu (GridPane menuPane) {
+    public void populateMenu (GridPane menuPane) {
 
         super.componentAdder.makeLabel(menuPane, 1, 1, "New Event Name :");
         eventNameField = super.componentAdder.makeField(menuPane, 2, 1);

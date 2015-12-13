@@ -7,7 +7,7 @@ import javafx.stage.FileChooser;
 public class UploadImageMenu extends AuthoringMenu{
 
 	public UploadImageMenu(String title, AuthoringController controller) {
-		super(title, controller);
+		super(title, controller, null, null);
 		super.showMenu(300, 300);
 		// TODO Auto-generated constructor stub
 	}
@@ -17,7 +17,7 @@ public class UploadImageMenu extends AuthoringMenu{
 	}
 
 	@Override
-	protected void populateMenu(GridPane menuPane) {
+	public void populateMenu(GridPane menuPane) {
 		// TODO Auto-generated method stub
 		FileChooser f = new FileChooser();
 	}
