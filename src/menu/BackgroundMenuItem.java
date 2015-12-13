@@ -2,18 +2,15 @@ package menu;
 
 import java.util.ResourceBundle;
 
-public class BackgroundMenuItem extends AbstractMenuItem {
+public class BackgroundMenuItem extends ImageMenuItem {
 
 	public BackgroundMenuItem(ResourceBundle resource, MenuController menuController) {
-		super(resource);
-		this.setText(myResource.getString("NEWBACKGROUND"));
-//		this.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
-		this.setOnAction(e -> handle(menuController));
+		super(resource, menuController, "NEWBACKGROUND");
 	}
 
 	@Override
-	public void handle(MenuController menuController) {
-		menuController.addImage("backgrounds");
+	public ImageFolders imageFolder() {
+		return ImageFolders.BACKGROUND;
 	}
 	
 }

@@ -114,7 +114,7 @@ public class SuperController {
   }
   
   public void deleteLevels() {
-	  getUICore().getMenu().deleteGame();
+	  getUICore().getMenu().reorderGame();
   }
 
 }

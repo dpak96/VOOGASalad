@@ -2,18 +2,15 @@ package menu;
 
 import java.util.ResourceBundle;
 
-public class PlatformMenuItem extends AbstractMenuItem {
+public class PlatformMenuItem extends ImageMenuItem {
 
 	public PlatformMenuItem(ResourceBundle resource, MenuController menuController) {
-		super(resource);
-		this.setText(myResource.getString("NEWPLATFORM"));
-//		this.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
-		this.setOnAction(e -> handle(menuController));
+		super(resource, menuController, "NEWPLATFORM");
 	}
 
 	@Override
-	public void handle(MenuController menuController) {
-		menuController.addImage("platforms");
+	public ImageFolders imageFolder() {
+		return ImageFolders.PLATFORM;
 	}
 
 }

@@ -222,7 +222,7 @@ public class RandomUI extends Pane {
 	private void updateTableR() {
 		
 		myTableR.setItems(null);
-//		tableMaker(myTableR,["Articles", "Probability"]);
+//		tableMaker(myTableR,["Article", "Probability"]);
 		
 		TableColumn<Map, String> firstDataColumn = new TableColumn<>("Articles");
 		TableColumn<Map, String> secondDataColumn = new TableColumn<>("Probabilities");
