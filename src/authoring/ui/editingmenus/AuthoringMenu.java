@@ -23,10 +23,13 @@ public abstract class AuthoringMenu implements IMenuAction, ICreateMenu {
     protected AuthoringController myController;
     private String myTitle;
 
-    public AuthoringMenu (String title, AuthoringController controller, int menuWidth, int menuHeight) {
+    public AuthoringMenu (String title,
+                          AuthoringController controller,
+                          int menuWidth,
+                          int menuHeight) {
         myController = controller;
         myTitle = title;
-        showMenu(menuWidth,menuHeight);
+        showMenu(menuWidth, menuHeight);
     }
 
     public void showMenu (int menuWidth, int menuHeight) {

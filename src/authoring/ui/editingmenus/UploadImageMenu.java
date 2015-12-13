@@ -7,8 +7,7 @@ import javafx.stage.FileChooser;
 public class UploadImageMenu extends AuthoringMenu{
 
 	public UploadImageMenu(String title, AuthoringController controller) {
-		super(title, controller, null, null);
-		super.showMenu(300, 300);
+		super(title, controller, 300, 300);
 		// TODO Auto-generated constructor stub
 	}
 

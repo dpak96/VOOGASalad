@@ -13,7 +13,7 @@ public class BackgroundMenu extends AuthoringMenu {
     private ComboBoxImageRendering imageHandler=new ComboBoxImageRendering();
     private static final int MENU_WIDTH=300;
     private static final int MENU_HEIGHT=300;
-    
+    private static final String IMAGE_LABEL="Background Image: "
     public BackgroundMenu (String title, AuthoringController controller) {
         super(title, controller,MENU_WIDTH,MENU_HEIGHT);
     }
@@ -27,7 +27,7 @@ public class BackgroundMenu extends AuthoringMenu {
     public void populateMenu (GridPane menuPane) {
         
         int rowIndex=1;
-        imageBox=super.componentAdder.makeLabelAndBox(menuPane, 1, rowIndex, "Background Image: ");
+        imageBox=super.componentAdder.makeLabelAndBox(menuPane, 1, rowIndex,IMAGE_LABEL);
         imageBox.getItems().add(" ");
         imageHandler.addBackgroundImages(imageBox);
         

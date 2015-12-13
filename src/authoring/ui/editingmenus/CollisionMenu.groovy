@@ -11,6 +11,7 @@ public class CollisionMenu extends AuthoringMenu {
     private TextField myCollisionName = new TextField();
     private static final int MENU_WIDTH=300;
     private static final int MENU_HEIGHT=150;
+    private static final String COLLISION_LABEL="Collision Name";
     public CollisionMenu(String title, AuthoringController controller) {
         super(title, controller);
         super.showMenu(MENU_WIDTH, MENU_HEIGHT);
@@ -18,7 +19,7 @@ public class CollisionMenu extends AuthoringMenu {
 
     public void populateMenu(GridPane menuPane) {
         menuPane.setHgap(10);
-        super.componentAdder.makeLabel(menuPane, 1, 1, "Collision Name");
+        super.componentAdder.makeLabel(menuPane, 1, 1,COLLISION_LABEL);
         menuPane.add(myCollisionName, 2, 1);
     }
 
