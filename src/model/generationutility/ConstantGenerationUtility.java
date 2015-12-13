@@ -46,6 +46,10 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 			Article firstArticle = myCreation.get(0);
 			double viewpointSpotX = myViewpoint.getX() - accumulatedXChange + i*generations;
 			double viewpointSpotY = myViewpoint.getY() - accumulatedYChange + i*generations;
+			System.out.println("firstArticle " + firstArticle);
+			System.out.println("firstArticle.getImageFile() " + firstArticle.getImageFile());
+			System.out.println("viewpointSpotX+myXOffset " + viewpointSpotX+myXOffset);
+			System.out.println("viewpointSpotY+myYOffset " + viewpointSpotY+myYOffset);
 			Article newOne = new Article(firstArticle.getImageFile(), viewpointSpotX+myXOffset, viewpointSpotY+myYOffset, true);
 			myArticles.add(newOne);
 			for(int j = 1; j < myCreation.size(); j++){

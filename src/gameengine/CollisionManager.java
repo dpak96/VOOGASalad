@@ -131,6 +131,7 @@ public class CollisionManager {
 		for (Position[] p : b) {
 			for (Position q : p) {
 				if (q.isValidPosition() && a.isValidPosition() && a.getX() != -1 && q.getX() != -1) {
+
 					//a.getX() == q.getX() && a.getY() == q.getY()
 				
 					if (a.getX() == q.getX() && a.getY() == q.getY()) {
