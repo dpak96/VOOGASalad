@@ -1,3 +1,8 @@
+// This entire file is part of my masterpiece.
+// Rob Martorano
+
+
+
 package authoring.backend
 
 import model.controller.ModelController;
@@ -9,13 +14,12 @@ import java.lang.reflect.Constructor;
 public class EditorManager extends Editor {
 	private Map<String, Editor> myEditorMap;
 
-
 	public EditorManager(ModelController modelController) {
 		super(modelController);
 		this.register(modelController);
 	}
 
-	public void register(ModelController mc){
+	private void register(ModelController mc){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
 		myEditorMap = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
@@ -32,8 +36,26 @@ public class EditorManager extends Editor {
 		return object;
 	}
 
-
 	public getSubEditor(String editor){
 		return myEditorMap.get(editor);
 	}
+
+
+	public callEvent(String editor, String method, e1){
+		return myEditorMap.get(editor)."$method"(e1);
+
+	}
+
+	public callEvent(String editor, String method, e1,e2){
+		return myEditorMap.get(editor)."$method"(e1);
+	}
+
+	public callEvent(String editor, String method, e1,e2,e3){
+		return myEditorMap.get(editor)."$method"(e1);
+	}
+
+	public callEvent(String editor, String method, e1,e2,e3,e4){
+		return myEditorMap.get(editor)."$method"(e1,e2,e3,e4);
+	}
+
 }

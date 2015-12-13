@@ -63,8 +63,9 @@ public class LevelManager {
 	 */
 	public void nextLevel() {
 		if (myCurrentLevel != 0) {
-			myCurrentLevel += 1;
-			myCurrentLevelName = myLevels.get(1);
+			System.out.println(myLevels.get(myCurrentLevel));
+			myCurrentLevelName = myLevels.get(myCurrentLevel++);
+			System.out.println(myCurrentLevelName);
 
 			Model model = xmlUtil.load(new File(myFolderPath + myCurrentLevelName));
 			// model.getCharacter().setScore(myModelCtr.getCharacter().getScore());

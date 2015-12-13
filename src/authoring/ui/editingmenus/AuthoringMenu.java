@@ -18,7 +18,7 @@ import resourcemanager.ResourceManager;
 public abstract class AuthoringMenu implements IMenuAction {
     protected MenuBuilder componentAdder = new MenuBuilder();
     protected AuthoringController myController;
-    protected ComboBoxImageRendering renderer=new ComboBoxImageRendering();
+    protected ComboBoxImageRendering renderer= new ComboBoxImageRendering();
     private String myTitle;
 
     public AuthoringMenu (String title, AuthoringController controller) {
@@ -44,6 +44,7 @@ public abstract class AuthoringMenu implements IMenuAction {
         propertyMenu.showAndWait().filter(selection -> selection == ButtonType.OK)
                 .ifPresent(action -> this.executeYourMenuFunction());
     }
+
 
     protected void displayErrorMessage () {
 

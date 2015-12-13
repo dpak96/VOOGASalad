@@ -46,11 +46,11 @@ public class AuthoringController {
 		}
 	}
 
-	private getNewInstance(String cName){
+	private getNewInstance(String cName) {
 		Class<?> cl = Class.forName(cName);
 		Object object;
 		Constructor<?> ctor = null;
-		if(cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController") || cName.equals("authoring.controller.InfiniteController")){
+		if (cName.equals("authoring.controller.OtherController") || cName.equals("authoring.controller.KeyPressController") || cName.equals("authoring.controller.InfiniteController")) {
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = ModelController.class;
@@ -59,8 +59,7 @@ public class AuthoringController {
 			o[0] = this;
 			o[1] = myModelController;
 			object = ctor.newInstance(o);
-		}
-		else if(cName.equals("authoring.controller.ArticleCAndGController")){
+		} else if (cName.equals("authoring.controller.ArticleCAndGController")) {
 			Class[] hi = new Class[2];
 			hi[0] = AuthoringController.class;
 			hi[1] = EditorManager.class;
@@ -69,9 +68,7 @@ public class AuthoringController {
 			o[0] = this;
 			o[1] = myEditor;
 			object = ctor.newInstance(o);
-		}
-
-		else{
+		} else {
 			ctor = cl.getConstructor(AuthoringController.class);
 			Object[] o = new Object[1];
 			o[0] = this;
@@ -79,9 +76,6 @@ public class AuthoringController {
 		}
 
 		return object;
-	}
-
-	private pressDelete(){
 	}
 
 	public AuthoringUI getUi() {

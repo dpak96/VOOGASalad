@@ -23,7 +23,6 @@ public class MapOverviewModule extends HUDModule {
 	
 	public MapOverviewModule(){
 		super();
-		myText = new Text("Overview");
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class MapOverviewModule extends HUDModule {
 		myMap = new Canvas(offset*3.0/4.0, offset*3.0/5.0);
 		myGC = myMap.getGraphicsContext2D();
 		myMap.setVisible(true);
-		this.getChildren().addAll(myText,myMap);
+		this.getChildren().addAll(myMap);
 		
 	}
 

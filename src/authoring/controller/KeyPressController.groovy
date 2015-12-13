@@ -12,7 +12,7 @@ import uibasics.KeyPress
  * Created by Rob on 12/8/15.
  */
 class KeyPressController {
-
+	private final double DISTANCE_MOVE = 50;
 	private AuthoringController myAuthoringController;
 	private ModelController myModelController;
 	KeyPressController(AuthoringController authoring, ModelController model){
@@ -30,19 +30,19 @@ class KeyPressController {
 		}
 		Article view = myAuthoringController.callEvent("OtherController", "getViewPoint")
 		if(event.getCode() == KeyCode.RIGHT){
-			view.setX(view.getX()+50);
+			view.setX(view.getX()+DISTANCE_MOVE);
 			deleteButton();
 		}
 		if(event.getCode() == KeyCode.LEFT){
-			view.setX(view.getX()-50);
+			view.setX(view.getX()-DISTANCE_MOVE);
 			deleteButton();
 		}
 		if(event.getCode() == KeyCode.UP){
-			view.setY(view.getY()-50);
+			view.setY(view.getY()-DISTANCE_MOVE);
 			deleteButton();
 		}
 		if(event.getCode() == KeyCode.DOWN){
-			view.setY(view.getY()+50);
+			view.setY(view.getY()+DISTANCE_MOVE);
 			deleteButton();
 		}
 	}
@@ -52,12 +52,12 @@ class KeyPressController {
 	}
 
 	private deleteButton(){
-		if(myAuthoringController.getCurrentButton() != null){
+		/*if(myAuthoringController.getCurrentButton() != null){
 			Button b = myAuthoringController.getCurrentButton();
 			Pane p = (Pane) b.getParent();
 			p.getChildren().remove(b);
 			myAuthoringController.setHighlighted(false);
 			myAuthoringController.setCurrentButton(null);
-		}
+		}*/
 	}
 }
