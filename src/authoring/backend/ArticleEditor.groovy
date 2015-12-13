@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece
+// Kevin Wang
+
 package authoring.backend
 
 import model.article.Article;
@@ -11,9 +14,7 @@ class ArticleEditor extends Editor {
 	public Article createNewArticleAndPlace(String name,imageFileName,
 			x,
 			y, direction) {
-		double xAdjusted = x;
-		double yAdjusted = y;
-		return myModelController.createArticleFromCenter(imageFileName, xAdjusted, yAdjusted,
+		return myModelController.createArticleFromCenter(imageFileName, x, y,
 				direction);
 	}
 

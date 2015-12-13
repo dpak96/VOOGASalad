@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece
+// Kevin Wang
+
 package authoring.backend
 
 import model.controller.ModelController;
@@ -15,7 +18,7 @@ public class EditorManager extends Editor {
 		this.register(modelController);
 	}
 
-	public void register(ModelController mc){
+	private void register(ModelController mc){
 		ResourceBundle rb = (ResourceBundle) ResourceManager.getResourceManager().getResource("PropertiesManager", "Reflection");
 		myEditorMap = new HashMap<String, Editor>();
 		for(String x: rb.keySet()){
