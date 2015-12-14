@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Wuming Zhang
 package gameengine;
 
 import java.util.ArrayList;
