@@ -6,6 +6,8 @@ import java.util.*;
 import gameengine.CollisionInformation;
 import javafx.scene.image.Image;
 import model.BitMap;
+import model.generationutility.IPositionCopyable;
+import model.generationutility.IRectangular;
 import resourcemanager.ResourceManager;
 
 
@@ -14,7 +16,7 @@ import resourcemanager.ResourceManager;
  * @author danielpak
  *
  */
-public class Article{
+public class Article implements IPositionCopyable, IRectangular{
 
 	public enum Status {ACTIVE, INACTIVE, HARDINACTIVE};
 
@@ -262,6 +264,13 @@ public class Article{
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 
+	}
+
+
+
+	@Override
+	public IPositionCopyable copyAtLocation(double x, double y) {
+		return new Article(myImageFile, x, y);
 	}
 
 }

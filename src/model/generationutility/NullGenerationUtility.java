@@ -1,9 +1,10 @@
 package model.generationutility;
+import java.util.*;
 
 public class NullGenerationUtility extends AbstractGenerationUtility{
 
-	public void update(){
-		
+	public Collection<IPositionCopyable> generate(){
+		return new ArrayList<IPositionCopyable>();
 	}
 	
 }

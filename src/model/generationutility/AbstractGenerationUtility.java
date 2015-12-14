@@ -1,7 +1,8 @@
 package model.generationutility;
+import java.util.*;
 
 public abstract class AbstractGenerationUtility {
 
-	public abstract void update();
+	public abstract Collection<IPositionCopyable> generate();
 	
 }

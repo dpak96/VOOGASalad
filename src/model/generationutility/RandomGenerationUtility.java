@@ -13,7 +13,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	
 	
 	//Set up the random generation utility
-	public RandomGenerationUtility(Map<Article, Double> probabilities, List<Article> allArticles, Article viewpoint) {
+	public RandomGenerationUtility(Map<IPositionCopyable>, Double> probabilities, Article viewpoint) {
 		super(allArticles, viewpoint);
 		myGenerationProbabilities = probabilities;
 		for (Article a : myGenerationProbabilities.keySet()) {
@@ -24,7 +24,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	}
 	
 	//Switches between vertical and horizontal generation
-	public void typeUpdate() {
+	public void utilityGenerate() {
 		if (myXChange != 0)
 			xGenerate(myXChange);
 		if (myYChange != 0)
@@ -69,21 +69,5 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		}
 	}
 	
-	/* Testing RandomGenerationUtiltiy
-	
-	public static void main(String[] args){
-		Map<Article, Double> prob = new HashMap<Article, Double>();
-		prob.put(new Article("Goomba", 0, 10), 0.0001);
-		Article v = new Article("Goomba", 0, 0, true);
-		List<Article> all = new ArrayList<Article>();
-		RandomGenerationUtility r = new RandomGenerationUtility(prob, all, v);
-		while(true){
-			r.update();
-			v.setX(v.getX()+0.5);
-		}
-	}
-	
-	*/
-
 
 }

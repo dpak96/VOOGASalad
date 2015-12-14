@@ -1,7 +1,6 @@
 package model.generationutility;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import model.article.Article;
 
@@ -16,7 +15,7 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	protected double myXChange;
 	protected double myYChange;
 	
-	private final int boundsExtension = 200;
+	//private final int boundsExtension = 200;
 	
 
 	public ConcreteGenerationUtility(List<Article> allArticles, Article viewpoint) {
@@ -27,18 +26,25 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	}
 
 	@Override
-	public void update() {
+	public Collection<IPositionCopyable> generate() {
+		setViewCoordinateChanges();
+		Collection<IPositionCopyable> generated = subGenerate();
+		updatePreviousViewPositions();
+	}
+	
+	private void setViewCoordinateChanges(){
 		myXChange = myViewpoint.getX() - myPrevX;
-		myYChange = myViewpoint.getY() - myPrevY;
-		typeUpdate();	
-		deleteOutOfFrame();
+		myYChange = myViewpoint.getY() - myPrevY;	
+	}
+	
+	private void updatePreviousViewPositions(){
 		myPrevX = myViewpoint.getX();
 		myPrevY = myViewpoint.getY();
 	}
 	
-	protected abstract void typeUpdate();
+	protected abstract void utilityGenerate();
 	
-
+/*
 	private void deleteOutOfFrame() {
 		for (Iterator<Article> iterator = myArticles.iterator(); iterator.hasNext();) {
 			Article a = iterator.next();
@@ -50,5 +56,6 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 			}
 		}
 	}
+	*/
 
 }
