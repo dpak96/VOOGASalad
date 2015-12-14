@@ -36,26 +36,21 @@ public class EditorManager extends Editor {
 		return object;
 	}
 
-	public getSubEditor(String editor){
-		return myEditorMap.get(editor);
-	}
-
-
-	public callEvent(String editor, String method, e1){
-		return myEditorMap.get(editor)."$method"(e1);
+	public callEditor(String editor, String method, param1){
+		return myEditorMap.get(editor)."$method"(param1);
 
 	}
 
-	public callEvent(String editor, String method, e1,e2){
-		return myEditorMap.get(editor)."$method"(e1,e2);
+	public callEditor(String editor, String method, param1,param2){
+		return myEditorMap.get(editor)."$method"(param1,param2);
 	}
 
-	public callEvent(String editor, String method, e1,e2,e3){
-		return myEditorMap.get(editor)."$method"(e1,e2,e3);
+	public callEditor(String editor, String method, param1,param2,param3){
+		return myEditorMap.get(editor)."$method"(param1,param2,param3);
 	}
 
-	public callEvent(String editor, String method, e1,e2,e3,e4){
-		return myEditorMap.get(editor)."$method"(e1,e2,e3,e4);
+	public callEditor(String editor, String method, param1,param2,param3,param4){
+		return myEditorMap.get(editor)."$method"(param1,param2,param3,param4);
 	}
 
 }

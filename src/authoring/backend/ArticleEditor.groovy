@@ -11,20 +11,20 @@ class ArticleEditor extends Editor {
 		super(mc);
 	}
 
-	public Article createNewArticleAndPlace(String imageFileName, double x, double y, boolean direction) {
+	protected createNewArticleAndPlace(String imageFileName, double x, double y, boolean direction) {
 		 myModelController.createArticleFromCenter(imageFileName, x, y, direction);
 	}
 
-	public getArticle(double x, double y){
+	protected getArticle(double x, double y){
 		return myModelController.getArticleFromCoordinates(x,y);
 	}
 
-	public void removeArticle(Article article) {
+	protected void removeArticle(Article article) {
 		myModelController.removeArticle(article);
 	}
 
 
-	public editProperty(String function,x, Article article) {
+	protected editProperty(String function,x, Article article) {
 		article."$function"(x);
 	}
 
