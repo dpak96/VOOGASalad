@@ -54,6 +54,10 @@ public class ModelController implements IModelController {
 	public void makeXMLUtility() {
 		myXMLUtility = new xmlUtility(myLevelManager);
 	}
+	
+	public xmlUtility getXMLUtility() {
+		return myXMLUtility;
+	}
 	public void makeLevelManager(GameCreation game) {
 		myLevelManager = new LevelManager(this,game);
 	}
