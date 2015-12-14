@@ -1,5 +1,5 @@
 // This entire file is part of my masterpiece.
-// Matthew Battles
+// MATTHEW BATTLES
 package menu;
 
 import javafx.scene.layout.BorderPane;
@@ -23,7 +23,8 @@ public class MenuController {
     private MainMenu myMainMenu;
     private ModelController myModelController;
     private GameCreation game;
-
+    private FileChooser myFileChooser;
+    private File myDir;
 
     public MenuController(GraphicHandler graphicHandler, ModelController modelController){
         myGraphicHandler = graphicHandler;
@@ -42,39 +43,47 @@ public class MenuController {
     }
 
     public boolean saveGameCreation(GameCreation gameCreation){
-    	game = gameCreation;
+    	saveSetup(gameCreation);
+    	
     	File gamesDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames");
     	if(!gamesDir.exists()){
     		gamesDir.mkdir();
     	}
-    	FileChooser myFileChooser = new FileChooser();
+    	
     	myFileChooser.setTitle("New Game Folder");
     	myFileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "SquirtleSquadGames" ));
-        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+        
         try {
-        	dir.mkdir();
-        	game.setFolderPath(dir.getPath());
+        	myDir.mkdir();
+        	game.setFolderPath(myDir.getPath());
         	XMLOrderer levelOrder = new XMLOrderer();
-        	levelOrder.makeXML(dir.getName());
-        	game.setGame(dir.getName());
+        	levelOrder.makeXML(myDir.getName());
+        	game.setGame(myDir.getName());
         } catch (Exception e) {
             return false;
         }
         return true;
     }
+
+	private void saveSetup(GameCreation gameCreation) {
+		game = gameCreation;
+    	myFileChooser = new FileChooser();
+    	myDir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+	}
     
     public void saveLevelCreation(GameCreation gameCreation){
-    	game = gameCreation;
+    	saveSetup(gameCreation);
+    	
     	File levelDir = new File(gameCreation.getFolderPath());
-    	FileChooser myFileChooser = new FileChooser();
+    	
     	myFileChooser.setTitle("New Level File");
 		FileChooser.ExtensionFilter extensionFilter =
 				new FileChooser.ExtensionFilter("Java files (*.xml)", "*.xml");
 		myFileChooser.getExtensionFilters().add(extensionFilter);
     	myFileChooser.setInitialDirectory(levelDir);
-        File dir = myFileChooser.showSaveDialog(myMainMenu.getScene().getWindow());
+        
         try {
-        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),dir.getName());
+        	XMLOrderer levelOrder = new XMLOrderer(levelDir.getPath(),myDir.getName());
         	levelOrder.makeXML(gameCreation.getName());
         	myModelController.setModel(new Model());
         } 
@@ -102,10 +111,10 @@ public class MenuController {
     public void loadGame(){
     	try {
             myModelController.load(myMainMenu.getScene().getWindow());
-    	} catch (NullPointerException e) {
+    	} 
+    	catch (NullPointerException e) {
     		JOptionPane.showMessageDialog(null, "Load cancelled.", "Cancelled Load", JOptionPane.WARNING_MESSAGE);
     	}
-
     }
     
     public void loadGame(GameCreation gameCreation, String file){
@@ -126,7 +135,6 @@ public class MenuController {
 		myImageChooser.getExtensionFilters().addAll(extensionFilter, jpegFilter);
 
         ArrayList<File> selectedImages = (ArrayList<File>) myImageChooser.showOpenMultipleDialog(myMainMenu.getScene().getWindow());
-        
         if(selectedImages != null){
         	for(File image : selectedImages){
         		File mainImageLocation = makeEmptyFile(image.getName());
