@@ -16,6 +16,13 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 	
 	
 	//Set up the random generation utility
+	/**
+	 * probabilities is a map from objects that can be generated to the probability that they are generated
+	 * viewpoint is supposed to represent the screen that the user sees. It controls
+	 * where things are being generated through this utility.
+	 * @param probabilities
+	 * @param viewpoint
+	 */
 	public RandomGenerationUtility(Map<IPositionCopyable, Double> probabilities, IRectangular viewpoint) {
 		super(viewpoint);
 		myGenerationProbabilities = probabilities;
