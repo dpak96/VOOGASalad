@@ -204,5 +204,20 @@ class DoodleJumpPreset extends Preset {
 		
 		article.setCollisionType("Enemy");
 
+		tempMap = new HashMap<String, Object>();
+		tempMap.put("myActor", article);
+
+		tempMap.put("myYVelocity", (double) -3.0);
+
+		ex = myAuthoringController.callEvent("OtherController","makeExecutable","ExecutableSetVerticalVelocity", tempMap);
+		listExecutable = new ArrayList<Executable>();
+		listExecutable.add(ex);
+		listCondition = new ArrayList<Condition>();
+		ev = myAuthoringController.callEvent("OtherController","makeEvent","Move Up", listCondition, listExecutable);
+		listEvent = new ArrayList<Event>();
+		listEvent.add(ev);
+		myAuthoringController.callEvent("KeyPressController", "mapKey", "W", listEvent);
+
+		article.setCollisionType("Enemy");
 	}
 }
