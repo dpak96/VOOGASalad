@@ -317,8 +317,5 @@ public class ModelController implements IModelController {
 		return myModel.getAllCollisionTypes();
 	}
 
-	public void makeGen(Map<Article, Double> probabilities){
-		RandomGenerationUtility randomGenerationUtility = new RandomGenerationUtility(probabilities,getArticles(),getViewpoint());
-	}
 
 }

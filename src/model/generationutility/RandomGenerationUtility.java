@@ -26,6 +26,7 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		setAdjustedProbabilities();
 	}
 	
+	//Changes the probabilities for a new checkdistance
 	private void setAdjustedProbabilities(){
 		for (IPositionCopyable potentialGeneratedObject : myGenerationProbabilities.keySet()) {
 			double prob = myGenerationProbabilities.get(potentialGeneratedObject);
@@ -64,26 +65,29 @@ public class RandomGenerationUtility extends ConcreteGenerationUtility{
 		for (int j = 0; j < Math.abs(myYChange); j += myCheckDistance) {
 			for (int i = 0; i < myViewpoint.getWidth(); i += myCheckDistance) {
 				for (IPositionCopyable potentialGeneratedObject : myGenerationProbabilities.keySet()) {
-						double newX = myViewpoint.getX()+i;
-						double newY = getNewY(j);
-						attemptGeneration(yGenerated, newX, newY, potentialGeneratedObject);
+					double newX = myViewpoint.getX()+i;
+					double newY = getNewY(j);
+					attemptGeneration(yGenerated, newX, newY, potentialGeneratedObject);
 				}
 			}
 		}
 		return yGenerated;
 	}
 
+	//gets X of where a newly generated object should be
 	private double getNewX(double i){
 		if(myXChange > 0) return myViewpoint.getX()+myViewpoint.getWidth()-i;
 		else return myViewpoint.getX() + i;
 		
 	}
 	
+	//gets Y of where a newly generated object should be
 	private double getNewY(double j){
 		if(myYChange > 0) return myViewpoint.getY() + myViewpoint.getHeight() - j;
 		else return myViewpoint.getY() + j;
 	}
 	
+	//Rolls a number and generates an object if it fits the probability, adds said object to list of generated objects
 	private void attemptGeneration(Collection<IPositionCopyable> generated, double x, double y, IPositionCopyable copyable){
 		if (Math.random() < myGenerationProbabilities.get(copyable)) {
 			IPositionCopyable copy = copyable.copyAtLocation(x, y);

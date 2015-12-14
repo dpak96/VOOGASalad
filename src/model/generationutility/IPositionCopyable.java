@@ -1,6 +1,6 @@
 package model.generationutility;
 
-public interface IPositionCopyable {
+public interface IPositionCopyable extends IRectangular {
 
 	/**
 	 * Takes in x and y, returns a copy of the given object but set the given X and Y

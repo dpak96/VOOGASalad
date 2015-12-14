@@ -61,13 +61,25 @@ public class Model extends Observable{
 	
 	public void setConstantGenerator(List<List<Article>> constants, double xDistance,
 			double yDistance, double xOffset, double yOffset) {
-		randomGenerator = new ConstantGenerationUtility(constants, xDistance, yDistance, 
-				xOffset, yOffset, myArticles, myViewpoint);
+		List<List<IPositionCopyable>> ic = new ArrayList<List<IPositionCopyable>>();
+		for(List<Article> a : constants){
+			List<IPositionCopyable> ic2 = new ArrayList<IPositionCopyable>();
+			for(Article a2 : a){
+				ic2.add((IPositionCopyable) a2);
+			}
+			ic.add(ic2);
+		}
+		randomGenerator = new ConstantGenerationUtility(ic, xDistance, yDistance, 
+				xOffset, yOffset, myViewpoint);
 
 	}
 	
 	public void setRandomGenerator(Map<Article, Double> probabilities){
-		randomGenerator = new RandomGenerationUtility(probabilities, myArticles, myViewpoint);
+		Map<IPositionCopyable, Double> m = new HashMap<IPositionCopyable, Double>();
+		for(Article a : probabilities.keySet()){
+			m.put((IPositionCopyable) a, probabilities.get(a));
+		}
+		randomGenerator = new RandomGenerationUtility(m, myViewpoint);
 	}
 
 	public List<Event> getAllEvents(){

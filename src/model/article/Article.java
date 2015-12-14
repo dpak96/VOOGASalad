@@ -16,7 +16,7 @@ import resourcemanager.ResourceManager;
  * @author danielpak
  *
  */
-public class Article implements IPositionCopyable, IRectangular{
+public class Article implements IPositionCopyable{
 
 	public enum Status {ACTIVE, INACTIVE, HARDINACTIVE};
 

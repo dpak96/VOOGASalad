@@ -6,7 +6,7 @@ import model.article.Article;
 
 public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 	
-	private List<List<Article>> myGenerationOptions;
+	private List<List<IPositionCopyable>> myGenerationOptions;
 	private double myXDistance;
 	private double myYDistance;
 	
@@ -16,11 +16,11 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 	private double myXOffset;
 	private double myYOffset;
 
-	public ConstantGenerationUtility(List<List<Article>> generationOptions, 
+	public ConstantGenerationUtility(List<List<IPositionCopyable>> generationOptions, 
 			double xDistance, double yDistance, 
 			double viewpointXOffset, double viewpointYOffset,
-			List<Article> allArticles, Article viewpoint){
-		super(allArticles, viewpoint);
+			IRectangular viewpoint){
+		super(viewpoint);
 		myGenerationOptions = generationOptions;
 		myXDistance = xDistance;
 		myYDistance = yDistance;
@@ -29,7 +29,8 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 	}
 	
 	@Override
-	protected void subGenerate() {
+	protected Collection<IPositionCopyable> subGenerate() {
+		Collection<IPositionCopyable> generated = new ArrayList<IPositionCopyable>();
 		accumulatedXChange += myXChange;
 		accumulatedYChange += myYChange;
 		
@@ -42,26 +43,22 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 		for(int i = 0; i < generations; i++){
 			int randomIndex = (int) Math.floor(myGenerationOptions.size()*Math.random());
 
-			List<Article> myCreation = myGenerationOptions.get(randomIndex);
-			Article firstArticle = myCreation.get(0);
+			List<IPositionCopyable> myCreation = myGenerationOptions.get(randomIndex);
+			IPositionCopyable firstArticle = myCreation.get(0);
 			double viewpointSpotX = myViewpoint.getX() - accumulatedXChange + i*generations;
 			double viewpointSpotY = myViewpoint.getY() - accumulatedYChange + i*generations;
-			System.out.println("firstArticle " + firstArticle);
-			System.out.println("firstArticle.getImageFile() " + firstArticle.getImageFile());
-			System.out.println("viewpointSpotX+myXOffset " + viewpointSpotX+myXOffset);
-			System.out.println("viewpointSpotY+myYOffset " + viewpointSpotY+myYOffset);
-			Article newOne = new Article(firstArticle.getImageFile(), viewpointSpotX+myXOffset, viewpointSpotY+myYOffset, true);
-			myArticles.add(newOne);
+			IPositionCopyable newOne = firstArticle.copyAtLocation(viewpointSpotX + myXOffset, viewpointSpotY+myYOffset);
+			generated.add(newOne);
 			for(int j = 1; j < myCreation.size(); j++){
 				double xDif = myCreation.get(j).getX()-firstArticle.getX();
 				double yDif = myCreation.get(j).getY()-firstArticle.getY();
-				Article newRelative = new Article(myCreation.get(j).getImageFile(), 
-						newOne.getX() + xDif, newOne.getY() + yDif, true);
-				myArticles.add(newRelative);
+				IPositionCopyable newRelative = newOne.copyAtLocation(newOne.getX() + xDif, newOne.getY() + yDif);
+				generated.add(newRelative);
 			}
 		}
 		accumulatedXChange -= myXDistance*generations;
 		accumulatedYChange -= myYDistance*generations;
+		return generated;
 		
 	}
 	/*Testing
