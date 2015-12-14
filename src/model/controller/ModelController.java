@@ -32,7 +32,10 @@ public class ModelController implements IModelController {
 		myModel.initialize();
 		initializeCollision();
 		myModelFactory = new ModelFactory();
-		myXMLUtility = new xmlUtility(this);
+		
+		//before, this class was initializing the XMLutility with the current model..where it shouldn't have needed to
+		//passing in a reference to the MC allows the executables to be reinitialized with the level manager, solving a huge design problem
+		//of loading in each new level with the saved executables. 
 	}
 	
 	public void update(){
@@ -48,10 +51,14 @@ public class ModelController implements IModelController {
 		return myModelFactory.getParameters(className);
 	}
 
+	public void makeXMLUtility() {
+		myXMLUtility = new xmlUtility(myLevelManager);
+	}
 	public void makeLevelManager(GameCreation game) {
 		myLevelManager = new LevelManager(this,game);
 	}
 	
+	//this method is part of my code masterpiece
 	public LevelManager getLevelManager() {
 		return myLevelManager;
 	}
@@ -195,6 +202,7 @@ public class ModelController implements IModelController {
 		myModel.notifyObservers();
 	}
 	
+	//this method id part of my masterpiece - a huge evolution of my effort to save and load states from SLOGO
 	public void updateModelWithNewModel(Model toLoad) {
 		
 		myModel.destroyModel();
@@ -216,12 +224,14 @@ public class ModelController implements IModelController {
 		myModel.setBackgroundImage(toLoad.getBackgroundImage());
 		toLoad.destroyModel();
 	}
-
-	public xmlUtility getXMLUtility() {
-		return myXMLUtility;
-	}
 	
+	//this is part of my masterpiece
 	public void save(Window wind, String path) {
+		for (Executable f: this.getExecutables()) {
+			if (f instanceof ExecutableLevelChanges) {
+				((ExecutableLevelChanges) f).destroyLevelManager();
+			}
+		}
 		try {
 			myXMLUtility.saveModel(wind, path, myModel);
 		} catch (NullPointerException e) {
@@ -229,6 +239,7 @@ public class ModelController implements IModelController {
 		}
 	}
 
+	//this is part of my masterpiece
 	public void load(Window wind) {
 		try {
 			updateModelWithNewModel(myXMLUtility.loadModel(wind));
@@ -246,7 +257,6 @@ public class ModelController implements IModelController {
 	}
 
 	public void addNewCollisionType(String type) {
-
 		myModel.addNewCollisionType(type);
 	}
 

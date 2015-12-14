@@ -1,3 +1,4 @@
+//This was refactored the day before the due date (without changing functionality) for my masterpiece
 package model.XMLutility;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,6 +12,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import gameengine.CollisionTypeEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import level.manager.LevelManager;
 import level.manager.XMLOrderer;
 import model.Model;
 import model.controller.ModelController;
@@ -19,11 +21,11 @@ import model.processes.ExecutableLevelChanges;
 
 public class xmlUtility {
 	XStream myStream;
-	ModelController myModelController;
+	LevelManager myLevelManager;
 	
-	public xmlUtility(ModelController mc) {
+	public xmlUtility(LevelManager levelManager) {
 		myStream = new XStream(new DomDriver());
-		myModelController = mc;
+		myLevelManager = levelManager;
 	}
 	
 	public Model loadModel(Window window) {
@@ -39,8 +41,8 @@ public class xmlUtility {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
+	
 	public Model load(File file){
 		try {
 			myStream = new XStream(new DomDriver());
@@ -50,7 +52,7 @@ public class xmlUtility {
 			Object readObject = myStream.fromXML(file);
 			for (Executable f: ((Model) readObject).getExecutables()) {
 				if (f instanceof ExecutableLevelChanges) {
-					((ExecutableLevelChanges) f).initialize(myModelController.getLevelManager());
+					((ExecutableLevelChanges) f).initialize(myLevelManager);
 				}
 			}
 			return (Model) readObject;
@@ -87,11 +89,6 @@ public class xmlUtility {
 		myStream.omitField(Observable.class, "obs");
 		myStream.omitField(Observable.class, "changed");
 		
-		for (Executable f: myModelController.getExecutables()) {
-			if (f instanceof ExecutableLevelChanges) {
-				((ExecutableLevelChanges) f).destroyLevelManager();
-			}
-		}
 		try{
 			//myStream.processAnnotations(ModelAnnotations.class);
 			myStream.toXML(myModel, new FileWriter(game));
