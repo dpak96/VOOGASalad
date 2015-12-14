@@ -1,14 +1,11 @@
 package model.generationutility;
-
 import java.util.*;
 
-import model.article.Article;
 
 public abstract class ConcreteGenerationUtility extends AbstractGenerationUtility{
 	
 
-	protected List<Article> myArticles;
-	protected Article myViewpoint;
+	protected IRectangular myViewpoint;
 	protected double myPrevX;
 	protected double myPrevY;
 	
@@ -18,8 +15,7 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 	//private final int boundsExtension = 200;
 	
 
-	public ConcreteGenerationUtility(List<Article> allArticles, Article viewpoint) {
-		myArticles = allArticles;
+	public ConcreteGenerationUtility(IRectangular viewpoint) {
 		myViewpoint = viewpoint;
 		myPrevX = myViewpoint.getX();
 		myPrevY = myViewpoint.getY();
@@ -30,6 +26,7 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 		setViewCoordinateChanges();
 		Collection<IPositionCopyable> generated = subGenerate();
 		updatePreviousViewPositions();
+		return generated;
 	}
 	
 	private void setViewCoordinateChanges(){
@@ -42,7 +39,7 @@ public abstract class ConcreteGenerationUtility extends AbstractGenerationUtilit
 		myPrevY = myViewpoint.getY();
 	}
 	
-	protected abstract void utilityGenerate();
+	protected abstract Collection<IPositionCopyable> subGenerate();
 	
 /*
 	private void deleteOutOfFrame() {

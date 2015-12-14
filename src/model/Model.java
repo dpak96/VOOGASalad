@@ -53,7 +53,10 @@ public class Model extends Observable{
 	}
 	
 	public void update(){
-		myArticles.addAll(randomGenerator.generate());
+		for(IPositionCopyable i : randomGenerator.generate()){
+			Article a = (Article) i;
+			myArticles.add(a);
+		}
 	}
 	
 	public void setConstantGenerator(List<List<Article>> constants, double xDistance,

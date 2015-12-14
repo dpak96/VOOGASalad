@@ -270,7 +270,9 @@ public class Article implements IPositionCopyable, IRectangular{
 
 	@Override
 	public IPositionCopyable copyAtLocation(double x, double y) {
-		return new Article(myImageFile, x, y);
+		Article a = new Article(myImageFile, x, y);
+		a.setCollisionType(myCollisionType);
+		return a;
 	}
 
 }

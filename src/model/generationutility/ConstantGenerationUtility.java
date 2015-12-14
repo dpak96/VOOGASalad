@@ -29,7 +29,7 @@ public class ConstantGenerationUtility extends ConcreteGenerationUtility{
 	}
 	
 	@Override
-	protected void utilityGenerate() {
+	protected void subGenerate() {
 		accumulatedXChange += myXChange;
 		accumulatedYChange += myYChange;
 		
