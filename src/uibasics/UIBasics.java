@@ -17,21 +17,32 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
+//This entire class is part of my code masterpiece
 
 public class UIBasics {
   private Pane myPane;
   private List<Article> myBackArticles;
   private List<ImageView> myFrontArticles;
   private List<AbstractCommand> myCommands;
-  private ModelController myModelController;
-//  private ImageView chara;
+  private IViewpoint myViewpoint;
+  private String ImageManager;
+  private boolean myWidthAsPercent, myHeightAsPercent, myContain, myCover;
 
-  public UIBasics(ModelController modelController) {
-    load("commands");
+  public UIBasics(IViewpoint viewpoint) {
     myPane = new Pane();
-    myModelController = modelController;
+    myViewpoint = viewpoint;
     myBackArticles = new ArrayList<Article>();
     myFrontArticles = new ArrayList<ImageView>();
+    init();
+  }
+  
+  private void init() {
+	    load("commands");
+	    ImageManager = "ImageManager";
+	    myWidthAsPercent = true;
+	    myHeightAsPercent = true;
+	    myContain = true;
+	    myCover = false;
   }
 
   private void load(String identifier) {
@@ -50,37 +61,23 @@ public class UIBasics {
   public void update(List<Article> list, Article character, String backImage) {
     clearAll();
     myBackArticles = list;
+    list.add(character);
     for (Article value : myBackArticles) {
-    	//For the Authoring Environment Offset
-		Image img = (Image) ResourceManager.getResourceManager().getResource("ImageManager", value.getImageFile());
-		double width = img.getWidth();
-		int iSizeX = (int) (value.getWidth()/width);
-		for (int i = 0; i < iSizeX; i++) {
-			articleUpdate(value, i, width);
-		}
+		articleUpdate(value);
     }
-    articleUpdate(character, 0, 0);
     myPane.getChildren().addAll(myFrontArticles);
     setBackImage(backImage);
   }
 
-  public void articleUpdate(Article article, int offset, double width) {
+  private void articleUpdate(Article article) {
     ImageView img = new ImageView();
     commands(article, img);
-    //For the Authoring Environment Offset
-    img.setX(img.getX()+(offset*width));
     myFrontArticles.add(img);
   }
-  
-//  public void articleUpdateCharacter(Article article) {
-//	    chara = new ImageView();
-//	    commands(article, chara);
-//	    myFrontArticles.add(chara);
-//	  }
 
   private void commands(Article article, ImageView img) {
     for (AbstractCommand c : myCommands)
-      c.update(article, myModelController, img);
+      c.update(article, myViewpoint, img);
   }
 
   private void clearAll() {
@@ -88,21 +85,20 @@ public class UIBasics {
     myFrontArticles.clear();
   }
 
-  public void setBackImage(String img) {
+  private void setBackImage(String img) {
 	try {
-	    BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
-	    BackgroundPosition pos = new BackgroundPosition(null, -myModelController.getViewpoint().getX(), 
-	    		false, null, myModelController.getViewpoint().getY(), false);
+	    BackgroundSize size = new BackgroundSize(100, 100, myWidthAsPercent, myHeightAsPercent, myContain, myCover);
+	    BackgroundPosition pos = new BackgroundPosition(null, -myViewpoint.getViewpoint().getX(), 
+	    		false, null, myViewpoint.getViewpoint().getY(), false);
 	    BackgroundImage back =
 	        new BackgroundImage((Image) resourcemanager.ResourceManager.getResourceManager()
-	            .getResource("ImageManager", img),
+	            .getResource(ImageManager, img),
 	                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, pos, size);
 
 	    myPane.setBackground(new Background(back));
 	} catch (NullPointerException e) {
 	    myPane.setBackground(null);
 	}
-
   }
 
 }

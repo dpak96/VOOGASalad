@@ -17,8 +17,11 @@ import model.processes.Executable;
 import model.processes.ExecutableLevelChanges;
 import resourcemanager.ResourceManager;
 import startscreen.GameCreation;
+import uibasics.IViewpoint;
 
-public class ModelController implements IModelController {
+//This class is NOT all part of my masterpiece.  I merely added another interface to be used elsewhere
+
+public class ModelController implements IModelController, IViewpoint {
 
 	private Model myModel;
 	private ModelFactory myModelFactory;
