@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Alex Rice
 package game.player;
 
 import java.util.List;
@@ -10,14 +12,16 @@ import javafx.scene.text.Text;
 import model.article.Article;
 import resourcemanager.ResourceManager;
 
-public class LivesModule extends HUDModule {
+public class LivesModule extends AbstractVHUDModule {
 	
 	private FlowPane myVisualLives;
 	private Text myLivesVal;
+	private String myText;
 	
 	public LivesModule(){
 		super();
-		myLivesVal = new Text("Lives: ");
+		myText = myRB.getString("LIVES");
+		myLivesVal = new Text(myText);
 		myVisualLives = new FlowPane();
 		this.getChildren().addAll(myLivesVal, myVisualLives);
 	}
@@ -31,7 +35,7 @@ public class LivesModule extends HUDModule {
 	public void update(List<Article> arg ,Article character, ActionController ac){
 		double lives = character.getLife();
 		int life = ((Double) lives).intValue();
-		myLivesVal.setText("Lives: " + life);
+		myLivesVal.setText(myText + life);
 		for(int i = myVisualLives.getChildren().size()-1; i>=0;i--){
 			myVisualLives.getChildren().remove(i);
 		}

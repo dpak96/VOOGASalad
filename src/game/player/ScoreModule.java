@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Alex Rice
 package game.player;
 
 import java.util.ArrayList;
@@ -11,16 +13,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.article.Article;
 
-public class ScoreModule extends HUDModule {
+public class ScoreModule extends AbstractVHUDModule {
 	
 	private Text myHeader;
 	private HBox myScore;
 	private Double myOffset;
+	private String myText;
 	
 	
 	public ScoreModule(){
 		super();
-		myHeader = new Text("Score: ");
+		myText = myRB.getString("SCORE");
+		myHeader = new Text(myText);
 		myScore = new HBox();
 		myScore.setSpacing(2);
 		this.getChildren().addAll(myHeader,myScore);
@@ -44,7 +48,7 @@ public class ScoreModule extends HUDModule {
 	
 	@Override
 	public void update(List<Article> arg, Article character, ActionController ac){
-		//scoreCheck(score);
+		scoreCheck(character.getScore());
 		double score = character.getScore();
 		Double score2 = score;
 		int score3 = score2.intValue();
@@ -57,29 +61,20 @@ public class ScoreModule extends HUDModule {
 		}
 	}
 	
-	public void scoreCheck(double score){
+	private void scoreCheck(double score){
 		Double score2 = Math.log10(score);
 		int digits = score2.intValue();
-		if(digits>3){
-			for(int k = digits; k<myScore.getChildren().size(); k++){
-				myScore.getChildren().remove(k);
-			}
-			double multiplier = (4.0/(double)digits);
-			for(int i=0;i<myScore.getChildren().size();i++){
-				VBox temp = (VBox) myScore.getChildren().get(i);
-				temp.setPadding(new Insets(multiplier*7.0, multiplier*7.0, multiplier*7.0, multiplier*7.0));
-				Text digit = (Text) temp.getChildren().get(0);
-				digit.setFont(Font.font(myOffset/(multiplier*8.0)));
-			}
-			for(int j = digits-1; j<digits; j++){
-				VBox temp = new VBox();
-				temp.setPadding(new Insets(multiplier*7.0, multiplier*7.0, multiplier*7.0, multiplier*7.0));
-				temp.setStyle("-fx-background-color: white;" + "-fx-border-color: black;" + "-fx-border-width: 2px;" + "-fx-border-radius: 10px;" + "-fx-background-radius: 10px;");
-				Text digit = new Text("0");
-				digit.setFont(Font.font(myOffset/(multiplier*8.0)));
-				temp.getChildren().add(digit);
-				myScore.getChildren().add(temp);
-			}
+		for(int i = myScore.getChildren().size()-1; i>=4; i--){
+			myScore.getChildren().remove(i);
+		}
+		for(int i = 3; i<digits; i++){
+			VBox temp = new VBox();
+			Text digit = new Text("0");
+			digit.setFont(Font.font(myOffset/8.0));
+			temp.setPadding(new Insets(7.0,7.0,7.0,7.0));
+			temp.setStyle("-fx-background-color: white;" + "-fx-border-color: black;" + "-fx-border-width: 2px;" + "-fx-border-radius: 10px;" + "-fx-background-radius: 10px;");
+			temp.getChildren().add(digit);
+			myScore.getChildren().add(temp);
 		}
 	}
 }

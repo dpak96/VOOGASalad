@@ -55,7 +55,7 @@ class KeyPressController {
 		if(myAuthoringController.getCurrentButton() != null){
 			Button b = myAuthoringController.getCurrentButton();
 			Pane p = (Pane) b.getParent();
-			p.getChildren().remove(b);
+			//p.getChildren().remove(b);
 			myAuthoringController.setHighlighted(false);
 			myAuthoringController.setCurrentButton(null);
 		}

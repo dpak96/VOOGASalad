@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Alex Rice
 package game.player;
 
 import java.io.IOException;
@@ -9,16 +11,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import action.controller.ActionController;
-import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.article.Article;
 import resourcemanager.ResourceManager;
 
-public class HighScoresModule extends HUDModule {
+public class HighScoresModule extends AbstractVHUDModule {
 	
 	private Button myButton;
 	private HighScoreInputDialog myInputScore;
